@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 export const Durationtabs = () => {
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -12,8 +13,9 @@ export const Durationtabs = () => {
 
   return (
     <Box sx={{ width: '100%', backgroundColor: '#F5DEB3', }}>
-    <Tabs  value={value} onChange={handleChange} centered inkBarStyle={{background: 'red'}}>
-      <Tab sx={{color:'black'}} color='error' label="Hourly" />
+    <Tabs  TabIndicatorProps={{
+           style: { background: "black", } }}  textColor='' value={value} onChange={handleChange} centered >
+      <Tab sx={{color:'black'}} label="Hourly" />
       <Tab sx={{color:'black'}}  label="Daily" />
       <Tab  sx={{color:'black'}} label="Weekly" />
     </Tabs>
