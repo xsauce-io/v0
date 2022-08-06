@@ -10,6 +10,7 @@
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.3",
+    "axios": "^0.27.2",
     "framer-motion": "^7.0.0",
     "next": "latest",
     "react": "18.1.0",
