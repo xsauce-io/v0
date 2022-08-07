@@ -4,9 +4,38 @@ import { Card } from '../components/card'
 import { Announcement } from '../components/announcement'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { RepeatOneSharp } from "@mui/icons-material";
+import { Skeleton } from "@mui/material";
 
 
 const Home: NextPage = () => {
+
+  const options = {
+    method: "GET",
+    url: "https://xchange-temporary-server.herokuapp.com/api/v1/products",
+};
+
+const [response, setResponse] = useState([]);
+
+// fetch sneaker data
+const getSneaker = async () => {
+    axios
+        .request(options)
+        .then(function (response) {
+            setResponse(response.data.results[0]);
+            console.log(response.data.results[0]);
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+};
+
+useEffect(() => {
+    getSneaker();
+}, []);
+
   return (
     
     <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
@@ -18,10 +47,11 @@ const Home: NextPage = () => {
       <main className="flex w-full flex-1 flex-col text-center">
        <Nav/>
        <Announcement/>
-       <div className="sm:w-full p-[30px]">
-        <div className="flex w-full flex-1 flex-col">
-       <Card/>
-       <Card/>
+       <h1 className='text-[25px] font-semibold p-4'>Markets</h1>
+       <div className="sm:w-full px-[20px]">
+        <div className="flex w-full flex-1 flex-col space-y-4">
+       <Card cardObject={response}/>
+       <Card cardObject={response}/>
        </div>
 
        </div>

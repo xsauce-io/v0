@@ -3,8 +3,9 @@ import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
 import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRounded';
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { RepeatOneSharp } from "@mui/icons-material";
 import { Skeleton } from "@mui/material";
+// import AspectRatio from '@mui/joy/AspectRatio';
+
 
 
 
@@ -48,12 +49,16 @@ export const WagerCard = () => {
                             <Skeleton variant="rectangular" className={'h-[257px]'} />
                         </React.Fragment> :
                         <React.Fragment>
-                            <div className="text-left relative pb-4 lg:justify-center flex " >
-                                <div className='absolute left-5 top-5'>
+                            <div className="sm:flex flex-col text-left lg:justify-center flex" >
+                                <div className=''>
                                     <h3 className='font-bold lg:text-[50px]'>{response.name}</h3>
                                     <p className='font-normal lg:text-[30px]'>ID:{response.sku}</p>
                                 </div>
-                                <img className="rounded-lg" src={response.image?.original} />
+                                <div className="sm:w-[292px] h-[150]">
+                                {/* <AspectRatio objectFit="contain"> */}
+                                <img  src={response.image?.original} />
+                                {/* </AspectRatio> */}
+                                </div>
                             </div>
                         </React.Fragment>
                 }
