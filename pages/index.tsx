@@ -37,8 +37,11 @@ useEffect(() => {
 }, []);
 
   return (
+
+    //#F5DEB3 - Vanilla
+    //#E5E5E5 - Gray
     
-    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
+    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#F5DEB3] ">
       <Head>
         <title>Xsauce</title>
         <link rel="icon" href="/favicon.ico" />
@@ -57,7 +60,7 @@ useEffect(() => {
        </div>
       </main>
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
+      {/* <footer className="flex h-24 w-full items-center justify-center border-t">
         <a
           className="flex items-center justify-center gap-2"
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -67,7 +70,7 @@ useEffect(() => {
           Powered by{' '}
           <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </a>
-      </footer>
+      </footer> */}
     </div>
   )
 }

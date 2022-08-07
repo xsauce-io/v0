@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 const Wager: NextPage = () => {
 	return (
-		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
+		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#F5DEB3]">
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
