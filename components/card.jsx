@@ -7,7 +7,7 @@ import { Skeleton } from "@mui/material";
 export const Card = ({cardObject}) => {
 
   return (
-    <a href="/wager" class="flex flex-row overflow-hidden rounded-2xl bg-black justify-center h-[400px]">
+    <a href="/wager" class="flex flex-row overflow-hidden rounded-2xl bg-black justify-center laptop:h-[400px]">
 
                       { cardObject === undefined ?
                         <React.Fragment>

@@ -63,13 +63,13 @@ useEffect(() => {
        <CasinoIcon/>
        <h3 className='text-[25px] text-left font-semibold'>Wager</h3>
        </div>
-       <div className="mobile:w-full px-[20px] laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
-        <div className="mobile: flex w-full flex-1 flex-col laptop: grid grid-cols-3 grid-rows-1 gap-4 w-[1252px]">
+       <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
+        <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-[1252px]">
        <Card cardObject={response}/>
        <Card cardObject={response}/>
        <Card cardObject={response}/>
        </div>
-       <a href='/markets'className='rounded bg-[#ACFF00] text-black hover:bg-gray font-bold font-xl p-3 outline'>See all &#8594;</a>
+       <a href='/markets'className='rounded bg-black text-[#ACFF00] hover:bg-gray font-bold font-xl p-3 outline'>See all &#8594;</a>
        </div>
        <div className='flex flex-row items-center pl-4 pt-4 pb-6 space-x-2'>
        <QueryStatsIcon/>
