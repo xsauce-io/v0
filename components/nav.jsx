@@ -1,10 +1,11 @@
 import React from 'react';
 import { Drawer, Box, Typography } from '@mui/material'
 import { useState } from 'react'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
+
 
 export const Nav = () => {
-
-
+ 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
@@ -52,13 +53,7 @@ export const Nav = () => {
   
         <div class="flex items-center gap-4">
           <div class="sm:gap-4 sm:flex">
-            <button
-              class="block px-6 rounded-md py-2 text-sm font-medium text-black bg-[#ACFF00] hover:bg-gray-200 transition shadow"
-              onClick={""}
-            >
-              Connect
-            </button>
-  
+          <ConnectButton/>
           </div>
   
           <button
@@ -92,49 +87,49 @@ export const Nav = () => {
           >
               <Box p={2} width='250px' textAlign='left' role='presentation' sx={{backgroundColor:'black', height:'100'}}  >
                 <Typography component='div'>
-                  <ul class='space-y-10 pl-1 text-[27px] text-white'>
+                  <ul class='space-y-10 pl-1 text-[27px] text-#F5DEB3'>
                     <li>
-                    <a class="text-white transition hover:text-white/75" href="/">
+                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
                     HOME
                     </a>
                     </li>
                   
                     <li>
-                    <a class="text-white transition hover:text-white/75" href="/">
+                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
                     LOGIN
                     </a>
                     </li>
                  
                     <li>
-                    <a class="text-white transition hover:text-white/75" href="/">
+                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
                     FUND
                     </a>
                     </li>
 
                    
                     <li>
-                    <a class="text-white transition hover:text-white/75" href="/">
+                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
                     WAGER
                     </a>
                     </li>
                     
                    
                     <li>
-                    <a class="text-white transition hover:text-white/75" href="/">
+                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
                     HOW IT WORKS
                     </a>
                     </li>
 
                    
                     <li>
-                    <a class="text-white transition hover:text-white/75" href="/">
+                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
                     BLOG
                     </a>
                     </li>
                     
                     
                     <li>
-                    <a class="text-white transition hover:text-white/75" href="/">
+                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
                    FAQs
                     </a>
                     </li>
@@ -142,7 +137,7 @@ export const Nav = () => {
 
                     
                     <li>
-                    <a class="text-white transition hover:text-white/75" href="/">
+                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
                     CONTACT US
                     </a>
                     </li>

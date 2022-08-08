@@ -18,8 +18,9 @@ const Wager: NextPage = () => {
 			</Head>
 
 			<main className="flex w-full flex-1 flex-col text-center">
+      <Announcement />
 				<Nav />
-				<Announcement />
+				
 				<Durationtabs />
 				<div className="p-5">
 					<WagerCard />
@@ -30,12 +31,15 @@ const Wager: NextPage = () => {
           </div>
           <img className="rounded-lg" src='https://images.stockx.com/360/adidas-Yeezy-Boost-350-V2-MX-Oat/Images/adidas-Yeezy-Boost-350-V2-MX-Oat/Lv2/img01.jpg?fm=avif&auto=compress&w=480&dpr=2&updated_at=1635746118&h=320&q=75'/>
         </div> */}
+        <h3 className="text-left pt-5 pb-3 text-xl font-medium">
+						1.) Confirm Wager Conditions
+					</h3>
 					<h3 className="text-left pt-5 pb-3 text-xl font-medium">
-						1.) Select Wager Direction
+						2.) Select Wager Direction
 					</h3>
 					<Wagerbtn />
 					<h3 className="text-left pt-5 pb-2 text-xl font-medium">
-						2.) Wager Amount
+						3.) Wager Amount
 					</h3>
 					<Wagerinput />
 				</div>

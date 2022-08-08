@@ -7,7 +7,7 @@ import { Skeleton } from "@mui/material";
 export const Card = ({cardObject}) => {
 
   return (
-    <a href="/wager" class="flex flex-row overflow-hidden rounded-2xl bg-black ">
+    <a href="/wager" class="flex flex-row overflow-hidden rounded-2xl bg-black justify-center laptop:h-[400px]">
 
                       { cardObject === undefined ?
                         <React.Fragment>
@@ -15,7 +15,7 @@ export const Card = ({cardObject}) => {
                         </React.Fragment> :
                         <React.Fragment>
       <div class="p-4 flex flex-row items-center">
-        <img class='h-[25px] px-4' src="/sneakericon1.svg"/>
+        <img class='mobile:h-[25px] px-4' src="/sneakericon1.svg"/>
         <div class='flex flex-col align-middle justify-center'>
         <h5 class="text-[15px] text-[#F5DEB3]">{cardObject.name}</h5>
         <div class='flex flex-row w-full align-middle justify-center items-center p-2'>
