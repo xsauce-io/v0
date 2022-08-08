@@ -25,7 +25,7 @@ export const Durationtabs = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <Box sx={{ width: '100%', backgroundColor: '#E5E5E5', }}>
+    <Box sx={{ width: '100%', backgroundColor: '#D8E9BC', }}>
     <Tabs  TabIndicatorProps={{
            style: { background: "black", } }}  value={value} onChange={handleChange} centered >
       <Tab sx={{color:'black'}} label="Hourly" />

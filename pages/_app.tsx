@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}  appInfo={{
         appName: 'Xsauce'}}   theme={darkTheme({
-          accentColor: '#F5DEB3',
+          accentColor: '#ACFF00',
           accentColorForeground: 'black',
           borderRadius: 'small',
           fontStack: 'system',

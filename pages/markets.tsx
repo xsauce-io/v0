@@ -1,20 +1,16 @@
 import type { NextPage } from 'next'
 import { Nav } from '../components/nav'
 import { Card } from '../components/card'
-import { Feed } from '../components/feed'
+import { Announcement } from '../components/announcement'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { RepeatOneSharp } from "@mui/icons-material";
 import { Skeleton } from "@mui/material";
-import React from 'react'
-import CasinoIcon from '@mui/icons-material/Casino';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 
-const Home: NextPage = () => {
+const Markets: NextPage = () => {
 
   const options = {
     method: "GET",
@@ -45,7 +41,7 @@ useEffect(() => {
     //#F5DEB3 - Vanilla
     //#E5E5E5 - Gray
     
-    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5] ">
+    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#F5DEB3] ">
       <Head>
         <title>Xsauce</title>
         <link rel="icon" href="/favicon.ico" />
@@ -53,27 +49,14 @@ useEffect(() => {
 
       <main className="flex w-full flex-1 flex-col text-center">
        <Nav/>
-       <div className='flex flex-row items-center pt-4 pl-4 space-x-2'>
-        <NewspaperIcon/>
-       <h1 className='text-[25px] text-left font-semibold'>News</h1>
-       </div>
-       
-       <Feed/>
-       <div className='flex flex-row items-center pl-4 pb-6 space-x-2'>
-       <CasinoIcon/>
-       <h3 className='text-[25px] text-left font-semibold'>Wager</h3>
-       </div>
-       <div className="mobile:w-full px-[20px] laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
-        <div className="mobile: flex w-full flex-1 flex-col laptop: grid grid-cols-3 grid-rows-1 gap-4 w-[1252px]">
-       <Card cardObject={response}/>
+       <Announcement/>
+       <h1 className='text-[25px] font-semibold p-4'>Markets</h1>
+       <div className="sm:w-full px-[20px]">
+        <div className="flex w-full flex-1 flex-col space-y-4">
        <Card cardObject={response}/>
        <Card cardObject={response}/>
        </div>
-       <a href='/markets'className='rounded bg-[#ACFF00] text-black hover:bg-gray font-bold font-xl p-3 outline'>See all &#8594;</a>
-       </div>
-       <div className='flex flex-row items-center pl-4 pt-4 pb-6 space-x-2'>
-       <QueryStatsIcon/>
-       <h1 className='text-[25px] text-left font-semibold'>Positions</h1>
+
        </div>
       </main>
 
@@ -92,4 +75,4 @@ useEffect(() => {
   )
 }
 
-export default Home
+export default Markets
