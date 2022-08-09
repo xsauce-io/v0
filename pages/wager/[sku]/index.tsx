@@ -66,7 +66,7 @@ useEffect(() => {
         }
 					
 					
-        <h3 className="text-left pt-5 pb-4 text-xl font-medium">
+        <h3 className="text-left pb-4 text-xl font-medium">
 						1.) Confirm Wager Conditions
 					</h3>
           <h2 className='font-bold text-lg text-left'> Hourly Wager: Price {'>'} $400</h2>

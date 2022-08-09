@@ -20,7 +20,20 @@ const cardObjectHref = "/wager/" + cardObject.sku
                         </React.Fragment> :
                         <React.Fragment>
       <div class="p-4 flex flex-row items-center">
-        <img class='mobile:h-[70px] px-4' src={cardObject.image?.original}/>
+
+        {cardObject.image?.original === '' ?
+          <React.Fragment>
+            <img class='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
+          </React.Fragment> :
+          cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
+          <React.Fragment>
+            <img class='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
+          </React.Fragment> :
+        <img class='mobile:h-[70px] px-4' src={cardObject.image?.original}/> 
+        }
+        
+
+ ?
         <div class='flex flex-col align-middle justify-center'>
         <h5 class="text-[15px] text-[#F5DEB3]">{cardObject.name}</h5>
         <div class='flex flex-row w-full align-middle justify-center items-center p-2'>

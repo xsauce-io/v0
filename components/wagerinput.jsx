@@ -14,7 +14,7 @@ export const Wagerinput = () => {
         placeholder="Wager"
       />
 
-      <button class="absolute p-2 text-black -translate-y-1/2 bg-[#ACFF00] rounded-lg top-1/2 right-4" type="button">
+      <button class="absolute p-2 text-black -translate-y-1/2 bg-[#D8E9BC] rounded-lg top-1/2 right-4" type="button">
         Submit
       </button>
     </div>

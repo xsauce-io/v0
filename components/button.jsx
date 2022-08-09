@@ -6,22 +6,21 @@ export const Wagerbtn = () => {
 
   return (
 <div className="flex flex-row w-full justify-center">
-<div class="inline-flex items-center overflow-hidden rounded">
-  <button class="px-14 py-2 bg-black focus:outline-none focus:text-black focus:bg-white active:bg-gray text-white" type="button">
+<div class="inline-flex items-center overflow-hidden rounded outline">
+  <button class=" px-10 py-2 bg-[#D8E9BC] outline focus:outline-none focus:text-black focus:bg-white active:bg-gray text-black" type="button">
     <span class="sr-only"> True </span>
 
-    <ArrowCircleUpRoundedIcon sx={{fontSize:'30px' ,color:'#ACFF00', paddingRight:'5px'}}/>
-    True
-  </button>
+    <ArrowCircleUpRoundedIcon sx={{fontSize:'30px' ,color:'#203700', paddingRight:'5px', outlineColor:'black'}}/>
+    Yes 60¢  </button>
 
 
-  <span class="w-px h-4 bg-white/25"></span>
+  <span class="w-px h-4"></span>
 
-  <button class="px-14 py-2 bg-black focus:outline-none focus:text-black focus:bg-white active:bg-white text-white" type="button">
+  <button class=" px-10 py-2 bg-[#D8E9BC] focus:outline-none focus:text-black focus:bg-white active:bg-white text-black" type="button">
     <span class="sr-only"> False </span>
 
     
-    False
+    No 40¢
     <ArrowCircleDownRoundedIcon sx={{fontSize:'30px' ,color:'red', paddingLeft:'5px'}}/>
   </button>
 </div>
