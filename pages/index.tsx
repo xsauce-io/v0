@@ -54,6 +54,10 @@ useEffect(() => {
 
       <main className="flex w-full flex-1 flex-col text-center">
        <Nav/>
+       {/* <div className='flex flex-row p-0 m-0 items-middle justify-center'>
+       <h1 className='text-[20px] pl-6 pt-6 font-bold text-left'>
+       Welcome, </h1> <h2 className='text-left pl-6 pr-6 text-[12px] '>to the world’s first prediction market for 👟s </h2>
+       </div> */}
        <div className='flex flex-row items-center pt-4 pl-4 space-x-2'>
         <NewspaperIcon/>
        <h1 className='text-[25px] text-left font-semibold'>News</h1>
@@ -62,7 +66,7 @@ useEffect(() => {
        <Feed/>
        <div className='flex flex-row items-center pl-4 pb-6 space-x-2'>
        <CasinoIcon/>
-       <h3 className='text-[25px] text-left font-semibold'>Wager</h3>
+       <h3 className='text-[25px] text-left font-semibold'>Wagers</h3>
        </div>
        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
         <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-[1252px]">
