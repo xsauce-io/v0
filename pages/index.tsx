@@ -18,18 +18,19 @@ const Home: NextPage = () => {
 
   const options = {
     method: "GET",
-    url: "https://xchange-temporary-server.herokuapp.com/api/v1/products",
+    url: "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=adidas&name=yeezy-350",
 };
 
-const [response, setResponse] = useState([]);
+const [response, setResponse] = useState([] as any);
 
 // fetch sneaker data
 const getSneaker = async () => {
     axios
         .request(options)
         .then(function (response) {
-            setResponse(response.data.results[0]);
-            console.log(response.data.results[0]);
+            const array: any[] = [response.data.results[0], response.data.results[1], response.data.results[7]]
+            setResponse(array);
+            console.log(response.data.results);
         })
         .catch(function (error) {
             console.error(error);
@@ -65,9 +66,10 @@ useEffect(() => {
        </div>
        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
         <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-[1252px]">
-       <Card cardObject={response}/>
-       <Card cardObject={response}/>
-       <Card cardObject={response}/>
+        {response.map((el: any) => (
+            <Card cardObject={el}/>
+            ))
+          }
        </div>
        <a href='/markets'className='rounded bg-black text-[#ACFF00] hover:bg-gray font-bold font-xl p-3 outline'>See all &#8594;</a>
        </div>

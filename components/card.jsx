@@ -1,13 +1,18 @@
 import React from "react";
 import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
 import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRounded';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Skeleton } from "@mui/material";
+import Link from 'next/link'
 
 
 export const Card = ({cardObject}) => {
+const cardObjectHref = "/wager/" + cardObject.sku
 
   return (
-    <a href="/wager" class="flex flex-row overflow-hidden rounded-2xl bg-black justify-center laptop:h-[400px]">
+    <Link href={cardObjectHref}>
+    <a class="flex flex-row overflow-hidden rounded-2xl bg-black justify-center laptop:h-[400px]">
 
                       { cardObject === undefined ?
                         <React.Fragment>
@@ -15,7 +20,7 @@ export const Card = ({cardObject}) => {
                         </React.Fragment> :
                         <React.Fragment>
       <div class="p-4 flex flex-row items-center">
-        <img class='mobile:h-[25px] px-4' src="/sneakericon1.svg"/>
+        <img class='mobile:h-[70px] px-4' src={cardObject.image?.original}/>
         <div class='flex flex-col align-middle justify-center'>
         <h5 class="text-[15px] text-[#F5DEB3]">{cardObject.name}</h5>
         <div class='flex flex-row w-full align-middle justify-center items-center p-2'>
@@ -42,6 +47,7 @@ export const Card = ({cardObject}) => {
       </React.Fragment>
 }
     </a>
+    </Link>
 
   )
 }

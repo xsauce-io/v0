@@ -14,7 +14,7 @@ const Markets: NextPage = () => {
 
   const options = {
     method: "GET",
-    url: "https://xchange-temporary-server.herokuapp.com/api/v1/products",
+    url: "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=adidas&name=yeezy-350&gender=men",
 };
 
 const [response, setResponse] = useState([]);
@@ -24,8 +24,8 @@ const getSneaker = async () => {
     axios
         .request(options)
         .then(function (response) {
-            setResponse(response.data.results[0]);
-            console.log(response.data.results[0]);
+            setResponse(response.data.results);
+            console.log(response.data.results);
         })
         .catch(function (error) {
             console.error(error);
@@ -41,20 +41,25 @@ useEffect(() => {
     //#F5DEB3 - Vanilla
     //#E5E5E5 - Gray
     
-    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#F5DEB3] ">
+    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
       <Head>
         <title>Xsauce</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex w-full flex-1 flex-col text-center">
+      <Announcement/>
        <Nav/>
-       <Announcement/>
+       
        <h1 className='text-[25px] font-semibold p-4'>Markets</h1>
        <div className="sm:w-full px-[20px]">
         <div className="flex w-full flex-1 flex-col space-y-4">
-       <Card cardObject={response}/>
-       <Card cardObject={response}/>
+
+          {response.map(el => (
+            <Card cardObject={el}/>
+            ))
+          }
+
        </div>
 
        </div>
