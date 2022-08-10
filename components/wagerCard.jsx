@@ -5,7 +5,7 @@ import { Skeleton } from "@mui/material";
 
 
 
-export const WagerCard = ({cardObject}) => {
+export const WagerCard = ({ cardObject }) => {
 
 
     return (
@@ -27,11 +27,7 @@ export const WagerCard = ({cardObject}) => {
                                     <h3 className='font-bold lg:text-[50px]'>{cardObject.name}</h3>
                                     <p className='font-normal lg:text-[30px]'>ID:{cardObject.sku}</p>
                                 </div>
-                                <div className="sm:w-[292px] h-[150]">
-                                {/* <AspectRatio objectFit="contain"> */}
-                                <img  src={cardObject.image?.original} />
-                                {/* </AspectRatio> */}
-                                </div>
+                                <img src={cardObject.image?.original} className="object-cover h-[300px] tablet:h-[500px] laptop:h-[700px] desktop:h-[800px]  " />
                             </div>
                         </React.Fragment>
                 }

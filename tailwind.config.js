@@ -6,17 +6,21 @@ module.exports = {
   ],
   theme: {
     screens: {
-      'mobile':'300px',
+      'mobile': '300px',
 
       'tablet': '640px',
 
       'laptop': '1200px',
-  
+
 
       'desktop': '1400px',
-  
+
     },
-    extend: {},
+    extend: {
+      scale: {
+        '80': '0.8'
+      }
+    },
   },
   plugins: [
   ],
