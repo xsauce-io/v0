@@ -1,18 +1,18 @@
 import type { NextPage } from 'next';
-import { Nav } from '../../../components/nav';
+import { Nav } from '../components/nav';
 // import { Card } from '../components/card'
-import { Wagerbtn } from '../../../components/button';
-import { Wagerinput } from '../../../components/wagerinput';
-import { Announcement } from '../../../components/announcement';
-import { Durationtabs } from '../../../components/durationtabs';
-import { WagerCard } from '../../../components/wagerCard';
+import { Wagerbtn } from '../components/button';
+import { Wagerinput } from '../components/wagerinput';
+import { Announcement } from '../components/announcement';
+import { Durationtabs } from '../components/durationtabs';
+import { WagerCard } from '../components/wagerCard';
 import { useRouter } from 'next/router'
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const WagerPage: NextPage = ({cardObject}) => {
+const WagerPage: NextPage = (cardObject) => {
 
   const router = useRouter()
 

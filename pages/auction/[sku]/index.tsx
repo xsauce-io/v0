@@ -11,8 +11,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {Countdown} from '../../../components/countdown'
 
-const WagerPage: NextPage = ({cardObject}) => {
+const WagerPage: NextPage = (cardObject) => {
 
   const router = useRouter()
 
@@ -46,6 +47,8 @@ const getSneaker = async () => {
 useEffect(() => {
     getSneaker();
 }, []);
+
+
 	return (
 
 		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
@@ -59,6 +62,11 @@ useEffect(() => {
 				<Nav />
 				
 				<Durationtabs />
+        <h3 className="flex flex-row items-center justify-center text-left p-6 text-[30px] font-medium">
+         
+					🏁 Pre-Realease Auction
+					</h3>
+          <Countdown/>
 				<div className="p-5">
         {response.map((el: any) => (
             <WagerCard  cardObject={el}/>
@@ -67,17 +75,12 @@ useEffect(() => {
 					
 					
         <h3 className="text-left pb-4 text-xl font-medium">
-						1.) Confirm Wager Conditions
+					Confirm Wager Conditions
 					</h3>
-          <h2 className='font-bold text-lg text-left'> Hourly Wager: Price {'>'} $400</h2>
-          
-					<h3 className="text-left pt-5 pb-3 text-xl font-medium">
-						2.) Select Wager Direction
-					</h3>
+         
+        
 					<Wagerbtn />
-					<h3 className="text-left pt-5 pb-2 text-xl font-medium">
-						3.) Wager Amount
-					</h3>
+			
 					<Wagerinput />
 				</div>
 			</main>

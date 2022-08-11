@@ -27,7 +27,7 @@ export const WagerCard = ({ cardObject }) => {
                                     <h3 className='font-bold lg:text-[50px]'>{cardObject.name}</h3>
                                     <p className='font-normal lg:text-[30px]'>ID:{cardObject.sku}</p>
                                 </div>
-                                <img src={cardObject.image?.original} className="object-cover h-[300px] tablet:h-[500px] laptop:h-[700px] desktop:h-[800px]  " />
+                                <img src={cardObject.image?.original} className="object-cover mobile:h-[200px] tablet:h-[500px] laptop:h-[700px] desktop:h-[800px]  " />
                             </div>
                         </React.Fragment>
                 }

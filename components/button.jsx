@@ -11,7 +11,7 @@ export const Wagerbtn = () => {
     <span class="sr-only"> True </span>
 
     <ArrowCircleUpRoundedIcon sx={{fontSize:'30px' ,color:'#203700', paddingRight:'5px', outlineColor:'black'}}/>
-    Yes 60¢  </button>
+    Yes  </button>
 
 
   <span class="w-px h-4"></span>
@@ -20,7 +20,7 @@ export const Wagerbtn = () => {
     <span class="sr-only"> False </span>
 
     
-    No 40¢
+    No
     <ArrowCircleDownRoundedIcon sx={{fontSize:'30px' ,color:'red', paddingLeft:'5px'}}/>
   </button>
 </div>

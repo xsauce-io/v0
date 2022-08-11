@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { Nav } from '../components/nav'
-import { Card } from '../components/card'
+import { Card } from '../components/cardWager'
 import { Announcement } from '../components/announcement'
 import Head from 'next/head'
 import Image from 'next/image'
