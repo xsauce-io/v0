@@ -29,11 +29,9 @@ export const Nav = () => {
               </a>
             </li>
   
-    
-  
             <li>
               <a class="text-white transition hover:text-white/75" href="/">
-               Wager
+               Pre-Market
               </a>
             </li>
   
@@ -87,58 +85,44 @@ export const Nav = () => {
           >
               <Box p={2} width='250px' textAlign='left' role='presentation' sx={{backgroundColor:'black', height:'100'}}  >
                 <Typography component='div'>
-                  <ul class='space-y-10 pl-1 text-[27px] text-#F5DEB3'>
+                  <ul class='space-y-10 pl-1 text-[27px]'>
                     <li>
-                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
-                    HOME
+                    <a class="text-[#D8E9BC] transition hover:text-white/75" href="/">
+                    Dashboard
                     </a>
                     </li>
                   
-                    <li>
-                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
-                    LOGIN
-                    </a>
-                    </li>
-                 
-                    <li>
-                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
-                    FUND
-                    </a>
-                    </li>
 
                    
                     <li>
-                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
-                    WAGER
+                    <a class="text-[#D8E9BC] transition hover:text-white/75" href="/">
+                    Pre-Market
+                    </a>
+                    </li>
+                    
+                    <li>
+                    <a class="text-[#D8E9BC] transition hover:text-white/75" href="/">
+                    Live-Market
                     </a>
                     </li>
                     
                    
                     <li>
-                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
-                    HOW IT WORKS
+                    <a class="text-[#D8E9BC] transition hover:text-white/75" href="/">
+                    How It Works
                     </a>
                     </li>
 
                    
                     <li>
-                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
-                    BLOG
+                    <a class="text-[#D8E9BC] transition hover:text-white/75" href="/">
+                    Blog
                     </a>
                     </li>
                     
-                    
                     <li>
-                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
-                   FAQs
-                    </a>
-                    </li>
-                    
-
-                    
-                    <li>
-                    <a class="text-[#F5DEB3] transition hover:text-white/75" href="/">
-                    CONTACT US
+                    <a class="text-[#D8E9BC] transition hover:text-white/75" href="/">
+                    Contact Us
                     </a>
                     </li>
                     

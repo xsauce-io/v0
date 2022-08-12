@@ -1,16 +1,17 @@
 import type { NextPage } from 'next';
-import { Nav } from '../components/nav';
+import { Nav } from '../../../components/nav';
 // import { Card } from '../components/card'
-import { Wagerbtn } from '../components/button';
-import { Wagerinput } from '../components/wagerinput';
-import { Announcement } from '../components/announcement';
-import { Durationtabs } from '../components/durationtabs';
-import { WagerCard } from '../components/wagerCard';
+import { Wagerbtn } from '../../../components/button';
+import { Wagerinput } from '../../../components/wagerinput';
+import { Announcement } from '../../../components/announcement';
+import { WagerCard } from '../../../components/wagerCard';
 import { useRouter } from 'next/router'
-import Head from 'next/head';
-import Image from 'next/image';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Tooltip } from '@mui/material';
+import {Countdown} from '../../../components/countdown'
+import InfoIcon from '@mui/icons-material/Info';
+import Head from 'next/head';
 
 const WagerPage: NextPage = (cardObject) => {
 
@@ -46,6 +47,8 @@ const getSneaker = async () => {
 useEffect(() => {
     getSneaker();
 }, []);
+
+
 	return (
 
 		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
@@ -58,32 +61,38 @@ useEffect(() => {
       <Announcement />
 				<Nav />
 				
-				<Durationtabs />
+				{/* <Durationtabs /> */}
+        <h3 className="flex flex-row items-center justify-center text-left p-4 text-[25px] font-medium">
+         
+					🏁 Pre-Release Auction
+					</h3>
+          <Countdown/>
 				<div className="p-5">
         {response.map((el: any) => (
             <WagerCard  cardObject={el}/>
             ))
         }
 					
-					
-        <h3 className="text-left pb-4 text-xl font-medium">
-						1.) Confirm Wager Conditions
+					<div className='mobile:flex flex-col space-y-6 justify-center items-middle pt-6'>
+        <h3 className="mobile:text-[18px] font-medium text-center">
+					Condition: Resell Price {'>'} $400<br></br> Closes: 08/20/2022 12:00 PM EST
 					</h3>
-          <h2 className='font-bold text-lg text-left'> Hourly Wager: Price {'>'} $400</h2>
+          <h3 className="mobile:text-[25px] font-medium flex flex-row justify-center">
+          Price : 50¢
+          <Tooltip
+            title="Pre-Release contracts are 50¢ regardless of Condition Type" arrow>
+          <InfoIcon sx={{fontSize:'18px'}}/>
+          </Tooltip>
+          </h3>
           
-					<h3 className="text-left pt-5 pb-3 text-xl font-medium">
-						2.) Select Wager Direction
-					</h3>
-					<Wagerbtn />
-					<h3 className="text-left pt-5 pb-2 text-xl font-medium">
-						3.) Wager Amount
-					</h3>
+			
 					<Wagerinput />
+          </div>
 				</div>
 			</main>
 
-			<footer className="flex h-24 w-full items-center justify-center border-t">
-			</footer>
+			{/* <footer className="flex h-24 w-full items-center justify-center border-t">
+			</footer> */}
 		</div>
 	);
 };

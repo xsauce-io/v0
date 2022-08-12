@@ -54,9 +54,8 @@ const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
       <FormControl sx={{ m: 1, }}>
         <InputLabel id="demo-simple-select-helper-label">Order Type</InputLabel>
         <Select
-
-       
-          sx={{backgroundColor: orderType === 1 ? '#D8E9BC': '#FFB4AB'}}
+          sx={{backgroundColor: orderType === '' ? 'white' : orderType === 1 ? '#D8E9BC': '#FFB4AB'}}
+          required
           labelId="orderType"
           name="order"
           value={orderType}
@@ -72,12 +71,13 @@ const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
       <FormControl sx={{ m: 1, }}>
         <InputLabel id="demo-simple-select-helper-label">Condition Type</InputLabel>
         <Select
-          sx={{backgroundColor: orderType === 1 ? '#D8E9BC': '#FFB4AB'}}
+          sx={{backgroundColor: orderType === '' ? 'white' : orderType === 1 ? '#D8E9BC': '#FFB4AB'}}
           labelId="conditionType"
           name="condition"
           value={conditionType}
           label="Condition Type"
           onChange={handleChange2}
+          required
         >
           <MenuItem value={1}>Yes</MenuItem>
           <MenuItem value={2}>No</MenuItem>
@@ -96,6 +96,7 @@ const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
         name="contractNumber"
         type="number"
         placeholder="Limit Price"
+        required
       />
     </div>
     <div class="relative">
@@ -106,11 +107,12 @@ const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
         name="contractNumber"
         type="number"
         placeholder="# of Contracts"
+        required
       />
     </div>
     </div>
-    <button id='mint' class={orderType === 1 ? 'bg-[#D8E9BC] mobile:py-3 mx-20 my-5 outline outline-gray-400 text-black rounded-lg': 'bg-[#FFB4AB] mobile:py-3 mx-20 my-5 outline outline-gray-400 text-black rounded-lg'} type="submit">
-       {orderType === 1 ? 'Buy': 'Sell'}
+    <button id='mint' class={orderType === '' ? 'bg-white mobile:py-3 mx-20 my-5 outline outline-gray-400 text-black rounded-lg': orderType === 1 ? 'bg-[#D8E9BC] mobile:py-3 mx-20 my-5 outline outline-gray-400 text-black rounded-lg': 'bg-[#FFB4AB] mobile:py-3 mx-20 my-5 outline outline-gray-400 text-black rounded-lg'} type="submit">
+       {orderType === '' ? 'Confirm': orderType === 1 ? 'Buy' : 'Sell'}
       </button>
       
     </form>

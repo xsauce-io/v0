@@ -7,8 +7,8 @@ import { Skeleton } from "@mui/material";
 import Link from 'next/link'
 
 
-export const CardAuction = ({cardObject}) => {
-const cardObjectHref = "/auction/" + cardObject.sku
+export const CardPreMarket = ({cardObject}) => {
+const cardObjectHref = "/pre-market/" + cardObject.sku
 
   return (
     <Link href={cardObjectHref}>
