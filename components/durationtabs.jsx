@@ -28,9 +28,8 @@ export const Durationtabs = () => {
     <Box sx={{ width: '100%', backgroundColor: '#D8E9BC', }}>
     <Tabs  TabIndicatorProps={{
            style: { background: "black", } }}  value={value} onChange={handleChange} centered >
-      <Tab sx={{color:'black'}} label="Hourly" />
-      <Tab sx={{color:'black'}}  label="Daily" />
-      <Tab  sx={{color:'black'}} label="Weekly" />
+      <Tab sx={{color:'black'}} label="Info" />
+      <Tab sx={{color:'black'}}  label="Chart" />
     </Tabs>
   </Box>
   </ThemeProvider>

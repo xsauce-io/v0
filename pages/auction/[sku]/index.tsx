@@ -4,14 +4,14 @@ import { Nav } from '../../../components/nav';
 import { Wagerbtn } from '../../../components/button';
 import { Wagerinput } from '../../../components/wagerinput';
 import { Announcement } from '../../../components/announcement';
-import { Durationtabs } from '../../../components/durationtabs';
 import { WagerCard } from '../../../components/wagerCard';
 import { useRouter } from 'next/router'
-import Head from 'next/head';
-import Image from 'next/image';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Tooltip } from '@mui/material';
 import {Countdown} from '../../../components/countdown'
+import InfoIcon from '@mui/icons-material/Info';
+import Head from 'next/head';
 
 const WagerPage: NextPage = (cardObject) => {
 
@@ -61,10 +61,10 @@ useEffect(() => {
       <Announcement />
 				<Nav />
 				
-				<Durationtabs />
-        <h3 className="flex flex-row items-center justify-center text-left p-6 text-[30px] font-medium">
+				{/* <Durationtabs /> */}
+        <h3 className="flex flex-row items-center justify-center text-left p-4 text-[25px] font-medium">
          
-					🏁 Pre-Realease Auction
+					🏁 Pre-Release Auction
 					</h3>
           <Countdown/>
 				<div className="p-5">
@@ -73,20 +73,26 @@ useEffect(() => {
             ))
         }
 					
-					
-        <h3 className="text-left pb-4 text-xl font-medium">
-					Confirm Wager Conditions
+					<div className='mobile:flex flex-col space-y-6 justify-center items-middle pt-6'>
+        <h3 className="mobile:text-[18px] font-medium text-center">
+					Condition: Resell Price {'>'} $400<br></br> Closes: 08/20/2022 12:00 PM EST
 					</h3>
-         
-        
-					<Wagerbtn />
+          <h3 className="mobile:text-[25px] font-medium flex flex-row justify-center">
+          Price : 50¢
+          <Tooltip
+            title="Pre-Release contracts are 50¢ regardless of direction" arrow>
+          <InfoIcon sx={{fontSize:'18px'}}/>
+          </Tooltip>
+          </h3>
+          
 			
 					<Wagerinput />
+          </div>
 				</div>
 			</main>
 
-			<footer className="flex h-24 w-full items-center justify-center border-t">
-			</footer>
+			{/* <footer className="flex h-24 w-full items-center justify-center border-t">
+			</footer> */}
 		</div>
 	);
 };
