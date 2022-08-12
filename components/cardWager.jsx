@@ -7,7 +7,7 @@ import { Skeleton } from "@mui/material";
 import Link from 'next/link'
 
 
-export const Card = ({cardObject}) => {
+export const Card = (cardObject) => {
 const cardObjectHref = "/wager/" + cardObject.sku
 
   return (

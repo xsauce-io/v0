@@ -13,7 +13,7 @@ import React from 'react'
 import CasinoIcon from '@mui/icons-material/Casino';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
-import GavelIcon from '@mui/icons-material/Gavel';
+import SportsScoreIcon from '@mui/icons-material/SportsScore';
 
 
 const Home: NextPage = () => {
@@ -71,7 +71,7 @@ useEffect(() => {
        
        <Feed/>
        <div className='flex flex-row items-center pl-4 pb-6 space-x-2'>
-       <GavelIcon/>
+       <SportsScoreIcon/>
        <h3 className='text-[25px] text-left font-semibold'>Pre-Market</h3>
        </div>
        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
