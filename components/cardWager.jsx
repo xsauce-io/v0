@@ -19,7 +19,7 @@ const cardObjectHref = "/wager/" + cardObject.sku
                             <Skeleton variant="rectangular" sx={{backgroundColor:'white', height:'30px'}} />
                         </React.Fragment> :
                         <React.Fragment>
-      <div class="p-4 flex flex-row items-center">
+      <div class="p-4 flex flex-row items-center laptop:flex-col">
 
         {cardObject.image?.original === '' ?
           <React.Fragment>
@@ -29,7 +29,7 @@ const cardObjectHref = "/wager/" + cardObject.sku
           <React.Fragment>
             <img class='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
           </React.Fragment> :
-        <img class='mobile:h-[70px] px-4' src={cardObject.image?.original}/> 
+        <img class='mobile:h-[70px] px-4 laptop:h-[200px]' src={cardObject.image?.original}/> 
         }
         
 
@@ -39,14 +39,14 @@ const cardObjectHref = "/wager/" + cardObject.sku
         <div class='flex flex-row w-full align-middle justify-center items-center p-2'>
           
 
-          <p class="text-[16px] text-white px-4">Price {">"} $300</p>
+          <p class="text-[16px] text-white px-4 laptop:text-[20px]">Price {">"} $300</p>
 
 
          
         </div>
 
 
-        <p class="mt-2 text-[12px] text-[#F5DEB3]">Market closes on 08/15/2022 @ 12:00PM EST</p>
+        <p class="mt-2 text-[12px] text-[#F5DEB3] laptop:text-[16px]">Market closes on 08/15/2022 @ 12:00PM EST</p>
         </div>
       </div>
       </React.Fragment>

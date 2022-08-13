@@ -9,9 +9,9 @@ export const Nav = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
-    <header class="bg-gray-900">
+    <header class="bg-gray-900 sticky top-0">
     <div
-      class="flex items-center h-16 w-full gap-8 px-4 mx-auto sm:px-6 lg:px-8"
+      class="flex items-center h-16 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8"
     >
       <a class="block text-teal-300" href="/">
         <span class="sr-only">Home</span>
@@ -19,7 +19,7 @@ export const Nav = () => {
       </a>
   
       <div class="flex items-center justify-end flex-1 md:justify-between">
-        <nav class="hidden md:block" aria-labelledby="header-navigation">
+        <nav class="hidden" aria-labelledby="header-navigation">
           <h2 class="sr-only" id="header-navigation">Header navigation</h2>
   
           <ul class="flex items-center gap-6 text-sm">
