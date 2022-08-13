@@ -7,7 +7,7 @@ import { Skeleton } from "@mui/material";
 import Link from 'next/link'
 
 
-export const Card = (cardObject) => {
+export const Card = ({cardObject}) => {
 const cardObjectHref = "/wager/" + cardObject.sku
 
   return (
@@ -23,11 +23,11 @@ const cardObjectHref = "/wager/" + cardObject.sku
 
         {cardObject.image?.original === '' ?
           <React.Fragment>
-            <img class='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
+            <img class='mobile:h-[30px] px-4 laptop:h-[90px] mb-10 mt-16' src='/sneakericon1.svg'/>
           </React.Fragment> :
           cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
           <React.Fragment>
-            <img class='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
+            <img class='mobile:h-[30px] px-4 laptop:h-[90px] mb-10 mt-16' src='/sneakericon1.svg'/>
           </React.Fragment> :
         <img class='mobile:h-[70px] px-4 laptop:h-[200px]' src={cardObject.image?.original}/> 
         }
@@ -39,7 +39,7 @@ const cardObjectHref = "/wager/" + cardObject.sku
         <div class='flex flex-row w-full align-middle justify-center items-center p-2'>
           
 
-          <p class="text-[16px] text-white px-4 laptop:text-[20px]">Price {">"} $300</p>
+          <p class="text-[16px] text-white px-4 laptop:text-[20px]">Prediction: Price {">"} $300</p>
 
 
          
