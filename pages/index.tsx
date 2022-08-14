@@ -19,13 +19,13 @@ import SportsScoreIcon from '@mui/icons-material/SportsScore';
 const Home: NextPage = () => {
 
 
-let [auctionResponse, setAuctionResponse] = useState([] as any);
+let [premarketResponse, setAuctionResponse] = useState([] as any);
 let [marketResponse, setMarketResponse] = useState([] as any);
 
 // fetch sneaker data
 const getSneaker2 = async () => {
   Promise.all([
-    axios.get("https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=nike&name=dunk-sb&gender=men"),
+    axios.get("https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=nike&name=air-max-patta&gender=men"),
     axios.get("https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=adidas&name=Yeezy-350")
    ])
    
@@ -76,7 +76,7 @@ useEffect(() => {
        </div>
        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
         <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-[1252px]">
-        {auctionResponse.map((el: any) => (
+        {premarketResponse.map((el: any) => (
             <CardPreMarket cardObject={el}/>
             ))
           }

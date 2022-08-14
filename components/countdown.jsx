@@ -5,7 +5,7 @@ export const Countdown = () => {
 
   const counter = () => {
 
-  const countDate = new Date("August 13, 2022 12:00:00").getTime()
+  const countDate = new Date("August 15, 2022 12:00:00").getTime()
   console.log(countDate);
   const now = new Date().getTime();
   const gap = countDate - now;

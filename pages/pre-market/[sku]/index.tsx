@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { Nav } from '../../../components/nav';
 // import { Card } from '../components/card'
-import { Wagerbtn } from '../../../components/button';
+import { ProductDetails} from '../../../components/productDetails';
 import { Wagerinput } from '../../../components/wagerinput';
 import { Announcement } from '../../../components/announcement';
 import { WagerCard } from '../../../components/wagerCard';
@@ -67,7 +67,8 @@ useEffect(() => {
 					🏁 Pre-Release Auction
 					</h3>
           <Countdown/>
-				<div className="p-5">
+				<div className="p-5 laptop:flex flex-col">
+        <div className="p-5 laptop:flex flex-row items-center justify-center space-x-[200px] pb-20">
         {response.map((el: any) => (
             <WagerCard  cardObject={el}/>
             ))
@@ -87,8 +88,17 @@ useEffect(() => {
           
 			
 					<Wagerinput />
+         
+          
           </div>
+          
+          </div>
+          {response.map((el:any) => (
+          <ProductDetails cardObject={el}/>
+          ))
+          }
 				</div>
+        
 			</main>
 
 			{/* <footer className="flex h-24 w-full items-center justify-center border-t">
