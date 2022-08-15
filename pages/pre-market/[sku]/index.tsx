@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { Nav } from '../../../components/nav';
 // import { Card } from '../components/card'
 import { ProductDetails} from '../../../components/productDetails';
+import { PredictToggle} from '../../../components/predictionToggle'
 import { Wagerinput }  from '../../../components/wagerinput';
 import { Announcement } from '../../../components/announcement';
 import { WagerCard } from '../../../components/wagerCard';
@@ -61,21 +62,21 @@ useEffect(() => {
       <Announcement />
 				<Nav />
 				
-				{/* <Durationtabs /> */}
-        <h3 className="flex flex-row items-center justify-center text-left p-4 text-[25px] font-medium">
-         
-					🏁 Pre-Release Auction
+			
+        <h3 className="flex flex-row items-center justify-center text-left pt-4 pb-4 bg-white text-[25px] font-medium">
+        🏁 Pre-Market
 					</h3>
           <Countdown/>
-				<div className="p-5 laptop:flex flex-col">
-        <div className="p-5 laptop:flex flex-row items-center justify-center space-x-[200px] pb-20">
+        
+				<div className=" laptop:flex flex-col">
+        <div className="p-5 laptop:flex flex-row items-center justify-center laptop:space-x-[1px] pb-20">
         {response.map((el: any) => (
             <WagerCard  cardObject={el}/>
             ))
         }
 					
-					<div className='mobile:flex flex-col space-y-6 justify-center items-middle pt-6'>
-        <h3 className="mobile:text-[18px] font-medium text-center">
+					<div className='mobile:flex flex-col space-y-6 justify-center items-center pt-6 laptop:w-1/3'>
+        <h3 className="mobile:text-[18px] font-medium">
 					Condition: Resell Price {'>'} $400<br></br> Closes: 08/20/2022 12:00 PM EST
 					</h3>
           <h3 className="mobile:text-[25px] font-medium flex flex-row justify-center">
@@ -85,6 +86,7 @@ useEffect(() => {
           <InfoIcon sx={{fontSize:'18px'}}/>
           </Tooltip>
           </h3>
+          
           
 			
 					<Wagerinput />

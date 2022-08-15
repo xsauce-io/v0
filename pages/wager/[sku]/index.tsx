@@ -1,8 +1,9 @@
 import type { NextPage } from 'next';
 import { Nav } from '../../../components/nav';
 // import { Card } from '../components/card'
-import { Wagerbtn } from '../../../components/button';
-import { WagerConfig } from '../../../components/wagerConfig';
+import { ProductDetails} from '../../../components/productDetails';
+import { PredictToggle} from '../../../components/predictionToggle'
+import { Wagerinput }  from '../../../components/wagerinput';
 import { Announcement } from '../../../components/announcement';
 import { WagerCard } from '../../../components/wagerCard';
 import { useRouter } from 'next/router'
@@ -11,7 +12,6 @@ import axios from "axios";
 import { Tooltip } from '@mui/material';
 import {Countdown} from '../../../components/countdown'
 import InfoIcon from '@mui/icons-material/Info';
-import { PredictToggle } from '../../../components/predictionToggle';
 import Head from 'next/head';
 
 const WagerPage: NextPage = (cardObject) => {
@@ -48,6 +48,8 @@ const getSneaker = async () => {
 useEffect(() => {
     getSneaker();
 }, []);
+
+
 	return (
 
 		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
@@ -60,32 +62,50 @@ useEffect(() => {
       <Announcement />
 				<Nav />
 				
+			
+        <h3 className="flex flex-row items-center justify-center text-left pt-4 pb-4 bg-white text-[25px] font-medium">
+        ⏱ Live Market
 				
-				<div className="p-5">
+					</h3>
+        
+				<div className=" laptop:flex flex-col">
+        <div className="p-5 laptop:flex flex-row items-center justify-center laptop:space-x-[1px] pb-20">
         {response.map((el: any) => (
             <WagerCard  cardObject={el}/>
             ))
         }
 					
-					<div className='mobile:flex flex-col space-y-3 justify-center items-middle pt-4'>
-        <h3 className="mobile:text-[18px] font-medium text-center">
+					<div className='mobile:flex flex-col space-y-6 justify-center items-center pt-6 laptop:w-1/3'>
+        <h3 className="mobile:text-[18px] font-medium">
 					Condition: Resell Price {'>'} $400<br></br> Closes: 08/20/2022 12:00 PM EST
 					</h3>
           <h3 className="mobile:text-[25px] font-medium flex flex-row justify-center">
           Price : 50¢
           <Tooltip
-            title="Price is determined by the number of participants on each side of the market" arrow>
+            title="Pre-Release contracts are 50¢ regardless of Condition Type" arrow>
           <InfoIcon sx={{fontSize:'18px'}}/>
           </Tooltip>
           </h3>
-          <PredictToggle/>
-
+          
+			
+					<PredictToggle />
+         
+          
           </div>
+          
+          </div>
+          
+          {response.map((el:any) => (
+          <ProductDetails cardObject={el}/>
+          ))
+          }
+      
 				</div>
+        
 			</main>
 
-			<footer className="flex h-24 w-full items-center justify-center border-t">
-			</footer>
+			{/* <footer className="flex h-24 w-full items-center justify-center border-t">
+			</footer> */}
 		</div>
 	);
 };

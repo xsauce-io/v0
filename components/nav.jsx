@@ -9,7 +9,7 @@ export const Nav = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
-    <header class="bg-gray-900 sticky top-0">
+    <header class="bg-gray-900 sticky top-0 z-20">
     <div
       class="flex items-center h-16 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8"
     >

@@ -10,10 +10,10 @@ export const WagerCard = ({ cardObject }) => {
 
     return (
         <React.Fragment>
-            <div className="">
+            <div className="w-[2/3] p-5">
 
 
-                {/* <img className="rounded-lg" src={response.image?.original} /> */}
+ 
                 {
                     cardObject === undefined ?
                         <React.Fragment>

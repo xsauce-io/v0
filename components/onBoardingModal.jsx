@@ -1,60 +1,61 @@
 import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Carousel  from 'nuka-carousel';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import Box from '@mui/material/Box'
+import Slide from '@mui/material/Slide';
+import Carousel from 'nuka-carousel'
 
-
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export const Onboard = () => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
-      <Button onClick={handleOpen}>How it works</Button>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+      <Button variant="outlined" onClick={handleClickOpen}>
+        How it works
+      </Button>
+      <Dialog
         open={open}
+        TransitionComponent={Transition}
+        keepMounted
         onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-
-      style={{  position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: '100vw',
-      height: '100vh',
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      boxShadow: 24,
-      p: 4,}}
+        aria-describedby="alert-dialog-slide-description"
+       sx={{ }}
       >
-       
-        <Fade in={open}>
-        <Box>
-        <Carousel
-       slidesToShow={1}
-       style={{height:'800px', backgroundColor:'black',}}
-       >
-       <img src="/sneakericon.png" />
-      <img src="/logo.svg" />
-      <img src="/sneakericon.png" />
-     <img src="/logo.svg" />
-     <img src="/sneakericon.png" />
-       </Carousel>
-       </Box>
-        </Fade>
-      
-      </Modal>
+        <Box sx={{bgcolor:'white'}}>
+        <DialogActions>
+        <Button sx={{fontSize:'30px',display:'flex', flexDirection:'row' ,justifyContent:'right',paddingRight:'18px'}} onClick={handleClose}>&#10005;</Button>
+        </DialogActions>
+        <DialogContent >
+          <DialogContentText id="alert-dialog-slide-description">
+            
+           <Carousel width={"1000px"} style={{height:'600px'}}>
+           <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide1" />
+        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide2" />
+        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide3" />
+        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide4" />
+        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide5" />
+        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide6" />
+      </Carousel>
+         
+          </DialogContentText>
+        </DialogContent>
+        </Box>
+      </Dialog>
     </div>
   );
 }

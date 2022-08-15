@@ -5,7 +5,7 @@ export const Countdown = () => {
 
   const counter = () => {
 
-  const countDate = new Date("August 15, 2022 12:00:00").getTime()
+  const countDate = new Date("August 17, 2022 12:00:00").getTime()
   console.log(countDate);
   const now = new Date().getTime();
   const gap = countDate - now;
@@ -33,7 +33,8 @@ export const Countdown = () => {
 
 return (
 
-<div className="mobile:flex flex-row space-x-2 justify-center text-[12px] bg-white p-4">
+<div className="mobile:flex flex-row space-x-2 justify-center text-[12px] bg-[#ACFF00] p-4 items-center">
+  <h1 className="font-bold text-[18px]">Release Countdown:</h1>
 
 <div id="container-day">
   <h3 >Time</h3>

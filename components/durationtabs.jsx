@@ -9,13 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 export const Durationtabs = () => {
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main:'#000000'
-      }
-    }
-  })
+ 
 
   const [value, setValue] = React.useState(0);
 
