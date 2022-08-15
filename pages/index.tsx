@@ -14,6 +14,7 @@ import CasinoIcon from '@mui/icons-material/Casino';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
+import {Onboard} from '../components/onBoardingModal'
 
 
 const Home: NextPage = () => {
@@ -64,7 +65,10 @@ useEffect(() => {
        <h1 className='text-[20px] pl-6 pt-6 font-bold text-left'>
        Welcome, </h1> <h2 className='text-left pl-6 pr-6 text-[12px] '>to the world’s first prediction market for 👟s </h2>
        </div> */}
+
+     
        <div className='flex flex-row items-center pt-4 pl-20 space-x-2'>
+       <Onboard/>
         <NewspaperIcon/>
        <h1 className='text-[25px] text-left font-semibold'>News</h1>
        </div>

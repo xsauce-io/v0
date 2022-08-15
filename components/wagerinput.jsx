@@ -5,26 +5,41 @@ import ArrowCircleDownRoundedIcon from "@mui/icons-material/ArrowCircleDownRound
 import ArrowCircleUpRoundedIcon from "@mui/icons-material/ArrowCircleUpRounded"
 import { ButtonGroup } from "../components/marketCondTggle"
 import { useState, useEffect } from "react"
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+
+
 
 export const Wagerinput = () => {
 
 
 const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
 
+const [alignment, setAlignment] = React.useState();
 
-const [isYes, setIsYes] = useState(true);
+const handleChange = (event, newAlignment) => {
+  setAlignment(newAlignment);
+};
+
+
+
+const [isYes, setIsYes] = useState('Yes');
 const [clickedId, setClickedId] = useState(-1);
 
 
-const handleClick = (event, id) => {
-  event.preventDefault();
-  setClickedId(id);
-  if (event.target.value === "1") {
-    setIsYes(true);
-  } else if (event.target.value === "2") {
-    setIsYes(false);
+const handleClick = (e) => {
+  e.preventDefault();
+  console.log(alignment)
   }
-};
+
+// const printButtonLabel = (event) => {
+//   console.log(event.target.value);
+//   if (event.target.value === "1") {
+//     setIsLong(true);
+//   } else if (event.target.value === "2") {
+//     setIsLong(false);
+//   }
+// };
 
 
   //use effect sets 1st button to clicked
@@ -41,11 +56,11 @@ const handleClick = (event, id) => {
     await provider.send('eth_requestAccounts', []);
     const signer = await provider.getSigner();
     const erc1155 = new ethers.Contract(address, erc1155abi, signer);
-    await erc1155.mint(BigNumber.from(data.get({prediction})), BigNumber.from(data.get("contractNumber")), {
+    await erc1155.mint(BigNumber.from(alignment), BigNumber.from(data.get("contractNumber")), {
       value: ethers.utils.parseEther((0.05 * BigNumber.from(data.get("contractNumber"))).toString())
     });
   }
-    let buttonObject = [{ name: "Yes" }, { value: 2, name: "No" }]
+   
 
 
 
@@ -56,26 +71,23 @@ const handleClick = (event, id) => {
 
       <form onSubmit={handleTransfer} className="flex flex-col space-y-5">
 
-<div className="flex flex-row justify-center items-center h-14 bg-[gray] rounded-xl">
+<div className="flex flex-row justify-center items-center">
+<ToggleButtonGroup
+  color="primary"
+  value={alignment}
+  exclusive
+  onChange={handleChange}
+  onClick={handleClick}
+>
+  <ToggleButton  value="1">Yes</ToggleButton>
+  <ToggleButton  value="2">No</ToggleButton>
+</ToggleButtonGroup>
 
-      {buttonObject.map((buttonObject, i) => (
 
-     
-       <input
-          key={i}
-          type='button'
-          name='predicition'
-          value={buttonObject.name}
-          onClick={(event) => handleClick(event, i)}
-          className={i === clickedId ? "bg-[#B6F563] w-1/2 h-14 rounded-xl" : "bg-[gray] w-1/2 h-14 rounded-xl"}
-           />
-      
-        
-      ))}
-        
+         
       </div>
-  {/* <div class="relative">
-    <input class="hidden" type="radio" name="prediction" value="1" id="yes"   />
+   {/* <div class="relative">
+    <input class="hidden" type="radio" name="prediction" value="1" id="yes"  onClick={handleClick} />
 
     <label class="block bg-[#D8E9BC] p-4 text-sm font-medium transition-colors shadow-md rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 " for="yes">
     <ArrowCircleUpRoundedIcon sx={{fontSize:'30px' ,color:'#203700', outlineColor:'black'}}/>
@@ -89,7 +101,7 @@ const handleClick = (event, id) => {
   </div>
 
   <div class="relative">
-    <input class="hidden" type="radio" name="prediction" value="2" id="no" />
+    <input class="hidden" type="radio" name="prediction" value="2" id="no"  onClick={handleClick}/>
 
     <label class="block bg-[#D8E9BC] p-4 text-sm font-medium transition-colors shadow-md rounded-lg shadow-sm cursor-pointer  hover:bg-gray-50" for="no">
     No
@@ -99,8 +111,8 @@ const handleClick = (event, id) => {
     <svg class="absolute w-5 h-5 text-blue-600 opacity-0 top-4 right-4 peer-checked:opacity-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
     </svg>
-  </div> */}
-  
+  </div> 
+   */}
 
 
 
@@ -125,6 +137,6 @@ const handleClick = (event, id) => {
 
 
   )
-}
 
+  }
 

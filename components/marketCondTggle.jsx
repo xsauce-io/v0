@@ -1,3 +1,4 @@
+import { chakra } from "@chakra-ui/react";
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from "react";
 
@@ -10,8 +11,6 @@ import React, { useEffect, useState } from "react";
 */
 
 export const ButtonGroup = ({ buttons, onClick }) => {
-
-
   const [clickedId, setClickedId] = useState(-1);
 
   //set onClick per button Id
@@ -32,22 +31,36 @@ export const ButtonGroup = ({ buttons, onClick }) => {
 
   return (
     <React.Fragment>
-      <div className="flex flex-row justify-center items-center h-14 bg-[gray] rounded-xl">
-      {buttons.map((buttonObject, i) => (
-        <button
-          key={i}
-          name={buttonObject.name}
-          value={buttonObject.value}
-          onClick={(event) => handleClick(event, i)}
-          className={i === clickedId ? "bg-[#B6F563] w-1/2 h-14 rounded-xl" : "bg-[gray] w-1/2 h-14 rounded-xl"}
+      <div>
+        <chakra.button
+          height={"100%"}
+          borderRadius={"xl"}
+          flex={1}
+          key='Yes'
+          name={buttons[0].name}
+          value={buttons[0].value}
+          onClick={handleClick}
+          className={'Yes' === clickedId ? "active" : "inactive"}
         >
-          {buttonObject.name}
-        </button>
-      ))}
-      </div>
+          
+        </chakra.button>
+
+        <chakra.button
+          height={"100%"}
+          borderRadius={"xl"}
+          flex={1}
+          key='No'
+          name={buttons[1].name}
+          value={buttons[1].value}
+          onClick={(event) => handleClick(event, i)}
+          className={'No' === clickedId ? "active" : "inactive"}
+        >
+         
+        </chakra.button>
+        </div>
     </React.Fragment>
   );
-
+};
 
 /*-------------------------------------
 *------------- PropTypes  -------------
@@ -57,6 +70,3 @@ ButtonGroup.propTypes = {
   buttons: PropTypes.array,
   onClick: PropTypes.func,
 };
-
-}
-
