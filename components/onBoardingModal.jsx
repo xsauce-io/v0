@@ -30,7 +30,7 @@ export const Onboard = () => {
   return (
     <div>
       
-      <Button sx={{height:'2.5rem', "&.MuiButton-contained": { color: "#000000", backgroundColor:'#FFFFFF' },}} variant="contained" onClick={handleClickOpen}>
+      <Button sx={{height:'2.5rem', "&.MuiButton-contained": { color: "#000000", backgroundColor:'#FFFFFF', fontWeight:'900' },}} variant="contained" onClick={handleClickOpen}>
         How it works
       </Button>
       
