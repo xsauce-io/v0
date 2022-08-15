@@ -68,7 +68,7 @@ useEffect(() => {
 
      
        <div className='flex flex-row items-center pt-4 pl-20 space-x-2'>
-       <Onboard/>
+       
         <NewspaperIcon/>
        <h1 className='text-[25px] text-left font-semibold'>News</h1>
        </div>

@@ -7,6 +7,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Box from '@mui/material/Box'
 import Slide from '@mui/material/Slide';
 import Carousel from 'nuka-carousel'
+import { createStyles, makeStyles } from '@mui/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -23,34 +25,47 @@ export const Onboard = () => {
     setOpen(false);
   };
 
+
+
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      
+      <Button sx={{height:'2.5rem', "&.MuiButton-contained": { color: "#000000", backgroundColor:'#FFFFFF' },}} variant="contained" onClick={handleClickOpen}>
         How it works
       </Button>
+      
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-       sx={{ }}
+       PaperProps={{
+        style:{ borderRadius:30}
+       }}
       >
-        <Box sx={{bgcolor:'white'}}>
+        <Box sx={{bgcolor:'black'}}>
         <DialogActions>
-        <Button sx={{fontSize:'30px',display:'flex', flexDirection:'row' ,justifyContent:'right',paddingRight:'18px'}} onClick={handleClose}>&#10005;</Button>
+        <Button sx={{color:'#ACFF00', fontSize:'30px',display:'flex', flexDirection:'row' ,justifyContent:'right',paddingRight:'18px'}} onClick={handleClose}>&#10005;</Button>
         </DialogActions>
         <DialogContent >
           <DialogContentText id="alert-dialog-slide-description">
             
-           <Carousel width={"1000px"} style={{height:'600px'}}>
-           <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide1" />
-        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide2" />
-        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide3" />
-        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide4" />
-        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide5" />
-        <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide6" />
+           <Carousel style={{height:'400px'}} defaultControlsConfig={{
+    nextButtonText: '→ ',
+    prevButtonText: '←',
+    pagingDotsStyle: {
+      fill: "white",
+      padding:'10px',
+      
+    }
+  }}>
+           <img src="./Slide4.png" />
+           <img src="./Slide3.png" />
+           <img src="./Slide2.png" />
+           <img src="./Slide1.png" />
       </Carousel>
+
+      
          
           </DialogContentText>
         </DialogContent>

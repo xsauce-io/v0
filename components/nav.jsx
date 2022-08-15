@@ -2,11 +2,14 @@ import React from 'react';
 import { Drawer, Box, Typography } from '@mui/material'
 import { useState } from 'react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import {Onboard} from '../components/onBoardingModal'
+
 
 
 export const Nav = () => {
  
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
 
   return (
     <header class="bg-gray-900 sticky top-0 z-20">
@@ -50,7 +53,9 @@ export const Nav = () => {
         </nav>
   
         <div class="flex items-center gap-4">
+        <Onboard/>
           <div class="sm:gap-4 sm:flex">
+          
           <ConnectButton/>
           </div>
   
