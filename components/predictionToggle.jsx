@@ -15,6 +15,9 @@ export const PredictToggle = () => {
 const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
 
 const [alignment, setAlignment] = useState();
+const [isYes, setIsYes] = useState();
+const [order, setOrder] = useState();
+const [isBuy, setIsBuy] = useState();
 
 const theme = createTheme({
   palette: {
@@ -37,15 +40,23 @@ const handleChange = (event, newAlignment) => {
   setAlignment(newAlignment);
   if (event.target.value === "1") {
         setIsYes(true);
+        
       } else if (event.target.value === "2") {
         setIsYes(false);
+        
       }
 };
 
+const handleChange1 = (event, newOrder) => {
+setOrder(newOrder);
+if (event.target.value === "1") {
+  setIsBuy(true);
+} else if (event.target.value === "2") {
+  setIsBuy(false);
+}
 
+}
 
-const [isYes, setIsYes] = useState();
-const [clickedId, setClickedId] = useState(-1);
 
 
 const handleClick = (e) => {
@@ -54,12 +65,6 @@ const handleClick = (e) => {
   
   }
 
-
-
-  //use effect sets 1st button to clicked
-  useEffect(() => {
-    setClickedId(0);
-  }, []);
 
 
   const handleTransfer = async (e) => {
@@ -83,9 +88,27 @@ const handleClick = (e) => {
     <React.Fragment>
 
 
-      <form onSubmit={handleTransfer} className="flex flex-col space-y-5  justify-center items-center mobile:w-full laptop:w-1/3">
+      <form onSubmit={handleTransfer} className="flex flex-col space-y-4 justify-center items-center mobile:w-full laptop:w-1/3">
 
 
+    
+  <ThemeProvider theme={theme}>
+<ToggleButtonGroup
+  
+ color= { isBuy === true ? "primary" : 'secondary' }
+  sx={{backgroundColor:'white', '@media screen and (min-width: 300px)': { width:'100%'}}}
+  value={order}
+  exclusive
+  
+  
+  onChange={handleChange1}
+>
+  <ToggleButton  sx={{width:'100%', boxShadow:'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' }}  value="1">Buy</ToggleButton>
+  <ToggleButton sx={{width:'100%', boxShadow:'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' }}   value="2">Sell</ToggleButton>
+</ToggleButtonGroup>
+</ThemeProvider>
+<p className="text-[gray] text-[12px]">Buying or Selling?</p>
+         
 
   <ThemeProvider theme={theme}>
 <ToggleButtonGroup
@@ -100,8 +123,7 @@ const handleClick = (e) => {
   <ToggleButton sx={{width:'100%', boxShadow:'0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' }}   value="2">No</ToggleButton>
 </ToggleButtonGroup>
 </ThemeProvider>
-         
-
+<p className="text-[gray] text-[12px]">Prediction</p>
 
    
 
@@ -118,8 +140,8 @@ const handleClick = (e) => {
         placeholder="# of Contracts"
       />
 
-      <button id='mint' class={isYes == undefined ? "mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-white opacity-60 rounded shadow-md mobile:w-full": isYes == true ? "mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-[#416900] opacity-60 rounded shadow-md mobile:w-full":"mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-[#BA1A1A] opacity-60 rounded shadow-md mobile:w-full"} type="submit">
-      {isYes == undefined ? 'Select Bid Type' : isYes === true ? 'Buy Yes Bid(s)': 'Buy No Bid(s)'}
+      <button id='mint' class={isBuy == undefined ? "mt-5 w-3/4 h-[3rem] text-[13px] py-2 px-5 text-black bg-white opacity-60 rounded shadow-md mobile:w-full": isBuy == true ? "mt-5 w-3/4 h-[3rem]  text-[13px] py-2 px-5 text-black bg-[#416900] opacity-60 rounded shadow-md mobile:w-full":"mt-5 w-3/4 h-[3rem] text-[13px] py-2 px-5 text-black bg-[#BA1A1A] opacity-60 rounded shadow-md mobile:w-full"} type="submit">
+      {isBuy == undefined ? 'Select Order Type' : isBuy === true ? 'Place Buy Order': 'Place Sell Order'}
       </button>
    
     </form>

@@ -4,17 +4,14 @@ import { Card } from '../components/cardWager'
 import { CardPreMarket} from '../components/cardPreMarket'
 import { Feed } from '../components/feed'
 import Head from 'next/head'
-import Image from 'next/image'
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { RepeatOneSharp } from "@mui/icons-material";
 import { Skeleton } from "@mui/material";
 import React from 'react'
 import CasinoIcon from '@mui/icons-material/Casino';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
-import {Onboard} from '../components/onBoardingModal'
 
 
 const Home: NextPage = () => {
@@ -27,7 +24,7 @@ let [marketResponse, setMarketResponse] = useState([] as any);
 const getSneaker2 = async () => {
   Promise.all([
     axios.get("https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=nike&name=air-max-patta&gender=men"),
-    axios.get("https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=adidas&name=Yeezy-350")
+    axios.get("https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=nike&name=air-max-patta&gender=men")
    ])
    
   .then(axios.spread((obj1,obj2) => {
@@ -59,7 +56,7 @@ useEffect(() => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col text-center">
+      <main className="flex w-full flex-1 flex-col text-center mb-20">
        <Nav/>
        {/* <div className='flex flex-row p-0 m-0 items-middle justify-center'>
        <h1 className='text-[20px] pl-6 pt-6 font-bold text-left'>
@@ -68,9 +65,8 @@ useEffect(() => {
 
      
        <div className='flex flex-row items-center pt-4 pl-20 space-x-2'>
+       <h1 className='text-[50px] underline underline-offset-8 decoration-[#ACFF00]'>Dashboard</h1>
        
-        <NewspaperIcon/>
-       <h1 className='text-[25px] text-left font-semibold'>News</h1>
        </div>
        
        <Feed/>
@@ -99,10 +95,6 @@ useEffect(() => {
             ))
           }
        </div>
-       </div>
-       <div className='flex flex-row items-center pl-4 pt-4 pb-6 space-x-2'>
-       <QueryStatsIcon/>
-       <h1 className='text-[25px] text-left font-semibold'>Positions</h1>
        </div>
       </main>
 

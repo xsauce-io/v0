@@ -12,7 +12,7 @@ const cardObjectHref = "/wager/" + cardObject.sku
 
   return (
     <Link href={cardObjectHref}>
-    <a class="flex flex-row overflow-hidden rounded-2xl bg-black justify-center laptop:h-[400px]">
+    <a class="shadow-xl flex flex-row overflow-hidden rounded-2xl bg-black justify-center laptop:h-[400px]">
 
                       { cardObject === undefined ?
                         <React.Fragment>
