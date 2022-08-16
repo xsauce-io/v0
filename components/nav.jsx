@@ -53,7 +53,9 @@ export const Nav = () => {
         </nav>
   
         <div class="flex items-center gap-4">
+          <div class='mobile:hidden laptop:flex'>
         <Onboard/>
+        </div>
           <div class="sm:gap-4 sm:flex">
           
           <ConnectButton/>

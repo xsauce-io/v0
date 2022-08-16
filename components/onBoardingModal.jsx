@@ -59,10 +59,10 @@ export const Onboard = () => {
       
     }
   }}>
-           <img src="./Slide4.png" />
-           <img src="./Slide3.png" />
-           <img src="./Slide2.png" />
-           <img src="./Slide1.png" />
+           <img src="/Slide4.png" />
+           <img src="/Slide3.png" />
+           <img src="/Slide2.png" />
+           <img src="/Slide1.png" />
       </Carousel>
 
       

@@ -14,6 +14,7 @@ import {Countdown} from '../../../components/countdown'
 import InfoIcon from '@mui/icons-material/Info';
 import Head from 'next/head';
 
+
 const WagerPage: NextPage = (cardObject) => {
 
   const router = useRouter()

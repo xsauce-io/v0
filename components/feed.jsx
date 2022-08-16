@@ -19,11 +19,11 @@ return (
 <h1>Click for onboarding</h1>
 </div>
 </div>
-<div className="flex flex-row space-x-4 w-full justify-center">
-<div className="w-1/3 h-[35vh] text-white bg-black rounded-md shadow-lg">
+<div className="flex flex-row space-x-4 w-[1200px] justify-center">
+<div className="w-1/4 h-[35vh] text-white bg-black rounded-md shadow-lg">
 <h1>Release Calender</h1>
 </div>
-<div className="w-1/3 h-[35vh] text-white bg-black rounded-md shadow-lg">
+<div className="w-1/2 h-[35vh] text-white bg-black rounded-md shadow-lg">
 <h1>Click for onboarding</h1>
 </div>
 </div>
