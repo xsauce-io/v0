@@ -10,7 +10,7 @@ export const WagerCard = ({ cardObject }) => {
 
     return (
         <React.Fragment>
-            <div className="w-[2/3] p-5">
+            <div className="w-[2/3] p-5 ">
 
 
  

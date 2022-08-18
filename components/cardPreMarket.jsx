@@ -1,8 +1,4 @@
 import React from "react";
-import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
-import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRounded';
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { Skeleton } from "@mui/material";
 import Link from 'next/link'
 
@@ -12,11 +8,12 @@ const cardObjectHref = "/pre-market/" + cardObject.sku
 
   return (
     <Link href={cardObjectHref}>
-    <a class="flex flex-row overflow-hidden rounded-2xl bg-black justify-center laptop:h-[400px]">
+    <a class="transition duration-500 hover:scale-105 flex flex-row overflow-hidden rounded-2xl bg-gray-500 bg-opacity-50
+ justify-center laptop:h-[400px]">
 
                       { cardObject === undefined ?
                         <React.Fragment>
-                            <Skeleton variant="rectangular" sx={{backgroundColor:'white', height:'30px'}} />
+                          <Skeleton variant="rectangular" sx={{backgroundColor:'white', height:'300px'}} />
                         </React.Fragment> :
                         <React.Fragment>
       <div class="p-4 flex flex-row items-center laptop:flex-col">
@@ -33,7 +30,7 @@ const cardObjectHref = "/pre-market/" + cardObject.sku
         }
         
 
- ?
+ 
         <div class='flex flex-col align-middle justify-center'>
         <h5 class="text-[15px] text-[#F5DEB3]">{cardObject.name}</h5>
         <div class='flex flex-row w-full align-middle justify-center items-center p-2'>

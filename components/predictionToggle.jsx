@@ -103,7 +103,8 @@ useEffect(() => {
       // firstToken address
       "0x820a9Ca5F7D4b40Cdb81DCd373CBE7173106ce1e",
       // firstToken amount
-      BigNumber.from(data.get("contractNumber")),
+      // BigNumber.from(data.get("contractNumber"))
+      '1',
       // secondToken amount
      '800',
       // startPagePtr

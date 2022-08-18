@@ -5,6 +5,10 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontFamily:{
+      'SG':['"Space Grotesk"', 'sans-serif'],
+      'Inter':['Inter', 'sans-serif']
+    },
     screens: {
       'mobile': '300px',
 
