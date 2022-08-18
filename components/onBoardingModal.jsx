@@ -30,7 +30,7 @@ export const Onboard = () => {
   return (
     <div>
       
-      <Button sx={{height:'2.5rem', "&.MuiButton-contained": { color: "#000000", backgroundColor:'#EAF5D5', fontWeight:'900'},}} variant="contained" onClick={handleClickOpen}>
+      <Button sx={{"&.MuiButton-contained": { color: "#ACFF00", fontFamily:"sans-serif", padding:"0px", '&:hover': {backgroundColor: 'black'} } }} variant="contained" onClick={handleClickOpen}>
         How it works
       </Button>
       
@@ -59,10 +59,10 @@ export const Onboard = () => {
       
     }
   }}>
-           <img src="/Slide4.png" />
-           <img src="/Slide3.png" />
-           <img src="/Slide2.png" />
-           <img src="/Slide1.png" />
+           <img src="./1.jpg" />
+           <img src="./2.jpg" />
+           <img src="./3.jpg" />
+           <img src="./4.jpg" />
       </Carousel>
 
       

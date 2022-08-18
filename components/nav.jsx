@@ -40,9 +40,9 @@ export const Nav = () => {
               <li>
                 <a
                   class="text-[#ACFF00] transition hover:text-white"
-                  href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
+                  
                 >
-                  How It Works
+                  <Onboard/>
                 </a>
               </li>
 

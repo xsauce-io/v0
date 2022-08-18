@@ -80,7 +80,7 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <main className="flex flex-col w-full text-center mb-20">
+      <main className="flex flex-col w-full text-center mb-20 font-SG">
         <Announcement/>
         <Nav />
 
