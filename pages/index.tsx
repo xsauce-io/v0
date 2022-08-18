@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   let [premarketResponse, setAuctionResponse] = useState([] as any);
   let [marketResponse, setMarketResponse] = useState([] as any);
   let [isLoading, setisLoading] = useState(true as boolean);
-  let [toggled, setisToggled] = useState(false as boolean);
+  let [toggled, setisToggled] = useState(true as boolean);
 
   // fetch sneaker data
   const getSneaker2 = async () => {
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
     //#F5DEB3 - Vanilla
     //#E5E5E5 - Gray
 
-    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5] ">
+    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-lime-400 via-gray-100 to-white">
       <Head>
         <title>Xsauce</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -124,13 +124,13 @@ const Home: NextPage = () => {
             <h3 className="text-[20px] text-left font-bold font-Inter">
                 Filter:
               </h3>
-            <button onClick={() => setisToggled(false)} className={toggled == false ? "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-inherit p-2" }>
+            <button onClick={() => setisToggled(true)} className={toggled == true ? "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-inherit p-2" }>
               <SportsScoreIcon />
               <h3 className="text-[20px] text-left font-normal font-Inter">
                 Pre-Market
               </h3>
             </button>
-            <button onClick={() => setisToggled(true)} className={toggled == true ? "laptop:flex flex-row items-center rounded-xl transition duration-200 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-inherit p-2" }>
+            <button onClick={() => setisToggled(false)} className={toggled == false ? "laptop:flex flex-row items-center rounded-xl transition duration-200 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-inherit p-2" }>
                <CasinoIcon />
               <h3 className="text-[20px] text-left font-normal font-Inter">
                 Live Market

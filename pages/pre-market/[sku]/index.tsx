@@ -52,7 +52,7 @@ useEffect(() => {
 
 	return (
 
-		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
+		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-lime-400 via-gray-100 to-white">
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
