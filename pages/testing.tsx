@@ -3,12 +3,10 @@ import { Nav } from '../components/nav'
 import { Card } from '../components/cardWager'
 import { Announcement } from '../components/announcement'
 import Head from 'next/head'
-import {Onboard} from '../components/onBoardingModal'
-import Carousel from 'nuka-carousel'
 
 
 
-const Markets: NextPage = () => {
+const Redeem: NextPage = () => {
 
 
 
@@ -41,4 +39,3 @@ const Markets: NextPage = () => {
   )
 }
 
-export default Markets

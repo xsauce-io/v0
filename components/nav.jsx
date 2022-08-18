@@ -40,11 +40,12 @@ export const Nav = () => {
               <li>
                 <a
                   class="text-[#ACFF00] transition hover:text-white"
-                  
+                  href="/redeem"
                 >
-                  <Onboard/>
+                 Redeem
                 </a>
               </li>
+
 
               <li>
                 <a
@@ -52,6 +53,16 @@ export const Nav = () => {
                   href="/https://twitter.com/xsauce_io"
                 >
                   Contact Us
+                </a>
+              </li>
+
+
+              <li>
+                <a
+                  class="text-[#ACFF00] transition hover:text-white"
+                  
+                >
+                  <Onboard/>
                 </a>
               </li>
             </ul>
@@ -118,6 +129,15 @@ export const Nav = () => {
                         Live Market
                       </a>
                     </li>
+
+                    <li>
+                <a
+                  class="text-[#ACFF00] transition hover:text-white"
+                  href="/redeem"
+                >
+                 Redeem
+                </a>
+              </li>
 
                     <li>
                       <a

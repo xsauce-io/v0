@@ -34,19 +34,18 @@ const cardObjectHref = "/wager/" + cardObject.sku
         
 
  
-        <div class='flex flex-col align-middle justify-center'>
+        <div class='flex flex-col items-center justify-center space-y-4'>
         <h5 class="text-[15px] text-[#F5DEB3]">{cardObject.name}</h5>
-        <div class='flex flex-row w-full align-middle justify-center items-center p-2'>
+  
           
 
-          <p class="text-[16px] text-white px-4 laptop:text-[20px]">Prediction: Price {">"} $300</p>
+          <p class="text-[16px] text-white  laptop:text-[20px]">Prediction: Price {">"} $300</p>
 
 
-         
-        </div>
 
 
-        <p class="mt-2 text-[12px] text-[#F5DEB3] laptop:text-[16px]">Market closes on 08/15/2022 @ 12:00PM EST</p>
+
+        <p class=" text-[12px] text-[#F5DEB3] laptop:text-[16px]">Market closes on 08/15/2022 @ 12:00PM EST</p>
         </div>
       </div>
       </React.Fragment>
