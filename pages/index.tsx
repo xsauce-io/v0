@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { Nav } from "../components/nav";
 import { Card } from "../components/cardWager";
 import { CardPreMarket } from "../components/cardPreMarket";
-import { Dashboard } from "../components/dashboard";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -69,7 +68,7 @@ const Home: NextPage = () => {
     //#F5DEB3 - Vanilla
     //#E5E5E5 - Gray
 
-    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-lime-400 via-gray-100 to-white">
+    <div className="flex w-screen flex-col items-center justify-center bg-[#1B1C18]">
       <Head>
         <title>Xsauce</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -88,15 +87,17 @@ const Home: NextPage = () => {
        <h1 className='text-[20px] pl-6 pt-6 font-bold text-left'>
        Welcome, </h1> <h2 className='text-left pl-6 pr-6 text-[12px] '>to the world’s first prediction market for 👟s </h2>
        </div> */}
-
+<div className="m-auto outline-4 outline-[#8F9285] mobile:hidden tablet:flex w-[700px] laptop:w-[1100px] desktop:w-[1300px]">
         <Carousel
           wrapAround
           speed={600}
-          style={{
-            height: "333px",
-            width: "1300px",
+          style={{  
+            height: "1/3vh",
+            width: "100%",
+        
             borderRadius: "20px",
             margin: "auto",
+            marginTop:'50px'
           }}
           defaultControlsConfig={{
             nextButtonStyle: {
@@ -115,24 +116,25 @@ const Home: NextPage = () => {
           <img src="/Slide2.png" />
           <img src="/Slide3.png" />
           <img src="/Slide4.png" />
+          
         </Carousel>
-
+        </div>
         
         <div className="flex flex-row items-center pl-18 pb-8 pt-8">
           <div className="flex flex-row items-center justify-between w-[1300px] m-auto">
             <div className='flex flex-row items-center space-x-4'>
-            <h3 className="text-[20px] text-left font-bold font-Inter">
+            <h3 className="text-[22px] text-[white] text-left font-bold font-SG">
                 Filter:
               </h3>
-            <button onClick={() => setisToggled(true)} className={toggled == true ? "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-inherit p-2" }>
+            <button onClick={() => setisToggled(true)} className={toggled == true ? "laptop:flex flex-row items-center rounded-xl text-[black] transition duration-500 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-inherit p-2 text-[white]" }>
               <SportsScoreIcon />
-              <h3 className="text-[20px] text-left font-normal font-Inter">
+              <h3 className="text-[17px] text-left font-normal font-Inter">
                 Pre-Market
               </h3>
             </button>
-            <button onClick={() => setisToggled(false)} className={toggled == false ? "laptop:flex flex-row items-center rounded-xl transition duration-200 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-inherit p-2" }>
+            <button onClick={() => setisToggled(false)} className={toggled == false ? "laptop:flex flex-row items-center text-[black] rounded-xl transition duration-200 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center text-[white] rounded-xl transition duration-500 bg-inherit p-2" }>
                <CasinoIcon />
-              <h3 className="text-[20px] text-left font-normal font-Inter">
+              <h3 className="text-[17px] text-left font-normal font-Inter">
                 Live Market
               </h3>
             </button>
@@ -146,7 +148,7 @@ const Home: NextPage = () => {
           </div>
         </div>
         {toggled === true ? (
-        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px] font-Inter">
+        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px] font-SG">
           <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-[1300px] ">
             {isLoading === true ? (
               <React.Fragment>

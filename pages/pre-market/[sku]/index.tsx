@@ -2,10 +2,9 @@ import type { NextPage } from 'next';
 import { Nav } from '../../../components/nav';
 // import { Card } from '../components/card'
 import { ProductDetails} from '../../../components/productDetails';
-import { PredictToggle} from '../../../components/predictionToggle'
 import { Wagerinput }  from '../../../components/wagerinput';
 import { Announcement } from '../../../components/announcement';
-import { WagerCard } from '../../../components/wagerCard';
+import { PreCard } from '../../../components/preCard';
 import { useRouter } from 'next/router'
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -14,7 +13,7 @@ import {Countdown} from '../../../components/countdown'
 import InfoIcon from '@mui/icons-material/Info';
 import Head from 'next/head';
 
-const WagerPage: NextPage = (cardObject) => {
+const WagerPage: NextPage = () => {
 
   const router = useRouter()
 
@@ -46,19 +45,20 @@ const getSneaker = async () => {
 };
 
 useEffect(() => {
-    getSneaker();
-}, []);
+  if(!router.isReady) return;
+   getSneaker();
+}, [router.isReady]);
 
 
 	return (
 
-		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-lime-400 via-gray-100 to-white">
+		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main className="flex w-full flex-1 flex-col text-center">
+			<main id='tester' className="flex w-full flex-1 flex-col text-center">
       <Announcement />
 				<Nav />
 				
@@ -71,7 +71,7 @@ useEffect(() => {
 				<div className=" laptop:flex flex-col">
         <div className="p-5 laptop:flex flex-row items-center justify-center laptop:space-x-[1px] pb-20">
         {response.map((el: any) => (
-            <WagerCard  cardObject={el}/>
+            <PreCard  cardObject={el}/>
             ))
         }
 					

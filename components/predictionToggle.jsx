@@ -19,7 +19,6 @@ export const PredictToggle = () => {
   const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
   const addressRink ="0x360b9D17f8546941208085C045871E2a318117Ba"
   const dai = "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
- const byteCode = ''
 const [alignment, setAlignment] = useState();
 const [isYes, setIsYes] = useState();
 const [order, setOrder] = useState();
@@ -112,9 +111,9 @@ useEffect(() => {
       // MaxCancels
       '1',
       // makerOnly
-      isBuy,
-      // takerOnly
       !isBuy,
+      // takerOnly
+      isBuy,
       )
 
   }
@@ -131,7 +130,7 @@ useEffect(() => {
 
       <form onSubmit={handleTransfer} className="flex flex-col space-y-4 justify-center items-center mobile:w-full laptop:w-1/3">
 
-
+      <h1 className="font-SG text-[20px]">Order Details</h1>
     
   <ThemeProvider theme={theme}>
 <ToggleButtonGroup

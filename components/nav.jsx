@@ -7,8 +7,9 @@ import { Onboard } from "../components/onBoardingModal";
 export const Nav = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+
   return (
-    <header class="bg-black sticky top-0 z-20 w-[100vw] mb-10">
+    <header class="bg-[#E3E3DB] sticky top-0 z-20 w-[100vw]">
       <div class="flex items-center h-16 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8">
         <a class="block text-teal-300" href="/">
           <span class="sr-only">Home</span>
@@ -21,16 +22,16 @@ export const Nav = () => {
               Header navigation
             </h2>
 
-            <ul class="flex items-center gap-6 text-md font-SG">
+            <ul class="flex items-center gap-6 text-[1rem] font-SG">
               <li>
-                <a class="text-[#ACFF00] transition hover:text-white" href="/">
+                <a class=" text-black transition hover:text-[#ACFF00]" href="/">
                   Pre-Market
                 </a>
               </li>
 
               <li>
                 <a
-                  class="text-[#ACFF00] transition hover:text-white"
+                  class="text-black transition hover:text-[#ACFF00]"
                   href="/markets"
                 >
                   Live Market
@@ -39,7 +40,7 @@ export const Nav = () => {
 
               <li>
                 <a
-                  class="text-[#ACFF00] transition hover:text-white"
+                  class="text-black transition hover:text-[#ACFF00]"
                   href="/redeem"
                 >
                  Redeem
@@ -49,7 +50,7 @@ export const Nav = () => {
 
               <li>
                 <a
-                  class="text-[#ACFF00] transition hover:text-white"
+                  class="text-black transition hover:text-[#ACFF00]"
                   href="/https://twitter.com/xsauce_io"
                 >
                   Contact Us
@@ -59,7 +60,7 @@ export const Nav = () => {
 
               <li>
                 <a
-                  class="text-[#ACFF00] transition hover:text-white"
+                  class="text-black transition hover:text-[#ACFF00]"
                   
                 >
                   <Onboard/>
@@ -70,7 +71,7 @@ export const Nav = () => {
 
           <div class="flex items-center gap-4">
             <div class="sm:gap-4 sm:flex">
-              <ConnectButton />
+              <ConnectButton/>
             </div>
 
             <button

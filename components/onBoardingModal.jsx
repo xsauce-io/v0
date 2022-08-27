@@ -30,9 +30,9 @@ export const Onboard = () => {
   return (
     <div>
       
-      <Button sx={{"&.MuiButton-contained": { color: "#ACFF00", fontFamily:"sans-serif", padding:"0px", '&:hover': {backgroundColor: 'black'} } }} variant="contained" onClick={handleClickOpen}>
-        How it works
-      </Button>
+      <button className= 'text-[1rem]  text-black font-SG  p-0 hover:text-[#ACFF00]' variant="contained" onClick={handleClickOpen}>
+        How it Works
+      </button>
       
       <Dialog
         open={open}

@@ -4,7 +4,7 @@ import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 // import AspectRatio from '@mui/joy/AspectRatio';
 
-export const WagerCard = ({ cardObject }) => {
+export const PreCard = ({ cardObject }) => {
   return (
     <React.Fragment>
       <div className="w-[2/3] p-5 ">
@@ -25,19 +25,6 @@ export const WagerCard = ({ cardObject }) => {
                   <p className="font-normal font-Inter mobile:text-center laptop:text-[25px] desktop:text-[20px]">
                     ID:{cardObject.sku}
                   </p>
-                  <h3 className="font-Inter mobile:text-[18px] font-medium">
-                    Condition: Resell Price {">"} $400<br></br> Closes:
-                    08/20/2022 12:00 PM EST
-                  </h3>
-                  <h3 className="font-Inter mobile:text-[25px] font-medium flex flex-row justify-center">
-                    Price : 50¢
-                    <Tooltip
-                      title="Pre-Release contracts are 50¢ regardless of Condition Type"
-                      arrow
-                    >
-                      <InfoIcon sx={{ fontSize: "18px" }} />
-                    </Tooltip>
-                  </h3>
                 </div>
                 <img
                   src={cardObject.image?.original}

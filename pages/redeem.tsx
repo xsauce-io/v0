@@ -10,6 +10,7 @@ import axios from 'axios'
 
 
 
+
 const Redeem: NextPage = () => {
 
   let [isLoading, setisLoading] = useState(true as boolean);
@@ -235,6 +236,7 @@ const Redeem: NextPage = () => {
     Redeem </button>
 
       </form>
+      
       
       
       </main>
