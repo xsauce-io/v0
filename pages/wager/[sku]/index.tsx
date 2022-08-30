@@ -71,7 +71,7 @@ useEffect(() => {
 
 	return (
 
-		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-lime-400 via-gray-100 to-white ">
+		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5] ">
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
@@ -82,7 +82,7 @@ useEffect(() => {
 				<Nav />
 				
 			
-        <h3 className="flex flex-row items-center justify-center text-left pt-4 pb-4 bg-white text-[25px] font-medium">
+        <h3 className="flex flex-row items-center justify-center text-left pt-4 mt-8 pb-4 text-[28px] font-medium">
         ⏱ Live Market
 				
 					</h3>
@@ -96,20 +96,16 @@ useEffect(() => {
         }
 					
 					<div className='mobile:flex flex-col space-y-6 justify-center items-center pt-2 laptop:w-1/3'>
-      
+{/*       
           <button className={admin == true ? 'h-[100px] w-[100px] bg-[black]': 'h-[100px] w-[100px] bg-[red]' }></button>
-			
+			 */}
 					<PredictToggle />
          
           
           </div>
           
           </div>
-          
-          {response.map((el:any) => (
-          <ProductDetails cardObject={el}/>
-          ))
-          }
+        
       
 				</div>
         

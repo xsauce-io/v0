@@ -52,32 +52,38 @@ useEffect(() => {
 
 	return (
 
-		<div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
+		<div className="flex h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main id='tester' className="flex w-full flex-1 flex-col text-center">
+			<main id='tester' className="flex w-full h-full flex-1 flex-col text-center">
       <Announcement />
 				<Nav />
-				
+        <Countdown/>
 			
-        <h3 className="flex flex-row items-center justify-center text-left pt-4 pb-4 bg-white text-[25px] font-medium">
+        <h3 className="flex flex-row items-center justify-center text-left pt-2 pb-2 mt-10 text-[30px] font-medium">
         🏁 Pre-Market
 					</h3>
-          <Countdown/>
+         
         
-				<div className=" laptop:flex flex-col">
-        <div className="p-5 laptop:flex flex-row items-center justify-center laptop:space-x-[1px] pb-20">
+				<div className=" laptop:flex flex-col laptop:h-[calc(100%-310px)] justify-center">
+        <div className=" laptop:flex flex-row items-center justify-center laptop:space-x-[1px]">
+          <div className='bg-black flex flex-row w-2/3 rounded-tr-lg rounded-br-lg'>
         {response.map((el: any) => (
             <PreCard  cardObject={el}/>
             ))
         }
+          {response.map((el:any) => (
+          <ProductDetails cardObject={el}/>
+          ))
+          }
+        </div>
 					
 					<div className='mobile:flex flex-col space-y-6 justify-center items-center pt-6 laptop:w-1/3'>
         <h3 className="mobile:text-[18px] font-medium">
-					Condition: Resell Price {'>'} $400<br></br> Closes: 08/20/2022 12:00 PM EST
+					Wager: Resell Price is {'>'} $400<br></br> Closes: 09.10.2022 @ 12:00 PM EST
 					</h3>
           <h3 className="mobile:text-[25px] font-medium flex flex-row justify-center">
           Price : 50¢
@@ -95,10 +101,7 @@ useEffect(() => {
           </div>
           
           </div>
-          {response.map((el:any) => (
-          <ProductDetails cardObject={el}/>
-          ))
-          }
+        
 				</div>
         
 			</main>

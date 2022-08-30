@@ -6,7 +6,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Box from '@mui/material/Box'
 import Slide from '@mui/material/Slide';
-import Carousel from 'nuka-carousel'
 import { createStyles, makeStyles } from '@mui/styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -30,7 +29,7 @@ export const Onboard = () => {
   return (
     <div>
       
-      <button className= 'text-[1rem]  text-black font-SG  p-0 hover:text-[#ACFF00]' variant="contained" onClick={handleClickOpen}>
+      <button className= 'text-[1rem]  text-black font-SG  p-0 hover:text-[#D9CE3F]' variant="contained" onClick={handleClickOpen}>
         How it Works
       </button>
       
@@ -50,20 +49,7 @@ export const Onboard = () => {
         <DialogContent >
           <DialogContentText id="alert-dialog-slide-description">
             
-           <Carousel style={{height:'400px'}} defaultControlsConfig={{
-    nextButtonText: '→ ',
-    prevButtonText: '←',
-    pagingDotsStyle: {
-      fill: "white",
-      padding:'10px',
-      
-    }
-  }}>
-           <img src="./1.jpg" />
-           <img src="./2.jpg" />
-           <img src="./3.jpg" />
-           <img src="./4.jpg" />
-      </Carousel>
+     
 
       
          

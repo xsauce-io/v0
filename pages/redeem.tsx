@@ -85,7 +85,7 @@ const Redeem: NextPage = () => {
     //#F5DEB3 - Vanilla
     //#E5E5E5 - Gray
     
-    <div className="flex min-h-screen w-screen flex-col bg-gradient-to-b from-lime-400 via-gray-100 to-white">
+    <div className="flex h-screen w-screen flex-col bg-[#E5E5E5]">
       <Head>
         <title>Xsauce</title>
         <link rel="icon" href="/favicon.ico" />
@@ -94,13 +94,13 @@ const Redeem: NextPage = () => {
 
       <Announcement/>
        <Nav/>
-      <main className="flex w-full items-center justify-center flex-col">
+      <main className="flex w-full items-center justify-center flex-col h-[calc(100%-85px)]">
       
-      <form className="flex w-full items-center justify-center flex-col space-y-5">
+      <form className="flex w-full h-full items-center justify-center flex-col space-y-5">
       <div className="flex w-full items-center justify-center flex-col">
       
   <label className='font-SG text-[25px] pb-3' htmlFor="markets">Choose a market:</label>
-  <select className='mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-1/3 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none  ' onChange={handleChange} id="markets" name="markets">
+  <select className='bg-[white] shadow-black shadow-md mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-1/3 font-SG text-[15px] mb-3 rounded focus:outline-none' onChange={handleChange} id="markets" name="markets">
     <option value="1">Nike Air Max 1 Patta Denim</option>
     <option value="2">Jordan 1 Retro High Homage to Home Chicago (Numbered)</option>
     <option value="3">Nike Air Max 90 OFF-White Desert Ore</option>
@@ -232,7 +232,7 @@ const Redeem: NextPage = () => {
 </div>
 </div>
 }
-      <button id='redeem' className= "h-[3rem] w-[8rem] text-[15px] px-4 text-white bg-black rounded shadow-md hover:bg-[#ACFF00] transition duration-300 hover:text-black" type="submit">
+      <button id='redeem' className= "h-[3rem] w-[8rem] text-[15px] px-4 text-white bg-black rounded shadow-md hover:bg-white transition duration-300 hover:text-black" type="submit">
     Redeem </button>
 
       </form>

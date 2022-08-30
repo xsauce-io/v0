@@ -74,7 +74,7 @@ const grabData = async () => {
     setERC20Abi(responses[0].data)
     setOrderBookAbi(responses[1].data)
     // TODO fetch object based on chainID now is only Rinkeby
-    setOrderBookAddress(responses[2].data[4].OrderBook.address)
+    setOrderBookAddress(responses[2].data[4].OrderBook20Token20A158Token20B159.address)
   })).catch(errors => {
     console.log(errors)
   })

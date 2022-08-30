@@ -5,20 +5,78 @@ import { CardPreMarket } from "../components/cardPreMarket";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { RepeatOneSharp } from "@mui/icons-material";
 import { Skeleton } from "@mui/material";
 import React from "react";
 import CasinoIcon from "@mui/icons-material/Casino";
-import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import SportsScoreIcon from "@mui/icons-material/SportsScore";
-import Carousel from "nuka-carousel/lib/carousel";
 import { Announcement } from "../components/announcement";
+import {
+  Box,
+  IconButton,
+  useBreakpointValue,
+  Stack,
+  Heading,
+  Text,
+  Container,
+} from '@chakra-ui/react';
+// Here we have used react-icons package for the icons
+import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+// And react-slick as our Carousel Lib
+import Slider from 'react-slick';
+
+
+
 
 const Home: NextPage = () => {
   let [premarketResponse, setAuctionResponse] = useState([] as any);
   let [marketResponse, setMarketResponse] = useState([] as any);
   let [isLoading, setisLoading] = useState(true as boolean);
   let [toggled, setisToggled] = useState(true as boolean);
+  const [slider, setSlider] = React.useState<Slider | null>(null);
+
+
+  // Settings for the slider
+
+  const settings = {
+    dots: true,
+    arrows: false,
+    fade: true,
+    infinite: true,
+    autoplay: true,
+    speed: 500,
+    autoplaySpeed: 5000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  // As we have used custom buttons, we need a reference variable to
+  // change the state
+
+
+  // These are the breakpoints which changes the position of the
+  // buttons as the screen size changes
+  // const top = useBreakpointValue({ base: '90%', md: '50%' });
+  // const side = useBreakpointValue({ base: '30%', md: '40px' });
+
+  // This list contains all the data for carousels
+  // This can be static or loaded from a server
+  const cards = [
+    {
+    image:
+        'Slide1.svg' },
+    {
+     image:
+        'Slide2.svg',
+    },
+    {
+      title: 'Design Projects 3',
+      text:
+        "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+      image:
+        'https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
+    },
+  ];
+
 
   // fetch sneaker data
   const getSneaker2 = async () => {
@@ -68,7 +126,7 @@ const Home: NextPage = () => {
     //#F5DEB3 - Vanilla
     //#E5E5E5 - Gray
 
-    <div className="flex w-screen flex-col items-center justify-center bg-[#1B1C18]">
+    <div className="flex w-screen flex-col items-center justify-center bg-[#E5E5E5]">
       <Head>
         <title>Xsauce</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,60 +137,94 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <main className="flex flex-col w-full text-center mb-20 font-SG">
+      <main className="flex flex-col w-full text-center font-SG">
         <Announcement/>
         <Nav />
 
-        {/* <div className='flex flex-row p-0 m-0 items-middle justify-center'>
-       <h1 className='text-[20px] pl-6 pt-6 font-bold text-left'>
-       Welcome, </h1> <h2 className='text-left pl-6 pr-6 text-[12px] '>to the world’s first prediction market for 👟s </h2>
-       </div> */}
-<div className="m-auto outline-4 outline-[#8F9285] mobile:hidden tablet:flex w-[700px] laptop:w-[1100px] desktop:w-[1300px]">
-        <Carousel
-          wrapAround
-          speed={600}
-          style={{  
-            height: "1/3vh",
-            width: "100%",
-        
-            borderRadius: "20px",
-            margin: "auto",
-            marginTop:'50px'
-          }}
-          defaultControlsConfig={{
-            nextButtonStyle: {
-              display: "none",
-            },
-            prevButtonStyle: {
-              display: "none",
-            },
-            pagingDotsStyle: {
-              fill: "white",
-              padding: "10px",
-            },
-          }}
-        >
-          <img src="/Slide1.png" />
-          <img src="/Slide2.png" />
-          <img src="/Slide3.png" />
-          <img src="/Slide4.png" />
-          
-        </Carousel>
-        </div>
+        <Box
+      position={'relative'}
+      height={'1/3vh'}
+      width={'full'}
+      overflow={'hidden'}>
+      {/* CSS files for react-slick */}
+      <link
+        rel="stylesheet"
+        type="text/css"
+        charSet="UTF-8"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+      />
+      {/* Left Icon */}
+      <IconButton
+        aria-label="left-arrow"
+        variant="ghost"
+        position="absolute"
+        left='1%'
+        top='50%'
+        transform={'translate(0%, -50%)'}
+        zIndex={2}
+        onClick={() => slider?.slickPrev()}>
+        <BiLeftArrowAlt color='white' size="40px" />
+      </IconButton>
+      {/* Right Icon */}
+      <IconButton
+        aria-label="right-arrow"
+        variant="ghost"
+        position="absolute"
+        right='1%'
+        top='50%'
+        transform={'translate(0%, -50%)'}
+        zIndex={2}
+        onClick={() => slider?.slickNext()}>
+        <BiRightArrowAlt color='white' size="40px" />
+      </IconButton>
+      {/* Slider */}
+      <Slider {...settings} ref={(slider: any) => setSlider(slider)}>
+        {cards.map((card, index) => (
+          <Box
+            key={index}
+            height={'6xl'}
+            position="relative"
+            backgroundPosition="center"
+            backgroundRepeat="no-repeat"
+            backgroundSize="cover"
+            backgroundImage={`url(${card.image})`}>
+            {/* This is the block you need to change, to customize the caption */}
+            <Container size="container.lg" height="400px" position="relative">
+              <Stack
+                spacing={6}
+                w={'full'}
+                maxW={'lg'}
+                position="absolute"
+                left="15%"
+                top="50%">
+                <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+                  {card.title}
+                </Heading>
+                <Text fontSize={{ base: 'md', lg: 'lg' }} color="GrayText">
+                  {card.text}
+                </Text>
+              </Stack>
+            </Container>
+          </Box>
+        ))}
+      </Slider>
+    </Box>
         
         <div className="flex flex-row items-center pl-18 pb-8 pt-8">
-          <div className="flex flex-row items-center justify-between w-[1300px] m-auto">
+          <div className="flex flex-row items-center justify-between w-[1300px] m-auto border-b-0">
             <div className='flex flex-row items-center space-x-4'>
-            <h3 className="text-[22px] text-[white] text-left font-bold font-SG">
-                Filter:
-              </h3>
-            <button onClick={() => setisToggled(true)} className={toggled == true ? "laptop:flex flex-row items-center rounded-xl text-[black] transition duration-500 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 bg-inherit p-2 text-[white]" }>
+            <button onClick={() => setisToggled(true)} className={toggled == true ? "laptop:flex flex-row items-center rounded-xl text-white transition duration-500 bg-[black] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 p-2 text-black" }>
               <SportsScoreIcon />
               <h3 className="text-[17px] text-left font-normal font-Inter">
                 Pre-Market
               </h3>
             </button>
-            <button onClick={() => setisToggled(false)} className={toggled == false ? "laptop:flex flex-row items-center text-[black] rounded-xl transition duration-200 bg-[#ACFF00] p-2" : "laptop:flex flex-row items-center text-[white] rounded-xl transition duration-500 bg-inherit p-2" }>
+            <button onClick={() => setisToggled(false)} className={toggled == false ? "laptop:flex flex-row items-center text-white rounded-xl transition duration-200 bg-[black] p-2" : "laptop:flex flex-row items-center text-black rounded-xl transition duration-500  p-2" }>
                <CasinoIcon />
               <h3 className="text-[17px] text-left font-normal font-Inter">
                 Live Market
@@ -148,11 +240,11 @@ const Home: NextPage = () => {
           </div>
         </div>
         {toggled === true ? (
-        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px] font-SG">
+        <div className=" mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px] font-SG border-b-0 pb-12">
           <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-[1300px] ">
             {isLoading === true ? (
               <React.Fragment>
-                <div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
+                <div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3 ">
                   <Skeleton
                     variant="rectangular"
                     sx={{
@@ -258,7 +350,7 @@ const Home: NextPage = () => {
         </div>
             ) : (
 
-        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
+        <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px] pb-12">
           <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-[1300px]">
             {isLoading === true ? (
               <React.Fragment>

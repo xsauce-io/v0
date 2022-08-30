@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           appName: "Xsauce",
         }}
         theme={darkTheme({
-          accentColor: "#ACFF00",
+          accentColor: "#D9CE3F",
           accentColorForeground: "black",
           borderRadius: "small",
           fontStack: "system",
