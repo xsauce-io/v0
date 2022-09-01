@@ -44,7 +44,7 @@ export const Nav = () => {
 
             <ul class="flex items-center gap-6 text-[1rem] font-SG">
               <li>
-                <a class=" text-black transition hover:text-[#D9CE3F]" href="/premarkets">
+                <a class=" text-black transition hover:text-[#D9CE3F]" href="/">
                   Home
                 </a>
               </li>
@@ -151,7 +151,7 @@ export const Nav = () => {
                     <li>
                       <a
                         class="text-black transition hover:text-[#D9CE3F]/75"
-                        href="/"
+                        href="/premarkets"
                       >
                         Pre-Market
                       </a>
