@@ -99,16 +99,16 @@ const Redeem: NextPage = () => {
       <form className="flex w-full h-full items-center justify-center flex-col space-y-5">
       <div className="flex w-full items-center justify-center flex-col">
       
-  <label className='font-SG text-[25px] pb-3' htmlFor="markets">Choose a market:</label>
-  <select className='bg-[white] shadow-black shadow-md mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-1/3 font-SG text-[15px] mb-3 rounded focus:outline-none' onChange={handleChange} id="markets" name="markets">
+  <label className='font-SG text-[25px] pb-3 pt-3' htmlFor="markets">Choose a market:</label>
+  <select className='bg-[#F1F1F1] shadow-black shadow-md border-r-[16px] border-transparent  mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-[390px] font-SG text-[15px] mb-3 rounded focus:outline-none' onChange={handleChange} id="markets" name="markets">
     <option value="1">Nike Air Max 1 Patta Denim</option>
     <option value="2">Jordan 1 Retro High Homage to Home Chicago (Numbered)</option>
     <option value="3">Nike Air Max 90 OFF-White Desert Ore</option>
   </select>
 </div>
 { toggled === '1'? (
-  <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
-          <div className="mobile:flex w-full flex-1 flex-col laptop:w-[500px]">
+  <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:items-center">
+          <div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
             {isLoading === true ? (
               <React.Fragment>
                 <div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
@@ -149,8 +149,8 @@ const Redeem: NextPage = () => {
       </div>
       </div>
 ) : toggled == '2' ? ( 
-<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-full">
-<div className="mobile:flex w-full flex-1 flex-col laptop:w-[500px]">
+<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:">
+<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
   {isLoading === true ? (
     <React.Fragment>
       <div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
@@ -190,8 +190,8 @@ const Redeem: NextPage = () => {
     marketResponse2.map((el: any) => <Card cardObject={el} />) )}
 </div>
 </div>
-) : <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px]">
-<div className="mobile:flex w-full flex-1 flex-col laptop:w-[500px]">
+) : <div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:">
+<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
   {isLoading === true ? (
     <React.Fragment>
       <div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">

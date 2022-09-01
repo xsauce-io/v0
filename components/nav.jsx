@@ -13,7 +13,7 @@ export const Nav = () => {
       <div class="flex items-center h-16 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8">
         <a class="block" href="/">
           <span class="sr-only">Home</span>
-          <div className="border-r-[1px] border-black h-16 flex flex-row items-center space-x-1">
+          <div className="border-r-[1px] border-black h-16 flex flex-row items-center space-x-[.5px]">
           <svg
 					width="33"
 					height="32"
@@ -44,7 +44,7 @@ export const Nav = () => {
 
             <ul class="flex items-center gap-6 text-[1rem] font-SG">
               <li>
-                <a class=" text-black transition hover:text-[#D9CE3F]" href="/">
+                <a class=" text-black transition hover:text-[#D9CE3F]" href="/premarkets">
                   Pre-Market
                 </a>
               </li>

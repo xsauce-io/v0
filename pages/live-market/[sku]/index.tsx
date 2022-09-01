@@ -11,7 +11,7 @@ import axios from "axios";
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers'
 
-const WagerPage: NextPage = (cardObject) => {
+const LiveMarket: NextPage = (cardObject) => {
 
   const router = useRouter()
 
@@ -117,4 +117,4 @@ useEffect(() => {
 	);
 };
 
-export default WagerPage;
+export default LiveMarket;

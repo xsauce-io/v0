@@ -18,12 +18,12 @@ import {
   Heading,
   Text,
   Container,
+  Link,
 } from '@chakra-ui/react';
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 // And react-slick as our Carousel Lib
-import Slider from 'react-slick';
-
+import Slider from "react-slick";
 
 
 
@@ -32,12 +32,12 @@ const Home: NextPage = () => {
   let [marketResponse, setMarketResponse] = useState([] as any);
   let [isLoading, setisLoading] = useState(true as boolean);
   let [toggled, setisToggled] = useState(true as boolean);
-  const [slider, setSlider] = React.useState<Slider | null>(null);
+  const [slider, setSlider] = React.useState<any | null>(null);
 
 
   // Settings for the slider
 
-  const settings = {
+  const Settings = {
     dots: true,
     arrows: false,
     fade: true,
@@ -62,9 +62,11 @@ const Home: NextPage = () => {
   // This can be static or loaded from a server
   const cards = [
     {
-    image:
+      link:'',
+      image:
         'Slide1.svg' },
     {
+      link:'https://linktr.ee/xsauceio',
      image:
         'Slide2.svg',
     },
@@ -82,28 +84,37 @@ const Home: NextPage = () => {
   const getSneaker2 = async () => {
     Promise.all([
       axios.get(
-        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=394805-100"
+        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=B75571"
       ),
       axios.get(
-        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AR9880-023"
+        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AO4606-001"
       ),
 
       axios.get(
-        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AA7293-200"
+        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DR9654-100"
+      ),
+      axios.get(
+        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DV2122-400"
+      ),
+      axios.get(
+        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=HP7870"
+      ),
+      axios.get(
+        "https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DH7138-006"
       ),
     ])
 
       .then(
-        axios.spread((obj1, obj2, obj3) => {
+        axios.spread((obj1, obj2, obj3, obj4, obj5, obj6) => {
           setAuctionResponse([
             obj1.data.results[0],
             obj2.data.results[0],
             obj3.data.results[0],
           ]);
           setMarketResponse([
-            obj1.data.results[0],
-            obj2.data.results[0],
-            obj3.data.results[0],
+            obj4.data.results[0],
+            obj5.data.results[0],
+            obj6.data.results[0],
           ]);
 
           setisLoading(false);
@@ -183,7 +194,7 @@ const Home: NextPage = () => {
         <BiRightArrowAlt color='white' size="40px" />
       </IconButton>
       {/* Slider */}
-      <Slider {...settings} ref={(slider: any) => setSlider(slider)}>
+      <Slider {...Settings} ref={(slider: any) => setSlider(slider)}>
         {cards.map((card, index) => (
           <Box
             key={index}
@@ -194,7 +205,9 @@ const Home: NextPage = () => {
             backgroundSize="cover"
             backgroundImage={`url(${card.image})`}>
             {/* This is the block you need to change, to customize the caption */}
+            <Link href={`${card.link}`}>
             <Container size="container.lg" height="400px" position="relative">
+            
               <Stack
                 spacing={6}
                 w={'full'}
@@ -209,7 +222,9 @@ const Home: NextPage = () => {
                   {card.text}
                 </Text>
               </Stack>
+            
             </Container>
+            </Link>
           </Box>
         ))}
       </Slider>

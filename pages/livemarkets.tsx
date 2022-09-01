@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { Nav } from '../components/nav'
-import { Card } from '../components/cardWager'
+import { LiveMarketCard } from '../components/liveMarketsCard'
 import { Announcement } from '../components/announcement'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -41,7 +41,7 @@ useEffect(() => {
     //#F5DEB3 - Vanilla
     //#E5E5E5 - Gray
     
-    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#E5E5E5]">
+    <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#F8F8F8]">
       <Head>
         <title>Xsauce</title>
         <link rel="icon" href="/favicon.ico" />
@@ -50,19 +50,51 @@ useEffect(() => {
       <main className="flex w-full flex-1 flex-col text-center">
       <Announcement/>
        <Nav/>
+  
+       <div className='flex flex-row  w-full bg-[#8B8B8B] bg-opacity-20 space-x-14 justify-center pb-14 pt-14'>
+        
+       <div className='flex flex-col font-SG items-center py-3 h-[350px] w-[290px] rounded-md bg-[#F9F9F9] shadow-[8px_12px_18px_17px_rgba(0,0,0,0.3)]'>
+        <img src='/jordansvg.svg' className='h-[120px] bg-[#EAEAEA] w-[130px] my-4 p-4 rounded-full'></img>
+        <h1 className='text-[25px]'> Total Live <br/> Markets </h1>
+        <h1 className='text-[60px] text-[#630606] m-0 flex flex-col items-center'>3</h1>
        
-       <h1 className='text-[25px] font-semibold p-4'>Markets</h1>
-       <div className="sm:w-full px-[20px]">
-        <div className="flex w-full flex-1 flex-col space-y-4">
+        </div>
+        <div className='flex flex-col font-SG items-center py-3 h-[350px] w-[290px] rounded-md bg-[#F9F9F9] shadow-[8px_12px_18px_17px_rgba(0,0,0,0.3)]'>
+        <img src='/octobers.svg' className='h-[120px] bg-[#EAEAEA] w-[130px] my-4 p-4 rounded-full'></img>
+        <h1 className='text-[25px]'> Total <br/>Markets Value</h1>
+        <h1 className='text-[60px] text-[#630606] m-0 flex flex-col items-center'>$1.5 M</h1>
+       
+        </div>
+        <div className='flex flex-col font-SG items-center py-3 h-[350px] w-[290px] rounded-md bg-[#F9F9F9] shadow-[8px_12px_18px_17px_rgba(0,0,0,0.3)]'>
+        <img src='/jordansvg.svg' className='h-[120px] bg-[#EAEAEA] w-[130px] my-4 p-4 rounded-full'></img>
+        <h1 className='text-[25px]'> Total <br/> Trades </h1>
+        <h1 className='text-[60px] text-[#630606] m-0 flex flex-col items-center'>420</h1>
+       
+        </div>
+
+        <div className='flex flex-col font-SG items-center py-3 h-[350px] w-[290px] text-[#FED955] rounded-md bg-[#251E1E] shadow-[8px_12px_18px_17px_rgba(0,0,0,0.3)]'>
+        <img src='/11s.svg' className='h-[120px] bg-[#EAEAEA] w-[130px] my-4 p-4 rounded-full'></img>
+        <h1 className='text-[25px]'> Total <br/> Redeemed </h1>
+        <h1 className='text-[60px] text-[#EAEAEA] m-0 flex flex-col items-center'>300</h1>
+       
+        </div>
+
+
+
+       </div>
+       
+       <h1 className='text-[40px] font-SG font-semibold p-4'>Live <span className='text-[#630606]'>Markets</span></h1>
+     
+        <div className="laptop:grid grid-cols-3 grid-rows-1 gap-y-14 place-items-center gap-x-1 mb-10 pt-10">
 
           {response.map(el => (
-            <Card cardObject={el}/>
+            <LiveMarketCard cardObject={el}/>
             ))
           }
 
        </div>
 
-       </div>
+   
       </main>
 
       {/* <footer className="flex h-24 w-full items-center justify-center border-t">

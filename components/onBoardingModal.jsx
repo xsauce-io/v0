@@ -44,7 +44,7 @@ export const Onboard = () => {
       >
         <Box sx={{bgcolor:'black'}}>
         <DialogActions>
-        <Button sx={{color:'#ACFF00', fontSize:'30px',display:'flex', flexDirection:'row' ,justifyContent:'right',paddingRight:'18px'}} onClick={handleClose}>&#10005;</Button>
+        <Button sx={{color:'#D9CE3F', fontSize:'30px',display:'flex', flexDirection:'row' ,justifyContent:'right',paddingRight:'18px'}} onClick={handleClose}>&#10005;</Button>
         </DialogActions>
         <DialogContent >
           <DialogContentText id="alert-dialog-slide-description">

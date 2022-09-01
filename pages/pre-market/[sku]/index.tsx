@@ -13,7 +13,7 @@ import {Countdown} from '../../../components/countdown'
 import InfoIcon from '@mui/icons-material/Info';
 import Head from 'next/head';
 
-const WagerPage: NextPage = () => {
+const PreMarket: NextPage = () => {
 
   const router = useRouter()
 
@@ -112,4 +112,4 @@ useEffect(() => {
 	);
 };
 
-export default WagerPage;
+export default PreMarket;

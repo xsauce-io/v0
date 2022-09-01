@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/wager/index.tsx", "pages/wager/[sku]", "pages/testing.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/live-market/index.tsx", "pages/live-market/[sku]", "pages/testing.tsx"],
   "exclude": ["node_modules"]
 }
