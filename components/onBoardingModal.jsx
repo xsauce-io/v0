@@ -28,33 +28,33 @@ export const Onboard = () => {
 
   return (
     <div>
-      
-      <button className= 'text-[1rem]  text-black font-SG  p-0 hover:text-[#D9CE3F]' variant="contained" onClick={handleClickOpen}>
+
+      <button className='text-[1rem] text-black font-SG border-2 p-1.5 px-2.5 border-black rounded-md hover:scale-105 ' variant="contained" onClick={handleClickOpen}>
         How it Works
       </button>
-      
+
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-       PaperProps={{
-        style:{ borderRadius:30}
-       }}
+        PaperProps={{
+          style: { borderRadius: 30 }
+        }}
       >
-        <Box sx={{bgcolor:'black'}}>
-        <DialogActions>
-        <Button sx={{color:'#D9CE3F', fontSize:'30px',display:'flex', flexDirection:'row' ,justifyContent:'right',paddingRight:'18px'}} onClick={handleClose}>&#10005;</Button>
-        </DialogActions>
-        <DialogContent >
-          <DialogContentText id="alert-dialog-slide-description">
-            
-     
+        <Box sx={{ bgcolor: 'black' }}>
+          <DialogActions>
+            <Button sx={{ color: '#D9CE3F', fontSize: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'right', paddingRight: '18px' }} onClick={handleClose}>&#10005;</Button>
+          </DialogActions>
+          <DialogContent >
+            <DialogContentText id="alert-dialog-slide-description">
 
-      
-         
-          </DialogContentText>
-        </DialogContent>
+
+
+
+
+            </DialogContentText>
+          </DialogContent>
         </Box>
       </Dialog>
     </div>
