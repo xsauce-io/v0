@@ -9,14 +9,24 @@ import axios from 'axios';
 import { RepeatOneSharp } from '@mui/icons-material';
 import { Skeleton } from '@mui/material';
 
+import { FaList } from 'react-icons/Fa';
+import { RiLayoutGridFill } from 'react-icons/Ri';
+
 const Markets: NextPage = () => {
 	const SORT_BY_STATES = {
 		RELEASE_DATE: 'releaseDate',
 		NAME: 'name',
 		RETAIL_PRICE: 'retailPrice',
 	};
+
+	const LAYOUT_STATES = {
+		GRID: 'grid',
+		LIST: 'list',
+	};
+
 	const [response, setResponse] = useState([]);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
+	const [layout, setLayout] = useState({ state: LAYOUT_STATES.GRID });
 
 	const options = {
 		method: 'GET',
@@ -149,7 +159,7 @@ const Markets: NextPage = () => {
 				{/*Sorting */}
 
 				<div className="laptop: grid-cols-1 gap-4 px-12 ">
-					<div className="flex flex-row items-center space-x-8">
+					<div className="flex flex-row items-center space-x-8  ">
 						<div className="text-2xl">Sort By:</div>
 						<button
 							onClick={() => setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })}
@@ -187,13 +197,46 @@ const Markets: NextPage = () => {
 								Sneaker Name
 							</h3>
 						</button>
+
+						<div className=" flex-1 " />
+
+						<div className="flex flex-row items-center  ">
+							<button
+								onClick={() => setLayout({ state: LAYOUT_STATES.GRID })}
+								className={
+									layout.state === LAYOUT_STATES.GRID
+										? 'laptop:flex flex-row items-center text-black rounded-l-xl transition duration-200 bg-[#D9D9D9] p-2 w-[50%] '
+										: 'laptop:flex flex-row items-center text-black rounded-l-xl transition duration-500  p-2 bg-[#ECECEC] w-[50%]'
+								}
+							>
+								<RiLayoutGridFill size={35} className={'p-1'} />
+							</button>
+							<button
+								onClick={() => setLayout({ state: LAYOUT_STATES.LIST })}
+								className={
+									layout.state === LAYOUT_STATES.LIST
+										? 'laptop:flex flex-row items-center text-black rounded-r-xl transition duration-200 bg-[#D9D9D9] p-2 w-[50%]'
+										: 'laptop:flex flex-row items-center text-black rounded-r-xl transition duration-500  p-2 bg-[#ECECEC] w-[50%]'
+								}
+							>
+								<FaList size={35} className={'p-1'} />
+							</button>
+						</div>
 					</div>
 				</div>
-				<div className="laptop:grid grid-cols-3 grid-rows-1 gap-y-14 place-items-center gap-x-1 mb-10 pt-10">
-					{response.map((el) => (
-						<LiveMarketCard cardObject={el} />
-					))}
-				</div>
+				{layout.state === LAYOUT_STATES.GRID ? (
+					<div className="laptop:grid grid-cols-3 grid-rows-1 gap-y-14 place-items-center gap-x-1 mb-10 pt-10">
+						{response.map((el) => (
+							<LiveMarketCard cardObject={el} />
+						))}
+					</div>
+				) : (
+					<div className="laptop:grid grid-cols-1 grid-rows-3 gap-y-14 place-items-center gap-x-1 mb-10 pt-10">
+						{response.map((el) => (
+							<LiveMarketCard cardObject={el} />
+						))}
+					</div>
+				)}
 			</main>
 
 			{/* <footer className="flex h-24 w-full items-center justify-center border-t">
