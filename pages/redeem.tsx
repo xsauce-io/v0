@@ -100,7 +100,7 @@ const Redeem: NextPage = () => {
       <div className="flex w-full items-center justify-center flex-col">
       
   <label className='font-SG text-[25px] pb-3 pt-3' htmlFor="markets">Choose a market:</label>
-  <select className='bg-[#F1F1F1] shadow-black shadow-md border-r-[16px] border-transparent  mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-[390px] font-SG text-[15px] mb-3 rounded focus:outline-none' onChange={handleChange} id="markets" name="markets">
+  <select className='bg-[#F1F1F1] shadow-black shadow-md mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-[390px] font-SG text-[15px] mb-3 rounded focus:outline-none' onChange={handleChange} id="markets" name="markets">
     <option value="1">Nike Air Max 1 Patta Denim</option>
     <option value="2">Jordan 1 Retro High Homage to Home Chicago (Numbered)</option>
     <option value="3">Nike Air Max 90 OFF-White Desert Ore</option>

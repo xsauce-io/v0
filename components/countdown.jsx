@@ -33,7 +33,7 @@ export const Countdown = () => {
 
 return (
 
-<div className="mobile:flex flex-row space-x-2 justify-center text-[10px] bg-[#D9CE3F] text-black p-4 items-center">
+<div className="mobile:flex flex-row space-x-2 justify-center text-[10px] bg-[#630606] text-white p-4 items-center">
   <h1 className="laptop:font-bold text-[18px] mobile:font-bold text-[8px]">Release Countdown:</h1>
 
 <div id="container-day">
