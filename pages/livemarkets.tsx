@@ -8,6 +8,7 @@ import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { RepeatOneSharp } from '@mui/icons-material';
 import { Skeleton } from '@mui/material';
+import { Tabs } from '../components/tabs';
 
 import { FaList } from 'react-icons/Fa';
 import { RiLayoutGridFill } from 'react-icons/Ri';
@@ -96,6 +97,7 @@ const Markets: NextPage = () => {
 			<main className="flex w-full flex-1 flex-col text-center">
 				<Announcement />
 				<Nav />
+				<Tabs></Tabs>
 
 				<div className="flex flex-row  w-full bg-[#8B8B8B] bg-opacity-20 space-x-14 justify-center pb-14 pt-14">
 					<div className="flex flex-col font-SG items-center py-3 h-[350px] w-[290px] rounded-md bg-[#F9F9F9] shadow-[8px_12px_18px_17px_rgba(0,0,0,0.3)]">
