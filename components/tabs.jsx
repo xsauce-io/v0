@@ -7,8 +7,8 @@ export const Tabs = (props) => {
 
 
     return (
-        <div className="flex flex-col w-full px-10 items-center justify-center">
-            <div class="tabs w-[90%] ">
+        <div className="w-full items-center justify-center ">
+            <div class="tabs w-[100%] border-black border-b-2 ">
                 <Link href="/dashboard">
                     <a class="tab tab-bordered">Dashboard</a>
                 </Link>
@@ -22,7 +22,7 @@ export const Tabs = (props) => {
                     <a class="tab tab-bordered">Cash Out</a>
                 </Link>
             </div>
-            <div class="flex py-4">
+            <div class="py-4">
                 {props.children}
             </div>
         </div>
