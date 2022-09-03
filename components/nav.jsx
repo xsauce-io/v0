@@ -219,7 +219,7 @@ export const Nav = () => {
         <label tabindex="0" className="text-[14px] flex flex-row justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
           {toggled === '1' ?
           <>
-             <img className="h-[15%] w-[15%]" src='aribtrum.svg'/> 
+             <img className="h-[15%] w-[15%]" src="arbitrum.svg"/> 
           <span className="text-black">Arbitrum</span>
           </> : toggled === '2' ?
           <>

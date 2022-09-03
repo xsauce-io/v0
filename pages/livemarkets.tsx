@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { Nav } from '../components/nav';
-import { LiveMarketCard } from '../components/liveMarketsCard';
 import { Announcement } from '../components/announcement';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -11,6 +10,7 @@ import { Skeleton } from '@mui/material';
 
 import { FaList } from 'react-icons/Fa';
 import { RiLayoutGridFill } from 'react-icons/Ri';
+import { Card } from '../components/cardWager';
 
 const Markets: NextPage = () => {
 	const SORT_BY_STATES = {
@@ -126,7 +126,7 @@ const Markets: NextPage = () => {
 					</div>
 					<div className="flex flex-col font-SG items-center py-3 h-[350px] w-[290px] rounded-md bg-[#F9F9F9] shadow-[8px_12px_18px_17px_rgba(0,0,0,0.3)]">
 						<img
-							src="/jordansvg.svg"
+							src="/hurache.svg"
 							className="h-[120px] bg-[#EAEAEA] w-[130px] my-4 p-4 rounded-full"
 						></img>
 						<h1 className="text-[25px]">
@@ -152,15 +152,13 @@ const Markets: NextPage = () => {
 					</div>
 				</div>
 
-				<h1 className="text-[40px] font-SG font-semibold p-4">
-					Live <span className="text-[#630606]">Markets</span>
-				</h1>
-
+				
 				{/*Sorting */}
 
 				<div className="laptop: grid-cols-1 gap-4 px-12 ">
-					<div className="flex flex-row items-center space-x-8  ">
-						<div className="text-2xl">Sort By:</div>
+          <div className='flex flex-row items-center justify-start space-x-4'>
+					<div className="flex flex-row items-center justify-center border-[#30403F] border-[1px] rounded-[40px] w-[40%] h-[40%] py-2 px-3 space-x-2">
+						<div className="text-[10px]">Filter on:</div>
 						<button
 							onClick={() => setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })}
 							className={
@@ -169,7 +167,7 @@ const Markets: NextPage = () => {
 									: 'laptop:flex flex-row items-center rounded-xl transition duration-500 p-2 text-black'
 							}
 						>
-							<h3 className="text-2xl text-left font-normal font-Inter p-1.5">
+							<h3 className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-2 px-4 border-[black]">
 								Retail Price
 							</h3>
 						</button>
@@ -181,7 +179,7 @@ const Markets: NextPage = () => {
 									: 'laptop:flex flex-row items-center text-black rounded-xl transition duration-500  p-2'
 							}
 						>
-							<h3 className="text-2xl text-left font-normal font-SG p-1.5">
+							<h3 className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-2 px-4 border-[black]">
 								Release Date
 							</h3>
 						</button>
@@ -193,12 +191,13 @@ const Markets: NextPage = () => {
 									: 'laptop:flex flex-row items-center text-black rounded-xl transition duration-500  p-2'
 							}
 						>
-							<h3 className="text-2xl text-left font-normal font-Inter p-1.5">
-								Sneaker Name
+						<h3 className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-2 px-4 border-[black]">
+							Sneaker Name
 							</h3>
 						</button>
+            </div>
 
-						<div className=" flex-1 " />
+						{/* <div className=" flex-1 " />
 
 						<div className="flex flex-row items-center  ">
 							<button
@@ -221,19 +220,36 @@ const Markets: NextPage = () => {
 							>
 								<FaList size={35} className={'p-1'} />
 							</button>
-						</div>
-					</div>
+						</div> */}
+             <div className="flex flex-row items-center justify-center border-[#30403F] border-[1px] rounded-[40px] w-[15%] h-[40%] py-2 px-3 space-x-2">
+						<div className="text-[10px]">Ascending</div>
+						<button
+							onClick={() => setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })}
+							className={
+								sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+									? 'laptop:flex flex-row items-center rounded-xl text-white transition duration-500 text-[#D9CE3F] p-2'
+									: 'laptop:flex flex-row items-center rounded-xl transition duration-500 p-2 text-black'
+							}
+						>
+							<h3 className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-2 px-4 border-[black]">
+								Retail Price
+							</h3>
+						</button>
+					</div> 
+          </div>
+         
+
 				</div>
 				{layout.state === LAYOUT_STATES.GRID ? (
 					<div className="laptop:grid grid-cols-3 grid-rows-1 gap-y-14 place-items-center gap-x-1 mb-10 pt-10">
 						{response.map((el) => (
-							<LiveMarketCard cardObject={el} />
+							<Card cardObject={el} />
 						))}
 					</div>
 				) : (
 					<div className="laptop:grid grid-cols-1 grid-rows-3 gap-y-14 place-items-center gap-x-1 mb-10 pt-10">
 						{response.map((el) => (
-							<LiveMarketCard cardObject={el} />
+							<Card cardObject={el} />
 						))}
 					</div>
 				)}
