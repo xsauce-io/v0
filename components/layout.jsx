@@ -40,7 +40,7 @@ export const Layout = ({ children }) => {
 
                 </div>
                 <Tabs >
-                    <div className='border-[blue] border-2'>{children}</div>
+                    <div className=''>{children}</div>
                 </Tabs>
 
                 <Footer />
