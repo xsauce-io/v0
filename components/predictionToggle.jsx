@@ -167,21 +167,21 @@ useEffect(() => {
    
 
       <input
-        class="w-full  mobile: py-4 pl-3 pr-55 text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+        className="w-full  mobile: py-4 pl-3 pr-55 text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
         name="LimitPrice"
         type="number"
         placeholder="Limit Price"
         required
       />
       <input
-        class="w-full mobile:py-4 pl-3 pr-55 text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+        className="w-full mobile:py-4 pl-3 pr-55 text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
         name="contractNumber"
         type="number"
         placeholder="# of Contracts"
         required
       />
 
-      <button id='mint' class={isBuy == undefined ? "mt-5 w-3/4 h-[3rem] text-[13px] py-2 px-5 text-black bg-white opacity-60 rounded shadow-md mobile:w-full": isBuy == true ? "mt-5 w-3/4 h-[3rem]  text-[13px] py-2 px-5 text-black bg-[#416900] opacity-60 rounded shadow-md mobile:w-full":"mt-5 w-3/4 h-[3rem] text-[13px] py-2 px-5 text-black bg-[#BA1A1A] opacity-60 rounded shadow-md mobile:w-full"} type="submit">
+      <button id='mint' className={isBuy == undefined ? "mt-5 w-3/4 h-[3rem] text-[13px] py-2 px-5 text-black bg-white opacity-60 rounded shadow-md mobile:w-full": isBuy == true ? "mt-5 w-3/4 h-[3rem]  text-[13px] py-2 px-5 text-black bg-[#416900] opacity-60 rounded shadow-md mobile:w-full":"mt-5 w-3/4 h-[3rem] text-[13px] py-2 px-5 text-black bg-[#BA1A1A] opacity-60 rounded shadow-md mobile:w-full"} type="submit">
       {isBuy == undefined ? 'Select Order Type' : isBuy === true ? 'Place Buy Order': 'Place Sell Order'}
       </button>
    

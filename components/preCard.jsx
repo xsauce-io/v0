@@ -22,7 +22,7 @@ export const PreCard = ({ cardObject }) => {
                   <h3 className="font-SG mobile:text-center laptop:text-[35px] desktop:text-[24px] w-full ">
                     {cardObject.name}
                   </h3>
-                
+
                 </div>
                 <img
                   src={cardObject.image?.original}
@@ -30,14 +30,14 @@ export const PreCard = ({ cardObject }) => {
                 />
               </div>
               <div className="flex font-SG text-[11px] flex-row items-center space-x-4 w-full justify-center mb-8">
-              <p className="bg-white rounded-md  p-4">Release Date: {cardObject.releaseDate}</p>
-              <p className=" bg-white rounded-md p-4  mobile:text-center laptop:text-[11px] desktop:text-[11px]">
-                    SKU:{cardObject.sku}
-                  </p>
-      <p className="bg-white rounded-md p-4">Retail Price: ${cardObject.retailPrice}</p>
-    <p className="bg-white rounded-md p-4">Silhouette: {cardObject.silhouette}</p>
-    </div>
-    <p className="flex flex-row rounded-md items-center bg-white text-center p-4 w-full mx-6 justify-center overflow-y-scroll mb-10">The Story: {cardObject.story}</p>
+                <p className="bg-white rounded-md  p-4">Release Date: {cardObject.releaseDate}</p>
+                <p className=" bg-white rounded-md p-4  mobile:text-center laptop:text-[11px] desktop:text-[11px]">
+                  SKU:{cardObject.sku}
+                </p>
+                <p className="bg-white rounded-md p-4">Retail Price: ${cardObject.retailPrice}</p>
+                <p className="bg-white rounded-md p-4">Silhouette: {cardObject.silhouette}</p>
+              </div>
+              <p className="flex flex-row rounded-md items-center bg-white text-center p-4 w-full mx-6 justify-center overflow-y-scroll mb-10">The Story: {cardObject.story}</p>
             </div>
           </React.Fragment>
         )}

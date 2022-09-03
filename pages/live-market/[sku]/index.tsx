@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { Nav } from '../../../components/nav';
 // import { Card } from '../components/card'
-import { ProductDetails } from '../../../components/productDetails';
 import { PredictToggle } from '../../../components/predictionToggle';
 import { Announcement } from '../../../components/announcement';
 import { WagerCard } from '../../../components/wagerCard';
@@ -11,6 +10,8 @@ import axios from 'axios';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 import { Layout } from '../../../components/layout';
+
+declare var window: any;
 
 const LiveMarket: NextPage = (cardObject) => {
 	const router = useRouter();
@@ -46,7 +47,7 @@ const LiveMarket: NextPage = (cardObject) => {
 	};
 
 	const adminCheck = async () => {
-		const provider = new ethers.providers.Web3Provider(window.ethereum as any);
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		// Prompt user for account connections
 		let wallet = await provider.send('eth_requestAccounts', [0]);
 		let accounts = wallet.toString();
