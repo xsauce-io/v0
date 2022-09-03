@@ -29,7 +29,7 @@ export const Nav = () => {
 
   return (
     //TODO: on merge change width to 100%
-    <header class="bg-white sticky top-0 z-20 w-[full] border-b-[1px] border-black">
+    <header class="bg-[#EFF1F3] sticky top-0 z-20 w-[full] border-b-[1px]  border-t-[1px] border-black">
       <div class="flex flex-row justify-between items-center h-20 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8">
         <a class="block" href="/">
           <span class="sr-only">Home</span>
