@@ -1,6 +1,9 @@
 
+import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
+import { BsTelegram } from "react-icons/bs"
+import { FaGithub, FaRegHandPeace, FaTwitter, FaTwitterSquare } from "react-icons/Fa"
 
 export const Footer = ({ children }) => {
     return (
@@ -31,7 +34,69 @@ export const Footer = ({ children }) => {
                 </div>
 
             </div>
-            <div class="border-t-[2px] border-black"> footer</div>
+            <div class="flex flex-row border-t-[2px] border-black py-6 space-x-8">
+                <div class=" space-x-10">
+                    <a href="https://docs.xsauce.io/connect/socials"
+                        target={'_blank'}
+                        rel={'noreferrer'}>
+                        <button class="text-[12px] hover:underline">Whitepaper</button>
+                    </a>
+                    <a href="https://docs.xsauce.io/connect/socials"
+                        target={'_blank'}
+                        rel={'noreferrer'}>
+                        <button class="text-[12px] hover:underline">Xchange</button>
+                    </a>
+                    <a href="https://docs.xsauce.io/connect/socials"
+                        target={'_blank'}
+                        rel={'noreferrer'}>
+                        <button class="text-[12px] hover:underline">Docs</button>
+                    </a>
+                </div>
+                <div class="space-x-6">
+                    <a
+                        href="https://twitter.com/xsauce_io"
+                        target={'_blank'}
+                        rel={'noreferrer'}
+                    >
+                        <button>
+                            <FaTwitterSquare size={20} />
+                        </button>
+
+                    </a>
+                    <a
+                        href="https://github.com/xsauce-io"
+                        target={'_blank'}
+                        rel={'noreferrer'}
+                    >
+                        <button>
+                            <FaGithub size={20} />
+                        </button>
+                    </a>
+                    <a
+                        href="https://angel.co/company/xsauced-1"
+                        target={'_blank'}
+                        rel={'noreferrer'}
+                    >
+                        <button>
+                            <FaRegHandPeace size={20} />
+                        </button>
+
+                    </a>
+                    <a
+                        href="https://angel.co/company/xsauced-1"
+                        target={'_blank'}
+                        rel={'noreferrer'}
+                    >
+                        <button >
+                            <BsTelegram size={20} />
+                        </button>
+
+                    </a>
+
+                </div>
+                <div class="flex-1 text-right text-[12px]">© 2022 Xsauce platform</div>
+            </div>
+
         </footer>
     )
 }
