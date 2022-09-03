@@ -21,7 +21,7 @@ export const Layout = ({ children }) => {
                 <div class='w-[100%]  py-10 mt-[2rem]'>
                     <grid class="grid grid-cols-3">
                         <div class="col-span-1">
-                            <h1 class='laptop:text-5xl py-10'>Xchange</h1>
+                            <h1 class='text-5xl laptop: py-10'>Xchange</h1>
                         </div>
                         <div class="col-span-2 flex justify-end">
                             <div class="flex flex-col h-full w-3/7  space-y-4">
