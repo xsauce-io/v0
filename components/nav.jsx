@@ -1,18 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Drawer, Box, Typography } from "@mui/material";
 import { useState } from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import {ethers, utils} from 'ethers';
 import { Onboard } from "../components/onBoardingModal";
 
 export const Nav = () => {
 
   let [toggled, setisToggled] = useState('1');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  let [accounts, setAccount] = useState(null);
+  const fullLengthAccount = ''
+
+  const getWallet =  async () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  let wallet = await provider.send("eth_requestAccounts", [0]);
+  accounts = wallet.toString();
+  fullLengthAccount = wallet.toString();
+
+  let truncateAccountName = accounts.substring(0, 4) + '...' + accounts.slice(-4);
+  setAccount(truncateAccountName);
+  }
+
+  const copyAddress = async () => {
+
+
+     /* Copy the text inside the text field */
+    await navigator.clipboard.writeText(fullLengthAccount);
+  
+    /* Alert the copied text */
+    alert("Copied Address: " + fullLengthAccount);
+  }
 
 
   const handleChange = (event) => {
     if (event.target.value === '1') {
-    setisToggled('1')
+  //ethers call
     }
 
     else if (event.target.value === '2') {
@@ -26,20 +48,149 @@ export const Nav = () => {
     }
   }
 
+  useEffect(() => {
+    getWallet();
+   },[]);
+
+   useEffect( () => {
+    const chains = async () => {
+    if (toggled === '1') {
+      if (window.ethereum) {
+      try {
+        let id = ethers.utils.hexValue(421613)
+        // check if the chain to connect to is installed
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId:id }], // chainId must be in hexadecimal numbers
+        });
+      } catch (error) {
+        // This error code indicates that the chain has not been added to MetaMask
+        // if it is not, then install it into the user MetaMask
+        if (error.code === 4902) {
+          try {
+            let id = ethers.utils.hexValue(421613)
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainName:'Arbitrum Nitro Rollup Testnet',
+                  chainId: id,
+                  rpcUrls: ['https://goerli-rollup.arbitrum.io/rpc'],
+                  blockExplorerUrls:['https://goerli-rollup-explorer.arbitrum.io/'],
+                  nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 }
+                  
+                },
+              ],
+            });
+          } catch (addError) {
+            console.error(addError);
+          }
+        }
+        console.error(error);
+      }
+    }  
+        }
+    
+        else if (toggled === '2') {
+          if (window.ethereum) {
+           
+            try {
+              let id =  ethers.utils.hexValue(80001)
+              // check if the chain to connect to is installed
+              await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: id }], // chainId must be in hexadecimal numbers
+              });
+            } catch (error) {
+              // This error code indicates that the chain has not been added to MetaMask
+              // if it is not, then install it into the user MetaMask
+              if (error.code === 4902) {
+                try {
+                  let id =  ethers.utils.hexValue(80001)
+                  await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [
+                      {
+                        chainName:'Mumbai Testnet',
+                        chainId: id,
+                        rpcUrls: ['https://rpc-mumbai.matic.today/'],
+                        blockExplorerUrls:['https://mumbai.polygonscan.com/'],
+                        nativeCurrency: { name: 'Matic', symbol: 'MATIC', decimals: 18 }
+                      },
+                    ],
+                  });
+                } catch (addError) {
+                  console.error(addError);
+                }
+              }
+              console.error(error);
+            }
+          } 
+    
+        }
+    
+        else if (toggled === '3') {
+          if (window.ethereum) {
+            try {
+              let id =  ethers.utils.hexValue(41)
+              // check if the chain to connect to is installed
+              await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: id }], // chainId must be in hexadecimal numbers
+              });
+            } catch (error) {
+              // This error code indicates that the chain has not been added to MetaMask
+              // if it is not, then install it into the user MetaMask
+              if (error.code === 4902) {
+                try {
+                  let id =  ethers.utils.hexValue(41)
+                  await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [
+                      {
+                        chainName:'Telos Testnet',
+                        chainId: id,
+                        rpcUrls: ['https://testnet.telos.net/evm'],
+                        blockExplorerUrls:['https://testnet.teloscan.io'],
+                        nativeCurrency: { name: 'Telos', symbol: 'TLOS', decimals: 18 }
+                      },
+                    ],
+                  });
+                } catch (addError) {
+                  console.error(addError);
+                }
+              }
+              console.error(error);
+            }
+          } else {
+            // if no window.ethereum then MetaMask is not installed
+            alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
+          } 
+    
+        }
+   
+   }
+  chains();
+  },[toggled]);
+  
+  
+
 
   return (
-    <header class="bg-white sticky top-0 z-20 w-[100vw] border-b-[1px] border-black">
-      <div class="flex flex-row justify-between items-center h-20 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8">
-        <a class="block" href="/">
-          <span class="sr-only">Home</span>
+    <header className="bg-white sticky top-0 z-20 w-[100vw] border-b-[1px] border-black">
+      <div className="flex flex-row items-center h-20 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8">
+        <div className="flex-1">
+        <a className="block" href="/">
+          <span className="sr-only">Home</span>
           <div className="text-[14px] h-20 flex flex-row items-center">
           
             <h1 className="font-Inter pr-2">Xchange</h1>
             <div className="bg-black text-[10px]  font-Inter text-white rounded-[40px] py-2 px-4 ">Beta</div>
           </div>
         </a>
+        </div>
 
-
+        <div className="flex flex-row flex-1 justify-center">
 
         <svg
               width="33"
@@ -60,58 +211,56 @@ export const Nav = () => {
               />
             </svg>
 
-            <div className="flex flex-row font-Inter space-x-[8px]">
-           
-          
-            
-              {/* <select className='appearance-none bg-[#DCDEE1] mobile:w-3/4 text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-[150px] text-[15px] py-[10px]  rounded-[40px] focus:outline-none' onChange={handleChange} id="chain" name="chain">
-    <option className="flex flex-row" value="1">
-    <img className='w-[10px] h-[20px]' src='/polygon.png'/>
-      
-      Polygon</option>
-    
-    <option value="2">Arbitrum</option>
-    <option value="3">Optimisim</option>
-  </select>
-
-  <span className='bg-[#DCDEE1] mobile:w-3/4 text-[15px] mb-3 p-4 rounded laptop:w-[103px] text-[15px] rounded-[40px] py-[10px] px-[32px]'></span>
-   */}
-
+            </div>
 
  
-    <div class="flex space-x-4 font-Inter">
-      <div class="dropdown dropdown-end">
-        <label tabindex="0" class="btn btn-ghost bg-[#DCDEE1] space-x-2 rounded-[40px]">
-          <img src="polygon.png"/>
-          <span>Polygon</span>
+    <div className="flex flex-row flex-1 justify-end items-center space-x-4 font-Inter">
+      <div className="dropdown dropdown-end">
+        <label tabindex="0" className="text-[14px] flex flex-row justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
+          {toggled === '1' ?
+          <>
+             <img className="h-[15%] w-[15%]" src='aribtrum.svg'/> 
+          <span className="text-black">Arbitrum</span>
+          </> : toggled === '2' ?
+          <>
+           <img className="h-[15%] w-[15%]" src="polygon.svg"/>
+           <span className="text-black">Polygon</span> 
+           </> :
+             <>
+          <img className="h-[15%] w-[15%]" src="telos.png"/>
+          <span className="text-black">Telos</span> 
+          </> 
+ }
           <img src="dropdown.png"/>
           
           </label>
-        <ul tabindex="0" class="menu dropdown-content p-2 shadow  rounded-box w-52 mt-4">
-          <li><a>Item 1</a></li> 
-          <li><a>Item 2</a></li>
-        </ul>
-      </div>
-      <div class="btn btn-ghost bg-[#DCDEE1] rounded-[40px] space-x-2">
-        <span>Wallet</span>
-      <img src="/copy.png"/>
-      </div>
+        <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4">
+          
+<li><a onClick={() => setisToggled('1')}><img className="h-[30%] w-[30%]" src="arbitrum.svg"/>Arbitrum</a></li>
+<li><a onClick={() => setisToggled('2')}><img className="h-[30%] w-[30%]" src="polygon.svg"/>Polygon</a></li>
+
+<li><a onClick={() => setisToggled('3')}><img className="h-[30%] w-[30%]" src="telos.png"/>Telos</a></li>
+
+</ul>
+</div>
+
+      <button className="text-[14px] flex flex-row justify-center items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-2  w-[175px]" onClick={() => {getWallet(); copyAddress()}}>
+        <span className="truncate">
+          { accounts == null? 
+            'Connect Wallet':
+          accounts }</span>
+      <img className={accounts == null ? "hidden": "visible"} src="/copy.png"/>
+      </button>
     </div>
   
-
-             
-            
-           
-
-     
             <button
-              class="mobile:block p-2.5 text-black bg-white rounded hover:text-[#D9CE3F]/75 transition laptop:hidden"
+              className="mobile:block p-2.5 text-black bg-white rounded hover:text-[#D9CE3F]/75 transition laptop:hidden"
               onClick={() => setIsDrawerOpen(true)}
             >
-              <span class="sr-only">Toggle menu</span>
+              <span className="sr-only">Toggle menu</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
+                className="w-5 h-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -142,10 +291,10 @@ export const Nav = () => {
                 sx={{ backgroundColor: "#E5E5E5", height: "100" }}
               >
                 <Typography component="div">
-                  <ul class="space-y-16 pl-1 text-[27px] font-SG">
+                  <ul className="space-y-16 pl-1 text-[27px] font-SG">
                     <li>
                       <a
-                        class="text-black transition hover:text-[#D9CE3F]/75"
+                        className="text-black transition hover:text-[#D9CE3F]/75"
                         href="/"
                       >
                         Home
@@ -153,7 +302,7 @@ export const Nav = () => {
                     </li>
                     <li>
                       <a
-                        class="text-black transition hover:text-[#D9CE3F]/75"
+                        className="text-black transition hover:text-[#D9CE3F]/75"
                         href="/premarkets"
                       >
                         Pre-Market
@@ -162,7 +311,7 @@ export const Nav = () => {
 
                     <li>
                       <a
-                        class="text-black transition hover:text-[#D9CE3F]/75"
+                        className="text-black transition hover:text-[#D9CE3F]/75"
                         href="/markets"
                       >
                         Live Market
@@ -171,7 +320,7 @@ export const Nav = () => {
 
                     <li>
                       <a
-                        class="text-black transition hover:text-[#D9CE3F]/75"
+                        className="text-black transition hover:text-[#D9CE3F]/75"
                         href="/redeem"
                       >
                         Redeem
@@ -182,7 +331,7 @@ export const Nav = () => {
 
                     <li>
                       <a
-                        class="text-black transition hover:text-[#D9CE3F]/75"
+                        className="text-black transition hover:text-[#D9CE3F]/75"
                         href="/https://twitter.com/xsauce_io"
                       >
                         Contact Us
@@ -191,11 +340,11 @@ export const Nav = () => {
 
 
                     <li>
-                      <div class="grid grid-cols-1 divide-y place-items-stretch	 ">
+                      <div className="grid grid-cols-1 divide-y place-items-stretch	 ">
                         <div>
                           <Onboard />
                         </div>
-                        {/* <div class="mt-6 text-black text-lg  bg-[#D9CE3F] p-1.5 px-0.5 transition rounded-md hover:scale-105 ">
+                        {/* <div className="mt-6 text-black text-lg  bg-[#D9CE3F] p-1.5 px-0.5 transition rounded-md hover:scale-105 ">
                           <ConnectButton />
                         </div> */}
 
@@ -207,7 +356,6 @@ export const Nav = () => {
               </Box>
             </Drawer>
             </div>
-          </div>
     </header>
   );
 };

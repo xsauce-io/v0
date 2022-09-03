@@ -8,60 +8,61 @@ const cardObjectHref = "/live-market/" + cardObject.sku
 
   return (
     <Link href={cardObjectHref}>
-     <a class="transition duration-500 bg-[#F1F1F1] rounded-md shadow-md shadow-black text-black hover:shadow-2xl hover:shadow-black flex flex-col overflow-hidden 
- laptop:h-[420px] w-[390px] items-center text-center p-4">
+     <a className="mt-10 transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl hover:shadow-black flex flex-col overflow-hidden 
+ laptop:h-[420px] w-[280px] items-start text-left">
 
                       { cardObject === undefined ?
                         <React.Fragment>
                           <Skeleton variant="rectangular" sx={{backgroundColor:'white', height:'300px'}} />
                         </React.Fragment> :
                         <React.Fragment>
-      <div class="flex flex-row items-center laptop:flex-col laptop:space-y-5 laptop:justify-center">
+      <div className="flex flex-row items-center laptop:flex-col laptop:space-y-2 laptop:justify-center">
                           
         {cardObject.image?.original === '' ?
           <React.Fragment>
-            <img class='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
+            <img className='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
           </React.Fragment> :
           cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
           <React.Fragment>
-            <img class='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
+            <img className='mobile:h-[30px] px-4' src='/sneakericon1.svg'/>
           </React.Fragment> :
           <React.Fragment>
-           
-          <h1 class="text-[25px] font-bold  h-[22%] w-[370px] line-clamp-2 px-3">{cardObject.name}</h1>
+            <div className="w-full h-[125px] bg-white flex flex-col justify-center items-center">
+        <img className='object-cover mobile:h-[70px] px-4 laptop:w-[50%] laptop:h-[75%]' src={cardObject.image?.original}></img>
+        </div>
+        
+          <h1 className="text-[20px] font-bold text-white h-[22%] w-[280px] line-clamp-2 px-4 ">{cardObject.name}</h1>
+          <h2 className=" text-[12px] text-left w-full border-b-[1px] border-[#30403F] text-white px-4 pb-4 ">Retail Price: ${cardObject.retailPrice}</h2>
+    
         {/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
       
-         <div className="w-full flex flex-col items-center">
-        <img class='object-cover mobile:h-[70px] px-4 laptop:w-[230px] laptop:h-[120px] ' src={cardObject.image?.original}></img>
-        </div>
         
        
        
      
       
-        
-        {/* </div> */}
         
         </React.Fragment>
         }
-          <div className="flex flex-col w-full rounded-md space-y-3">
-        <h1 class="text-[20px] pt-2 ">Will the price be over $300?
+          <div className="flex flex-col w-full px-4 space-y-3">
+        <h1 className="text-[12px] text-white ">Will the price be over $300?
        </h1>
          
-        <div class='flex flex-row items-left  w-full h-[50px] py-2 px-3 items-center'>
+        <div className='flex flex-row items-center border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[40%] py-2 px-3 space-x-2 items-center'>
           
         
-          <p class="text-[10px] bg-[#CD0C0C] text-white   flex flex-col justify-center laptop:text-[14px]   border-black h-full   w-[40%]">🧊 No - 40%</p>
+          <p className=" bg-[#ACFF00] text-black  rounded-[40px]  flex flex-row justify-center laptop:text-[10px] py-1 border-[1px] border-[#30403F] h-full w-full">No - 60%</p>
 
-        <p class="text-[10px] bg-[#099309] text-white flex flex-col justify-center laptop:text-[14px]   border-black h-full w-[60%]">🔥 Yes - 60%</p>
+        <p className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-1 border-[#30403F] h-full w-full">Yes - 40%</p>
         </div>
-        
+        <div className='flex flex-row items-center text-white text-[12px]  border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[40%] py-2 px-3 items-center'> Place a wager on this sneaker</div>
+          
      
        
         
-        <div className=" px-2 pb-2 w-full rounded-bl-md rounded-br-md  ">
-        <h2 className=" text-[16px] ">Projected Retail Price: ${cardObject.retailPrice}</h2>
-        <h2 className=" text-[12px] underline  ">Expires 09.10.2022</h2>
+        <div className=" px-4 pb-14 w-[60%]">
+     
+        <h2 className=" text-[12px] text-[#748282] ">Expires 09.10.2022</h2>
         </div> 
         
       

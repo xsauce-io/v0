@@ -29,28 +29,28 @@ const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
     <React.Fragment>
       <form onSubmit={handleTransfer} className="flex flex-col space-y-3">
 
-    <div class="relative">
-      <label class="sr-only" for="amount"> Amount Desired</label>
+    <div className="relative">
+      <label className="sr-only" for="amount"> Amount Desired</label>
 
       <input
-        class="mobile:w-full py-4 pl-3 pr-55 text-[12px] border-2 border-gray-200 rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+        className="mobile:w-full py-4 pl-3 pr-55 text-[12px] border-2 border-gray-200 rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
         name="contractNumber"
         type="number"
         placeholder="Limit Price"
       />
     </div>
-    <div class="relative">
-      <label class="sr-only" for="amount"> Amount Desired</label>
+    <div className="relative">
+      <label className="sr-only" for="amount"> Amount Desired</label>
 
       <input
-        class="mobile:w-full py-4 pl-3 pr-55 text-[12px] border-2 border-gray-200 rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+        className="mobile:w-full py-4 pl-3 pr-55 text-[12px] border-2 border-gray-200 rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
         name="contractNumber"
         type="number"
         placeholder="# of Contracts"
       />
     </div>
 
-    <button id='mint' class="mobile:py-3 m-20 outline text-black bg-[#D8E9BC] rounded-lg" type="submit">
+    <button id='mint' className="mobile:py-3 m-20 outline text-black bg-[#D8E9BC] rounded-lg" type="submit">
         Buy
       </button>
     </form>

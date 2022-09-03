@@ -37,17 +37,17 @@ const Home: NextPage = () => {
 
   // Settings for the slider
 
-  const Settings = {
-    dots: true,
-    arrows: false,
-    fade: true,
-    infinite: true,
-    autoplay: true,
-    speed: 500,
-    autoplaySpeed: 5000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  // const Settings = {
+  //   dots: true,
+  //   arrows: false,
+  //   fade: true,
+  //   infinite: true,
+  //   autoplay: true,
+  //   speed: 500,
+  //   autoplaySpeed: 5000,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  // };
 
   // As we have used custom buttons, we need a reference variable to
   // change the state
@@ -60,24 +60,24 @@ const Home: NextPage = () => {
 
   // This list contains all the data for carousels
   // This can be static or loaded from a server
-  const cards = [
-    {
-      link:'',
-      image:
-        'Slide1.svg' },
-    {
-      link:'https://linktr.ee/xsauceio',
-     image:
-        'Slide2.svg',
-    },
-    {
-      title: 'Design Projects 3',
-      text:
-        "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image:
-        'https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-    },
-  ];
+  // const cards = [
+  //   {
+  //     link:'',
+  //     image:
+  //       'Slide1.svg' },
+  //   {
+  //     link:'https://linktr.ee/xsauceio',
+  //    image:
+  //       'Slide2.svg',
+  //   },
+  //   {
+  //     title: 'Design Projects 3',
+  //     text:
+  //       "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+  //     image:
+  //       'https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
+  //   },
+  // ];
 
 
   // fetch sneaker data
@@ -110,10 +110,11 @@ const Home: NextPage = () => {
             obj1.data.results[0],
             obj2.data.results[0],
             obj3.data.results[0],
+            obj4.data.results[0],
+    
           ]);
           setMarketResponse([
-            obj4.data.results[0],
-            obj5.data.results[0],
+      
             obj6.data.results[0],
           ]);
 
@@ -152,111 +153,10 @@ const Home: NextPage = () => {
         <Announcement/>
         <Nav />
 
-        <Box
-      position={'relative'}
-      height={'1/3vh'}
-      width={'full'}
-      overflow={'hidden'}>
-      {/* CSS files for react-slick */}
-      <link
-        rel="stylesheet"
-        type="text/css"
-        charSet="UTF-8"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      />
-      {/* Left Icon */}
-      <IconButton
-        aria-label="left-arrow"
-        variant="ghost"
-        position="absolute"
-        left='1%'
-        top='50%'
-        transform={'translate(0%, -50%)'}
-        zIndex={2}
-        onClick={() => slider?.slickPrev()}>
-        <BiLeftArrowAlt color='white' size="40px" />
-      </IconButton>
-      {/* Right Icon */}
-      <IconButton
-        aria-label="right-arrow"
-        variant="ghost"
-        position="absolute"
-        right='1%'
-        top='50%'
-        transform={'translate(0%, -50%)'}
-        zIndex={2}
-        onClick={() => slider?.slickNext()}>
-        <BiRightArrowAlt color='white' size="40px" />
-      </IconButton>
-      {/* Slider */}
-      <Slider {...Settings} ref={(slider: any) => setSlider(slider)}>
-        {cards.map((card, index) => (
-          <Box
-            key={index}
-            height={'6xl'}
-            position="relative"
-            backgroundPosition="center"
-            backgroundRepeat="no-repeat"
-            backgroundSize="cover"
-            backgroundImage={`url(${card.image})`}>
-            {/* This is the block you need to change, to customize the caption */}
-            <Link href={`${card.link}`}>
-            <Container size="container.lg" height="400px" position="relative">
-            
-              <Stack
-                spacing={6}
-                w={'full'}
-                maxW={'lg'}
-                position="absolute"
-                left="15%"
-                top="50%">
-                <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
-                  {card.title}
-                </Heading>
-                <Text fontSize={{ base: 'md', lg: 'lg' }} color="GrayText">
-                  {card.text}
-                </Text>
-              </Stack>
-            
-            </Container>
-            </Link>
-          </Box>
-        ))}
-      </Slider>
-    </Box>
-        
-        <div className="flex flex-row items-center pl-18 pb-8 pt-8">
-          <div className="flex flex-row items-center justify-between w-[1300px] m-auto border-b-0">
-            <div className='flex flex-row items-center space-x-4'>
-            <button onClick={() => setisToggled(true)} className={toggled == true ? "laptop:flex flex-row items-center rounded-xl text-white transition duration-500 bg-[black] p-2" : "laptop:flex flex-row items-center rounded-xl transition duration-500 p-2 text-black" }>
-              <SportsScoreIcon />
-              <h3 className="text-[17px] text-left font-normal font-Inter">
-                Pre-Market
-              </h3>
-            </button>
-            <button onClick={() => setisToggled(false)} className={toggled == false ? "laptop:flex flex-row items-center text-white rounded-xl transition duration-200 bg-[black] p-2" : "laptop:flex flex-row items-center text-black rounded-xl transition duration-500  p-2" }>
-               <CasinoIcon />
-              <h3 className="text-[17px] text-left font-normal font-Inter">
-                Live Market
-              </h3>
-            </button>
-            </div>
-            <a
-              href="/markets"
-              className="rounded ml-8 text-black font-light text-[16px] hover:bg-gray px-4 underline underline-offset-2 font-Inter"
-            >
-              see all &#8594;
-            </a>
-          </div>
-        </div>
+  
         {toggled === true ? (
         <div className=" mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-[1300px] font-SG border-b-0 pb-12">
-          <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-[1300px] ">
+          <div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-4 grid-rows-1 gap-2 laptop:w-[1300px] ">
             {isLoading === true ? (
               <React.Fragment>
                 <div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3 ">
@@ -358,7 +258,7 @@ const Home: NextPage = () => {
               </React.Fragment>
             ) : (
               premarketResponse.map((el: any) => (
-                <CardPreMarket cardObject={el} />
+                <Card cardObject={el} />
               ))
             )}
           </div>

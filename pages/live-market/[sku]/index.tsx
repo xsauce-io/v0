@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { Nav } from '../../../components/nav';
 // import { Card } from '../components/card'
-import { ProductDetails} from '../../../components/productDetails';
 import { PredictToggle} from '../../../components/predictionToggle'
 import { Announcement } from '../../../components/announcement';
 import { WagerCard } from '../../../components/wagerCard';

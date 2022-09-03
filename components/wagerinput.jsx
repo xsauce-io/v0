@@ -105,17 +105,17 @@ const handleClick = (e) => {
       </div>
 
 
-    <div class="relative">
-      <label class="sr-only" for="amount"> Amount Desired</label>
+    <div className="relative">
+      <label className="sr-only" for="amount"> Amount Desired</label>
 
       <input
-        class="desktop:w-3/4   mobile:w-3/4 py-4 pl-3 pr-55 text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+        className="desktop:w-3/4   mobile:w-3/4 py-4 pl-3 pr-55 text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
         name="contractNumber"
         type="number"
         placeholder="# of Contracts"
       />
 
-      <button id='mint' class={isYes === undefined ? "mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-[white] opacity-60 rounded shadow-md" : isYes == true ? "mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-[#416900] opacity-60 rounded shadow-md":"mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-[#BA1A1A] opacity-60 rounded shadow-md"} type="submit">
+      <button id='mint' className={isYes === undefined ? "mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-[white] opacity-60 rounded shadow-md" : isYes == true ? "mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-[#416900] opacity-60 rounded shadow-md":"mt-5 w-3/4 h-[3rem] py-2 px-5 text-black bg-[#BA1A1A] opacity-60 rounded shadow-md"} type="submit">
       {isYes === undefined ? 'Select Bid Type': isYes === true ? 'Buy Yes Bid(s)': 'Buy No Bid(s)'}
       </button>
     </div>
