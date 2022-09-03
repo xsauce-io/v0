@@ -30,7 +30,21 @@ export const Layout = ({ children }) => {
 
                                 <div class='bg-[#DCDEE1] rounded-[10px] p-4 text-left w-[100%]'>
                                     <h1 class="py-2" >FINANCIAL OVERVIEW</h1>
-                                    <h1>dedsufbsk</h1>
+                                    <grid class="grid grid-cols-3">
+                                        <div class="grid grid-rows-2">
+                                            <div class="text-[grey]">Positions</div>
+                                            <div>12 positions</div>
+                                        </div>
+                                        <div class="grid grid-rows-2">
+                                            <div class="text-[grey]">Xsauce tokens</div>
+                                            <div>3,702 $SAUX</div>
+                                        </div>
+                                        <div class="grid grid-rows-2">
+                                            <div></div>
+                                            <div ><button class="rounded-2xl px-3 bg-[#ACFF00] "> redeem</button></div>
+                                        </div>
+
+                                    </grid>
                                 </div>
 
 

@@ -13,13 +13,13 @@ export const Tabs = (props) => {
                     <a class={router.pathname == "/" ? "tab border-[#ACFF00] border-b-[2px] transition text-black" : "tab transition"}>Dashboard</a>
                 </Link>
                 <Link href="/livemarkets">
-                    <a class={router.pathname == "/livemarkets" ? "tab  border-b-[2px] border-[#ACFF00]  transition text-black " : "tab transition"}>Live Market</a>
+                    <a class={router.pathname == "/livemarkets" ? "tab border-b-[2px] border-[#ACFF00] transition text-black " : "tab transition"}>Live Market</a>
                 </Link>
                 <Link href="/premarkets">
                     <a class={router.pathname == "/premarkets" ? "tab border-[#ACFF00] border-b-[2px] transition text-black" : "tab transition"}>Pre Market</a>
                 </Link>
                 <Link href="/redeem">
-                    <a class={router.pathname == "/redeem" ? "tab  border-[#ACFF00] border-b-[2px] transition text-black" : "tab transition"}>Cash Out</a>
+                    <a class={router.pathname == "/redeem" ? "tab border-[#ACFF00] border-b-[2px] transition text-black" : "tab transition"}>Cash Out</a>
                 </Link>
             </div>
             <div class="py-10">
