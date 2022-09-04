@@ -11,7 +11,12 @@ import { Tabs } from '../components/tabs';
 import { Layout } from '../components/layout';
 import { ContentHeader } from '../components/contentHeader';
 import { FaList } from 'react-icons/Fa';
-import { RiArrowDropDownLine, RiLayoutGridFill } from 'react-icons/Ri';
+import {
+	RiArrowDownSLine,
+	RiArrowDropDownLine,
+	RiArrowUpSLine,
+	RiLayoutGridFill,
+} from 'react-icons/Ri';
 import { Card } from '../components/cardWager';
 
 const Markets: NextPage = () => {
@@ -183,10 +188,14 @@ const Markets: NextPage = () => {
 								</ul>
 							</div>
 							<button
-								className="hover:text-[blue]"
+								className="hover:scale-150"
 								onClick={() => setIsAscending(!isAscending)}
 							>
-								down
+								{isAscending === true ? (
+									<RiArrowUpSLine size={20} />
+								) : (
+									<RiArrowDownSLine size={20} />
+								)}
 							</button>
 						</div>
 					</ContentHeader>
