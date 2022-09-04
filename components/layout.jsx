@@ -15,7 +15,7 @@ export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSub
     return (
 
         <div class="bg-[#EFF1F3] text-black w-screen">
-            <div className={`laptop:px-20 w-full  items-center justify-center text-black`} style={{ backgroundColor: headerBg, color: headerColor, borderColor: headerColor }} >
+            <div className={`laptop:px-40 w-full  items-center justify-center text-black`} style={{ backgroundColor: headerBg, color: headerColor, borderColor: headerColor }} >
                 <Announcement />
                 <Nav logoColor={logoColor} />
                 <Header title={headerTitle} subtitle={headerSubtitle}>
@@ -24,10 +24,10 @@ export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSub
             </div>
             <div class='w-full items-center  justify-center' >
                 <Tabs bgColor={headerBg} >
-                    <div class='laptop:px-20'>{children}</div>
+                    <div class='laptop:px-40'>{children}</div>
                 </Tabs>
             </div>
-            <div class='laptop:px-20 w-full  items-center justify-center'>
+            <div class='laptop:px-40 w-full  items-center justify-center'>
                 <Footer />
             </div>
 
@@ -44,8 +44,6 @@ Layout.defaultProps = {
     logoColor: '#0C1615',
     tabHeader: 'Position',
     showFinancialOverview: true,
-
-
 };
 
 Layout.propTypes = {
