@@ -27,14 +27,20 @@ export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSub
             </div>
 
             <div className='w-full items-center justify-center'>
+                <div className='relative laptop:px-40'>
+                    <div className='laptop: absolute bottom-[-150px] right-0 flex space-x-2 w-[62%] px-40 justify-end '>
+                        <FinancialOverviewCard />
+                        <ContractsCard />
+                    </div>
+                </div>
                 <Tabs bgColor={headerBg} >
                     <div className='laptop:px-40'>{children}</div>
                 </Tabs>
-                <div className='relative laptop:px-40'>
+                {/* <div className='relative laptop:px-40'>
                     <div className='laptopn: absolute bottom-[940px] right-0 flex space-x-2 w-[60%] px-40 '>
                         <FinancialOverviewCard /> <ContractsCard />
                     </div>
-                </div>
+                </div> */}
 
             </div>
             <div className='laptop:px-40 w-full items-center justify-center'>
