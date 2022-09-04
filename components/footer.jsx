@@ -8,9 +8,9 @@ import { FaGithub, FaRegHandPeace, FaTwitter, FaTwitterSquare } from "react-icon
 export const Footer = ({ children }) => {
     return (
         <footer>
-            <div class="mb-16 grid grid-cols-3 ">
+            <div className="mb-16 grid grid-cols-3 ">
 
-                <div class="col-span-1 space-y-6">
+                <div className="col-span-1 space-y-6">
                     <svg
                         width="33"
                         height="32"
@@ -29,30 +29,30 @@ export const Footer = ({ children }) => {
                             fill="#000000"
                         />
                     </svg>
-                    <div class="text-[58px] font-SG" >The future of <span class="block"> cultural asset </span></div>
-                    <div class="text-[10px] font-inter">The prediction market known as "The Xchange" is for informational and educational purposes only. "The Xchange" is a decentralized protocol operated by autonomous smart contracts and does not have any vested interest in the outcomes of any market.</div>
+                    <div className="text-[58px] font-SG" >The future of <span className="block"> cultural asset </span></div>
+                    <div className="text-[10px] font-inter">The prediction market known as "The Xchange" is for informational and educational purposes only. "The Xchange" is a decentralized protocol operated by autonomous smart contracts and does not have any vested interest in the outcomes of any market.</div>
                 </div>
 
             </div>
-            <div class="flex flex-row border-t-[2px] border-black py-6 space-x-8">
-                <div class=" space-x-10">
+            <div className="flex flex-row border-t-[2px] border-black py-6 space-x-8">
+                <div className=" space-x-10">
                     <a href="https://docs.xsauce.io/connect/socials"
                         target={'_blank'}
                         rel={'noreferrer'}>
-                        <button class="text-[12px] hover:underline">Whitepaper</button>
+                        <button className="text-[12px] hover:underline">Whitepaper</button>
                     </a>
                     <a href="https://docs.xsauce.io/connect/socials"
                         target={'_blank'}
                         rel={'noreferrer'}>
-                        <button class="text-[12px] hover:underline">Xchange</button>
+                        <button className="text-[12px] hover:underline">Xchange</button>
                     </a>
                     <a href="https://docs.xsauce.io/connect/socials"
                         target={'_blank'}
                         rel={'noreferrer'}>
-                        <button class="text-[12px] hover:underline">Docs</button>
+                        <button className="text-[12px] hover:underline">Docs</button>
                     </a>
                 </div>
-                <div class="space-x-6">
+                <div className="space-x-6">
                     <a
                         href="https://twitter.com/xsauce_io"
                         target={'_blank'}
@@ -94,7 +94,7 @@ export const Footer = ({ children }) => {
                     </a>
 
                 </div>
-                <div class="flex-1 text-right text-[12px]">© 2022 Xsauce platform</div>
+                <div className="flex-1 text-right text-[12px]">© 2022 Xsauce platform</div>
             </div>
 
         </footer>
