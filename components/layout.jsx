@@ -41,7 +41,7 @@ Layout.defaultProps = {
     headerColor: 'white',
     headerTitle: 'Xchange',
     headerSubtitle: '',
-    logoColor: '#0C1615',
+    logoColor: '#ACFF00',
     tabHeader: 'Position',
     showFinancialOverview: true,
 };
