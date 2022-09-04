@@ -29,7 +29,7 @@ const Markets: NextPage = () => {
 	const [response, setResponse] = useState([]);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
 	const [layout, setLayout] = useState({ state: LAYOUT_STATES.GRID });
-	let [toggled, setisToggled] = useState('1');
+	let [toggled, setisToggled] = useState('2');
 
 	const options = {
 		method: 'GET',
@@ -103,41 +103,53 @@ const Markets: NextPage = () => {
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3">
 							<h5 className="text-sm">Filter on</h5>
 							<div className="dropdown dropdown-end">
-								<label className="text-[14px] flex flex-row justify-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white">
-									{toggled === '1' ? (
+								<label
+									tabIndex={0}
+									className="text-[14px] flex flex-row justify-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white"
+								>
+									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
 										<>
-											<span className="text-black">Most Positive</span>
+											<span className="text-black">Retail Price</span>
 										</>
-									) : toggled === '2' ? (
+									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
 										<>
-											<span className="text-black">Most Negative</span>
+											<span className="text-black">Release Date</span>
 										</>
 									) : (
 										<>
-											<span className="text-black">Telos</span>
+											<span className="text-black">Name</span>
 										</>
 									)}
 									<RiArrowDropDownLine />
 								</label>
-								<ul className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4">
+								<ul
+									tabIndex={0}
+									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
+								>
 									<li>
-										<button onClick={() => setisToggled('1')}>
-											Most Positive
+										<button
+											onClick={() =>
+												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
+											}
+										>
+											Retail Price
 										</button>
 									</li>
 									<li>
 										<button
-											onClick={() => {
-												setisToggled('2');
-											}}
+											onClick={() =>
+												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
+											}
 										>
-											Most Negative
+											Release Date
 										</button>
 									</li>
 
 									<li>
-										<button onClick={() => setisToggled('3')}>
-											Most Popular
+										<button
+											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
+										>
+											Name
 										</button>
 									</li>
 								</ul>
