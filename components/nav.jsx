@@ -179,7 +179,7 @@ export const Nav = () => {
 
 
   return (
-    <header className="bg-white sticky top-0 z-20 w-full border-b-[1px] border-black">
+    <header className="bg-[#EFF1F3] sticky top-0 z-20 w-full border-b-[1px] border-black">
       <div className="flex flex-row items-center h-20 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8">
         <div className="flex-1">
           <a className="block" href="/">

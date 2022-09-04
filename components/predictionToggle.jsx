@@ -11,14 +11,24 @@ import axios from 'axios'
 export const PredictToggle = () => {
 
   const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
-  const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook.json'
+  const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
   const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
+  const TokenA = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
+
   const requestERC20 = axios.get(erc20Git);
   const requestOrderBook = axios.get(OrderBookGit);
   const requestOrderBookAddress = axios.get(OrderBookAddressGit);
-  const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
-  const addressRink ="0x360b9D17f8546941208085C045871E2a318117Ba"
-  const dai = "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
+  const requestTokenA = axios.get(TokenA);
+
+  // const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
+  // const addressRink ="0x360b9D17f8546941208085C045871E2a318117Ba"
+  // const dai = "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
+
+
+
+
+
+  
 const [alignment, setAlignment] = useState();
 const [isYes, setIsYes] = useState();
 const [order, setOrder] = useState();
@@ -27,6 +37,7 @@ const [ERC20Abi, setERC20Abi] = useState(null)
 const [orderBookAbi, setOrderBookAbi] = useState(null)
 const [orderBookAddress, setOrderBookAddress] = useState(null)
 const [signedContract, setSignedContract] = useState(null)
+const [tokenA, setTokenA] = useState(null)
 
 
 const theme = createTheme({
@@ -69,17 +80,19 @@ if (event.target.value === "1") {
 
 }
 
-const grabData = async () => {
-  axios.all([requestERC20, requestOrderBook, requestOrderBookAddress]).then(axios.spread((...responses) => {
-    setERC20Abi(responses[0].data)
-    setOrderBookAbi(responses[1].data)
-    // TODO fetch object based on chainID now is only Rinkeby
-    setOrderBookAddress(responses[2].data[4].OrderBook20Token20A158Token20B159.address)
-  })).catch(errors => {
-    console.log(errors)
-  })
-}
+ const grabData = async () => {
+    axios.all([requestERC20, requestOrderBook, requestOrderBookAddress, requestTokenA]).then(axios.spread((...responses) => {
+      setERC20Abi(responses[0].data)
+      setOrderBookAbi(responses[1].data)
+      // TODO fetch object based on chainID now is only Rinkeby
 
+      setOrderBookAddress(responses[2].data[4].OrderBook20.address)
+      setTokenA(responses[2].data[4].Token20A184.address)
+      console.log('working')
+    })).catch(errors => {
+      console.log(errors)
+    })
+  }
 
 useEffect(() => {
   grabData();
@@ -100,16 +113,13 @@ useEffect(() => {
     setSignedContract(signedContract)
     const order = await signedContract.limitOrder(
       // firstToken address
-      "0x820a9Ca5F7D4b40Cdb81DCd373CBE7173106ce1e",
+      tokenA,
       // firstToken amount
       // BigNumber.from(data.get("contractNumber"))
-      '1',
+      BigNumber.from('500'),
       // secondToken amount
-     '800',
-      // startPagePtr
-      utils.formatBytes32String("0"), 
-      // MaxCancels
-      '1',
+      BigNumber.from('500'),
+
       // makerOnly
       !isBuy,
       // takerOnly
