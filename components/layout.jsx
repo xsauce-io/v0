@@ -20,16 +20,22 @@ export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSub
             <div className={`laptop:px-40 w-full  items-center justify-center text-black`} style={{ backgroundColor: headerBg, color: headerColor, borderColor: headerColor }} >
                 {/* <Announcement /> */}
                 <Nav logoColor={logoColor} />
-                <Header title={headerTitle} subtitle={headerSubtitle}>
-                    {showFinancialOverview === true ? <HowItWorksButton /> : <></>}
-                    <FinancialOverviewCard />
-                    <ContractsCard />
+                <Header title={headerTitle} subtitle={headerSubtitle} >
+
                 </Header>
+
             </div>
+
             <div className='w-full items-center justify-center'>
                 <Tabs bgColor={headerBg} >
                     <div className='laptop:px-40'>{children}</div>
                 </Tabs>
+                <div className='relative laptop:px-40'>
+                    <div className='laptopn: absolute bottom-[940px] right-0 flex space-x-2 w-[60%] px-40 '>
+                        <FinancialOverviewCard /> <ContractsCard />
+                    </div>
+                </div>
+
             </div>
             <div className='laptop:px-40 w-full items-center justify-center'>
                 <Footer />
