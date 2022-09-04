@@ -28,16 +28,12 @@ const Markets: NextPage = () => {
 
 	const [response, setResponse] = useState([]);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
-	const [layout, setLayout] = useState({ state: LAYOUT_STATES.GRID });
-	let [toggled, setisToggled] = useState('2');
+	const [isAscending, setIsAscending] = useState(true);
 
 	const options = {
 		method: 'GET',
 		url: 'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=adidas&name=yeezy-350&gender=men',
 	};
-
-	const handleSortByReleaseDateClick = () => {};
-	const handleSortByRetailPriceClick = () => {};
 
 	// fetch sneaker data
 	const getSneaker = async () => {
@@ -57,34 +53,66 @@ const Markets: NextPage = () => {
 	}, []);
 
 	useMemo(() => {
-		if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-			response.sort((a: { name: string }, b: { name: string }) =>
-				a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-			);
-			console.log({ response });
-		} else if (
-			response.length > 0 &&
-			sortBy.state === SORT_BY_STATES.RELEASE_DATE
-		) {
-			response.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
-				a.releaseDate > b.releaseDate
-					? 1
-					: b.releaseDate > a.releaseDate
-					? -1
-					: 0
-			);
-			console.log({ response });
-		} else if (
-			response.length > 0 &&
-			sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-		) {
-			response.sort(
-				(a: { retailPrice: number }, b: { retailPrice: number }) =>
-					a.retailPrice - b.retailPrice
-			);
-			console.log({ response });
+		if (response.length > 0 && isAscending === true) {
+			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+				response.sort((a: { name: string }, b: { name: string }) =>
+					a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+				);
+				console.log({ response });
+			} else if (
+				response.length > 0 &&
+				sortBy.state === SORT_BY_STATES.RELEASE_DATE
+			) {
+				response.sort(
+					(a: { releaseDate: string }, b: { releaseDate: string }) =>
+						a.releaseDate > b.releaseDate
+							? 1
+							: b.releaseDate > a.releaseDate
+							? -1
+							: 0
+				);
+				console.log({ response });
+			} else if (
+				response.length > 0 &&
+				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+			) {
+				response.sort(
+					(a: { retailPrice: number }, b: { retailPrice: number }) =>
+						a.retailPrice - b.retailPrice
+				);
+				console.log({ response });
+			}
+		} else if (response.length > 0 && isAscending === false) {
+			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+				response.sort((a: { name: string }, b: { name: string }) =>
+					a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
+				);
+				console.log({ response });
+			} else if (
+				response.length > 0 &&
+				sortBy.state === SORT_BY_STATES.RELEASE_DATE
+			) {
+				response.sort(
+					(a: { releaseDate: string }, b: { releaseDate: string }) =>
+						a.releaseDate < b.releaseDate
+							? 1
+							: b.releaseDate < a.releaseDate
+							? -1
+							: 0
+				);
+				console.log({ response });
+			} else if (
+				response.length > 0 &&
+				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+			) {
+				response.sort(
+					(a: { retailPrice: number }, b: { retailPrice: number }) =>
+						b.retailPrice - a.retailPrice
+				);
+				console.log({ response });
+			}
 		}
-	}, [sortBy]);
+	}, [sortBy, isAscending]);
 
 	return (
 		//#F5DEB3 - Vanilla
@@ -154,73 +182,13 @@ const Markets: NextPage = () => {
 									</li>
 								</ul>
 							</div>
+							<button
+								className="hover:text-[blue]"
+								onClick={() => setIsAscending(!isAscending)}
+							>
+								down
+							</button>
 						</div>
-
-						{/* <div className="grid-cols-1 gap-4 px-12 ">
-							<div className="flex flex-row items-center justify-start space-x-4">
-								<div className="flex flex-row items-center justify-center border-[#30403F] border-[1px] rounded-[40px] w-[40%] h-[40%] py-2 px-3 space-x-2">
-									<div className="text-[10px]">Filter on:</div>
-									<button
-										onClick={() =>
-											setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
-										}
-										className={
-											sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-												? 'laptop:flex flex-row items-center rounded-xl text-white transition duration-500 text-[#D9CE3F] p-2'
-												: 'laptop:flex flex-row items-center rounded-xl transition duration-500 p-2 text-black'
-										}
-									>
-										<h3 className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-2 px-4 border-[black]">
-											Retail Price
-										</h3>
-									</button>
-									<button
-										onClick={() =>
-											setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
-										}
-										className={
-											sortBy.state === SORT_BY_STATES.RELEASE_DATE
-												? 'laptop:flex flex-row items-center text-white rounded-xl transition duration-200 text-[#D9CE3F] p-2'
-												: 'laptop:flex flex-row items-center text-black rounded-xl transition duration-500  p-2'
-										}
-									>
-										<h3 className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-2 px-4 border-[black]">
-											Release Date
-										</h3>
-									</button>
-									<button
-										onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
-										className={
-											sortBy.state === SORT_BY_STATES.NAME
-												? 'laptop:flex flex-row items-center text-white rounded-xl transition duration-200 text-[#D9CE3F] p-2'
-												: 'laptop:flex flex-row items-center text-black rounded-xl transition duration-500  p-2'
-										}
-									>
-										<h3 className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-2 px-4 border-[black]">
-											Sneaker Name
-										</h3>
-									</button>
-								</div>
-
-								<div className="flex flex-row items-center justify-center border-[#30403F] border-[1px] rounded-[40px] w-[15%] h-[40%] py-2 px-3 space-x-2">
-									<div className="text-[10px]">Ascending</div>
-									<button
-										onClick={() =>
-											setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
-										}
-										className={
-											sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-												? 'laptop:flex flex-row items-center rounded-xl text-white transition duration-500 text-[#D9CE3F] p-2'
-												: 'laptop:flex flex-row items-center rounded-xl transition duration-500 p-2 text-black'
-										}
-									>
-										<h3 className="text-black rounded-[40px] flex flex-row justify-center laptop:text-[10px] border-[1px] py-2 px-4 border-[black]">
-											Retail Price
-										</h3>
-									</button>
-								</div>
-							</div>
-						</div> */}
 					</ContentHeader>
 
 					<div className="laptop:grid grid-cols-3 grid-rows-1 gap-y-14 place-items-center gap-x-1 mb-10 pt-10">
