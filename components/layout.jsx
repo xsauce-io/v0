@@ -2,10 +2,12 @@ import { Nav } from './nav';
 import { Footer } from './footer';
 import { Tabs } from './tabs';
 import { Announcement } from './announcement';
-import { FinancialOverview } from './financialOverview'
+import { HowItWorksButton } from './howItWorksButton'
 import { Header } from './header'
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { FinancialOverviewCard } from './financialOverviewCard';
+import { ContractsCard } from './contractsCard'
 
 
 
@@ -19,7 +21,9 @@ export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSub
                 {/* <Announcement /> */}
                 <Nav logoColor={logoColor} />
                 <Header title={headerTitle} subtitle={headerSubtitle}>
-                    {showFinancialOverview === true ? <FinancialOverview /> : <></>}
+                    {showFinancialOverview === true ? <HowItWorksButton /> : <></>}
+                    <FinancialOverviewCard />
+                    <ContractsCard />
                 </Header>
             </div>
             <div className='w-full items-center justify-center'>
