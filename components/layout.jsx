@@ -34,7 +34,7 @@ export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSub
                     </div>
                 </div>
                 <Tabs bgColor={headerBg} >
-                    <div className='laptop:px-40'>{children}</div>
+                    <div className='laptop:px-40' >{children}</div>
                 </Tabs>
                 {/* <div className='relative laptop:px-40'>
                     <div className='laptopn: absolute bottom-[940px] right-0 flex space-x-2 w-[60%] px-40 '>
