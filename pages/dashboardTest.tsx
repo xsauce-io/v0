@@ -40,13 +40,17 @@ const DashboardTest: NextPage = () => {
 				/>
 			</Head>
 
+			{/* Example of layout Prop */}
 			<Layout
 				headerBg={'#0C1615'}
-				tabHeader={'Positions'}
 				headerColor={'white'}
+				headerTitle={'$130 000'}
+				tabHeader={'Positions'}
 				logoColor={'#ACFF00'}
 				showFinancialOverview={false}
-			></Layout>
+			>
+				<h1> Content</h1>
+			</Layout>
 		</div>
 	);
 };

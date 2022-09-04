@@ -8,9 +8,9 @@ export const FinancialOverview = ({ title }) => {
         <div class="flex flex-col h-full w-3/7  space-y-4 text-black">
 
             <button class='bg-[#DCDEE1] rounded-[10px] p-4 px-8 w-[100%] hover:opacity-40 flex '>
-                <HiOutlineBookOpen class='self-center ' />
+                <HiOutlineBookOpen class='self-center' />
                 <p class="px-4 ">Learn how the Xchange works</p>
-                <BsArrowRight class='self-center ' />
+                <BsArrowRight class='self-center' />
             </button>
 
             <div class='bg-[#DCDEE1] rounded-[10px] p-4 text-left w-[100%] '>

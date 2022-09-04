@@ -9,7 +9,7 @@ import { RepeatOneSharp } from '@mui/icons-material';
 import { Skeleton } from '@mui/material';
 import { Tabs } from '../components/tabs';
 import { Layout } from '../components/layout';
-
+import { ContentHeader } from '../components/contentHeader';
 import { FaList } from 'react-icons/Fa';
 import { RiLayoutGridFill } from 'react-icons/Ri';
 import { Card } from '../components/cardWager';
@@ -95,11 +95,14 @@ const Markets: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Layout>
+			<Layout headerSubtitle={'LIVE DERIVATIVES MARKET'}>
 				<main className="flex w-full flex-1 flex-col text-center">
 					{/*Sorting */}
+					<ContentHeader title={'Predict the live market'}>
+						<h1>filter</h1>
+					</ContentHeader>
 
-					<div className="laptop: grid-cols-1 gap-4 px-12 ">
+					<div className=" grid-cols-1 gap-4 px-12 ">
 						<div className="flex flex-row items-center justify-start space-x-4">
 							<div className="flex flex-row items-center justify-center border-[#30403F] border-[1px] rounded-[40px] w-[40%] h-[40%] py-2 px-3 space-x-2">
 								<div className="text-[10px]">Filter on:</div>

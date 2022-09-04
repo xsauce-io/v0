@@ -3,7 +3,7 @@ import { Footer } from './footer';
 import { Tabs } from './tabs';
 import { Announcement } from './announcement';
 import { FinancialOverview } from './financialOverview'
-import { Hero } from './hero'
+import { Header } from './header'
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -11,26 +11,23 @@ import classnames from 'classnames';
 
 // props for bg color, hero header, hero subheader, optional hero box,  Nav colors (text and Icons), tab header and icon
 
-export const Layout = ({ children, headerBg, headerColor, heroTitle, showFinancialOverview, logoColor, tabHeader }) => {
+export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSubtitle, showFinancialOverview, logoColor }) => {
     return (
 
         <div class="bg-[#EFF1F3] text-black w-screen">
-            <div className={`laptop:px-20 w-[full]  items-center justify-center text-black`} style={{ backgroundColor: headerBg, color: headerColor, borderColor: headerColor }} >
+            <div className={`laptop:px-20 w-full  items-center justify-center text-black`} style={{ backgroundColor: headerBg, color: headerColor, borderColor: headerColor }} >
                 <Announcement />
                 <Nav logoColor={logoColor} />
-                <Hero title={heroTitle}>
+                <Header title={headerTitle} subtitle={headerSubtitle}>
                     {showFinancialOverview === true ? <FinancialOverview /> : <></>}
-
-                </Hero>
+                </Header>
             </div>
-            <div class='w-[full] items-center  justify-center' >
+            <div class='w-full items-center  justify-center' >
                 <Tabs bgColor={headerBg} >
                     <div class='laptop:px-20'>{children}</div>
                 </Tabs>
-
             </div>
-            <div class='laptop:px-20 w-[full]  items-center justify-center'>
-
+            <div class='laptop:px-20 w-full  items-center justify-center'>
                 <Footer />
             </div>
 
@@ -42,11 +39,12 @@ export const Layout = ({ children, headerBg, headerColor, heroTitle, showFinanci
 Layout.defaultProps = {
     headerBg: '#EFF1F3',
     headerColor: 'black',
-    heroTitle: 'Xchange',
-    heroBoxHidden: false,
+    headerTitle: 'Xchange',
+    headerSubtitle: '',
     logoColor: '#0C1615',
     tabHeader: 'Position',
     showFinancialOverview: true,
+
 
 };
 
