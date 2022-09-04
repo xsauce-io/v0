@@ -14,20 +14,20 @@ import classnames from 'classnames';
 export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSubtitle, showFinancialOverview, logoColor }) => {
     return (
 
-        <div class="bg-[#EFF1F3] text-black w-screen">
+        <div className="bg-[#EFF1F3] text-black w-screen">
             <div className={`laptop:px-40 w-full  items-center justify-center text-black`} style={{ backgroundColor: headerBg, color: headerColor, borderColor: headerColor }} >
-                <Announcement />
+                {/* <Announcement /> */}
                 <Nav logoColor={logoColor} />
                 <Header title={headerTitle} subtitle={headerSubtitle}>
                     {showFinancialOverview === true ? <FinancialOverview /> : <></>}
                 </Header>
             </div>
-            <div class='w-full items-center  justify-center' >
+            <div className='w-full items-center justify-center'>
                 <Tabs bgColor={headerBg} >
-                    <div class='laptop:px-40'>{children}</div>
+                    <div className='laptop:px-40'>{children}</div>
                 </Tabs>
             </div>
-            <div class='laptop:px-40 w-full  items-center justify-center'>
+            <div className='laptop:px-40 w-full items-center justify-center'>
                 <Footer />
             </div>
 
@@ -37,8 +37,8 @@ export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSub
 }
 
 Layout.defaultProps = {
-    headerBg: '#EFF1F3',
-    headerColor: 'black',
+    headerBg: '#0C1615',
+    headerColor: 'white',
     headerTitle: 'Xchange',
     headerSubtitle: '',
     logoColor: '#0C1615',
