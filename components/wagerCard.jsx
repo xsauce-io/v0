@@ -3,7 +3,7 @@ import { Skeleton } from "@mui/material";
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import axios from "axios";
-import { ethers, BigNumber } from "ethers";
+import { ethers, BigNumber, utils } from "ethers";
 
 // import AspectRatio from '@mui/joy/AspectRatio';
 
@@ -15,21 +15,32 @@ export const WagerCard = ({ cardObject }) => {
   const [orderBookAddress, setOrderBookAddress] = useState(null)
   const [currentQuote, setCurrentQuote] = useState(0)
   const [signedContract, setSignedContract] = useState(null)
+  const [tokenA, setTokenA] = useState(null)
+  const [tokenB, setTokenB] = useState(null)
+  const [isLoaded, Loading] = useState(false)
 
   const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
-  const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook.json'
+  const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
   const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
+  const TokenA = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
+  const TokenB = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
 
   const requestERC20 = axios.get(erc20Git);
   const requestOrderBook = axios.get(OrderBookGit);
   const requestOrderBookAddress = axios.get(OrderBookAddressGit);
+  const requestTokenA = axios.get(TokenA);
+  const requestTokenB = axios.get(TokenB);
 
   const grabData = async () => {
-    axios.all([requestERC20, requestOrderBook, requestOrderBookAddress]).then(axios.spread((...responses) => {
+    axios.all([requestERC20, requestOrderBook, requestOrderBookAddress, requestTokenA, requestTokenB]).then(axios.spread((...responses) => {
       setERC20Abi(responses[0].data)
       setOrderBookAbi(responses[1].data)
       // TODO fetch object based on chainID now is only Rinkeby
-      setOrderBookAddress(responses[2].data[4].OrderBook20Token20A158Token20B159.address)
+
+      setOrderBookAddress(responses[2].data[4].OrderBook20.address)
+      setTokenA(responses[2].data[4].Token20A184.address)
+      setTokenB(responses[2].data[4].Token20B185.address)
+      Loading(true);
     })).catch(errors => {
       console.log(errors)
     })
@@ -42,28 +53,39 @@ export const WagerCard = ({ cardObject }) => {
     // console.log(data.get("contractNumber"));
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send('eth_requestAccounts', []);
-    const signer = await provider.getSigner();
+    const signer = provider.getSigner();
     const orderBook = new ethers.Contract(orderBookAddress, orderBookAbi, signer);
     signedContract = orderBook.connect(signer);
     setSignedContract(signedContract)
     const quote = await orderBook.quoteExactAmountOut(
-      "0xa8e8ef4cC39cCDb22E7bA0B683BB85905bD463dC",
-      BigNumber.from('800000'),
-      BigNumber.from('100000'),
+      tokenB,
+      BigNumber.from('500'),
+      BigNumber.from("1000000000000000000"),
      '5',
      '5'
     );
-    setCurrentQuote(quote[0].toNumber());
+    setCurrentQuote(quote[0].toString());
+
     
     console.log(quote[0].toNumber())
   }
 
 
     useEffect(() => {
-      grabData();
      
+      const loader = async () =>{
+        await grabData();
+      }
+      loader();
+      
      },[]);
     
+     useEffect(() => {
+      if (isLoaded === true) {
+     quote();
+      } else { return }
+   },[isLoaded]);
+  
 
 
   return (
@@ -98,6 +120,7 @@ export const WagerCard = ({ cardObject }) => {
                     >
                       <InfoIcon sx={{ fontSize: "18px" }} />
                     </Tooltip>
+                    <button onClick={quote} className="bg-black text-white p-3 text-[12px]">Update Quote</button>
                   </h3>
                   {/* <button onClick={quote} >Get Quote</button> */}
                 </div>

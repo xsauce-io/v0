@@ -8,6 +8,7 @@ import { Skeleton } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Layout } from '../components/layout';
+import { ContentHeader } from '../components/contentHeader';
 
 const Redeem: NextPage = () => {
 	let [isLoading, setisLoading] = useState(true as boolean);
@@ -73,6 +74,7 @@ const Redeem: NextPage = () => {
 
 			<Layout>
 				<main className="flex w-full items-center justify-center flex-col h-[calc(100%-85px)]">
+					<ContentHeader title={'Cash Out'} />
 					<form className="flex w-full h-full items-center justify-center flex-col space-y-5">
 						<div className="flex w-full items-center justify-center flex-col">
 							<label

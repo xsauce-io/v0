@@ -1,6 +1,6 @@
 
 import type { NextPage } from 'next'
-import Tester from '../components/testing'
+import { Dashboard } from '../components/dashboard'
 
 
 const Testing: NextPage = () => {
@@ -12,7 +12,7 @@ const Testing: NextPage = () => {
     //#E5E5E5 - Gray
     
     
-      <Tester/>
+      <Dashboard/>
   )
   
 }
