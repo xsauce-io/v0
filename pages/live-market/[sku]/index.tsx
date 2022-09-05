@@ -10,6 +10,10 @@ import axios from 'axios';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 import { Layout } from '../../../components/layout';
+import { ActionCard } from '../../../components/actionCard';
+import { Header } from '../../../components/header';
+import { ContentHeader } from '../../../components/contentHeader';
+import { Footer } from '../../../components/footer';
 
 declare var window: any;
 
@@ -71,36 +75,46 @@ const LiveMarket: NextPage = (cardObject) => {
 	}, []);
 
 	return (
-		<div>
+		<div className="bg-[#EFF1F3]">
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Layout>
-				<main className="flex w-full flex-1 flex-col text-center">
-					<h3 className="flex flex-row items-center justify-center text-left pt-4 mt-8 pb-4 text-[28px] font-medium">
-						⏱ Live Market
-					</h3>
-					<h1>{admin}</h1>
+			<div
+				className={`laptop:px-40 w-full items-center justify-center text-black bg-[#EFF1F3]`}
+				style={{
+					backgroundColor: '#0C1615',
+					color: 'white',
+					borderColor: '#0C1615',
+				}}
+			>
+				{/* <Announcement /> */}
+				<Nav logoColor="#ACFF00" />
+			</div>
+			<main className="flex w-full laptop:px-60 flex-1 flex-col text-center pb-40 mt-20 ">
+				<ContentHeader title={'Sneaker Name'}></ContentHeader>
+				<h1>{admin}</h1>
 
-					<div className=" laptop:flex flex-col">
-						<div className="p-5 laptop:flex flex-row items-center justify-center laptop:space-x-[1px] pb-20">
+				<div className="laptop:flex flex-col">
+					<div className=" laptop:flex flex-row items-center  laptop:space-x-[1px]">
+						<div className="flex-1">
 							{response.map((el: any) => (
 								<WagerCard cardObject={el} />
 							))}
-
-							<div className="mobile:flex flex-col space-y-6 justify-center items-center pt-2 laptop:w-1/3">
-								{/*       
+						</div>
+						<div className="mobile:flex flex-col space-y-6  items-center pt-2 ">
+							{/*       
           <button className={admin == true ? 'h-[100px] w-[100px] bg-[black]': 'h-[100px] w-[100px] bg-[red]' }></button>
 			 */}
-								<PredictToggle />
-							</div>
+							<ActionCard />
 						</div>
 					</div>
-				</main>
-			</Layout>
-			{/* <footer className="flex h-24 w-full items-center justify-center border-t">
-			</footer> */}
+				</div>
+			</main>
+
+			<div className="laptop:px-40 w-full items-center justify-center">
+				<Footer />
+			</div>
 		</div>
 	);
 };
