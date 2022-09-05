@@ -100,3 +100,7 @@ export const Footer = ({ children }) => {
         </footer>
     )
 }
+
+Footer.defaultProps = {
+    children: '',
+}
