@@ -1,510 +1,138 @@
-import type { NextPage } from 'next';
-import { Nav } from '../components/nav';
-import { Card } from '../components/cardWager';
-import { Layout } from '../components/layout';
-import { CardPreMarket } from '../components/cardPreMarket';
-import Head from 'next/head';
-import { useState, useEffect, useMemo } from 'react';
-import axios from 'axios';
-import { Skeleton } from '@mui/material';
-import React from 'react';
-import CasinoIcon from '@mui/icons-material/Casino';
-import SportsScoreIcon from '@mui/icons-material/SportsScore';
-import { ContentHeader } from '../components/contentHeader';
-import { Announcement } from '../components/announcement';
-import {
-	RiArrowDownSLine,
-	RiArrowDropDownLine,
-	RiArrowUpSLine,
-	RiLayoutGridFill,
-} from 'react-icons/Ri';
-import {
-	Box,
-	IconButton,
-	useBreakpointValue,
-	Stack,
-	Heading,
-	Text,
-	Container,
-	Link,
-} from '@chakra-ui/react';
-// Here we have used react-icons package for the icons
-import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
-// And react-slick as our Carousel Lib
-import Slider from 'react-slick';
-import { Tabs } from '../components/tabs';
+import React, { useEffect, useState } from "react";
+import { Skeleton } from "@mui/material";
+import { Tooltip } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
+import axios from "axios";
+import { ethers, BigNumber, utils } from "ethers";
 
-const Home: NextPage = () => {
-	const SORT_BY_STATES = {
-		RELEASE_DATE: 'releaseDate',
-		NAME: 'name',
-		RETAIL_PRICE: 'retailPrice',
-	};
-	let [premarketResponse, setAuctionResponse] = useState([] as any);
-	let [marketResponse, setMarketResponse] = useState([] as any);
-	let [isLoading, setisLoading] = useState(true as boolean);
-	let [toggled, setisToggled] = useState(true as boolean);
-	const [slider, setSlider] = React.useState<any | null>(null);
-	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
-	const [isAscending, setIsAscending] = useState(true);
+// import AspectRatio from '@mui/joy/AspectRatio';
 
-	// Settings for the slider
+export const WagerCard = ({ cardObject }) => {
 
-	const Settings = {
-		dots: true,
-		arrows: false,
-		fade: true,
-		infinite: true,
-		autoplay: true,
-		speed: 500,
-		autoplaySpeed: 5000,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-	};
 
-	// As we have used custom buttons, we need a reference variable to
-	// change the state
+  const [ERC20Abi, setERC20Abi] = useState(null)
+  const [orderBookAbi, setOrderBookAbi] = useState(null)
+  const [orderBookAddress, setOrderBookAddress] = useState(null)
+  const [currentQuote, setCurrentQuote] = useState(0)
+  const [signedContract, setSignedContract] = useState(null)
+  const [tokenA, setTokenA] = useState(null)
+  const [tokenB, setTokenB] = useState(null)
+  const [isLoaded, Loading] = useState(false)
 
-	// This list contains all the data for carousels
-	// This can be static or loaded from a server
-	const cards = [
-		{
-			link: '',
-			image: 'Slide1.svg',
-		},
-		{
-			link: 'https://linktr.ee/xsauceio',
-			image: 'Slide2.svg',
-		},
-		{
-			title: 'Design Projects 3',
-			text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-			image:
-				'https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-		},
-	];
+  const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
+  const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
+  const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
+  const TokenA = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
+  const TokenB = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
 
-	// fetch sneaker data
-	const getSneaker2 = async () => {
-		Promise.all([
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=B75571'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AO4606-001'
-			),
+  const requestERC20 = axios.get(erc20Git);
+  const requestOrderBook = axios.get(OrderBookGit);
+  const requestOrderBookAddress = axios.get(OrderBookAddressGit);
+  const requestTokenA = axios.get(TokenA);
+  const requestTokenB = axios.get(TokenB);
 
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DR9654-100'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DV2122-400'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=HP7870'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DH7138-006'
-			),
-		])
+  const grabData = async () => {
+    axios.all([requestERC20, requestOrderBook, requestOrderBookAddress, requestTokenA, requestTokenB]).then(axios.spread((...responses) => {
+      setERC20Abi(responses[0].data)
+      setOrderBookAbi(responses[1].data)
+      // TODO fetch object based on chainID now is only Rinkeby
 
-			.then(
-				axios.spread((obj1, obj2, obj3, obj4, obj5, obj6) => {
-					setAuctionResponse([
-						obj1.data.results[0],
-						obj2.data.results[0],
-						obj3.data.results[0],
-					]);
-					setMarketResponse([
-						obj4.data.results[0],
-						obj5.data.results[0],
-						obj6.data.results[0],
-					]);
+      setOrderBookAddress(responses[2].data[4].OrderBook20.address)
+      setTokenA(responses[2].data[4].Token20A184.address)
+      setTokenB(responses[2].data[4].Token20B185.address)
+      Loading(true);
+    })).catch(errors => {
+      console.log(errors)
+    })
+  }
 
-					setisLoading(false);
 
-					console.log({ obj1 });
-					console.log({ obj2 });
-				})
-			)
-			.catch(function (error) {
-				console.error(error);
-			});
-	};
+  const quote = async () => {
+    // e.preventDefault();
+    // const data = new FormData(e.target);
+    // console.log(data.get("contractNumber"));
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []);
+    const signer = provider.getSigner();
+    const orderBook = new ethers.Contract(orderBookAddress, orderBookAbi, signer);
+    signedContract = orderBook.connect(signer);
+    setSignedContract(signedContract)
+    const quote = await orderBook.quoteExactAmountOut(
+      tokenB,
+      BigNumber.from('500'),
+      BigNumber.from("1000000000000000000"),
+     '5',
+     '5'
+    );
+    setCurrentQuote(quote[0].toString());
 
-	useEffect(() => {
-		getSneaker2();
-	}, []);
+    
+    console.log(quote[0].toNumber())
+  }
 
-	useMemo(() => {
-		if (premarketResponse.length > 0 && isAscending === true) {
-			if (
-				premarketResponse.length > 0 &&
-				sortBy.state === SORT_BY_STATES.NAME
-			) {
-				premarketResponse.sort((a: { name: string }, b: { name: string }) =>
-					a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-				);
-				console.log({ premarketResponse });
-			} else if (
-				premarketResponse.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-			) {
-				premarketResponse.sort(
-					(a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate > b.releaseDate
-							? 1
-							: b.releaseDate > a.releaseDate
-							? -1
-							: 0
-				);
-				console.log({ premarketResponse });
-			} else if (
-				premarketResponse.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-			) {
-				premarketResponse.sort(
-					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-						a.retailPrice - b.retailPrice
-				);
-				console.log({ premarketResponse });
-			}
-		} else if (premarketResponse.length > 0 && isAscending === false) {
-			if (
-				premarketResponse.length > 0 &&
-				sortBy.state === SORT_BY_STATES.NAME
-			) {
-				premarketResponse.sort((a: { name: string }, b: { name: string }) =>
-					a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
-				);
-				console.log({ premarketResponse });
-			} else if (
-				premarketResponse.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-			) {
-				premarketResponse.sort(
-					(a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate < b.releaseDate
-							? 1
-							: b.releaseDate < a.releaseDate
-							? -1
-							: 0
-				);
-				console.log({ premarketResponse });
-			} else if (
-				premarketResponse.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-			) {
-				premarketResponse.sort(
-					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-						b.retailPrice - a.retailPrice
-				);
-				console.log({ premarketResponse });
-			}
-		}
-	}, [sortBy, isAscending]);
 
-	return (
-		//#F5DEB3 - Vanilla
-		//#E5E5E5 - Gray
-		<div>
-			<Head>
-				<title>Xsauce</title>
-				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link rel="preconnect" href="https://fonts.gstatic.com" />
-				<link
-					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-					rel="stylesheet"
-				/>
-			</Head>
+    useEffect(() => {
+     
+      const loader = async () =>{
+        await grabData();
+      }
+      loader();
+      
+     },[]);
+    
+     useEffect(() => {
+      if (isLoaded === true) {
+     quote();
+      } else { return }
+   },[isLoaded]);
+  
 
-			<Layout>
-				<main>
-					<ContentHeader title={'Positions'}>
-						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
-							<h5 className="text-sm">Filter on</h5>
-							<div className="dropdown dropdown-end">
-								<label
-									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white"
-								>
-									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
-										<>
-											<span className="text-black">Retail Price</span>
-										</>
-									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
-										<>
-											<span className="text-black">Release Date</span>
-										</>
-									) : (
-										<>
-											<span className="text-black">Name</span>
-										</>
-									)}
-									<RiArrowDropDownLine size={20} />
-								</label>
-								<ul
-									tabIndex={0}
-									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
-								>
-									<li>
-										<button
-											onClick={() =>
-												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
-											}
-										>
-											Retail Price
-										</button>
-									</li>
-									<li>
-										<button
-											onClick={() =>
-												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
-											}
-										>
-											Release Date
-										</button>
-									</li>
 
-									<li>
-										<button
-											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
-										>
-											Name
-										</button>
-									</li>
-								</ul>
-							</div>
-							<button
-								className="hover:scale-150"
-								onClick={() => setIsAscending(!isAscending)}
-							>
-								{isAscending === true ? (
-									<RiArrowUpSLine size={20} />
-								) : (
-									<RiArrowDownSLine size={20} />
-								)}
-							</button>
-						</div>
-					</ContentHeader>
-
-					<div className=" mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-full font-SG border-b-0 pb-12">
-						<div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-4 grid-rows-1 gap-2 laptop:w-full ">
-							{isLoading === true ? (
-								<React.Fragment>
-									<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3 ">
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '12px',
-											}}
-											width={400}
-											height={300}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={400}
-											height={30}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={300}
-											height={30}
-										/>
-									</div>
-									<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '12px',
-											}}
-											width={400}
-											height={300}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={400}
-											height={30}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={300}
-											height={30}
-										/>
-									</div>
-									<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '12px',
-											}}
-											width={400}
-											height={300}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={400}
-											height={30}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={300}
-											height={30}
-										/>
-									</div>
-								</React.Fragment>
-							) : (
-								premarketResponse.map((el: any) => <Card cardObject={el} />)
-							)}
-						</div>
-					</div>
-
-					<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:px-[80px] flex flex-row items-center space-x-4 w-full pb-12">
-						<div className="mobile:flex w-full flex-1 flex-col laptop:grid grid-cols-3 grid-rows-1 gap-4 laptop:w-full">
-							{isLoading === true ? (
-								<React.Fragment>
-									<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '12px',
-											}}
-											width={400}
-											height={300}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={400}
-											height={30}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={300}
-											height={30}
-										/>
-									</div>
-									<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '12px',
-											}}
-											width={400}
-											height={300}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={400}
-											height={30}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={300}
-											height={30}
-										/>
-									</div>
-									<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '12px',
-											}}
-											width={400}
-											height={300}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={400}
-											height={30}
-										/>
-										<Skeleton
-											variant="rectangular"
-											sx={{
-												zIndex: '2',
-												backgroundColor: 'gray',
-												borderRadius: '8px',
-											}}
-											width={300}
-											height={30}
-										/>
-									</div>
-								</React.Fragment>
-							) : (
-								marketResponse.map((el: any) => <Card cardObject={el} />)
-							)}
-						</div>
-					</div>
-				</main>
-			</Layout>
-		</div>
-	);
+  return (
+    <React.Fragment>
+      <div className="w-[2/3] p-5 ">
+        {cardObject === undefined ? (
+          <React.Fragment>
+            <Skeleton variant="text" />
+            <Skeleton variant="text" />
+            <Skeleton variant="rectangular" className={"h-[257px]"} />
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="mobile:flex flex-col text-center desktop:bg-white text-black rounded-lg px-16 py-6 ">
+              <div className="mobile:flex flex-col laptop:flex flex-row items-center justify-center">
+                <div className="mobile:flex flex-col items-center desktop:pt-6 space-y-4">
+                  <h3 className="font-bold font-SG mobile:text-center laptop:text-[35px] desktop:text-[24px]">
+                    {cardObject.name}
+                  </h3>
+                  <p className="font-normal font-Inter mobile:text-center laptop:text-[25px] desktop:text-[20px]">
+                    ID:{cardObject.sku}
+                  </p>
+                  <h3 className="font-Inter mobile:text-[18px] font-medium">
+                  Wager: Resell Price {">"} $400<br></br> Closes:
+                    09.05.2022 12:00 PM EST
+                  </h3>
+                  <h3 className="font-Inter mobile:text-[25px] font-medium flex flex-row justify-center">
+                    Price : {currentQuote}
+                    <Tooltip
+                      title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest asking price in the orderbook."
+                      arrow
+                    >
+                      <InfoIcon sx={{ fontSize: "18px" }} />
+                    </Tooltip>
+                    <button onClick={quote} className="bg-black text-white p-3 text-[12px]">Update Quote</button>
+                  </h3>
+                  {/* <button onClick={quote} >Get Quote</button> */}
+                </div>
+                <img
+                  src={cardObject.image?.original}
+                  className="object-cover mobile:h-[200px] mb-4 tablet:h-[250px] laptop:h-[200px] m-0 desktop:h-[250px] w-[330px] rounded-lg"
+                />
+              </div>
+            </div>
+          </React.Fragment>
+        )}
+      </div>
+    </React.Fragment>
+  );
 };
-
-export default Home;
