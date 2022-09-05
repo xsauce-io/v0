@@ -7,9 +7,10 @@ export const Tabs = ({ children, bgColor }) => {
 
 
     return (
-        <div className="w-full items-center justify-center" >
-            <div className="laptop:px-40 font-SG" style={{ backgroundColor: bgColor }}>
-                <div className="tabs border-black border-b-[1px] w-full text-white" >
+        <div className="w-full items-center justify-center   border-0" >
+            <div className="laptop:px-40 font-SG  border-0" style={{ backgroundColor: bgColor }
+            }>
+                <div className="tabs border-[#000] border-b-[1px] border-t-[0px] w-full text-white" >
                     <Link href="/">
                         <a className={router.pathname == "/" ? "tab border-[#ACFF00] border-b-[3px] transition " : "tab transition  text-[#748282]"} style={router.pathname == "/" ? { color: 'inherit' } : null}>Dashboard</a>
                     </Link>

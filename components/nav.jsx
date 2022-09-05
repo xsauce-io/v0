@@ -180,12 +180,11 @@ export const Nav = ({ logoColor }) => {
 
 
     <header className="bg-inherit sticky top-0 z-20 w-full border-b-[1px] border-inherit">
-      <div className="flex flex-row items-center h-20 w-full gap-8 px-4 mx-auto mobile:px-6 laptop:px-8">
+      <div className="flex flex-row items-center h-20 w-full gap-8  mx-auto ">
         <div className="flex-1">
           <a className="block" href="/">
             <span className="sr-only">Home</span>
             <div className="text-[14px] h-20 flex flex-row items-center">
-
               <h1 className="font-Inter pr-2">Xchange</h1>
               <div className="bg-white text-[10px] font-Inter text-black rounded-[40px] py-1 px-2">Beta</div>
             </div>
