@@ -129,11 +129,15 @@ const Markets: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Layout headerSubtitle={'LIVE DERIVATIVES MARKET'}>
+			<Layout
+				headerSubtitle={'LIVE DERIVATIVES MARKET'}
+				showHowItWorksButton={true}
+				showFinancialOverview={false}
+			>
 				<main className="flex w-full flex-1 flex-col text-center">
 					{/*Sorting */}
 					<ContentHeader title={'Predict the live market'}>
-						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3">
+						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
 							<h5 className="text-sm">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
@@ -153,7 +157,7 @@ const Markets: NextPage = () => {
 											<span className="text-black">Name</span>
 										</>
 									)}
-									<RiArrowDropDownLine />
+									<RiArrowDropDownLine size={20} />
 								</label>
 								<ul
 									tabIndex={0}

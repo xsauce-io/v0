@@ -18,3 +18,9 @@ export const ContentHeader = ({ title, children }) => {
         </div>
     )
 };
+
+ContentHeader.defaultProps = {
+
+    title: '',
+    children: ''
+}
