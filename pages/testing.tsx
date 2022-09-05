@@ -10,6 +10,7 @@ const Testing: NextPage = () => {
 		//#E5E5E5 - Gray
 		<>
 			<ActionCard />
+			<div className="p-4"></div>
 			<PredictToggle />
 		</>
 	);

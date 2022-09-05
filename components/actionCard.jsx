@@ -6,7 +6,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios'
-import { RiArrowDropDownLine } from "react-icons/Ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/Ri";
 
 
 export const ActionCard = () => {
@@ -155,14 +155,15 @@ export const ActionCard = () => {
 
         <React.Fragment>
 
-            <div className="flex flex-col  border-[1px]  border-[#0C1615] rounded-[10px] text-black">
-                <div className='bg-[#ACFF00]  rounded-t-[10px] border-b-[1px] p-2  w-[100%]  border-[#0C1615] ' />
+            <div className="flex flex-col border-[1px] border-[#0C1615] rounded-[10px] text-black">
+                <div className='bg-[#ACFF00]  rounded-t-[10px] border-b-[1px] p-2  w-[100%]  border-[#0C1615]' />
                 <div className='bg-white p-4 text-left w-[100%] border-b-[1px] border-[#0C1615]'>
-                    <grid className="grid grid-cols-3 ">
-                        <p className="inline-block mr-1 text-xs">Market Statistics</p>
-                        <div className="text-xs">Yes</div>
-                        <div className="text-xs">No</div>
-                    </grid>
+                    <flex className="flex flex-rows space-x-2 justify-center items-center">
+                        <p className=" mr-1 text-xs  ">Market Statistics</p>
+                        <div className="text-xs w-1/4 bg-[#0C1615] p-2 rounded-2xl text-center text-white">No - 40%</div>
+                        <div className="text-xs   w-1/4 bg-[#ACFF00] p-2 rounded-2xl text-center">Yes - 40%</div>
+
+                    </flex>
                 </div>
                 <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
 
@@ -301,21 +302,35 @@ export const ActionCard = () => {
                         placeholder="# of Contracts"
                         required
                     />*/}
-                    <div className='bg-white items-center text-left  p-4 space-y-4  w-full '>
+                    <div className='bg-white items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
 
-                        <button id='mint' className={isBuy == undefined ? " w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60" : isBuy == true ? "w-full font-medium  text-xl py-4  text-white  rounded-[80px] hover:opacity-60text-black bg-[#416900] " : " w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60 bg-[#BA1A1A]"} type="submit">
+                        <button id='mint' className={isBuy == undefined ? " w-full font-medium  text-xl py-4  text-[#0C1615] bg-[#DCDEE1] rounded-[80px] hover:opacity-60" : isBuy == true ? "w-full font-medium  text-xl py-4  text-[#0C1615] rounded-[80px] hover:opacity-60text-black bg-[#ACFF00] " : " w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60 "} type="submit">
                             {isBuy == undefined ? 'Select Order Type' : isBuy === true ? 'Place Buy Order' : 'Place Sell Order'}
                         </button>
-                        <div className="w-full p-4 flex">
+                        <div className="w-full px-5 flex">
                             <p className="text-left text-sm font-medium">
                                 Wager Total Cost
                             </p>
                             <div className="flex-1 font-medium" />
                             <p className="text-left text-sm  font-medium">
-                                $ 2000.00
+                                $ 2,000.00
                             </p>
                         </div>
                     </div>
+
+                    <div className='bg-[#DCDEE1] items-center text-left rounded-b-[10px] p-3  space-y-4  w-full '>
+                        <div className="w-full  flex px-5 items-center">
+                            <p className="text-left text-sm font-medium">
+                                Total possible winnings
+                            </p>
+                            <div className="flex-1 " />
+                            <p className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs">
+                                <RiArrowDropUpLine className="inline-block" size={20} />
+                                $ 2,000.00
+                            </p>
+                        </div>
+                    </div>
+
 
                 </form>
             </div>
