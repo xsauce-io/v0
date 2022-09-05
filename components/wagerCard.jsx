@@ -4,6 +4,8 @@ import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import axios from "axios";
 import { ethers, BigNumber, utils } from "ethers";
+import { ContentHeader } from "./contentHeader";
+import { MdOutlineContentCopy } from 'react-icons/md'
 
 // import AspectRatio from '@mui/joy/AspectRatio';
 
@@ -61,31 +63,31 @@ export const WagerCard = ({ cardObject }) => {
       tokenB,
       BigNumber.from('500'),
       BigNumber.from("1000000000000000000"),
-     '5',
-     '5'
+      '5',
+      '5'
     );
     setCurrentQuote(quote[0].toString());
 
-    
+
     console.log(quote[0].toNumber())
   }
 
 
-    useEffect(() => {
-     
-      const loader = async () =>{
-        await grabData();
-      }
-      loader();
-      
-     },[]);
-    
-     useEffect(() => {
-      if (isLoaded === true) {
-     quote();
-      } else { return }
-   },[isLoaded]);
-  
+  useEffect(() => {
+
+    const loader = async () => {
+      await grabData();
+    }
+    loader();
+
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded === true) {
+      quote();
+    } else { return }
+  }, [isLoaded]);
+
 
 
   return (
@@ -99,7 +101,72 @@ export const WagerCard = ({ cardObject }) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <div className="mobile:flex flex-col text-center desktop:bg-white text-black rounded-lg px-16 py-6 ">
+            <div>
+              <ContentHeader title={cardObject.name}></ContentHeader>
+            </div>
+            <grid className="bg-white w-full grid grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
+              <div className="col-span-2 row-span-6 flex justify-center ">
+                <div className="w-[70%] py-4 ">
+                  <img
+                    src={cardObject.image?.original}
+                    className="object-cover mobile:h-[200px] mb-4 tablet:h-[250px] laptop:h-[50%] w-[100%]  desktop:h-[250px] w-[100%] rounded-lg"
+                  />
+                </div>
+              </div>
+              <div className="col-span-2 row-span-6 text-left border-t-[1px] border-[#0C1615] px-6 py-10"><p className="text-xl font-medium font-SG py-4">
+                Product Description
+              </p>This Xsauce Vault NFT represents and tracks proof of ownership of the actual sneaker stored within our Xsauce  Vault, which has been verified via Xsauce’s authentication process. Note only 250 out of 500 editions will be made available for initial purchase, with the remaining 250 being reserved for potential "shock drops" by Xsauce.</div>
+
+              <div className="col-span-1 row-span-3 border-t-[1px] border-[#0C1615] text-left px-6 py-3 border-r-[1px]" >
+                <p className="py-2">Shoe information</p>
+                <p className="text-xs"> Release Date</p>
+                <p>10-23-2022</p>
+              </div>
+              <div className="col-span-1 row-span-3 border-t-[1px] border-[#0C1615] text-left px-6 py-3 " >
+                <p className="py-2">Market information</p>
+                <p className="text-xs"> Release Date</p>
+                <p>10-23-2022</p>
+              </div>
+              <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px]" >
+                <p className="text-xs"> Sku <MdOutlineContentCopy className="inline-block" /></p>
+                <p>{cardObject.sku}</p>
+              </div>
+              <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
+                <p className="text-xs"> Sku <MdOutlineContentCopy className="inline-block" /></p>
+                <p>{cardObject.sku}</p>
+              </div>
+              <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px]" >
+                <p className="text-xs"> Current retail price <MdOutlineContentCopy className="inline-block" /></p>
+                <p>{cardObject.sku}</p>
+              </div>
+              <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
+                <p className="text-xs"> Current retail price <MdOutlineContentCopy className="inline-block" /></p>
+                <p>{cardObject.sku}</p>
+              </div>
+              <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
+                <p className="text-xs"> Wager <MdOutlineContentCopy className="inline-block" /></p>
+                <p> Resell Price {">"} $400<br></br> Closes:
+                  09.05.2022 12:00 PM EST</p>
+              </div>
+              <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
+                <p className="text-xs"> Closes <MdOutlineContentCopy className="inline-block" /></p>
+                <p>
+                  09.05.2022 12:00 PM EST</p>
+              </div>
+              <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-b-xl space-x-4" >
+                Price : {currentQuote}
+                <Tooltip
+                  title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest asking price in the orderbook."
+                  arrow
+                >
+                  <InfoIcon sx={{ fontSize: "18px" }} />
+                </Tooltip>
+                <button onClick={quote} className="bg-black text-white p-3 text-[12px] rounded-2xl ">Update Quote</button>
+              </div>
+
+            </grid>
+
+            {/* <div className="mobile:flex flex-col text-center desktop:bg-white text-black rounded-lg px-16 py-6 ">
               <div className="mobile:flex flex-col laptop:flex flex-row items-center justify-center">
                 <div className="mobile:flex flex-col items-center desktop:pt-6 space-y-4">
                   <h3 className="font-bold font-SG mobile:text-center laptop:text-[35px] desktop:text-[24px]">
@@ -109,7 +176,7 @@ export const WagerCard = ({ cardObject }) => {
                     ID:{cardObject.sku}
                   </p>
                   <h3 className="font-Inter mobile:text-[18px] font-medium">
-                  Wager: Resell Price {">"} $400<br></br> Closes:
+                    Wager: Resell Price {">"} $400<br></br> Closes:
                     09.05.2022 12:00 PM EST
                   </h3>
                   <h3 className="font-Inter mobile:text-[25px] font-medium flex flex-row justify-center">
@@ -122,17 +189,17 @@ export const WagerCard = ({ cardObject }) => {
                     </Tooltip>
                     <button onClick={quote} className="bg-black text-white p-3 text-[12px]">Update Quote</button>
                   </h3>
-                  {/* <button onClick={quote} >Get Quote</button> */}
                 </div>
                 <img
                   src={cardObject.image?.original}
                   className="object-cover mobile:h-[200px] mb-4 tablet:h-[250px] laptop:h-[200px] m-0 desktop:h-[250px] w-[330px] rounded-lg"
                 />
               </div>
-            </div>
+            </div> */}
           </React.Fragment>
-        )}
-      </div>
-    </React.Fragment>
+        )
+        }
+      </div >
+    </React.Fragment >
   );
 };

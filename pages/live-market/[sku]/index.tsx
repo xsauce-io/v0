@@ -81,7 +81,7 @@ const LiveMarket: NextPage = (cardObject) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div
-				className={`laptop:px-40 w-full items-center justify-center text-black bg-[#EFF1F3]`}
+				className={`px-40 w-full items-center justify-center text-black bg-[#EFF1F3]`}
 				style={{
 					backgroundColor: '#0C1615',
 					color: 'white',
@@ -91,8 +91,8 @@ const LiveMarket: NextPage = (cardObject) => {
 				{/* <Announcement /> */}
 				<Nav logoColor="#ACFF00" />
 			</div>
-			<main className="flex w-full laptop:px-60 flex-1 flex-col text-center pb-40 mt-20 ">
-				<ContentHeader title={'Sneaker Name'}></ContentHeader>
+			<main className="flex w-full px-48 flex-1 flex-col text-center pb-40 mt-20 ">
+				{/* <p className="text-left">back</p> */}
 				<h1>{admin}</h1>
 
 				<div className="laptop:flex flex-col">
@@ -102,7 +102,7 @@ const LiveMarket: NextPage = (cardObject) => {
 								<WagerCard cardObject={el} />
 							))}
 						</div>
-						<div className="mobile:flex flex-col space-y-6  items-center pt-2 ">
+						<div className="flex flex-col  items-start justify-start w-1/3 ">
 							{/*       
           <button className={admin == true ? 'h-[100px] w-[100px] bg-[black]': 'h-[100px] w-[100px] bg-[red]' }></button>
 			 */}
@@ -112,7 +112,7 @@ const LiveMarket: NextPage = (cardObject) => {
 				</div>
 			</main>
 
-			<div className="laptop:px-40 w-full items-center justify-center">
+			<div className="px-40 w-full items-center justify-center">
 				<Footer />
 			</div>
 		</div>
