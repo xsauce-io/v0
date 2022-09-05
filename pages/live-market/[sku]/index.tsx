@@ -14,6 +14,10 @@ import { ActionCard } from '../../../components/actionCard';
 import { Header } from '../../../components/header';
 import { ContentHeader } from '../../../components/contentHeader';
 import { Footer } from '../../../components/footer';
+import Link from 'next/link';
+import { RiArrowDropLeftLine } from 'react-icons/Ri';
+import { BsArrowLeft } from 'react-icons/bs';
+import { FiArrowLeft } from 'react-icons/fi';
 
 declare var window: any;
 
@@ -91,18 +95,25 @@ const LiveMarket: NextPage = (cardObject) => {
 				{/* <Announcement /> */}
 				<Nav logoColor="#ACFF00" />
 			</div>
-			<main className="flex w-full px-48 flex-1 flex-col text-center pb-40 mt-20 ">
-				{/* <p className="text-left">back</p> */}
+			<main className="flex w-full px-48 flex-1 flex-col text-center pb-40 mt-16 ">
 				<h1>{admin}</h1>
 
-				<div className="laptop:flex flex-col">
-					<div className=" laptop:flex flex-row items-center  laptop:space-x-[1px]">
+				<div className="laptop:flex flex-col ">
+					<button
+						className="text-left text-[##748282] text-xs"
+						onClick={() => router.back()}
+					>
+						<FiArrowLeft className="inline-block mr-2 text-[##748282]" />
+						GO BACK
+					</button>
+
+					<div className=" laptop:flex flex-row items-center space-x-4">
 						<div className="flex-1">
 							{response.map((el: any) => (
 								<WagerCard cardObject={el} />
 							))}
 						</div>
-						<div className="flex flex-col  items-start justify-start w-1/3 ">
+						<div className="w-1/3 self-start mt-28">
 							{/*       
           <button className={admin == true ? 'h-[100px] w-[100px] bg-[black]': 'h-[100px] w-[100px] bg-[red]' }></button>
 			 */}
