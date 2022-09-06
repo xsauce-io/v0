@@ -5,6 +5,9 @@
     "build": "next build",
     "start": "next start"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@chakra-ui/react": "^2.2.6",
     "@emotion/react": "^11.10.0",
