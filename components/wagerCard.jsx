@@ -101,9 +101,9 @@ export const WagerCard = ({ cardObject }) => {
         ) : (
           <React.Fragment>
 
-            <div className="text-3xl py-4 text-left mb-10"> {cardObject.name}</div>
+            <div className="text-3xl py-4 text-left mb-10 text-[#0C1615]"  > {cardObject.name}</div>
 
-            <grid className="bg-white w-full grid grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
+            <grid className="bg-white w-full grid  text-[#0C1615] grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
               <div className="col-span-2 row-span-6 flex justify-center ">
                 <div className="w-[70%] py-4 ">
                   <img

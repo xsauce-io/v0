@@ -16,6 +16,7 @@ import { ContentHeader } from '../../../components/contentHeader';
 import { Footer } from '../../../components/footer';
 import Link from 'next/link';
 
+
 declare var window: any;
 
 const LiveMarket: NextPage = (cardObject) => {
@@ -119,7 +120,7 @@ const LiveMarket: NextPage = (cardObject) => {
 				</div>
 			</main>
 
-			<div className="px-40 w-full items-center justify-center">
+			<div className="px-40 w-full items-center justify-center text-[#0C1615] ">
 				<Footer />
 			</div>
 		</div>

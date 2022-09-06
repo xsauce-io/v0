@@ -160,6 +160,7 @@ const Markets: NextPage = () => {
 									>
 										<path
 											d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
+
 											stroke="#0C1615"
 											stroke-width="1.2"
 											stroke-linecap="round"
@@ -213,6 +214,7 @@ const Markets: NextPage = () => {
 									>
 										<path
 											d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
+
 											stroke="#0C1615"
 											stroke-width="1.2"
 											stroke-linecap="round"
@@ -230,6 +232,7 @@ const Markets: NextPage = () => {
 										<path
 											d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
 											stroke="#0C1615"
+
 											stroke-width="1.2"
 											stroke-linecap="round"
 											stroke-linejoin="round"
