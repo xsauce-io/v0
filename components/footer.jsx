@@ -3,7 +3,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
 import { BsTelegram } from "react-icons/bs"
-import { FaGithub, FaRegHandPeace, FaTwitter, FaTwitterSquare } from "react-icons/Fa"
+import { FaGithub, FaRegHandPeace, FaTwitter, FaTwitterSquare } from "react-icons/fa"
 
 export const Footer = ({ children }) => {
     return (
