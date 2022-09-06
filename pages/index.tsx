@@ -27,7 +27,6 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import Slider from 'react-slick';
 import { Tabs } from '../components/tabs';
 import { Dashboard } from '../components/dashboard';
-import { RiArrowDropDownLine, RiArrowUpSLine } from 'react-icons/Ri';
 import { ContentHeader } from '../components/contentHeader';
 
 const Home: NextPage = () => {
@@ -123,7 +122,21 @@ const Home: NextPage = () => {
 											<span className="text-black">Name</span>
 										</>
 									)} */}
-									<RiArrowDropDownLine />
+									<svg
+										width="8"
+										height="5"
+										viewBox="0 0 8 5"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
+											stroke="#0C1615"
+											stroke-width="1.2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
 								</label>
 								<ul
 									tabIndex={0}
@@ -161,7 +174,21 @@ const Home: NextPage = () => {
 								className="hover:scale-150"
 								// onClick={() => setIsAscending(!isAscending)}
 							>
-								<RiArrowUpSLine size={20} />
+								<svg
+									width="8"
+									height="5"
+									viewBox="0 0 8 5"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
+										stroke="#0C1615"
+										stroke-width="1.2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
 
 								{/* <RiArrowDownSLine size={20} /> */}
 							</button>
