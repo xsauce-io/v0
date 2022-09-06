@@ -199,7 +199,7 @@ export const WagerCard = ({ cardObject }) => {
           </React.Fragment>
         )
         }
-      </div >
-    </React.Fragment >
+      </div>
+    </React.Fragment>
   );
 };
