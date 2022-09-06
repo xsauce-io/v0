@@ -5,6 +5,9 @@
     "build": "next build",
     "start": "next start"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@chainlink/contracts": "^0.4.1",
     "@chakra-ui/react": "^2.2.6",
@@ -26,7 +29,6 @@
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-icons": "^4.4.0",
     "react-slick": "^0.29.0",
     "ts-node": "^10.9.1",
     "wagmi": "^0.6.1"

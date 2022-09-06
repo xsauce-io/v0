@@ -1,7 +1,5 @@
 import React from "react"
-import { BsArrowRight } from 'react-icons/bs'
-import { HiOutlineBookOpen } from 'react-icons/hi'
-import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/Ri";
+
 
 export const ContractsCard = ({ title }) => {
 
@@ -32,12 +30,12 @@ export const ContractsCard = ({ title }) => {
                         <div className="grid grid-rows-2">
                             <div className=" flex ">
                                 <p className="inline-block mr-1 text-xs">Yes</p>
-                                <RiArrowUpSFill />
+
                             </div>
                             <div className=" text-sm">8 shares </div>
                         </div>
                         <div className="grid grid-rows-2 ">
-                            <div className=" text-xs flex"> <p className="inline-block mr-1 text-xs">No</p>  <RiArrowDownSFill /></div>
+                            <div className=" text-xs flex"> <p className="inline-block mr-1 text-xs">No</p>  </div>
                             <div className=" text-sm">4 shares</div>
                         </div>
                     </grid>
@@ -45,7 +43,6 @@ export const ContractsCard = ({ title }) => {
                         <div className="grid grid-rows-2">
                             <div className=" flex ">
                                 <p className="inline-block mr-1 text-xs">Avg Price</p>
-                                <RiArrowDownSFill />
                             </div>
                             <div className=" text-sm">$ 0,50</div>
                         </div>

@@ -1,12 +1,11 @@
 import React from "react"
-import { BsArrowRight } from 'react-icons/bs'
-import { HiOutlineBookOpen } from 'react-icons/hi'
+
 
 export const FinancialOverviewCard = ({ title }) => {
 
     return (
         <div className="flex flex-col  border-[1px]  border-[#0C1615] rounded-[10px] text-black">
-            <div className='bg-[#ACFF00]  rounded-t-[10px] border-b-[1px] p-2  w-[100%] hover:opacity-40 border-[#0C1615] ' />
+            <div className='bg-[#ACFF00]  rounded-t-[10px] border-b-[1px] p-2  w-[100%]  border-[#0C1615] ' />
 
             <div className='bg-white px-4 text-left w-[100%] border-b-[1px] border-[#0C1615]'>
                 <h1 className="py-2 pb-4 text-sm">FINANCIAL OVERVIEW</h1>
