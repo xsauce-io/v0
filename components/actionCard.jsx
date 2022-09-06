@@ -6,7 +6,6 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios'
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 
 
 export const ActionCard = () => {
@@ -189,7 +188,7 @@ export const ActionCard = () => {
                                     </>
 
                                 )}
-                                <RiArrowDropDownLine size={20} />
+
                             </label>
                             <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
                                 <li><a onClick={() => { setIsYes(true) }}>Yes</a></li>
@@ -216,7 +215,7 @@ export const ActionCard = () => {
                                     </>
 
                                 )}
-                                <RiArrowDropDownLine size={20} />
+
                             </label>
                             <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
                                 <li><a onClick={() => { setIsBuy(true) }}>Buy</a></li>
@@ -324,7 +323,7 @@ export const ActionCard = () => {
                         </p>
                         <div className="flex-1 " />
                         <p className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs">
-                            <RiArrowDropUpLine className="inline-block" size={20} />
+
                             $ 2,000.00
                         </p>
                     </div>

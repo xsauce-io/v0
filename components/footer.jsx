@@ -2,8 +2,7 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
-import { BsTelegram } from "react-icons/bs"
-import { FaGithub, FaRegHandPeace, FaTwitter, FaTwitterSquare } from "react-icons/fa"
+
 
 export const Footer = ({ children }) => {
     return (
@@ -59,7 +58,7 @@ export const Footer = ({ children }) => {
                         rel={'noreferrer'}
                     >
                         <button>
-                            <FaTwitterSquare size={20} />
+
                         </button>
 
                     </a>
@@ -69,7 +68,7 @@ export const Footer = ({ children }) => {
                         rel={'noreferrer'}
                     >
                         <button>
-                            <FaGithub size={20} />
+
                         </button>
                     </a>
                     <a
@@ -78,7 +77,7 @@ export const Footer = ({ children }) => {
                         rel={'noreferrer'}
                     >
                         <button>
-                            <FaRegHandPeace size={20} />
+
                         </button>
 
                     </a>
@@ -88,7 +87,7 @@ export const Footer = ({ children }) => {
                         rel={'noreferrer'}
                     >
                         <button >
-                            <BsTelegram size={20} />
+
                         </button>
 
                     </a>

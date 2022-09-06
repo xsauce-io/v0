@@ -15,8 +15,6 @@ import { Header } from '../../../components/header';
 import { ContentHeader } from '../../../components/contentHeader';
 import { Footer } from '../../../components/footer';
 import Link from 'next/link';
-import { BsArrowLeft } from 'react-icons/bs';
-import { FiArrowLeft } from 'react-icons/fi';
 
 declare var window: any;
 
@@ -102,7 +100,6 @@ const LiveMarket: NextPage = (cardObject) => {
 						className="text-left text-[##748282] text-xs"
 						onClick={() => router.back()}
 					>
-						<FiArrowLeft className="inline-block mr-2 text-[##748282]" />
 						GO BACK
 					</button>
 

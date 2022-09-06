@@ -1,6 +1,5 @@
 import React from "react"
-import { BsArrowRight } from 'react-icons/bs'
-import { HiOutlineBookOpen } from 'react-icons/hi'
+
 
 export const ContractsCard = ({ title }) => {
 

@@ -5,7 +5,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import axios from "axios";
 import { ethers, BigNumber, utils } from "ethers";
 import { ContentHeader } from "./contentHeader";
-import { MdOutlineContentCopy } from 'react-icons/md'
 
 // import AspectRatio from '@mui/joy/AspectRatio';
 
@@ -128,28 +127,28 @@ export const WagerCard = ({ cardObject }) => {
                 <p>10-23-2022</p>
               </div>
               <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px]" >
-                <p className="text-xs"> Sku <MdOutlineContentCopy className="inline-block" /></p>
+                <p className="text-xs"> Sku </p>
                 <p>{cardObject.sku}</p>
               </div>
               <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
-                <p className="text-xs"> Sku <MdOutlineContentCopy className="inline-block" /></p>
+                <p className="text-xs"> Sku </p>
                 <p>{cardObject.sku}</p>
               </div>
               <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px]" >
-                <p className="text-xs"> Current retail price <MdOutlineContentCopy className="inline-block" /></p>
+                <p className="text-xs"> Current retail price </p>
                 <p>{cardObject.sku}</p>
               </div>
               <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
-                <p className="text-xs"> Current retail price <MdOutlineContentCopy className="inline-block" /></p>
+                <p className="text-xs"> Current retail price</p>
                 <p>{cardObject.sku}</p>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
-                <p className="text-xs"> Wager <MdOutlineContentCopy className="inline-block" /></p>
+                <p className="text-xs"> Wager </p>
                 <p> Resell Price {">"} $400<br></br> Closes:
                   09.05.2022 12:00 PM EST</p>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
-                <p className="text-xs"> Closes <MdOutlineContentCopy className="inline-block" /></p>
+                <p className="text-xs"> Closes </p>
                 <p>
                   09.05.2022 12:00 PM EST</p>
               </div>
