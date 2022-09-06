@@ -173,7 +173,6 @@ const Home: NextPage = () => {
 
 							<div className="flex flex-row w-[10%] pr-4">
 								Contract
-								<img className="w-[10%]" src="up-down.svg" />
 							</div>
 						</div>
 						{premarketResponse.map((el: []) => (

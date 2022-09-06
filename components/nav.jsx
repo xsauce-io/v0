@@ -9,10 +9,10 @@ import PropTypes from 'prop-types';
 
 
 export const Nav = ({ logoColor }) => {
-
-  let [toggled, setisToggled] = useState('1');
+  let [network, setNetwork] = useState();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   let [accounts, setAccount] = useState(null);
+ 
   const fullLengthAccount = ''
 
   const getWallet = async () => {
@@ -35,30 +35,43 @@ export const Nav = ({ logoColor }) => {
     alert("Copied Address: " + fullLengthAccount);
   }
 
-
-  const handleChange = (event) => {
-    if (event.target.value === '1') {
-      //ethers call
-    }
-
-    else if (event.target.value === '2') {
-      setisToggled('2')
-
-    }
-
-    else if (event.target.value === '3') {
-      setisToggled('3')
-
-    }
+  const setState = (NetworkIndex) => {
+    setNetwork(NetworkIndex)
+    localStorage.setItem('networkNum', NetworkIndex)
   }
+
+  // const handleChange = (event) => {
+  //   if (event.target.value === '1') {
+  //     //ethers call
+  //   }
+
+  //   else if (event.target.value === '2') {
+  //     setisToggled('2')
+
+  //   }
+
+  //   else if (event.target.value === '3') {
+  //     setisToggled('3')
+
+  //   }
+  // }
 
   useEffect(() => {
     getWallet();
   }, []);
 
   useEffect(() => {
+    setNetwork(localStorage.getItem('networkNum'))
+
+  }, [network]);
+
+
+
+  useEffect(() => {
     const chains = async () => {
-      if (toggled === '1') {
+      if (network === '1') 
+     { if (localStorage.getItem('network') === 'arbitrum') {return}
+     else {
         if (window.ethereum) {
           try {
             let id = ethers.utils.hexValue(421613)
@@ -67,6 +80,8 @@ export const Nav = ({ logoColor }) => {
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: id }], // chainId must be in hexadecimal numbers
             });
+
+            
           } catch (error) {
             // This error code indicates that the chain has not been added to MetaMask
             // if it is not, then install it into the user MetaMask
@@ -86,14 +101,21 @@ export const Nav = ({ logoColor }) => {
                     },
                   ],
                 });
+                
               } catch (addError) {
                 console.error(addError);
               }
             }
             console.error(error);
           }
+          
         }
-      } else if (toggled === '2') {
+        localStorage.setItem('network', 'arbitrum');
+      }
+
+      } else if (network === '2') 
+     { if (localStorage.getItem('network') === 'mumbai') {return} 
+     else {
         if (window.ethereum) {
 
           try {
@@ -128,8 +150,12 @@ export const Nav = ({ logoColor }) => {
             console.error(error);
           }
         }
-
-      } else if (toggled === '3') {
+        localStorage.setItem('network', 'mumbai');
+      }
+     
+     } else if (network === '3') 
+     { if (localStorage.getItem('network') === 'telos') {return} 
+     else {
         if (window.ethereum) {
           try {
             let id = ethers.utils.hexValue(41)
@@ -166,12 +192,13 @@ export const Nav = ({ logoColor }) => {
           // if no window.ethereum then MetaMask is not installed
           alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
         }
-
+        localStorage.setItem('network', 'telos');
       }
-
+      
     }
+  }
     chains();
-  }, [toggled]);
+  }, [network]);
 
 
 
@@ -218,11 +245,11 @@ export const Nav = ({ logoColor }) => {
         <div className="flex flex-row flex-1 justify-end items-center space-x-4 font-Inter">
           <div className="dropdown dropdown-end">
             <label tabindex="0" className="text-[14px] flex flex-row justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
-              {toggled === '1' ?
+              {network === '1' ?
                 <>
                   <img className="h-[15%] w-[15%]" src="arbitrum.svg" />
                   <span className="text-black">Arbitrum</span>
-                </> : toggled === '2' ?
+                </> : network === '2' ?
                   <>
                     <img className="h-[15%] w-[15%]" src="polygon.svg" />
                     <span className="text-black">Polygon</span>
@@ -237,10 +264,9 @@ export const Nav = ({ logoColor }) => {
             </label>
             <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4">
 
-              <li><a onClick={() => setisToggled('1')}><img className="h-[30%] w-[30%]" src="arbitrum.svg" />Arbitrum</a></li>
-              <li><a onClick={() => setisToggled('2')}><img className="h-[30%] w-[30%]" src="polygon.svg" />Polygon</a></li>
-
-              <li><a onClick={() => setisToggled('3')}><img className="h-[30%] w-[30%]" src="telos.png" />Telos</a></li>
+              <li><a onClick={() => setState('1')}><img className="h-[30%] w-[30%]" src="arbitrum.svg" />Arbitrum</a></li>
+              <li><a onClick={() => setState('2') }><img className="h-[30%] w-[30%]" src="polygon.svg" />Polygon</a></li>
+              <li><a onClick={() => setState('3')}><img className="h-[30%] w-[30%]" src="telos.png" />Telos</a></li>
 
             </ul>
           </div>
