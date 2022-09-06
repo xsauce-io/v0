@@ -1,7 +1,7 @@
 import React from "react"
 import { BsArrowRight } from 'react-icons/bs'
 import { HiOutlineBookOpen } from 'react-icons/hi'
-import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/Ri";
+import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 
 export const ContractsCard = ({ title }) => {
 

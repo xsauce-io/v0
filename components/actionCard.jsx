@@ -6,7 +6,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios'
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/Ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 
 
 export const ActionCard = () => {
