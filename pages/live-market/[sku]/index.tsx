@@ -15,7 +15,6 @@ import { Header } from '../../../components/header';
 import { ContentHeader } from '../../../components/contentHeader';
 import { Footer } from '../../../components/footer';
 import Link from 'next/link';
-import { RiArrowDropLeftLine } from 'react-icons/Ri';
 import { BsArrowLeft } from 'react-icons/bs';
 import { FiArrowLeft } from 'react-icons/fi';
 
@@ -123,7 +122,7 @@ const LiveMarket: NextPage = (cardObject) => {
 				</div>
 			</main>
 
-			<div className="px-40 w-full items-center justify-center">
+			<div className="px-40 w-full items-center justify-center text-[#0C1615] ">
 				<Footer />
 			</div>
 		</div>

@@ -6,11 +6,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ContentHeader } from '../components/contentHeader';
 import React from 'react';
-import {
-	RiArrowDownSLine,
-	RiArrowDropDownLine,
-	RiArrowUpSLine,
-} from 'react-icons/Ri';
 
 const Home: NextPage = () => {
 	let [premarketResponse, setAuctionResponse] = useState([] as any);
@@ -105,7 +100,6 @@ const Home: NextPage = () => {
 											<span className="text-black">Name</span>
 										</>
 									)} */}
-									<RiArrowDropDownLine />
 								</label>
 								<ul
 									tabIndex={0}
@@ -143,8 +137,6 @@ const Home: NextPage = () => {
 								className="hover:scale-150"
 								// onClick={() => setIsAscending(!isAscending)}
 							>
-								<RiArrowUpSLine size={20} />
-
 								{/* <RiArrowDownSLine size={20} /> */}
 							</button>
 						</div>

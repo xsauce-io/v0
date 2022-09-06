@@ -10,13 +10,7 @@ import { Skeleton } from '@mui/material';
 import { Tabs } from '../components/tabs';
 import { Layout } from '../components/layout';
 import { ContentHeader } from '../components/contentHeader';
-import { FaList } from 'react-icons/Fa';
-import {
-	RiArrowDownSLine,
-	RiArrowDropDownLine,
-	RiArrowUpSLine,
-	RiLayoutGridFill,
-} from 'react-icons/Ri';
+
 import { Card } from '../components/cardWager';
 
 const Markets: NextPage = () => {
@@ -157,7 +151,21 @@ const Markets: NextPage = () => {
 											<span className="text-black">Name</span>
 										</>
 									)}
-									<RiArrowDropDownLine size={20} />
+									<svg
+										width="8"
+										height="5"
+										viewBox="0 0 8 5"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M6.66663 0.666656L3.8382 3.49508L1.00977 0.666656"
+											stroke="#0C1615"
+											stroke-width="1.2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
 								</label>
 								<ul
 									tabIndex={0}
@@ -196,9 +204,37 @@ const Markets: NextPage = () => {
 								onClick={() => setIsAscending(!isAscending)}
 							>
 								{isAscending === true ? (
-									<RiArrowUpSLine size={20} />
+									<svg
+										width="8"
+										height="5"
+										viewBox="0 0 8 5"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M6.66663 0.666656L3.8382 3.49508L1.00977 0.666656"
+											stroke="#0C1615"
+											stroke-width="1.2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
 								) : (
-									<RiArrowDownSLine size={20} />
+									<svg
+										width="8"
+										height="5"
+										viewBox="0 0 8 5"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M6.66663 0.666656L3.8382 3.49508L1.00977 0.666656"
+											stroke="#ACFF00"
+											stroke-width="1.2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
 								)}
 							</button>
 						</div>
