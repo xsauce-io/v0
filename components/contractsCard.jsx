@@ -36,7 +36,7 @@ export const ContractsCard = ({ title }) => {
                             <div className=" text-sm">8 shares </div>
                         </div>
                         <div className="grid grid-rows-2 ">
-                            <div className=" text-xs flex"> <p className="inline-block mr-1 text-xs">No</p>  <RiArrowDownSFill /></div>
+                            <div className=" text-xs flex"> <p className="inline-block mr-1 text-xs">No</p>  </div>
                             <div className=" text-sm">4 shares</div>
                         </div>
                     </grid>
