@@ -205,7 +205,7 @@ const Markets: NextPage = () => {
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5"
+									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50"
 								>
 									<svg
 										width="16"
