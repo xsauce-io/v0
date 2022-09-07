@@ -73,6 +73,8 @@ const Redeem: NextPage = () => {
 			<Layout
 				headerTitle={'Redeem Positions'}
 				headerSubtitle={'MONEY WELL EARNED'}
+				showFinancialOverview={false}
+				showHowItWorksButton={true}
 			>
 				<main className="flex w-full items-center justify-center flex-col h-[calc(100%-85px)]">
 					<form className="flex w-full h-full items-center justify-center flex-col space-y-5">
