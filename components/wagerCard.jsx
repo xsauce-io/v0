@@ -71,6 +71,16 @@ export const WagerCard = ({ cardObject }) => {
     console.log(quote[0].toNumber())
   }
 
+  const copyAddress = () => {
+
+
+    
+    navigator.clipboard.writeText('0x50...C13ca');
+
+
+    alert("Copied Address: " + '0x50...C13ca');
+  }
+
 
   useEffect(() => {
 
@@ -114,12 +124,12 @@ export const WagerCard = ({ cardObject }) => {
               </div>
               <div className="col-span-2 row-span-6 text-left border-t-[1px] border-[#0C1615] px-6 py-10"><p className="text-xl font-medium font-SG py-4">
                 Product Description
-              </p>This Xsauce Vault NFT represents and tracks proof of ownership of the actual sneaker stored within our Xsauce  Vault, which has been verified via Xsauce’s authentication process. Note only 250 out of 500 editions will be made available for initial purchase, with the remaining 250 being reserved for potential "shock drops" by Xsauce.</div>
+              </p>{cardObject.story}</div>
 
               <div className="col-span-1 row-span-3 border-t-[1px] border-[#0C1615] text-left px-6 py-3 border-r-[1px]" >
                 <p className="py-2">Shoe information</p>
                 <p className="text-xs"> Release Date</p>
-                <p>10-23-2022</p>
+                <p>{cardObject.releaseDate}</p>
               </div>
               <div className="col-span-1 row-span-3 border-t-[1px] border-[#0C1615] text-left px-6 py-3 " >
                 <p className="py-2">Market information</p>
@@ -135,22 +145,30 @@ export const WagerCard = ({ cardObject }) => {
                 <p>{cardObject.sku}</p>
               </div>
               <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px]" >
-                <p className="text-xs"> Current retail price </p>
-                <p>{cardObject.sku}</p>
+                <p className="text-xs"> Retail price </p>
+                <p>{cardObject.retailPrice}</p>
               </div>
               <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
-                <p className="text-xs"> Current retail price</p>
-                <p>{cardObject.sku}</p>
+                <p className="text-xs"> Estimated resell price</p>
+                <p>{cardObject.estimatedMarketValue}</p>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Wager </p>
-                <p> Resell Price {">"} $400<br></br> Closes:
-                  09.05.2022 12:00 PM EST</p>
+                <p> Resell Price {">"} $400</p>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Closes </p>
                 <p>
                   09.05.2022 12:00 PM EST</p>
+              </div>
+              <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
+                <p className="text-xs"> Contract</p>
+                <a className="flex flex-row space-x-[2px]" onClick={() => copyAddress()}>
+                <p> 0x50...C13ca</p>
+              <img src="/Images.svg"/>
+            </a>
+                
+          
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-b-xl space-x-4" >
                 Price : {currentQuote}
