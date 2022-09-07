@@ -1,6 +1,6 @@
 
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Drawer, Box, Typography } from "@mui/material";
 import { useState } from "react";
 import { ethers, utils } from 'ethers';
@@ -9,14 +9,46 @@ import PropTypes from 'prop-types';
 
 
 export const Nav = ({ logoColor }) => {
-  let [network, setNetwork] = useState();
+  // let [network, setNetwork] = useState();
+
+ 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   let [accounts, setAccount] = useState(null);
- 
+  const [toggle, setToggle] = useState()
+ const [current, setCurrent] = useState();
   const fullLengthAccount = ''
 
   const getWallet = async () => {
+    if (localStorage.getItem('network') === 'arbitrum')
+    {
+      setToggle(421613);
+    }
+
+    if (localStorage.getItem('network') === 'mumbai')
+    {
+      setToggle(80001);
+    }
+
+    if (localStorage.getItem('network') === 'telos')
+    {
+      setToggle(41);
+    }
+
+    if (localStorage.getItem('network') === 'unknown' )
+    {
+      setToggle(null);
+    }
+
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const network = await provider.getNetwork(); 
+    const chainId = network.chainId;
+    if ((chainId !== 421613) || (chainId !== 80001) || (chainId !== 41) ) {
+      localStorage.setItem('network', 'unknown')
+
+    }
+    setCurrent(chainId);
+   chains(chainId);
+    console.log({here:chainId});
     let wallet = await provider.send("eth_requestAccounts", [0]);
     accounts = wallet.toString();
     fullLengthAccount = wallet.toString();
@@ -35,10 +67,158 @@ export const Nav = ({ logoColor }) => {
     alert("Copied Address: " + fullLengthAccount);
   }
 
+
   const setState = (NetworkIndex) => {
-    setNetwork(NetworkIndex)
-    localStorage.setItem('networkNum', NetworkIndex)
+    setToggle(NetworkIndex)
+    chains(NetworkIndex);
+    console.log({setState:NetworkIndex});
+    // localStorage.setItem('network', NetworkName)
+    // localStorage.setItem('networkNum', NetworkIndex)
+  
   }
+
+  const chains = async (NetworkIndex) => {
+      
+    if (NetworkIndex === 421613) {
+      
+        try {
+          let id = ethers.utils.hexValue(421613)
+          // check if the chain to connect to is installed
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: id }], // chainId must be in hexadecimal numbers
+          });
+          setCurrent(NetworkIndex);
+          localStorage.setItem('network', 'arbitrum')
+        } catch (error) {
+          // This error code indicates that the chain has not been added to MetaMask
+          // if it is not, then install it into the user MetaMask
+          if (error.code === 4001) {
+            setToggle(current)
+            console.log({catch:current})
+          }
+
+          if (error.code === 4902) {
+            try {
+              let id = ethers.utils.hexValue(421613)
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainName: 'Arbitrum Nitro Rollup Testnet',
+                    chainId: id,
+                    rpcUrls: ['https://goerli-rollup.arbitrum.io/rpc'],
+                    blockExplorerUrls: ['https://goerli-rollup-explorer.arbitrum.io/'],
+                    nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 }
+
+                  },
+                ],
+              });
+              
+            } catch (addError) {
+              console.error(addError);
+            }
+          }
+          console.error(error);
+        }
+        
+      }
+    
+
+     else if (NetworkIndex === 80001) {
+
+      try {
+    let id = ethers.utils.hexValue(80001)
+          // check if the chain to connect to is installed
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: id }], // chainId must be in hexadecimal numbers
+          });
+          setCurrent(NetworkIndex);
+          localStorage.setItem('network', 'mumbai');
+        } catch (error) {
+          if (error.code === 4001) {
+            setToggle(current)
+            console.log({catch:current})
+          }
+
+          // This error code indicates that the chain has not been added to MetaMask
+          // if it is not, then install it into the user MetaMask
+          if (error.code === 4902) {
+            try {
+              let id = ethers.utils.hexValue(80001)
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainName: 'Mumbai Testnet',
+                    chainId: id,
+                    rpcUrls: ['https://rpc-mumbai.matic.today/'],
+                    blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
+                    nativeCurrency: { name: 'Matic', symbol: 'MATIC', decimals: 18 }
+                  },
+                ],
+              });
+            } catch (addError) {
+              console.error(addError);
+            }
+          }
+          console.error(error);
+        }
+      }
+    
+   
+   else if (NetworkIndex === 41) {
+  //  {  if (localStorage.getItem('network') === 'N/A') {return localStorage.setItem('network','telos')}
+  //  else {
+  //     if (window.ethereum) {
+        try {
+          let id = ethers.utils.hexValue(41)
+          // check if the chain to connect to is installed
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: id }], // chainId must be in hexadecimal numbers
+          });
+          setCurrent(NetworkIndex);
+          localStorage.setItem('network','telos')
+
+        } catch (error) {
+          if (error.code === 4001) {
+            setToggle(current)
+            console.log({catch:current})
+          }
+          // This error code indicates that the chain has not been added to MetaMask
+          // if it is not, then install it into the user MetaMask
+          if (error.code === 4902) {
+            try {
+              let id = ethers.utils.hexValue(41)
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainName: 'Telos Testnet',
+                    chainId: id,
+                    rpcUrls: ['https://testnet.telos.net/evm'],
+                    blockExplorerUrls: ['https://testnet.teloscan.io'],
+                    nativeCurrency: { name: 'Telos', symbol: 'TLOS', decimals: 18 }
+                  },
+                ],
+              });
+            } catch (addError) {
+              console.error(addError);
+            }
+          }
+          console.error(error);
+        }
+      } else {
+        // if no window.ethereum then MetaMask is not installed
+        toggle = null
+      }
+
+      
+      // localStorage.setItem('network', 'telos');
+      // localStorage.setItem('networkNum', '3');
+    }
 
   // const handleChange = (event) => {
   //   if (event.target.value === '1') {
@@ -58,149 +238,12 @@ export const Nav = ({ logoColor }) => {
 
   useEffect(() => {
     getWallet();
+    localStorage.getItem('network')
   }, []);
 
-  useEffect(() => {
-    setNetwork(localStorage.getItem('networkNum'))
-
-  }, [network]);
-
-
-
-  useEffect(() => {
-    const chains = async () => {
-      if (network === '1') 
-     { if (localStorage.getItem('network') === 'arbitrum') {return}
-     else {
-        if (window.ethereum) {
-          try {
-            let id = ethers.utils.hexValue(421613)
-            // check if the chain to connect to is installed
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: id }], // chainId must be in hexadecimal numbers
-            });
-
-            
-          } catch (error) {
-            // This error code indicates that the chain has not been added to MetaMask
-            // if it is not, then install it into the user MetaMask
-            if (error.code === 4902) {
-              try {
-                let id = ethers.utils.hexValue(421613)
-                await window.ethereum.request({
-                  method: 'wallet_addEthereumChain',
-                  params: [
-                    {
-                      chainName: 'Arbitrum Nitro Rollup Testnet',
-                      chainId: id,
-                      rpcUrls: ['https://goerli-rollup.arbitrum.io/rpc'],
-                      blockExplorerUrls: ['https://goerli-rollup-explorer.arbitrum.io/'],
-                      nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 }
-
-                    },
-                  ],
-                });
-                
-              } catch (addError) {
-                console.error(addError);
-              }
-            }
-            console.error(error);
-          }
-          
-        }
-        localStorage.setItem('network', 'arbitrum');
-      }
-
-      } else if (network === '2') 
-     { if (localStorage.getItem('network') === 'mumbai') {return} 
-     else {
-        if (window.ethereum) {
-
-          try {
-            let id = ethers.utils.hexValue(80001)
-            // check if the chain to connect to is installed
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: id }], // chainId must be in hexadecimal numbers
-            });
-          } catch (error) {
-            // This error code indicates that the chain has not been added to MetaMask
-            // if it is not, then install it into the user MetaMask
-            if (error.code === 4902) {
-              try {
-                let id = ethers.utils.hexValue(80001)
-                await window.ethereum.request({
-                  method: 'wallet_addEthereumChain',
-                  params: [
-                    {
-                      chainName: 'Mumbai Testnet',
-                      chainId: id,
-                      rpcUrls: ['https://rpc-mumbai.matic.today/'],
-                      blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
-                      nativeCurrency: { name: 'Matic', symbol: 'MATIC', decimals: 18 }
-                    },
-                  ],
-                });
-              } catch (addError) {
-                console.error(addError);
-              }
-            }
-            console.error(error);
-          }
-        }
-        localStorage.setItem('network', 'mumbai');
-      }
-     
-     } else if (network === '3') 
-     { if (localStorage.getItem('network') === 'telos') {return} 
-     else {
-        if (window.ethereum) {
-          try {
-            let id = ethers.utils.hexValue(41)
-            // check if the chain to connect to is installed
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: id }], // chainId must be in hexadecimal numbers
-            });
-          } catch (error) {
-            // This error code indicates that the chain has not been added to MetaMask
-            // if it is not, then install it into the user MetaMask
-            if (error.code === 4902) {
-              try {
-                let id = ethers.utils.hexValue(41)
-                await window.ethereum.request({
-                  method: 'wallet_addEthereumChain',
-                  params: [
-                    {
-                      chainName: 'Telos Testnet',
-                      chainId: id,
-                      rpcUrls: ['https://testnet.telos.net/evm'],
-                      blockExplorerUrls: ['https://testnet.teloscan.io'],
-                      nativeCurrency: { name: 'Telos', symbol: 'TLOS', decimals: 18 }
-                    },
-                  ],
-                });
-              } catch (addError) {
-                console.error(addError);
-              }
-            }
-            console.error(error);
-          }
-        } else {
-          // if no window.ethereum then MetaMask is not installed
-          alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
-        }
-        localStorage.setItem('network', 'telos');
-      }
-      
-    }
-  }
-    chains();
-  }, [network]);
-
-
+  // useEffect(() => {
+  //   window.location.reload();
+  // }, [toggle]);
 
 
   return (
@@ -244,29 +287,32 @@ export const Nav = ({ logoColor }) => {
 
         <div className="flex flex-row flex-1 justify-end items-center space-x-4 font-Inter">
           <div className="dropdown dropdown-end">
-            <label tabindex="0" className="text-[14px] flex flex-row justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
-              {network === '1' ?
+            <label tabindex="0" className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
+              {toggle === 421613 ?
                 <>
                   <img className="h-[15%] w-[15%]" src="arbitrum.svg" />
                   <span className="text-black">Arbitrum</span>
-                </> : network === '2' ?
+                </> : toggle === 80001 ?
                   <>
                     <img className="h-[15%] w-[15%]" src="polygon.svg" />
-                    <span className="text-black">Polygon</span>
-                  </> :
+                    <span className="text-[black]">Polygon</span>
+                  </> : toggle === 41 ?
                   <>
                     <img className="h-[15%] w-[15%]" src="telos.png" />
-                    <span className="text-black">Telos</span>
+                    <span className="text-[black]">Telos</span>
+                  </> : 
+                    <>
+                    <span className="text-[red] text-[14px]">Unknown</span>
                   </>
               }
               <img src="dropdown.png" />
 
             </label>
-            <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4">
+            <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4">
 
-              <li><a onClick={() => setState('1')}><img className="h-[30%] w-[30%]" src="arbitrum.svg" />Arbitrum</a></li>
-              <li><a onClick={() => setState('2') }><img className="h-[30%] w-[30%]" src="polygon.svg" />Polygon</a></li>
-              <li><a onClick={() => setState('3')}><img className="h-[30%] w-[30%]" src="telos.png" />Telos</a></li>
+              <li><a onClick={() => setState(421613)}><img className="h-[30%] w-[30%]" src="arbitrum.svg" />Arbitrum</a></li>
+              <li><a onClick={() => setState(80001) }><img className="h-[30%] w-[30%]" src="polygon.svg" />Polygon</a></li>
+              <li><a onClick={() => setState(41)}><img className="h-[30%] w-[30%]" src="telos.png" />Telos</a></li>
 
             </ul>
           </div>
