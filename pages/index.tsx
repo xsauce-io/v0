@@ -97,7 +97,7 @@ const Home: NextPage = () => {
 				/>
 			</Head>
 
-			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$144,000.00'}>
+			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$ 144,000.00'}>
 				<>
 					<ContentHeader title={'Positions'} icon={<img src="pieChart.svg" />}>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">

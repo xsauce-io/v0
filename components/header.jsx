@@ -10,8 +10,8 @@ export const Header = ({ title, children, subtitle }) => {
         <div className='w-[100%] pt-10 mt-[2rem] text-inherit min-h-[200px] '>
             <grid className="grid grid-cols-3">
                 <div className="col-span-1 font-SG">
-                    <h5 className="text-[#748282] text-sm font-SG">{subtitle}</h5>
-                    <h1 className='text-5xl py-4 font-SG'>{title}</h1>
+                    <p className="text-[#748282] text-sm  font-SG" >{subtitle}</p>
+                    <p className='text-5xl py-4 '>{title}</p>
                 </div>
                 <div className="col-span-2 flex justify-end font-SG" >
                     {children}
@@ -24,9 +24,12 @@ export const Header = ({ title, children, subtitle }) => {
 
 Header.defaultProps = {
     subtitle: '',
+    title: '',
 
 };
 
 Header.propTypes = {
     subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+
 };

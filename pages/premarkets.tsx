@@ -124,12 +124,20 @@ const Markets: NextPage = () => {
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
+				<link rel="icon" href="/favicon.ico" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link
+					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+					rel="stylesheet"
+				/>
 			</Head>
 
 			<Layout
 				headerSubtitle={'PRE MARKET'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
+				headerTitle={'Xchange'}
 			>
 				<main className="flex w-full flex-1 flex-col text-center">
 					{/*Sorting */}
