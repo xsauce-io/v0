@@ -132,73 +132,7 @@ const Markets: NextPage = () => {
 					{/*Sorting */}
 					<ContentHeader
 						title={'Predict the live market'}
-						icon={
-							<svg
-								width="32"
-								height="32"
-								viewBox="0 0 32 32"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M9.09332 17.6534H3.62665V25.5467H9.09332V17.6534Z"
-									fill="#ACFF00"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M18.6533 10H13.3333V22.8267H18.6533V10Z"
-									fill="#ACFF00"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M28.2933 6.38672H22.8267V18.9734H28.2933V6.38672Z"
-									fill="#ACFF00"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M6.35992 17.6534V13.1467"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M15.9866 9.38673V4.88007"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M25.56 6.29173V3.70673"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M6.35992 28.3601V25.5467"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M16 25.6401V23.3334"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M25.56 22.8134V18.9734"
-									stroke="#0C1615"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-							</svg>
-						}
+						icon={<img className="" src="candle.svg" />}
 					>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
 							<h5 className="text-sm">Filter on</h5>
@@ -207,32 +141,7 @@ const Markets: NextPage = () => {
 									tabIndex={0}
 									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50"
 								>
-									<svg
-										width="16"
-										height="16"
-										viewBox="0 0 16 16"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M4 6L12 6"
-											stroke="#0C1615"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-										<path
-											d="M10.6666 8L5.33329 8"
-											stroke="#0C1615"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-										<path
-											d="M6.66671 10L9.33337 10"
-											stroke="#0C1615"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+									<img className="" src="textBlock.svg" />
 
 									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
 										<span className="text-black ">Retail Price</span>
@@ -241,21 +150,7 @@ const Markets: NextPage = () => {
 									) : (
 										<span className="text-black ">Name</span>
 									)}
-									<svg
-										width="16"
-										height="16"
-										viewBox="0 0 16 16"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M10.6666 6.66666L7.8382 9.49508L5.00977 6.66666"
-											stroke="#0C1615"
-											stroke-width="1.2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+									<img className="" src="downArrow.svg" />
 								</label>
 								<ul
 									tabIndex={0}
@@ -294,37 +189,9 @@ const Markets: NextPage = () => {
 								onClick={() => setIsAscending(!isAscending)}
 							>
 								{isAscending === true ? (
-									<svg
-										width="16"
-										height="16"
-										viewBox="0 0 16 16"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M10.6666 6.66666L7.8382 9.49508L5.00977 6.66666"
-											stroke="#0C1615"
-											stroke-width="1.2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+									<img className="" src="upArrow.svg" />
 								) : (
-									<svg
-										width="16"
-										height="16"
-										viewBox="0 0 16 16"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.33337 9.33331L8.1618 6.50489L10.9902 9.33331"
-											stroke="#0C1615"
-											stroke-width="1.2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+									<img className="" src="downArrow.svg" />
 								)}
 							</button>
 						</div>
