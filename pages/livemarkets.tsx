@@ -121,52 +121,43 @@ const Markets: NextPage = () => {
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link
+					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+					rel="stylesheet"
+				/>
 			</Head>
 
 			<Layout
 				headerSubtitle={'LIVE DERIVATIVES MARKET'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
+				headerTitle={'Xchange'}
 			>
 				<main className="flex w-full flex-1 flex-col text-center">
 					{/*Sorting */}
-					<ContentHeader title={'Predict the live market'}>
+					<ContentHeader
+						title={'Predict the live market'}
+						icon={<img className="" src="candle.svg" />}
+					>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
 							<h5 className="text-sm">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white"
+									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50"
 								>
-									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
-										<>
-											<span className="text-black">Retail Price</span>
-										</>
-									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
-										<>
-											<span className="text-black">Release Date</span>
-										</>
-									) : (
-										<>
-											<span className="text-black">Name</span>
-										</>
-									)}
-									<svg
-										width="8"
-										height="5"
-										viewBox="0 0 8 5"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
+									<img className="" src="textBlock.svg" />
 
-											stroke="#0C1615"
-											stroke-width="1.2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
+										<span className="text-black ">Retail Price</span>
+									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
+										<span className="text-black">Release Date</span>
+									) : (
+										<span className="text-black ">Name</span>
+									)}
+									<img className="" src="downArrow.svg" />
 								</label>
 								<ul
 									tabIndex={0}
@@ -205,39 +196,9 @@ const Markets: NextPage = () => {
 								onClick={() => setIsAscending(!isAscending)}
 							>
 								{isAscending === true ? (
-									<svg
-										width="8"
-										height="5"
-										viewBox="0 0 8 5"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
-
-											stroke="#0C1615"
-											stroke-width="1.2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+									<img className="" src="upArrow.svg" />
 								) : (
-									<svg
-										width="8"
-										height="5"
-										viewBox="0 0 8 5"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
-											stroke="#0C1615"
-
-											stroke-width="1.2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+									<img className="" src="downArrow.svg" />
 								)}
 							</button>
 						</div>

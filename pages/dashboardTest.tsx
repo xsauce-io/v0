@@ -75,7 +75,7 @@ const Home: NextPage = () => {
 				/>
 			</Head>
 
-			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$144,000.00'}>
+			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$ 144,000.00'}>
 				<>
 					<ContentHeader title={'Positions'}>
 						{' '}
@@ -115,7 +115,6 @@ const Home: NextPage = () => {
 											stroke-linejoin="round"
 										/>
 									</svg>
-
 								</label>
 								<ul
 									tabIndex={0}
@@ -169,7 +168,6 @@ const Home: NextPage = () => {
 									/>
 								</svg>
 
-
 								{/* <RiArrowDownSLine size={20} /> */}
 							</button>
 						</div>
@@ -196,9 +194,7 @@ const Home: NextPage = () => {
 								<img className="w-[5%]" src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[10%] pr-4">
-								Contract
-							</div>
+							<div className="flex flex-row w-[10%] pr-4">Contract</div>
 						</div>
 						{premarketResponse.map((el: []) => (
 							<Dashboard positions={el} />

@@ -15,7 +15,7 @@ import { Header } from '../../../components/header';
 import { ContentHeader } from '../../../components/contentHeader';
 import { Footer } from '../../../components/footer';
 import Link from 'next/link';
-
+import Image from 'next/image';
 
 declare var window: any;
 
@@ -81,6 +81,12 @@ const LiveMarket: NextPage = (cardObject) => {
 			<Head>
 				<title>Xsauce</title>
 				<link rel="icon" href="/favicon.ico" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link
+					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+					rel="stylesheet"
+				/>
 			</Head>
 			<div
 				className={`px-40 w-full items-center justify-center text-black bg-[#EFF1F3]`}
@@ -98,10 +104,12 @@ const LiveMarket: NextPage = (cardObject) => {
 
 				<div className="laptop:flex flex-col ">
 					<button
-						className="text-left text-[##748282] text-xs"
+						className="text-left text-[##748282] text-xs flex space-x-2"
 						onClick={() => router.back()}
 					>
-						GO BACK
+						<img className="" src="/slimArrowLeft.svg" width="16" height="16" />
+
+						<p>GO BACK</p>
 					</button>
 
 					<div className=" laptop:flex flex-row items-center space-x-4">

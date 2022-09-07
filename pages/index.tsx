@@ -32,6 +32,7 @@ const Home: NextPage = () => {
 	let [premarketResponse, setAuctionResponse] = useState([] as any);
 	let [isLoading, setisLoading] = useState(true as boolean);
 	let [toggled, setisToggled] = useState(true as boolean);
+	const [isAscending, setIsAscending] = useState(true);
 
 	const getSneaker2 = async () => {
 		Promise.all([
@@ -96,131 +97,81 @@ const Home: NextPage = () => {
 				/>
 			</Head>
 
-			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$144,000.00'}>
+			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$ 144,000.00'}>
 				<>
-					<ContentHeader title={'Positions'}>
-						{' '}
+					<ContentHeader title={'Positions'} icon={<img src="pieChart.svg" />}>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
 							<h5 className="text-sm">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white"
+									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50"
 								>
-									<span className="text-black">Name</span>
+									<img className="" src="textBlock.svg" />
+									<span className="text-black">Winning Positions</span>
+
 									{/* {sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
-										<>
-											<span className="text-black">Retail Price</span>
-										</>
+										<span className="text-black ">Retail Price</span>
 									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
-										<>
-											<span className="text-black">Release Date</span>
-										</>
+										<span className="text-black">Release Date</span>
 									) : (
-										<>
-											<span className="text-black">Name</span>
-										</>
+										<span className="text-black ">Name</span>
 									)} */}
-
-									<svg
-										width="8"
-										height="5"
-										viewBox="0 0 8 5"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
-											stroke="#0C1615"
-											stroke-width="1.2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
-
+									<img className="" src="downArrow.svg" />
 								</label>
 								<ul
 									tabIndex={0}
 									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
 									<li>
-										<button
-										// onClick={() =>
-										// 	setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
-										// }
-										>
-											Retail Price
-										</button>
+										<button>Winnings Positions</button>
 									</li>
 									<li>
-										<button
-										// onClick={() =>
-										// 	setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
-										// }
-										>
-											Release Date
-										</button>
+										<button>Total Price</button>
 									</li>
 
 									<li>
-										<button
-										// onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
-										>
-											Name
-										</button>
+										<button>Returns</button>
 									</li>
 								</ul>
 							</div>
 							<button
 								className="hover:scale-150"
-								// onClick={() => setIsAscending(!isAscending)}
+								onClick={() => setIsAscending(!isAscending)}
 							>
-								<svg
-									width="8"
-									height="5"
-									viewBox="0 0 8 5"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M6.66667 0.666656L3.83824 3.49508L1.00981 0.666656"
-
-										stroke="#0C1615"
-										stroke-width="1.2"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-								</svg>
-
-								{/* <RiArrowDownSLine size={20} /> */}
+								{isAscending === true ? (
+									<img className="" src="upArrow.svg" />
+								) : (
+									<img className="" src="downArrow.svg" />
+								)}
 							</button>
 						</div>
 					</ContentHeader>
-					<div className="flex flex-col w-full">
-						<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full">
-							<div className="flex flex-row pl-4 w-[30%]">
-								Position
-								<img className="w-[3.4%]" src="up-down.svg" />
+					<div className="flex flex-col w-full ">
+						<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
+							<div className="flex flex-row pl-4 w-[30%] space-x-2 items-center ">
+								<p>Positions</p>
+								<img src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[18.5%]">
-								Shares
-								<img className="w-[5%]" src="up-down.svg" />
+							<div className="flex flex-row w-[18.5%] space-x-2 items-center">
+								<p>Shares</p>
+								<img src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[21.5%]">
-								Total Price
-								<img className="w-[5%]" src="up-down.svg" />
+							<div className="flex flex-row w-[21.5%] space-x-2 items-center">
+								<p>Total price</p>
+								<img src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[20%]">
-								Return
-								<img className="w-[5%]" src="up-down.svg" />
+							<div className="flex flex-row w-[20%] space-x-2 items-center">
+								<p>Return</p>
+								<img src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[10%] pr-4">
-								Contract
-								<img className="w-[10%]" src="up-down.svg" />
+							<div className="flex flex-row w-[11%]  space-x-2 items-center">
+								<p>Contracts</p>
+								<img src="up-down.svg" />
 							</div>
 						</div>
 						{premarketResponse.map((el: []) => (

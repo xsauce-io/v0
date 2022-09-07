@@ -28,14 +28,19 @@ export const ContractsCard = ({ title }) => {
                 <div className='bg-[#DCDEE1] rounded-b-[10px]  text-left w-[100%] '>
                     <grid className="grid grid-cols-2 border-b-[1px] border-[#0C1615] px-4 p-2 w-full">
                         <div className="grid grid-rows-2">
-                            <div className=" flex ">
+                            <div className=" flex items-center ">
                                 <p className="inline-block mr-1 text-xs">Yes</p>
+                                <img className="w-[8px]" src="filledArrowup.svg" />
+
 
                             </div>
                             <div className=" text-sm">8 shares </div>
                         </div>
                         <div className="grid grid-rows-2 ">
-                            <div className=" text-xs flex"> <p className="inline-block mr-1 text-xs">No</p>  </div>
+                            <div className=" text-xs flex items-center">
+                                <p className="inline-block mr-1 text-xs">No</p>
+                                <img className="w-[8px]" src="filledArrowDown.svg" />
+                            </div>
                             <div className=" text-sm">4 shares</div>
                         </div>
                     </grid>
@@ -43,6 +48,7 @@ export const ContractsCard = ({ title }) => {
                         <div className="grid grid-rows-2">
                             <div className=" flex ">
                                 <p className="inline-block mr-1 text-xs">Avg Price</p>
+
                             </div>
                             <div className=" text-sm">$ 0,50</div>
                         </div>
