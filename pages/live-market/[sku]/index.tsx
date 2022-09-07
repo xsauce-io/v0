@@ -104,7 +104,7 @@ const LiveMarket: NextPage = (cardObject) => {
 
 				<div className="laptop:flex flex-col ">
 					<button
-						className="text-left text-[##748282] text-xs flex space-x-2"
+						className="text-left text-[#748282] text-xs flex space-x-2"
 						onClick={() => router.back()}
 					>
 						<img className="" src="/slimArrowLeft.svg" width="16" height="16" />
