@@ -287,7 +287,7 @@ export const Nav = ({ logoColor }) => {
 
         <div className="flex flex-row flex-1 justify-end items-center space-x-4 font-Inter">
           <div className="dropdown dropdown-end">
-            <label tabindex="0" className="text-[14px] flex flex-row justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
+            <label tabindex="0" className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
               {toggle === 421613 ?
                 <>
                   <img className="h-[15%] w-[15%]" src="arbitrum.svg" />
@@ -295,11 +295,11 @@ export const Nav = ({ logoColor }) => {
                 </> : toggle === 80001 ?
                   <>
                     <img className="h-[15%] w-[15%]" src="polygon.svg" />
-                    <span className="text-black">Polygon</span>
+                    <span className="text-[black]">Polygon</span>
                   </> : toggle === 41 ?
                   <>
                     <img className="h-[15%] w-[15%]" src="telos.png" />
-                    <span className="text-black">Telos</span>
+                    <span className="text-[black]">Telos</span>
                   </> : 
                     <>
                     <span className="text-[red] text-[14px]">Unknown</span>
@@ -308,7 +308,7 @@ export const Nav = ({ logoColor }) => {
               <img src="dropdown.png" />
 
             </label>
-            <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4">
+            <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4">
 
               <li><a onClick={() => setState(421613)}><img className="h-[30%] w-[30%]" src="arbitrum.svg" />Arbitrum</a></li>
               <li><a onClick={() => setState(80001) }><img className="h-[30%] w-[30%]" src="polygon.svg" />Polygon</a></li>
