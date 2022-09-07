@@ -16,7 +16,7 @@ const Redeem: NextPage = () => {
 	let [marketResponse1, setMarketResponse1] = useState([] as any);
 	let [marketResponse2, setMarketResponse2] = useState([] as any);
 	let [marketResponse3, setMarketResponse3] = useState([] as any);
-	let [toggled, setisToggled] = useState(localStorage.getItem('myCat'));
+	let [toggled, setisToggled] = useState('1');
 
 	const getSneaker2 = async () => {
 		Promise.all([
@@ -81,7 +81,7 @@ const Redeem: NextPage = () => {
 						<ContentHeader
 							title={'Select Wager'}
 							icon={<img className="" src="candle.svg" />}
-						></ContentHeader>
+						/>
 						<div className=" w-[35%] items-center justify-center flex-col dropdown dropdown-right ">
 							<label
 								tabIndex={0}
