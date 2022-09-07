@@ -15,7 +15,7 @@ import { Header } from '../../../components/header';
 import { ContentHeader } from '../../../components/contentHeader';
 import { Footer } from '../../../components/footer';
 import Link from 'next/link';
-
+import Image from 'next/image';
 
 declare var window: any;
 
@@ -98,10 +98,12 @@ const LiveMarket: NextPage = (cardObject) => {
 
 				<div className="laptop:flex flex-col ">
 					<button
-						className="text-left text-[##748282] text-xs"
+						className="text-left text-[##748282] text-xs flex space-x-2"
 						onClick={() => router.back()}
 					>
-						GO BACK
+						<img className="" src="/slimArrowLeft.svg" width="16" height="16" />
+
+						<p>GO BACK</p>
 					</button>
 
 					<div className=" laptop:flex flex-row items-center space-x-4">

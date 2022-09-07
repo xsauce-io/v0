@@ -147,31 +147,31 @@ const Home: NextPage = () => {
 							</button>
 						</div>
 					</ContentHeader>
-					<div className="flex flex-col w-full">
-						<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full">
-							<div className="flex flex-row pl-4 w-[30%] space-x-2">
+					<div className="flex flex-col w-full ">
+						<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
+							<div className="flex flex-row pl-4 w-[30%] space-x-2 items-center ">
 								<p>Positions</p>
-								<img className="w-[3.4%]" src="up-down.svg" />
+								<img src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[18.5%] space-x-2">
+							<div className="flex flex-row w-[18.5%] space-x-2 items-center">
 								<p>Shares</p>
-								<img className="w-[5%]" src="up-down.svg" />
+								<img src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[21.5%] space-x-2">
+							<div className="flex flex-row w-[21.5%] space-x-2 items-center">
 								<p>Total price</p>
-								<img className="w-[4.4%]" src="up-down.svg" />
+								<img src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[20%] space-x-2">
+							<div className="flex flex-row w-[20%] space-x-2 items-center">
 								<p>Return</p>
-								<img className="w-[4.8%]" src="up-down.svg" />
+								<img src="up-down.svg" />
 							</div>
 
-							<div className="flex flex-row w-[11%]  space-x-2">
+							<div className="flex flex-row w-[11%]  space-x-2 items-center">
 								<p>Contracts</p>
-								<img className="w-[10%]" src="up-down.svg" />
+								<img src="up-down.svg" />
 							</div>
 						</div>
 						{premarketResponse.map((el: []) => (
