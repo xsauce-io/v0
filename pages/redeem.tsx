@@ -91,7 +91,7 @@ const Redeem: NextPage = () => {
 								Choose a market:
 							</label>
 							<select
-								className="bg-[#F1F1F1] shadow-black shadow-md mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-[390px] font-SG text-[15px] mb-3 rounded focus:outline-none"
+								className="bg-white shadow-black shadow-md mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-[390px] font-SG text-[15px] mb-3 rounded focus:outline-none"
 								onChange={handleChange}
 								id="markets"
 								name="markets"
@@ -147,7 +147,7 @@ const Redeem: NextPage = () => {
 								</div>
 							</div>
 						) : toggled == '2' ? (
-							<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:">
+							<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:items-center">
 								<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
 									{isLoading === true ? (
 										<React.Fragment>
@@ -190,7 +190,7 @@ const Redeem: NextPage = () => {
 								</div>
 							</div>
 						) : (
-							<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:">
+							<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:items-center">
 								<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
 									{isLoading === true ? (
 										<React.Fragment>
@@ -238,7 +238,7 @@ const Redeem: NextPage = () => {
 							className="h-[3rem] w-[8rem] text-[15px] px-4 text-white bg-black rounded shadow-md hover:bg-white transition duration-300 hover:text-black"
 							type="submit"
 						>
-							Redeem{' '}
+							Redeem
 						</button>
 					</form>
 				</main>
