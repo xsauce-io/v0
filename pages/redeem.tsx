@@ -88,7 +88,7 @@ const Redeem: NextPage = () => {
 								className="text-xl flex flex-column justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-8 bg-white space-x-5 hover:opacity-50"
 							>
 								{toggled === '1' ? (
-									<p className="text-black overflow-hidden">
+									<p className="text-black truncate">
 										Nike Air Max 1 Patta Denim
 									</p>
 								) : toggled === '2' ? (
