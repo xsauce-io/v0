@@ -116,8 +116,8 @@ export const WagerCard = ({ cardObject }) => {
             <div className="text-3xl py-4 text-left mb-10 text-[#0C1615]"  > {cardObject.name}</div>
 
             <grid className="bg-white w-full grid  text-[#0C1615] grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
-              <div className="col-span-2 row-span-6 flex justify-center ">
-                <div className="w-[70%] py-4 ">
+              <div className="col-span-2 row-span-6 flex justify-center relative ">
+                <div className="w-[70%] py-4 relative">
                   {cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
 
                     <img className="object-cover mobile:h-[200px] tablet:h-[250px] laptop:h-[50%] w-[80%] m-auto desktop:h-[250px] w-[100%] rounded-lg"
@@ -129,10 +129,11 @@ export const WagerCard = ({ cardObject }) => {
                         src={cardObject.image?.original}
                         className="object-cover mobile:h-[200px]  mtablet:h-[250px] laptop: w-[80%] m-auto desktop:h-[250px] w-[100%] rounded-lg "
                       />
-                      <div className="mr-0">
-                        <ExpandImageModal shoeImage={cardObject.image?.original} /></div>
                     </>}
 
+                </div>
+                <div className="mr-0 absolute right-3 bottom-3" hidden={(cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png')}>
+                  <ExpandImageModal shoeImage={cardObject.image?.original} />
                 </div>
               </div>
               <div className="col-span-2 row-span-6 text-left border-t-[1px] border-[#0C1615] px-6 py-10"><p className="text-xl font-medium font-SG py-4">

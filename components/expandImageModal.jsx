@@ -46,6 +46,7 @@ export const ExpandImageModal = ({ shoeImage }) => {
                     <DialogContent >
 
                         <DialogContentText >
+
                             <img
                                 src={shoeImage}
                                 className="object-cover w-full h-full"
