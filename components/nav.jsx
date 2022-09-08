@@ -16,7 +16,8 @@ export const Nav = ({ logoColor }) => {
   let [accounts, setAccount] = useState(null);
   const [toggle, setToggle] = useState()
   const [current, setCurrent] = useState();
-  const fullLengthAccount = ''
+  const [isCopied, setIsCopied] = useState(false);
+  const [fullLengthAccount, setFullLengthAccount] = useState(null);
 
   const getWallet = async () => {
     if (localStorage.getItem('network') === 'arbitrum') {
@@ -47,22 +48,34 @@ export const Nav = ({ logoColor }) => {
     console.log({ here: chainId });
     let wallet = await provider.send("eth_requestAccounts", [0]);
     accounts = wallet.toString();
-    fullLengthAccount = wallet.toString();
-
+    setFullLengthAccount(wallet.toString())
     let truncateAccountName = accounts.substring(0, 4) + '...' + accounts.slice(-4);
     setAccount(truncateAccountName);
   }
 
-  const copyAddress = () => {
-
-
+  const copyAddress = async () => {
     /* Copy the text inside the text field */
-    navigator.clipboard.writeText(fullLengthAccount);
+
+    await navigator.clipboard.writeText(fullLengthAccount);
+    navigator.clipboard.readText().then(text => { console.log('copied text', text) })
 
     /* Alert the copied text */
-    alert("Copied Address: " + fullLengthAccount);
+    // alert("Copied Address: " + fullLengthAccount);
   }
 
+  const copyAddressToClipboard = async () => {
+
+    console.log(fullLengthAccount);
+    console.log(accounts);
+
+    await navigator.clipboard.writeText(fullLengthAccount).then(setIsCopied(true));
+    navigator.clipboard.readText().then(text => { console.log('copied text', text) })
+    setTimeout(() => {
+      setIsCopied(false);
+      console.log("done timer")
+    }, 2000)
+
+  }
 
   const setState = (NetworkIndex) => {
     setToggle(NetworkIndex)
@@ -216,21 +229,7 @@ export const Nav = ({ logoColor }) => {
     // localStorage.setItem('networkNum', '3');
   }
 
-  // const handleChange = (event) => {
-  //   if (event.target.value === '1') {
-  //     //ethers call
-  //   }
 
-  //   else if (event.target.value === '2') {
-  //     setisToggled('2')
-
-  //   }
-
-  //   else if (event.target.value === '3') {
-  //     setisToggled('3')
-
-  //   }
-  // }
 
   useEffect(() => {
     getWallet();
@@ -318,8 +317,9 @@ export const Nav = ({ logoColor }) => {
               {accounts == null ?
                 'Connect Wallet' :
                 accounts}</span>
-            <a onClick={() => copyAddress()}>
-              <img className={accounts == null ? "hidden" : "visible"} src="/copy.png" />
+            <a onClick={() => copyAddressToClipboard()} className={'relative'}>
+              <img className={accounts == null ? "hidden" : "visible active:scale-125"} src="/copy.png" />
+              <p className={isCopied == false ? "hidden" : " transition ease-in-out duration-300 delay-150 visible z-10 absolute bg-white opacity-70 px-2 py-0.5"}>Copied</p>
             </a>
           </button>
         </div>
@@ -427,6 +427,6 @@ export const Nav = ({ logoColor }) => {
           </Box>
         </Drawer>
       </div>
-    </header>
+    </header >
   );
 };

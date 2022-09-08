@@ -17,7 +17,7 @@ export const Dashboard = ({ positions }) => {
         </span>
         <span className="flex flex-row w-[20%] text-xs">
           <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex space-x-2">
-            <img src="/filledArrowUp.svg" />
+            <img className="w-[8px]" src="/upfull.svg" />
             <p> $ 15,000.00</p>
           </span>
         </span>
