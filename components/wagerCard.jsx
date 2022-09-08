@@ -20,6 +20,8 @@ export const WagerCard = ({ cardObject }) => {
   const [tokenA, setTokenA] = useState(null)
   const [tokenB, setTokenB] = useState(null)
   const [isLoaded, Loading] = useState(false)
+  const [currentMarket, setCurrentMarket] = useState()
+  const [expiration, setExpiration] = useState();
 
   const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
   const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
@@ -32,6 +34,7 @@ export const WagerCard = ({ cardObject }) => {
   const requestOrderBookAddress = axios.get(OrderBookAddressGit);
   const requestTokenA = axios.get(TokenA);
   const requestTokenB = axios.get(TokenB);
+  const explorer = 'https://goerli.etherscan.io/address/' + currentMarket?.address;
 
   const grabData = async () => {
     axios.all([requestERC20, requestOrderBook, requestOrderBookAddress, requestTokenA, requestTokenB]).then(axios.spread((...responses) => {
@@ -88,6 +91,7 @@ export const WagerCard = ({ cardObject }) => {
 
     const loader = async () => {
       await grabData();
+      getMarketbySku();
     }
     loader();
 
@@ -98,6 +102,19 @@ export const WagerCard = ({ cardObject }) => {
       quote();
     } else { return }
   }, [isLoaded]);
+
+  const getMarketbySku = () => {
+    const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
+    req.then(res => {
+      const test = res.data[3][cardObject.sku]
+      setCurrentMarket(test)
+      const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+      setExpiration(expires)
+      console.log({ testing: test })
+    })
+  }
+
+
 
 
 
@@ -173,13 +190,14 @@ export const WagerCard = ({ cardObject }) => {
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Closes </p>
                 <p>
-                  09.05.2022 12:00 PM EST</p>
+                  {expiration}</p>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Contract</p>
-                <a className="flex flex-row space-x-[2px]" onClick={() => copyAddress()}>
-                  <p> 0x50...C13ca</p>
-                  <img src="/Images.svg" className="active:scale-125" />
+
+                <a className="flex flex-row space-x-[2px]" target="blank" rel='noreferrer' href={explorer}>
+                  <p className="underline"> {currentMarket?.address}</p>
+
                 </a>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-b-xl space-x-4" >

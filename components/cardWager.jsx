@@ -2,14 +2,28 @@ import React from "react";
 import { Skeleton } from "@mui/material";
 import Link from 'next/link'
 import { useState, useEffect } from "react";
+import { ethers } from "ethers";
+import mock1155 from "../abi/mock1155.json";
+import axios from "axios";
 
 
 export const Card = ({ cardObject }) => {
   const cardObjectHref = "/live-market/" + cardObject.sku
 
 
-  let No = 40
-  let Yes = 60
+  const getMarketbySku = async () => {
+    const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
+  req.then(res => {
+    const test = res.data[3]["384664-023"]
+    setCurrentMarket(test)
+    const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+    setExpiration(expires)
+    console.log({testing:test})
+  })
+     
+    // setCurrentMarket()
+  }
+
 
   const calculations = () => {
 
@@ -21,13 +35,49 @@ export const Card = ({ cardObject }) => {
 
   }
 
+  const ratios = async () => {
+    if (currentMarket !== undefined) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(currentMarket?.address, mock1155, signer);
+    const getYes = await contract.totalSupply(
+     1
+    )
+    const getNo = await contract.totalSupply(
+     2
+    )
+
+    
+
+    let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+    
+
+    let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+    console.log(YesRatio)
+
+    setYes(YesRatio.toFixed(0))
+    setNo(NoRatio.toFixed(0))
+
+}
+}
+
+  const [No,setNo] = useState();
+  const [Yes,setYes] = useState();
+  const [currentMarket, setCurrentMarket] = useState()
+  const [expiration, setExpiration] = useState();
+
   let [favored, setFavored] = useState()
 
 
   useEffect(() => {
-    calculations();
+    getMarketbySku();
   }, []);
 
+
+  useEffect(() => {
+    ratios();
+    calculations();
+  }, [currentMarket]);
 
   return (
     <Link href={cardObjectHref}>
@@ -59,7 +109,7 @@ export const Card = ({ cardObject }) => {
               <div className="h-full">
                 <div className="px-8  " >
                   <h1 className="text-2xl font-normal text-white h-[22%] w-full line-clamp-2 font-SG  ">{cardObject.name}</h1>
-                  <h2 className=" text-lg font-light text-left w-full text-white py-4 font-inter"> Current Retail Price &ensp;  &ensp; &ensp; ${cardObject.retailPrice}</h2>
+                  <h2 className=" text-lg font-light text-left w-full text-white py-4 font-inter">Retail Price &ensp;  &ensp; &ensp; ${cardObject.retailPrice}</h2>
 
                 </div>
                 <div className="border-b-[1px] border-[#30403F]"></div>
@@ -82,7 +132,7 @@ export const Card = ({ cardObject }) => {
 
                     <div className=" w-full">
 
-                      <h2 className="text-[14px] text-[#748282]">This wager expires 09.10.2022</h2>
+                      <h2 className="text-[14px] text-[#748282]">This wager expires {expiration}</h2>
                     </div>
                   </div>
                 </div>

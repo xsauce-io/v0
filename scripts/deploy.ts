@@ -18,11 +18,15 @@ async function main() {
   console.log(`Oracle deployed to ${oracle.address}`);
 
   const MarketFactory = await ethers.getContractFactory("MarketFactory");
-  const market = await MarketFactory.deploy();
+  const marketFactory = await MarketFactory.deploy();
 
-  await market.deployed();
+  await marketFactory.deployed();
 
-  console.log(`Market deployed to ${market.address}`);
+  console.log(`Market deployed to ${marketFactory.address}`);
+
+  MarketFactory.createNewMarket(string memory uri, 250 , oracle.address , 1662814800, IERC20 _usdc)
+
+  
 
 }
 

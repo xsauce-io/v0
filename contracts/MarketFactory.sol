@@ -16,7 +16,7 @@ contract MarketFactory is Ownable {
 
  constructor() {}
 
- function createNewMarket(string memory uri, uint _predictionPrice, address _oracleFeed, uint256 _closingDate, IERC20 _usdc) public onlyOwner {
+ function createNewMarket(string memory uri, uint256 _predictionPrice, address _oracleFeed, uint256 _closingDate, IERC20 _usdc) public onlyOwner {
    Market newMarket = new Market(uri);
    newMarket.initialize(_predictionPrice, _oracleFeed, _usdc, _closingDate);
    string memory sku = IOracle(_oracleFeed).sku();
