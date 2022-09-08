@@ -16,6 +16,8 @@ export const Nav = ({ logoColor }) => {
   let [accounts, setAccount] = useState(null);
   const [toggle, setToggle] = useState()
   const [current, setCurrent] = useState();
+  const [isCopied, setIsCopied] = useState(false);
+
   const fullLengthAccount = ''
 
   const getWallet = async () => {
@@ -53,14 +55,15 @@ export const Nav = ({ logoColor }) => {
     setAccount(truncateAccountName);
   }
 
-  const copyAddress = () => {
-
-
+  const copyAddress = async () => {
     /* Copy the text inside the text field */
-    navigator.clipboard.writeText(fullLengthAccount);
+
+    await navigator.clipboard.writeText(fullLengthAccount);
+
+
 
     /* Alert the copied text */
-    alert("Copied Address: " + fullLengthAccount);
+    //alert("Copied Address: " + fullLengthAccount);
   }
 
 
@@ -216,21 +219,7 @@ export const Nav = ({ logoColor }) => {
     // localStorage.setItem('networkNum', '3');
   }
 
-  // const handleChange = (event) => {
-  //   if (event.target.value === '1') {
-  //     //ethers call
-  //   }
 
-  //   else if (event.target.value === '2') {
-  //     setisToggled('2')
-
-  //   }
-
-  //   else if (event.target.value === '3') {
-  //     setisToggled('3')
-
-  //   }
-  // }
 
   useEffect(() => {
     getWallet();
@@ -319,7 +308,8 @@ export const Nav = ({ logoColor }) => {
                 'Connect Wallet' :
                 accounts}</span>
             <a onClick={() => copyAddress()}>
-              <img className={accounts == null ? "hidden" : "visible"} src="/copy.png" />
+              <img className={accounts == null ? "hidden" : "visible active:scale-125"} src="/copy.png" />
+              {/* <p className={isCopied == false ? "hidden" : "visible"}> Hey</p> */}
             </a>
           </button>
         </div>
@@ -427,6 +417,6 @@ export const Nav = ({ logoColor }) => {
           </Box>
         </Drawer>
       </div>
-    </header>
+    </header >
   );
 };

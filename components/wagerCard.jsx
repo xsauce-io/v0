@@ -71,14 +71,15 @@ export const WagerCard = ({ cardObject }) => {
     console.log(quote[0].toNumber())
   }
 
-  const copyAddress = () => {
+  const copyAddress = async () => {
 
 
 
-    navigator.clipboard.writeText('0x50...C13ca');
+    await navigator.clipboard.writeText('0x50...C13ca');
 
 
-    alert("Copied Address: " + '0x50...C13ca');
+
+    //alert("Copied Address: " + '0x50...C13ca');
   }
 
 
@@ -170,10 +171,8 @@ export const WagerCard = ({ cardObject }) => {
                 <p className="text-xs"> Contract</p>
                 <a className="flex flex-row space-x-[2px]" onClick={() => copyAddress()}>
                   <p> 0x50...C13ca</p>
-                  <img src="/Images.svg" />
+                  <img src="/Images.svg" className="active:scale-125" />
                 </a>
-
-
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-b-xl space-x-4" >
                 Price : {currentQuote}
@@ -221,7 +220,7 @@ export const WagerCard = ({ cardObject }) => {
           </React.Fragment>
         )
         }
-      </div>
-    </React.Fragment>
+      </div >
+    </React.Fragment >
   );
 };
