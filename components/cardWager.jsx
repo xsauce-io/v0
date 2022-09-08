@@ -32,7 +32,7 @@ export const Card = ({ cardObject }) => {
   return (
     <Link href={cardObjectHref}>
       <a className="transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl flex flex-col 
- laptop: w-full items-start text-left font-inter max-h-fit">
+ laptop: w-full items-start text-left font-inter min-h-full">
 
         {cardObject === undefined ?
           <React.Fragment>
@@ -56,8 +56,8 @@ export const Card = ({ cardObject }) => {
 
               }
 
-              <div className=" h-full">
-                <div className="px-8 pt-4 " >
+              <div className="h-full">
+                <div className="px-8  " >
                   <h1 className="text-2xl font-normal text-white h-[22%] w-full line-clamp-2 font-SG  ">{cardObject.name}</h1>
                   <h2 className=" text-lg font-light text-left w-full text-white py-4 font-inter"> Current Retail Price &ensp;  &ensp; &ensp; ${cardObject.retailPrice}</h2>
 
@@ -75,7 +75,7 @@ export const Card = ({ cardObject }) => {
 
                         <p className={favored == false ? "bg-[#ACFF00] text-black  text-[14px] font-normal  rounded-[40px]  flex flex-row justify-center  py-1 border-[1px] border-[#30403F] h-full w-full" : "text-white text-sm font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] py-1 border-[#30403F] h-full w-full"}>Yes - {Yes} %</p>
                       </div>
-                      <button className='flex flex-row items-center text-white text-[14px]  border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[30%] py-2 px-4 items-center hover:bg-[#ACFF00] hover:text-black '> <p> Place a bet on this sneaker</p> <img className="ml-3 text-white" src="/slimRightArrowWhite.svg"/></button>
+                      <button className='flex flex-row items-center text-white text-[14px]  border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[30%] py-2 px-4 items-center hover:bg-[#ACFF00] hover:text-black '> <p> Place a bet on this sneaker</p> <img className="ml-3 text-white" src="/slimRightArrowWhite.svg" /></button>
 
                     </div>
 
