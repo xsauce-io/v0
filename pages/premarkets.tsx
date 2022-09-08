@@ -143,7 +143,7 @@ const Markets: NextPage = () => {
 					{/*Sorting */}
 					<ContentHeader
 						title={'Predict the live market'}
-						icon={<img className="" src="candle.svg" />}
+						icon={<img className="" src="/candle.svg" />}
 					>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
 							<h5 className="text-sm">Filter on</h5>
@@ -152,7 +152,7 @@ const Markets: NextPage = () => {
 									tabIndex={0}
 									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50"
 								>
-									<img className="" src="textBlock.svg" />
+									<img className="" src="/textBlock.svg" />
 
 									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
 										<span className="text-black ">Retail Price</span>
@@ -161,7 +161,7 @@ const Markets: NextPage = () => {
 									) : (
 										<span className="text-black ">Name</span>
 									)}
-									<img className="" src="downArrow.svg" />
+									<img className="" src="/downArrow.svg" />
 								</label>
 								<ul
 									tabIndex={0}
@@ -200,9 +200,9 @@ const Markets: NextPage = () => {
 								onClick={() => setIsAscending(!isAscending)}
 							>
 								{isAscending === true ? (
-									<img className="" src="upArrow.svg" />
+									<img className="" src="/upArrow.svg" />
 								) : (
-									<img className="" src="downArrow.svg" />
+									<img className="" src="/downArrow.svg" />
 								)}
 							</button>
 						</div>

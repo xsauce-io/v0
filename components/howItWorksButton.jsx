@@ -7,11 +7,11 @@ export const HowItWorksButton = ({ title }) => {
         <div className="flex flex-col h-full w-3/7  rounded-[10px] text-black">
 
             <button className='bg-white rounded-t-[10px] py-5 pr-10  pl-5 w-[100%] border-b-[1px] border-[#0C1615] hover:opacity-40 flex  items-center'>
-                <img className="" src="openBook.svg" />
+                <img className="" src="/openBook.svg" />
 
                 <p className="px-4 text-sm ">Learn how the Xchange works</p>
 
-                <img className="" src="slimRightArrow.svg" />
+                <img className="" src="/slimRightArrow.svg" />
             </button>
 
             <div className='bg-[#DCDEE1] rounded-b-[10px] p-4 text-left w-[100%] space-y-2 '>

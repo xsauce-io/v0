@@ -80,7 +80,7 @@ const Redeem: NextPage = () => {
 					<form className="flex w-full h-full items-center justify-center flex-col space-y-5">
 						<ContentHeader
 							title={'Select Wager'}
-							icon={<img className="" src="candle.svg" />}
+							icon={<img className="" src="/candle.svg" />}
 						/>
 						<div className=" w-[35%] items-center justify-center flex-col dropdown dropdown-right ">
 							<label
@@ -100,7 +100,7 @@ const Redeem: NextPage = () => {
 										Nike Air Max 90 OFF-White Desert Ore
 									</p>
 								)}
-								<img className="" src="downArrow.svg" />
+								<img className="" src="/downArrow.svg" />
 							</label>
 							<ul
 								tabIndex={0}
