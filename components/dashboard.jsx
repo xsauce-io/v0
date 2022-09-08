@@ -7,7 +7,7 @@ export const Dashboard = ({ positions }) => {
     <a>
       <div className="flex flex-row text-[12px] rounded-[40px] w-full bg-[#0C1615] text-white font-Inter items-center justify-between py-4 px-8 my-[.5rem]">
         <span className="flex flex-row  w-[30%] font-SG text-sm">
-          {positions.name}
+          {positions?.name}
         </span>
         <span className="flex flex-row  w-[18.5%] text-xs">
           15,000 YES

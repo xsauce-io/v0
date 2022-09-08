@@ -1,11 +1,13 @@
 import React from "react"
 import { BigNumber, ethers, utils } from 'ethers'
-import erc1155abi from '../abi/erc1155.json'
-import { useState, useEffect } from "react"
+import erc1155abi from '../abi/erc1155.json';
+import mock1155 from '../abi/mock1155.json';
+import { useState, useEffect } from "react";
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios'
+
 
 
 export const ActionCard = () => {
@@ -15,12 +17,28 @@ export const ActionCard = () => {
     const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
     const TokenA = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
 
+
+
+const getMarketbySku = () => {
+  const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
+req.then(res => {
+  const test = res.data[3]["384664-023"]
+  setCurrentMarket(test)
+  const expires = (new Date((res.data[3]["384664-023"].expiration) * 1000)).toLocaleDateString("en-US")
+  setExpiration(expires)
+  console.log({testing:test})
+})
+   
+  // setCurrentMarket()
+}
+
+
     const requestERC20 = axios.get(erc20Git);
     const requestOrderBook = axios.get(OrderBookGit);
     const requestOrderBookAddress = axios.get(OrderBookAddressGit);
     const requestTokenA = axios.get(TokenA);
 
-    // const address = "0xb16a791282B604120E28e703C56D9Cb6E3C776b1"
+    const Mockaddress = "0xac9BD2821B4296ea92b716DB8D841e46cd1f2F71"
     // const addressRink ="0x360b9D17f8546941208085C045871E2a318117Ba"
     // const dai = "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
 
@@ -31,14 +49,18 @@ export const ActionCard = () => {
 
     const [alignment, setAlignment] = useState();
     const [isYes, setIsYes] = useState();
+    const [No,setNo] = useState();
+    const [Yes,setYes] = useState();
     const [order, setOrder] = useState();
+
     const [isBuy, setIsBuy] = useState();
     const [ERC20Abi, setERC20Abi] = useState(null)
     const [orderBookAbi, setOrderBookAbi] = useState(null)
     const [orderBookAddress, setOrderBookAddress] = useState(null)
     const [signedContract, setSignedContract] = useState(null)
     const [tokenA, setTokenA] = useState(null)
-
+    const [currentMarket, setCurrentMarket] = useState()
+    const [expiration, setExpiration] = useState();
 
     const theme = createTheme({
         palette: {
@@ -88,14 +110,42 @@ export const ActionCard = () => {
 
             setOrderBookAddress(responses[2].data[4].OrderBook20.address)
             setTokenA(responses[2].data[4].Token20A184.address)
-            console.log('working')
+            console.log(responses[2].data[4])
+
+
+
         })).catch(errors => {
             console.log(errors)
         })
+
     }
+
+const ratios = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(Mockaddress, mock1155, signer);
+    const getYes = await contract.totalSupply(
+     1
+    )
+    const getNo = await contract.totalSupply(
+     2
+    )
+
+    let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+    
+
+    let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+    console.log(YesRatio)
+
+    setYes(YesRatio.toFixed(0))
+    setNo(NoRatio.toFixed(0))
+
+}
 
     useEffect(() => {
         grabData();
+        ratios();
+        getMarketbySku();
     }, []);
 
 
@@ -151,6 +201,7 @@ export const ActionCard = () => {
 
 
     return (
+      
 
 
         <div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
@@ -158,8 +209,8 @@ export const ActionCard = () => {
             <div className='bg-white p-4 text-left w-[100%] border-b-[1px] border-[#0C1615]'>
                 <flex className="flex flex-rows space-x-2 justify-center items-center">
                     <p className=" mr-1 text-xs  ">Market Statistics</p>
-                    <div className="text-xs w-1/4 bg-[#0C1615] p-2 rounded-2xl text-center text-white">No - 40%</div>
-                    <div className="text-xs   w-1/4 bg-[#ACFF00] p-2 rounded-2xl text-center">Yes - 40%</div>
+                    <div className="text-xs w-1/4 bg-[#0C1615] p-2 rounded-2xl text-center text-white">No - {No}%</div>
+                    <div className="text-xs   w-1/4 bg-[#ACFF00] p-2 rounded-2xl text-center">Yes - {Yes}%</div>
 
                 </flex>
             </div>
@@ -167,8 +218,8 @@ export const ActionCard = () => {
 
                 <div className='bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full '>
                     <did>
-                        <p className="font-SG text-md text-start ">Will the Resell Price be over 400$</p>
-                        <p className="font-SG text-xs underline text-left opacity-70 mt-2">Wager Expires: 09/12/2022</p>
+                        <p className="font-SG text-md text-start ">Will the Resell Price be over ${currentMarket?.prediction}</p>
+                        <p className="font-SG text-xs text-left opacity-70 mt-2">Wager Expires: {expiration}</p>
                     </did>
 
                     <div className='bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
