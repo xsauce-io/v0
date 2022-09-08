@@ -30,7 +30,7 @@ export const ContractsCard = ({ title }) => {
                         <div className="grid grid-rows-2">
                             <div className=" flex items-center ">
                                 <p className="inline-block mr-1 text-xs">Yes</p>
-                                <img className="w-[8px]" src="/filledArrowUp.svg" />
+                                <img className="w-[8px]" src="/upfull.svg" />
 
 
                             </div>
