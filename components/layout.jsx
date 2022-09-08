@@ -62,4 +62,4 @@ Layout.propTypes = {
     logoColor: PropTypes.string,
     showFinancialOverview: PropTypes.bool,
 
-};
+}; 

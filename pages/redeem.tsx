@@ -9,13 +9,14 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Layout } from '../components/layout';
 import { ContentHeader } from '../components/contentHeader';
+import { RedeemCard } from '../components/redeemCard';
 
 const Redeem: NextPage = () => {
 	let [isLoading, setisLoading] = useState(true as boolean);
 	let [marketResponse1, setMarketResponse1] = useState([] as any);
 	let [marketResponse2, setMarketResponse2] = useState([] as any);
 	let [marketResponse3, setMarketResponse3] = useState([] as any);
-	let [toggled, setisToggled] = useState('1' as string);
+	let [toggled, setisToggled] = useState('1');
 
 	const getSneaker2 = async () => {
 		Promise.all([
@@ -48,16 +49,6 @@ const Redeem: NextPage = () => {
 			});
 	};
 
-	const handleChange = (event: any) => {
-		if (event.target.value === '1') {
-			setisToggled('1');
-		} else if (event.target.value === '2') {
-			setisToggled('2');
-		} else if (event.target.value === '3') {
-			setisToggled('3');
-		}
-	};
-
 	useEffect(() => {
 		getSneaker2();
 	}, []);
@@ -79,163 +70,115 @@ const Redeem: NextPage = () => {
 				/>
 			</Head>
 
-			<Layout headerTitle={'Redeem Positions'}>
+			<Layout
+				headerTitle={'Redeem Positions'}
+				headerSubtitle={'MONEY WELL EARNED'}
+				showFinancialOverview={false}
+				showHowItWorksButton={true}
+			>
 				<main className="flex w-full items-center justify-center flex-col h-[calc(100%-85px)]">
-					<ContentHeader title={'Cash Out'} />
 					<form className="flex w-full h-full items-center justify-center flex-col space-y-5">
-						<div className="flex w-full items-center justify-center flex-col">
+						<ContentHeader
+							title={'Select Wager'}
+							icon={<img className="" src="/candle.svg" />}
+						/>
+						<div className=" w-[35%] items-center justify-center flex-col dropdown dropdown-right ">
 							<label
-								className="font-SG text-[25px] pb-3 pt-3"
-								htmlFor="markets"
+								tabIndex={0}
+								className="text-xl flex flex-column justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-8 bg-white space-x-5 hover:opacity-50"
 							>
-								Choose a market:
+								{toggled === '1' ? (
+									<p className="text-black truncate">
+										Nike Air Max 1 Patta Denim
+									</p>
+								) : toggled === '2' ? (
+									<p className="text-black truncate">
+										Jordan 1 Retro High Homage to Home Chicago (Numbered)
+									</p>
+								) : (
+									<p className="text-black truncate ">
+										Nike Air Max 90 OFF-White Desert Ore
+									</p>
+								)}
+								<img className="" src="/downArrow.svg" />
 							</label>
-							<select
-								className="bg-white shadow-black shadow-md mobile:w-3/4 font-SG text-[15px] mb-3 p-4 rounded focus:outline-none laptop:w-[390px] font-SG text-[15px] mb-3 rounded focus:outline-none"
-								onChange={handleChange}
-								id="markets"
-								name="markets"
+							<ul
+								tabIndex={0}
+								className="dropdown-content bg-white p-4 shadow rounded-box w-[400px] mt-4 z-10 text-lg"
 							>
-								<option value="1">Nike Air Max 1 Patta Denim</option>
-								<option value="2">
+								<li
+									className="py-2 border-b-[1px] border-[#0C1615]"
+									onClick={() => setisToggled('1')}
+								>
+									Nike Air Max 1 Patta Denim
+								</li>
+								<li
+									className="py-2 border-b-[1px] border-[#0C1615]"
+									onClick={() => setisToggled('2')}
+								>
 									Jordan 1 Retro High Homage to Home Chicago (Numbered)
-								</option>
-								<option value="3">Nike Air Max 90 OFF-White Desert Ore</option>
-							</select>
+								</li>
+								<li className="py-2 " onClick={() => setisToggled('3')}>
+									Nike Air Max 90 OFF-White Desert Ore
+								</li>
+							</ul>
 						</div>
-						{toggled === '1' ? (
-							<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:items-center">
-								<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
-									{isLoading === true ? (
-										<React.Fragment>
-											<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '12px',
-													}}
-													width={400}
-													height={300}
-												/>
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '8px',
-													}}
-													width={400}
-													height={30}
-												/>
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '8px',
-													}}
-													width={300}
-													height={30}
-												/>
-											</div>
-										</React.Fragment>
-									) : (
-										marketResponse1.map((el: any) => <Card cardObject={el} />)
-									)}
-								</div>
+						<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:items-center">
+							<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
+								{isLoading === true ? (
+									<React.Fragment>
+										<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
+											<Skeleton
+												variant="rectangular"
+												sx={{
+													zIndex: '2',
+													backgroundColor: 'gray',
+													borderRadius: '12px',
+												}}
+												width={400}
+												height={300}
+											/>
+											<Skeleton
+												variant="rectangular"
+												sx={{
+													zIndex: '2',
+													backgroundColor: 'gray',
+													borderRadius: '8px',
+												}}
+												width={400}
+												height={30}
+											/>
+											<Skeleton
+												variant="rectangular"
+												sx={{
+													zIndex: '2',
+													backgroundColor: 'gray',
+													borderRadius: '8px',
+												}}
+												width={300}
+												height={30}
+											/>
+										</div>
+									</React.Fragment>
+								) : toggled == '1' ? (
+									marketResponse1.map((el: any) => (
+										<RedeemCard cardObject={el} />
+									))
+								) : toggled == '2' ? (
+									marketResponse2.map((el: any) => (
+										<RedeemCard cardObject={el} />
+									))
+								) : (
+									marketResponse3.map((el: any) => (
+										<RedeemCard cardObject={el} />
+									))
+								)}
 							</div>
-						) : toggled == '2' ? (
-							<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:items-center">
-								<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
-									{isLoading === true ? (
-										<React.Fragment>
-											<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '12px',
-													}}
-													width={400}
-													height={300}
-												/>
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '8px',
-													}}
-													width={400}
-													height={30}
-												/>
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '8px',
-													}}
-													width={300}
-													height={30}
-												/>
-											</div>
-										</React.Fragment>
-									) : (
-										marketResponse2.map((el: any) => <Card cardObject={el} />)
-									)}
-								</div>
-							</div>
-						) : (
-							<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:items-center">
-								<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
-									{isLoading === true ? (
-										<React.Fragment>
-											<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '12px',
-													}}
-													width={400}
-													height={300}
-												/>
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '8px',
-													}}
-													width={400}
-													height={30}
-												/>
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '8px',
-													}}
-													width={300}
-													height={30}
-												/>
-											</div>
-										</React.Fragment>
-									) : (
-										marketResponse3.map((el: any) => <Card cardObject={el} />)
-									)}
-								</div>
-							</div>
-						)}
+						</div>
+
 						<button
 							id="redeem"
-							className="h-[3rem] w-[8rem] text-[15px] px-4 text-white bg-black rounded shadow-md hover:bg-white transition duration-300 hover:text-black"
+							className="h-[4rem] w-[9rem] text-lg px-4 text-black bg-[#ACFF00] rounded shadow-md hover:bg-white transition duration-300 hover:text-black justify-self-center"
 							type="submit"
 						>
 							Redeem

@@ -58,7 +58,7 @@ export const Footer = ({ children }) => {
                         rel={'noreferrer'}
                     >
                         <button>
-                            <img className="" src="twitterIcon.svg" />
+                            <img className="" src="/twitterIcon.svg" />
                         </button>
 
                     </a>
@@ -68,7 +68,7 @@ export const Footer = ({ children }) => {
                         rel={'noreferrer'}
                     >
                         <button>
-                            <img className="" src="githubIcon.svg" />
+                            <img className="" src="/githubIcon.svg" />
                         </button>
                     </a>
                     <a
@@ -77,7 +77,7 @@ export const Footer = ({ children }) => {
                         rel={'noreferrer'}
                     >
                         <button>
-                            <img className="" src="discordIcon.svg" />
+                            <img className="" src="/discordIcon.svg" />
                         </button>
 
                     </a>
@@ -87,7 +87,7 @@ export const Footer = ({ children }) => {
                         rel={'noreferrer'}
                     >
                         <button >
-                            <img className="" src="angelListIcon.svg" />
+                            <img className="" src="/angelListIcon.svg" />
                         </button>
 
                     </a>

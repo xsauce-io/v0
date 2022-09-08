@@ -176,22 +176,22 @@ const Home: NextPage = () => {
 						<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full">
 							<div className="flex flex-row pl-4 w-[30%]">
 								Position
-								<img className="w-[3.4%]" src="up-down.svg" />
+								<img className="w-[3.4%]" src="/-down.svg" />
 							</div>
 
 							<div className="flex flex-row w-[18.5%]">
 								Shares
-								<img className="w-[5%]" src="up-down.svg" />
+								<img className="w-[5%]" src="/up-down.svg" />
 							</div>
 
 							<div className="flex flex-row w-[21.5%]">
 								Total Price
-								<img className="w-[5%]" src="up-down.svg" />
+								<img className="w-[5%]" src="/up-down.svg" />
 							</div>
 
 							<div className="flex flex-row w-[20%]">
 								Return
-								<img className="w-[5%]" src="up-down.svg" />
+								<img className="w-[5%]" src="/up-down.svg" />
 							</div>
 
 							<div className="flex flex-row w-[10%] pr-4">Contract</div>

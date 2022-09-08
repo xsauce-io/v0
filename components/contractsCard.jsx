@@ -30,7 +30,7 @@ export const ContractsCard = ({ title }) => {
                         <div className="grid grid-rows-2">
                             <div className=" flex items-center ">
                                 <p className="inline-block mr-1 text-xs">Yes</p>
-                                <img className="w-[8px]" src="filledArrowup.svg" />
+                                <img className="w-[8px]" src="/filledArrowUp.svg" />
 
 
                             </div>
@@ -39,7 +39,7 @@ export const ContractsCard = ({ title }) => {
                         <div className="grid grid-rows-2 ">
                             <div className=" text-xs flex items-center">
                                 <p className="inline-block mr-1 text-xs">No</p>
-                                <img className="w-[8px]" src="filledArrowDown.svg" />
+                                <img className="w-[8px]" src="/filledArrowDown.svg" />
                             </div>
                             <div className=" text-sm">4 shares</div>
                         </div>

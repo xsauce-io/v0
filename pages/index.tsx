@@ -83,7 +83,7 @@ const Home: NextPage = () => {
 
 			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$ 144,000.00'}>
 				<>
-					<ContentHeader title={'Positions'} icon={<img src="pieChart.svg" />}>
+					<ContentHeader title={'Positions'} icon={<img src="/pieChart.svg" />}>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
 							<h5 className="text-sm">Filter on</h5>
 							<div className="dropdown dropdown-end">
@@ -91,7 +91,7 @@ const Home: NextPage = () => {
 									tabIndex={0}
 									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50"
 								>
-									<img className="" src="textBlock.svg" />
+									<img className="" src="/textBlock.svg" />
 									<span className="text-black">Winning Positions</span>
 
 									{/* {sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
@@ -101,7 +101,7 @@ const Home: NextPage = () => {
 									) : (
 										<span className="text-black ">Name</span>
 									)} */}
-									<img className="" src="downArrow.svg" />
+									<img className="" src="/downArrow.svg" />
 								</label>
 								<ul
 									tabIndex={0}
@@ -124,9 +124,9 @@ const Home: NextPage = () => {
 								onClick={() => setIsAscending(!isAscending)}
 							>
 								{isAscending === true ? (
-									<img className="" src="upArrow.svg" />
+									<img className="" src="/upArrow.svg" />
 								) : (
-									<img className="" src="downArrow.svg" />
+									<img className="" src="/downArrow.svg" />
 								)}
 							</button>
 						</div>
@@ -135,27 +135,27 @@ const Home: NextPage = () => {
 						<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
 							<div className="flex flex-row pl-4 w-[30%] space-x-2 items-center ">
 								<p>Positions</p>
-								<img src="up-down.svg" />
+								<img src="/up-down.svg" />
 							</div>
 
 							<div className="flex flex-row w-[18.5%] space-x-2 items-center">
 								<p>Shares</p>
-								<img src="up-down.svg" />
+								<img src="/up-down.svg" />
 							</div>
 
 							<div className="flex flex-row w-[21.5%] space-x-2 items-center">
 								<p>Total price</p>
-								<img src="up-down.svg" />
+								<img src="/up-down.svg" />
 							</div>
 
 							<div className="flex flex-row w-[20%] space-x-2 items-center">
 								<p>Return</p>
-								<img src="up-down.svg" />
+								<img src="/up-down.svg" />
 							</div>
 
 							<div className="flex flex-row w-[11%]  space-x-2 items-center">
 								<p>Contracts</p>
-								<img src="up-down.svg" />
+								<img src="/up-down.svg" />
 							</div>
 						</div>
 						{premarketResponse.map((el: []) => (

@@ -77,7 +77,7 @@ export const WagerCard = ({ cardObject }) => {
   const copyAddress = () => {
 
 
-    
+
     navigator.clipboard.writeText('0x50...C13ca');
 
 
@@ -133,10 +133,15 @@ export const WagerCard = ({ cardObject }) => {
             <grid className="bg-white w-full grid  text-[#0C1615] grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
               <div className="col-span-2 row-span-6 flex justify-center ">
                 <div className="w-[70%] py-4 ">
-                  <img
-                    src={cardObject.image?.original}
-                    className="object-cover mobile:h-[200px] mb-4 tablet:h-[250px] laptop:h-[50%] w-[100%]  desktop:h-[250px] w-[100%] rounded-lg"
-                  />
+                  {cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
+
+                    <img className="object-cover mobile:h-[200px] tablet:h-[250px] laptop:h-[50%] w-[80%] m-auto desktop:h-[250px] w-[100%] rounded-lg"
+                      src='/hurache.svg' />
+
+                    : <img
+                      src={cardObject.image?.original}
+                      className="object-cover mobile:h-[200px]  mtablet:h-[250px] laptop: w-[80%] m-auto desktop:h-[250px] w-[100%] rounded-lg "
+                    />}
                 </div>
               </div>
               <div className="col-span-2 row-span-6 text-left border-t-[1px] border-[#0C1615] px-6 py-10"><p className="text-xl font-medium font-SG py-4">
@@ -180,11 +185,20 @@ export const WagerCard = ({ cardObject }) => {
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Contract</p>
+<<<<<<< HEAD
                 <a className="flex flex-row space-x-[2px]" target="blank" rel='noreferrer' href={explorer}>
                 <p className="underline"> {currentMarket?.address}</p>
             </a>
                 
           
+=======
+                <a className="flex flex-row space-x-[2px]" onClick={() => copyAddress()}>
+                  <p> 0x50...C13ca</p>
+                  <img src="/Images.svg" />
+                </a>
+
+
+>>>>>>> 3d3b298da1f5fe5618af3ceb754d4232e631e273
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-b-xl space-x-4" >
                 Price : {currentQuote}
