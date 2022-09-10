@@ -16,7 +16,7 @@ import { ContractsCard } from './contractsCard'
 export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSubtitle, showFinancialOverview, showHowItWorksButton, logoColor }) => {
     return (
         <div className="bg-[#EFF1F3] text-black w-screen">
-            <div className={`px-40 w-full items-center justify-center text-black`} style={{ backgroundColor: headerBg, color: headerColor, borderColor: headerColor }} >
+            <div className={`w-full items-center justify-center text-black  laptop:px-40`} style={{ backgroundColor: headerBg, color: headerColor, borderColor: headerColor }} >
                 {/* <Announcement /> */}
                 <Nav logoColor={logoColor} />
                 <Header title={headerTitle} subtitle={headerSubtitle} >
