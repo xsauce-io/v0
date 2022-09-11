@@ -4,7 +4,7 @@ import React from "react"
 export const ContractsCard = ({ title }) => {
 
     return (
-        <div className="h-full  border-[1px]  border-[#0C1615] rounded-[10px] text-black">
+        <div className="h-full border-[1px]  border-[#0C1615] rounded-[10px] text-black">
             <div className='bg-[#ACFF00] rounded-t-[10px] border-b-[1px] p-2  w-[100%] hover:opacity-40  border-[#0C1615] ' />
 
             <div className='bg-white  px-4 text-left w-[100%] border-b-[1px] border-[#0C1615] '>

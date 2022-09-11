@@ -13,7 +13,7 @@ export const Header = ({ title, children, subtitle }) => {
                     <p className="text-[#748282] text-sm font-SG " >{subtitle}</p>
                     <p className='text-5xl py-4 '>{title}</p>
                 </div>
-                <div className="flex col-span-2 justify-end font-SG mobile:pt-4 pb-16 tablet:pb-0 tablet:pt-0  " >
+                <div className="flex col-span-2 mobile:justify-center tablet:justify-end font-SG mobile:pt-4 pb-16 tablet:pb-0 tablet:pt-0  " >
                     {children}
                 </div>
             </grid>
