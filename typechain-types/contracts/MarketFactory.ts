@@ -31,6 +31,7 @@ export interface MarketFactoryInterface extends utils.Interface {
   functions: {
     "allMarkets(uint256)": FunctionFragment;
     "createNewMarket(string,uint256,address,uint256,address)": FunctionFragment;
+    "getAllMarkets()": FunctionFragment;
     "getMarket(string,uint256,uint256)": FunctionFragment;
     "markets(bytes32)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -42,6 +43,7 @@ export interface MarketFactoryInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "allMarkets"
       | "createNewMarket"
+      | "getAllMarkets"
       | "getMarket"
       | "markets"
       | "owner"
@@ -62,6 +64,10 @@ export interface MarketFactoryInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAllMarkets",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getMarket",
@@ -88,6 +94,10 @@ export interface MarketFactoryInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "allMarkets", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "createNewMarket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllMarkets",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getMarket", data: BytesLike): Result;
@@ -176,6 +186,10 @@ export interface MarketFactory extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getAllMarkets(
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { valid: string[] }>;
+
     getMarket(
       sku: PromiseOrValue<string>,
       _predictionPrice: PromiseOrValue<BigNumberish>,
@@ -214,6 +228,8 @@ export interface MarketFactory extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getAllMarkets(overrides?: CallOverrides): Promise<string[]>;
+
   getMarket(
     sku: PromiseOrValue<string>,
     _predictionPrice: PromiseOrValue<BigNumberish>,
@@ -251,6 +267,8 @@ export interface MarketFactory extends BaseContract {
       _usdc: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getAllMarkets(overrides?: CallOverrides): Promise<string[]>;
 
     getMarket(
       sku: PromiseOrValue<string>,
@@ -311,6 +329,8 @@ export interface MarketFactory extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getAllMarkets(overrides?: CallOverrides): Promise<BigNumber>;
+
     getMarket(
       sku: PromiseOrValue<string>,
       _predictionPrice: PromiseOrValue<BigNumberish>,
@@ -349,6 +369,8 @@ export interface MarketFactory extends BaseContract {
       _usdc: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    getAllMarkets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getMarket(
       sku: PromiseOrValue<string>,

@@ -11,6 +11,8 @@ import { Tabs } from '../components/tabs';
 import { Layout } from '../components/layout';
 import { ContentHeader } from '../components/contentHeader';
 
+import { ethers, utils } from 'ethers';
+
 import { Card } from '../components/cardWager';
 
 const Markets: NextPage = () => {
@@ -25,23 +27,45 @@ const Markets: NextPage = () => {
 		LIST: 'list',
 	};
 
-	const [response, setResponse] = useState([]);
+	const [response, setResponse] = useState([] as any);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
+  let [isLoading, setisLoading] = useState(true as boolean);
 	const [isAscending, setIsAscending] = useState(true);
 
-	const options = {
-		method: 'GET',
-		url: 'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=adidas&name=yeezy-350&gender=men',
-	};
 
 	// fetch sneaker data
 	const getSneaker = async () => {
-		axios
-			.request(options)
-			.then(function (response) {
-				setResponse(response.data.results);
-				console.log(response.data.results);
-			})
+		Promise.all([
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=384664-023'
+			),
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=BQ4422-400'
+			),
+
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=CT8012-011'
+			),
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DV2122-400'
+			),
+		])
+
+			.then(
+				axios.spread((obj1, obj2, obj3, obj4) => {
+					setResponse([
+						obj1.data.results[0],
+						obj2.data.results[0],
+						obj3.data.results[0],
+            obj4.data.results[0],
+          ]);
+
+					setisLoading(false);
+
+					console.log({ obj1 });
+					console.log({ obj2 });
+				})
+			)
 			.catch(function (error) {
 				console.error(error);
 			});
@@ -49,6 +73,8 @@ const Markets: NextPage = () => {
 
 	useEffect(() => {
 		getSneaker();
+  
+    console.log()
 	}, []);
 
 	useMemo(() => {
@@ -204,8 +230,8 @@ const Markets: NextPage = () => {
 						</div>
 					</ContentHeader>
 
-					<div className="laptop:grid grid-cols-3 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response.map((el) => (
+					<div className="laptop:grid grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
+						{response.map((el:any) => (
 							<Card cardObject={el} />
 						))}
 					</div>

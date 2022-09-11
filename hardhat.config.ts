@@ -7,11 +7,19 @@ dotenv.config();
 
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.16",
+  solidity:{ 
+    version:"0.8.16",
+    settings: {
+    optimizer: {
+      enabled: true,
+      runs: 1000,
+    },
+}
+  },
   networks: {
-    goerli: {
-      url: 'https://ethereum-goerli-rpc.allthatnode.com',
-      accounts: process.env.GOERLI_KEY !== undefined ? [process.env.GOERLI_KEY] : [],
+    fantom: {
+      url: 'https://rpc.testnet.fantom.network/',
+      accounts: process.env.fantom !== undefined ? [process.env.fantom] : [],
     }
   },
   paths: {

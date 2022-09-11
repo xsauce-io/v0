@@ -27,7 +27,7 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
     event positionCreated(uint id , uint256 amount);
 
-    constructor(string memory uri_) public ERC1155(uri_) {}
+    constructor(string memory uri_) ERC1155(uri_) {}
 
     function initialize(uint _predictionPrice, address _oracleFeed, IERC20 _usdc, uint256 _closingDate) external onlyOwner() {
         // require(
@@ -41,7 +41,7 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         usdc = _usdc;
     }
 
-    function resolveAssetPrice() public {
+    function resolveAssetPrice() public onlyOwner {
       // require((priceRequested - block.timestamp > 5 minutes), 'Pre-Market Still Open');
       if (predictionPrice > oracleFeed.price()) {
         favored = true;
@@ -51,7 +51,11 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
       resolved = true;
     }
 
-    function getData() public {
+    function updateSku(string memory _newSku) public onlyOwner {
+      oracleFeed.setSku(_newSku);
+    }
+
+    function getData() public onlyOwner {
         oracleFeed.requestPrice();
         fetched = true;
         priceRequested = block.timestamp;

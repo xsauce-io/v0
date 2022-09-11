@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=B75571'
 			),
 			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AO4606-001'
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=BQ4422-400'
 			),
 
 			axios.get(

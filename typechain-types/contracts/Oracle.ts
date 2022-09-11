@@ -36,6 +36,7 @@ export interface OracleInterface extends utils.Interface {
     "price()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "requestPrice()": FunctionFragment;
+    "setSku(string)": FunctionFragment;
     "sku()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdrawLink()": FunctionFragment;
@@ -50,6 +51,7 @@ export interface OracleInterface extends utils.Interface {
       | "price"
       | "renounceOwnership"
       | "requestPrice"
+      | "setSku"
       | "sku"
       | "transferOwnership"
       | "withdrawLink"
@@ -70,6 +72,10 @@ export interface OracleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "requestPrice",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setSku",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "sku", values?: undefined): string;
   encodeFunctionData(
@@ -94,6 +100,7 @@ export interface OracleInterface extends utils.Interface {
     functionFragment: "requestPrice",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setSku", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sku", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
@@ -224,6 +231,11 @@ export interface Oracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    setSku(
+      _newSku: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sku(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(
@@ -258,6 +270,11 @@ export interface Oracle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  setSku(
+    _newSku: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sku(overrides?: CallOverrides): Promise<string>;
 
   transferOwnership(
@@ -287,6 +304,11 @@ export interface Oracle extends BaseContract {
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     requestPrice(overrides?: CallOverrides): Promise<string>;
+
+    setSku(
+      _newSku: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     sku(overrides?: CallOverrides): Promise<string>;
 
@@ -362,6 +384,11 @@ export interface Oracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    setSku(
+      _newSku: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sku(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
@@ -394,6 +421,11 @@ export interface Oracle extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     requestPrice(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setSku(
+      _newSku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

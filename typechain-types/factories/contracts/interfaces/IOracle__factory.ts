@@ -121,6 +121,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_newSku",
+        type: "string",
+      },
+    ],
+    name: "setSku",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "sku",
     outputs: [

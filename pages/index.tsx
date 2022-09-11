@@ -21,41 +21,24 @@ const Home: NextPage = () => {
 	const getSneaker2 = async () => {
 		Promise.all([
 			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=B75571'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AO4606-001'
-			),
-
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DR9654-100'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DV2122-400'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=HP7870'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DH7138-006'
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=nike&silhouette=dunk'
 			),
 		])
 
 			.then(
-				axios.spread((obj1, obj2, obj3, obj4, obj5, obj6) => {
+				axios.spread((obj1) => {
 					setAuctionResponse([
 						obj1.data.results[0],
-						obj2.data.results[0],
-						obj3.data.results[0],
-						obj4.data.results[0],
-						obj5.data.results[0],
-						obj6.data.results[0],
+						obj1.data.results[1],
+						obj1.data.results[2],
+						obj1.data.results[3],
+						obj1.data.results[4],
+						obj1.data.results[5],
 					]);
 
 					setisLoading(false);
 
 					console.log({ obj1 });
-					console.log({ obj2 });
 				})
 			)
 			.catch(function (error) {

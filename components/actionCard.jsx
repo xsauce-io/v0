@@ -251,7 +251,7 @@ const ratios = async () => {
                     </div>
                     <div className='bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
                         <p className="text-left text-sm ">
-                            Buy of Sell
+                            Buy or Sell
                         </p>
                         <div class="flex-1"></div>
                         <div class="dropdown dropdown-end ">

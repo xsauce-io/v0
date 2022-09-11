@@ -1,0 +1,66 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Bank",
+  "sourceName": "contracts/bank.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_funds",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "bank_funds",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "deployer",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060405161019c38038061019c83398101604081905261002f91610060565b600055600180546001600160a01b039092166001600160a01b0319928316179055600280549091163317905561009a565b6000806040838503121561007357600080fd5b82516001600160a01b038116811461008a57600080fd5b6020939093015192949293505050565b60f4806100a86000396000f3fe6080604052348015600f57600080fd5b5060043610603c5760003560e01c80638da5cb5b146041578063d5f3948814608a578063d6b82fe31460a9575b600080fd5b60015460609073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020015b60405180910390f35b60025460609073ffffffffffffffffffffffffffffffffffffffff1681565b60b160005481565b604051908152602001608156fea264697066735822122065a6b4a98828398390bc5a5be2467916b85088f0f2f8f1f1696a43e533c6a9d664736f6c63430008100033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b5060043610603c5760003560e01c80638da5cb5b146041578063d5f3948814608a578063d6b82fe31460a9575b600080fd5b60015460609073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020015b60405180910390f35b60025460609073ffffffffffffffffffffffffffffffffffffffff1681565b60b160005481565b604051908152602001608156fea264697066735822122065a6b4a98828398390bc5a5be2467916b85088f0f2f8f1f1696a43e533c6a9d664736f6c63430008100033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

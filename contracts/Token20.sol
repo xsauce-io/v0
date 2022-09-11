@@ -9,11 +9,12 @@ contract Token20 is ERC20, ERC20Burnable {
     uint8 _decimals;
 
     constructor(
-        string memory tokenName,
-        string memory tokenSymbol,
+        string memory testToken,
+        string memory Test,
         uint8 decimals_
-    ) ERC20(tokenName, tokenSymbol) {
+    ) ERC20(testToken, Test) {
         _decimals = decimals_;
+        _mint(msg.sender, 10000 * 10 ** decimals());
     }
 
     function mint(address to, uint256 amount) external {

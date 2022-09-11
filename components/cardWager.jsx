@@ -14,7 +14,7 @@ export const Card = ({ cardObject }) => {
   const getMarketbySku = async () => {
     const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
   req.then(res => {
-    const test = res.data[3]["384664-023"]
+    const test = res.data[3][cardObject.sku]
     setCurrentMarket(test)
     const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
     setExpiration(expires)
@@ -115,7 +115,7 @@ export const Card = ({ cardObject }) => {
                 <div className="border-b-[1px] border-[#30403F]"></div>
                 <div className="px-8 ">
                   <div className="flex flex-col w-full py-4 space-y-3 font-light">
-                    <h1 className="text-[14px] text-white font-inter ">Will the price be over $300?
+                    <h1 className="text-[14px] text-white font-inter ">Will the price be over {currentMarket?.prediction}?
                     </h1>
 
                     <div className="space-y-3">

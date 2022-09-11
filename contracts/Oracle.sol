@@ -18,6 +18,9 @@ contract Oracle is IOracle, Ownable {
         fee = (1 * LINK_DIVISIBILITY) / 10; 
         sku = _sku;
     }
+ function setSku(string memory _newSku) public override onlyOwner {
+        sku = _newSku;
+    }
 
     function requestPrice() external override returns (bytes32 requestId) {
         Chainlink.Request memory req = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);

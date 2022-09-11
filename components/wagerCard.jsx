@@ -185,20 +185,11 @@ export const WagerCard = ({ cardObject }) => {
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Contract</p>
-<<<<<<< HEAD
+
                 <a className="flex flex-row space-x-[2px]" target="blank" rel='noreferrer' href={explorer}>
                 <p className="underline"> {currentMarket?.address}</p>
             </a>
                 
-          
-=======
-                <a className="flex flex-row space-x-[2px]" onClick={() => copyAddress()}>
-                  <p> 0x50...C13ca</p>
-                  <img src="/Images.svg" />
-                </a>
-
-
->>>>>>> 3d3b298da1f5fe5618af3ceb754d4232e631e273
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-b-xl space-x-4" >
                 Price : {currentQuote}
