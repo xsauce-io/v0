@@ -13,14 +13,14 @@ export const Card = ({ cardObject }) => {
 
   const getMarketbySku = async () => {
     const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-  req.then(res => {
-    const test = res.data[3]["384664-023"]
-    setCurrentMarket(test)
-    const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
-    setExpiration(expires)
-    console.log({testing:test})
-  })
-     
+    req.then(res => {
+      const test = res.data[3]["384664-023"]
+      setCurrentMarket(test)
+      const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+      setExpiration(expires)
+      console.log({ testing: test })
+    })
+
     // setCurrentMarket()
   }
 
@@ -37,32 +37,32 @@ export const Card = ({ cardObject }) => {
 
   const ratios = async () => {
     if (currentMarket !== undefined) {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = await provider.getSigner();
-    const contract = new ethers.Contract(currentMarket?.address, mock1155, signer);
-    const getYes = await contract.totalSupply(
-     1
-    )
-    const getNo = await contract.totalSupply(
-     2
-    )
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(currentMarket?.address, mock1155, signer);
+      const getYes = await contract.totalSupply(
+        1
+      )
+      const getNo = await contract.totalSupply(
+        2
+      )
 
-    
 
-    let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-    
 
-    let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-    console.log(YesRatio)
+      let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
 
-    setYes(YesRatio.toFixed(0))
-    setNo(NoRatio.toFixed(0))
 
-}
-}
+      let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+      console.log(YesRatio)
 
-  const [No,setNo] = useState();
-  const [Yes,setYes] = useState();
+      setYes(YesRatio.toFixed(0))
+      setNo(NoRatio.toFixed(0))
+
+    }
+  }
+
+  const [No, setNo] = useState();
+  const [Yes, setYes] = useState();
   const [currentMarket, setCurrentMarket] = useState()
   const [expiration, setExpiration] = useState();
 
@@ -81,27 +81,26 @@ export const Card = ({ cardObject }) => {
 
   return (
     <Link href={cardObjectHref}>
-      <a className="transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl flex flex-col 
- laptop: w-full items-start text-left font-inter min-h-full">
+      <a className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full">
 
         {cardObject === undefined ?
           <React.Fragment>
             <Skeleton variant="rectangular" sx={{ backgroundColor: 'white', height: '450px' }} />
           </React.Fragment> :
           <React.Fragment>
-            <div className="flex flex-row items-left laptop:flex-col laptop:space-y-3 laptop:justify-center  w-full h-full">
+            <div className="flex items-left flex-col space-y-3 justify-center w-full h-full">
 
               {cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
 
                 <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
-                  <img className='object-cover mobile:h-[30px] laptop:w-[40%] m-auto laptop:h-[100%] scale-125' src='/hurache.svg' />
+                  <img className='object-cover mobile:w-[40%]  m-auto laptop:h-[100%] scale-125' src='/hurache.svg' />
                 </div>
                 :
 
                 <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
                   {/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
-                  <img className='object-cover mobile:h-[70px] laptop:w-[40%] m-auto laptop:h-[100%] scale-150' src={cardObject.image?.original}></img>
+                  <img className='object-cover mobile:w-[40%]  m-auto laptop:h-[100%] scale-150' src={cardObject.image?.original}></img>
                 </div>
 
               }

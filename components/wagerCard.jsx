@@ -120,7 +120,7 @@ export const WagerCard = ({ cardObject }) => {
 
   return (
     <React.Fragment>
-      <div className="w-[2/3] ">
+      <div className=" ">
         {cardObject === undefined ? (
           <React.Fragment>
             <Skeleton variant="text" />
@@ -137,14 +137,14 @@ export const WagerCard = ({ cardObject }) => {
                 <div className="w-[70%] py-4 relative">
                   {cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
 
-                    <img className="object-cover mobile:h-[200px] tablet:h-[250px] laptop:h-[50%] w-[80%] m-auto desktop:h-[250px] w-[100%] rounded-lg"
+                    <img className="object-cover mobile:h-[100%]  tablet:h-[80%]] laptop:h-[50%] w-[80%] m-auto desktop:h-[80%] w-[100%] rounded-lg"
                       src='/hurache.svg' />
 
                     :
                     <>
                       <img
                         src={cardObject.image?.original}
-                        className="object-cover mobile:h-[200px]  mtablet:h-[250px] laptop: w-[80%] m-auto desktop:h-[250px] w-[100%] rounded-lg "
+                        className="object-cover mobile:h-[100%]  tablet:h-[80%]] laptop: w-[80%] m-auto desktop:h-[100%] w-[100%] rounded-lg "
                       />
                     </>}
 
