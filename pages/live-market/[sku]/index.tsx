@@ -118,7 +118,6 @@ const LiveMarket: NextPage = (cardObject) => {
 								<WagerCard cardObject={el} />
 							))}
 						</div>
-						{/* mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28 */}
 						<div className="self-start mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28">
 							{/*       
           <button className={admin == true ? 'h-[100px] w-[100px] bg-[black]': 'h-[100px] w-[100px] bg-[red]' }></button>
