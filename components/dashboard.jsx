@@ -24,6 +24,9 @@ export const Dashboard = ({ positions }) => {
           <span className="flex flex-row  w-[18.5%] text-xs">
             15,000 YES
           </span>
+          <span className="flex flex-row  w-[21.5%] text-xs">
+            $7,500
+          </span>
 
           <span className="flex flex-row w-[20%] text-xs">
             <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex space-x-2">
