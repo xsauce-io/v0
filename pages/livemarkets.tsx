@@ -204,7 +204,7 @@ const Markets: NextPage = () => {
 						</div>
 					</ContentHeader>
 
-					<div className="grid mobile:grid-cols-1 laptop:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
+					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
 						{response.map((el) => (
 							<Card cardObject={el} />
 						))}
