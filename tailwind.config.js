@@ -5,14 +5,16 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    fontFamily:{
-      'SG':['"Space Grotesk"', 'sans-serif'],
-      'Inter':['Inter', 'sans-serif']
+    fontFamily: {
+      'SG': ['"Space Grotesk"', 'sans-serif'],
+      'Inter': ['Inter', 'sans-serif']
     },
     screens: {
       'mobile': '300px',
 
       'tablet': '640px',
+
+      'sm-laptop': '1024px',
 
       'laptop': '1200px',
 

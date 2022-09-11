@@ -89,7 +89,7 @@ const LiveMarket: NextPage = (cardObject) => {
 				/>
 			</Head>
 			<div
-				className={`px-40 w-full items-center justify-center text-black bg-[#EFF1F3]`}
+				className={`mobile:px-5 laptop:px-40 w-full items-center justify-center text-black bg-[#EFF1F3]`}
 				style={{
 					backgroundColor: '#0C1615',
 					color: 'white',
@@ -99,10 +99,10 @@ const LiveMarket: NextPage = (cardObject) => {
 				{/* <Announcement /> */}
 				<Nav logoColor="#ACFF00" />
 			</div>
-			<main className="flex w-full px-48 flex-1 flex-col text-center pb-40 mt-16 ">
+			<main className="flex w-full mobile:px-5 laptop:px-48 flex-1 flex-col text-center pb-40 mt-16 ">
 				<h1>{admin}</h1>
 
-				<div className="laptop:flex flex-col ">
+				<div className="flex flex-col ">
 					<button
 						className="text-left text-[#748282] text-xs flex space-x-2"
 						onClick={() => router.back()}
@@ -112,13 +112,14 @@ const LiveMarket: NextPage = (cardObject) => {
 						<p>GO BACK</p>
 					</button>
 
-					<div className=" laptop:flex flex-row items-center space-x-4">
+					<div className="tablet:flex flex-row items-center tablet:space-x-4">
 						<div className="flex-1">
 							{response.map((el: any) => (
 								<WagerCard cardObject={el} />
 							))}
 						</div>
-						<div className="w-1/3 self-start mt-28">
+						{/* mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28 */}
+						<div className="self-start mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28">
 							{/*       
           <button className={admin == true ? 'h-[100px] w-[100px] bg-[black]': 'h-[100px] w-[100px] bg-[red]' }></button>
 			 */}
@@ -128,7 +129,7 @@ const LiveMarket: NextPage = (cardObject) => {
 				</div>
 			</main>
 
-			<div className="px-40 w-full items-center justify-center text-[#0C1615] ">
+			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center text-[#0C1615] ">
 				<Footer />
 			</div>
 		</div>
