@@ -3,8 +3,8 @@ import { Layout } from '../components/layout';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 import React from 'react';
+import { DashboardTable } from '../components/dashboardTable';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
@@ -20,7 +20,6 @@ const Home: NextPage = () => {
 		desktop: '1400',
 	};
 
-	const { width } = useWindowDimensions();
 	let [premarketResponse, setAuctionResponse] = useState([] as any);
 	let [isLoading, setisLoading] = useState(true as boolean);
 	let [toggled, setisToggled] = useState(true as boolean);
@@ -139,78 +138,11 @@ const Home: NextPage = () => {
 							</button>
 						</div>
 					</ContentHeader>
-					<div className="flex flex-col w-full ">
-						{width >= screens.laptop ? (
-							<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
-								<div className="flex flex-row pl-4 w-[30%] space-x-2 items-center ">
-									<p>Positions</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[18.5%] space-x-2 items-center">
-									<p>Shares</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[21.5%] space-x-2 items-center">
-									<p>Total price</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[20%] space-x-2 items-center">
-									<p>Return</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[11%]  space-x-2 items-center">
-									<p>Contracts</p>
-									<img src="/up-down.svg" />
-								</div>
-							</div>
-						) : width >= screens.tablet ? (
-							<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
-								<div className="flex flex-row pl-4 w-[30%] space-x-2 items-center w-full flex-1 ">
-									<p>Positions</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[18.5%] space-x-2 items-center">
-									<p>Shares</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[20%] space-x-2 items-center">
-									<p>Return</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[31%]  space-x-2 items-center">
-									<p>Contracts</p>
-									<img src="/up-down.svg" />
-								</div>
-							</div>
-						) : (
-							<div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4 space-x-2">
-								<div className="flex flex-row pl-4 w-[40%] items-center ">
-									<p>Positions</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[28.5%] items-center">
-									<p>Shares</p>
-									<img src="/up-down.svg" />
-								</div>
-
-								<div className="flex flex-row w-[32%] items-center ">
-									<p>Return</p>
-									<img src="/up-down.svg" />
-								</div>
-							</div>
-						)}
+					<DashboardTable>
 						{premarketResponse.map((el: []) => (
 							<Dashboard positions={el} />
 						))}
-					</div>
+					</DashboardTable>
 				</>
 			</Layout>
 		</div>
