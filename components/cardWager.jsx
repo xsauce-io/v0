@@ -81,27 +81,26 @@ export const Card = ({ cardObject }) => {
 
   return (
     <Link href={cardObjectHref}>
-      <a className="transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl flex flex-col 
- laptop: w-full items-start text-left font-inter min-h-full">
+      <a className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full">
 
         {cardObject === undefined ?
           <React.Fragment>
             <Skeleton variant="rectangular" sx={{ backgroundColor: 'white', height: '450px' }} />
           </React.Fragment> :
           <React.Fragment>
-            <div className="flex flex-row items-left laptop:flex-col laptop:space-y-3 laptop:justify-center  w-full h-full">
+            <div className="flex items-left flex-col space-y-3 justify-center w-full h-full">
 
               {cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
 
                 <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
-                  <img className='object-cover mobile:h-[30px] laptop:w-[40%] m-auto laptop:h-[100%] scale-125' src='/hurache.svg' />
+                  <img className='object-cover mobile:w-[40%]  m-auto laptop:h-[100%] scale-125' src='/hurache.svg' />
                 </div>
                 :
 
                 <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
                   {/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
-                  <img className='object-cover mobile:h-[70px] laptop:w-[40%] m-auto laptop:h-[100%] scale-150' src={cardObject.image?.original}></img>
+                  <img className='object-cover mobile:w-[40%]  m-auto laptop:h-[100%] scale-150' src={cardObject.image?.original}></img>
                 </div>
 
               }
