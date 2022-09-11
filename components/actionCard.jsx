@@ -19,18 +19,18 @@ export const ActionCard = () => {
 
 
 
-const getMarketbySku = () => {
-  const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-req.then(res => {
-  const test = res.data[3]["384664-023"]
-  setCurrentMarket(test)
-  const expires = (new Date((res.data[3]["384664-023"].expiration) * 1000)).toLocaleDateString("en-US")
-  setExpiration(expires)
-  console.log({testing:test})
-})
-   
-  // setCurrentMarket()
-}
+    const getMarketbySku = () => {
+        const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
+        req.then(res => {
+            const test = res.data[3]["384664-023"]
+            setCurrentMarket(test)
+            const expires = (new Date((res.data[3]["384664-023"].expiration) * 1000)).toLocaleDateString("en-US")
+            setExpiration(expires)
+            console.log({ testing: test })
+        })
+
+        // setCurrentMarket()
+    }
 
 
     const requestERC20 = axios.get(erc20Git);
@@ -49,8 +49,8 @@ req.then(res => {
 
     const [alignment, setAlignment] = useState();
     const [isYes, setIsYes] = useState();
-    const [No,setNo] = useState();
-    const [Yes,setYes] = useState();
+    const [No, setNo] = useState();
+    const [Yes, setYes] = useState();
     const [order, setOrder] = useState();
 
     const [isBuy, setIsBuy] = useState();
@@ -120,27 +120,27 @@ req.then(res => {
 
     }
 
-const ratios = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = await provider.getSigner();
-    const contract = new ethers.Contract(Mockaddress, mock1155, signer);
-    const getYes = await contract.totalSupply(
-     1
-    )
-    const getNo = await contract.totalSupply(
-     2
-    )
+    const ratios = async () => {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(Mockaddress, mock1155, signer);
+        const getYes = await contract.totalSupply(
+            1
+        )
+        const getNo = await contract.totalSupply(
+            2
+        )
 
-    let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-    
+        let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
 
-    let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-    console.log(YesRatio)
 
-    setYes(YesRatio.toFixed(0))
-    setNo(NoRatio.toFixed(0))
+        let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+        console.log(YesRatio)
 
-}
+        setYes(YesRatio.toFixed(0))
+        setNo(NoRatio.toFixed(0))
+
+    }
 
     useEffect(() => {
         grabData();
@@ -201,7 +201,7 @@ const ratios = async () => {
 
 
     return (
-      
+
 
 
         <div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
@@ -316,7 +316,7 @@ const ratios = async () => {
                             Limit Price
                         </p>
                         <input
-                            className="flex-1 text-right text-md mobile:pl-3  appearance-none focus:none focus:outline-none hover:underline"
+                            className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none hover:underline"
                             name="LimitPrice"
                             type="number"
                             placeholder="00.00"
@@ -324,11 +324,11 @@ const ratios = async () => {
                         />
                     </div>
                     <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
-                        <p className="text-left text-sm ">
+                        <p className="text-left text-sm inline-block ">
                             Contract Number
                         </p>
                         <input
-                            className="flex-1 text-right text-md mobile:pl-3  appearance-none focus:none focus:outline-none hover:underline"
+                            className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block  appearance-none focus:none focus:outline-none hover:underline"
                             name="contractNumber"
                             type="number"
                             placeholder="# of Contracts"
@@ -362,7 +362,7 @@ const ratios = async () => {
                         </p>
                         <div className="flex-1 font-medium" />
                         <p className="text-left text-sm  font-medium">
-                            $ 2,000.00
+                            $2,000.00
                         </p>
                     </div>
                 </div>
@@ -374,8 +374,7 @@ const ratios = async () => {
                         </p>
                         <div className="flex-1 " />
                         <p className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs">
-
-                            $ 2,000.00
+                            $2,000.00
                         </p>
                     </div>
                 </div>

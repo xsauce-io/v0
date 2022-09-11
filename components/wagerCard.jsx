@@ -5,6 +5,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import axios from "axios";
 import { ethers, BigNumber, utils } from "ethers";
 import { ContentHeader } from "./contentHeader";
+import { ExpandImageModal } from "./expandImageModal"
 
 // import AspectRatio from '@mui/joy/AspectRatio';
 
@@ -20,7 +21,7 @@ export const WagerCard = ({ cardObject }) => {
   const [tokenB, setTokenB] = useState(null)
   const [isLoaded, Loading] = useState(false)
   const [currentMarket, setCurrentMarket] = useState()
-    const [expiration, setExpiration] = useState();
+  const [expiration, setExpiration] = useState();
 
   const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
   const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
@@ -74,14 +75,15 @@ export const WagerCard = ({ cardObject }) => {
     console.log(quote[0].toNumber())
   }
 
-  const copyAddress = () => {
+  const copyAddress = async () => {
 
 
 
-    navigator.clipboard.writeText('0x50...C13ca');
+    await navigator.clipboard.writeText('0x50...C13ca');
 
 
-    alert("Copied Address: " + '0x50...C13ca');
+
+    //alert("Copied Address: " + '0x50...C13ca');
   }
 
 
@@ -103,22 +105,22 @@ export const WagerCard = ({ cardObject }) => {
 
   const getMarketbySku = () => {
     const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-  req.then(res => {
-    const test = res.data[3][cardObject.sku]
-    setCurrentMarket(test)
-    const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
-    setExpiration(expires)
-    console.log({testing:test})
-  })
+    req.then(res => {
+      const test = res.data[3][cardObject.sku]
+      setCurrentMarket(test)
+      const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+      setExpiration(expires)
+      console.log({ testing: test })
+    })
   }
 
-  
+
 
 
 
   return (
     <React.Fragment>
-      <div className="w-[2/3] ">
+      <div className=" ">
         {cardObject === undefined ? (
           <React.Fragment>
             <Skeleton variant="text" />
@@ -131,17 +133,24 @@ export const WagerCard = ({ cardObject }) => {
             <div className="text-3xl py-4 text-left mb-10 text-[#0C1615]"  > {cardObject.name}</div>
 
             <grid className="bg-white w-full grid  text-[#0C1615] grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
-              <div className="col-span-2 row-span-6 flex justify-center ">
-                <div className="w-[70%] py-4 ">
+              <div className="col-span-2 row-span-6 flex justify-center relative ">
+                <div className="w-[70%] py-4 relative">
                   {cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
 
-                    <img className="object-cover mobile:h-[200px] tablet:h-[250px] laptop:h-[50%] w-[80%] m-auto desktop:h-[250px] w-[100%] rounded-lg"
+                    <img className="object-cover mobile:h-[100%]  tablet:h-[80%]] laptop:h-[50%] w-[80%] m-auto desktop:h-[80%] w-[100%] rounded-lg"
                       src='/hurache.svg' />
 
-                    : <img
-                      src={cardObject.image?.original}
-                      className="object-cover mobile:h-[200px]  mtablet:h-[250px] laptop: w-[80%] m-auto desktop:h-[250px] w-[100%] rounded-lg "
-                    />}
+                    :
+                    <>
+                      <img
+                        src={cardObject.image?.original}
+                        className="object-cover mobile:h-[100%]  tablet:h-[80%]] laptop: w-[80%] m-auto desktop:h-[100%] w-[100%] rounded-lg "
+                      />
+                    </>}
+
+                </div>
+                <div className="mr-0 absolute right-3 bottom-3" hidden={(cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png')}>
+                  <ExpandImageModal shoeImage={cardObject.image?.original} />
                 </div>
               </div>
               <div className="col-span-2 row-span-6 text-left border-t-[1px] border-[#0C1615] px-6 py-10"><p className="text-xl font-medium font-SG py-4">
@@ -187,9 +196,9 @@ export const WagerCard = ({ cardObject }) => {
                 <p className="text-xs"> Contract</p>
 
                 <a className="flex flex-row space-x-[2px]" target="blank" rel='noreferrer' href={explorer}>
-                <p className="underline"> {currentMarket?.address}</p>
-            </a>
-                
+                  <p className="underline"> {currentMarket?.address}</p>
+
+                </a>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-b-xl space-x-4" >
                 Price : {currentQuote}
@@ -237,7 +246,7 @@ export const WagerCard = ({ cardObject }) => {
           </React.Fragment>
         )
         }
-      </div>
-    </React.Fragment>
+      </div >
+    </React.Fragment >
   );
 };
