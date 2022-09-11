@@ -8,7 +8,8 @@ import { Onboard } from "../components/onBoardingModal";
 import PropTypes from 'prop-types';
 import { useWindowDimensions } from "/utils/hooks/useWindowDimensions.js";
 import { Laptop, ScreenRotationAltSharp, Screenshot } from "@mui/icons-material";
-
+import { LocalDrawer } from '../components/drawer'
+import { DrawerHeader } from "@chakra-ui/react";
 
 
 export const Nav = ({ logoColor }) => {
@@ -335,156 +336,52 @@ export const Nav = ({ logoColor }) => {
             </button>
           </div> : <></>}
 
-        {width < screens.laptop ?
-          <div className="flex-1 flex justify-end">
-            <button
-              className="mobile:block p-5 text-white bg-[inherit] rounded hover:text-[#D9CE3F]/75 transition  "
-              onClick={() => setIsDrawerOpen(true)}
-            >
-              <span className="sr-only">Toggle menu</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div> :
-          <></>}
-        <Drawer
-          PaperProps={{
-            sx: {
-              backgroundColor: "#EFF1F3",
-            },
-          }}
-          anchor="right"
-          open={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
-        >
-          <Box
-            p={2}
-            width="250px"
-            textAlign="center"
-            role="presentation"
-            sx={{ backgroundColor: "#EFF1F3", height: "100" }}
-          >
-            <Typography component="div">
-              <ul className="space-y-16 pl-1 text-[27px] font-SG">
-                <li>
-                  <a
-                    className="text-black transition hover:text-[#D9CE3F]/75"
-                    href="/"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-black transition hover:text-[#D9CE3F]/75"
-                    href="/premarkets"
-                  >
-                    Pre-Market
-                  </a>
-                </li>
+        <LocalDrawer>
 
-                <li>
-                  <a
-                    className="text-black transition hover:text-[#D9CE3F]/75"
-                    href="/markets"
-                  >
-                    Live Market
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-black transition hover:text-[#D9CE3F]/75"
-                    href="/redeem"
-                  >
-                    Redeem
-                  </a>
-                </li>
-
-
-
-                <li>
-                  <a
-                    className="text-black transition hover:text-[#D9CE3F]/75"
-                    href="/https://twitter.com/xsauce_io"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-
-
-                <li>
-                  <div className="grid grid-cols-1 divide-y place-items-stretch	 ">
-                    <div>
-                      <Onboard />
-                    </div>
-                    {/* <div className="mt-6 text-black text-lg  bg-[#D9CE3F] p-1.5 px-0.5 transition rounded-md hover:scale-105 ">
-                          <ConnectButton />
-                        </div> */}
-
-                  </div>
-
-                </li>
-              </ul>
-            </Typography>
-
-            <div className="flex flex-col  flex-1 justify-end items-center space-x-4 font-Inter ">
-              <div className="dropdown dropdown-end">
-                <label tabindex="0" className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
-                  {toggle === 421613 ?
+          <div className="flex flex-col flex-1 justify-center items-center space-y-4 pt-8 font-Inter border-t-[1px] border-[#0C1615] mt-4 ">
+            <div className="dropdown dropdown-end">
+              <label tabindex="0" className="text-lg flex flex-row text-black justify-center items-center px-4 py-2 bg-[#DCDEE1] space-x-2 rounded-3xl w-full">
+                {toggle === 421613 ?
+                  <>
+                    <img className="h-[15%] w-[15%]" src="/arbitrum.svg" />
+                    <span className="text-black">Arbitrum</span>
+                  </> : toggle === 80001 ?
                     <>
-                      <img className="h-[15%] w-[15%]" src="/arbitrum.svg" />
-                      <span className="text-black">Arbitrum</span>
-                    </> : toggle === 80001 ?
+                      <img className="h-[15%] w-[15%]" src="/polygon.svg" />
+                      <span className="text-[black]">Polygon</span>
+                    </> : toggle === 41 ?
                       <>
-                        <img className="h-[15%] w-[15%]" src="/polygon.svg" />
-                        <span className="text-[black]">Polygon</span>
-                      </> : toggle === 41 ?
-                        <>
-                          <img className="h-[15%] w-[15%]" src="/telos.png" />
-                          <span className="text-[black]">Telos</span>
-                        </> :
-                        <>
-                          <span className="text-[red] text-[14px]">Unknown</span>
-                        </>
-                  }
-                  <img src="/dropdown.png" />
+                        <img className="h-[15%] w-[15%]" src="/telos.png" />
+                        <span className="text-[black]">Telos</span>
+                      </> :
+                      <>
+                        <span className="text-[red] text-[14px]">Unknown</span>
+                      </>
+                }
+                <img src="/dropdown.png" />
 
-                </label>
-                <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4">
+              </label>
+              <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-full mt-4">
 
-                  <li><a onClick={() => setState(421613)}><img className="h-[30%] w-[30%]" src="/arbitrum.svg" />Arbitrum</a></li>
-                  <li><a onClick={() => setState(80001)}><img className="h-[30%] w-[30%]" src="/polygon.svg" />Polygon</a></li>
-                  <li><a onClick={() => setState(41)}><img className="h-[30%] w-[30%]" src="/telos.png" />Telos</a></li>
+                <li><a onClick={() => setState(421613)}><img className="h-[30%] w-[30%]" src="/arbitrum.svg" />Arbitrum</a></li>
+                <li><a onClick={() => setState(80001)}><img className="h-[30%] w-[30%]" src="/polygon.svg" />Polygon</a></li>
+                <li><a onClick={() => setState(41)}><img className="h-[30%] w-[30%]" src="/telos.png" />Telos</a></li>
 
-                </ul>
-              </div>
-
-              <button className="text-[14px] flex flex-row justify-center text-black  items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-2  w-[175px]" onClick={() => getWallet()}>
-                <span className="truncate">
-                  {accounts == null ?
-                    'Connect Wallet' :
-                    accounts}</span>
-                <a onClick={() => copyAddressToClipboard()} className={'relative'}>
-                  <img className={accounts == null ? "hidden" : "visible active:scale-125"} src="/copy.png" />
-                  <p className={isCopied == false ? "hidden" : " transition ease-in-out duration-300 delay-150 visible z-10 absolute bg-white opacity-70 px-2 py-0.5"}>Copied</p>
-                </a>
-              </button>
+              </ul>
             </div>
-          </Box>
-        </Drawer>
+
+            <button className="text-lg flex flex-row text-black items-center bg-[#DCDEE1] rounded-3xl py-2 px-6 w-full" onClick={() => getWallet()}>
+              <span className="truncate">
+                {accounts == null ?
+                  'Connect Wallet' :
+                  accounts}</span>
+              <a onClick={() => copyAddressToClipboard()} className={'relative'}>
+                <img className={accounts == null ? "hidden" : "visible active:scale-125"} src="/copy.png" />
+                <p className={isCopied == false ? "hidden" : " transition ease-in-out duration-300 delay-150 visible z-10 absolute bg-white opacity-70 px-2 py-0.5"}>Copied</p>
+              </a>
+            </button>
+          </div>
+        </LocalDrawer>
       </div>
     </header>
   );
