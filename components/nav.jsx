@@ -486,6 +486,6 @@ export const Nav = ({ logoColor }) => {
           </Box>
         </Drawer>
       </div>
-    </header >
+    </header>
   );
 };

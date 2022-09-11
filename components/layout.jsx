@@ -36,7 +36,7 @@ export const Layout = ({ children, headerBg, headerColor, headerTitle, headerSub
                     <div className='laptop:px-40' >{children}</div>
                 </Tabs>
             </div>
-            <div className='px-40 w-full items-center justify-center'>
+            <div className='mobile:px-5 laptop:px-40 w-full items-center justify-center'>
                 <Footer />
             </div>
 

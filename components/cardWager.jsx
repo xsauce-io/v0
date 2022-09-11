@@ -13,14 +13,14 @@ export const Card = ({ cardObject }) => {
 
   const getMarketbySku = async () => {
     const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-  req.then(res => {
-    const test = res.data[3]["384664-023"]
-    setCurrentMarket(test)
-    const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
-    setExpiration(expires)
-    console.log({testing:test})
-  })
-     
+    req.then(res => {
+      const test = res.data[3]["384664-023"]
+      setCurrentMarket(test)
+      const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+      setExpiration(expires)
+      console.log({ testing: test })
+    })
+
     // setCurrentMarket()
   }
 
@@ -37,32 +37,32 @@ export const Card = ({ cardObject }) => {
 
   const ratios = async () => {
     if (currentMarket !== undefined) {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = await provider.getSigner();
-    const contract = new ethers.Contract(currentMarket?.address, mock1155, signer);
-    const getYes = await contract.totalSupply(
-     1
-    )
-    const getNo = await contract.totalSupply(
-     2
-    )
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(currentMarket?.address, mock1155, signer);
+      const getYes = await contract.totalSupply(
+        1
+      )
+      const getNo = await contract.totalSupply(
+        2
+      )
 
-    
 
-    let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-    
 
-    let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-    console.log(YesRatio)
+      let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
 
-    setYes(YesRatio.toFixed(0))
-    setNo(NoRatio.toFixed(0))
 
-}
-}
+      let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+      console.log(YesRatio)
 
-  const [No,setNo] = useState();
-  const [Yes,setYes] = useState();
+      setYes(YesRatio.toFixed(0))
+      setNo(NoRatio.toFixed(0))
+
+    }
+  }
+
+  const [No, setNo] = useState();
+  const [Yes, setYes] = useState();
   const [currentMarket, setCurrentMarket] = useState()
   const [expiration, setExpiration] = useState();
 

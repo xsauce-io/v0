@@ -2,14 +2,24 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
+import { useWindowDimensions } from "/utils/hooks/useWindowDimensions.js";
 
 
 export const Footer = ({ children }) => {
+    const screens = {
+        mobile: "300",
+        tablet: "640",
+        laptop: "1200",
+        desktop: "1400"
+    }
+
+    const { width } = useWindowDimensions();
+
     return (
         <footer>
-            <div className="mb-16 grid grid-cols-3 ">
+            <div className="grid mb-8 tablet:grid tablet:grid-cols-5 laptop:grid-cols-3 mb-16  ">
 
-                <div className="col-span-1 space-y-6">
+                <div className="mobile:col-span-5 tablet:col-span-2  laptop:col-span-1 space-y-6">
                     <svg
                         width="33"
                         height="32"
@@ -28,73 +38,141 @@ export const Footer = ({ children }) => {
                             fill="#000000"
                         />
                     </svg>
-                    <div className="text-[58px] font-SG" >The future of <span className="block"> cultural asset </span></div>
+                    <div className=" text-[36px] tablet:text-[48px] laptop:text-[58px] font-SG" >The future of <span className="block"> cultural asset </span></div>
                     <div className="text-[10px] font-inter">The prediction market known as "The Xchange" is for informational and educational purposes only. "The Xchange" is a decentralized protocol operated by autonomous smart contracts and does not have any vested interest in the outcomes of any market.</div>
                 </div>
 
             </div>
-            <div className="flex flex-row border-t-[2px] border-black py-6 space-x-8">
-                <div className=" space-x-10">
-                    <a href="https://docs.xsauce.io/connect/socials"
-                        target={'_blank'}
-                        rel={'noreferrer'}>
-                        <button className="text-[12px] hover:underline">Whitepaper</button>
-                    </a>
-                    <a href="https://docs.xsauce.io/connect/socials"
-                        target={'_blank'}
-                        rel={'noreferrer'}>
-                        <button className="text-[12px] hover:underline">Xchange</button>
-                    </a>
-                    <a href="https://docs.xsauce.io/connect/socials"
-                        target={'_blank'}
-                        rel={'noreferrer'}>
-                        <button className="text-[12px] hover:underline">Docs</button>
-                    </a>
-                </div>
-                <div className="space-x-6">
-                    <a
-                        href="https://twitter.com/xsauce_io"
-                        target={'_blank'}
-                        rel={'noreferrer'}
-                    >
-                        <button>
-                            <img className="" src="/twitterIcon.svg" />
-                        </button>
 
-                    </a>
-                    <a
-                        href="https://github.com/xsauce-io"
-                        target={'_blank'}
-                        rel={'noreferrer'}
-                    >
-                        <button>
-                            <img className="" src="/githubIcon.svg" />
-                        </button>
-                    </a>
-                    <a
-                        href="https://angel.co/company/xsauced-1"
-                        target={'_blank'}
-                        rel={'noreferrer'}
-                    >
-                        <button>
-                            <img className="" src="/discordIcon.svg" />
-                        </button>
+            {width >= screens.tablet ?
+                <div className="flex mobile:flex-col   tablet:flex-row py-6 space-x-8 tablet:border-t-[2px] border-black">
+                    <div className="space-x-10">
+                        <a href="https://docs.xsauce.io/connect/socials"
+                            target={'_blank'}
+                            rel={'noreferrer'}>
+                            <button className="text-[12px] hover:underline">Whitepaper</button>
+                        </a>
+                        <a href="https://docs.xsauce.io/connect/socials"
+                            target={'_blank'}
+                            rel={'noreferrer'}>
+                            <button className="text-[12px] hover:underline">Xchange</button>
+                        </a>
+                        <a href="https://docs.xsauce.io/connect/socials"
+                            target={'_blank'}
+                            rel={'noreferrer'}>
+                            <button className="text-[12px] hover:underline">Docs</button>
+                        </a>
+                    </div>
+                    <div className="space-x-6 mobile:flex-1 border-t-[2px] border-black  tablet:border-0 flex">
+                        <a
+                            href="https://twitter.com/xsauce_io"
+                            target={'_blank'}
+                            rel={'noreferrer'}
+                        >
+                            <button>
+                                <img className="" src="/twitterIcon.svg" />
+                            </button>
 
-                    </a>
-                    <a
-                        href="https://angel.co/company/xsauced-1"
-                        target={'_blank'}
-                        rel={'noreferrer'}
-                    >
-                        <button >
-                            <img className="" src="/angelListIcon.svg" />
-                        </button>
+                        </a>
+                        <a
+                            href="https://github.com/xsauce-io"
+                            target={'_blank'}
+                            rel={'noreferrer'}
+                        >
+                            <button>
+                                <img className="" src="/githubIcon.svg" />
+                            </button>
+                        </a>
+                        <a
+                            href="https://angel.co/company/xsauced-1"
+                            target={'_blank'}
+                            rel={'noreferrer'}
+                        >
+                            <button>
+                                <img className="" src="/discordIcon.svg" />
+                            </button>
 
-                    </a>
+                        </a>
+                        <a
+                            href="https://angel.co/company/xsauced-1"
+                            target={'_blank'}
+                            rel={'noreferrer'}
+                        >
+                            <button >
+                                <img className="" src="/angelListIcon.svg" />
+                            </button>
 
-                </div>
-                <div className="flex-1 text-right text-[12px]">© 2022 Xsauce platform</div>
-            </div>
+                        </a>
+                        <div className="flex-1"  ></div>
+                        <div className="text-right text-[12px]">© 2022 Xsauce platform</div>
+
+                    </div>
+                </div> : <div className="flex flex-col flex-row pb-10">
+                    <div className="space-x-10 pb-10">
+                        <a href="https://docs.xsauce.io/connect/socials"
+                            target={'_blank'}
+                            rel={'noreferrer'}>
+                            <button className="text-[12px] hover:underline">Whitepaper</button>
+                        </a>
+                        <a href="https://docs.xsauce.io/connect/socials"
+                            target={'_blank'}
+                            rel={'noreferrer'}>
+                            <button className="text-[12px] hover:underline">Xchange</button>
+                        </a>
+                        <a href="https://docs.xsauce.io/connect/socials"
+                            target={'_blank'}
+                            rel={'noreferrer'}>
+                            <button className="text-[12px] hover:underline">Docs</button>
+                        </a>
+                    </div>
+                    <div className="border-t-[2px] border-black flex pt-10 ml-0 space-x-3">
+
+                        <div className="text-left text-[10px] ">© 2022 Xsauce. All rights Reserved.</div>
+                        <div className="flex-1"  ></div>
+
+                        <a
+                            href="https://twitter.com/xsauce_io"
+                            target={'_blank'}
+                            rel={'noreferrer'}
+                        >
+                            <button>
+                                <img className="" src="/twitterIcon.svg" />
+                            </button>
+
+                        </a>
+                        <a
+                            href="https://github.com/xsauce-io"
+                            target={'_blank'}
+                            rel={'noreferrer'}
+                        >
+                            <button>
+                                <img className="" src="/githubIcon.svg" />
+                            </button>
+                        </a>
+                        <a
+                            href="https://angel.co/company/xsauced-1"
+                            target={'_blank'}
+                            rel={'noreferrer'}
+                        >
+                            <button>
+                                <img className="" src="/discordIcon.svg" />
+                            </button>
+
+                        </a>
+                        <a
+                            href="https://angel.co/company/xsauced-1"
+                            target={'_blank'}
+                            rel={'noreferrer'}
+                        >
+                            <button >
+                                <img className="" src="/angelListIcon.svg" />
+                            </button>
+
+                        </a>
+
+
+                    </div>
+                </div>}
 
         </footer>
     )
