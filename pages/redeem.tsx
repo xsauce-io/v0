@@ -82,7 +82,7 @@ const Redeem: NextPage = () => {
 							title={'Select Wager'}
 							icon={<img className="" src="/candle.svg" />}
 						/>
-						<div className=" w-[35%] items-center justify-center flex-col dropdown dropdown-right ">
+						<div className="mobile:w-full tablet:w-[60%] laptop:w-[35%] items-center justify-center flex-col dropdown laptop:dropdown-right mobile:dropdown-end ">
 							<label
 								tabIndex={0}
 								className="text-xl flex flex-column justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-8 bg-white space-x-5 hover:opacity-50"
@@ -104,7 +104,7 @@ const Redeem: NextPage = () => {
 							</label>
 							<ul
 								tabIndex={0}
-								className="dropdown-content bg-white p-4 shadow rounded-box w-[400px] mt-4 z-10 text-lg"
+								className="dropdown-content bg-white p-4 shadow rounded-box w-full mt-4 z-10 text-lg"
 							>
 								<li
 									className="py-2 border-b-[1px] border-[#0C1615]"
@@ -123,7 +123,7 @@ const Redeem: NextPage = () => {
 								</li>
 							</ul>
 						</div>
-						<div className="mobile:w-full px-[20px] flex flex-col space-y-4 laptop:items-center">
+						<div className="mobile:full tablet:w-[60%] flex flex-col space-y-4 laptop:items-center">
 							<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
 								{isLoading === true ? (
 									<React.Fragment>
