@@ -4,7 +4,7 @@ import React from "react"
 export const HowItWorksButton = ({ title }) => {
 
     return (
-        <div className="flex flex-col h-full w-3/7  rounded-[10px] text-black">
+        <div className="flex flex-col h-full  tablet:w-[52%] laptop:w-[43%]  mobile:w-full rounded-[10px] text-black">
 
             <button className='bg-white rounded-t-[10px] py-5 pr-10  pl-5 w-[100%] border-b-[1px] border-[#0C1615] hover:opacity-40 flex  items-center'>
                 <img className="" src="/openbook.svg" />
