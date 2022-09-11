@@ -309,11 +309,11 @@ export const ActionCard = () => {
                         </ToggleButtonGroup>
                     </ThemeProvider>
                     <p className="text-[gray] text-[12px]">Prediction</p> */}
-                <div className='bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full '>
+                <div className='bg-white items-center text-left border-b-[1px] p-4 space-y-4 border-[#0C1615] w-full '>
 
                     <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
-                        <p className="text-left text-sm ">
-                            Limit Price
+                        <p className="text-left text-sm pr-1 ">
+                            Limit Price:
                         </p>
                         <input
                             className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none hover:underline"
@@ -324,13 +324,13 @@ export const ActionCard = () => {
                         />
                     </div>
                     <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
-                        <p className="text-left text-sm inline-block ">
-                            Contract Number
+                        <p className="text-left text-sm inline-block pr-1 ">
+                            Contract Number:
                         </p>
                         <input
-                            className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block  appearance-none focus:none focus:outline-none hover:underline"
+                            className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none hover:underline"
                             name="contractNumber"
-                            type="number"
+                            type="text"
                             placeholder="# of Contracts"
                             required
                         />
