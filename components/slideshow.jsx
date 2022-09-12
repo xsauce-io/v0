@@ -3,7 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './slideshow.module.css';
 
 // ---------------- IMPORTANT -----------------
-// This is only for 
+// This component can only be used in jsx files.
+// And its currently hardcoded to support the onboarding modal
 
 const Images = [
     {
