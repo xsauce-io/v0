@@ -16,6 +16,7 @@ import { ContentHeader } from '../../../components/contentHeader';
 import { Footer } from '../../../components/footer';
 import Link from 'next/link';
 import Image from 'next/image';
+import {Jackpot} from '../../../components/jackpot';
 
 declare var window: any;
 
@@ -121,8 +122,9 @@ const LiveMarket: NextPage = (cardObject) => {
 						<div className="self-start mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28">
 							{/*       
           <button className={admin == true ? 'h-[100px] w-[100px] bg-[black]': 'h-[100px] w-[100px] bg-[red]' }></button>
-			 */}
-							<ActionCard />
+			 */}            <Jackpot/>
+							<ActionCard cardObject={sku} />
+
 						</div>
 					</div>
 				</div>

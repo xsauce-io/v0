@@ -58,7 +58,6 @@ export interface MarketInterface extends utils.Interface {
     "supportsInterface(bytes4)": FunctionFragment;
     "totalSupply(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "updateSku(string)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
   };
 
@@ -93,7 +92,6 @@ export interface MarketInterface extends utils.Interface {
       | "supportsInterface"
       | "totalSupply"
       | "transferOwnership"
-      | "updateSku"
       | "uri"
   ): FunctionFragment;
 
@@ -225,10 +223,6 @@ export interface MarketInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "updateSku",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "uri",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -301,7 +295,6 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "updateSku", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
 
   events: {
@@ -558,11 +551,6 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    updateSku(
-      _newSku: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     uri(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -708,11 +696,6 @@ export interface Market extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  updateSku(
-    _newSku: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   uri(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -847,11 +830,6 @@ export interface Market extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    updateSku(
-      _newSku: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1065,11 +1043,6 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    updateSku(
-      _newSku: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     uri(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1213,11 +1186,6 @@ export interface Market extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateSku(
-      _newSku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

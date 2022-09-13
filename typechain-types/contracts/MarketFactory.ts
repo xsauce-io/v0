@@ -30,7 +30,7 @@ import type {
 export interface MarketFactoryInterface extends utils.Interface {
   functions: {
     "allMarkets(uint256)": FunctionFragment;
-    "createNewMarket(string,uint256,address,uint256,address)": FunctionFragment;
+    "createNewMarket(string,uint256,address,uint256,address,string)": FunctionFragment;
     "getAllMarkets()": FunctionFragment;
     "getMarket(string,uint256,uint256)": FunctionFragment;
     "markets(bytes32)": FunctionFragment;
@@ -62,6 +62,7 @@ export interface MarketFactoryInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
       PromiseOrValue<string>
     ]
   ): string;
@@ -183,6 +184,7 @@ export interface MarketFactory extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _usdc: PromiseOrValue<string>,
+      sku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -225,6 +227,7 @@ export interface MarketFactory extends BaseContract {
     _oracleFeed: PromiseOrValue<string>,
     _closingDate: PromiseOrValue<BigNumberish>,
     _usdc: PromiseOrValue<string>,
+    sku: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -265,6 +268,7 @@ export interface MarketFactory extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _usdc: PromiseOrValue<string>,
+      sku: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -326,6 +330,7 @@ export interface MarketFactory extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _usdc: PromiseOrValue<string>,
+      sku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -367,6 +372,7 @@ export interface MarketFactory extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _usdc: PromiseOrValue<string>,
+      sku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

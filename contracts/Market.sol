@@ -51,10 +51,6 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
       resolved = true;
     }
 
-    function updateSku(string memory _newSku) public onlyOwner {
-      oracleFeed.setSku(_newSku);
-    }
-
     function getData() public onlyOwner {
         oracleFeed.requestPrice();
         fetched = true;

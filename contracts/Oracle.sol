@@ -18,7 +18,7 @@ contract Oracle is IOracle, Ownable {
         fee = (1 * LINK_DIVISIBILITY) / 10; 
         sku = _sku;
     }
- function setSku(string memory _newSku) public override onlyOwner {
+ function setSku(string memory _newSku) public onlyOwner {
         sku = _newSku;
     }
 

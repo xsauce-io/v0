@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Market.sol": {
-      "lastModificationDate": 1662852091809,
-      "contentHash": "c738d03928ee2b5821138b01ebcf9230",
+      "lastModificationDate": 1663028642433,
+      "contentHash": "d3eeafe66e20b2074d21588d56274c7e",
       "sourceName": "contracts/Market.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -44,8 +44,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/interfaces/IOracle.sol": {
-      "lastModificationDate": 1662776786338,
-      "contentHash": "11a282c96a17f14db12b79eb6c5d9f99",
+      "lastModificationDate": 1663028741225,
+      "contentHash": "d0278aa21d3bc80e45b57394062bef73",
       "sourceName": "contracts/interfaces/IOracle.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1185,8 +1185,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/MarketFactory.sol": {
-      "lastModificationDate": 1662917508276,
-      "contentHash": "5e9ced62f5cbdfb0cc3fa21f20c3e683",
+      "lastModificationDate": 1662951977564,
+      "contentHash": "9ae7550185697ff14898daf2880456cc",
       "sourceName": "contracts/MarketFactory.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1261,8 +1261,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Oracle.sol": {
-      "lastModificationDate": 1662776767321,
-      "contentHash": "24f17d332472606347000105f2c5e483",
+      "lastModificationDate": 1663034416547,
+      "contentHash": "e30938f8f4560e3daa6cae35ca868e63",
       "sourceName": "contracts/Oracle.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1298,44 +1298,6 @@
       ],
       "artifacts": [
         "Oracle"
-      ]
-    },
-    "/Users/home/Desktop/xsauce.v0/v0/contracts/bank.sol": {
-      "lastModificationDate": 1662859059349,
-      "contentHash": "9ba559597e342dc060c8d66f23b639b0",
-      "sourceName": "contracts/bank.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "hardhat/console.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "Bank",
-        "BankFactory"
       ]
     }
   }

@@ -1,17 +1,19 @@
 import type { NextPage } from 'next';
-import { Nav } from '../components/nav';
-import { Announcement } from '../components/announcement';
+
 import Head from 'next/head';
-import Image from 'next/image';
+
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import { RepeatOneSharp } from '@mui/icons-material';
-import { Skeleton } from '@mui/material';
-import { Tabs } from '../components/tabs';
+import { ethers, utils, BigNumber} from 'ethers';
 import { Layout } from '../components/layout';
 
 import { ContentHeader } from '../components/contentHeader';
 import { Card } from '../components/cardWager';
+import marketFactoryabi from "../abi/marketFactory.json";
+
+
+
+declare var window: any;
 
 const Markets: NextPage = () => {
 	const SORT_BY_STATES = {
@@ -25,9 +27,12 @@ const Markets: NextPage = () => {
 		LIST: 'list',
 	};
 
-	const [response, setResponse] = useState([]);
+	const [response, setResponse] = useState([] as any);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
 	const [isAscending, setIsAscending] = useState(true);
+  const [admin, setAdmin] = useState(false);
+  let [isLoading, setisLoading] = useState(true as boolean);
+
 
 	const options = {
 		method: 'GET',
@@ -39,12 +44,37 @@ const Markets: NextPage = () => {
 
 	// fetch sneaker data
 	const getSneaker = async () => {
-		axios
-			.request(options)
-			.then(function (response) {
-				setResponse(response.data.results);
-				console.log(response.data.results);
-			})
+		Promise.all([
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=384664-023'
+			),
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=BQ4422-400'
+			),
+
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=CT8012-011'
+			),
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DV2122-400'
+			),
+		])
+
+			.then(
+				axios.spread((obj1, obj2, obj3, obj4) => {
+					setResponse([
+						obj1.data.results[0],
+						obj2.data.results[0],
+						obj3.data.results[0],
+            obj4.data.results[0],
+          ]);
+
+					setisLoading(false);
+
+					console.log({ obj1 });
+					console.log({ obj2 });
+				})
+			)
 			.catch(function (error) {
 				console.error(error);
 			});
@@ -52,6 +82,46 @@ const Markets: NextPage = () => {
 
 	useEffect(() => {
 		getSneaker();
+  
+    console.log()
+	}, []);
+
+  const adminCheck = async () => {
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		// Prompt user for account connections
+		let wallet = await provider.send('eth_requestAccounts', [0]);
+		let accounts = wallet.toString();
+		console.log(accounts);
+
+		if (accounts == 0x50924f626d1ae4813e4a81e2c5589ec3882c13ca) {
+			setAdmin(true);
+		} else {
+			setAdmin(false);
+		}
+	};
+
+
+  const createNewMarket = async (e:any) => {
+    const address = "0x27D7a1119D4D397f432D7C3266dbC6D77a09CACe"
+    e.preventDefault();
+    const data = new FormData(e.target);
+    console.log(data.get("contractNumber"));
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []);
+    const signer = provider.getSigner();
+    const MarketFactory = new ethers.Contract(address, marketFactoryabi, signer);
+
+    const create = await MarketFactory.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json',  BigNumber.from(data.get("prediction")), 0, BigNumber.from(data.get("closingDate")), 0) 
+create.wait(1)
+
+const newMarket = await create.allMarkets(-1);
+
+alert(`market created at ${newMarket}!`)
+  }
+
+	useEffect(() => {
+		getSneaker();
+    adminCheck();
 	}, []);
 
 	useMemo(() => {
@@ -206,9 +276,29 @@ const Markets: NextPage = () => {
 								)}
 							</button>
 						</div>
+            {admin === true ?
+            <form className='space-x-2 ml-4'>
+
+
+<input
+  className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+  name="prediction"
+  type="string"
+  placeholder="Prediction Price"
+/>
+<input
+  className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+  name="closingDate"
+  type="string"
+  placeholder="Closing Date (UNIX)"
+/>
+            <button className='bg-black text-white rounded-lg py-3 px-2 mt-3' onClick={createNewMarket}>Add Market</button>
+            </form> : <></>}
+
+
 					</ContentHeader>
 					<div className="grid mobile:grid-cols-1  laptop:grid tablet:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response.map((el) => (
+						{response.map((el:any) => (
 							<Card cardObject={el} />
 						))}
 					</div>

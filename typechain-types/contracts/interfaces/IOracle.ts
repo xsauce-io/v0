@@ -32,18 +32,11 @@ export interface IOracleInterface extends utils.Interface {
     "jobId()": FunctionFragment;
     "price()": FunctionFragment;
     "requestPrice()": FunctionFragment;
-    "setSku(string)": FunctionFragment;
     "sku()": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic:
-      | "fee"
-      | "jobId"
-      | "price"
-      | "requestPrice"
-      | "setSku"
-      | "sku"
+    nameOrSignatureOrTopic: "fee" | "jobId" | "price" | "requestPrice" | "sku"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "fee", values?: undefined): string;
@@ -52,10 +45,6 @@ export interface IOracleInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "requestPrice",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setSku",
-    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "sku", values?: undefined): string;
 
@@ -66,7 +55,6 @@ export interface IOracleInterface extends utils.Interface {
     functionFragment: "requestPrice",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "setSku", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sku", data: BytesLike): Result;
 
   events: {
@@ -163,11 +151,6 @@ export interface IOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setSku(
-      _newSku: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     sku(overrides?: CallOverrides): Promise<[string]>;
   };
 
@@ -181,11 +164,6 @@ export interface IOracle extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setSku(
-    _newSku: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   sku(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
@@ -196,11 +174,6 @@ export interface IOracle extends BaseContract {
     price(overrides?: CallOverrides): Promise<BigNumber>;
 
     requestPrice(overrides?: CallOverrides): Promise<string>;
-
-    setSku(
-      _newSku: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     sku(overrides?: CallOverrides): Promise<string>;
   };
@@ -248,11 +221,6 @@ export interface IOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setSku(
-      _newSku: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     sku(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
@@ -264,11 +232,6 @@ export interface IOracle extends BaseContract {
     price(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     requestPrice(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setSku(
-      _newSku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

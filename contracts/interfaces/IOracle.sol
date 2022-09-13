@@ -14,6 +14,4 @@ abstract contract IOracle is ChainlinkClient {
 
     event RequestPrice(bytes32 indexed requestId, uint256 price);
 
-     function setSku(string memory _newSku) external virtual;
-
 }

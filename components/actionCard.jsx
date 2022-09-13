@@ -1,7 +1,7 @@
 import React from "react"
 import { BigNumber, ethers, utils } from 'ethers'
 import erc1155abi from '../abi/erc1155.json';
-import mock1155 from '../abi/mock1155.json';
+import marketabi from '../abi/markets.json';
 import { useState, useEffect } from "react";
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
@@ -10,7 +10,7 @@ import axios from 'axios'
 
 
 
-export const ActionCard = () => {
+export const ActionCard = ({cardObject}) => {
 
     const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
     const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
@@ -18,18 +18,15 @@ export const ActionCard = () => {
     const TokenA = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
 
 
-
     const getMarketbySku = () => {
-        const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-        req.then(res => {
-            const test = res.data[3]["384664-023"]
-            setCurrentMarket(test)
-            const expires = (new Date((res.data[3]["384664-023"].expiration) * 1000)).toLocaleDateString("en-US")
-            setExpiration(expires)
-            console.log({ testing: test })
-        })
-
-        // setCurrentMarket()
+      const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
+      req.then(res => {
+        const test = res.data[3][cardObject]
+        setCurrentMarket(test)
+        const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+        setExpiration(expires)
+        console.log({ testing: currentMarket })
+      })
     }
 
 
@@ -121,32 +118,41 @@ export const ActionCard = () => {
     }
 
     const ratios = async () => {
+      if (currentMarket !== undefined) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = await provider.getSigner();
-        const contract = new ethers.Contract(Mockaddress, mock1155, signer);
+        const contract = new ethers.Contract(currentMarket?.address, marketabi, signer);
         const getYes = await contract.totalSupply(
-            1
+          1
         )
         const getNo = await contract.totalSupply(
-            2
+          2
         )
-
+  
+  
+  
         let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-
-
+  
+  
         let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
         console.log(YesRatio)
-
+  
         setYes(YesRatio.toFixed(0))
         setNo(NoRatio.toFixed(0))
-
+  
+      }
     }
 
     useEffect(() => {
+      ratios();
+      // calculations();
+    }, [currentMarket]);
+
+    useEffect(() => {
         grabData();
-        ratios();
         getMarketbySku();
     }, []);
+
 
 
     useEffect(() => {

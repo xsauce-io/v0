@@ -90,7 +90,7 @@ export const WagerCard = ({ cardObject }) => {
   useEffect(() => {
 
     const loader = async () => {
-      await grabData();
+      // await grabData();
       getMarketbySku();
     }
     loader();
