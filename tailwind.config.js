@@ -5,6 +5,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+
     fontFamily: {
       'SG': ['"Space Grotesk"', 'sans-serif'],
       'Inter': ['Inter', 'sans-serif']
@@ -25,6 +26,15 @@ module.exports = {
     extend: {
       scale: {
         '80': '0.8'
+      },
+      colors: {
+        'bright-green': '#ACFF00',
+        'dark-green': '#0C1615',
+        'light-grey': '#EFF1F3',
+        'off-white': '#EFF3F0',
+        'grey': '#656E6F',
+        'off-grey': '#748282',
+
       }
     },
   },

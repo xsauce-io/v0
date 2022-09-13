@@ -26,7 +26,7 @@ export const ExpandImageModal = ({ shoeImage }) => {
     return (
         <div>
 
-            <button className='text-[1rem] text-black font-SG border-2 p-1.5 px-2.5 border-black rounded-md hover:scale-105 ' variant="contained" onClick={handleClickOpen}>
+            <button className='text-[1rem] text-black font-SG p-1.5 px-2.5 border-black rounded-md hover:scale-105 ' variant="contained" onClick={handleClickOpen}>
                 <img src="/expandIcon.svg" />
             </button>
 

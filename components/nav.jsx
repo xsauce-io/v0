@@ -293,7 +293,7 @@ export const Nav = ({ logoColor }) => {
 
         {width >= screens.laptop ?
           <div className="flex flex-row  flex-1 justify-end items-center space-x-4 font-Inter">
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end hover:opacity-60">
               <label tabindex="0" className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
                 {toggle === 421613 ?
                   <>
@@ -324,13 +324,13 @@ export const Nav = ({ logoColor }) => {
               </ul>
             </div>
 
-            <button className="text-[14px] flex flex-row justify-center text-black  items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-2  w-[175px]" onClick={() => getWallet()}>
+            <button className="text-[14px] flex flex-row justify-center text-black  items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60" onClick={() => getWallet()}>
               <span className="truncate">
                 {accounts == null ?
                   'Connect Wallet' :
                   accounts}</span>
               <a onClick={() => copyAddressToClipboard()} className={'relative'}>
-                <img className={accounts == null ? "hidden" : "visible active:scale-125"} src="/copy.png" />
+                <img className={accounts == null ? "hidden" : "visible hover:scale-110 active:scale-125"} src="/copy.png" />
                 <p className={isCopied == false ? "hidden" : " transition ease-in-out duration-300 delay-150 visible z-10 absolute bg-white opacity-70 px-2 py-0.5"}>Copied</p>
               </a>
             </button>
@@ -338,8 +338,8 @@ export const Nav = ({ logoColor }) => {
 
         <LocalDrawer>
 
-          <div className="flex flex-col flex-1 justify-center items-center space-y-4 pt-8 font-Inter border-t-[1px] border-[#0C1615] mt-4 ">
-            <div className="dropdown dropdown-end">
+          <div className="flex flex-col flex-1 justify-center items-center space-y-4 pt-8 font-Inter border-t-[1px] border-white mt-4 ">
+            <div className="dropdown dropdown-end hover:opacity-60">
               <label tabindex="0" className="text-lg flex flex-row text-black justify-center items-center px-4 py-2 bg-[#DCDEE1] space-x-2 rounded-3xl w-full">
                 {toggle === 421613 ?
                   <>
@@ -370,7 +370,7 @@ export const Nav = ({ logoColor }) => {
               </ul>
             </div>
 
-            <button className="text-lg flex flex-row text-black items-center bg-[#DCDEE1] rounded-3xl py-2 px-6 w-full" onClick={() => getWallet()}>
+            <button className="text-lg flex flex-row text-black items-center bg-[#DCDEE1] rounded-3xl py-2 px-6 w-full hover:opacity-60" onClick={() => getWallet()}>
               <span className="truncate">
                 {accounts == null ?
                   'Connect Wallet' :

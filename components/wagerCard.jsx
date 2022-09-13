@@ -208,7 +208,7 @@ export const WagerCard = ({ cardObject }) => {
                 >
                   <InfoIcon sx={{ fontSize: "18px" }} />
                 </Tooltip>
-                <button onClick={quote} className="bg-black text-white p-3 text-[12px] rounded-2xl ">Update Quote</button>
+                <button onClick={quote} className="bg-black text-white p-3 text-[12px] rounded-2xl hover:opacity-60">Update Quote</button>
               </div>
 
             </grid>

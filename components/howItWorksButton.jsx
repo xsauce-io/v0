@@ -60,7 +60,7 @@ export const HowItWorksButton = ({ title }) => {
             <div className='bg-[#DCDEE1] rounded-b-[10px] p-4 text-left w-[100%] space-y-2 '>
                 <div className="py-2 flex space-x-2 text-sm">
                     <h1 className=" text-sm">FINANCIAL OVERVIEW </h1>
-                    <button className="rounded-2xl px-3 bg-[#ACFF00] text-xs ">Redeem</button>
+                    <button className="rounded-2xl px-3 bg-[#ACFF00] text-xs hover:opacity-60 ">Redeem</button>
 
                 </div>
                 <grid className="grid grid-cols-2">

@@ -122,7 +122,7 @@ export const WagerCard = ({ cardObject }) => {
                     </Tooltip>
                     <button onClick={quote} className="bg-black text-white p-3 text-[12px]">Update Quote</button>
                   </h3>
-                  {/* <button onClick={quote} >Get Quote</button> */}
+                  {/* <button className="hover:opacity-75" onClick={quote} >Get Quote</button> */}
                 </div>
                 <img
                   src={cardObject.image?.original}
