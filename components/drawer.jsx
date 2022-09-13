@@ -29,7 +29,7 @@ export const LocalDrawer = ({ children }) => {
             {width < screens.laptop ?
                 <div className="flex-1 flex justify-end">
                     <button
-                        className="mobile:block p-5 text-white bg-[inherit] rounded hover:text-[#D9CE3F]/75 transition  "
+                        className="mobile:block p-5 text-white bg-[inherit] rounded hover:text-[#ACFF00]/75 transition"
                         onClick={() => setIsDrawerOpen(true)}
                     >
                         <span className="sr-only">Toggle menu</span>
@@ -54,7 +54,7 @@ export const LocalDrawer = ({ children }) => {
             <Drawer
                 PaperProps={{
                     sx: {
-                        backgroundColor: "#EFF1F3",
+                        backgroundColor: "#0C1615",
                     },
                 }
                 }
@@ -62,19 +62,19 @@ export const LocalDrawer = ({ children }) => {
                 open={isDrawerOpen}
                 onClose={() => setIsDrawerOpen(false)}
             >
-                <div className="h-20 border-b-[1px] border-[#0C1615]  mx-8 "></div>
+                <div className="h-20 border-b-[1px] border-white  mx-8 "></div>
                 <Box
                     p={4}
                     width="250px"
                     textAlign="left"
                     role="presentation"
-                    sx={{ backgroundColor: "#EFF1F3", height: "100" }}
+                    sx={{ backgroundColor: "#0C1615", height: "100" }}
                 >
 
                     <ul className="space-y-8 text-2xl font-SG pb-6">
                         <li>
                             <a
-                                className="text-black transition hover:text-[#ACFF00]"
+                                className="text-white transition hover:text-[#ACFF00]"
                                 href="/"
                             >
                                 Home
@@ -82,7 +82,7 @@ export const LocalDrawer = ({ children }) => {
                         </li>
                         <li>
                             <a
-                                className="text-black transition hover:text-[#ACFF00]"
+                                className="text-white transition hover:text-[#ACFF00]"
                                 href="/premarkets"
                             >
                                 Pre-Market
@@ -91,8 +91,8 @@ export const LocalDrawer = ({ children }) => {
 
                         <li>
                             <a
-                                className="text-black transition hover:text-[#ACFF00]"
-                                href="/markets"
+                                className="text-white transition hover:text-[#ACFF00]"
+                                href="/livemarkets"
                             >
                                 Live Market
                             </a>
@@ -100,7 +100,7 @@ export const LocalDrawer = ({ children }) => {
 
                         <li>
                             <a
-                                className="text-black transition hover:text-[#ACFF00]"
+                                className="text-white transition hover:text-[#ACFF00]"
                                 href="/redeem"
                             >
                                 Redeem
@@ -111,22 +111,16 @@ export const LocalDrawer = ({ children }) => {
 
                         <li>
                             <a
-                                className="text-black transition hover:text-[#ACFF00]"
-                                href="/https://twitter.com/xsauce_io"
+                                className="text-white transition hover:text-[#ACFF00]"
+                                href="https://docs.xsauce.io/connect/socials"
+                                target={'_blank'}
+                                rel={'noreferrer'}
                             >
                                 Contact Us
                             </a>
                         </li>
 
-                        {/* <li>
-                                <div className="grid grid-cols-1 divide-y place-items-stretch	 ">
-                                    <div>
-                                        <Onboard />
-                                    </div>
-                                    
-                                </div>
 
-                            </li> */}
                     </ul>
 
 

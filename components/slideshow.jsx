@@ -22,9 +22,9 @@ const Images = [
 ]
 
 
-export const Slideshow = ({ href }) => {
-    const slides = ["#0088FE", "#00C49F", "#FFBB28"];
-    const delay = 5000;
+export const Slideshow = () => {
+    //const slides = ["#0088FE", "#00C49F", "#FFBB28"];
+    const delay = 3000;
 
     const [index, setIndex] = useState(0);
     const timeoutRef = useRef(null);
@@ -32,7 +32,7 @@ export const Slideshow = ({ href }) => {
     useEffect(() => {
         resetTimeout();
         timeoutRef.current = setTimeout(() => setIndex((prevIndex) =>
-            prevIndex === (slides.length - 1) ?
+            prevIndex === (Images.length - 1) ?
                 0 :
                 prevIndex + 1
         ),

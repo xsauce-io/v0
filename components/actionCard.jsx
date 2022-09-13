@@ -228,33 +228,34 @@ export const ActionCard = ({cardObject}) => {
                         <p className="font-SG text-xs text-left opacity-70 mt-2">Wager Expires: {expiration}</p>
                     </did>
 
-                    <div className='bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
-                        <p className="text-left text-sm ">
-                            Select the Wager
-                        </p>
-                        <div class="flex-1"></div>
-                        <div class="dropdown dropdown-end ">
-                            <label tabindex="0" class="flex items-center">
-                                {isYes === true ? (
-                                    <>
-                                        <span className="text-black">Yes</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <span className="text-black">No</span>
-                                    </>
 
-                                )}
+                    <div class="bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615]  dropdown dropdown-end  ">
 
-                            </label>
-                            <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
-                                <li><a onClick={() => { setIsYes(true) }}>Yes</a></li>
-                                <li><a onClick={() => { setIsYes(false) }}>No</a></li>
-                            </ul>
-                        </div>
+                        <label tabindex="0" class="flex items-center hover:opacity-60 ">
+                            <p className="text-left text-sm ">
+                                Select the Wager
+                            </p>
+                            <div class="flex-1"></div>
+                            {isYes === true ? (
+                                <>
+                                    <span className="text-black">Yes</span>
+                                </>
+                            ) : (
+                                <>
+                                    <span className="text-black">No</span>
+                                </>
 
+                            )}
 
+                        </label>
+                        <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-[25%] mt-4    ">
+                            <li><a onClick={() => { setIsYes(true) }} className="flex justify-right">Yes</a></li>
+                            <li><a onClick={() => { setIsYes(false) }}>No</a></li>
+                        </ul>
                     </div>
+
+
+
                     <div className='bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
                         <p className="text-left text-sm ">
                             Buy or Sell
@@ -274,7 +275,7 @@ export const ActionCard = ({cardObject}) => {
                                 )}
 
                             </label>
-                            <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+                            <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-52 mt-4">
                                 <li><a onClick={() => { setIsBuy(true) }}>Buy</a></li>
                                 <li><a onClick={() => { setIsBuy(false) }}>Sell</a></li>
                             </ul>
@@ -283,38 +284,7 @@ export const ActionCard = ({cardObject}) => {
 
                     </div>
                 </div>
-                {/* 
-                    <ThemeProvider theme={theme}>
-                        <ToggleButtonGroup
 
-                            color={isBuy === true ? "primary" : 'secondary'}
-                            sx={{ backgroundColor: 'white', '@media screen and (min-width: 300px)': { width: '100%' } }}
-                            value={order}
-                            exclusive
-                            required
-                            onChange={handleChange1}
-                        >
-                            <ToggleButton sx={{ width: '100%', boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' }} value="1">Buy</ToggleButton>
-                            <ToggleButton sx={{ width: '100%', boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' }} value="2">Sell</ToggleButton>
-                        </ToggleButtonGroup>
-                    </ThemeProvider>
-                    <p className="text-[gray] text-[12px]">Buying or Selling?</p>
-
-
-                    <ThemeProvider theme={theme}>
-                        <ToggleButtonGroup
-
-                            color={isYes === true ? "primary" : 'secondary'}
-                            sx={{ backgroundColor: 'white', '@media screen and (min-width: 300px)': { width: '100%' } }}
-                            value={alignment}
-                            exclusive
-                            onChange={handleChange}
-                        >
-                            <ToggleButton sx={{ width: '100%', boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' }} value="1">Yes</ToggleButton>
-                            <ToggleButton sx={{ width: '100%', boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' }} value="2">No</ToggleButton>
-                        </ToggleButtonGroup>
-                    </ThemeProvider>
-                    <p className="text-[gray] text-[12px]">Prediction</p> */}
                 <div className='bg-white items-center text-left border-b-[1px] p-4 space-y-4 border-[#0C1615] w-full '>
 
                     <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
@@ -343,20 +313,7 @@ export const ActionCard = ({cardObject}) => {
                     </div>
                 </div>
 
-                {/* <input
-                        className="w-full text-right mobile: py-4 pl-3 pr-55 text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
-                        name="LimitPrice"
-                        type="number"
-                        placeholder="Limit Price"
-                        required
-                    /> 
-                    <input
-                        className="w-full mobile:py-4 pl-3 pr-55 text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
-                        name="contractNumber"
-                        type="number"
-                        placeholder="# of Contracts"
-                        required
-                    />*/}
+
                 <div className='bg-white items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
 
                     <button id='mint' className={isBuy == undefined ? " w-full font-medium  text-xl py-4  text-[#0C1615] bg-[#DCDEE1] rounded-[80px] hover:opacity-60" : isBuy == true ? "w-full font-medium  text-xl py-4  text-[#0C1615] rounded-[80px] hover:opacity-60text-black bg-[#ACFF00] " : " w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60 "} type="submit">
