@@ -47,17 +47,19 @@ export const Footer = ({ children }) => {
             {width >= screens.tablet ?
                 <div className="flex mobile:flex-col   tablet:flex-row py-6 space-x-8 tablet:border-t-[2px] border-black">
                     <div className="space-x-10">
-                        <a href="https://docs.xsauce.io/connect/socials"
+                        <a href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
                             target={'_blank'}
                             rel={'noreferrer'}>
                             <button className="text-[12px] hover:underline">Whitepaper</button>
                         </a>
-                        <a href="https://docs.xsauce.io/connect/socials"
+                        <a
+                            href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
                             target={'_blank'}
                             rel={'noreferrer'}>
                             <button className="text-[12px] hover:underline">Xchange</button>
                         </a>
-                        <a href="https://docs.xsauce.io/connect/socials"
+                        <a
+                            href="https://docs.xsauce.io/getting-started/introduction"
                             target={'_blank'}
                             rel={'noreferrer'}>
                             <button className="text-[12px] hover:underline">Docs</button>
@@ -84,12 +86,12 @@ export const Footer = ({ children }) => {
                             </button>
                         </a>
                         <a
-                            href="https://angel.co/company/xsauced-1"
+                            href="https://t.me/xsauce_io"
                             target={'_blank'}
                             rel={'noreferrer'}
                         >
                             <button>
-                                <img className="" src="/discordIcon.svg" />
+                                <img className="" src="/telegramIcon.svg" />
                             </button>
 
                         </a>
@@ -109,17 +111,20 @@ export const Footer = ({ children }) => {
                     </div>
                 </div> : <div className="flex flex-col flex-row pb-10">
                     <div className="space-x-10 pb-10">
-                        <a href="https://docs.xsauce.io/connect/socials"
+                        <a
+                            href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
                             target={'_blank'}
                             rel={'noreferrer'}>
                             <button className="text-[12px] hover:underline">Whitepaper</button>
                         </a>
-                        <a href="https://docs.xsauce.io/connect/socials"
+                        <a
+                            href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
                             target={'_blank'}
                             rel={'noreferrer'}>
                             <button className="text-[12px] hover:underline">Xchange</button>
                         </a>
-                        <a href="https://docs.xsauce.io/connect/socials"
+                        <a
+                            href="https://docs.xsauce.io/getting-started/introduction"
                             target={'_blank'}
                             rel={'noreferrer'}>
                             <button className="text-[12px] hover:underline">Docs</button>
@@ -150,12 +155,12 @@ export const Footer = ({ children }) => {
                             </button>
                         </a>
                         <a
-                            href="https://angel.co/company/xsauced-1"
+                            href="https://t.me/xsauce_io"
                             target={'_blank'}
                             rel={'noreferrer'}
                         >
                             <button>
-                                <img className="" src="/discordIcon.svg" />
+                                <img className="" src="/telegramIcon.svg" />
                             </button>
 
                         </a>
