@@ -293,7 +293,7 @@ export const Nav = ({ logoColor }) => {
 
         {width >= screens.laptop ?
           <div className="flex flex-row  flex-1 justify-end items-center space-x-4 font-Inter">
-            <div className="dropdown dropdown-end hover:opacity-60">
+            <div className="dropdown dropdown-end ">
               <label tabindex="0" className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]">
                 {toggle === 421613 ?
                   <>
@@ -339,7 +339,7 @@ export const Nav = ({ logoColor }) => {
         <LocalDrawer>
 
           <div className="flex flex-col flex-1 justify-center items-center space-y-4 pt-8 font-Inter border-t-[1px] border-white mt-4 ">
-            <div className="dropdown dropdown-end hover:opacity-60">
+            <div className="dropdown dropdown-end ">
               <label tabindex="0" className="text-lg flex flex-row text-black justify-center items-center px-4 py-2 bg-[#DCDEE1] space-x-2 rounded-3xl w-full">
                 {toggle === 421613 ?
                   <>

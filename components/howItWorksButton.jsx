@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Box from '@mui/material/Box'
 import Slide from '@mui/material/Slide';
-import { Slideshow } from "./slideShow";
+import { Slideshow } from "./slideshow";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;

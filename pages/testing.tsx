@@ -4,7 +4,6 @@ import { ActionCard } from '../components/actionCard';
 import { BatchPrediction } from '@mui/icons-material';
 import { PredictToggle } from '../components/predictionToggle';
 import { useWindowDimensions } from '../utils/hooks/useWindowDimensionsTS';
-import { Slideshow } from '../components/slideShow';
 const Testing: NextPage = () => {
 	const windowDimensions = useWindowDimensions();
 	const width = windowDimensions?.width;
