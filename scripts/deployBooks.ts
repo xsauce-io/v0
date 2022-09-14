@@ -1,51 +1,73 @@
-import { ethers } from "hardhat";
+import {ethers} from "ethers"
 import axios from "axios";
 
 
 async function main() {
 
-
-
 const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBookFactory20.json'
 const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
 
-const requestOrderBook = axios.get(OrderBookGit);
+let OrderBookAddress:any;
+let OrderBookAbi:any;
+let Book1;
+let Book2;
+let Book3;
+let Book4;
+let orderBookFactory:any;
+const goerli:any = "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161";
+const tokenAddress = "0x9B2BC1c778051870767bE3d8b8d6b714Fc0E4967";
+const market1Add = "0x44A5cE34F2997091De32F1eC7f552c3FC175869d";
+const market2Add = "0xc1Aa2632054ab8aa38Df8C9922cf745D17C53c5C";
+const market3Add =  "0xEc48934ce43df67c69202e82b846F8dca821EAa6";
+const market4Add = "0x560Ac3D6E79a658E16f248b5C976D596D9392d58";
+
+const requestOrderBookAbi = axios.get(OrderBookGit);
 const requestOrderBookAddress = axios.get(OrderBookAddressGit);
 
-let orderBookAddress: string
-let orderBookAbi: []
+const creationOfBooks = async () => {
+  Book1 = await orderBookFactory.createBook(tokenAddress, market1Add, 100)
+  Book2 = await orderBookFactory.createBook(tokenAddress, market2Add, 100)
+  Book3 = await orderBookFactory.createBook(tokenAddress, market3Add, 100)
+  Book4 = await orderBookFactory.createBook(tokenAddress, market4Add, 100)
+
+  await Book4.wait(1)
+
+console.log(Book1);
+console.log(Book2);
+console.log(Book3);
+console.log(Book4);
+
+  }
 
 
-
-
-
-axios.all([requestOrderBook, requestOrderBookAddress]).then(axios.spread(async (...responses) => {
+axios.all([requestOrderBookAbi, requestOrderBookAddress]).then(axios.spread((...responses) => {
     
 
-  orderBookAbi = await responses[1].data
-   orderBookAddress = await responses[2].data[4].OrderBookFactory20
+  OrderBookAbi = responses[0].data;
+  OrderBookAddress = responses[1].data[4].OrderBookFactory20.address;
+
+ console.log(OrderBookAddress)
+
+
+const provider = new ethers.providers.JsonRpcProvider(goerli)
+const signer = provider.getSigner();
+orderBookFactory = new ethers.Contract(OrderBookAddress, OrderBookAbi, signer);
 
 
 
-    const provider = new ethers.providers.JsonRpcProvider()
-    const signer = provider.getSigner();
-    const orderBookFactory = new ethers.Contract(orderBookAddress, orderBookAbi, signer);
-    orderBookFactory.connect(signer);
-
-    const Book1 = await orderBookFactory.createBook(usdc.address, market1Add, 100)
-    const Book2 = await orderBookFactory.createBook(usdc.address, market2Add, 100)
-    const Book3 = await orderBookFactory.createBook(usdc.address, market3Add, 100)
-    const Book4 = await orderBookFactory.createBook(usdc.address, market4Add, 100)
+creationOfBooks()
 
 
-await Book4.wait(1)
+ })).catch(errors => {
+  console.log(errors)
+})
 
 
-
-
+}
 
 
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+

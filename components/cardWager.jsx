@@ -3,7 +3,7 @@ import { Skeleton } from "@mui/material";
 import Link from 'next/link'
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import mock1155 from "../abi/mock1155.json";
+import marketAbi from "../abi/markets.json";
 import axios from "axios";
 
 
@@ -39,7 +39,7 @@ export const Card = ({ cardObject }) => {
     if (currentMarket !== undefined) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = await provider.getSigner();
-      const contract = new ethers.Contract(currentMarket?.address, mock1155, signer);
+      const contract = new ethers.Contract(currentMarket?.address, marketAbi, signer);
       const getYes = await contract.totalSupply(
         1
       )
@@ -74,10 +74,10 @@ export const Card = ({ cardObject }) => {
   }, []);
 
 
-  useEffect(() => {
-    ratios();
-    calculations();
-  }, [currentMarket]);
+  // useEffect(() => {
+  //   // ratios();
+  //   // calculations();
+  // }, [currentMarket]);
 
   return (
     <Link href={cardObjectHref}>

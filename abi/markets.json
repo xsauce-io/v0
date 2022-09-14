@@ -683,19 +683,6 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "_newSku",
-        "type": "string"
-      }
-    ],
-    "name": "updateSku",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"

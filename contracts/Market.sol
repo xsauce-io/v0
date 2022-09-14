@@ -77,7 +77,7 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         _setURI(newuri);
     }
 
-    function mint(address, uint256 id, uint256 amount, bytes memory data) public
+    function mint(address, uint256 id, uint256 amount, bytes memory data) public onlyOwner
     {
         _mint(msg.sender, id, amount, data);
         emit positionCreated(id, amount);

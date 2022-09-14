@@ -4,7 +4,6 @@ import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import axios from "axios";
 import { ethers, BigNumber, utils } from "ethers";
-import { ContentHeader } from "./contentHeader";
 import { ExpandImageModal } from "./expandImageModal"
 
 // import AspectRatio from '@mui/joy/AspectRatio';
@@ -13,8 +12,10 @@ export const WagerCard = ({ cardObject }) => {
 
 
   const [ERC20Abi, setERC20Abi] = useState(null)
-  const [orderBookAbi, setOrderBookAbi] = useState(null)
-  const [orderBookAddress, setOrderBookAddress] = useState(null)
+  const [orderBookAbi, setOrderBookAbi] = useState()
+  const [orderBookFactoryAbi, setOrderBookFactoryAbi] = useState()
+  const [orderBookAddress, setOrderBookAddress] = useState()
+  const [orderBookFactoryAddress, setOrderBookFactoryAddress] = useState()
   const [currentQuote, setCurrentQuote] = useState(0)
   const [signedContract, setSignedContract] = useState(null)
   const [tokenA, setTokenA] = useState(null)
@@ -23,28 +24,26 @@ export const WagerCard = ({ cardObject }) => {
   const [currentMarket, setCurrentMarket] = useState()
   const [expiration, setExpiration] = useState();
 
-  const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
   const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
+  const OrderBookFactoryGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBookFactory20.json'
   const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
-  const TokenA = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
-  const TokenB = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
 
-  const requestERC20 = axios.get(erc20Git);
   const requestOrderBook = axios.get(OrderBookGit);
+  const requestOrderBookFactoryAbi = axios.get(OrderBookFactoryGit);
   const requestOrderBookAddress = axios.get(OrderBookAddressGit);
-  const requestTokenA = axios.get(TokenA);
-  const requestTokenB = axios.get(TokenB);
+
   const explorer = 'https://goerli.etherscan.io/address/' + currentMarket?.address;
 
   const grabData = async () => {
-    axios.all([requestERC20, requestOrderBook, requestOrderBookAddress, requestTokenA, requestTokenB]).then(axios.spread((...responses) => {
-      setERC20Abi(responses[0].data)
-      setOrderBookAbi(responses[1].data)
-      // TODO fetch object based on chainID now is only Rinkeby
+    axios.all([requestOrderBook, requestOrderBookAddress, requestOrderBookFactoryAbi]).then(axios.spread((...responses) => {
+      setOrderBookAbi(responses[0].data)
 
-      setOrderBookAddress(responses[2].data[4].OrderBook20.address)
-      setTokenA(responses[2].data[4].Token20A184.address)
-      setTokenB(responses[2].data[4].Token20B185.address)
+      setOrderBookAddress(responses[1].data[4].OrderBook20.address)
+      // TODO fetch object based on chainID now is only Rinkeby
+      setOrderBookFactoryAddress(responses[1].data[4].OrderBookFactory20.address)
+      setOrderBookFactoryAbi(responses[2].data)
+
+   
       Loading(true);
     })).catch(errors => {
       console.log(errors)
@@ -52,28 +51,34 @@ export const WagerCard = ({ cardObject }) => {
   }
 
 
-  const quote = async () => {
-    // e.preventDefault();
+const tokenAddress = "0x9B2BC1c778051870767bE3d8b8d6b714Fc0E4967"
+const market1Add = "0x44A5cE34F2997091De32F1eC7f552c3FC175869d"
+
+const market1OrderBook = "0xbB311A5025bF1f5900Bf70e9a69cE961BD09d371";
+
+
+  const getBookInfo = async (e) => {
+
+    e.preventDefault();
     // const data = new FormData(e.target);
-    // console.log(data.get("contractNumber"));
+    // const Toke2 = data.get("Token2");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send('eth_requestAccounts', []);
     const signer = provider.getSigner();
-    const orderBook = new ethers.Contract(orderBookAddress, orderBookAbi, signer);
-    signedContract = orderBook.connect(signer);
-    setSignedContract(signedContract)
-    const quote = await orderBook.quoteExactAmountOut(
-      tokenB,
-      BigNumber.from('500'),
-      BigNumber.from("1000000000000000000"),
-      '5',
-      '5'
-    );
-    setCurrentQuote(quote[0].toString());
+    const OrderBookFactory = new ethers.Contract(orderBookFactoryAddress, orderBookFactoryAbi, signer);
+    const NewBook = await OrderBookFactory.getBook(tokenAddress, market1Add, 100)
 
+   console.log(NewBook);
 
-    console.log(quote[0].toNumber())
+// const newMarket = await create.allMarkets(-1);
+
+// alert(`market created at ${newMarket}!`)
   }
+
+
+
+
+
 
   const copyAddress = async () => {
 
@@ -90,18 +95,14 @@ export const WagerCard = ({ cardObject }) => {
   useEffect(() => {
 
     const loader = async () => {
-      // await grabData();
+      await grabData();
       getMarketbySku();
     }
     loader();
 
   }, []);
 
-  useEffect(() => {
-    if (isLoaded === true) {
-      quote();
-    } else { return }
-  }, [isLoaded]);
+
 
   const getMarketbySku = () => {
     const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
@@ -200,16 +201,7 @@ export const WagerCard = ({ cardObject }) => {
 
                 </a>
               </div>
-              <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-b-xl space-x-4" >
-                Price : {currentQuote}
-                <Tooltip
-                  title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest asking price in the orderbook."
-                  arrow
-                >
-                  <InfoIcon sx={{ fontSize: "18px" }} />
-                </Tooltip>
-                <button onClick={quote} className="bg-black text-white p-3 text-[12px] rounded-2xl hover:opacity-60">Update Quote</button>
-              </div>
+            
 
             </grid>
 

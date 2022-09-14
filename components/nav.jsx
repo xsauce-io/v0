@@ -309,7 +309,8 @@ export const Nav = ({ logoColor }) => {
                         <span className="text-[black]">Telos</span>
                       </> :
                       <>
-                        <span className="text-[red] text-[14px]">Unknown</span>
+                       <img className="h-[15%] w-[15%]" src="/eth.png" />
+                        <span className="text-[black] text-[14px]">Goerli</span>
                       </>
                 }
                 <img src="/dropdown.png" />

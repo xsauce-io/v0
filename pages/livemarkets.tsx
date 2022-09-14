@@ -61,9 +61,6 @@ const Markets: NextPage = () => {
           ]);
 
 					setisLoading(false);
-
-					console.log({ obj1 });
-					console.log({ obj2 });
 				})
 			)
 			.catch(function (error) {
@@ -73,8 +70,6 @@ const Markets: NextPage = () => {
 
 	useEffect(() => {
 		getSneaker();
-  
-    console.log()
 	}, []);
 
 	useMemo(() => {

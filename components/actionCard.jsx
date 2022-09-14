@@ -6,17 +6,21 @@ import { useState, useEffect } from "react";
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import axios from 'axios'
-
+import axios from 'axios';
+import { Tooltip } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
+import {useToast} from '@chakra-ui/react';
 
 
 export const ActionCard = ({cardObject}) => {
+    const toast = useToast();
+
 
     const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
     const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
     const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
-    const TokenA = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
-
+    const TokenAdd = "0x9B2BC1c778051870767bE3d8b8d6b714Fc0E4967"
+    const market1OrderBook = "0xbB311A5025bF1f5900Bf70e9a69cE961BD09d371";
 
     const getMarketbySku = () => {
       const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
@@ -25,24 +29,73 @@ export const ActionCard = ({cardObject}) => {
         setCurrentMarket(test)
         const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
         setExpiration(expires)
-        console.log({ testing: currentMarket })
+       
       })
     }
 
 
-    const requestERC20 = axios.get(erc20Git);
+    const handleTransfer = async (e) => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      console.log(data.get("contractNumber"));
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send('eth_requestAccounts', []);
+      const signer = await provider.getSigner();
+      const orderBook = new ethers.Contract(market1OrderBook, orderBookAbi, signer);
+      let signedContract = orderBook.connect(signer);
+      setSignedContract(signedContract)
+      let fromToken;
+      if (isBuy === true) {
+        fromToken = TokenAdd;
+      } else { fromToken = market1Add}
+   
+      const order = await signedContract.limitOrder(
+          fromToken,
+          BigNumber.from("800000000000000000"),
+          BigNumber.from("1000000000000000000"),
+          BigNumber.from("1000000000000000000"),
+        
+          // makerOnly
+          !isBuy,
+          // takerOnly
+          isBuy,
+      )
+
+      }
+
+
+    const quote = async (e) => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send('eth_requestAccounts', []);
+      const signer = provider.getSigner();
+      const orderBook = new ethers.Contract(market1OrderBook, orderBookAbi, signer);
+      signedContract = orderBook.connect(signer);
+      setSignedContract(signedContract)
+      let fromToken;
+      if (isBuy === true) {
+        fromToken = TokenAdd;
+      } else { fromToken = market1Add}
+      const quote = await orderBook.quoteExactAmountOut(
+        fromToken,
+        BigNumber.from("100000000000000000"),
+        BigNumber.from("8000000000000000000"),
+      );
+      setCurrentQuote(quote[0].toString());
+  
+  
+      console.log(quote[0].toNumber())
+    }
+
+  
     const requestOrderBook = axios.get(OrderBookGit);
     const requestOrderBookAddress = axios.get(OrderBookAddressGit);
-    const requestTokenA = axios.get(TokenA);
+  
 
     const Mockaddress = "0xac9BD2821B4296ea92b716DB8D841e46cd1f2F71"
-    // const addressRink ="0x360b9D17f8546941208085C045871E2a318117Ba"
+    const market1Add ="0x44A5cE34F2997091De32F1eC7f552c3FC175869d"
     // const dai = "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
-
-
-
-
-
 
     const [alignment, setAlignment] = useState();
     const [isYes, setIsYes] = useState();
@@ -51,31 +104,13 @@ export const ActionCard = ({cardObject}) => {
     const [order, setOrder] = useState();
 
     const [isBuy, setIsBuy] = useState();
-    const [ERC20Abi, setERC20Abi] = useState(null)
+    const [currentQuote, setCurrentQuote] = useState(0)
     const [orderBookAbi, setOrderBookAbi] = useState(null)
     const [orderBookAddress, setOrderBookAddress] = useState(null)
     const [signedContract, setSignedContract] = useState(null)
     const [tokenA, setTokenA] = useState(null)
     const [currentMarket, setCurrentMarket] = useState()
     const [expiration, setExpiration] = useState();
-
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#416900',
-
-            },
-            secondary: {
-                main: '#BA1A1A',
-
-            },
-            action: {
-                selectedOpacity: .6
-            }
-
-        }
-    })
-
 
 
     const handleChange = (event, newAlignment) => {
@@ -100,16 +135,11 @@ export const ActionCard = ({cardObject}) => {
     }
 
     const grabData = async () => {
-        axios.all([requestERC20, requestOrderBook, requestOrderBookAddress, requestTokenA]).then(axios.spread((...responses) => {
-            setERC20Abi(responses[0].data)
-            setOrderBookAbi(responses[1].data)
+        axios.all([requestOrderBook, requestOrderBookAddress]).then(axios.spread((...responses) => {
+            setOrderBookAbi(responses[0].data)
             // TODO fetch object based on chainID now is only Rinkeby
-
-            setOrderBookAddress(responses[2].data[4].OrderBook20.address)
-            setTokenA(responses[2].data[4].Token20A184.address)
-            console.log(responses[2].data[4])
-
-
+            setOrderBookAddress(responses[1].data[4].OrderBook20.address)
+           
 
         })).catch(errors => {
             console.log(errors)
@@ -144,7 +174,7 @@ export const ActionCard = ({cardObject}) => {
     }
 
     useEffect(() => {
-      ratios();
+      // ratios();
       // calculations();
     }, [currentMarket]);
 
@@ -174,37 +204,6 @@ export const ActionCard = ({cardObject}) => {
         }
     }, [isBuy])
 
-    const handleTransfer = async (e) => {
-        e.preventDefault();
-        const data = new FormData(e.target);
-        console.log(data.get("contractNumber"));
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send('eth_requestAccounts', []);
-        const signer = await provider.getSigner();
-        const contract = new ethers.Contract(orderBookAddress, orderBookAbi, signer);
-        let signedContract = contract.connect(signer);
-        setSignedContract(signedContract)
-        const order = await signedContract.limitOrder(
-            // firstToken address
-            tokenA,
-            // firstToken amount
-            // BigNumber.from(data.get("contractNumber"))
-            BigNumber.from('500'),
-            // secondToken amount
-            BigNumber.from('500'),
-
-            // makerOnly
-            !isBuy,
-            // takerOnly
-            isBuy,
-        )
-
-    }
-
-
-
-
-
 
     return (
 
@@ -220,7 +219,7 @@ export const ActionCard = ({cardObject}) => {
 
                 </flex>
             </div>
-            <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
+            <form onSubmit={quote} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
 
                 <div className='bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full '>
                     <did>
@@ -287,24 +286,25 @@ export const ActionCard = ({cardObject}) => {
 
                 <div className='bg-white items-center text-left border-b-[1px] p-4 space-y-4 border-[#0C1615] w-full '>
 
-                    <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
+                    <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2  hover:outline-1'   >
                         <p className="text-left text-sm pr-1 ">
                             Limit Price:
                         </p>
                         <input
-                            className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none hover:underline"
+                            className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none "
                             name="LimitPrice"
                             type="number"
                             placeholder="00.00"
                             required
                         />
+                        <p className="text-sm ml-1"> USDC</p>
                     </div>
-                    <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
+                    <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2 hover:outline-1' >
                         <p className="text-left text-sm inline-block pr-1 ">
-                            Contract Number:
+                            Amount:
                         </p>
                         <input
-                            className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none hover:underline"
+                            className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none "
                             name="contractNumber"
                             type="text"
                             placeholder="# of Contracts"
@@ -313,6 +313,20 @@ export const ActionCard = ({cardObject}) => {
                     </div>
                 </div>
 
+                <div className='bg-[#ACFF00] items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
+                    <div className="font-Inter mobile:text-lg font-medium flex flex-row justify-center items-center">
+                
+                    <Tooltip
+                      title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest asking price in the orderbook."
+                      arrow
+                      className="self-start mr-2"
+                    >
+                      <InfoIcon sx={{ fontSize: "18px" }} />
+                    </Tooltip>
+                     <p className="pr-4 " >Price : ${currentQuote} </p>
+                    <button type="submit" className="bg-black text-white p-3 text-xs rounded-3xl">Update Quote</button>
+                  </div>
+                 </div>
 
                 <div className='bg-white items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
 
@@ -330,6 +344,8 @@ export const ActionCard = ({cardObject}) => {
                     </div>
                 </div>
 
+                
+
                 <div className='bg-[#DCDEE1] items-center text-left rounded-b-[10px] p-3  space-y-4  w-full '>
                     <div className="w-full  flex px-5 items-center">
                         <p className="text-left text-sm font-medium">
@@ -341,6 +357,9 @@ export const ActionCard = ({cardObject}) => {
                         </p>
                     </div>
                 </div>
+
+                
+
 
 
             </form>

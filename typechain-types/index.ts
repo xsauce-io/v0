@@ -56,10 +56,6 @@ export type { ERC165 } from "./@openzeppelin/contracts/utils/introspection/ERC16
 export { ERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/ERC165__factory";
 export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC165";
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
-export type { Bank } from "./contracts/bank.sol/Bank";
-export { Bank__factory } from "./factories/contracts/bank.sol/Bank__factory";
-export type { BankFactory } from "./contracts/bank.sol/BankFactory";
-export { BankFactory__factory } from "./factories/contracts/bank.sol/BankFactory__factory";
 export type { IOracle } from "./contracts/interfaces/IOracle";
 export { IOracle__factory } from "./factories/contracts/interfaces/IOracle__factory";
 export type { Market } from "./contracts/Market";
