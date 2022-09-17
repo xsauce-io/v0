@@ -24,7 +24,7 @@ export const ContractsCard = ({ title }) => {
                 </grid>
             </div>
 
-            <div className='bg-[#DCDEE1] rounded-b-[10px] text-left w-[100%]  space-y-2 '>
+            <div className='bg-[#DCDEE1] rounded-b-[10px] text-left w-[100%] space-y-2  flex-1'>
                 <div className='bg-[#DCDEE1] rounded-b-[10px]  text-left w-[100%] '>
                     <grid className="grid grid-cols-2 border-b-[1px] border-[#0C1615] px-4 p-2 w-full">
                         <div className="grid grid-rows-2">
