@@ -16,7 +16,7 @@ export const Dashboard = ({ positions }) => {
 
 
     <a>
-      {width >= screens.laptop ?
+      {width >= screens.desktop ?
         <div className="flex flex-row  text-[12px] rounded-[40px] w-full bg-[#0C1615] text-white font-Inter items-center justify-between py-4 px-8 my-[.5rem]">
           <span className="flex flex-row  w-[30%] font-SG text-sm">
             {positions?.name}
@@ -70,7 +70,7 @@ export const Dashboard = ({ positions }) => {
           </span>
 
         </div>}
-    </a >
+    </a>
 
   )
 }

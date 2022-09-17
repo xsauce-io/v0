@@ -16,6 +16,7 @@ const Home: NextPage = () => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',
+		smlaptop: '1024',
 		laptop: '1200',
 		desktop: '1400',
 	};
