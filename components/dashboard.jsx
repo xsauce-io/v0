@@ -21,51 +21,51 @@ export const Dashboard = ({ positions }) => {
           <span className="flex flex-row  w-[30%] font-SG text-sm">
             {positions?.name}
           </span>
-          <span className="flex flex-row  w-[18.5%] text-xs">
+          <span className="flex flex-row  w-[18.5%] text-xs font-Inter">
             15,000 YES
           </span>
-          <span className="flex flex-row  w-[21.5%] text-xs">
+          <span className="flex flex-row  w-[21.5%] text-xs font-Inter">
             $7,500
           </span>
 
           <span className="flex flex-row w-[20%] text-xs">
             <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex space-x-2">
               <img className="w-[8px]" src="/upfull.svg" />
-              <p> $ 15,000.00</p>
+              <p className="text-xs font-Inter"> $ 15,000.00</p>
             </span>
           </span>
-          <span className='flex flex-row w-[10%] text-xs'>
+          <span className='flex flex-row w-[10%] text-xs font-Inter'>
             0x75EE1fe...D61Cb&nbsp;&nbsp;↗
           </span>
         </div>
         : width >= screens.tablet ? <div className="flex flex-row  text-[12px] rounded-[40px] w-full bg-[#0C1615] text-white font-Inter items-center justify-between py-4 px-8 my-[.5rem]">
-          <span className="flex flex-row  w-[30%] font-SG text-sm">
+          <span className="flex flex-row  w-[30%] font-SG text-sm ">
             {positions?.name}
           </span>
-          <span className="flex flex-row  w-[18.5%] text-xs">
+          <span className="flex flex-row  w-[18.5%] text-xs font-Inter">
             15,000 YES
           </span>
 
           <span className="flex flex-row w-[20%] text-xs">
             <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex space-x-2">
               <img className="w-[8px]" src="/upfull.svg" />
-              <p> $ 15,000.00</p>
+              <p className="text-xs font-Inter"> $ 15,000.00</p>
             </span>
           </span>
-          <span className='flex flex-row w-[18%] text-xs'>
+          <span className='flex flex-row w-[18%] text-xs font-Inter'>
             0x75EE1fe...D61Cb&nbsp;&nbsp;↗
           </span>
         </div> : <div className="flex flex-row  text-[12px] rounded-[40px] w-full bg-[#0C1615] text-white font-Inter items-center justify-between py-4 px-8 my-[.5rem]">
           <span className="flex flex-row  w-[40%] font-SG text-xs text-ellipsis overflow-hidden ">
             {positions?.name}
           </span>
-          <span className="flex flex-row  w-[28.5%] text-xs">
+          <span className="flex flex-row  w-[28.5%] text-xs font-Inter">
             15,000 YES
           </span>
 
-          <span className="flex flex-row w-[32%] text-xs ">
+          <span className="flex flex-row w-[32%]  ">
             <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex space-x-2">
-              <p className="text-xs">$15,000.00</p>
+              <p className="text-xs font-Inter">$15,000.00</p>
             </span>
           </span>
 

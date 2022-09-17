@@ -325,7 +325,7 @@ export const Nav = ({ logoColor }) => {
               </ul>
             </div>
 
-            <button className="text-[14px] flex flex-row justify-center text-black  items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60" onClick={() => getWallet()}>
+            <button className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60" onClick={() => getWallet()}>
               <span className="truncate">
                 {accounts == null ?
                   'Connect Wallet' :
@@ -371,7 +371,7 @@ export const Nav = ({ logoColor }) => {
               </ul>
             </div>
 
-            <button className="text-lg flex flex-row text-black items-center bg-[#DCDEE1] rounded-3xl py-2 px-6 w-full hover:opacity-60" onClick={() => getWallet()}>
+            <button className="text-lg flex flex-row text-black items-center bg-[#DCDEE1] font-Inter rounded-3xl py-2 px-6 w-full hover:opacity-60" onClick={() => getWallet()}>
               <span className="truncate">
                 {accounts == null ?
                   'Connect Wallet' :

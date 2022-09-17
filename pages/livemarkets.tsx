@@ -162,7 +162,7 @@ const Markets: NextPage = () => {
 						icon={<img className="" src="/candle.svg" />}
 					>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
-							<h5 className="text-sm">Filter on</h5>
+							<h5 className="text-sm font-Inter ">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
@@ -171,11 +171,11 @@ const Markets: NextPage = () => {
 									<img className="" src="/textBlock.svg" />
 
 									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
-										<span className="text-black ">Retail Price</span>
+										<span className="text-black font-Inter ">Retail Price</span>
 									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
-										<span className="text-black">Release Date</span>
+										<span className="text-black font-Inter">Release Date</span>
 									) : (
-										<span className="text-black ">Name</span>
+										<span className="text-black font-Inter ">Name</span>
 									)}
 									<img className="" src="/downArrow.svg" />
 								</label>
@@ -188,6 +188,7 @@ const Markets: NextPage = () => {
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
 											}
+											className="font-Inter"
 										>
 											Retail Price
 										</button>
@@ -197,6 +198,7 @@ const Markets: NextPage = () => {
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
 											}
+											className="font-Inter"
 										>
 											Release Date
 										</button>
@@ -205,6 +207,7 @@ const Markets: NextPage = () => {
 									<li>
 										<button
 											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
+											className="font-Inter"
 										>
 											Name
 										</button>

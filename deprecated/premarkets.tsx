@@ -4,14 +4,12 @@ import Head from 'next/head';
 
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import { ethers, utils, BigNumber} from 'ethers';
+import { ethers, utils, BigNumber } from 'ethers';
 import { Layout } from '../components/layout';
 
 import { ContentHeader } from '../components/contentHeader';
 import { Card } from '../components/cardWager';
-import marketFactoryabi from "../abi/marketFactory.json";
-
-
+import marketFactoryabi from '../abi/marketFactory.json';
 
 declare var window: any;
 
@@ -30,9 +28,8 @@ const Markets: NextPage = () => {
 	const [response, setResponse] = useState([] as any);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
 	const [isAscending, setIsAscending] = useState(true);
-  const [admin, setAdmin] = useState(false);
-  let [isLoading, setisLoading] = useState(true as boolean);
-
+	const [admin, setAdmin] = useState(false);
+	let [isLoading, setisLoading] = useState(true as boolean);
 
 	const options = {
 		method: 'GET',
@@ -66,8 +63,8 @@ const Markets: NextPage = () => {
 						obj1.data.results[0],
 						obj2.data.results[0],
 						obj3.data.results[0],
-            obj4.data.results[0],
-          ]);
+						obj4.data.results[0],
+					]);
 
 					setisLoading(false);
 
@@ -82,11 +79,11 @@ const Markets: NextPage = () => {
 
 	useEffect(() => {
 		getSneaker();
-  
-    console.log()
+
+		console.log();
 	}, []);
 
-  const adminCheck = async () => {
+	const adminCheck = async () => {
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		// Prompt user for account connections
 		let wallet = await provider.send('eth_requestAccounts', [0]);
@@ -100,28 +97,37 @@ const Markets: NextPage = () => {
 		}
 	};
 
+	const createNewMarket = async (e: any) => {
+		const address = '0x27D7a1119D4D397f432D7C3266dbC6D77a09CACe';
+		e.preventDefault();
+		const data = new FormData(e.target);
+		console.log(data.get('contractNumber'));
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		await provider.send('eth_requestAccounts', []);
+		const signer = provider.getSigner();
+		const MarketFactory = new ethers.Contract(
+			address,
+			marketFactoryabi,
+			signer
+		);
 
-  const createNewMarket = async (e:any) => {
-    const address = "0x27D7a1119D4D397f432D7C3266dbC6D77a09CACe"
-    e.preventDefault();
-    const data = new FormData(e.target);
-    console.log(data.get("contractNumber"));
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
-    const signer = provider.getSigner();
-    const MarketFactory = new ethers.Contract(address, marketFactoryabi, signer);
+		const create = await MarketFactory.createNewMarket(
+			'https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json',
+			BigNumber.from(data.get('prediction')),
+			0,
+			BigNumber.from(data.get('closingDate')),
+			0
+		);
+		create.wait(1);
 
-    const create = await MarketFactory.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json',  BigNumber.from(data.get("prediction")), 0, BigNumber.from(data.get("closingDate")), 0) 
-create.wait(1)
+		const newMarket = await create.allMarkets(-1);
 
-const newMarket = await create.allMarkets(-1);
-
-alert(`market created at ${newMarket}!`)
-  }
+		alert(`market created at ${newMarket}!`);
+	};
 
 	useEffect(() => {
 		getSneaker();
-    adminCheck();
+		adminCheck();
 	}, []);
 
 	useMemo(() => {
@@ -216,7 +222,7 @@ alert(`market created at ${newMarket}!`)
 						icon={<img className="" src="/candle.svg" />}
 					>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
-							<h5 className="text-sm">Filter on</h5>
+							<h5 className="text-sm font-Inter">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
@@ -225,11 +231,11 @@ alert(`market created at ${newMarket}!`)
 									<img className="" src="/textBlock.svg" />
 
 									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
-										<span className="text-black ">Retail Price</span>
+										<span className="text-black font-Inter ">Retail Price</span>
 									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
-										<span className="text-black">Release Date</span>
+										<span className="text-black font-Inter">Release Date</span>
 									) : (
-										<span className="text-black ">Name</span>
+										<span className="text-black font-Inter ">Name</span>
 									)}
 									<img className="" src="/downArrow.svg" />
 								</label>
@@ -242,6 +248,7 @@ alert(`market created at ${newMarket}!`)
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
 											}
+											className="text-black font-Inter "
 										>
 											Retail Price
 										</button>
@@ -251,6 +258,7 @@ alert(`market created at ${newMarket}!`)
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
 											}
+											className="text-black font-Inter "
 										>
 											Release Date
 										</button>
@@ -259,6 +267,7 @@ alert(`market created at ${newMarket}!`)
 									<li>
 										<button
 											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
+											className="text-black font-Inter "
 										>
 											Name
 										</button>
@@ -276,29 +285,33 @@ alert(`market created at ${newMarket}!`)
 								)}
 							</button>
 						</div>
-            {admin === true ?
-            <form className='space-x-2 ml-4'>
-
-
-<input
-  className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
-  name="prediction"
-  type="string"
-  placeholder="Prediction Price"
-/>
-<input
-  className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
-  name="closingDate"
-  type="string"
-  placeholder="Closing Date (UNIX)"
-/>
-            <button className='bg-black text-white rounded-lg py-3 px-2 mt-3' onClick={createNewMarket}>Add Market</button>
-            </form> : <></>}
-
-
+						{admin === true ? (
+							<form className="space-x-2 ml-4">
+								<input
+									className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+									name="prediction"
+									type="string"
+									placeholder="Prediction Price"
+								/>
+								<input
+									className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+									name="closingDate"
+									type="string"
+									placeholder="Closing Date (UNIX)"
+								/>
+								<button
+									className="bg-black text-white rounded-lg py-3 px-2 mt-3"
+									onClick={createNewMarket}
+								>
+									Add Market
+								</button>
+							</form>
+						) : (
+							<></>
+						)}
 					</ContentHeader>
 					<div className="grid mobile:grid-cols-1  laptop:grid tablet:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response.map((el:any) => (
+						{response.map((el: any) => (
 							<Card cardObject={el} />
 						))}
 					</div>

@@ -17,19 +17,19 @@ export const DashboardTable = ({ children }) => {
 
         <div className="flex flex-col w-full ">
             {width >= screens.desktop ? (
-                <div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
+                <div className="flex flex-row py-4 text-[14px]  items-center w-full px-4 font-Inter">
                     <div className="flex flex-row pl-4 w-[30%] space-x-2 items-center ">
-                        <p>Positions</p>
+                        <p >Positions</p>
                         <img src="/up-down.svg" />
                     </div>
 
                     <div className="flex flex-row w-[18.5%] space-x-2 items-center">
-                        <p>Shares</p>
+                        <p  >Shares</p>
                         <img src="/up-down.svg" />
                     </div>
 
                     <div className="flex flex-row w-[21.5%] space-x-2 items-center">
-                        <p>Total price</p>
+                        <p >Total price</p>
                         <img src="/up-down.svg" />
                     </div>
 

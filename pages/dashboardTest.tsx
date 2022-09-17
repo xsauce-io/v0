@@ -80,13 +80,13 @@ const Home: NextPage = () => {
 					<ContentHeader title={'Positions'}>
 						{' '}
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
-							<h5 className="text-sm">Filter on</h5>
+							<h5 className="text-sm font-Inter">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
 									className="text-[14px] flex flex-row justify-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white"
 								>
-									<span className="text-black">Name</span>
+									<span className="text-black font-Inter">Name</span>
 									{/* {sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
 										<>
 											<span className="text-black">Retail Price</span>
