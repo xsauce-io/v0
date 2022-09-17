@@ -309,7 +309,7 @@ export const Nav = ({ logoColor }) => {
                         <span className="text-[black]">Telos</span>
                       </> :
                       <>
-                       <img className="h-[15%] w-[15%]" src="/eth.png" />
+                        <img className="h-[15%] w-[15%]" src="/eth.png" />
                         <span className="text-[black] text-[14px]">Goerli</span>
                       </>
                 }
@@ -339,9 +339,9 @@ export const Nav = ({ logoColor }) => {
 
         <LocalDrawer>
 
-          <div className="flex flex-col flex-1 justify-center items-center space-y-4 pt-8 font-Inter border-t-[1px] border-white mt-4 ">
-            <div className="dropdown dropdown-end ">
-              <label tabindex="0" className="text-lg flex flex-row text-black justify-center items-center px-4 py-2 bg-[#DCDEE1] space-x-2 rounded-3xl w-full">
+          <div className="flex flex-col flex-1 justify-center items-center space-y-4 pt-8 font-Inter border-t-[1px] border-white mt-4   ">
+            <div className="dropdown dropdown-end w-full">
+              <label tabindex="0" className="text-lg flex flex-row text-black justify-center items-center px-4 py-2 bg-[#DCDEE1] space-x-2 rounded-3xl">
                 {toggle === 421613 ?
                   <>
                     <img className="h-[15%] w-[15%]" src="/arbitrum.svg" />
@@ -362,7 +362,7 @@ export const Nav = ({ logoColor }) => {
                 <img src="/dropdown.png" />
 
               </label>
-              <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-full mt-4">
+              <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-full mt-4 z-10">
 
                 <li><a onClick={() => setState(421613)}><img className="h-[30%] w-[30%]" src="/arbitrum.svg" />Arbitrum</a></li>
                 <li><a onClick={() => setState(80001)}><img className="h-[30%] w-[30%]" src="/polygon.svg" />Polygon</a></li>
