@@ -8,7 +8,7 @@ export const Tabs = ({ children, bgColor }) => {
 
     return (
         <div className="w-full items-center justify-center border-0" >
-            <div className="px-5 laptop:px-40 font-SG border-0" style={{ backgroundColor: bgColor }
+            <div className="px-5 laptop:px-40 font-Inter border-0" style={{ backgroundColor: bgColor }
             }>
                 <div className="tabs border-[#000] border-b-[1px] border-t-[0px] w-full text-white space-x-3 tablet:space-x-8 " >
                     <Link href="/">

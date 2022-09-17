@@ -13,14 +13,14 @@ export const Card = ({ cardObject }) => {
 
   const getMarketbySku = async () => {
     const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-  req.then(res => {
-    const test = res.data[3][cardObject.sku]
-    setCurrentMarket(test)
-    const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
-    setExpiration(expires)
-    console.log({testing:test})
-  })
-     
+    req.then(res => {
+      const test = res.data[3][cardObject.sku]
+      setCurrentMarket(test)
+      const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+      setExpiration(expires)
+      console.log({ testing: test })
+    })
+
     // setCurrentMarket()
   }
 
@@ -81,26 +81,26 @@ export const Card = ({ cardObject }) => {
 
   return (
     <Link href={cardObjectHref}>
-      <a className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full">
+      <a className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full 	">
 
         {cardObject === undefined ?
           <React.Fragment>
             <Skeleton variant="rectangular" sx={{ backgroundColor: 'white', height: '450px' }} />
           </React.Fragment> :
           <React.Fragment>
-            <div className="flex items-left flex-col space-y-3 justify-center w-full h-full">
+            <div className="flex items-left flex-col space-y-3 justify-center w-full h-full ">
 
               {cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
 
                 <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
-                  <img className='object-cover mobile:w-[40%]  m-auto laptop:h-[100%] scale-125' src='/hurache.svg' />
+                  <img className='object-cover mobile:w-[40%]  m-auto mobile:h-[100%] scale-100' src='/hurache.svg' />
                 </div>
                 :
 
-                <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
+                <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
                   {/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
-                  <img className='object-cover mobile:w-[40%]  m-auto laptop:h-[100%] scale-150' src={cardObject.image?.original}></img>
+                  <img className='object-contain mobile:w-[40%]  m-auto mobile:h-[100%] scale-110' src={cardObject.image?.original}></img>
                 </div>
 
               }

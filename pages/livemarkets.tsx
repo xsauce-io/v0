@@ -29,9 +29,8 @@ const Markets: NextPage = () => {
 
 	const [response, setResponse] = useState([] as any);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
-  let [isLoading, setisLoading] = useState(true as boolean);
+	let [isLoading, setisLoading] = useState(true as boolean);
 	const [isAscending, setIsAscending] = useState(true);
-
 
 	// fetch sneaker data
 	const getSneaker = async () => {
@@ -57,8 +56,8 @@ const Markets: NextPage = () => {
 						obj1.data.results[0],
 						obj2.data.results[0],
 						obj3.data.results[0],
-            obj4.data.results[0],
-          ]);
+						obj4.data.results[0],
+					]);
 
 					setisLoading(false);
 				})
@@ -226,7 +225,7 @@ const Markets: NextPage = () => {
 					</ContentHeader>
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response.map((el:any) => (
+						{response.map((el: any) => (
 							<Card cardObject={el} />
 						))}
 					</div>
