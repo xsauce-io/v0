@@ -39,7 +39,7 @@ export const Footer = ({ children }) => {
                         />
                     </svg>
                     <div className=" text-[36px] tablet:text-[48px] laptop:text-[58px] font-SG" >The future of <span className="block"> cultural asset </span></div>
-                    <div className="text-[10px] font-inter">The prediction market known as "The Xchange" is for informational and educational purposes only. "The Xchange" is a decentralized protocol operated by autonomous smart contracts and does not have any vested interest in the outcomes of any market.</div>
+                    <div className="text-[10px] font-Inter">The prediction market known as "The Xchange" is for informational and educational purposes only. "The Xchange" is a decentralized protocol operated by autonomous smart contracts and does not have any vested interest in the outcomes of any market.</div>
                 </div>
 
             </div>
@@ -50,19 +50,19 @@ export const Footer = ({ children }) => {
                         <a href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
                             target={'_blank'}
                             rel={'noreferrer'}>
-                            <button className="text-[12px] hover:underline">Whitepaper</button>
+                            <button className="text-[12px] font-Inter hover:underline">Whitepaper</button>
                         </a>
                         <a
                             href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
                             target={'_blank'}
                             rel={'noreferrer'}>
-                            <button className="text-[12px] hover:underline">Xchange</button>
+                            <button className="text-[12px] font-Inter hover:underline">Xchange</button>
                         </a>
                         <a
                             href="https://docs.xsauce.io/getting-started/introduction"
                             target={'_blank'}
                             rel={'noreferrer'}>
-                            <button className="text-[12px] hover:underline">Docs</button>
+                            <button className="text-[12px] font-Inter hover:underline">Docs</button>
                         </a>
                     </div>
                     <div className="space-x-6 mobile:flex-1 border-t-[2px] border-black  tablet:border-0 flex">
@@ -132,7 +132,7 @@ export const Footer = ({ children }) => {
                     </div>
                     <div className="border-t-[2px] border-black flex pt-10 ml-0 space-x-3">
 
-                        <div className="text-left text-[10px] ">© 2022 Xsauce. All rights Reserved.</div>
+                        <div className="text-left text-[10px] font-Inter">© 2022 Xsauce. All rights Reserved.</div>
                         <div className="flex-1"  ></div>
 
                         <a

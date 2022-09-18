@@ -13,14 +13,14 @@ export const Card = ({ cardObject }) => {
 
   const getMarketbySku = async () => {
     const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-  req.then(res => {
-    const test = res.data[3][cardObject.sku]
-    setCurrentMarket(test)
-    const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
-    setExpiration(expires)
-    console.log({testing:test})
-  })
-     
+    req.then(res => {
+      const test = res.data[3][cardObject.sku]
+      setCurrentMarket(test)
+      const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+      setExpiration(expires)
+      console.log({ testing: test })
+    })
+
     // setCurrentMarket()
   }
 
@@ -81,26 +81,26 @@ export const Card = ({ cardObject }) => {
 
   return (
     <Link href={cardObjectHref}>
-      <a className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full">
+      <a className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full 	">
 
         {cardObject === undefined ?
           <React.Fragment>
             <Skeleton variant="rectangular" sx={{ backgroundColor: 'white', height: '450px' }} />
           </React.Fragment> :
           <React.Fragment>
-            <div className="flex items-left flex-col space-y-3 justify-center w-full h-full">
+            <div className="flex items-left flex-col space-y-3 justify-center w-full h-full ">
 
               {cardObject.image?.original === '' || cardObject.image?.original === 'https://image.goat.com/placeholders/product_templates/original/missing.png' ?
 
                 <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
-                  <img className='object-cover mobile:w-[40%]  m-auto laptop:h-[100%] scale-125' src='/hurache.svg' />
+                  <img className='object-cover mobile:w-[40%]  m-auto mobile:h-[100%] scale-100' src='/hurache.svg' />
                 </div>
                 :
 
-                <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
+                <div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
                   {/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
-                  <img className='object-cover mobile:w-[40%]  m-auto laptop:h-[100%] scale-150' src={cardObject.image?.original}></img>
+                  <img className='object-contain mobile:w-[40%]  m-auto mobile:h-[100%] scale-110' src={cardObject.image?.original}></img>
                 </div>
 
               }
@@ -108,7 +108,7 @@ export const Card = ({ cardObject }) => {
               <div className="h-full">
                 <div className="px-8  " >
                   <h1 className="text-2xl font-normal text-white h-[22%] w-full line-clamp-2 font-SG  ">{cardObject.name}</h1>
-                  <h2 className=" text-lg font-light text-left w-full text-white py-4 font-inter">Retail Price &ensp;  &ensp; &ensp; ${cardObject.retailPrice}</h2>
+                  <h2 className=" text-lg font-light text-left w-full text-white py-4 font-Inter">Retail Price &ensp;  &ensp; &ensp; ${cardObject.retailPrice}</h2>
 
                 </div>
                 <div className="border-b-[1px] border-[#30403F]"></div>
@@ -120,18 +120,18 @@ export const Card = ({ cardObject }) => {
                     <div className="space-y-3">
                       <div className='flex flex-row items-center border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[50%] py-2 px-4 space-x-2 items-center font-inter'>
 
-                        <p className={favored == true ? "bg-[#ACFF00] text-black  text-[14px] font-normal rounded-[40px]  flex flex-row justify-center   py-1 border-[1px] border-[#30403F] h-full w-full" : "text-white  text-sm font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] py-1 border-[#30403F] h-full w-full"} >No - {No} %</p>
+                        <p className={favored == true ? "bg-[#ACFF00] text-black  text-[14px] font-normal rounded-[40px]  flex flex-row justify-center   py-1 border-[1px] border-[#30403F] h-full w-full" : "text-white  text-sm font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] py-1 border-[#30403F] h-full w-full font-Inter"} >No - {No} %</p>
 
-                        <p className={favored == false ? "bg-[#ACFF00] text-black  text-[14px] font-normal  rounded-[40px]  flex flex-row justify-center  py-1 border-[1px] border-[#30403F] h-full w-full" : "text-white text-sm font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] py-1 border-[#30403F] h-full w-full"}>Yes - {Yes} %</p>
+                        <p className={favored == false ? "bg-[#ACFF00] text-black  text-[14px] font-normal  rounded-[40px]  flex flex-row justify-center  py-1 border-[1px] border-[#30403F] h-full w-full" : "text-white text-sm font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] py-1 border-[#30403F] h-full w-full font-Inter"}>Yes - {Yes} %</p>
                       </div>
-                      <button className='flex flex-row items-center text-white text-[14px]  border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[30%] py-2 px-4 items-center hover:bg-[#ACFF00] hover:text-black '> <p> Place a bet on this sneaker</p> <img className="ml-3 text-white" src="/slimRightArrowWhite.svg" /></button>
+                      <button className='flex flex-row items-center text-white text-[14px]  border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[30%] py-2 px-4 items-center font-Inter hover:bg-[#ACFF00] hover:text-black '> <p> Place a bet on this sneaker</p> <img className="ml-3 text-white" src="/slimRightArrowWhite.svg" /></button>
 
                     </div>
 
 
-                    <div className=" w-full">
+                    <div className="w-full">
 
-                      <h2 className="text-[14px] text-[#748282]">This wager expires {expiration}</h2>
+                      <h2 className="text-[14px] text-[#748282] font-Inter">This wager expires {expiration}</h2>
                     </div>
                   </div>
                 </div>

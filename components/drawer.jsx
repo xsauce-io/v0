@@ -80,14 +80,14 @@ export const LocalDrawer = ({ children }) => {
                                 Home
                             </a>
                         </li>
-                        <li>
+                        {/* <li>
                             <a
                                 className="text-white transition hover:text-[#ACFF00]"
                                 href="/premarkets"
                             >
                                 Pre-Market
                             </a>
-                        </li>
+                        </li> */}
 
                         <li>
                             <a

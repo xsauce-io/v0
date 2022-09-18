@@ -16,6 +16,7 @@ const Home: NextPage = () => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',
+		smlaptop: '1024',
 		laptop: '1200',
 		desktop: '1400',
 	};
@@ -75,14 +76,16 @@ const Home: NextPage = () => {
 				<>
 					<ContentHeader title={'Positions'} icon={<img src="/pieChart.svg" />}>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
-							<h5 className="text-sm">Filter on</h5>
+							<h5 className="text-sm font-Inter">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
 									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50"
 								>
 									<img className="" src="/textBlock.svg" />
-									<span className="text-black">Winning Positions</span>
+									<span className="text-black font-Inter">
+										Winning Positions
+									</span>
 
 									{/* {sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
 										<span className="text-black ">Retail Price</span>
@@ -98,14 +101,18 @@ const Home: NextPage = () => {
 									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
 									<li>
-										<button>Winnings Positions</button>
+										<button className="text-black font-Inter">
+											Winnings Positions
+										</button>
 									</li>
 									<li>
-										<button>Total Price</button>
+										<button className="text-black font-Inter">
+											Total Price
+										</button>
 									</li>
 
 									<li>
-										<button>Returns</button>
+										<button className="text-black font-Inter">Returns</button>
 									</li>
 								</ul>
 							</div>
