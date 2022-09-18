@@ -69,18 +69,20 @@ const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protoc
 const requestOrderBookAbi = axios.get(OrderBookGit);
 const requestOrderBookAddress = axios.get(OrderBookAddressGit);
 
-const tokenAddress = "0x9B2BC1c778051870767bE3d8b8d6b714Fc0E4967"
+const Token1 = "0x0163f21F8AcB86564491676C21Ca235cb9ddbFcD"
+const Token2 = "0xEAAC1924EDC605928C106C74932387d37B2387Aa"
+
 const market1Add = "0x44A5cE34F2997091De32F1eC7f552c3FC175869d"
 
 const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
-  const [OrderBookAddress, setOrderBookAddress] = useState("" as any);
+  const [OrderBookFactoryAddress, setOrderBookFactoryAddress] = useState("" as any);
 
 
   axios.all([requestOrderBookAbi, requestOrderBookAddress]).then(axios.spread((...responses) => {
     const OrderBookInfo = responses[0].data;
     setOrderBookAbi(OrderBookInfo);
-    const OrderBookAddress = responses[1].data[4].OrderBookFactory20.address;
-  setOrderBookAddress(OrderBookAddress);
+    const OrderBookFactoryAddress = responses[1].data[4].OrderBookFactory20.address;
+  setOrderBookFactoryAddress(OrderBookFactoryAddress);
 
    })).catch(errors => {
     console.log(errors)
@@ -96,11 +98,11 @@ const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send('eth_requestAccounts', []);
     const signer = provider.getSigner();
-    const OrderBookFactory = new ethers.Contract(OrderBookAddress, OrderBookAbi, signer);
-    const NewBook = await OrderBookFactory.createBook(tokenAddress, Toke2, 100)
+    const OrderBookFactory = new ethers.Contract(OrderBookFactoryAddress, OrderBookAbi, signer);
+    const NewBook = await OrderBookFactory.createBook(Token1, Toke2, 100)
     await NewBook.wait(1)
 
-   console.log(NewBook.address);
+   console.log(NewBook);
 
 // const newMarket = await create.allMarkets(-1);
 
@@ -115,11 +117,12 @@ const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send('eth_requestAccounts', []);
     const signer = provider.getSigner();
-    const OrderBookFactory = new ethers.Contract(OrderBookAddress, OrderBookAbi, signer);
-    const NewBook = await OrderBookFactory.getBook(tokenAddress, Toke2, 100)
+    const OrderBookFactory = new ethers.Contract(OrderBookFactoryAddress, OrderBookAbi, signer);
+    const NewBook = await OrderBookFactory.getBook(Token1, Token2, 100)
+    
+  
 
-
-   console.log(NewBook.address);
+   console.log(NewBook);
 
 // const newMarket = await create.allMarkets(-1);
 
@@ -170,7 +173,7 @@ const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
 						<p>GO BACK</p>
 					</button>
           {admin === true ?
-            <form onSubmit={createNewBook}  className='space-x-2 ml-4'>
+            <form onSubmit={getBookInfo}  className='space-x-2 ml-4'>
 <input
   className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
   name="Token2"

@@ -19,8 +19,9 @@ export const ActionCard = ({cardObject}) => {
     const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
     const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
     const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
-    const TokenAdd = "0x9B2BC1c778051870767bE3d8b8d6b714Fc0E4967"
-    const market1OrderBook = "0xbB311A5025bF1f5900Bf70e9a69cE961BD09d371";
+    const Token1 = "0x0163f21F8AcB86564491676C21Ca235cb9ddbFcD"
+    const Token2 = "0xEAAC1924EDC605928C106C74932387d37B2387Aa"
+    const market1OrderBook = "0x632f332B9B212A6462717ad34CBBB61a55dcBe69";
 
     const getMarketbySku = () => {
       const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
@@ -37,7 +38,7 @@ export const ActionCard = ({cardObject}) => {
     const handleTransfer = async (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
-      console.log(data.get("contractNumber"));
+      console.log(data.get("Amount") * data.get("LimitPrice"));
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send('eth_requestAccounts', []);
       const signer = await provider.getSigner();
@@ -46,27 +47,32 @@ export const ActionCard = ({cardObject}) => {
       setSignedContract(signedContract)
       let fromToken;
       if (isBuy === true) {
-        fromToken = TokenAdd;
-      } else { fromToken = market1Add}
-   
+        fromToken = Token1;
+      } else { fromToken = Token2};
+   console.log(fromToken);
       const order = await signedContract.limitOrder(
           fromToken,
-          BigNumber.from("800000000000000000"),
-          BigNumber.from("1000000000000000000"),
-          BigNumber.from("1000000000000000000"),
-        
+          ethers.utils.parseUnits("200", 18),
+          ethers.utils.parseUnits("500", 18),
+          ethers.utils.parseUnits("5",18),
+
+          //data.get("LimitPrice")
+
+          // ethers.utils.parseUnits(data.get("Amount"))
+          // data.get("LimitPrice") * data.get("Amount") 
           // makerOnly
-          !isBuy,
+          false,
           // takerOnly
-          isBuy,
+          false,
       )
 
       }
 
+    
 
     const quote = async (e) => {
       e.preventDefault();
-      const data = new FormData(e.target);
+      // const data = new FormData(e.target);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send('eth_requestAccounts', []);
       const signer = provider.getSigner();
@@ -75,17 +81,13 @@ export const ActionCard = ({cardObject}) => {
       setSignedContract(signedContract)
       let fromToken;
       if (isBuy === true) {
-        fromToken = TokenAdd;
-      } else { fromToken = market1Add}
-      const quote = await orderBook.quoteExactAmountOut(
-        fromToken,
-        BigNumber.from("100000000000000000"),
-        BigNumber.from("8000000000000000000"),
-      );
-      setCurrentQuote(quote[0].toString());
+        fromToken = Token1;
+      } else { fromToken = Token2}
+      const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
+      setCurrentQuote((LowestAsk/(10**18)).toString());
   
   
-      console.log(quote[0].toNumber())
+      console.log((LowestAsk/(10**18)).toString())
     }
 
   
@@ -94,7 +96,7 @@ export const ActionCard = ({cardObject}) => {
   
 
     const Mockaddress = "0xac9BD2821B4296ea92b716DB8D841e46cd1f2F71"
-    const market1Add ="0x44A5cE34F2997091De32F1eC7f552c3FC175869d"
+  
     // const dai = "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
 
     const [alignment, setAlignment] = useState();
@@ -104,7 +106,7 @@ export const ActionCard = ({cardObject}) => {
     const [order, setOrder] = useState();
 
     const [isBuy, setIsBuy] = useState();
-    const [currentQuote, setCurrentQuote] = useState(0)
+    const [currentQuote, setCurrentQuote] = useState()
     const [orderBookAbi, setOrderBookAbi] = useState(null)
     const [orderBookAddress, setOrderBookAddress] = useState(null)
     const [signedContract, setSignedContract] = useState(null)
@@ -219,7 +221,7 @@ export const ActionCard = ({cardObject}) => {
 
                 </flex>
             </div>
-            <form onSubmit={quote} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
+            <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
 
                 <div className='bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full '>
                     <did>
@@ -294,7 +296,7 @@ export const ActionCard = ({cardObject}) => {
                             className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none "
                             name="LimitPrice"
                             type="number"
-                            placeholder="00.00"
+                            placeholder="100"
                             required
                         />
                         <p className="text-sm ml-1"> USDC</p>
@@ -305,8 +307,8 @@ export const ActionCard = ({cardObject}) => {
                         </p>
                         <input
                             className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none "
-                            name="contractNumber"
-                            type="text"
+                            name="Amount"
+                            type="number"
                             placeholder="# of Contracts"
                             required
                         />
@@ -324,13 +326,13 @@ export const ActionCard = ({cardObject}) => {
                       <InfoIcon sx={{ fontSize: "18px" }} />
                     </Tooltip>
                      <p className="pr-4 " >Price : ${currentQuote} </p>
-                    <button type="submit" className="bg-black text-white p-3 text-xs rounded-3xl">Update Quote</button>
+                    <button onClick={quote} className="bg-black text-white p-3 text-xs rounded-3xl">Update Quote</button>
                   </div>
                  </div>
 
                 <div className='bg-white items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
 
-                    <button id='mint' className={isBuy == undefined ? " w-full font-medium  text-xl py-4  text-[#0C1615] bg-[#DCDEE1] rounded-[80px] hover:opacity-60" : isBuy == true ? "w-full font-medium  text-xl py-4  text-[#0C1615] rounded-[80px] hover:opacity-60text-black bg-[#ACFF00] " : " w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60 "} type="submit">
+                    <button type="submit" id='mint' className={isBuy == undefined ? " w-full font-medium  text-xl py-4  text-[#0C1615] bg-[#DCDEE1] rounded-[80px] hover:opacity-60" : isBuy == true ? "w-full font-medium  text-xl py-4  text-[#0C1615] rounded-[80px] hover:opacity-60text-black bg-[#ACFF00] " : " w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60 "}>
                         {isBuy == undefined ? 'Select Order Type' : isBuy === true ? 'Place Buy Order' : 'Place Sell Order'}
                     </button>
                     <div className="w-full px-5 flex">

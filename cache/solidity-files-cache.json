@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Market.sol": {
-      "lastModificationDate": 1663122083495,
-      "contentHash": "f0846352de48b903f08499cba0d44793",
+      "lastModificationDate": 1663450125245,
+      "contentHash": "73a3c0537bb55aff0120a5b6fd6260dc",
       "sourceName": "contracts/Market.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -34,7 +34,10 @@
         "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol",
         "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol",
         "./interfaces/IOracle.sol",
-        "./Token20.sol"
+        "./Token20.sol",
+        "@openzeppelin/contracts/utils/math/SafeMath.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+        "hardhat/console.sol"
       ],
       "versionPragmas": [
         "^0.8.16"
@@ -82,8 +85,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Token20.sol": {
-      "lastModificationDate": 1662776767321,
-      "contentHash": "3504b65555f0aee2181262e4c6d5a7b8",
+      "lastModificationDate": 1663352047973,
+      "contentHash": "dd1b28819470a7ce02528650adc870c0",
       "sourceName": "contracts/Token20.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -109,14 +112,49 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
         "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol"
       ],
       "versionPragmas": [
-        "^0.8.13"
+        "^0.8.16"
       ],
       "artifacts": [
         "Token20"
+      ]
+    },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1662586962011,
+      "contentHash": "4ff3cd2f6272c9a6516e9ee4f2b967d3",
+      "sourceName": "hardhat/console.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">= 0.4.22 <0.9.0"
+      ],
+      "artifacts": [
+        "console"
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
@@ -198,6 +236,41 @@
         "ERC1155"
       ]
     },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol": {
+      "lastModificationDate": 1662586966185,
+      "contentHash": "2337f0279507b5edf14a07067adf0d05",
+      "sourceName": "@openzeppelin/contracts/utils/math/SafeMath.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SafeMath"
+      ]
+    },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol": {
       "lastModificationDate": 1662586966936,
       "contentHash": "6a99607f60a77d468b7ed41303ea4a6c",
@@ -272,6 +345,43 @@
         "ERC1155Burnable"
       ]
     },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/ConfirmedOwner.sol": {
+      "lastModificationDate": 1662586966066,
+      "contentHash": "16d64572b0310127fc8a771e63be6d20",
+      "sourceName": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ConfirmedOwnerWithProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ConfirmedOwner"
+      ]
+    },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/ChainlinkClient.sol": {
       "lastModificationDate": 1662586966066,
       "contentHash": "6af479cbde42f1a7225c9cebc6e32239",
@@ -315,10 +425,10 @@
         "ChainlinkClient"
       ]
     },
-    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/ConfirmedOwner.sol": {
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol": {
       "lastModificationDate": 1662586966066,
-      "contentHash": "16d64572b0310127fc8a771e63be6d20",
-      "sourceName": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol",
+      "contentHash": "8b1c5f02622cd87472493bda6595d1be",
+      "sourceName": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol",
       "solcConfig": {
         "version": "0.8.16",
         "settings": {
@@ -343,13 +453,48 @@
         }
       },
       "imports": [
-        "./ConfirmedOwnerWithProposal.sol"
+        "./interfaces/OwnableInterface.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "ConfirmedOwner"
+        "ConfirmedOwnerWithProposal"
+      ]
+    },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol": {
+      "lastModificationDate": 1662586966910,
+      "contentHash": "2e814c8a9f77897f6995436d97c23d99",
+      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "OwnableInterface"
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/Chainlink.sol": {
@@ -390,10 +535,10 @@
         "Chainlink"
       ]
     },
-    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol": {
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol": {
       "lastModificationDate": 1662586966910,
-      "contentHash": "27da4b2007d200dd5afff31dbf31ac99",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol",
+      "contentHash": "da5a0c3bd86c896f6a407f909c57edf3",
+      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol",
       "solcConfig": {
         "version": "0.8.16",
         "settings": {
@@ -422,42 +567,7 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "PointerInterface"
-      ]
-    },
-    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol": {
-      "lastModificationDate": 1662586966909,
-      "contentHash": "06b6aefcae95de6d1597ad8e1d73a08b",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ENSInterface"
+        "LinkTokenInterface"
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/OperatorInterface.sol": {
@@ -498,41 +608,6 @@
         "OperatorInterface"
       ]
     },
-    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol": {
-      "lastModificationDate": 1662586966910,
-      "contentHash": "da5a0c3bd86c896f6a407f909c57edf3",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "LinkTokenInterface"
-      ]
-    },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/ChainlinkRequestInterface.sol": {
       "lastModificationDate": 1662586966909,
       "contentHash": "14407a6ead15cff8a0e0a7f8037c68f5",
@@ -566,6 +641,76 @@
       ],
       "artifacts": [
         "ChainlinkRequestInterface"
+      ]
+    },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol": {
+      "lastModificationDate": 1662586966909,
+      "contentHash": "06b6aefcae95de6d1597ad8e1d73a08b",
+      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ENSInterface"
+      ]
+    },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol": {
+      "lastModificationDate": 1662586966910,
+      "contentHash": "27da4b2007d200dd5afff31dbf31ac99",
+      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "PointerInterface"
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/vendor/ENSResolver.sol": {
@@ -708,78 +853,6 @@
       ],
       "artifacts": [
         "OracleInterface"
-      ]
-    },
-    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol": {
-      "lastModificationDate": 1662586966066,
-      "contentHash": "8b1c5f02622cd87472493bda6595d1be",
-      "sourceName": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./interfaces/OwnableInterface.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ConfirmedOwnerWithProposal"
-      ]
-    },
-    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol": {
-      "lastModificationDate": 1662586966910,
-      "contentHash": "2e814c8a9f77897f6995436d97c23d99",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "OwnableInterface"
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
@@ -1038,6 +1111,43 @@
         "IERC1155"
       ]
     },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+      "lastModificationDate": 1662586966936,
+      "contentHash": "9148c2e10c4efb12c71a7f080da5559b",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC1155.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC1155MetadataURI"
+      ]
+    },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
       "lastModificationDate": 1662586966185,
       "contentHash": "9f8822b72fe2702979e40160cb6d9636",
@@ -1112,43 +1222,6 @@
         "ERC165"
       ]
     },
-    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
-      "lastModificationDate": 1662586966936,
-      "contentHash": "9148c2e10c4efb12c71a7f080da5559b",
-      "sourceName": "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC1155.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC1155MetadataURI"
-      ]
-    },
     "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
       "lastModificationDate": 1662586966186,
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
@@ -1185,8 +1258,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/MarketFactory.sol": {
-      "lastModificationDate": 1662951977564,
-      "contentHash": "9ae7550185697ff14898daf2880456cc",
+      "lastModificationDate": 1663272608762,
+      "contentHash": "dbe5317a177038bbc76ca5c72ce02195",
       "sourceName": "contracts/MarketFactory.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1223,41 +1296,6 @@
       ],
       "artifacts": [
         "MarketFactory"
-      ]
-    },
-    "/Users/home/Desktop/xsauce.v0/v0/node_modules/hardhat/console.sol": {
-      "lastModificationDate": 1662586962011,
-      "contentHash": "4ff3cd2f6272c9a6516e9ee4f2b967d3",
-      "sourceName": "hardhat/console.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">= 0.4.22 <0.9.0"
-      ],
-      "artifacts": [
-        "console"
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Oracle.sol": {
@@ -1298,6 +1336,80 @@
       ],
       "artifacts": [
         "Oracle"
+      ]
+    },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+      "lastModificationDate": 1662586966934,
+      "contentHash": "3a843b05b85a270e9455e3d2e804e633",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC20.sol",
+        "../extensions/draft-IERC20Permit.sol",
+        "../../../utils/Address.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SafeERC20"
+      ]
+    },
+    "/Users/home/Desktop/xsauce.v0/v0/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
+      "lastModificationDate": 1662586966936,
+      "contentHash": "fb77f144244b9ab12533aa6ce85ef8c5",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC20Permit"
       ]
     }
   }

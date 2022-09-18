@@ -42,12 +42,13 @@ export interface MarketInterface extends utils.Interface {
     "feeCollector()": FunctionFragment;
     "fetched()": FunctionFragment;
     "getData()": FunctionFragment;
-    "initialize(uint256,address,address,uint256)": FunctionFragment;
+    "initialize(uint256,address,uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mint(address,uint256,uint256,bytes)": FunctionFragment;
-    "mintBatch(address,uint256[],uint256[],bytes)": FunctionFragment;
+    "mint(uint256,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "predictionPrice()": FunctionFragment;
+    "priceOfNo()": FunctionFragment;
+    "priceOfYes()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "resolveAssetPrice()": FunctionFragment;
     "resolved()": FunctionFragment;
@@ -59,6 +60,7 @@ export interface MarketInterface extends utils.Interface {
     "totalSupply(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
+    "xchange(uint256,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -79,9 +81,10 @@ export interface MarketInterface extends utils.Interface {
       | "initialize"
       | "isApprovedForAll"
       | "mint"
-      | "mintBatch"
       | "owner"
       | "predictionPrice"
+      | "priceOfNo"
+      | "priceOfYes"
       | "renounceOwnership"
       | "resolveAssetPrice"
       | "resolved"
@@ -93,6 +96,7 @@ export interface MarketInterface extends utils.Interface {
       | "totalSupply"
       | "transferOwnership"
       | "uri"
+      | "xchange"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "NO", values?: undefined): string;
@@ -142,7 +146,6 @@ export interface MarketInterface extends utils.Interface {
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
@@ -152,25 +155,16 @@ export interface MarketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mintBatch",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<BigNumberish>[],
-      PromiseOrValue<BytesLike>
-    ]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "predictionPrice",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "priceOfNo", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "priceOfYes",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -226,6 +220,10 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "uri",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "xchange",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
 
   decodeFunctionResult(functionFragment: "NO", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "YES", data: BytesLike): Result;
@@ -255,12 +253,13 @@ export interface MarketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "mintBatch", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "predictionPrice",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "priceOfNo", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "priceOfYes", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
@@ -296,6 +295,7 @@ export interface MarketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "xchange", data: BytesLike): Result;
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
@@ -466,7 +466,6 @@ export interface Market extends BaseContract {
     initialize(
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
-      _usdc: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -478,24 +477,18 @@ export interface Market extends BaseContract {
     ): Promise<[boolean]>;
 
     mint(
-      arg0: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
       amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    mintBatch(
-      to: PromiseOrValue<string>,
-      ids: PromiseOrValue<BigNumberish>[],
-      amounts: PromiseOrValue<BigNumberish>[],
-      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     predictionPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    priceOfNo(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    priceOfYes(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -555,6 +548,12 @@ export interface Market extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    xchange(
+      fromId: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   NO(overrides?: CallOverrides): Promise<BigNumber>;
@@ -611,7 +610,6 @@ export interface Market extends BaseContract {
   initialize(
     _predictionPrice: PromiseOrValue<BigNumberish>,
     _oracleFeed: PromiseOrValue<string>,
-    _usdc: PromiseOrValue<string>,
     _closingDate: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -623,24 +621,18 @@ export interface Market extends BaseContract {
   ): Promise<boolean>;
 
   mint(
-    arg0: PromiseOrValue<string>,
     id: PromiseOrValue<BigNumberish>,
     amount: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  mintBatch(
-    to: PromiseOrValue<string>,
-    ids: PromiseOrValue<BigNumberish>[],
-    amounts: PromiseOrValue<BigNumberish>[],
-    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   predictionPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+  priceOfNo(overrides?: CallOverrides): Promise<BigNumber>;
+
+  priceOfYes(overrides?: CallOverrides): Promise<BigNumber>;
 
   renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -701,6 +693,12 @@ export interface Market extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  xchange(
+    fromId: PromiseOrValue<BigNumberish>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     NO(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -752,7 +750,6 @@ export interface Market extends BaseContract {
     initialize(
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
-      _usdc: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -764,24 +761,18 @@ export interface Market extends BaseContract {
     ): Promise<boolean>;
 
     mint(
-      arg0: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
       amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    mintBatch(
-      to: PromiseOrValue<string>,
-      ids: PromiseOrValue<BigNumberish>[],
-      amounts: PromiseOrValue<BigNumberish>[],
-      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     predictionPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+    priceOfNo(overrides?: CallOverrides): Promise<BigNumber>;
+
+    priceOfYes(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -837,6 +828,12 @@ export interface Market extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    xchange(
+      fromId: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -958,7 +955,6 @@ export interface Market extends BaseContract {
     initialize(
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
-      _usdc: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -970,24 +966,18 @@ export interface Market extends BaseContract {
     ): Promise<BigNumber>;
 
     mint(
-      arg0: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
       amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    mintBatch(
-      to: PromiseOrValue<string>,
-      ids: PromiseOrValue<BigNumberish>[],
-      amounts: PromiseOrValue<BigNumberish>[],
-      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     predictionPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+    priceOfNo(overrides?: CallOverrides): Promise<BigNumber>;
+
+    priceOfYes(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1047,6 +1037,12 @@ export interface Market extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    xchange(
+      fromId: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1104,7 +1100,6 @@ export interface Market extends BaseContract {
     initialize(
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
-      _usdc: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -1116,24 +1111,18 @@ export interface Market extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     mint(
-      arg0: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
       amount: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    mintBatch(
-      to: PromiseOrValue<string>,
-      ids: PromiseOrValue<BigNumberish>[],
-      amounts: PromiseOrValue<BigNumberish>[],
-      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     predictionPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    priceOfNo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    priceOfYes(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1192,6 +1181,12 @@ export interface Market extends BaseContract {
     uri(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    xchange(
+      fromId: PromiseOrValue<BigNumberish>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

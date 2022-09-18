@@ -310,7 +310,7 @@ export const Nav = ({ logoColor }) => {
                       </> :
                       <>
                        <img className="h-[15%] w-[15%]" src="/eth.png" />
-                        <span className="text-[black] text-[14px]">Goerli</span>
+                        <span className="text-[black] text-[14px]">Rinkeby</span>
                       </>
                 }
                 <img src="/dropdown.png" />

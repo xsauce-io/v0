@@ -19,12 +19,12 @@ contract MarketFactory is Ownable {
  constructor() {}
 
  function createNewMarket(string memory uri, uint256 _predictionPrice, address _oracleFeed, uint256 _closingDate, IERC20 _usdc, string memory sku) public onlyOwner {
-  Market market = new Market(uri);
-   market.initialize(_predictionPrice, _oracleFeed, _usdc, _closingDate);
-   bytes32 marketKey = keccak256(abi.encodePacked(sku, _predictionPrice, _closingDate));
-   markets[marketKey] = address(market);
-   allMarkets.push(address(market));
-   emit marketCreated(sku, _predictionPrice, _closingDate);
+  // Market market = new Market(uri);
+  // //  market.initialize(_predictionPrice, _oracleFeed, _usdc, _closingDate);
+  //  bytes32 marketKey = keccak256(abi.encodePacked(sku, _predictionPrice, _closingDate));
+  //  markets[marketKey] = address(market);
+  //  allMarkets.push(address(market));
+  //  emit marketCreated(sku, _predictionPrice, _closingDate);
 
  }
 

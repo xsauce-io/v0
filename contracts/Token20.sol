@@ -1,11 +1,9 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.13;
-
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+pragma solidity ^0.8.16;
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract Token20 is ERC20, ERC20Burnable {
-
+contract Token20 is ERC20, ERC20Burnable, Ownable{
     uint8 _decimals;
 
     constructor(
@@ -14,7 +12,7 @@ contract Token20 is ERC20, ERC20Burnable {
         uint8 decimals_
     ) ERC20(testToken, Test) {
         _decimals = decimals_;
-        _mint(msg.sender, 10000 * 10 ** decimals());
+        _mint(msg.sender, 10000 * 10**decimals());
     }
 
     function mint(address to, uint256 amount) external {
