@@ -6,8 +6,8 @@ async function main() {
 
   const Usdc = await ethers.getContractFactory("Token20");
   const usdc = await Usdc.deploy(
-    "USD Coin Mock",
-    "USDCM",
+    "Stable $auce",
+    "$",
     18
   )
 
@@ -39,15 +39,15 @@ async function main() {
 //  const market3Add = await MF.allMarkets(2);
 //  const market4Add = await MF.allMarkets(3);
 
-const Market = await ethers.getContractFactory("Market");
+// const Market = await ethers.getContractFactory("MarketFcatory");
 
-  const market = await Market.deploy('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', usdc.address);
+//   const market = await Market.deploy('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', usdc.address);
 
-  await market.deployed();
+//   await market.deployed();
 
 
   console.log("Token address: ", usdc.address)
-  console.log("Market Address", market.address)
+  // console.log("Market Address", market.address)
   // console.log("MarketFactory address is: ", MF.address)
   // console.log("Oracle address: ", oracle.address)
   // console.log("Market1 address: ", market1Add)

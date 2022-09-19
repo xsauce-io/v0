@@ -1,25 +1,40 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.16;
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract Token20 is ERC20, ERC20Burnable, Ownable{
+contract Token20 is ERC20, Ownable{
     uint8 _decimals;
+    mapping(address => uint) public lockTime;
+    IERC20 usdc;
+    uint public amountAllowed = 1000000000000000000000;
+
 
     constructor(
-        string memory testToken,
-        string memory Test,
+        string memory Sauce,
+        string memory $,
         uint8 decimals_
-    ) ERC20(testToken, Test) {
+        
+    ) ERC20(Sauce, $) {
         _decimals = decimals_;
-        _mint(msg.sender, 10000 * 10**decimals());
+        _mint(msg.sender, 1000000000000 * 10**decimals());
     }
 
-    function mint(address to, uint256 amount) external {
-        _mint(to, amount);
-    }
 
     function decimals() public view override returns (uint8) {
         return _decimals;
     }
+
+
+    function sendSauce(address _requestor) external {
+        require(block.timestamp > lockTime[msg.sender], "lock time has not expired. Please try again later");
+
+        //if the balance of this contract is greater then the requested amount send funds
+       _mint(_requestor, amountAllowed);        
+ 
+        //updates locktime 1 day from now
+        lockTime[msg.sender] = block.timestamp + 1 days;
+
+
+}
 }

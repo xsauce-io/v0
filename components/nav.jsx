@@ -1,15 +1,14 @@
 
 
 import React, { useEffect, useMemo } from "react";
-import { Drawer, Box, Typography } from "@mui/material";
+
 import { useState } from "react";
 import { ethers, utils } from 'ethers';
-import { Onboard } from "../components/onBoardingModal";
-import PropTypes from 'prop-types';
+
 import { useWindowDimensions } from "/utils/hooks/useWindowDimensions.js";
-import { Laptop, ScreenRotationAltSharp, Screenshot } from "@mui/icons-material";
+
 import { LocalDrawer } from '../components/drawer'
-import { DrawerHeader } from "@chakra-ui/react";
+import SauceTokenABI from '../abi/$tableSauce.json'
 
 
 export const Nav = ({ logoColor }) => {
@@ -93,10 +92,12 @@ export const Nav = ({ logoColor }) => {
     setToggle(NetworkIndex)
     chains(NetworkIndex);
     console.log({ setState: NetworkIndex });
-    // localStorage.setItem('network', NetworkName)
-    // localStorage.setItem('networkNum', NetworkIndex)
 
   }
+
+
+
+
 
   const chains = async (NetworkIndex) => {
 
@@ -241,16 +242,24 @@ export const Nav = ({ logoColor }) => {
     // localStorage.setItem('networkNum', '3');
   }
 
+const SauceTokenAddress = "0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D";
 
+  const faucet = async () => {
+    
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    let requestor = (await provider.send('eth_requestAccounts', [0])).toString();
+    const signer = provider.getSigner();
+    const SauceToken = new ethers.Contract(SauceTokenAddress, SauceTokenABI, signer);
+    await SauceToken.sendSauce(requestor);
+    console.log(requestor)
+
+  }
+ 
 
   useEffect(() => {
     getWallet();
     localStorage.getItem('network')
   }, []);
-
-  // useEffect(() => {
-  //   window.location.reload();
-  // }, [toggle]);
 
 
   return (
@@ -339,7 +348,7 @@ export const Nav = ({ logoColor }) => {
        
 
 
-          <button className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-1 py-2  w-[175px] hover:opacity-60" onClick={() => getWallet()}>
+          <button className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-1 py-2  w-[175px] hover:opacity-60" onClick={() => faucet()}>
               <p>Get Testnet Tokens</p>
                 <img src="/icon.svg" />
                

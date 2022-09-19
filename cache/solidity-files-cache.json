@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Market.sol": {
-      "lastModificationDate": 1663450125245,
-      "contentHash": "73a3c0537bb55aff0120a5b6fd6260dc",
+      "lastModificationDate": 1663551821855,
+      "contentHash": "78267e8c2f277ce41f887c9fecb83db9",
       "sourceName": "contracts/Market.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -85,8 +85,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Token20.sol": {
-      "lastModificationDate": 1663352047973,
-      "contentHash": "dd1b28819470a7ce02528650adc870c0",
+      "lastModificationDate": 1663553727195,
+      "contentHash": "1c3718281d9018fb977b52665a31ece0",
       "sourceName": "contracts/Token20.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -113,7 +113,7 @@
       },
       "imports": [
         "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol"
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
       ],
       "versionPragmas": [
         "^0.8.16"
