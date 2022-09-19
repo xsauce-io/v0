@@ -10,11 +10,14 @@ import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useToast } from '@chakra-ui/react';
+import classNames from 'classnames';
+
 
 
 export const Xchange = ({ cardObject }) => {
     const toast = useToast();
 
+    const [orderBookType, setOrderBookType] = useState();
 
     const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
     const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
@@ -217,9 +220,14 @@ export const Xchange = ({ cardObject }) => {
             <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
 
                 <div className='bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full '>
-                    <did>
-                        <p className="font-SG text-md text-center ">House OrderBook / Open OrderBook</p>
-                    </did>
+                    <div className="flex flex-row justify-center rounded-2xl border-2 ">
+                        <button className={classNames("flex-1 font-SG text-md text-center rounded-l-2xl p-2 ", {'bg-[#ACFF00] rounded-r-2xl' : orderBookType === 'house'} )} onClick={() => setOrderBookType('house')} >
+                            House OrderBook
+                        </button>
+                        <button className={classNames(" flex-1 font-SG text-md text-center rounded-r-2xl p-2", {'bg-[#ACFF00] rounded-l-2xl ' : orderBookType === 'open'} )} onClick={() => setOrderBookType('open')}>
+                            Open OrderBook
+                        </button>
+                    </div>
 
 
                     <div class="bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615]  dropdown dropdown-end  ">
