@@ -9,10 +9,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import {useToast} from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 
 
-export const ActionCard = ({cardObject}) => {
+export const ActionCard = ({ cardObject }) => {
     const toast = useToast();
 
 
@@ -24,79 +24,79 @@ export const ActionCard = ({cardObject}) => {
     const market1OrderBook = "0x632f332B9B212A6462717ad34CBBB61a55dcBe69";
 
     const getMarketbySku = () => {
-      const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-      req.then(res => {
-        const test = res.data[3][cardObject]
-        setCurrentMarket(test)
-        const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
-        setExpiration(expires)
-       
-      })
+        const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
+        req.then(res => {
+            const test = res.data[3][cardObject]
+            setCurrentMarket(test)
+            const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
+            setExpiration(expires)
+
+        })
     }
 
 
     const handleTransfer = async (e) => {
-      e.preventDefault();
-      const data = new FormData(e.target);
-      console.log(data.get("Amount") * data.get("LimitPrice"));
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send('eth_requestAccounts', []);
-      const signer = await provider.getSigner();
-      const orderBook = new ethers.Contract(market1OrderBook, orderBookAbi, signer);
-      let signedContract = orderBook.connect(signer);
-      setSignedContract(signedContract)
-      let fromToken;
-      if (isBuy === true) {
-        fromToken = Token1;
-      } else { fromToken = Token2};
-   console.log(fromToken);
-      const order = await signedContract.limitOrder(
-          fromToken,
-          ethers.utils.parseUnits("200", 18),
-          ethers.utils.parseUnits("500", 18),
-          ethers.utils.parseUnits("5",18),
+        e.preventDefault();
+        const data = new FormData(e.target);
+        console.log(data.get("Amount") * data.get("LimitPrice"));
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send('eth_requestAccounts', []);
+        const signer = await provider.getSigner();
+        const orderBook = new ethers.Contract(market1OrderBook, orderBookAbi, signer);
+        let signedContract = orderBook.connect(signer);
+        setSignedContract(signedContract)
+        let fromToken;
+        if (isBuy === true) {
+            fromToken = Token1;
+        } else { fromToken = Token2 };
+        console.log(fromToken);
+        const order = await signedContract.limitOrder(
+            fromToken,
+            ethers.utils.parseUnits("200", 18),
+            ethers.utils.parseUnits("500", 18),
+            ethers.utils.parseUnits("5", 18),
 
-          //data.get("LimitPrice")
+            //data.get("LimitPrice")
 
-          // ethers.utils.parseUnits(data.get("Amount"))
-          // data.get("LimitPrice") * data.get("Amount") 
-          // makerOnly
-          false,
-          // takerOnly
-          false,
-      )
+            // ethers.utils.parseUnits(data.get("Amount"))
+            // data.get("LimitPrice") * data.get("Amount") 
+            // makerOnly
+            false,
+            // takerOnly
+            false,
+        )
 
-      }
-
-    
-
-    const quote = async (e) => {
-      e.preventDefault();
-      // const data = new FormData(e.target);
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send('eth_requestAccounts', []);
-      const signer = provider.getSigner();
-      const orderBook = new ethers.Contract(market1OrderBook, orderBookAbi, signer);
-      signedContract = orderBook.connect(signer);
-      setSignedContract(signedContract)
-      let fromToken;
-      if (isBuy === true) {
-        fromToken = Token1;
-      } else { fromToken = Token2}
-      const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
-      setCurrentQuote((LowestAsk/(10**18)).toString());
-  
-  
-      console.log((LowestAsk/(10**18)).toString())
     }
 
-  
+
+
+    const quote = async (e) => {
+        e.preventDefault();
+        // const data = new FormData(e.target);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send('eth_requestAccounts', []);
+        const signer = provider.getSigner();
+        const orderBook = new ethers.Contract(market1OrderBook, orderBookAbi, signer);
+        signedContract = orderBook.connect(signer);
+        setSignedContract(signedContract)
+        let fromToken;
+        if (isBuy === true) {
+            fromToken = Token1;
+        } else { fromToken = Token2 }
+        const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
+        setCurrentQuote((LowestAsk / (10 ** 18)).toString());
+
+
+        console.log((LowestAsk / (10 ** 18)).toString())
+    }
+
+
     const requestOrderBook = axios.get(OrderBookGit);
     const requestOrderBookAddress = axios.get(OrderBookAddressGit);
-  
+
 
     const Mockaddress = "0xac9BD2821B4296ea92b716DB8D841e46cd1f2F71"
-  
+
     // const dai = "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
 
     const [alignment, setAlignment] = useState();
@@ -141,7 +141,7 @@ export const ActionCard = ({cardObject}) => {
             setOrderBookAbi(responses[0].data)
             // TODO fetch object based on chainID now is only Rinkeby
             setOrderBookAddress(responses[1].data[4].OrderBook20.address)
-           
+
 
         })).catch(errors => {
             console.log(errors)
@@ -150,34 +150,34 @@ export const ActionCard = ({cardObject}) => {
     }
 
     const ratios = async () => {
-      if (currentMarket !== undefined) {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = await provider.getSigner();
-        const contract = new ethers.Contract(currentMarket?.address, marketabi, signer);
-        const getYes = await contract.totalSupply(
-          1
-        )
-        const getNo = await contract.totalSupply(
-          2
-        )
-  
-  
-  
-        let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-  
-  
-        let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-        console.log(YesRatio)
-  
-        setYes(YesRatio.toFixed(0))
-        setNo(NoRatio.toFixed(0))
-  
-      }
+        if (currentMarket !== undefined) {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = await provider.getSigner();
+            const contract = new ethers.Contract(currentMarket?.address, marketabi, signer);
+            const getYes = await contract.totalSupply(
+                1
+            )
+            const getNo = await contract.totalSupply(
+                2
+            )
+
+
+
+            let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+
+
+            let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+            console.log(YesRatio)
+
+            setYes(YesRatio.toFixed(0))
+            setNo(NoRatio.toFixed(0))
+
+        }
     }
 
     useEffect(() => {
-      // ratios();
-      // calculations();
+        // ratios();
+        // calculations();
     }, [currentMarket]);
 
     useEffect(() => {
@@ -250,8 +250,8 @@ export const ActionCard = ({cardObject}) => {
 
                         </label>
                         <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-[25%] mt-4    ">
-                            <li><a onClick={() => { setIsYes(true) }} className="flex justify-right">Yes</a></li>
-                            <li><a onClick={() => { setIsYes(false) }}>No</a></li>
+                            <li className=" rounded-box "><a onClick={() => { setIsYes(true) }} className="flex justify-right active:bg-[#ACFF00]">Yes</a></li>
+                            <li className=" rounded-box"><a className="flex justify-right active:bg-[#ACFF00]" onClick={() => { setIsYes(false) }}>No</a></li>
                         </ul>
                     </div>
 
@@ -260,7 +260,7 @@ export const ActionCard = ({cardObject}) => {
 
                 <div className='bg-white items-center text-left border-b-[1px] px-4 pb-4 space-y-4 border-[#0C1615] w-full '>
 
-                   
+
                     <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2 hover:outline-1' >
                         <p className="text-left text-sm inline-block pr-1 ">
                             Amount:
@@ -277,18 +277,18 @@ export const ActionCard = ({cardObject}) => {
 
                 <div className='bg-[#ACFF00] items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
                     <div className="font-Inter mobile:text-lg font-medium flex flex-row justify-center items-center">
-                
-                    <Tooltip
-                      title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest asking price in the orderbook."
-                      arrow
-                      className="self-start mr-2"
-                    >
-                      <InfoIcon sx={{ fontSize: "18px" }} />
-                    </Tooltip>
-                     <p className="pr-4 " >Price : ${currentQuote} </p>
-                  
-                  </div>
-                 </div>
+
+                        <Tooltip
+                            title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest asking price in the orderbook."
+                            arrow
+                            className="self-start mr-2"
+                        >
+                            <InfoIcon sx={{ fontSize: "18px" }} />
+                        </Tooltip>
+                        <p className="pr-4 " >Price : ${currentQuote} </p>
+
+                    </div>
+                </div>
 
                 <div className='bg-white items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
 
@@ -297,7 +297,7 @@ export const ActionCard = ({cardObject}) => {
                     </button>
                 </div>
 
-                
+
 
                 <div className='bg-[#DCDEE1] items-center text-left rounded-b-[10px] p-3  space-y-4  w-full '>
                     <div className="w-full  flex px-5 items-center">
@@ -311,7 +311,7 @@ export const ActionCard = ({cardObject}) => {
                     </div>
                 </div>
 
-                
+
 
 
 
