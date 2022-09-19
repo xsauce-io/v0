@@ -11,12 +11,9 @@ import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useToast } from '@chakra-ui/react';
 import classNames from 'classnames';
-import {HouseXchange} from '../components/houseXchange'
-import {OpenXchange} from '../components/openXchange'
 
 
-
-export const Xchange = ({ cardObject }) => {
+export const OpenXchange = ({ cardObject }) => {
     const toast = useToast();
 
     const [orderBookType, setOrderBookType] = useState('house');
@@ -202,7 +199,7 @@ export const Xchange = ({ cardObject }) => {
     }
 
     useEffect(() => {
-        ratios();
+        // ratios();
         // calculations();
     }, [currentMarket]);
 
@@ -238,33 +235,127 @@ export const Xchange = ({ cardObject }) => {
 
 
         <div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
-            <div className='bg-[#ACFF00]  rounded-t-[10px] border-b-[1px] p-2  w-[100%]  border-[#0C1615]' />
+              <div className='bg-white p-4 text-left w-[100%] rounded-tl-xl rounded-tr-xl border-b-[1px] border-[#0C1615]'>
+                <flex className="flex flex-rows space-x-2 justify-center items-center">
+                    <p className=" mr-1 text-xs  ">Market Statistics</p>
+                    <div className="text-xs w-1/4 bg-[#0C1615] p-2 rounded-2xl text-center text-white">No - {No}%</div>
+                    <div className="text-xs   w-1/4 bg-[#ACFF00] p-2 rounded-2xl text-center">Yes - {Yes}%</div>
 
-            {/* <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full"> */}
+                </flex>
+            </div>
+            <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
 
-                <div className='bg-white items-center text-left rounded-xl p-4   space-y-4 border-[#0C1615] w-full '>
-                    <div className="flex flex-row justify-center rounded-2xl border-2 ">
-                        <button className={classNames("flex-1 font-SG text-md text-center rounded-l-2xl p-2 ", {'bg-[#ACFF00] rounded-r-2xl' : orderBookType === 'house'} )} onClick={() => setOrderBookType('house')} >
-                            House OrderBook
-                        </button>
-                        <button className={classNames(" flex-1 font-SG text-md text-center rounded-r-2xl p-2", {'bg-[#ACFF00] rounded-l-2xl ' : orderBookType === 'open'} )} onClick={() => setOrderBookType('open')}>
-                            Open OrderBook
-                        </button>
+                <div className='bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full '>
+                   
+
+
+                    <div class="bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615]  dropdown dropdown-end  ">
+
+                        <label tabindex="0" class="flex items-center hover:opacity-60 ">
+                            <p className="text-left text-sm ">
+                                Select the Wager
+                            </p>
+                            <div class="flex-1"></div>
+                            {isYes === true ? (
+                                <>
+                                    <span className="text-black">Yes</span>
+                                </>
+                            ) : (
+                                <>
+                                    <span className="text-black">No</span>
+                                </>
+
+                            )}
+
+                        </label>
+                        <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-[25%] mt-4    ">
+                            <li><a onClick={() => { setIsYes(true) }} className="flex justify-right">Yes</a></li>
+                            <li><a onClick={() => { setIsYes(false) }}>No</a></li>
+                        </ul>
                     </div>
 
-                    { orderBookType === 'house' ?
-
-                    <HouseXchange cardObject={cardObject}/> :
-                    <OpenXchange />
-
-    }
-</div>
 
 
-              
-             
+                    <div className='bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
+                        <p className="text-left text-sm ">
+                            Buy or Sell
+                        </p>
+                        <div class="flex-1"></div>
+                        <div class="dropdown dropdown-end ">
+                            <label tabindex="0" class="flex items-center">
+                                {isBuy === true ? (
+                                    <>
+                                        <span className="text-black">Buy</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className="text-black">Sell</span>
+                                    </>
 
-             
+                                )}
+
+                            </label>
+                            <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box  mt-4">
+                                <li><a className="active:bg-[#ACFF00]" onClick={() => { setIsBuy(true) }}>Buy</a></li>
+                                <li><a className="active:bg-[#ACFF00]" onClick={() => { setIsBuy(false) }}>Sell</a></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div> 
+
+                <div className='bg-white items-center text-left border-b-[1px] p-4 space-y-4 border-[#0C1615] w-full '>
+
+                    <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2  hover:outline-1'   >
+                        <p className="text-left text-sm pr-1 ">
+                            Limit Price:
+                        </p>
+                        <input
+                            className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none "
+                            name="LimitPrice"
+                            type="number"
+                            placeholder="100"
+                            required
+                        />
+                        <p className="text-sm ml-1"> USDC</p>
+                    </div>
+                    <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2 hover:outline-1' >
+                        <p className="text-left text-sm inline-block pr-1 ">
+                            Amount:
+                        </p>
+                        <input
+                            className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none "
+                            name="Amount"
+                            type="number"
+                            placeholder="# of Contracts"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div className='bg-[#ACFF00] items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
+                    <div className="font-Inter mobile:text-lg font-medium flex flex-row justify-center items-center">
+
+                        <Tooltip
+                            title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest asking price in the orderbook."
+                            arrow
+                            className="self-start mr-2"
+                        >
+                            <InfoIcon sx={{ fontSize: "18px" }} />
+                        </Tooltip>
+                        <p className="pr-4 " >Price : ${currentQuote} </p>
+                        <button onClick={quote} className="bg-black text-white p-3 text-xs rounded-3xl">Update Quote</button>
+                    </div>
+                </div>
+
+                <div className='bg-white items-center text-left  p-4 space-y-4 rounded-bl-lg rounded-br-lg  w-full'>
+
+                    <button type="submit" id='mint' className={isBuy == undefined ? " w-full font-medium  text-xl py-4  text-[#0C1615] bg-[#DCDEE1] rounded-[80px] hover:opacity-60" : isBuy == true ? "w-full font-medium  text-xl py-4  text-[#0C1615] rounded-[80px] hover:opacity-60text-black bg-[#ACFF00] " : " w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60 "}>
+                        {isBuy == undefined ? 'Select Order Type' : isBuy === true ? 'Place Buy Order' : 'Place Sell Order'}
+                    </button>
+
+                </div>
 
 
 
@@ -272,7 +363,8 @@ export const Xchange = ({ cardObject }) => {
 
 
 
-            {/* </form> */}
+
+            </form>
         </div>
 
     )
