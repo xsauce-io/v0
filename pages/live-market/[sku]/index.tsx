@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
-import { Layout } from '../../../components/layout';
+import { Xchange } from '../../../components/xchange';
 import { ActionCard } from '../../../components/actionCard';
 import { Header } from '../../../components/header';
 import { Footer } from '../../../components/footer';
@@ -190,11 +190,10 @@ const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
 								<WagerCard cardObject={el} />
 							))}
 						</div>
-						<div className="self-start mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28">
-							{/*       
-          <button className={admin == true ? 'h-[100px] w-[100px] bg-[black]': 'h-[100px] w-[100px] bg-[red]' }></button>
-			//             <Jackpot/>  */}
+						<div className="self-start mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28 space-y-4">
+					
 							<ActionCard cardObject={sku} />
+              <Xchange cardObject={sku} />
 
 						</div>
 					</div>

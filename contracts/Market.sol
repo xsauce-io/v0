@@ -113,13 +113,11 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         if (id == 1) {
             // require(amount <= usdc.balanceOf(msg.sender), "Balance too low");
             amountDue = priceOfYes.mul(amount);
-             console.log(priceOfYes);
             usdc.safeTransferFrom(msg.sender, address(this), amountDue);
           _mint(msg.sender, id, amount, "");
           
         } else {
             // require(amount <= usdc.balanceOf(msg.sender), "Balance too low");
-            console.log(priceOfYes);
             amountDue = priceOfNo.mul(amount);
             usdc.safeTransferFrom(msg.sender, address(this), amountDue);
            _mint(msg.sender, id, amount, "");
@@ -140,7 +138,7 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
     
         if (fromId == 1) {
-             console.log(priceOfYes);
+           
             require(amount <= balanceOf(msg.sender, 1), "Balance too low");
             uint256 remainingBalance = (amount.mul(priceOfYes));
             _burn(msg.sender, 1, amount);
