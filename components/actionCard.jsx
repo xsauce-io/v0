@@ -2,6 +2,7 @@ import React from "react"
 import { BigNumber, ethers, utils } from 'ethers'
 import erc1155abi from '../abi/erc1155.json';
 import marketabi from '../abi/markets.json';
+import $tableABI from '../abi/$tableSauce.json'
 import { useState, useEffect } from "react";
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
@@ -10,6 +11,7 @@ import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useToast } from '@chakra-ui/react';
+import { parseEther } from "ethers/lib/utils";
 
 
 export const ActionCard = ({ cardObject }) => {
@@ -19,8 +21,7 @@ export const ActionCard = ({ cardObject }) => {
     const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
     const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
     const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
-    const Token1 = "0x0163f21F8AcB86564491676C21Ca235cb9ddbFcD"
-    const Token2 = "0xEAAC1924EDC605928C106C74932387d37B2387Aa"
+    const $tableAddress = "0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D"
     const market1OrderBook = "0x632f332B9B212A6462717ad34CBBB61a55dcBe69";
 
     const getMarketbySku = () => {
@@ -35,36 +36,55 @@ export const ActionCard = ({ cardObject }) => {
     }
 
 
-    const handleTransfer = async (e) => {
-        e.preventDefault();
+
+
+
+    const approve$auce = async () => {
+
+      if (approvalCheck == true) {}
+  
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const address = (await provider.send('eth_requestAccounts', [])).toString();
+      const signer = provider.getSigner();
+      const $table = new ethers.Contract($tableAddress, $tableABI, signer);
+      console.log(address)
+      const allowance = (await $table.allowance(address, currentMarket.address))
+  
+  if (allowance > (100000 * 10**18) ) {
+    setapprovalCheck(true);
+  }
+  
+  else {
+
+    const approvedAmount = BigNumber.from("2").pow(BigNumber.from("256")).sub("1")
+    console.log(approvedAmount)
+  
+      await $table.approve(currentMarket.address, BigNumber.from(approvedAmount))
+      setapprovalCheck(true);
+  
+  }
+  } 
+    
+
+
+    const mint = async (e) => {
+      e.preventDefault();
+      
+        
         const data = new FormData(e.target);
-        console.log(data.get("Amount") * data.get("LimitPrice"));
+        console.log(data.get("Amount"));
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         await provider.send('eth_requestAccounts', []);
-        const signer = await provider.getSigner();
-        const orderBook = new ethers.Contract(market1OrderBook, orderBookAbi, signer);
-        let signedContract = orderBook.connect(signer);
+        const signer = provider.getSigner();
+        const market = new ethers.Contract(currentMarket.address, marketabi, signer);
+        let signedContract = market.connect(signer);
         setSignedContract(signedContract)
-        let fromToken;
-        if (isBuy === true) {
-            fromToken = Token1;
-        } else { fromToken = Token2 };
-        console.log(fromToken);
-        const order = await signedContract.limitOrder(
-            fromToken,
-            ethers.utils.parseUnits("200", 18),
-            ethers.utils.parseUnits("500", 18),
-            ethers.utils.parseUnits("5", 18),
-
-            //data.get("LimitPrice")
-
-            // ethers.utils.parseUnits(data.get("Amount"))
-            // data.get("LimitPrice") * data.get("Amount") 
-            // makerOnly
-            false,
-            // takerOnly
-            false,
-        )
+        let position;
+        if (isYes === true) {
+          position = 1
+        } else { position = 2 };
+        console.log(position);
+        const order = await signedContract.mint(BigNumber.from(position), BigNumber.from(data.get("Amount")))
 
     }
 
@@ -110,9 +130,9 @@ export const ActionCard = ({ cardObject }) => {
     const [orderBookAbi, setOrderBookAbi] = useState(null)
     const [orderBookAddress, setOrderBookAddress] = useState(null)
     const [signedContract, setSignedContract] = useState(null)
-    const [tokenA, setTokenA] = useState(null)
     const [currentMarket, setCurrentMarket] = useState()
     const [expiration, setExpiration] = useState();
+    const [approvalCheck, setapprovalCheck] = useState(false);
 
 
     const handleChange = (event, newAlignment) => {
@@ -176,9 +196,14 @@ export const ActionCard = ({ cardObject }) => {
     }
 
     useEffect(() => {
-        // ratios();
-        // calculations();
+        ratios();
+        if (currentMarket !== undefined) {
+        approve$auce()}
+        
     }, [currentMarket]);
+
+
+
 
     useEffect(() => {
         grabData();
@@ -221,7 +246,7 @@ export const ActionCard = ({ cardObject }) => {
 
                 </flex>
             </div>
-            <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
+            <form onSubmit={mint} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
 
                 <div className='bg-white items-center text-left  p-4   space-y-4 border-[#0C1615] w-full '>
                     <did>

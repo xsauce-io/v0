@@ -5,6 +5,11 @@
         "internalType": "string",
         "name": "uri_",
         "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "_usdc",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -384,14 +389,14 @@
         "type": "address"
       },
       {
-        "internalType": "contract IERC20",
-        "name": "_usdc",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
         "name": "_closingDate",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_sku",
+        "type": "string"
       }
     ],
     "name": "initialize",
@@ -426,11 +431,6 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
         "name": "id",
         "type": "uint256"
@@ -439,42 +439,9 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
-      },
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
       }
     ],
     "name": "mint",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "ids",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "amounts",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      }
-    ],
-    "name": "mintBatch",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -495,6 +462,32 @@
   {
     "inputs": [],
     "name": "predictionPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "priceOfNo",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "priceOfYes",
     "outputs": [
       {
         "internalType": "uint256",
@@ -630,6 +623,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "sku",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "bytes4",
@@ -697,6 +703,24 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "fromId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "xchange",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

@@ -178,15 +178,15 @@ const market1OrderBook = "0xbB311A5025bF1f5900Bf70e9a69cE961BD09d371";
               </div>
               <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px]" >
                 <p className="text-xs"> Retail price </p>
-                <p>{cardObject.retailPrice}</p>
+                <p>${cardObject.retailPrice}</p>
               </div>
               <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Estimated resell price</p>
-                <p>{cardObject.estimatedMarketValue}</p>
+                <p>${cardObject.estimatedMarketValue}</p>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Wager </p>
-                <p> Resell Price {">"} $400</p>
+                <p> Resell Price {">"} ${currentMarket?.prediction}</p>
               </div>
               <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Closes </p>

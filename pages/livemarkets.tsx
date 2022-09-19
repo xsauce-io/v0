@@ -36,17 +36,17 @@ const Markets: NextPage = () => {
 	const getSneaker = async () => {
 		Promise.all([
 			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=384664-023'
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=315728-381'
 			),
 			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=BQ4422-400'
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AA3830-001'
 			),
 
 			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=CT8012-011'
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AT9915-002'
 			),
 			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DV2122-400'
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=555088-711'
 			),
 		])
 

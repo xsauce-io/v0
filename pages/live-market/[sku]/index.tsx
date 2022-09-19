@@ -11,7 +11,7 @@ import { Xchange } from '../../../components/xchange';
 import { ActionCard } from '../../../components/actionCard';
 import { Header } from '../../../components/header';
 import { Footer } from '../../../components/footer';
-import {Quote} from '../../../components/quote';
+
 
 declare var window: any;
 
@@ -32,6 +32,7 @@ const LiveMarket: NextPage = (cardObject) => {
 
 	const [response, setResponse] = useState([] as any);
 	const [admin, setAdmin] = useState(false);
+
 
 	// fetch sneaker data
 	const getSneaker = async () => {
@@ -129,12 +130,14 @@ const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
 // alert(`market created at ${newMarket}!`)
   }
 
+
 	useEffect(() => {
 		if (!router.isReady) return;
 		getSneaker();
+    
 		adminCheck();
 	}, [router.isReady]);
-
+  
 
 
 	return (

@@ -251,7 +251,36 @@ const SauceTokenAddress = "0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D";
     const signer = provider.getSigner();
     const SauceToken = new ethers.Contract(SauceTokenAddress, SauceTokenABI, signer);
     await SauceToken.sendSauce(requestor);
-    console.log(requestor)
+
+
+
+
+    
+const tokenSymbol = '$';
+const tokenImage = "https://i.postimg.cc/15tqGBct/emblem.jpg";
+
+try {
+  const wasAdded = await ethereum.request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC20', 
+      options: {
+        address: SauceTokenAddress, // The address that the token is at.
+        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+        decimals: 18, // The number of decimals in the token
+        image: tokenImage, // A string url of the token logo
+      },
+    },
+  });
+
+  if (wasAdded) {
+    console.log('Now you are official!');
+  } else {
+    console.log('All good');
+  }
+} catch (error) {
+  console.log(error);
+}
 
   }
  
@@ -319,8 +348,8 @@ const SauceTokenAddress = "0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D";
                       </> :
                       <>
 
-                       <img className="h-[15%] w-[15%]" src="/eth.png" />
-                        <span className="text-[black] text-[14px]">Rinkeby</span>
+                       <img className="h-[12%] w-[12%]" src="/eth.png" />
+                        <span className="text-[black] text-[14px]">Goerli</span>
  </>
                 }
                 <img src="/downArrow.svg" />
@@ -329,8 +358,7 @@ const SauceTokenAddress = "0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D";
               <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4">
 
                 <li><a onClick={() => setState(421613)}><img className="h-[30%] w-[30%]" src="/arbitrum.svg" />Arbitrum</a></li>
-                <li><a onClick={() => setState(80001)}><img className="h-[30%] w-[30%]" src="/polygon.svg" />Polygon</a></li>
-                <li><a onClick={() => setState(41)}><img className="h-[30%] w-[30%]" src="/telos.png" />Telos</a></li>
+                <li><a><img className="h-[30%] w-[30%]" src="/fuel.png" />Fuel</a></li>
 
               </ul>
             </div>
@@ -348,12 +376,22 @@ const SauceTokenAddress = "0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D";
        
 
 
-          <button className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-1 py-2  w-[175px] hover:opacity-60" onClick={() => faucet()}>
-              <p>Get Testnet Tokens</p>
-                <img src="/icon.svg" />
+            <div className="dropdown dropdown-end ">
+              <label tabindex="0" className="text-lg text-black ">
+           
+                    <img className="w-[37px]" src="/menu.svg"/>
+
+              </label>
+              <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-[250px] mt-4 z-10">
+
+                <li><button onClick={() => faucet()}><img className="h-[10%] w-[10%]" src="/icon.svg" />Get Test Tokens</button></li>
+                <li><a className="active:bg-[#ACFF00] text-black" target="blank" href="https://goerli-faucet.pk910.de/"><img className="h-[7%] w-[7%]" src="/eth.png" />Get Test ETH(Goerli)</a></li>
                
-              
-            </button>
+
+              </ul>
+            </div>
+
+
 
             </div> : <></>}
        

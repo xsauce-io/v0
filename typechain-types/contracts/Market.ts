@@ -42,7 +42,7 @@ export interface MarketInterface extends utils.Interface {
     "feeCollector()": FunctionFragment;
     "fetched()": FunctionFragment;
     "getData()": FunctionFragment;
-    "initialize(uint256,address,uint256)": FunctionFragment;
+    "initialize(uint256,address,uint256,string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(uint256,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -56,6 +56,7 @@ export interface MarketInterface extends utils.Interface {
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setURI(string)": FunctionFragment;
+    "sku()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "totalSupply(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -92,6 +93,7 @@ export interface MarketInterface extends utils.Interface {
       | "safeTransferFrom"
       | "setApprovalForAll"
       | "setURI"
+      | "sku"
       | "supportsInterface"
       | "totalSupply"
       | "transferOwnership"
@@ -146,7 +148,8 @@ export interface MarketInterface extends utils.Interface {
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
@@ -204,6 +207,7 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "setURI",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(functionFragment: "sku", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>]
@@ -282,6 +286,7 @@ export interface MarketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setURI", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sku", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
@@ -467,6 +472,7 @@ export interface Market extends BaseContract {
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
+      _sku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -528,6 +534,8 @@ export interface Market extends BaseContract {
       newuri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    sku(overrides?: CallOverrides): Promise<[string]>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -611,6 +619,7 @@ export interface Market extends BaseContract {
     _predictionPrice: PromiseOrValue<BigNumberish>,
     _oracleFeed: PromiseOrValue<string>,
     _closingDate: PromiseOrValue<BigNumberish>,
+    _sku: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -672,6 +681,8 @@ export interface Market extends BaseContract {
     newuri: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  sku(overrides?: CallOverrides): Promise<string>;
 
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
@@ -751,6 +762,7 @@ export interface Market extends BaseContract {
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
+      _sku: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -808,6 +820,8 @@ export interface Market extends BaseContract {
       newuri: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    sku(overrides?: CallOverrides): Promise<string>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -956,6 +970,7 @@ export interface Market extends BaseContract {
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
+      _sku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1017,6 +1032,8 @@ export interface Market extends BaseContract {
       newuri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    sku(overrides?: CallOverrides): Promise<BigNumber>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
@@ -1101,6 +1118,7 @@ export interface Market extends BaseContract {
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
+      _sku: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1162,6 +1180,8 @@ export interface Market extends BaseContract {
       newuri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    sku(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
