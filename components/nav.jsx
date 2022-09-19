@@ -314,7 +314,7 @@ export const Nav = ({ logoColor }) => {
                         <span className="text-[black] text-[14px]">Rinkeby</span>
  </>
                 }
-                <img src="/dropdown.png" />
+                <img src="/downArrow.svg" />
 
               </label>
               <ul tabindex="0" className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4">
@@ -332,11 +332,23 @@ export const Nav = ({ logoColor }) => {
                   'Connect Wallet' :
                   accounts}</span>
               <a onClick={() => copyAddressToClipboard()} className={'relative'}>
-                <img className={accounts == null ? "hidden" : "visible hover:scale-110 active:scale-125"} src="/copy.png" />
+                <img className={accounts == null ? "hidden" : "visible hover:scale-110 active:scale-125"} src="/Images.svg" />
                 <p className={isCopied == false ? "hidden" : " transition ease-in-out duration-300 delay-150 visible z-10 absolute bg-white opacity-70 px-2 py-0.5"}>Copied</p>
               </a>
             </button>
-          </div> : <></>}
+       
+
+
+          <button className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-1 py-2  w-[175px] hover:opacity-60" onClick={() => getWallet()}>
+              <p>Get Testnet Tokens</p>
+                <img src="/icon.svg" />
+               
+              
+            </button>
+
+            </div> : <></>}
+       
+          
 
         <LocalDrawer>
 
@@ -382,6 +394,8 @@ export const Nav = ({ logoColor }) => {
                 <p className={isCopied == false ? "hidden" : " transition ease-in-out duration-300 delay-150 visible z-10 absolute bg-white opacity-70 px-2 py-0.5"}>Copied</p>
               </a>
             </button>
+
+
           </div>
         </LocalDrawer>
       </div>

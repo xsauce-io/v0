@@ -12,7 +12,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import {useToast} from '@chakra-ui/react';
 
 
-export const ActionCard = ({cardObject}) => {
+export const Xchange = ({cardObject}) => {
     const toast = useToast();
 
 
@@ -213,20 +213,12 @@ export const ActionCard = ({cardObject}) => {
 
         <div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
             <div className='bg-[#ACFF00]  rounded-t-[10px] border-b-[1px] p-2  w-[100%]  border-[#0C1615]' />
-            <div className='bg-white p-4 text-left w-[100%] border-b-[1px] border-[#0C1615]'>
-                <flex className="flex flex-rows space-x-2 justify-center items-center">
-                    <p className=" mr-1 text-xs  ">Market Statistics</p>
-                    <div className="text-xs w-1/4 bg-[#0C1615] p-2 rounded-2xl text-center text-white">No - {No}%</div>
-                    <div className="text-xs   w-1/4 bg-[#ACFF00] p-2 rounded-2xl text-center">Yes - {Yes}%</div>
-
-                </flex>
-            </div>
+        
             <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full">
 
-                <div className='bg-white items-center text-left  p-4   space-y-4 border-[#0C1615] w-full '>
+                <div className='bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full '>
                     <did>
-                        <p className="font-SG text-md text-start ">Will the Resell Price be over ${currentMarket?.prediction}</p>
-                        <p className="font-SG text-xs text-left opacity-70 mt-2">Wager Expires: {expiration}</p>
+                        <p className="font-SG text-md text-center ">House OrderBook / Open OrderBook</p>
                     </did>
 
 
@@ -256,11 +248,51 @@ export const ActionCard = ({cardObject}) => {
                     </div>
 
 
+
+                    <div className='bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex' >
+                        <p className="text-left text-sm ">
+                            Buy or Sell
+                        </p>
+                        <div class="flex-1"></div>
+                        <div class="dropdown dropdown-end ">
+                            <label tabindex="0" class="flex items-center">
+                                {isBuy === true ? (
+                                    <>
+                                        <span className="text-black">Buy</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className="text-black">Sell</span>
+                                    </>
+
+                                )}
+
+                            </label>
+                            <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-52 mt-4">
+                                <li><a onClick={() => { setIsBuy(true) }}>Buy</a></li>
+                                <li><a onClick={() => { setIsBuy(false) }}>Sell</a></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
                 </div>
 
-                <div className='bg-white items-center text-left border-b-[1px] px-4 pb-4 space-y-4 border-[#0C1615] w-full '>
+                <div className='bg-white items-center text-left border-b-[1px] p-4 space-y-4 border-[#0C1615] w-full '>
 
-                   
+                    <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2  hover:outline-1'   >
+                        <p className="text-left text-sm pr-1 ">
+                            Limit Price:
+                        </p>
+                        <input
+                            className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none "
+                            name="LimitPrice"
+                            type="number"
+                            placeholder="100"
+                            required
+                        />
+                        <p className="text-sm ml-1"> USDC</p>
+                    </div>
                     <div className='bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2 hover:outline-1' >
                         <p className="text-left text-sm inline-block pr-1 ">
                             Amount:
@@ -286,30 +318,20 @@ export const ActionCard = ({cardObject}) => {
                       <InfoIcon sx={{ fontSize: "18px" }} />
                     </Tooltip>
                      <p className="pr-4 " >Price : ${currentQuote} </p>
-                  
+                    <button onClick={quote} className="bg-black text-white p-3 text-xs rounded-3xl">Update Quote</button>
                   </div>
                  </div>
 
-                <div className='bg-white items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]'>
+                <div className='bg-white items-center text-left  p-4 space-y-4 rounded-bl-lg rounded-br-lg  w-full'>
 
-                    <button type="submit" id='mint' className="w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60">
-                        Mint
+                    <button type="submit" id='mint' className={isBuy == undefined ? " w-full font-medium  text-xl py-4  text-[#0C1615] bg-[#DCDEE1] rounded-[80px] hover:opacity-60" : isBuy == true ? "w-full font-medium  text-xl py-4  text-[#0C1615] rounded-[80px] hover:opacity-60text-black bg-[#ACFF00] " : " w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60 "}>
+                        {isBuy == undefined ? 'Select Order Type' : isBuy === true ? 'Place Buy Order' : 'Place Sell Order'}
                     </button>
+                   
                 </div>
 
                 
 
-                <div className='bg-[#DCDEE1] items-center text-left rounded-b-[10px] p-3  space-y-4  w-full '>
-                    <div className="w-full  flex px-5 items-center">
-                        <p className="text-left text-sm font-medium">
-                            Total possible winnings
-                        </p>
-                        <div className="flex-1 " />
-                        <p className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs">
-                            $2,000.00
-                        </p>
-                    </div>
-                </div>
 
                 
 

@@ -193,7 +193,7 @@ const market1OrderBook = "0xbB311A5025bF1f5900Bf70e9a69cE961BD09d371";
                 <p>
                   {expiration}</p>
               </div>
-              <div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
+              <div className="col-span-2 row-span-2 border-t-[1px] rounded-bl-xl rounded-br-xl border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 " >
                 <p className="text-xs"> Contract</p>
 
                 <a className="flex flex-row space-x-[2px] truncate" target="blank" rel='noreferrer' href={explorer}>
