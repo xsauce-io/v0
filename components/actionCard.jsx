@@ -49,6 +49,9 @@ export const ActionCard = ({ cardObject }) => {
 
 
 
+
+
+
     const approve$auce = async () => {
 
       if (approvalCheck == true) {}
@@ -204,6 +207,8 @@ export const ActionCard = ({ cardObject }) => {
 
         }
     }
+
+    
 
     useEffect(() => {
         ratios();

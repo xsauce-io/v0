@@ -144,27 +144,32 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
            
             require(amount <= balanceOf(msg.sender, 1), "Balance too low");
             uint256 remainingBalance = (amount.mul(priceOfYes));
-            _burn(msg.sender, 1, amount);
+
+            console.log(((priceOfYes * amount).mul(priceOfNo)).div(1e18).div(100));
+            
             
             uint256 sendBack = (remainingBalance.mul(priceOfNo)).div(1e18);
             uint256 toIdnewBalance = ((remainingBalance.mul(priceOfNo)).div(1e33)).div(100);
             
             require(toIdnewBalance >= 1, "You do not have enough collateral to exchange your position. The minimum exchange is 1 token.");
              usdc.safeTransfer(msg.sender, sendBack);
+             _burn(msg.sender, 1, amount);
             _mint(msg.sender, 2, toIdnewBalance, "");
             emit positionCreated(2, toIdnewBalance);
-        } else {
+        } else if (fromId == 2) {
             require(amount <= balanceOf(msg.sender, 2), "Balance too low");
             uint256 remainingBalance = amount.mul(priceOfNo);
-            _burn(msg.sender, 2, amount);
+            
              uint256 sendBack = (remainingBalance.mul(priceOfYes)).div(1e18);
             uint256 toIdnewBalance = ((remainingBalance.mul(priceOfYes)).div(1e33)).div(100);
             require(toIdnewBalance >= 1, "You do not have enough collateral to exchange your position. The minimum exchange is 1 token.");
-            
             usdc.safeTransfer(msg.sender, sendBack);
+            _burn(msg.sender, 2, amount);
             _mint(msg.sender, 1, toIdnewBalance, "");
             emit positionCreated(1, toIdnewBalance);
         }
+
+        else {}
     }
 
     // The following functions are overrides required by Solidity.

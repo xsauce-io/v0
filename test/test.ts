@@ -81,7 +81,7 @@ describe("Market Tests", function() {
   const signers = await ethers.getSigners();
   const alice = signers[0];
   const bob = signers[1];
-  const carol = signers[3];
+  const carol = signers[2];
 
 
   // const price = ethers.utils.formatEther(((await market.priceOfYes()).toString()))
@@ -103,7 +103,7 @@ describe("Market Tests", function() {
 
   console.log(await market.totalSupply(1))
   console.log(await market.totalSupply(2))
-  await market.mint(1,30)
+  await market.mint(1,300)
 
 
   console.log(await market.totalSupply(1))
@@ -117,26 +117,26 @@ console.log(await market.totalSupply(2))
 
   usdc.approve(market.address, ethers.constants.MaxUint256)
 
-  await market.xchange(1,10)
+  await market.xchange(1,70)
   console.log(await market.totalSupply(1))
   console.log(await market.totalSupply(2))
 
 
-  await market.mint(2,10)
+  // await market.mint(2,10)
 
   console.log(await market.totalSupply(1))
   console.log(await market.totalSupply(2))
 
 
-  await market.mint(1,1)
+  // await market.mint(1,1)
 
-  await market.xchange(1,7)
+  await market.xchange(2,30)
 
 
   console.log(await market.totalSupply(1))
   console.log(await market.totalSupply(2))
 
-  await market.mint(1,1)
+  // await market.mint(1,1)
 
   // console.log(await market.balanceOf(alice.address, 2))
 
