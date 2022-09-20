@@ -238,26 +238,26 @@ export const Xchange = ({ cardObject }) => {
 
 
         <div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
-            <div className='bg-[#ACFF00]  rounded-t-[10px] border-b-[1px] p-2  w-[100%]  border-[#0C1615]' />
+            <div className='bg-black  rounded-t-[10px] border-b-[1px] p-2  w-[100%]  border-[#0C1615]' />
 
             {/* <form onSubmit={handleTransfer} className="flex flex-col justify-center items-center mobile:w-full laptop:w-full"> */}
 
                 <div className='bg-white items-center text-left rounded-xl p-4   space-y-4 border-[#0C1615] w-full '>
-                    <div className="flex flex-row justify-center rounded-2xl border-2 ">
-                        <button className={classNames("flex-1 font-SG text-md text-center rounded-l-2xl p-2 ", {'bg-[#ACFF00] rounded-r-2xl' : orderBookType === 'house'} )} onClick={() => setOrderBookType('house')} >
+                    <div className="flex flex-row justify-center rounded-2xl border-[1px]  border-black">
+                        {/* <button className={classNames("flex-1 font-SG text-md text-center rounded-l-2xl p-2 ", {'bg-[#ACFF00] rounded-r-2xl' : orderBookType === 'house'} )} onClick={() => setOrderBookType('house')} >
                             House OrderBook
-                        </button>
-                        <button className={classNames(" flex-1 font-SG text-md text-center rounded-r-2xl p-2", {'bg-[#ACFF00] rounded-l-2xl ' : orderBookType === 'open'} )} onClick={() => setOrderBookType('open')}>
+                        </button> */}
+                        <text className={classNames(" flex-1 font-SG text-md text-center rounded-r-2xl p-2  rounded-l-2xl ")} >
                             Open OrderBook
-                        </button>
+                        </text>
                     </div>
 
-                    { orderBookType === 'house' ?
+                    {/* { orderBookType === 'house' ?
 
-                    <HouseXchange cardObject={cardObject}/> :
+                    <HouseXchange cardObject={cardObject}/> : */}
                     <OpenXchange />
 
-    }
+    
 </div>
 
 
