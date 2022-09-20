@@ -161,8 +161,8 @@ const Markets: NextPage = () => {
 						title={'Predict the live market'}
 						icon={<img className="" src="/candle.svg" />}
 					>
-						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
-							<h5 className="text-sm font-Inter ">Filter on</h5>
+						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-2 z-10">
+							<h5 className="text-sm font-Inter font-medium ">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
@@ -181,14 +181,14 @@ const Markets: NextPage = () => {
 								</label>
 								<ul
 									tabIndex={0}
-									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
+									className="dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
 									<li>
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
 											}
-											className="font-Inter"
+											className="font-Inter active:bg-[#ACFF00]"
 										>
 											Retail Price
 										</button>
@@ -198,7 +198,7 @@ const Markets: NextPage = () => {
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
 											}
-											className="font-Inter"
+											className="font-Inter active:bg-[#ACFF00]"
 										>
 											Release Date
 										</button>
@@ -207,14 +207,14 @@ const Markets: NextPage = () => {
 									<li>
 										<button
 											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
-											className="font-Inter"
+											className="font-Inter active:bg-[#ACFF00]"
 										>
 											Name
 										</button>
 									</li>
 								</ul>
 							</div>
-							<button
+							{/* <button
 								className="hover:scale-150"
 								onClick={() => setIsAscending(!isAscending)}
 							>
@@ -223,7 +223,7 @@ const Markets: NextPage = () => {
 								) : (
 									<img className="" src="/downArrow.svg" />
 								)}
-							</button>
+							</button> */}
 						</div>
 					</ContentHeader>
 

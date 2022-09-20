@@ -37,6 +37,15 @@ export const ActionCard = ({ cardObject }) => {
     }
 
 
+    const jackpot = async () => {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send('eth_requestAccounts', [0])
+        const signer = provider.getSigner();
+        const $table = new ethers.Contract($tableAddress, $tableABI, signer);
+        const totalJackpot = await $table.balanceOf(currentMarket.address);
+        setJackpot(totalJackpot);
+    }
+
 
 
 
@@ -133,7 +142,7 @@ export const ActionCard = ({ cardObject }) => {
     const [signedContract, setSignedContract] = useState(null)
     const [currentMarket, setCurrentMarket] = useState()
     const [expiration, setExpiration] = useState();
-    const [approvalCheck, setapprovalCheck] = useState(false);
+    const [jackpotTotal, setJackpot] = useState();
 
 
     const handleChange = (event, newAlignment) => {
@@ -198,6 +207,7 @@ export const ActionCard = ({ cardObject }) => {
 
     useEffect(() => {
         ratios();
+        jackpot();
         
         if (currentMarket !== undefined && isSet === false ) {
             approve$auce();
@@ -335,7 +345,7 @@ export const ActionCard = ({ cardObject }) => {
                         </p>
                         <div className="flex-1 " />
                         <p className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs">
-                            $2,000.00
+                            ${jackpotTotal}
                         </p>
                     </div>
                 </div>

@@ -76,7 +76,7 @@ const Home: NextPage = () => {
 				<>
 					<ContentHeader title={'Positions'} icon={<img src="/pieChart.svg" />}>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
-							<h5 className="text-sm font-Inter">Filter on</h5>
+							<h5 className="text-sm font-Inter font-medium">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
@@ -101,22 +101,24 @@ const Home: NextPage = () => {
 									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
 									<li>
-										<button className="text-black font-Inter">
+										<button className="text-black font-Inter active:bg-[#ACFF00]">
 											Winnings Positions
 										</button>
 									</li>
 									<li>
-										<button className="text-black font-Inter">
+										<button className="text-black font-Inter active:bg-[#ACFF00]">
 											Total Price
 										</button>
 									</li>
 
 									<li>
-										<button className="text-black font-Inter">Returns</button>
+										<button className="text-black font-Inter active:bg-[#ACFF00]">
+											Returns
+										</button>
 									</li>
 								</ul>
 							</div>
-							<button
+							{/* <button
 								className="hover:scale-150"
 								onClick={() => setIsAscending(!isAscending)}
 							>
@@ -125,7 +127,7 @@ const Home: NextPage = () => {
 								) : (
 									<img className="" src="/downArrow.svg" />
 								)}
-							</button>
+							</button> */}
 						</div>
 					</ContentHeader>
 					<DashboardTable>
