@@ -16,6 +16,7 @@ import { parseEther } from "ethers/lib/utils";
 
 export const ActionCard = ({ cardObject }) => {
     const toast = useToast();
+    const [isSet, setIsSet] = useState(false);
 
 
     const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
@@ -51,7 +52,7 @@ export const ActionCard = ({ cardObject }) => {
       const allowance = (await $table.allowance(address, currentMarket.address))
   
   if (allowance > (100000 * 10**18) ) {
-    setapprovalCheck(true);
+    
   }
   
   else {
@@ -60,7 +61,7 @@ export const ActionCard = ({ cardObject }) => {
     console.log(approvedAmount)
   
       await $table.approve(currentMarket.address, BigNumber.from(approvedAmount))
-      setapprovalCheck(true);
+      
   
   }
   } 
@@ -197,8 +198,11 @@ export const ActionCard = ({ cardObject }) => {
 
     useEffect(() => {
         ratios();
-        if (currentMarket !== undefined) {
-        approve$auce()}
+        
+        if (currentMarket !== undefined && isSet === false ) {
+            approve$auce();
+        }
+        setIsSet(true);
         
     }, [currentMarket]);
 
