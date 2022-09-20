@@ -1,12 +1,8 @@
 import React from "react"
 import { BigNumber, ethers, utils } from 'ethers'
-import erc1155abi from '../abi/erc1155.json';
 import marketabi from '../abi/markets.json';
 import $tableABI from '../abi/$tableSauce.json'
 import { useState, useEffect } from "react";
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import ToggleButton from '@mui/material/ToggleButton';
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
