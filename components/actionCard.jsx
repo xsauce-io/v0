@@ -1,20 +1,20 @@
 import React from "react"
 import { BigNumber, ethers, utils } from 'ethers'
-import erc1155abi from '../abi/erc1155.json';
+
 import marketabi from '../abi/markets.json';
 import $tableABI from '../abi/$tableSauce.json'
 import { useState, useEffect } from "react";
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import ToggleButton from '@mui/material/ToggleButton';
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useToast } from '@chakra-ui/react';
-import { parseEther } from "ethers/lib/utils";
+import { useRouter } from 'next/router';
+
 
 
 export const ActionCard = ({ cardObject }) => {
+  const router = useRouter();
+
     const toast = useToast();
     const [isSet, setIsSet] = useState(false);
 
@@ -38,16 +38,17 @@ export const ActionCard = ({ cardObject }) => {
 
 
     const jackpot = async () => {
+
+      if (currentMarket !== undefined) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         await provider.send('eth_requestAccounts', [0])
         const signer = provider.getSigner();
         const $table = new ethers.Contract($tableAddress, $tableABI, signer);
-        const totalJackpot = await $table.balanceOf(currentMarket.address);
+        const totalJackpot = ((await $table.balanceOf(currentMarket.address))/ 1e18).toFixed(2);
+        
         setJackpot(totalJackpot);
+      }
     }
-
-
-
 
 
 
@@ -136,7 +137,8 @@ export const ActionCard = ({ cardObject }) => {
     const [isYes, setIsYes] = useState();
     const [No, setNo] = useState();
     const [Yes, setYes] = useState();
-    const [order, setOrder] = useState();
+    const [priceOfYes, setPriceYes] = useState();
+    const [priceOfNo, setPriceNo] = useState();
 
     const [isBuy, setIsBuy] = useState();
     const [currentQuote, setCurrentQuote] = useState()
@@ -208,11 +210,55 @@ export const ActionCard = ({ cardObject }) => {
         }
     }
 
+
+    const prices = async () => {
+      if (currentMarket !== undefined) {
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          const signer = await provider.getSigner();
+          const contract = new ethers.Contract(currentMarket?.address, marketabi, signer);
+          const getYes = await contract.totalSupply(
+              1
+          )
+          const getNo = await contract.totalSupply(
+              2
+          )
+
+
+
+          let priceNo = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber()))
+
+
+          let priceYes = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) 
+          
+
+          setPriceYes(priceYes.toFixed(2))
+          setPriceNo(priceNo.toFixed(2))
+
+      }
+  }
+
+
+
+ 
+
+
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    getMarketbySku();
+  
+}, [router.isReady]);
+
+  useEffect(() => {
+      ratios();
+      prices();
+      jackpot();
     
+    
+}, [currentMarket]);
 
     useEffect(() => {
-        ratios();
-        jackpot();
+     
         
         if (currentMarket !== undefined && isSet === false ) {
             approve$auce();
@@ -224,31 +270,11 @@ export const ActionCard = ({ cardObject }) => {
 
 
 
-    useEffect(() => {
-        grabData();
-        getMarketbySku();
-    }, []);
+   
 
 
 
-    useEffect(() => {
-
-        if (isYes === true) {
-            setAlignment('1');
-        } else {
-            setAlignment('2');
-        }
-    }, [isYes])
-
-
-    useEffect(() => {
-
-        if (isBuy === true) {
-            setOrder('1');
-        } else {
-            setOrder('2');
-        }
-    }, [isBuy])
+   
 
 
     return (
@@ -323,13 +349,13 @@ export const ActionCard = ({ cardObject }) => {
                     <div className="font-Inter mobile:text-lg font-medium flex flex-row justify-center items-center">
 
                         <Tooltip
-                            title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest asking price in the orderbook."
+                            title="Price is dynamic and will adjust in response to buys/sells in the market. Buy price will always show the lowest market price."
                             arrow
                             className="self-start mr-2"
                         >
                             <InfoIcon sx={{ fontSize: "18px" }} />
                         </Tooltip>
-                        <p className="pr-4 " >Price : ${currentQuote} </p>
+                        <p className="pr-4 " >Price: ${isYes === true ? priceOfYes: priceOfNo } per contract </p>
 
                     </div>
                 </div>
