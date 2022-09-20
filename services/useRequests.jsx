@@ -2,7 +2,9 @@ import useSWR, { mutate } from 'swr';
 import axios from 'axios';
 import { marketsDataGit, OrderBookGit, urlBySku } from './constants';
 
+// ----------------------- ----------- ----------------------
 // ----------------------- Fetchers ----------------------
+// ----------------------- ----------- ----------------------
 
 function fetcher(url) {
 	return axios.get(url);
@@ -42,7 +44,9 @@ const specializedMarketFetcher = (url, sku) =>
 			return error;
 		});
 
+// ----------------------- ----------- ----------------------
 // ----------------------- useRequests ----------------------
+// ----------------------- ----------- ----------------------
 
 export const useGetSneaker = (sku) => {
 	const urlWithSku = urlBySku + sku;
