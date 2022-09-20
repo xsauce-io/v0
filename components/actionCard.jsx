@@ -35,25 +35,25 @@ export const ActionCard = ({ cardObject }) => {
 	const [orderBookAbi, setOrderBookAbi] = useState(null);
 	const [orderBookAddress, setOrderBookAddress] = useState(null);
 	const [signedContract, setSignedContract] = useState(null);
-	const [currentMarket, setCurrentMarket] = useState();
+	const [currentMarket, setCurrentMarket] = useState(data);
 	const [expiration, setExpiration] = useState();
 	const [jackpotTotal, setJackpot] = useState();
 
 	console.log('data', data);
 
-	const getMarketbySku = () => {
-		const req = axios.get(
-			'https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json'
-		);
-		req.then((res) => {
-			const test = res.data[3][cardObject];
-			setCurrentMarket(test);
-			const expires = new Date(test?.expiration * 1000).toLocaleDateString(
-				'en-US'
-			);
-			setExpiration(expires);
-		});
-	};
+	// const getMarketbySku = () => {
+	// 	const req = axios.get(
+	// 		'https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json'
+	// 	);
+	// 	req.then((res) => {
+	// 		const test = res.data[3][cardObject];
+	// 		setCurrentMarket(test);
+	// 		const expires = new Date(test?.expiration * 1000).toLocaleDateString(
+	// 			'en-US'
+	// 		);
+	// 		setExpiration(expires);
+	// 	});
+	// };
 
 	const jackpot = async () => {
 		if (currentMarket !== undefined) {
@@ -70,7 +70,8 @@ export const ActionCard = ({ cardObject }) => {
 	};
 
 	const approve$auce = async () => {
-		if (approvalCheck == true) {
+		if (isSet == true) {
+			return;
 		}
 
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -211,7 +212,7 @@ export const ActionCard = ({ cardObject }) => {
 
 	useEffect(() => {
 		if (!router.isReady) return;
-		getMarketbySku();
+		//getMarketbySku();
 	}, [router.isReady]);
 
 	useEffect(() => {

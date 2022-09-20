@@ -23,11 +23,6 @@ const Markets: NextPage = () => {
 		RETAIL_PRICE: 'retailPrice',
 	};
 
-	const LAYOUT_STATES = {
-		GRID: 'grid',
-		LIST: 'list',
-	};
-
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RETAIL_PRICE });
 	const [isAscending, setIsAscending] = useState(true);
 
