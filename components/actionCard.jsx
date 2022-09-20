@@ -15,6 +15,7 @@ import {
 	OrderBookAddressGit,
 	OrderBookGit,
 } from '../services/constants';
+import { useGetMarketBySku } from '../services/useRequests';
 export const ActionCard = ({ cardObject }) => {
 	const router = useRouter();
 	const { sku } = router.query;
@@ -35,6 +36,8 @@ export const ActionCard = ({ cardObject }) => {
 	const [currentMarket, setCurrentMarket] = useState();
 	const [expiration, setExpiration] = useState();
 	const [jackpotTotal, setJackpot] = useState();
+
+	const { data, error } = useGetMarketBySku(sku);
 
 	const getMarketbySku = () => {
 		const req = axios.get(
