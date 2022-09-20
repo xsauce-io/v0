@@ -14,6 +14,7 @@ import { ContentHeader } from '../components/contentHeader';
 import { ethers, utils } from 'ethers';
 
 import { Card } from '../components/cardWager';
+import { useGetSneaker } from '../services/useRequests';
 
 const Markets: NextPage = () => {
 	const SORT_BY_STATES = {
@@ -27,55 +28,61 @@ const Markets: NextPage = () => {
 		LIST: 'list',
 	};
 
-	const [response, setResponse] = useState([] as any);
-	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
-	let [isLoading, setisLoading] = useState(true as boolean);
+	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RETAIL_PRICE });
 	const [isAscending, setIsAscending] = useState(true);
 
+	const { data: sneaker1, error: errorSneaker1 } = useGetSneaker('315728-381');
+	const { data: sneaker2, error: errorSneaker2 } = useGetSneaker('AA3830-001');
+	const { data: sneaker3, error: errorSneaker3 } = useGetSneaker('AT9915-002');
+	const { data: sneaker4, error: errorSneaker4 } = useGetSneaker('555088-711');
+	console.log([sneaker1, sneaker2, sneaker3, sneaker4]);
+	const [response, setResponse] = useState([
+		sneaker1,
+		sneaker2,
+		sneaker3,
+		sneaker4,
+	]);
+
 	// fetch sneaker data
-	const getSneaker = async () => {
-		Promise.all([
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=315728-381'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=555088-108'
-			),
+	// const getSneaker = async () => {
+	// 	Promise.all([
+	// 		axios.get(
+	// 			'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=315728-381'
+	// 		),
+	// 		axios.get(
+	// 			'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AA3830-001'
+	// 		),
 
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AT9915-002'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DN3707-160'
-			),
-		])
+	// 		axios.get(
+	// 			'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AT9915-002'
+	// 		),
+	// 		axios.get(
+	// 			'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=555088-711'
+	// 		),
+	// 	])
 
-			.then(
-				axios.spread((obj1, obj2, obj3, obj4) => {
-					setResponse([
-						obj1.data.results[0],
-						obj2.data.results[0],
-						obj3.data.results[0],
-						obj4.data.results[0],
-					]);
+	// 		.then(
+	// 			axios.spread((obj1, obj2, obj3, obj4) => {
+	// 				setResponse([
+	// 					obj1.data.results[0],
+	// 					obj2.data.results[0],
+	// 					obj3.data.results[0],
+	// 					obj4.data.results[0],
+	// 				]);
+	// 			})
+	// 		)
+	// 		.catch(function (error) {
+	// 			console.error(error);
+	// 		});
+	// };
 
-					setisLoading(false);
-				})
-			)
-			.catch(function (error) {
-				console.error(error);
-			});
-	};
-
-	useEffect(() => {
-		getSneaker();
-	}, []);
+	useEffect(() => {}, [sneaker1, sneaker2, sneaker3, sneaker4]);
 
 	useMemo(() => {
 		if (response.length > 0 && isAscending === true) {
 			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
 				response.sort((a: { name: string }, b: { name: string }) =>
-					a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+					a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
 				);
 				console.log({ response });
 			} else if (
@@ -104,7 +111,7 @@ const Markets: NextPage = () => {
 		} else if (response.length > 0 && isAscending === false) {
 			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
 				response.sort((a: { name: string }, b: { name: string }) =>
-					a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
+					a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
 				);
 				console.log({ response });
 			} else if (
@@ -132,6 +139,10 @@ const Markets: NextPage = () => {
 			}
 		}
 	}, [sortBy, isAscending]);
+
+	if (!sneaker4) {
+		return <text>error</text>;
+	}
 
 	return (
 		//#F5DEB3 - Vanilla
@@ -228,7 +239,7 @@ const Markets: NextPage = () => {
 					</ContentHeader>
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response.map((el: any) => (
+						{response?.map((el: any) => (
 							<Card cardObject={el} />
 						))}
 					</div>
