@@ -274,7 +274,7 @@ const Markets: NextPage = () => {
 									</li>
 								</ul>
 							</div>
-							<button
+							{/* <button
 								className="hover:scale-150"
 								onClick={() => setIsAscending(!isAscending)}
 							>
@@ -283,7 +283,7 @@ const Markets: NextPage = () => {
 								) : (
 									<img className="" src="/downArrow.svg" />
 								)}
-							</button>
+							</button> */}
 						</div>
 						{admin === true ? (
 							<form className="space-x-2 ml-4">

@@ -88,7 +88,7 @@ const Redeem: NextPage = () => {
 								className="text-xl flex flex-column justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-8 bg-white space-x-5 hover:opacity-50"
 							>
 								{toggled === '1' ? (
-									<p className="text-black truncate font-INter">
+									<p className="text-black truncate font-Inter">
 										Nike Air Max 1 Patta Denim
 									</p>
 								) : toggled === '2' ? (
@@ -104,25 +104,32 @@ const Redeem: NextPage = () => {
 							</label>
 							<ul
 								tabIndex={0}
-								className="dropdown-content bg-white p-4 shadow rounded-box w-full mt-4 z-10 text-lg"
+								className="menu dropdown-content bg-[#DCDEE1] p-4 shadow rounded-box w-full mt-4 z-10 text-lg"
+								
 							>
 								<li
-									className="py-2 border-b-[1px] border-[#0C1615] font-Inter"
+									className="py-2 border-b-[1px] border-[#0C1615]"
 									onClick={() => setisToggled('1')}
 								>
-									Nike Air Max 1 Patta Denim
+									<text className="text-black font-Inter active:bg-[#ACFF00]">
+										Nike Air Max 1 Patta Denim
+									</text>
 								</li>
 								<li
-									className="py-2 border-b-[1px] border-[#0C1615] font-Inter"
+									className="py-2 border-b-[1px] border-[#0C1615] font-Inter active:bg-[#ACFF00]"
 									onClick={() => setisToggled('2')}
 								>
-									Jordan 1 Retro High Homage to Home Chicago (Numbered)
+									<text className="text-black font-Inter active:bg-[#ACFF00]">
+										Jordan 1 Retro High Homage to Home Chicago (Numbered)
+									</text>
 								</li>
 								<li
-									className="py-2 font-Inter "
+									className="py-2 font-Inter active:bg-[#ACFF00]"
 									onClick={() => setisToggled('3')}
 								>
-									Nike Air Max 90 OFF-White Desert Ore
+									<text className="text-black font-Inter active:bg-[#ACFF00]">
+										Nike Air Max 90 OFF-White Desert Ore
+									</text>
 								</li>
 							</ul>
 						</div>
@@ -181,7 +188,7 @@ const Redeem: NextPage = () => {
 
 						<button
 							id="redeem"
-							className="h-[4rem] w-[9rem] text-lg px-4 text-black bg-[#ACFF00] rounded shadow-md hover:bg-white transition duration-300 hover:text-black justify-self-center font-inter"
+							className="h-[4rem] w-[9rem] text-lg px-4 text-black bg-[#ACFF00] rounded shadow-md hover:bg-white transition duration-300 hover:text-black justify-self-center font-inter "
 							type="submit"
 						>
 							Redeem
