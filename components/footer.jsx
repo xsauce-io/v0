@@ -38,7 +38,7 @@ export const Footer = ({ children }) => {
                             fill="#000000"
                         />
                     </svg>
-                    <div className=" text-[36px] tablet:text-[48px] laptop:text-[58px] font-SG" >The future of <span className="block"> cultural asset </span></div>
+                    <div className=" text-[36px] tablet:text-[48px] laptop:text-[58px] font-SG" >The future of <span className="block"> cultural assets </span></div>
                     <div className="text-[10px] font-Inter">The prediction market known as "The Xchange" is for informational and educational purposes only. "The Xchange" is a decentralized protocol operated by autonomous smart contracts and does not have any vested interest in the outcomes of any market.</div>
                 </div>
 

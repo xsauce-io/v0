@@ -74,10 +74,10 @@ export const Card = ({ cardObject }) => {
   }, []);
 
 
-  // useEffect(() => {
-  //   // ratios();
-  //   // calculations();
-  // }, [currentMarket]);
+  useEffect(() => {
+    ratios();
+    calculations();
+  }, [currentMarket]);
 
   return (
     <Link href={cardObjectHref}>
