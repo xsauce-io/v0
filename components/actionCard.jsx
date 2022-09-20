@@ -21,6 +21,8 @@ export const ActionCard = ({ cardObject }) => {
 	const { sku } = router.query;
 	const [isSet, setIsSet] = useState(false);
 
+	const { data, error } = useGetMarketBySku(sku);
+
 	const [alignment, setAlignment] = useState();
 	const [isYes, setIsYes] = useState();
 	const [No, setNo] = useState();
@@ -37,7 +39,7 @@ export const ActionCard = ({ cardObject }) => {
 	const [expiration, setExpiration] = useState();
 	const [jackpotTotal, setJackpot] = useState();
 
-	const { data, error } = useGetMarketBySku(sku);
+	console.log('data', data);
 
 	const getMarketbySku = () => {
 		const req = axios.get(
