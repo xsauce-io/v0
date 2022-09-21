@@ -92,10 +92,10 @@ export const useGetMultiSneakers = (skuArray) => {
 		skuUrls.push(skuUrl);
 	}
 	console.log(skuUrls);
-	const { data, error } = useSWR([skuUrls], fetcherMultiCalls);
+	const { data, error, isValidating } = useSWR([skuUrls], fetcherMultiCalls);
 	console.log('get multi data', data);
 
-	return { data, error };
+	return { data, error, isValidating };
 };
 
 export const useGetMarketBySku = (sku) => {

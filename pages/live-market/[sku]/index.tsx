@@ -201,7 +201,7 @@ const LiveMarket: NextPage = (cardObject) => {
 							<WagerCard cardObject={data} />
 						</div>
 						<div className="self-start mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28 space-y-4">
-							<ActionCard cardObject={sku} />
+							<ActionCard />
 							<Xchange cardObject={sku} />
 						</div>
 					</div>
