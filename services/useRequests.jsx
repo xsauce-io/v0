@@ -34,8 +34,11 @@ const specializedMarketFetcher = (url, sku) =>
 				'en-US'
 			);
 
-			console.log(data);
-			data.expiration = expires;
+			if (expires === undefined) {
+				data.expiration = '';
+			} else {
+				data.expiration = expires;
+			}
 			console.log(data);
 			return data;
 		})
@@ -43,6 +46,32 @@ const specializedMarketFetcher = (url, sku) =>
 			console.error(error);
 			return error;
 		});
+
+const fetcherMultiCalls = (arrayUrl) => {
+	let data = [];
+	let error;
+	let promises = [];
+	for (let i = 0; i < arrayUrl.length; i++) {
+		promises.push(
+			axios.get(arrayUrl[i]).then((response) => {
+				data.push(response.data.results[0]);
+			})
+		);
+	}
+
+	Promise.all(promises)
+		.then(() => {
+			console.log('multi', data);
+			return data;
+		})
+		.catch(function (err) {
+			console.error(err);
+			error = err;
+			return error;
+		});
+
+	return data;
+};
 
 // ----------------------- ----------- ----------------------
 // ----------------------- useRequests ----------------------
@@ -57,12 +86,26 @@ export const useGetSneaker = (sku) => {
 	return { data, error };
 };
 
+export const useGetMultiSneakers = (skuArray) => {
+	const skuUrls = [];
+	for (let i = 0; i < skuArray.length; i++) {
+		let skuUrl = urlBySku + skuArray[i];
+		skuUrls.push(skuUrl);
+	}
+	console.log(skuUrls);
+	const { data, error } = useSWR([skuUrls], fetcherMultiCalls);
+	console.log('get multi data', data);
+	console.log('get multi error', error);
+
+	return { data, error };
+};
+
 export const useGetMarketBySku = (sku) => {
 	const { data, error } = useSWR(
 		[marketsDataGit, sku],
 		specializedMarketFetcher
 	);
-	console.log('useRequest market data ', data);
+	console.log('useRequest market data', data);
 
 	return { data, error };
 };

@@ -14,12 +14,15 @@ import {
 	Mockaddress,
 } from '../services/constants';
 import { useRouter } from 'next/router';
+import { useGetMarketBySku } from '../services/useRequests';
 
-export const OpenXchange = ({ cardObject }) => {
+export const OpenXchange = () => {
 	// ----------------------- Variables and State Variable ------------------------
 
 	const router = useRouter();
 	const { sku } = router.query;
+
+	const { data, error } = useGetMarketBySku(sku);
 
 	const [alignment, setAlignment] = useState();
 	const [isYes, setIsYes] = useState();
@@ -33,24 +36,24 @@ export const OpenXchange = ({ cardObject }) => {
 	const [orderBookAddress, setOrderBookAddress] = useState(null);
 	const [signedContract, setSignedContract] = useState(null);
 	const [tokenA, setTokenA] = useState(null);
-	const [currentMarket, setCurrentMarket] = useState();
+	const [currentMarket, setCurrentMarket] = useState(data);
 	const [expiration, setExpiration] = useState();
 
 	//--------------------- Fetch Requests  ------------------------
 
-	const getMarketbySku = () => {
-		const req = axios.get(
-			'https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json'
-		);
-		req.then((res) => {
-			const test = res.data[3][cardObject];
-			setCurrentMarket(test);
-			const expires = new Date(test?.expiration * 1000).toLocaleDateString(
-				'en-US'
-			);
-			setExpiration(expires);
-		});
-	};
+	// const getMarketbySku = () => {
+	// 	const req = axios.get(
+	// 		'https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json'
+	// 	);
+	// 	req.then((res) => {
+	// 		const test = res.data[3][cardObject];
+	// 		setCurrentMarket(test);
+	// 		const expires = new Date(test?.expiration * 1000).toLocaleDateString(
+	// 			'en-US'
+	// 		);
+	// 		setExpiration(expires);
+	// 	});
+	// };
 
 	// const xchange = async (e) => {
 	//   e.preventDefault();
@@ -183,10 +186,10 @@ export const OpenXchange = ({ cardObject }) => {
 		// calculations();
 	}, [currentMarket]);
 
-	useEffect(() => {
-		//grabData();
-		getMarketbySku();
-	}, []);
+	// useEffect(() => {
+	// 	if (!router.isReady) return;
+	// 	//getMarketbySku();
+	// }, [router.isReady]);
 
 	useEffect(() => {
 		if (isYes === true) {
@@ -203,6 +206,8 @@ export const OpenXchange = ({ cardObject }) => {
 			setOrder('2');
 		}
 	}, [isBuy]);
+
+	if (!data) return <div>loading...</div>;
 
 	return (
 		<div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
@@ -308,7 +313,7 @@ export const OpenXchange = ({ cardObject }) => {
 
 				<div className="bg-white items-center text-left border-b-[1px] p-4 space-y-4 border-[#0C1615] w-full ">
 					<div className="bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2  hover:outline-1">
-						<p className="text-left text-sm pr-1 ">Limit Price:</p>
+						<p className="text-left text-sm pr-1 ">Limit Price: {data?.name}</p>
 						<input
 							className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none "
 							name="LimitPrice"

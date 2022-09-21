@@ -13,6 +13,7 @@ import {
 	OrderBookFactoryGit,
 } from '../services/constants';
 import { useRouter } from 'next/router';
+import { useGetMarketBySku } from '../services/useRequests';
 // import AspectRatio from '@mui/joy/AspectRatio';
 
 export const WagerCard = ({ cardObject }) => {
