@@ -32,7 +32,6 @@ const Markets: NextPage = () => {
 		'AT9915-002',
 		'555088-711',
 	]);
-	//const [response, setResponse] = useState([]);
 
 	useMemo(() => {
 		if (data) {
@@ -99,9 +98,6 @@ const Markets: NextPage = () => {
 	if (!data) {
 		return <text>Loading</text>;
 	}
-
-	useEffect(() => {}, [data]);
-
 	return (
 		<div>
 			<Head>
@@ -184,7 +180,7 @@ const Markets: NextPage = () => {
 					</ContentHeader>
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{data?.map((el: any) => (
+						{data.map((el: any) => (
 							<Card cardObject={el} />
 						))}
 					</div>
