@@ -26,117 +26,79 @@ const Markets: NextPage = () => {
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RETAIL_PRICE });
 	const [isAscending, setIsAscending] = useState(true);
 
-	const { data: sneaker1, error: errorSneaker1 } = useGetSneaker('315728-381');
-	const { data: sneaker2, error: errorSneaker2 } = useGetSneaker('AA3830-001');
-	const { data: sneaker3, error: errorSneaker3 } = useGetSneaker('AT9915-002');
-	const { data: sneaker4, error: errorSneaker4 } = useGetSneaker('555088-711');
-	console.log([sneaker1, sneaker2, sneaker3, sneaker4]);
 	const { data, error } = useGetMultiSneakers([
 		'315728-381',
 		'AA3830-001',
 		'AT9915-002',
 		'555088-711',
 	]);
-	const [response, setResponse] = useState([]);
+	//const [response, setResponse] = useState([]);
 
-	// fetch sneaker data
-	// const getSneaker = async () => {
-	// 	Promise.all([
-	// 		axios.get(
-	// 			'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=315728-381'
-	// 		),
-	// 		axios.get(
-	// 			'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AA3830-001'
-	// 		),
+	useMemo(() => {
+		if (data) {
+			if (data.length > 0 && isAscending === true) {
+				if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+					data.sort((a: { name: string }, b: { name: string }) =>
+						a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
+					);
+					console.log({ data });
+				} else if (
+					data.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RELEASE_DATE
+				) {
+					data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
+						a.releaseDate > b.releaseDate
+							? 1
+							: b.releaseDate > a.releaseDate
+							? -1
+							: 0
+					);
+					console.log({ data });
+				} else if (
+					data.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+				) {
+					data.sort(
+						(a: { retailPrice: number }, b: { retailPrice: number }) =>
+							a.retailPrice - b.retailPrice
+					);
+					console.log({ data });
+				}
+			} else if (data.length > 0 && isAscending === false) {
+				if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+					data.sort((a: { name: string }, b: { name: string }) =>
+						a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
+					);
+					console.log({ data });
+				} else if (
+					data.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RELEASE_DATE
+				) {
+					data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
+						a.releaseDate < b.releaseDate
+							? 1
+							: b.releaseDate < a.releaseDate
+							? -1
+							: 0
+					);
+					console.log({ data });
+				} else if (
+					data.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+				) {
+					data.sort(
+						(a: { retailPrice: number }, b: { retailPrice: number }) =>
+							b.retailPrice - a.retailPrice
+					);
+					console.log({ data });
+				}
+			}
+		}
+	}, [sortBy, isAscending]);
 
-	// 		axios.get(
-	// 			'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AT9915-002'
-	// 		),
-	// 		axios.get(
-	// 			'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=555088-711'
-	// 		),
-	// 	])
-
-	// 		.then(
-	// 			axios.spread((obj1, obj2, obj3, obj4) => {
-	// 				setResponse([
-	// 					obj1.data.results[0],
-	// 					obj2.data.results[0],
-	// 					obj3.data.results[0],
-	// 					obj4.data.results[0],
-	// 				]);
-	// 			})
-	// 		)
-	// 		.catch(function (error) {
-	// 			console.error(error);
-	// 		});
-	// };
-
-	// useMemo(() => {
-	// 	if (response.length > 0 && isAscending === true) {
-	// 		if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-	// 			response.sort((a: { name: string }, b: { name: string }) =>
-	// 				a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
-	// 			);
-	// 			console.log({ response });
-	// 		} else if (
-	// 			response.length > 0 &&
-	// 			sortBy.state === SORT_BY_STATES.RELEASE_DATE
-	// 		) {
-	// 			response.sort(
-	// 				(a: { releaseDate: string }, b: { releaseDate: string }) =>
-	// 					a.releaseDate > b.releaseDate
-	// 						? 1
-	// 						: b.releaseDate > a.releaseDate
-	// 						? -1
-	// 						: 0
-	// 			);
-	// 			console.log({ response });
-	// 		} else if (
-	// 			response.length > 0 &&
-	// 			sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-	// 		) {
-	// 			response.sort(
-	// 				(a: { retailPrice: number }, b: { retailPrice: number }) =>
-	// 					a.retailPrice - b.retailPrice
-	// 			);
-	// 			console.log({ response });
-	// 		}
-	// 	} else if (response.length > 0 && isAscending === false) {
-	// 		if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-	// 			response.sort((a: { name: string }, b: { name: string }) =>
-	// 				a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
-	// 			);
-	// 			console.log({ response });
-	// 		} else if (
-	// 			response.length > 0 &&
-	// 			sortBy.state === SORT_BY_STATES.RELEASE_DATE
-	// 		) {
-	// 			response.sort(
-	// 				(a: { releaseDate: string }, b: { releaseDate: string }) =>
-	// 					a.releaseDate < b.releaseDate
-	// 						? 1
-	// 						: b.releaseDate < a.releaseDate
-	// 						? -1
-	// 						: 0
-	// 			);
-	// 			console.log({ response });
-	// 		} else if (
-	// 			response.length > 0 &&
-	// 			sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-	// 		) {
-	// 			response.sort(
-	// 				(a: { retailPrice: number }, b: { retailPrice: number }) =>
-	// 					b.retailPrice - a.retailPrice
-	// 			);
-	// 			console.log({ response });
-	// 		}
-	// 	}
-	// }, [sortBy, isAscending]);
-
-	// if (!data) {
-	// 	return <text>Loading</text>;
-	// }
+	if (!data) {
+		return <text>Loading</text>;
+	}
 
 	useEffect(() => {}, [data]);
 
@@ -187,7 +149,7 @@ const Markets: NextPage = () => {
 									tabIndex={0}
 									className="dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
@@ -197,18 +159,18 @@ const Markets: NextPage = () => {
 											Retail Price
 										</button>
 									</li>
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
 											}
-											className="font-Inter active:bg-[#ACFF00]"
+											className="font-Inter "
 										>
 											Release Date
 										</button>
 									</li>
 
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
 											className="font-Inter active:bg-[#ACFF00]"

@@ -61,7 +61,6 @@ const fetcherMultiCalls = (arrayUrl) => {
 
 	Promise.all(promises)
 		.then(() => {
-			console.log('multi', data);
 			return data;
 		})
 		.catch(function (err) {
@@ -95,7 +94,6 @@ export const useGetMultiSneakers = (skuArray) => {
 	console.log(skuUrls);
 	const { data, error } = useSWR([skuUrls], fetcherMultiCalls);
 	console.log('get multi data', data);
-	console.log('get multi error', error);
 
 	return { data, error };
 };
