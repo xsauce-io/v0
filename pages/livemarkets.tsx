@@ -26,12 +26,14 @@ const Markets: NextPage = () => {
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RETAIL_PRICE });
 	const [isAscending, setIsAscending] = useState(true);
 
-	const { data, error } = useGetMultiSneakers([
+	const { data, error, isValidating } = useGetMultiSneakers([
 		'315728-381',
 		'AA3830-001',
 		'AT9915-002',
 		'555088-711',
 	]);
+
+	console.log('livemarket', data);
 
 	useMemo(() => {
 		if (data) {
