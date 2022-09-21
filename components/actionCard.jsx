@@ -16,7 +16,7 @@ import {
 	OrderBookGit,
 } from '../services/constants';
 import { useGetMarketBySku } from '../services/useRequests';
-export const ActionCard = ({ cardObject }) => {
+export const ActionCard = () => {
 	const router = useRouter();
 	const { sku } = router.query;
 	const [isSet, setIsSet] = useState(false);

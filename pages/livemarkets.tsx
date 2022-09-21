@@ -14,7 +14,7 @@ import { ContentHeader } from '../components/contentHeader';
 import { ethers, utils } from 'ethers';
 
 import { Card } from '../components/cardWager';
-import { useGetSneaker } from '../services/useRequests';
+import { useGetMultiSneakers, useGetSneaker } from '../services/useRequests';
 
 const Markets: NextPage = () => {
 	const SORT_BY_STATES = {
@@ -31,12 +31,13 @@ const Markets: NextPage = () => {
 	const { data: sneaker3, error: errorSneaker3 } = useGetSneaker('AT9915-002');
 	const { data: sneaker4, error: errorSneaker4 } = useGetSneaker('555088-711');
 	console.log([sneaker1, sneaker2, sneaker3, sneaker4]);
-	const [response, setResponse] = useState([
-		sneaker1,
-		sneaker2,
-		sneaker3,
-		sneaker4,
+	const { data, error } = useGetMultiSneakers([
+		'315728-381',
+		'AA3830-001',
+		'AT9915-002',
+		'555088-711',
 	]);
+	const [response, setResponse] = useState([]);
 
 	// fetch sneaker data
 	// const getSneaker = async () => {
@@ -71,78 +72,75 @@ const Markets: NextPage = () => {
 	// 		});
 	// };
 
-	useEffect(() => {}, [sneaker1, sneaker2, sneaker3, sneaker4]);
+	// useMemo(() => {
+	// 	if (response.length > 0 && isAscending === true) {
+	// 		if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+	// 			response.sort((a: { name: string }, b: { name: string }) =>
+	// 				a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
+	// 			);
+	// 			console.log({ response });
+	// 		} else if (
+	// 			response.length > 0 &&
+	// 			sortBy.state === SORT_BY_STATES.RELEASE_DATE
+	// 		) {
+	// 			response.sort(
+	// 				(a: { releaseDate: string }, b: { releaseDate: string }) =>
+	// 					a.releaseDate > b.releaseDate
+	// 						? 1
+	// 						: b.releaseDate > a.releaseDate
+	// 						? -1
+	// 						: 0
+	// 			);
+	// 			console.log({ response });
+	// 		} else if (
+	// 			response.length > 0 &&
+	// 			sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+	// 		) {
+	// 			response.sort(
+	// 				(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 					a.retailPrice - b.retailPrice
+	// 			);
+	// 			console.log({ response });
+	// 		}
+	// 	} else if (response.length > 0 && isAscending === false) {
+	// 		if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+	// 			response.sort((a: { name: string }, b: { name: string }) =>
+	// 				a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
+	// 			);
+	// 			console.log({ response });
+	// 		} else if (
+	// 			response.length > 0 &&
+	// 			sortBy.state === SORT_BY_STATES.RELEASE_DATE
+	// 		) {
+	// 			response.sort(
+	// 				(a: { releaseDate: string }, b: { releaseDate: string }) =>
+	// 					a.releaseDate < b.releaseDate
+	// 						? 1
+	// 						: b.releaseDate < a.releaseDate
+	// 						? -1
+	// 						: 0
+	// 			);
+	// 			console.log({ response });
+	// 		} else if (
+	// 			response.length > 0 &&
+	// 			sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+	// 		) {
+	// 			response.sort(
+	// 				(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 					b.retailPrice - a.retailPrice
+	// 			);
+	// 			console.log({ response });
+	// 		}
+	// 	}
+	// }, [sortBy, isAscending]);
 
-	useMemo(() => {
-		if (response.length > 0 && isAscending === true) {
-			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-				response.sort((a: { name: string }, b: { name: string }) =>
-					a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-			) {
-				response.sort(
-					(a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate > b.releaseDate
-							? 1
-							: b.releaseDate > a.releaseDate
-							? -1
-							: 0
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-			) {
-				response.sort(
-					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-						a.retailPrice - b.retailPrice
-				);
-				console.log({ response });
-			}
-		} else if (response.length > 0 && isAscending === false) {
-			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-				response.sort((a: { name: string }, b: { name: string }) =>
-					a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-			) {
-				response.sort(
-					(a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate < b.releaseDate
-							? 1
-							: b.releaseDate < a.releaseDate
-							? -1
-							: 0
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-			) {
-				response.sort(
-					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-						b.retailPrice - a.retailPrice
-				);
-				console.log({ response });
-			}
-		}
-	}, [sortBy, isAscending]);
+	// if (!data) {
+	// 	return <text>Loading</text>;
+	// }
 
-	if (!sneaker4) {
-		return <text>error</text>;
-	}
+	useEffect(() => {}, [data]);
 
 	return (
-		//#F5DEB3 - Vanilla
-		//#E5E5E5 - Gray
-
 		<div>
 			<Head>
 				<title>Xsauce</title>
@@ -220,21 +218,11 @@ const Markets: NextPage = () => {
 									</li>
 								</ul>
 							</div>
-							{/* <button
-								className="hover:scale-150"
-								onClick={() => setIsAscending(!isAscending)}
-							>
-								{isAscending === true ? (
-									<img className="" src="/upArrow.svg" />
-								) : (
-									<img className="" src="/downArrow.svg" />
-								)}
-							</button> */}
 						</div>
 					</ContentHeader>
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response?.map((el: any) => (
+						{data?.map((el: any) => (
 							<Card cardObject={el} />
 						))}
 					</div>
