@@ -47,7 +47,8 @@ const specializedMarketFetcher = (url, sku) =>
 			return error;
 		});
 
-const fetcherMultiCalls = (arrayUrl) => {
+const fetcherMultiCalls = (skus, arrayUrl) => {
+	let skusTest = skus;
 	let data = [];
 	let error;
 	let promises = [];
@@ -85,6 +86,8 @@ export const useGetSneaker = (sku) => {
 	return { data, error };
 };
 
+// ----------------------- ----------- ----------------------
+
 export const useGetMultiSneakers = (skuArray) => {
 	const skuUrls = [];
 	for (let i = 0; i < skuArray.length; i++) {
@@ -92,11 +95,16 @@ export const useGetMultiSneakers = (skuArray) => {
 		skuUrls.push(skuUrl);
 	}
 	console.log(skuUrls);
-	const { data, error, isValidating } = useSWR([skuUrls], fetcherMultiCalls);
+	const { data, error, isValidating } = useSWR(
+		['/skus', skuUrls],
+		fetcherMultiCalls
+	);
 	console.log('get multi data', data);
 
 	return { data, error, isValidating };
 };
+
+// ----------------------- ----------- ----------------------
 
 export const useGetMarketBySku = (sku) => {
 	const { data, error } = useSWR(

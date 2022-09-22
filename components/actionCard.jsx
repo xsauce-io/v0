@@ -41,20 +41,6 @@ export const ActionCard = () => {
 
 	console.log('data', data);
 
-	// const getMarketbySku = () => {
-	// 	const req = axios.get(
-	// 		'https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json'
-	// 	);
-	// 	req.then((res) => {
-	// 		const test = res.data[3][cardObject];
-	// 		setCurrentMarket(test);
-	// 		const expires = new Date(test?.expiration * 1000).toLocaleDateString(
-	// 			'en-US'
-	// 		);
-	// 		setExpiration(expires);
-	// 	});
-	// };
-
 	const jackpot = async () => {
 		if (currentMarket !== undefined) {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
