@@ -121,8 +121,12 @@ const Home: NextPage = () => {
 
 			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$ 144,000.00'}>
 				<>
-					<ContentHeader title={'Positions'} icon={<img src="/pieChart.svg" />}>
-						<div className="flex flex-row space-x-3  items-center mobile:flex-col tablet:flex-row">
+					<ContentHeader
+						title={'Positions'}
+						icon={<img src="/pieChart.svg" />}
+						flexColumn
+					>
+						<div className="flex flex-row tablet:space-x-3  items-center mobile:flex-col space-y-3   tablet:flex-row">
 							<text>
 								Total wager lives <span className="text-[#748282]">87</span>
 							</text>

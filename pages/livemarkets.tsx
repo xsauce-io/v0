@@ -136,9 +136,9 @@ const Markets: NextPage = () => {
 					{/*Sorting */}
 					<ContentHeader
 						title={'Predict the live market'}
-						icon={<img className="" src="/candle.svg" />}
+						icon={<img src="/candle.svg" />}
 					>
-						<div className="flex mobile:flex-col tablet:flex-row space-x-3 space-y-3  items-center ">
+						<div className="flex mobile:flex-col tablet:flex-row tablet:space-x-3 space-y-3   items-center ">
 							<text>
 								Total wager lives <span className="text-[#748282]">87</span>
 							</text>

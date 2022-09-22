@@ -144,7 +144,7 @@ const Markets: NextPage = () => {
 
 					<div className="space-y-10">
 						<CalendarCard cardObject={highlight} />
-						<div className="flex flex-row space-x-3  items-center mobile:flex-col tablet:flex-row">
+						<div className="flex flex-row tablet:space-x-3  items-center mobile:flex-col  space-y-3  tablet:flex-row">
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
