@@ -138,7 +138,7 @@ const Markets: NextPage = () => {
 						title={'Predict the live market'}
 						icon={<img className="" src="/candle.svg" />}
 					>
-						<div className="flex flex-row space-x-3  items-center">
+						<div className="flex mobile:flex-col tablet:flex-row space-x-3 space-y-3  items-center ">
 							<text>
 								Total wager lives <span className="text-[#748282]">87</span>
 							</text>
@@ -147,7 +147,7 @@ const Markets: NextPage = () => {
 									tabIndex={0}
 									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615]  hover:opacity-50  w-[12em]"
 								>
-									<img className="" src="/settingsSlider.svg" />
+									<img className="" src="/arrowUpDownGrey.svg" />
 
 									<span className="flex-1 text-white font-Inter ">Sort On</span>
 

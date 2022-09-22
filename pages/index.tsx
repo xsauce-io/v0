@@ -122,7 +122,7 @@ const Home: NextPage = () => {
 			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$ 144,000.00'}>
 				<>
 					<ContentHeader title={'Positions'} icon={<img src="/pieChart.svg" />}>
-						<div className="flex flex-row space-x-3  items-center">
+						<div className="flex flex-row space-x-3  items-center mobile:flex-col tablet:flex-row">
 							<text>
 								Total wager lives <span className="text-[#748282]">87</span>
 							</text>
@@ -131,7 +131,7 @@ const Home: NextPage = () => {
 									tabIndex={0}
 									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615]  hover:opacity-50  w-[12em]"
 								>
-									<img className="" src="/settingsSlider.svg" />
+									<img className="" src="/arrowUpDownGrey.svg" />
 
 									<span className="flex-1 text-white font-Inter ">Sort On</span>
 

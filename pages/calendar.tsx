@@ -144,13 +144,13 @@ const Markets: NextPage = () => {
 
 					<div className="space-y-10">
 						<CalendarCard cardObject={highlight} />
-						<div className="flex flex-row space-x-3  items-center">
+						<div className="flex flex-row space-x-3  items-center mobile:flex-col tablet:flex-row">
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
 									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615]  hover:opacity-50  w-[12em]"
 								>
-									<img className="" src="/settingsSlider.svg" />
+									<img className="" src="/arrowUpDownGrey.svg" />
 
 									<span className="flex-1 text-white font-Inter ">Sort On</span>
 
