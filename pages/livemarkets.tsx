@@ -33,8 +33,6 @@ const Markets: NextPage = () => {
 		'555088-711',
 	]);
 
-	const { data: data2, error: error2 } = useGetSneaker('315728-381');
-
 	console.log('livemarket', data);
 
 	useMemo(() => {

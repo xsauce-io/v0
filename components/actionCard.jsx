@@ -197,6 +197,9 @@ export const ActionCard = () => {
 	};
 
 	useEffect(() => {
+		setCurrentMarket(data);
+	}, [data]);
+	useEffect(() => {
 		if (!router.isReady) return;
 		//getMarketbySku();
 	}, [router.isReady]);
