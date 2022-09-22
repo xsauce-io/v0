@@ -122,18 +122,26 @@ const Home: NextPage = () => {
 			<Layout headerSubtitle={'TOTAL BALANCE'} headerTitle={'$ 144,000.00'}>
 				<>
 					<ContentHeader title={'Positions'} icon={<img src="/pieChart.svg" />}>
-						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10">
+						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-3 z-10 ">
 							<h5 className="text-sm font-Inter font-medium">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50"
+									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50  w-[15em]"
 								>
 									<img className="" src="/textBlock.svg" />
-									<span className="text-black font-Inter">
-										Winning Positions
-									</span>
 
+									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
+										<span className="flex-1 text-black font-Inter ">
+											Retail Price
+										</span>
+									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
+										<span className="flex-1 text-black font-Inter">
+											Release Date
+										</span>
+									) : (
+										<span className=" flex-1 text-black font-Inter ">Name</span>
+									)}
 									<img className="" src="/downArrow.svg" />
 								</label>
 								<ul
@@ -141,19 +149,32 @@ const Home: NextPage = () => {
 									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
 									<li>
-										<button className="text-black font-Inter active:bg-[#ACFF00]">
-											Winnings Positions
+										<button
+											onClick={() =>
+												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
+											}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
+											Retail Price
 										</button>
 									</li>
 									<li>
-										<button className="text-black font-Inter active:bg-[#ACFF00]">
-											Total Price
+										<button
+											onClick={() =>
+												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
+											}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
+											Release Date
 										</button>
 									</li>
 
 									<li>
-										<button className="text-black font-Inter active:bg-[#ACFF00]">
-											Returns
+										<button
+											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
+											Name
 										</button>
 									</li>
 								</ul>

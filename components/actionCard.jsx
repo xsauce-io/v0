@@ -16,13 +16,18 @@ import {
 	OrderBookGit,
 } from '../services/constants';
 import { useGetMarketBySku } from '../services/useRequests';
+
 export const ActionCard = () => {
+	// -------------------------- router ----------------------
 	const router = useRouter();
 	const { sku } = router.query;
-	const [isSet, setIsSet] = useState(false);
+
+	// -------------------- Data Fetching ------------------
 
 	const { data, error } = useGetMarketBySku(sku);
 
+	// ------------------- State Variable --------------------
+	const [isSet, setIsSet] = useState(false);
 	const [alignment, setAlignment] = useState();
 	const [isYes, setIsYes] = useState();
 	const [No, setNo] = useState();
@@ -39,7 +44,7 @@ export const ActionCard = () => {
 	const [expiration, setExpiration] = useState();
 	const [jackpotTotal, setJackpot] = useState();
 
-	console.log('data', data);
+	//------------------ Functions ------------------
 
 	const jackpot = async () => {
 		if (currentMarket !== undefined) {
@@ -196,12 +201,14 @@ export const ActionCard = () => {
 		}
 	};
 
+	//------------------ Use Effect / Use memo ------------------
+
 	useEffect(() => {
 		setCurrentMarket(data);
 	}, [data]);
+
 	useEffect(() => {
 		if (!router.isReady) return;
-		//getMarketbySku();
 	}, [router.isReady]);
 
 	useEffect(() => {
