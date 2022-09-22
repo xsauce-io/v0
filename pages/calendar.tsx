@@ -28,7 +28,7 @@ const Markets: NextPage = () => {
 	};
 
 	const [response, setResponse] = useState([] as any);
-  const [highlight, setHighlight] = useState();
+	const [highlight, setHighlight] = useState();
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 	let [isLoading, setisLoading] = useState(true as boolean);
 	const [isAscending, setIsAscending] = useState(true);
@@ -37,23 +37,17 @@ const Markets: NextPage = () => {
 	const getSneaker = async () => {
 		Promise.all([
 			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=30',
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=30'
 			),
-      axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DZ5485-612',
+			axios.get(
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DZ5485-612'
 			),
-
 		])
 
 			.then(
 				axios.spread((obj1, obj2) => {
-					setResponse(
-						obj1.data.results,
-					);
-            setHighlight(
-              obj2.data.results[0]
-            );
-
+					setResponse(obj1.data.results);
+					setHighlight(obj2.data.results[0]);
 
 					setisLoading(false);
 				})
@@ -222,17 +216,15 @@ const Markets: NextPage = () => {
 							</button> */}
 						</div>
 					</ContentHeader>
-          <div className='space-y-6'>
+					<div className="space-y-6">
+						<CalendarCard cardObject={highlight} />
 
-            <CalendarCard cardObject={highlight}/>
-         
-
-					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response.map((el: any) => (
-							<CalendarCard cardObject={el} />
-						))}
+						<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
+							{response.map((el: any) => (
+								<CalendarCard cardObject={el} />
+							))}
+						</div>
 					</div>
-          </div>
 				</main>
 			</Layout>
 		</div>

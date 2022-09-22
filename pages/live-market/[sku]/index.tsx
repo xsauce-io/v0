@@ -12,14 +12,12 @@ import { ActionCard } from '../../../components/actionCard';
 import { Header } from '../../../components/header';
 import { Footer } from '../../../components/footer';
 
-
 declare var window: any;
 
 const LiveMarket: NextPage = (cardObject) => {
 	const router = useRouter();
 
 	const { sku } = router.query;
-
 
 	const skuUrl =
 		'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=' +
@@ -32,7 +30,6 @@ const LiveMarket: NextPage = (cardObject) => {
 
 	const [response, setResponse] = useState([] as any);
 	const [admin, setAdmin] = useState(false);
-
 
 	// fetch sneaker data
 	const getSneaker = async () => {
@@ -62,83 +59,88 @@ const LiveMarket: NextPage = (cardObject) => {
 		}
 	};
 
+	const OrderBookGit =
+		'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBookFactory20.json';
+	const OrderBookAddressGit =
+		'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json';
 
-const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBookFactory20.json'
-const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
+	const requestOrderBookAbi = axios.get(OrderBookGit);
+	const requestOrderBookAddress = axios.get(OrderBookAddressGit);
 
+	const Token1 = '0x0163f21F8AcB86564491676C21Ca235cb9ddbFcD';
+	const Token2 = '0xEAAC1924EDC605928C106C74932387d37B2387Aa';
 
-const requestOrderBookAbi = axios.get(OrderBookGit);
-const requestOrderBookAddress = axios.get(OrderBookAddressGit);
+	const market1Add = '0x44A5cE34F2997091De32F1eC7f552c3FC175869d';
 
-const Token1 = "0x0163f21F8AcB86564491676C21Ca235cb9ddbFcD"
-const Token2 = "0xEAAC1924EDC605928C106C74932387d37B2387Aa"
+	const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
+	const [OrderBookFactoryAddress, setOrderBookFactoryAddress] = useState(
+		'' as any
+	);
 
-const market1Add = "0x44A5cE34F2997091De32F1eC7f552c3FC175869d"
+	axios
+		.all([requestOrderBookAbi, requestOrderBookAddress])
+		.then(
+			axios.spread((...responses) => {
+				const OrderBookInfo = responses[0].data;
+				setOrderBookAbi(OrderBookInfo);
+				const OrderBookFactoryAddress =
+					responses[1].data[4].OrderBookFactory20.address;
+				setOrderBookFactoryAddress(OrderBookFactoryAddress);
+			})
+		)
+		.catch((errors) => {
+			console.log(errors);
+		});
 
-const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
-  const [OrderBookFactoryAddress, setOrderBookFactoryAddress] = useState("" as any);
+	const createNewBook = async (e: any) => {
+		e.preventDefault();
+		const data = new FormData(e.target);
+		const Toke2 = data.get('Token2');
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		await provider.send('eth_requestAccounts', []);
+		const signer = provider.getSigner();
+		const OrderBookFactory = new ethers.Contract(
+			OrderBookFactoryAddress,
+			OrderBookAbi,
+			signer
+		);
+		const NewBook = await OrderBookFactory.createBook(Token1, Toke2, 100);
+		await NewBook.wait(1);
 
+		console.log(NewBook);
 
-  axios.all([requestOrderBookAbi, requestOrderBookAddress]).then(axios.spread((...responses) => {
-    const OrderBookInfo = responses[0].data;
-    setOrderBookAbi(OrderBookInfo);
-    const OrderBookFactoryAddress = responses[1].data[4].OrderBookFactory20.address;
-  setOrderBookFactoryAddress(OrderBookFactoryAddress);
+		// const newMarket = await create.allMarkets(-1);
 
-   })).catch(errors => {
-    console.log(errors)
-  })
+		// alert(`market created at ${newMarket}!`)
+	};
 
+	const getBookInfo = async (e: any) => {
+		e.preventDefault();
+		const data = new FormData(e.target);
+		const Toke2 = data.get('Token2');
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		await provider.send('eth_requestAccounts', []);
+		const signer = provider.getSigner();
+		const OrderBookFactory = new ethers.Contract(
+			OrderBookFactoryAddress,
+			OrderBookAbi,
+			signer
+		);
+		const NewBook = await OrderBookFactory.getBook(Token1, Token2, 100);
 
+		console.log(NewBook);
 
-  const createNewBook = async (e:any) => {
+		// const newMarket = await create.allMarkets(-1);
 
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const Toke2 = data.get("Token2");
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
-    const signer = provider.getSigner();
-    const OrderBookFactory = new ethers.Contract(OrderBookFactoryAddress, OrderBookAbi, signer);
-    const NewBook = await OrderBookFactory.createBook(Token1, Toke2, 100)
-    await NewBook.wait(1)
-
-   console.log(NewBook);
-
-// const newMarket = await create.allMarkets(-1);
-
-// alert(`market created at ${newMarket}!`)
-  }
-
-  const getBookInfo = async (e:any) => {
-
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const Toke2 = data.get("Token2");
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
-    const signer = provider.getSigner();
-    const OrderBookFactory = new ethers.Contract(OrderBookFactoryAddress, OrderBookAbi, signer);
-    const NewBook = await OrderBookFactory.getBook(Token1, Token2, 100)
-    
-  
-
-   console.log(NewBook);
-
-// const newMarket = await create.allMarkets(-1);
-
-// alert(`market created at ${newMarket}!`)
-  }
-
+		// alert(`market created at ${newMarket}!`)
+	};
 
 	useEffect(() => {
 		if (!router.isReady) return;
 		getSneaker();
-    
+
 		adminCheck();
 	}, [router.isReady]);
-  
-
 
 	return (
 		<div className="bg-[#EFF1F3]">
@@ -175,17 +177,25 @@ const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
 
 						<p>GO BACK</p>
 					</button>
-          {admin === true ?
-            <form onSubmit={getBookInfo}  className='space-x-2 ml-4'>
-<input
-  className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
-  name="Token2"
-  type="string"
-  placeholder="Sneaker Contract Address"
-/>
+					{admin === true ? (
+						<form onSubmit={getBookInfo} className="space-x-2 ml-4">
+							<input
+								className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
+								name="Token2"
+								type="string"
+								placeholder="Sneaker Contract Address"
+							/>
 
-            <button type="submit" className='bg-black text-white rounded-lg py-3 px-2 mt-3'>Create New OrderBook</button>
-            </form> : <></>}
+							<button
+								type="submit"
+								className="bg-black text-white rounded-lg py-3 px-2 mt-3"
+							>
+								Create New OrderBook
+							</button>
+						</form>
+					) : (
+						<></>
+					)}
 
 					<div className="tablet:flex flex-row items-center tablet:space-x-4">
 						<div className="flex-1">
@@ -194,10 +204,8 @@ const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
 							))}
 						</div>
 						<div className="self-start mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28 space-y-4">
-					
 							<ActionCard cardObject={sku} />
-              <Xchange cardObject={sku} />
-
+							<Xchange cardObject={sku} />
 						</div>
 					</div>
 				</div>
