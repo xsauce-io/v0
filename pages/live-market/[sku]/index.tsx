@@ -25,33 +25,10 @@ const LiveMarket: NextPage = (cardObject) => {
 	const router = useRouter();
 	const { sku } = router.query;
 
-	const skuUrl =
-		'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=' +
-		sku;
-
-	const options = {
-		method: 'GET',
-		url: skuUrl,
-	};
-
 	const { data, error } = useGetSneaker(sku);
 
 	const [response, setResponse] = useState(data);
 	const [admin, setAdmin] = useState(false);
-
-	// // fetch sneaker data
-	// const getSneaker = async () => {
-	// 	axios
-	// 		.request(options)
-	// 		.then(function (response) {
-	// 			const array: any[] = response.data.results;
-	// 			setResponse(array);
-	// 			console.log(response.data.results);
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.error(error);
-	// 		});
-	// };
 
 	const adminCheck = async () => {
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
