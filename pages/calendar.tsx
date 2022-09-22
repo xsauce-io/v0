@@ -14,6 +14,11 @@ import { ContentHeader } from '../components/contentHeader';
 import { ethers, utils } from 'ethers';
 
 import { CalendarCard } from '../components/calendarCard';
+import {
+	useGetMarketBySku,
+	useGetSneaker,
+	useGetSneakerByLimit,
+} from '../services/useRequests';
 
 const Markets: NextPage = () => {
 	const SORT_BY_STATES = {
@@ -26,40 +31,22 @@ const Markets: NextPage = () => {
 		GRID: 'grid',
 		LIST: 'list',
 	};
+	const { data: highlightSneaker, error } = useGetSneaker('DZ5485-612');
+	const { data: sneakersData, error: sneakersDataError } =
+		useGetSneakerByLimit('28');
 
-	const [response, setResponse] = useState([] as any);
-	const [highlight, setHighlight] = useState();
+	console.log(sneakersData);
+
+	const [response, setResponse] = useState(sneakersData);
+	const [highlight, setHighlight] = useState(highlightSneaker);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 	let [isLoading, setisLoading] = useState(true as boolean);
 	const [isAscending, setIsAscending] = useState(true);
 
-	// fetch sneaker data
-	const getSneaker = async () => {
-		Promise.all([
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=28'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DZ5485-612'
-			),
-		])
-
-			.then(
-				axios.spread((obj1, obj2) => {
-					setResponse(obj1.data.results);
-					setHighlight(obj2.data.results[0]);
-
-					setisLoading(false);
-				})
-			)
-			.catch(function (error) {
-				console.error(error);
-			});
-	};
-
 	useEffect(() => {
-		getSneaker();
-	}, []);
+		setResponse(sneakersData);
+		setHighlight(highlightSneaker);
+	}, [sneakersData, highlightSneaker]);
 
 	useMemo(() => {
 		if (response.length > 0 && isAscending === true) {
@@ -150,8 +137,11 @@ const Markets: NextPage = () => {
 					<ContentHeader
 						title={'Upcoming Sneaker Drops'}
 						icon={<img className={'h-[35px] w-[35px]'} src="/calendar.svg" />}
-					>
-						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-2 z-10">
+					/>
+
+					<div className="space-y-10">
+						<CalendarCard cardObject={highlight} />
+						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-2 z-10 w-fit">
 							<h5 className="text-sm font-Inter font-medium ">Filter on</h5>
 							<div className="dropdown dropdown-end">
 								<label
@@ -204,21 +194,7 @@ const Markets: NextPage = () => {
 									</li>
 								</ul>
 							</div>
-							{/* <button
-								className="hover:scale-150"
-								onClick={() => setIsAscending(!isAscending)}
-							>
-								{isAscending === true ? (
-									<img className="" src="/upArrow.svg" />
-								) : (
-									<img className="" src="/downArrow.svg" />
-								)}
-							</button> */}
 						</div>
-					</ContentHeader>
-					<div className="space-y-6">
-						<CalendarCard cardObject={highlight} />
-
 						<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
 							{response.map((el: any) => (
 								<CalendarCard cardObject={el} />

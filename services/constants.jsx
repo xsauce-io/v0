@@ -18,3 +18,6 @@ export const dai = '0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa';
 
 export const urlBySku =
 	'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=';
+
+export const urlByLimit =
+	'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=';

@@ -118,16 +118,6 @@ const Home: NextPage = () => {
 									</li>
 								</ul>
 							</div>
-							{/* <button
-								className="hover:scale-150"
-								onClick={() => setIsAscending(!isAscending)}
-							>
-								{isAscending === true ? (
-									<img className="" src="/upArrow.svg" />
-								) : (
-									<img className="" src="/downArrow.svg" />
-								)}
-							</button> */}
 						</div>
 					</ContentHeader>
 					<DashboardTable>
