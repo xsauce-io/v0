@@ -44,6 +44,9 @@ const Markets: NextPage = () => {
 
 	useEffect(() => {
 		setResponse([s1, s2, s3, s4]);
+		setSortBy({
+			state: SORT_BY_STATES.RETAIL_PRICE,
+		});
 	}, [s1, s2, s3, s4]);
 
 	useMemo(() => {

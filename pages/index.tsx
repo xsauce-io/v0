@@ -134,13 +134,6 @@ const Home: NextPage = () => {
 										Winning Positions
 									</span>
 
-									{/* {sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
-										<span className="text-black ">Retail Price</span>
-									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
-										<span className="text-black">Release Date</span>
-									) : (
-										<span className="text-black ">Name</span>
-									)} */}
 									<img className="" src="/downArrow.svg" />
 								</label>
 								<ul

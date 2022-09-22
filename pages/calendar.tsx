@@ -40,7 +40,6 @@ const Markets: NextPage = () => {
 	const [response, setResponse] = useState(sneakersData);
 	const [highlight, setHighlight] = useState(highlightSneaker);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
-	let [isLoading, setisLoading] = useState(true as boolean);
 	const [isAscending, setIsAscending] = useState(true);
 
 	//------------------ Use Effect / Use memo ------------------
@@ -48,6 +47,9 @@ const Markets: NextPage = () => {
 	useEffect(() => {
 		setResponse(sneakersData);
 		setHighlight(highlightSneaker);
+		setSortBy({
+			state: SORT_BY_STATES.RETAIL_PRICE,
+		});
 	}, [sneakersData, highlightSneaker]);
 
 	useMemo(() => {
