@@ -42,67 +42,69 @@ const Markets: NextPage = () => {
 		setResponse([s1, s2, s3, s4]);
 	}, [s1, s2, s3, s4]);
 
-	// useMemo(() => {
-	// 	if (data) {
-	// 		if (data.length > 0 && isAscending === true) {
-	// 			if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-	// 				data.sort((a: { name: string }, b: { name: string }) =>
-	// 					a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
-	// 				);
-	// 				console.log({ data });
-	// 			} else if (
-	// 				data.length > 0 &&
-	// 				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-	// 			) {
-	// 				data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
-	// 					a.releaseDate > b.releaseDate
-	// 						? 1
-	// 						: b.releaseDate > a.releaseDate
-	// 						? -1
-	// 						: 0
-	// 				);
-	// 				console.log({ data });
-	// 			} else if (
-	// 				data.length > 0 &&
-	// 				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-	// 			) {
-	// 				data.sort(
-	// 					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-	// 						a.retailPrice - b.retailPrice
-	// 				);
-	// 				console.log({ data });
-	// 			}
-	// 		} else if (data.length > 0 && isAscending === false) {
-	// 			if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-	// 				data.sort((a: { name: string }, b: { name: string }) =>
-	// 					a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
-	// 				);
-	// 				console.log({ data });
-	// 			} else if (
-	// 				data.length > 0 &&
-	// 				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-	// 			) {
-	// 				data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
-	// 					a.releaseDate < b.releaseDate
-	// 						? 1
-	// 						: b.releaseDate < a.releaseDate
-	// 						? -1
-	// 						: 0
-	// 				);
-	// 				console.log({ data });
-	// 			} else if (
-	// 				data.length > 0 &&
-	// 				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-	// 			) {
-	// 				data.sort(
-	// 					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-	// 						b.retailPrice - a.retailPrice
-	// 				);
-	// 				console.log({ data });
-	// 			}
-	// 		}
-	// 	}
-	// }, [sortBy, isAscending]);
+	useMemo(() => {
+		if (response) {
+			if (response.length > 0 && isAscending === true) {
+				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+					response.sort((a: { name: string }, b: { name: string }) =>
+						a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RELEASE_DATE
+				) {
+					response.sort(
+						(a: { releaseDate: string }, b: { releaseDate: string }) =>
+							a.releaseDate > b.releaseDate
+								? 1
+								: b.releaseDate > a.releaseDate
+								? -1
+								: 0
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+				) {
+					response.sort(
+						(a: { retailPrice: number }, b: { retailPrice: number }) =>
+							a.retailPrice - b.retailPrice
+					);
+					console.log({ response });
+				}
+			} else if (response.length > 0 && isAscending === false) {
+				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+					response.sort((a: { name: string }, b: { name: string }) =>
+						a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RELEASE_DATE
+				) {
+					response.sort(
+						(a: { releaseDate: string }, b: { releaseDate: string }) =>
+							a.releaseDate < b.releaseDate
+								? 1
+								: b.releaseDate < a.releaseDate
+								? -1
+								: 0
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+				) {
+					response.sort(
+						(a: { retailPrice: number }, b: { retailPrice: number }) =>
+							b.retailPrice - a.retailPrice
+					);
+					console.log({ response });
+				}
+			}
+		}
+	}, [sortBy, isAscending]);
 
 	return (
 		<div>
@@ -149,33 +151,33 @@ const Markets: NextPage = () => {
 								</label>
 								<ul
 									tabIndex={0}
-									className="dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
+									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
-									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
+									<li>
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
 											}
-											className="font-Inter active:bg-[#ACFF00]"
+											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Retail Price
 										</button>
 									</li>
-									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
+									<li>
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
 											}
-											className="font-Inter "
+											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Release Date
 										</button>
 									</li>
 
-									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
+									<li>
 										<button
 											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
-											className="font-Inter active:bg-[#ACFF00]"
+											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Name
 										</button>
