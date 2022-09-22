@@ -14,6 +14,7 @@ import { ContentHeader } from '../components/contentHeader';
 import { ethers, utils } from 'ethers';
 
 import { CalendarCard } from '../components/calendarCard';
+import { CalendarHighlight } from '../components/calendarHighlight';
 import {
 	useGetMarketBySku,
 	useGetSneaker,
@@ -130,10 +131,10 @@ const Markets: NextPage = () => {
 			</Head>
 
 			<Layout
-				headerSubtitle={'RELEASE CALENDAR'}
+				headerSubtitle={'RELEASE SCHEDULE'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
-				headerTitle={'Xchange'}
+				headerTitle={'Calendar'}
 			>
 				<main className="flex w-full flex-1 flex-col text-center">
 					{/*Sorting */}
@@ -143,8 +144,8 @@ const Markets: NextPage = () => {
 					/>
 
 					<div className="space-y-10">
-						<CalendarCard cardObject={highlight} />
-						<div className="flex flex-row tablet:space-x-3  items-center mobile:flex-col  space-y-3  tablet:flex-row">
+						<CalendarHighlight cardObject={highlight} />
+						<div className="flex laptop:flex-row laptop:items-center laptop:space-y-0 mobile:flex-col mobile:space-y-2 tablet:space-x-3 items-center tablet:flex-row">
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
