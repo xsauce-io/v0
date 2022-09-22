@@ -27,10 +27,6 @@ const Markets: NextPage = () => {
 		RETAIL_PRICE: 'retailPrice',
 	};
 
-	const LAYOUT_STATES = {
-		GRID: 'grid',
-		LIST: 'list',
-	};
 	const { data: highlightSneaker, error } = useGetSneaker('DZ5485-612');
 	const { data: sneakersData, error: sneakersDataError } =
 		useGetSneakerByLimit('28');
@@ -49,63 +45,65 @@ const Markets: NextPage = () => {
 	}, [sneakersData, highlightSneaker]);
 
 	useMemo(() => {
-		if (response.length > 0 && isAscending === true) {
-			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-				response.sort((a: { name: string }, b: { name: string }) =>
-					a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-			) {
-				response.sort(
-					(a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate > b.releaseDate
-							? 1
-							: b.releaseDate > a.releaseDate
-							? -1
-							: 0
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-			) {
-				response.sort(
-					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-						a.retailPrice - b.retailPrice
-				);
-				console.log({ response });
-			}
-		} else if (response.length > 0 && isAscending === false) {
-			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-				response.sort((a: { name: string }, b: { name: string }) =>
-					a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-			) {
-				response.sort(
-					(a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate < b.releaseDate
-							? 1
-							: b.releaseDate < a.releaseDate
-							? -1
-							: 0
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-			) {
-				response.sort(
-					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-						b.retailPrice - a.retailPrice
-				);
-				console.log({ response });
+		if (response) {
+			if (response.length > 0 && isAscending === true) {
+				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+					response.sort((a: { name: string }, b: { name: string }) =>
+						a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RELEASE_DATE
+				) {
+					response.sort(
+						(a: { releaseDate: string }, b: { releaseDate: string }) =>
+							a.releaseDate > b.releaseDate
+								? 1
+								: b.releaseDate > a.releaseDate
+								? -1
+								: 0
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+				) {
+					response.sort(
+						(a: { retailPrice: number }, b: { retailPrice: number }) =>
+							a.retailPrice - b.retailPrice
+					);
+					console.log({ response });
+				}
+			} else if (response.length > 0 && isAscending === false) {
+				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+					response.sort((a: { name: string }, b: { name: string }) =>
+						a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RELEASE_DATE
+				) {
+					response.sort(
+						(a: { releaseDate: string }, b: { releaseDate: string }) =>
+							a.releaseDate < b.releaseDate
+								? 1
+								: b.releaseDate < a.releaseDate
+								? -1
+								: 0
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+				) {
+					response.sort(
+						(a: { retailPrice: number }, b: { retailPrice: number }) =>
+							b.retailPrice - a.retailPrice
+					);
+					console.log({ response });
+				}
 			}
 		}
 	}, [sortBy, isAscending]);
@@ -196,7 +194,7 @@ const Markets: NextPage = () => {
 							</div>
 						</div>
 						<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-							{response.map((el: any) => (
+							{response?.map((el: any) => (
 								<CalendarCard cardObject={el} />
 							))}
 						</div>

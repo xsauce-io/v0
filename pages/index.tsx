@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { Layout } from '../components/layout';
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import React from 'react';
 import { DashboardTable } from '../components/dashboardTable';
@@ -11,8 +11,10 @@ import { DashboardTable } from '../components/dashboardTable';
 
 import { Dashboard } from '../components/dashboard';
 import { ContentHeader } from '../components/contentHeader';
+import { useGetSneakerByLimit } from '../services/useRequests';
 
 const Home: NextPage = () => {
+	// ------------------- Constants ---------------------
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -20,44 +22,89 @@ const Home: NextPage = () => {
 		laptop: '1200',
 		desktop: '1400',
 	};
-
-	let [premarketResponse, setAuctionResponse] = useState([] as any);
-	let [isLoading, setisLoading] = useState(true as boolean);
-	let [toggled, setisToggled] = useState(true as boolean);
-	const [isAscending, setIsAscending] = useState(true);
-
-	const getSneaker2 = async () => {
-		Promise.all([
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=nike&silhouette=dunk'
-			),
-		])
-
-			.then(
-				axios.spread((obj1) => {
-					setAuctionResponse([
-						obj1.data.results[0],
-						obj1.data.results[1],
-						obj1.data.results[2],
-						obj1.data.results[3],
-						obj1.data.results[4],
-						obj1.data.results[5],
-					]);
-
-					setisLoading(false);
-
-					console.log({ obj1 });
-				})
-			)
-			.catch(function (error) {
-				console.error(error);
-			});
+	const SORT_BY_STATES = {
+		RELEASE_DATE: 'releaseDate',
+		NAME: 'name',
+		RETAIL_PRICE: 'retailPrice',
 	};
 
-	useEffect(() => {
-		getSneaker2();
-	}, []);
+	// -------------------- Data Fetching ------------------
+	const { data: sneakersData, error: sneakersDataError } =
+		useGetSneakerByLimit('11');
 
+	// ------------------- State Variable --------------------
+	const [response, setResponse] = useState(sneakersData);
+	//filter state mana
+	const [isAscending, setIsAscending] = useState(true);
+	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
+
+	useEffect(() => {
+		setResponse(sneakersData);
+	}, [sneakersData]);
+
+	useMemo(() => {
+		if (response) {
+			if (response.length > 0 && isAscending === true) {
+				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+					response.sort((a: { name: string }, b: { name: string }) =>
+						a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RELEASE_DATE
+				) {
+					response.sort(
+						(a: { releaseDate: string }, b: { releaseDate: string }) =>
+							a.releaseDate > b.releaseDate
+								? 1
+								: b.releaseDate > a.releaseDate
+								? -1
+								: 0
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+				) {
+					response.sort(
+						(a: { retailPrice: number }, b: { retailPrice: number }) =>
+							a.retailPrice - b.retailPrice
+					);
+					console.log({ response });
+				}
+			} else if (response.length > 0 && isAscending === false) {
+				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+					response.sort((a: { name: string }, b: { name: string }) =>
+						a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RELEASE_DATE
+				) {
+					response.sort(
+						(a: { releaseDate: string }, b: { releaseDate: string }) =>
+							a.releaseDate < b.releaseDate
+								? 1
+								: b.releaseDate < a.releaseDate
+								? -1
+								: 0
+					);
+					console.log({ response });
+				} else if (
+					response.length > 0 &&
+					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+				) {
+					response.sort(
+						(a: { retailPrice: number }, b: { retailPrice: number }) =>
+							b.retailPrice - a.retailPrice
+					);
+					console.log({ response });
+				}
+			}
+		}
+	}, [sortBy, isAscending]);
 	return (
 		//#F5DEB3 - Vanilla
 		//#E5E5E5 - Gray
@@ -121,7 +168,7 @@ const Home: NextPage = () => {
 						</div>
 					</ContentHeader>
 					<DashboardTable>
-						{premarketResponse.map((el: []) => (
+						{response?.map((el: []) => (
 							<Dashboard positions={el} />
 						))}
 					</DashboardTable>
