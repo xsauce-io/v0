@@ -14,12 +14,12 @@ export const Tabs = ({ children, bgColor }) => {
                     <Link href="/">
                         <a className={router.pathname == "/" ? "tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm " : "tab transition mobile:text-xs tablet:text-sm text-[#748282] px-0 "} style={router.pathname == "/" ? { color: 'inherit' } : null}>Dashboard</a>
                     </Link>
+                    <Link href="/calendar">
+                        <a className={router.pathname == "/calendar" ? "tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm " : "tab transition mobile:text-xs tablet:text-sm text-[#748282] px-0 "} style={router.pathname == "/calendar" ? { color: 'inherit' } : null}>Calendar</a>
+                    </Link>
                     <Link href="/livemarkets">
                         <a className={router.pathname == "/livemarkets" ? "tab border-b-[3px] border-[#ACFF00] transition text-black px-0 mobile:text-xs tablet:text-sm" : "tab transition text-[#748282] px-0 mobile:text-xs tablet:text-sm"} style={router.pathname == "/livemarkets" ? { color: 'inherit' } : null}>Live Market</a>
                     </Link>
-                    {/* <Link href="/premarkets">
-                        <a className={router.pathname == "/premarkets" ? "tab border-[#ACFF00] border-b-[3px] transition text-black px-0 mobile:text-xs tablet:text-sm" : "tab transition text-[#748282] px-0 mobile:text-xs tablet:text-sm"} style={router.pathname == "/premarkets" ? { color: 'inherit' } : null}>Pre Market</a>
-                    </Link> */}
                     <Link href="/redeem">
                         <a className={router.pathname == "/redeem" ? "tab border-[#ACFF00] border-b-[3px] transition text-black px-0 mobile:text-xs tablet:text-sm" : "tab transition text-[#748282] px-0 mobile:text-xs tablet:text-sm"} style={router.pathname == "/redeem" ? { color: 'inherit' } : null}>Cash Out</a>
                     </Link>

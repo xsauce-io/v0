@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Market.sol": {
-      "lastModificationDate": 1663631345231,
-      "contentHash": "ece31f99dd67d83b51d924ec47c91d6a",
+      "lastModificationDate": 1663727020157,
+      "contentHash": "e7fdd2127ba7a12d1779075985a02e02",
       "sourceName": "contracts/Market.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1258,8 +1258,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/MarketFactory.sol": {
-      "lastModificationDate": 1663272608762,
-      "contentHash": "dbe5317a177038bbc76ca5c72ce02195",
+      "lastModificationDate": 1663775434764,
+      "contentHash": "04d1ebf62cd4285780f51120fe104c58",
       "sourceName": "contracts/MarketFactory.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1288,6 +1288,7 @@
         "./Market.sol",
         "@openzeppelin/contracts/access/Ownable.sol",
         "./interfaces/IOracle.sol",
+        "./interfaces/IOrderBookFactory20.sol",
         "./Token20.sol",
         "hardhat/console.sol"
       ],
@@ -1299,8 +1300,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Oracle.sol": {
-      "lastModificationDate": 1663034416547,
-      "contentHash": "e30938f8f4560e3daa6cae35ca868e63",
+      "lastModificationDate": 1663724284959,
+      "contentHash": "ea981995d9bc665092456b1d064ce112",
       "sourceName": "contracts/Oracle.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1410,6 +1411,41 @@
       ],
       "artifacts": [
         "IERC20Permit"
+      ]
+    },
+    "/Users/home/Desktop/xsauce.v0/v0/contracts/interfaces/IOrderBookFactory20.sol": {
+      "lastModificationDate": 1663775294536,
+      "contentHash": "7eaff512c174598da3167b482245ce2d",
+      "sourceName": "contracts/interfaces/IOrderBookFactory20.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.16"
+      ],
+      "artifacts": [
+        "IOrderBookFactory20"
       ]
     }
   }

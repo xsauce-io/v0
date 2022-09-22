@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { IOracle } from "./IOracle";
+export type { IOrderBookFactory20 } from "./IOrderBookFactory20";

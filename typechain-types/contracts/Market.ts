@@ -29,6 +29,7 @@ import type {
 
 export interface MarketInterface extends utils.Interface {
   functions: {
+    "Book()": FunctionFragment;
     "NO()": FunctionFragment;
     "YES()": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
@@ -42,7 +43,7 @@ export interface MarketInterface extends utils.Interface {
     "feeCollector()": FunctionFragment;
     "fetched()": FunctionFragment;
     "getData()": FunctionFragment;
-    "initialize(uint256,address,uint256,string)": FunctionFragment;
+    "initialize(uint256,address,uint256,string,address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(uint256,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -61,11 +62,11 @@ export interface MarketInterface extends utils.Interface {
     "totalSupply(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
-    "xchange(uint256,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "Book"
       | "NO"
       | "YES"
       | "balanceOf"
@@ -98,9 +99,9 @@ export interface MarketInterface extends utils.Interface {
       | "totalSupply"
       | "transferOwnership"
       | "uri"
-      | "xchange"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "Book", values?: undefined): string;
   encodeFunctionData(functionFragment: "NO", values?: undefined): string;
   encodeFunctionData(functionFragment: "YES", values?: undefined): string;
   encodeFunctionData(
@@ -149,6 +150,7 @@ export interface MarketInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
       PromiseOrValue<string>
     ]
   ): string;
@@ -224,11 +226,8 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "uri",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "xchange",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
 
+  decodeFunctionResult(functionFragment: "Book", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "NO", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "YES", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -300,7 +299,6 @@ export interface MarketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "xchange", data: BytesLike): Result;
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
@@ -417,6 +415,8 @@ export interface Market extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    Book(overrides?: CallOverrides): Promise<[string]>;
+
     NO(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     YES(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -473,6 +473,7 @@ export interface Market extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _sku: PromiseOrValue<string>,
+      _Book: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -556,13 +557,9 @@ export interface Market extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    xchange(
-      fromId: PromiseOrValue<BigNumberish>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
   };
+
+  Book(overrides?: CallOverrides): Promise<string>;
 
   NO(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -620,6 +617,7 @@ export interface Market extends BaseContract {
     _oracleFeed: PromiseOrValue<string>,
     _closingDate: PromiseOrValue<BigNumberish>,
     _sku: PromiseOrValue<string>,
+    _Book: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -704,13 +702,9 @@ export interface Market extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  xchange(
-    fromId: PromiseOrValue<BigNumberish>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
+    Book(overrides?: CallOverrides): Promise<string>;
+
     NO(overrides?: CallOverrides): Promise<BigNumber>;
 
     YES(overrides?: CallOverrides): Promise<BigNumber>;
@@ -763,6 +757,7 @@ export interface Market extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _sku: PromiseOrValue<string>,
+      _Book: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -842,12 +837,6 @@ export interface Market extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    xchange(
-      fromId: PromiseOrValue<BigNumberish>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
   };
 
   filters: {
@@ -915,6 +904,8 @@ export interface Market extends BaseContract {
   };
 
   estimateGas: {
+    Book(overrides?: CallOverrides): Promise<BigNumber>;
+
     NO(overrides?: CallOverrides): Promise<BigNumber>;
 
     YES(overrides?: CallOverrides): Promise<BigNumber>;
@@ -971,6 +962,7 @@ export interface Market extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _sku: PromiseOrValue<string>,
+      _Book: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1054,15 +1046,11 @@ export interface Market extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    xchange(
-      fromId: PromiseOrValue<BigNumberish>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    Book(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     NO(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     YES(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1119,6 +1107,7 @@ export interface Market extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _sku: PromiseOrValue<string>,
+      _Book: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1201,12 +1190,6 @@ export interface Market extends BaseContract {
     uri(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    xchange(
-      fromId: PromiseOrValue<BigNumberish>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

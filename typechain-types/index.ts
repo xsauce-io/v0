@@ -60,6 +60,8 @@ export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
 export type { IOracle } from "./contracts/interfaces/IOracle";
 export { IOracle__factory } from "./factories/contracts/interfaces/IOracle__factory";
+export type { IOrderBookFactory20 } from "./contracts/interfaces/IOrderBookFactory20";
+export { IOrderBookFactory20__factory } from "./factories/contracts/interfaces/IOrderBookFactory20__factory";
 export type { Market } from "./contracts/Market";
 export { Market__factory } from "./factories/contracts/Market__factory";
 export type { MarketFactory } from "./contracts/MarketFactory";

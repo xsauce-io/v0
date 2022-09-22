@@ -28,6 +28,7 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     uint256 public closingDate;
     uint256 public priceOfNo;
     uint256 public priceOfYes;
+    address public Book;
     string public sku;
     IERC20 usdc;
 
@@ -37,6 +38,7 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         _mint(address(this), 1, 1, "");
         _mint(address(this), 2, 1, "");
         usdc = IERC20(_usdc);
+       
 
      
     }
@@ -45,7 +47,9 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         uint _predictionPrice,
         address _oracleFeed,
         uint256 _closingDate,
-        string memory _sku
+        string memory _sku,
+        address _Book
+
     ) external onlyOwner {
         // require(
         //     block.timestamp < _unlockTime,
@@ -56,6 +60,7 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         // unlockTime = _unlockTime;
         predictionPrice = _predictionPrice;
         sku = _sku;
+         Book = _Book;
     }
 
     function resolveAssetPrice() public onlyOwner {
@@ -128,51 +133,6 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
         emit positionCreated(id, amount);
     }
-
-    function xchange(uint256 fromId, uint256 amount) public {
-        priceOfNo = totalSupply(2).mul(1e18).div(
-            (totalSupply(1) + totalSupply(2))
-        );
-
-
-      priceOfYes = totalSupply(1).mul(1e18).div(
-            (totalSupply(1) + totalSupply(2))
-        );
-
-    
-        if (fromId == 1) {
-           
-            require(amount <= balanceOf(msg.sender, 1), "Balance too low");
-            uint256 remainingBalance = (amount.mul(priceOfYes));
-
-            console.log(((priceOfYes * amount).mul(priceOfNo)).div(1e18).div(100));
-            
-            
-            uint256 sendBack = (remainingBalance.mul(priceOfNo)).div(1e18);
-            uint256 toIdnewBalance = ((remainingBalance.mul(priceOfNo)).div(1e33)).div(100);
-            
-            require(toIdnewBalance >= 1, "You do not have enough collateral to exchange your position. The minimum exchange is 1 token.");
-             usdc.safeTransfer(msg.sender, sendBack);
-             _burn(msg.sender, 1, amount);
-            _mint(msg.sender, 2, toIdnewBalance, "");
-            emit positionCreated(2, toIdnewBalance);
-        } else if (fromId == 2) {
-            require(amount <= balanceOf(msg.sender, 2), "Balance too low");
-            uint256 remainingBalance = amount.mul(priceOfNo);
-            
-             uint256 sendBack = (remainingBalance.mul(priceOfYes)).div(1e18);
-            uint256 toIdnewBalance = ((remainingBalance.mul(priceOfYes)).div(1e33)).div(100);
-            require(toIdnewBalance >= 1, "You do not have enough collateral to exchange your position. The minimum exchange is 1 token.");
-            usdc.safeTransfer(msg.sender, sendBack);
-            _burn(msg.sender, 2, amount);
-            _mint(msg.sender, 1, toIdnewBalance, "");
-            emit positionCreated(1, toIdnewBalance);
-        }
-
-        else {}
-    }
-
-    // The following functions are overrides required by Solidity.
 
     function _beforeTokenTransfer(
         address operator,

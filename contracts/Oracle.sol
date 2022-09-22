@@ -28,7 +28,7 @@ contract Oracle is IOracle, Ownable {
         string memory base = string.concat('https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=',sku);
 
         req.add('get', base);
-        req.add('path', 'results.0.estimatedMarketValue'); // Chainlink nodes 1.0.0 and later support this format
+        req.add('path', 'results,0,estimatedMarketValue'); // Chainlink nodes 1.0.0 and later support this format
 
       
         int256 timesAmount = 1;

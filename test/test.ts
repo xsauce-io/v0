@@ -179,5 +179,7 @@ console.log(await market.totalSupply(2))
 // expect(YesPrice).to.equal(1/12);
   })
 
+  
+
 
 });
