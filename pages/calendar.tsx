@@ -149,7 +149,7 @@ const Markets: NextPage = () => {
 					{/*Sorting */}
 					<ContentHeader
 						title={'Upcoming Sneaker Drops'}
-						icon={<img className="w-[8%] h-[8%]" src="/calendar.png" />}
+						icon={<img className={'h-[35px] w-[35px]'} src="/calendar.svg" />}
 					>
 						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-2 z-10">
 							<h5 className="text-sm font-Inter font-medium ">Filter on</h5>
