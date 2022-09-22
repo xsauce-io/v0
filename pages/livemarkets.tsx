@@ -14,6 +14,7 @@ import { ContentHeader } from '../components/contentHeader';
 import { ethers, utils } from 'ethers';
 
 import { Card } from '../components/cardWager';
+import { useGetMultiSneakers, useGetSneaker } from '../services/useRequests';
 
 const Markets: NextPage = () => {
 	const SORT_BY_STATES = {
@@ -22,121 +23,88 @@ const Markets: NextPage = () => {
 		RETAIL_PRICE: 'retailPrice',
 	};
 
-	const LAYOUT_STATES = {
-		GRID: 'grid',
-		LIST: 'list',
-	};
-
-	const [response, setResponse] = useState([] as any);
-	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.NAME });
-	let [isLoading, setisLoading] = useState(true as boolean);
+	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RETAIL_PRICE });
 	const [isAscending, setIsAscending] = useState(true);
+	const { data: s1, error: e1 } = useGetSneaker('315728-381');
+	const { data: s2, error: e2 } = useGetSneaker('AA3830-001');
+	const { data: s3, error: e3 } = useGetSneaker('AT9915-002');
+	const { data: s4, error: e4 } = useGetSneaker('555088-711');
 
-	// fetch sneaker data
-	const getSneaker = async () => {
-		Promise.all([
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=315728-381'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=555088-108'
-			),
-
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AT9915-002'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DN3707-160'
-			),
-		])
-
-			.then(
-				axios.spread((obj1, obj2, obj3, obj4) => {
-					setResponse([
-						obj1.data.results[0],
-						obj2.data.results[0],
-						obj3.data.results[0],
-						obj4.data.results[0],
-					]);
-
-					setisLoading(false);
-				})
-			)
-			.catch(function (error) {
-				console.error(error);
-			});
-	};
+	// const { data, error, isValidating } = useGetMultiSneakers([
+	// 	'315728-381',
+	// 	'AA3830-001',
+	// 	'AT9915-002',
+	// 	'555088-711',
+	// ]);
+	const [response, setResponse] = useState([] as any[]);
 
 	useEffect(() => {
-		getSneaker();
-	}, []);
+		setResponse([s1, s2, s3, s4]);
+	}, [s1, s2, s3, s4]);
 
-	useMemo(() => {
-		if (response.length > 0 && isAscending === true) {
-			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-				response.sort((a: { name: string }, b: { name: string }) =>
-					a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-			) {
-				response.sort(
-					(a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate > b.releaseDate
-							? 1
-							: b.releaseDate > a.releaseDate
-							? -1
-							: 0
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-			) {
-				response.sort(
-					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-						a.retailPrice - b.retailPrice
-				);
-				console.log({ response });
-			}
-		} else if (response.length > 0 && isAscending === false) {
-			if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-				response.sort((a: { name: string }, b: { name: string }) =>
-					a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RELEASE_DATE
-			) {
-				response.sort(
-					(a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate < b.releaseDate
-							? 1
-							: b.releaseDate < a.releaseDate
-							? -1
-							: 0
-				);
-				console.log({ response });
-			} else if (
-				response.length > 0 &&
-				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-			) {
-				response.sort(
-					(a: { retailPrice: number }, b: { retailPrice: number }) =>
-						b.retailPrice - a.retailPrice
-				);
-				console.log({ response });
-			}
-		}
-	}, [sortBy, isAscending]);
+	// useMemo(() => {
+	// 	if (data) {
+	// 		if (data.length > 0 && isAscending === true) {
+	// 			if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+	// 				data.sort((a: { name: string }, b: { name: string }) =>
+	// 					a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
+	// 				);
+	// 				console.log({ data });
+	// 			} else if (
+	// 				data.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RELEASE_DATE
+	// 			) {
+	// 				data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
+	// 					a.releaseDate > b.releaseDate
+	// 						? 1
+	// 						: b.releaseDate > a.releaseDate
+	// 						? -1
+	// 						: 0
+	// 				);
+	// 				console.log({ data });
+	// 			} else if (
+	// 				data.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+	// 			) {
+	// 				data.sort(
+	// 					(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 						a.retailPrice - b.retailPrice
+	// 				);
+	// 				console.log({ data });
+	// 			}
+	// 		} else if (data.length > 0 && isAscending === false) {
+	// 			if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+	// 				data.sort((a: { name: string }, b: { name: string }) =>
+	// 					a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
+	// 				);
+	// 				console.log({ data });
+	// 			} else if (
+	// 				data.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RELEASE_DATE
+	// 			) {
+	// 				data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
+	// 					a.releaseDate < b.releaseDate
+	// 						? 1
+	// 						: b.releaseDate < a.releaseDate
+	// 						? -1
+	// 						: 0
+	// 				);
+	// 				console.log({ data });
+	// 			} else if (
+	// 				data.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+	// 			) {
+	// 				data.sort(
+	// 					(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 						b.retailPrice - a.retailPrice
+	// 				);
+	// 				console.log({ data });
+	// 			}
+	// 		}
+	// 	}
+	// }, [sortBy, isAscending]);
 
 	return (
-		//#F5DEB3 - Vanilla
-		//#E5E5E5 - Gray
-
 		<div>
 			<Head>
 				<title>Xsauce</title>
@@ -183,7 +151,7 @@ const Markets: NextPage = () => {
 									tabIndex={0}
 									className="dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
@@ -193,18 +161,18 @@ const Markets: NextPage = () => {
 											Retail Price
 										</button>
 									</li>
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
 											}
-											className="font-Inter active:bg-[#ACFF00]"
+											className="font-Inter "
 										>
 											Release Date
 										</button>
 									</li>
 
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
 											className="font-Inter active:bg-[#ACFF00]"
@@ -214,16 +182,6 @@ const Markets: NextPage = () => {
 									</li>
 								</ul>
 							</div>
-							{/* <button
-								className="hover:scale-150"
-								onClick={() => setIsAscending(!isAscending)}
-							>
-								{isAscending === true ? (
-									<img className="" src="/upArrow.svg" />
-								) : (
-									<img className="" src="/downArrow.svg" />
-								)}
-							</button> */}
 						</div>
 					</ContentHeader>
 

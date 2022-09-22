@@ -37,7 +37,7 @@ const Markets: NextPage = () => {
 	const getSneaker = async () => {
 		Promise.all([
 			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=30'
+				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=28'
 			),
 			axios.get(
 				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=DZ5485-612'
@@ -173,7 +173,7 @@ const Markets: NextPage = () => {
 									tabIndex={0}
 									className="dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
@@ -183,18 +183,18 @@ const Markets: NextPage = () => {
 											Retail Price
 										</button>
 									</li>
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
 											}
-											className="font-Inter active:bg-[#ACFF00]"
+											className="font-Inter "
 										>
 											Release Date
 										</button>
 									</li>
 
-									<li>
+									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
 										<button
 											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
 											className="font-Inter active:bg-[#ACFF00]"
