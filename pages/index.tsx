@@ -38,6 +38,7 @@ const Home: NextPage = () => {
 	const [isAscending, setIsAscending] = useState(true);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 
+	//------------------ Use Effect / Use memo ------------------
 	useEffect(() => {
 		setResponse(sneakersData);
 	}, [sneakersData]);
@@ -105,9 +106,8 @@ const Home: NextPage = () => {
 			}
 		}
 	}, [sortBy, isAscending]);
+
 	return (
-		//#F5DEB3 - Vanilla
-		//#E5E5E5 - Gray
 		<div>
 			<Head>
 				<title>Xsauce</title>

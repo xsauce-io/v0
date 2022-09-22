@@ -17,26 +17,30 @@ import { Card } from '../components/cardWager';
 import { useGetMultiSneakers, useGetSneaker } from '../services/useRequests';
 
 const Markets: NextPage = () => {
+	// ------------------- Constants ---------------------
+
 	const SORT_BY_STATES = {
 		RELEASE_DATE: 'releaseDate',
 		NAME: 'name',
 		RETAIL_PRICE: 'retailPrice',
 	};
 
-	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RETAIL_PRICE });
-	const [isAscending, setIsAscending] = useState(true);
+	// -------------------- Data Fetching ------------------
+
 	const { data: s1, error: e1 } = useGetSneaker('315728-381');
 	const { data: s2, error: e2 } = useGetSneaker('AA3830-001');
 	const { data: s3, error: e3 } = useGetSneaker('AT9915-002');
 	const { data: s4, error: e4 } = useGetSneaker('555088-711');
 
-	// const { data, error, isValidating } = useGetMultiSneakers([
-	// 	'315728-381',
-	// 	'AA3830-001',
-	// 	'AT9915-002',
-	// 	'555088-711',
-	// ]);
+	// ------------------- State Variable --------------------
+
 	const [response, setResponse] = useState([] as any[]);
+	const [sortBy, setSortBy] = useState({
+		state: SORT_BY_STATES.RETAIL_PRICE,
+	});
+	const [isAscending, setIsAscending] = useState(true);
+
+	//------------------ Use Effect / Use memo ------------------
 
 	useEffect(() => {
 		setResponse([s1, s2, s3, s4]);
@@ -188,7 +192,7 @@ const Markets: NextPage = () => {
 					</ContentHeader>
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response.map((el: any) => (
+						{response?.map((el: any) => (
 							<Card cardObject={el} />
 						))}
 					</div>

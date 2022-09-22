@@ -21,23 +21,29 @@ import {
 } from '../services/useRequests';
 
 const Markets: NextPage = () => {
+	// ------------------- Constants ---------------------
+
 	const SORT_BY_STATES = {
 		RELEASE_DATE: 'releaseDate',
 		NAME: 'name',
 		RETAIL_PRICE: 'retailPrice',
 	};
 
+	// -------------------- Data Fetching ------------------
+
 	const { data: highlightSneaker, error } = useGetSneaker('DZ5485-612');
 	const { data: sneakersData, error: sneakersDataError } =
 		useGetSneakerByLimit('28');
 
-	console.log(sneakersData);
+	// ------------------- State Variable --------------------
 
 	const [response, setResponse] = useState(sneakersData);
 	const [highlight, setHighlight] = useState(highlightSneaker);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 	let [isLoading, setisLoading] = useState(true as boolean);
 	const [isAscending, setIsAscending] = useState(true);
+
+	//------------------ Use Effect / Use memo ------------------
 
 	useEffect(() => {
 		setResponse(sneakersData);
@@ -109,9 +115,6 @@ const Markets: NextPage = () => {
 	}, [sortBy, isAscending]);
 
 	return (
-		//#F5DEB3 - Vanilla
-		//#E5E5E5 - Gray
-
 		<div>
 			<Head>
 				<title>Xsauce</title>
