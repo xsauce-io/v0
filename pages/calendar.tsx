@@ -168,33 +168,33 @@ const Markets: NextPage = () => {
 								</label>
 								<ul
 									tabIndex={0}
-									className="dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
+									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
 								>
-									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
+									<li>
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
 											}
-											className="font-Inter active:bg-[#ACFF00]"
+											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Retail Price
 										</button>
 									</li>
-									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
+									<li>
 										<button
 											onClick={() =>
 												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
 											}
-											className="font-Inter "
+											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Release Date
 										</button>
 									</li>
 
-									<li className="font-Inter active:bg-[#ACFF00] p-4 rounded-3xl">
+									<li>
 										<button
 											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
-											className="font-Inter active:bg-[#ACFF00]"
+											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Name
 										</button>
