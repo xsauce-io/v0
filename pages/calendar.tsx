@@ -144,27 +144,65 @@ const Markets: NextPage = () => {
 
 					<div className="space-y-10">
 						<CalendarCard cardObject={highlight} />
-						<div className="border-[#0C1615] bg-[#DCDEE1] border-2 rounded-[80px] flex items-center p-2 px-5 space-x-2 z-10 w-fit">
-							<h5 className="text-sm font-Inter font-medium ">Filter on</h5>
+						<div className="flex flex-row space-x-3  items-center">
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-5 bg-white space-x-5 hover:opacity-50  w-[15em]"
+									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615]  hover:opacity-50  w-[12em]"
 								>
-									<img className="" src="/textBlock.svg" />
+									<img className="" src="/settingsSlider.svg" />
 
-									{sortBy.state === SORT_BY_STATES.RETAIL_PRICE ? (
-										<span className="flex-1 text-black font-Inter ">
+									<span className="flex-1 text-white font-Inter ">Sort On</span>
+
+									<img className="" src="/downArrowGrey.svg" />
+								</label>
+								<ul
+									tabIndex={0}
+									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
+								>
+									<li>
+										<button
+											onClick={() =>
+												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
+											}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
 											Retail Price
-										</span>
-									) : sortBy.state === SORT_BY_STATES.RELEASE_DATE ? (
-										<span className="flex-1 text-black font-Inter">
+										</button>
+									</li>
+									<li>
+										<button
+											onClick={() =>
+												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
+											}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
 											Release Date
-										</span>
-									) : (
-										<span className=" flex-1 text-black font-Inter ">Name</span>
-									)}
-									<img className="" src="/downArrow.svg" />
+										</button>
+									</li>
+
+									<li>
+										<button
+											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
+											Name
+										</button>
+									</li>
+								</ul>
+							</div>
+							<div className="dropdown dropdown-end ">
+								<label
+									tabIndex={0}
+									className="text-[14px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615] hover:opacity-50  w-[12em]"
+								>
+									<img className="" src="/settingsSlider.svg" />
+
+									<span className="flex-1 text-white font-Inter ">
+										Filter On
+									</span>
+
+									<img className="" src="/downArrowGrey.svg" />
 								</label>
 								<ul
 									tabIndex={0}
