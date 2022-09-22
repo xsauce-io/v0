@@ -25,81 +25,85 @@ const Markets: NextPage = () => {
 
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RETAIL_PRICE });
 	const [isAscending, setIsAscending] = useState(true);
+	const { data: s1, error: e1 } = useGetSneaker('315728-381');
+	const { data: s2, error: e2 } = useGetSneaker('AA3830-001');
+	const { data: s3, error: e3 } = useGetSneaker('AT9915-002');
+	const { data: s4, error: e4 } = useGetSneaker('555088-711');
 
-	const { data, error, isValidating } = useGetMultiSneakers([
-		'315728-381',
-		'AA3830-001',
-		'AT9915-002',
-		'555088-711',
-	]);
+	// const { data, error, isValidating } = useGetMultiSneakers([
+	// 	'315728-381',
+	// 	'AA3830-001',
+	// 	'AT9915-002',
+	// 	'555088-711',
+	// ]);
+	const [response, setResponse] = useState([] as any[]);
 
-	console.log('livemarket', data);
+	useEffect(() => {
+		setResponse([s1, s2, s3, s4]);
+	}, [s1, s2, s3, s4]);
 
-	useMemo(() => {
-		if (data) {
-			if (data.length > 0 && isAscending === true) {
-				if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-					data.sort((a: { name: string }, b: { name: string }) =>
-						a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
-					);
-					console.log({ data });
-				} else if (
-					data.length > 0 &&
-					sortBy.state === SORT_BY_STATES.RELEASE_DATE
-				) {
-					data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate > b.releaseDate
-							? 1
-							: b.releaseDate > a.releaseDate
-							? -1
-							: 0
-					);
-					console.log({ data });
-				} else if (
-					data.length > 0 &&
-					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-				) {
-					data.sort(
-						(a: { retailPrice: number }, b: { retailPrice: number }) =>
-							a.retailPrice - b.retailPrice
-					);
-					console.log({ data });
-				}
-			} else if (data.length > 0 && isAscending === false) {
-				if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-					data.sort((a: { name: string }, b: { name: string }) =>
-						a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
-					);
-					console.log({ data });
-				} else if (
-					data.length > 0 &&
-					sortBy.state === SORT_BY_STATES.RELEASE_DATE
-				) {
-					data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
-						a.releaseDate < b.releaseDate
-							? 1
-							: b.releaseDate < a.releaseDate
-							? -1
-							: 0
-					);
-					console.log({ data });
-				} else if (
-					data.length > 0 &&
-					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-				) {
-					data.sort(
-						(a: { retailPrice: number }, b: { retailPrice: number }) =>
-							b.retailPrice - a.retailPrice
-					);
-					console.log({ data });
-				}
-			}
-		}
-	}, [sortBy, isAscending]);
+	// useMemo(() => {
+	// 	if (data) {
+	// 		if (data.length > 0 && isAscending === true) {
+	// 			if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+	// 				data.sort((a: { name: string }, b: { name: string }) =>
+	// 					a.name?.toLowerCase() > b.name?.toLowerCase() ? 1 : -1
+	// 				);
+	// 				console.log({ data });
+	// 			} else if (
+	// 				data.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RELEASE_DATE
+	// 			) {
+	// 				data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
+	// 					a.releaseDate > b.releaseDate
+	// 						? 1
+	// 						: b.releaseDate > a.releaseDate
+	// 						? -1
+	// 						: 0
+	// 				);
+	// 				console.log({ data });
+	// 			} else if (
+	// 				data.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+	// 			) {
+	// 				data.sort(
+	// 					(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 						a.retailPrice - b.retailPrice
+	// 				);
+	// 				console.log({ data });
+	// 			}
+	// 		} else if (data.length > 0 && isAscending === false) {
+	// 			if (data.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+	// 				data.sort((a: { name: string }, b: { name: string }) =>
+	// 					a.name?.toLowerCase() < b.name?.toLowerCase() ? 1 : -1
+	// 				);
+	// 				console.log({ data });
+	// 			} else if (
+	// 				data.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RELEASE_DATE
+	// 			) {
+	// 				data.sort((a: { releaseDate: string }, b: { releaseDate: string }) =>
+	// 					a.releaseDate < b.releaseDate
+	// 						? 1
+	// 						: b.releaseDate < a.releaseDate
+	// 						? -1
+	// 						: 0
+	// 				);
+	// 				console.log({ data });
+	// 			} else if (
+	// 				data.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+	// 			) {
+	// 				data.sort(
+	// 					(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 						b.retailPrice - a.retailPrice
+	// 				);
+	// 				console.log({ data });
+	// 			}
+	// 		}
+	// 	}
+	// }, [sortBy, isAscending]);
 
-	if (!data) {
-		return <text>Loading</text>;
-	}
 	return (
 		<div>
 			<Head>
@@ -182,7 +186,7 @@ const Markets: NextPage = () => {
 					</ContentHeader>
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{data.map((el: any) => (
+						{response.map((el: any) => (
 							<Card cardObject={el} />
 						))}
 					</div>

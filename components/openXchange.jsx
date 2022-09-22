@@ -41,26 +41,6 @@ export const OpenXchange = () => {
 
 	//--------------------- Fetch Requests  ------------------------
 
-	// const xchange = async (e) => {
-	//   e.preventDefault();
-
-	//     const data = new FormData(e.target);
-	//     console.log(data.get("Amount"));
-	//     const provider = new ethers.providers.Web3Provider(window.ethereum);
-	//     await provider.send('eth_requestAccounts', []);
-	//     const signer = provider.getSigner();
-	//     const market = new ethers.Contract(currentMarket.address, marketabi, signer);
-	//     let signedContract = market.connect(signer);
-	//     setSignedContract(signedContract)
-	//     let position;
-	//     if (isYes === true) {
-	//       position = 1
-	//     } else { position = 2 };
-	//     console.log(position);
-	//     const order = await signedContract.xchange(BigNumber.from(position), BigNumber.from(data.get("Amount")))
-
-	// }
-
 	//--------------------- Handler  Functions ------------------------
 
 	const handleTransfer = async (e) => {

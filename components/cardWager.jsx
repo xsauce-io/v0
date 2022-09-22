@@ -6,27 +6,13 @@ import { ethers } from 'ethers';
 import marketAbi from '../abi/markets.json';
 import axios from 'axios';
 import { Router } from 'next/router';
+import { useGetMarketBySku } from '../services/useRequests';
 
 export const Card = ({ cardObject }) => {
 	console.log(cardObject);
 	const cardObjectHref = '/live-market/' + cardObject?.sku;
 
-	const getMarketbySku = async () => {
-		const req = axios.get(
-			'https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json'
-		);
-		req.then((res) => {
-			const test = res.data[3][cardObject?.sku];
-			setCurrentMarket(test);
-			const expires = new Date(test?.expiration * 1000).toLocaleDateString(
-				'en-US'
-			);
-			setExpiration(expires);
-			console.log({ testing: test });
-		});
-
-		// setCurrentMarket()
-	};
+	const { data, error } = useGetMarketBySku(cardObject?.sku);
 
 	const calculations = () => {
 		if (No < Yes) {
@@ -66,10 +52,6 @@ export const Card = ({ cardObject }) => {
 	const [expiration, setExpiration] = useState();
 
 	let [favored, setFavored] = useState();
-
-	useEffect(() => {
-		getMarketbySku();
-	}, []);
 
 	// useEffect(() => {
 	//   // ratios();
