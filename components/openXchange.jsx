@@ -41,20 +41,6 @@ export const OpenXchange = () => {
 
 	//--------------------- Fetch Requests  ------------------------
 
-	// const getMarketbySku = () => {
-	// 	const req = axios.get(
-	// 		'https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json'
-	// 	);
-	// 	req.then((res) => {
-	// 		const test = res.data[3][cardObject];
-	// 		setCurrentMarket(test);
-	// 		const expires = new Date(test?.expiration * 1000).toLocaleDateString(
-	// 			'en-US'
-	// 		);
-	// 		setExpiration(expires);
-	// 	});
-	// };
-
 	// const xchange = async (e) => {
 	//   e.preventDefault();
 
