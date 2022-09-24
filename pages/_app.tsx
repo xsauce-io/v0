@@ -1,12 +1,18 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { ToastBar, Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
 			<Component {...pageProps} />
-			<Toaster />
+
+			<Toaster
+				position="top-right"
+				gutter={14}
+				toastOptions={{ duration: 2000 }}
+				containerStyle={{ top: '104px' }}
+			/>
 		</>
 	);
 }
