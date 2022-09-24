@@ -29,7 +29,6 @@ import type {
 
 export interface MarketInterface extends utils.Interface {
   functions: {
-    "Book()": FunctionFragment;
     "NO()": FunctionFragment;
     "YES()": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
@@ -43,7 +42,7 @@ export interface MarketInterface extends utils.Interface {
     "feeCollector()": FunctionFragment;
     "fetched()": FunctionFragment;
     "getData()": FunctionFragment;
-    "initialize(uint256,address,uint256,string,address)": FunctionFragment;
+    "initialize(uint256,address,uint256,string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(uint256,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -66,7 +65,6 @@ export interface MarketInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "Book"
       | "NO"
       | "YES"
       | "balanceOf"
@@ -101,7 +99,6 @@ export interface MarketInterface extends utils.Interface {
       | "uri"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "Book", values?: undefined): string;
   encodeFunctionData(functionFragment: "NO", values?: undefined): string;
   encodeFunctionData(functionFragment: "YES", values?: undefined): string;
   encodeFunctionData(
@@ -150,7 +147,6 @@ export interface MarketInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
       PromiseOrValue<string>
     ]
   ): string;
@@ -227,7 +223,6 @@ export interface MarketInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "Book", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "NO", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "YES", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -415,8 +410,6 @@ export interface Market extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    Book(overrides?: CallOverrides): Promise<[string]>;
-
     NO(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     YES(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -473,7 +466,6 @@ export interface Market extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _sku: PromiseOrValue<string>,
-      _Book: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -559,8 +551,6 @@ export interface Market extends BaseContract {
     ): Promise<[string]>;
   };
 
-  Book(overrides?: CallOverrides): Promise<string>;
-
   NO(overrides?: CallOverrides): Promise<BigNumber>;
 
   YES(overrides?: CallOverrides): Promise<BigNumber>;
@@ -617,7 +607,6 @@ export interface Market extends BaseContract {
     _oracleFeed: PromiseOrValue<string>,
     _closingDate: PromiseOrValue<BigNumberish>,
     _sku: PromiseOrValue<string>,
-    _Book: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -703,8 +692,6 @@ export interface Market extends BaseContract {
   ): Promise<string>;
 
   callStatic: {
-    Book(overrides?: CallOverrides): Promise<string>;
-
     NO(overrides?: CallOverrides): Promise<BigNumber>;
 
     YES(overrides?: CallOverrides): Promise<BigNumber>;
@@ -757,7 +744,6 @@ export interface Market extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _sku: PromiseOrValue<string>,
-      _Book: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -904,8 +890,6 @@ export interface Market extends BaseContract {
   };
 
   estimateGas: {
-    Book(overrides?: CallOverrides): Promise<BigNumber>;
-
     NO(overrides?: CallOverrides): Promise<BigNumber>;
 
     YES(overrides?: CallOverrides): Promise<BigNumber>;
@@ -962,7 +946,6 @@ export interface Market extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _sku: PromiseOrValue<string>,
-      _Book: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1049,8 +1032,6 @@ export interface Market extends BaseContract {
   };
 
   populateTransaction: {
-    Book(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     NO(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     YES(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1107,7 +1088,6 @@ export interface Market extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       _sku: PromiseOrValue<string>,
-      _Book: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

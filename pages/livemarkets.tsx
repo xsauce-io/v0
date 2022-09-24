@@ -27,10 +27,10 @@ const Markets: NextPage = () => {
 
 	// -------------------- Data Fetching ------------------
 
-	const { data: s1, error: e1 } = useGetSneaker('315728-381');
-	const { data: s2, error: e2 } = useGetSneaker('AA3830-001');
-	const { data: s3, error: e3 } = useGetSneaker('AT9915-002');
-	const { data: s4, error: e4 } = useGetSneaker('555088-711');
+	const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
+	const { data: s2, error: e2 } = useGetSneaker('DR8869-200');
+	const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
+	const { data: s4, error: e4 } = useGetSneaker('DX2836-001');
 
 	// ------------------- State Variable --------------------
 
@@ -140,7 +140,7 @@ const Markets: NextPage = () => {
 					>
 						<div className="flex mobile:flex-col tablet:flex-row tablet:space-x-3 space-y-3   items-center ">
 							<text>
-								Total wager lives <span className="text-[#748282]">87</span>
+								Total Live Markets <span className="text-[#748282]">4</span>
 							</text>
 							<div className="dropdown dropdown-end">
 								<label

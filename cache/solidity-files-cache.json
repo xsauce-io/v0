@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/home/Desktop/xsauce.v0/v0/contracts/Market.sol": {
-      "lastModificationDate": 1663727020157,
-      "contentHash": "e7fdd2127ba7a12d1779075985a02e02",
+      "lastModificationDate": 1664039261646,
+      "contentHash": "4350b4a85760dbf9ded23bd2a2171fcf",
       "sourceName": "contracts/Market.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1258,8 +1258,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/MarketFactory.sol": {
-      "lastModificationDate": 1663775434764,
-      "contentHash": "04d1ebf62cd4285780f51120fe104c58",
+      "lastModificationDate": 1664039358137,
+      "contentHash": "2083ccd76b796b732d0b61b0ef2fb951",
       "sourceName": "contracts/MarketFactory.sol",
       "solcConfig": {
         "version": "0.8.16",
@@ -1288,7 +1288,7 @@
         "./Market.sol",
         "@openzeppelin/contracts/access/Ownable.sol",
         "./interfaces/IOracle.sol",
-        "./interfaces/IOrderBookFactory20.sol",
+        "./interfaces/IOrderBookFactory1155.sol",
         "./Token20.sol",
         "hardhat/console.sol"
       ],
@@ -1413,10 +1413,10 @@
         "IERC20Permit"
       ]
     },
-    "/Users/home/Desktop/xsauce.v0/v0/contracts/interfaces/IOrderBookFactory20.sol": {
-      "lastModificationDate": 1663775294536,
-      "contentHash": "7eaff512c174598da3167b482245ce2d",
-      "sourceName": "contracts/interfaces/IOrderBookFactory20.sol",
+    "/Users/home/Desktop/xsauce.v0/v0/contracts/interfaces/IOrderBookFactory1155.sol": {
+      "lastModificationDate": 1664038569057,
+      "contentHash": "4c1f0aeb60829c4988d79289998cb66b",
+      "sourceName": "contracts/interfaces/IOrderBookFactory1155.sol",
       "solcConfig": {
         "version": "0.8.16",
         "settings": {
@@ -1445,7 +1445,7 @@
         "^0.8.16"
       ],
       "artifacts": [
-        "IOrderBookFactory20"
+        "IOrderBookFactory1155"
       ]
     }
   }

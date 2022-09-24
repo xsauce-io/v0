@@ -28,7 +28,6 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     uint256 public closingDate;
     uint256 public priceOfNo;
     uint256 public priceOfYes;
-    address public Book;
     string public sku;
     IERC20 usdc;
 
@@ -47,8 +46,7 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         uint _predictionPrice,
         address _oracleFeed,
         uint256 _closingDate,
-        string memory _sku,
-        address _Book
+        string memory _sku
 
     ) external onlyOwner {
         // require(
@@ -60,7 +58,6 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         // unlockTime = _unlockTime;
         predictionPrice = _predictionPrice;
         sku = _sku;
-         Book = _Book;
     }
 
     function resolveAssetPrice() public onlyOwner {

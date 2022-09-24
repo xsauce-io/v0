@@ -5,29 +5,37 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import marketAbi from '../abi/markets.json';
 import axios from 'axios';
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { useGetMarketBySku } from '../services/useRequests';
 
-export const Card = ({ cardObject }) => {
+export const Card =  ({ cardObject }) => {
 	console.log(cardObject);
 	const cardObjectHref = '/live-market/' + cardObject?.sku;
 
+
+
 	const { data, error } = useGetMarketBySku(cardObject?.sku);
 
+
+
 	const calculations = () => {
+    if (data !== undefined) {
 		if (No < Yes) {
 			setFavored(true);
 		} else {
 			setFavored(false);
 		}
-	};
+    }
+};
 
 	const ratios = async () => {
-		if (currentMarket !== undefined) {
+    console.log(data)
+     if (data !== undefined && data.address !== undefined) {
+  
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			const signer = await provider.getSigner();
 			const contract = new ethers.Contract(
-				currentMarket?.address,
+				data.address,
 				marketAbi,
 				signer
 			);
@@ -43,20 +51,20 @@ export const Card = ({ cardObject }) => {
 
 			setYes(YesRatio.toFixed(0));
 			setNo(NoRatio.toFixed(0));
+      
 		}
-	};
+  }
 
 	const [No, setNo] = useState();
 	const [Yes, setYes] = useState();
-	const [currentMarket, setCurrentMarket] = useState();
-	const [expiration, setExpiration] = useState();
+ const [favored, setFavored] = useState();
 
-	let [favored, setFavored] = useState();
 
-	// useEffect(() => {
-	//   // ratios();
-	//   // calculations();
-	// }, [currentMarket]);
+	useEffect(() => {
+	  ratios();
+	  calculations();
+    
+	}, [data]);
 
 	return (
 		<Link href={cardObjectHref}>
@@ -94,7 +102,7 @@ export const Card = ({ cardObject }) => {
 							<div className="h-full">
 								<div className="px-8  ">
 									<h1 className="text-2xl font-normal text-white h-[22%] w-full line-clamp-2 font-SG  ">
-										{cardObject.name}
+										{data?.name}
 									</h1>
 									<h2 className=" text-lg font-light text-left w-full text-white py-4 font-Inter">
 										Retail Price &ensp; &ensp; &ensp; ${cardObject.retailPrice}
@@ -104,7 +112,7 @@ export const Card = ({ cardObject }) => {
 								<div className="px-8 ">
 									<div className="flex flex-col w-full py-4 space-y-3 font-light">
 										<h1 className="text-[14px] text-white font-inter ">
-											Will the price be over {currentMarket?.prediction}?
+											Will the price be over {data?.prediction}?
 										</h1>
 
 										<div className="space-y-3">
@@ -141,7 +149,7 @@ export const Card = ({ cardObject }) => {
 
 										<div className="w-full">
 											<h2 className="text-[14px] text-[#748282] font-Inter">
-												This wager expires {expiration}
+												This wager expires {data?.expiration}
 											</h2>
 										</div>
 									</div>
