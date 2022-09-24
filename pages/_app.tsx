@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 			<Toaster
 				position="top-right"
-				gutter={14}
+				gutter={0}
 				toastOptions={{ duration: 2000 }}
 				containerStyle={{ top: '104px' }}
 			/>

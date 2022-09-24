@@ -4,8 +4,18 @@ import { ToastNotification } from '../components/toast';
 import { ToastNotificationActionBar } from '../components/toastActionBar';
 
 import { useWindowDimensions } from '../utils/hooks/useWindowDimensionsTS';
-
+const screens = {
+	mobile: '300',
+	tablet: '640',
+	smlaptop: '1024',
+	laptop: '1200',
+	desktop: '1400',
+};
 const Testing: NextPage = () => {
+	const windowDimensions = useWindowDimensions();
+	const width = windowDimensions?.width;
+	const height = windowDimensions?.height;
+
 	const notify = () =>
 		toast.custom((t) => (
 			<ToastNotificationActionBar
@@ -55,15 +65,10 @@ const Testing: NextPage = () => {
 			/>
 		));
 
-	const windowDimensions = useWindowDimensions();
-	const width = windowDimensions?.width;
-	const height = windowDimensions?.height;
 	return (
 		//#F5DEB3 - Vanilla
 		//#E5E5E5 - Gray
-		<div className="w-full h-full flex flex-col justify-center items-center ">
-			<div className="p-4 text-black"> {width}</div>
-			<div className="p-4 text-black"> {height}</div>
+		<div className="w-full h-full flex flex-col justify-center items-center space-y-5 ">
 			<button className="p-4 text-black border-2" onClick={notify}>
 				Make me a extented toast
 			</button>
