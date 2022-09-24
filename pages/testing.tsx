@@ -1,3 +1,4 @@
+import { duration } from '@mui/material';
 import type { NextPage } from 'next';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/toast';
@@ -66,8 +67,6 @@ const Testing: NextPage = () => {
 		));
 
 	return (
-		//#F5DEB3 - Vanilla
-		//#E5E5E5 - Gray
 		<div className="w-full h-full flex flex-col justify-center items-center space-y-5 ">
 			<button className="p-4 text-black border-2" onClick={notify}>
 				Make me a extented toast
