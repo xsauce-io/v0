@@ -18,53 +18,65 @@ const Testing: NextPage = () => {
 	const height = windowDimensions?.height;
 
 	const notify = () =>
-		toast.custom((t) => (
-			<ToastNotificationActionBar
-				message={'You have made this wager for this shoe in a successful way'}
-				subMessage={
-					'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.'
-				}
-				icon={<img src="/checkCircle.svg" />}
-				t={t}
-				onClick={() => alert('view changes')}
-			/>
-		));
+		toast.custom(
+			(t) => (
+				<ToastNotificationActionBar
+					message={'You have made this wager for this shoe in a successful way'}
+					subMessage={
+						'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.'
+					}
+					icon={<img src="/checkCircle.svg" />}
+					t={t}
+					onClick={() => alert('view changes')}
+				/>
+			),
+			{ duration: 2000 }
+		);
 
 	const notifyTwo = () =>
-		toast.custom((t) => (
-			<ToastNotification
-				message={'You have made this wager for this shoe in a successful way'}
-				subMessage={
-					'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.'
-				}
-				icon={<img src="/checkCircle.svg" />}
-				t={t}
-			/>
-		));
+		toast.custom(
+			(t) => (
+				<ToastNotification
+					message={'You have made this wager for this shoe in a successful way'}
+					subMessage={
+						'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.'
+					}
+					icon={<img src="/checkCircle.svg" />}
+					t={t}
+				/>
+			),
+			{ duration: 2000 }
+		);
 
 	const notifyError = () =>
-		toast.custom((t) => (
-			<ToastNotification
-				message={'You broke our entire application man, why did you do this?'}
-				subMessage={
-					'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.'
-				}
-				icon={<img src="/alertCircle.svg" />}
-				t={t}
-			/>
-		));
+		toast.custom(
+			(t) => (
+				<ToastNotification
+					message={'You broke our entire application man, why did you do this?'}
+					subMessage={
+						'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.'
+					}
+					icon={<img src="/alertCircle.svg" />}
+					t={t}
+				/>
+			),
+			{ duration: 2000 }
+		);
 
 	const notifyWarning = () =>
-		toast.custom((t) => (
-			<ToastNotification
-				message={'What you did didn’t make any sense buddy, go and fix it'}
-				subMessage={
-					'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.'
-				}
-				icon={<img src="/alertTriangle.svg" />}
-				t={t}
-			/>
-		));
+		toast.custom(
+			(t) => (
+				<ToastNotification
+					message={'What you did didn’t make any sense buddy, go and fix it'}
+					subMessage={
+						'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid pariatur, ipsum similique veniam.'
+					}
+					icon={<img src="/alertTriangle.svg" />}
+					t={t}
+				/>
+			),
+			{ duration: 2000 }
+		);
 
 	return (
 		<div className="w-full h-full flex flex-col justify-center items-center space-y-5 ">
