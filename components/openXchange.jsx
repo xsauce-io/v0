@@ -1,28 +1,20 @@
 import React from 'react';
 import { BigNumber, ethers, utils } from 'ethers';
-import erc1155abi from '../abi/erc1155.json';
-import marketabi from '../abi/markets.json';
 import { useState, useEffect } from 'react';
-
+import individualBook from "../abi/book.json"
+import marketabi from "../abi/markets.json"
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import {
-	Token1,
-	Token2,
-	market1OrderBook,
-	Mockaddress,
-} from '../services/constants';
 import { useRouter } from 'next/router';
 import { useGetMarketBySku } from '../services/useRequests';
+import { $tableAddress } from '../services/constants';
 
-export const OpenXchange = () => {
+export const OpenXchange = (cardObject) => {
 	// ----------------------- Variables and State Variable ------------------------
 
 	const router = useRouter();
 	const { sku } = router.query;
-
-	const { data, error } = useGetMarketBySku(sku);
 
 	const [alignment, setAlignment] = useState();
 	const [isYes, setIsYes] = useState();
@@ -33,53 +25,34 @@ export const OpenXchange = () => {
 	const [isBuy, setIsBuy] = useState();
 	const [currentQuote, setCurrentQuote] = useState();
 	const [orderBookAbi, setOrderBookAbi] = useState(null);
-	const [orderBookAddress, setOrderBookAddress] = useState(null);
 	const [signedContract, setSignedContract] = useState(null);
-	const [tokenA, setTokenA] = useState(null);
-	const [currentMarket, setCurrentMarket] = useState(data);
+	const [currentMarket, setCurrentMarket] = useState();
 	const [expiration, setExpiration] = useState();
 
 	//--------------------- Fetch Requests  ------------------------
 
+  const { data, error } = useGetMarketBySku(sku);
+
 	//--------------------- Handler  Functions ------------------------
 
-	const handleTransfer = async (e) => {
-		e.preventDefault();
-		const data = new FormData(e.target);
-		console.log(data.get('Amount') * data.get('LimitPrice'));
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		await provider.send('eth_requestAccounts', []);
-		const signer = await provider.getSigner();
-		const orderBook = new ethers.Contract(
-			market1OrderBook,
-			orderBookAbi,
-			signer
-		);
-		let signedContract = orderBook.connect(signer);
-		setSignedContract(signedContract);
-		let fromToken;
-		if (isBuy === true) {
-			fromToken = Token1;
-		} else {
-			fromToken = Token2;
-		}
-		console.log(fromToken);
-		const order = await signedContract.limitOrder(
-			fromToken,
-			ethers.utils.parseUnits('200', 18),
-			ethers.utils.parseUnits('500', 18),
-			ethers.utils.parseUnits('5', 18),
+  const limitOrder = async (e) => {
+    e.preventDefault();
+      const dataForm = new FormData(e.target);
+      console.log(dataForm.get("Amount"));
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send('eth_requestAccounts', []);
+      const signer = provider.getSigner();
+      const market = new ethers.Contract(data.book, individualBook, signer);
+      let signedContract = market.connect(signer);
+      setSignedContract(signedContract)
+      let position;
+      if (isYes === true) {
+        position = 1
+      } else { position = 2 };
+      console.log(position);
+      await signedContract.limitOrder(data.address, BigNumber.from(position), ethers.utils.parseUnits(dataForm.get("Amount").toString(), 18), ethers.utils.parseUnits((dataForm.get("Amount") * dataForm.get("LimitPrice")).toString(), 18), ethers.utils.parseUnits(dataForm.get("LimitPrice").toString(), 18),false, false)
 
-			//data.get("LimitPrice")
-
-			// ethers.utils.parseUnits(data.get("Amount"))
-			// data.get("LimitPrice") * data.get("Amount")
-			// makerOnly
-			false,
-			// takerOnly
-			false
-		);
-	};
+  }
 
 	const quote = async (e) => {
 		e.preventDefault();
@@ -88,17 +61,17 @@ export const OpenXchange = () => {
 		await provider.send('eth_requestAccounts', []);
 		const signer = provider.getSigner();
 		const orderBook = new ethers.Contract(
-			market1OrderBook,
-			orderBookAbi,
+			data.book,
+			individualBook,
 			signer
 		);
 		signedContract = orderBook.connect(signer);
 		setSignedContract(signedContract);
 		let fromToken;
 		if (isBuy === true) {
-			fromToken = Token1;
+			fromToken = data.address;
 		} else {
-			fromToken = Token2;
+			fromToken = $tableAddress;
 		}
 		const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
 		setCurrentQuote((LowestAsk / 10 ** 18).toString());
@@ -124,38 +97,38 @@ export const OpenXchange = () => {
 	// 		});
 	// };
 
-	// const ratios = async () => {
-	//     if (currentMarket !== undefined) {
-	//         const provider = new ethers.providers.Web3Provider(window.ethereum);
-	//         const signer = await provider.getSigner();
-	//         const contract = new ethers.Contract(currentMarket?.address, marketabi, signer);
-	//         const getYes = await contract.totalSupply(
-	//             1
-	//         )
-	//         const getNo = await contract.totalSupply(
-	//             2
-	//         )
+	const ratios = async () => {
+	    if (cardObject !== undefined) {
+	        const provider = new ethers.providers.Web3Provider(window.ethereum);
+	        const signer = provider.getSigner();
+	        const contract = new ethers.Contract(currentMarket?.address, marketabi, signer);
+	        const getYes = await contract.totalSupply(
+	            1
+	        )
+	        const getNo = await contract.totalSupply(
+	            2
+	        )
 
-	//         let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-	//         let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-	//         console.log(YesRatio)
+	        let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+	        let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
+	        console.log(YesRatio)
 
-	//         setYes(YesRatio.toFixed(0))
-	//         setNo(NoRatio.toFixed(0))
+	        setYes(YesRatio.toFixed(0))
+	        setNo(NoRatio.toFixed(0))
 
-	//     }
-	// }
+	    }
+	}
 
 	// --------------------- useEffects ---------------------------
 	useEffect(() => {
-		// ratios();
+		ratios();
 		// calculations();
 	}, [currentMarket]);
 
-	// useEffect(() => {
-	// 	if (!router.isReady) return;
-	// 	//getMarketbySku();
-	// }, [router.isReady]);
+  useEffect(() => {
+		setCurrentMarket(data);
+	}, [data]);
+
 
 	useEffect(() => {
 		if (isYes === true) {
@@ -173,7 +146,7 @@ export const OpenXchange = () => {
 		}
 	}, [isBuy]);
 
-	if (!data) return <div>loading...</div>;
+
 
 	return (
 		<div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
@@ -189,7 +162,7 @@ export const OpenXchange = () => {
 				</flex>
 			</div>
 			<form
-				onSubmit={handleTransfer}
+				onSubmit={limitOrder}
 				className="flex flex-col justify-center items-center mobile:w-full laptop:w-full"
 			>
 				<div className="bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full ">
@@ -232,54 +205,11 @@ export const OpenXchange = () => {
 							</li>
 						</ul>
 					</div>
-
-					<div className="bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex">
-						<p className="text-left text-sm ">Buy or Sell</p>
-						<div class="flex-1"></div>
-						<div class="dropdown dropdown-end ">
-							<label tabindex="0" class="flex items-center">
-								{isBuy === true ? (
-									<>
-										<span className="text-black">Buy</span>
-									</>
-								) : (
-									<>
-										<span className="text-black">Sell</span>
-									</>
-								)}
-							</label>
-							<ul
-								tabindex="0"
-								class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box  mt-4"
-							>
-								<li>
-									<a
-										className="active:bg-[#ACFF00]"
-										onClick={() => {
-											setIsBuy(true);
-										}}
-									>
-										Buy
-									</a>
-								</li>
-								<li>
-									<a
-										className="active:bg-[#ACFF00]"
-										onClick={() => {
-											setIsBuy(false);
-										}}
-									>
-										Sell
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
 				</div>
 
 				<div className="bg-white items-center text-left border-b-[1px] p-4 space-y-4 border-[#0C1615] w-full ">
 					<div className="bg-white items-center p-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2  hover:outline-1">
-						<p className="text-left text-sm pr-1 ">Limit Price: {data?.name}</p>
+						<p className="text-left text-sm pr-1 ">Limit Price:</p>
 						<input
 							className="flex-1 text-right mobile:text-sm laptop:text-md appearance-none focus:none focus:outline-none "
 							name="LimitPrice"

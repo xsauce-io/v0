@@ -12,16 +12,15 @@ import { ActionCard } from '../../../components/actionCard';
 import { Header } from '../../../components/header';
 import { Footer } from '../../../components/footer';
 import { useGetSneaker } from '../../../services/useRequests';
+import BookFactoryABI from "../../../abi/bookFactory.json"
 import {
-	Token1,
-	Token2,
-	OrderBookGit,
+	$tableAddress,
 	OrderBookAddressGit,
 } from '../../../services/constants';
 
 declare var window: any;
 
-const LiveMarket: NextPage = (cardObject) => {
+const LiveMarket: NextPage = () => {
 	const router = useRouter();
 	const { sku } = router.query;
 
@@ -44,73 +43,33 @@ const LiveMarket: NextPage = (cardObject) => {
 		}
 	};
 
-	const market1Add = '0x44A5cE34F2997091De32F1eC7f552c3FC175869d';
 
-	const [OrderBookAbi, setOrderBookAbi] = useState([] as any);
-	const [OrderBookFactoryAddress, setOrderBookFactoryAddress] = useState(
-		'' as any
-	);
-	const grabData = async () => {
-		const requestOrderBookAbi = axios.get(OrderBookGit);
-		const requestOrderBookAddress = axios.get(OrderBookAddressGit);
-		axios
-			.all([requestOrderBookAbi, requestOrderBookAddress])
-			.then(
-				axios.spread((...responses) => {
-					const OrderBookInfo = responses[0].data;
-					setOrderBookAbi(OrderBookInfo);
-					const OrderBookFactoryAddress =
-						responses[1].data[4].OrderBookFactory20.address;
-					setOrderBookFactoryAddress(OrderBookFactoryAddress);
-				})
-			)
-			.catch((errors) => {
-				console.log(errors);
-			});
-	};
-	const createNewBook = async (e: any) => {
-		e.preventDefault();
-		const data = new FormData(e.target);
-		const Toke2 = data.get('Token2');
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		await provider.send('eth_requestAccounts', []);
-		const signer = provider.getSigner();
-		const OrderBookFactory = new ethers.Contract(
-			OrderBookFactoryAddress,
-			OrderBookAbi,
-			signer
-		);
-		const NewBook = await OrderBookFactory.createBook(Token1, Toke2, 100);
-		await NewBook.wait(1);
 
-		console.log(NewBook);
-	};
+	
+	// const createNewBook = async (e: any) => {
+	// 	e.preventDefault();
+	// 	const data = new FormData(e.target);
+	// 	const Toke2 = data.get('Token2');
+	// 	const provider = new ethers.providers.Web3Provider(window.ethereum);
+	// 	await provider.send('eth_requestAccounts', []);
+	// 	const signer = provider.getSigner();
+	// 	const OrderBookFactory = new ethers.Contract(
+	// 		OrderBookFactoryAddress,
+	// 		OrderBookAbi,
+	// 		signer
+	// 	);
+	// 	const NewBook = await OrderBookFactory.createBook(Token1, Toke2, 100);
+	// 	await NewBook.wait(1);
 
-	const getBookInfo = async (e: any) => {
-		e.preventDefault();
-		const data = new FormData(e.target);
-		const Toke2 = data.get('Token2');
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		await provider.send('eth_requestAccounts', []);
-		const signer = provider.getSigner();
-		const OrderBookFactory = new ethers.Contract(
-			OrderBookFactoryAddress,
-			OrderBookAbi,
-			signer
-		);
-		const NewBook = await OrderBookFactory.getBook(Token1, Token2, 100);
+	// 	console.log(NewBook);
+	// };
 
-		console.log(NewBook);
-
-		// const newMarket = await create.allMarkets(-1);
-
-		// alert(`market created at ${newMarket}!`)
-	};
+	useEffect(() => {
+		setResponse(data);
+	}, [data]);
 
 	useEffect(() => {
 		if (!router.isReady) return;
-		//getSneaker();
-		grabData();
 		adminCheck();
 	}, [router.isReady]);
 
@@ -153,8 +112,8 @@ const LiveMarket: NextPage = (cardObject) => {
 
 						<p>GO BACK</p>
 					</button>
-					{admin === true ? (
-						<form onSubmit={getBookInfo} className="space-x-2 ml-4">
+					{/* {admin === true ? (
+						<form  className="space-x-2 ml-4">
 							<input
 								className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
 								name="Token2"
@@ -171,7 +130,7 @@ const LiveMarket: NextPage = (cardObject) => {
 						</form>
 					) : (
 						<></>
-					)}
+					)} */}
 
 					<div className="tablet:flex flex-row items-center tablet:space-x-4">
 						<div className="flex-1">
@@ -179,7 +138,7 @@ const LiveMarket: NextPage = (cardObject) => {
 						</div>
 						<div className="self-start mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-28 space-y-4">
 							<ActionCard />
-							<Xchange cardObject={sku} />
+							<Xchange cardObject={response} />
 						</div>
 					</div>
 				</div>

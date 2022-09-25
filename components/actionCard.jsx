@@ -207,9 +207,7 @@ export const ActionCard = () => {
 		setCurrentMarket(data);
 	}, [data]);
 
-	useEffect(() => {
-		if (!router.isReady) return;
-	}, [router.isReady]);
+
 
 	useEffect(() => {
 		ratios();
@@ -328,7 +326,7 @@ export const ActionCard = () => {
 						id="mint"
 						className="w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60"
 					>
-						Mint
+						Buy
 					</button>
 				</div>
 

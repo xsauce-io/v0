@@ -1,64 +1,36 @@
 import React from "react"
 import { BigNumber, ethers, utils } from 'ethers'
-import erc1155abi from '../abi/erc1155.json';
 import marketabi from '../abi/markets.json';
 import { useState, useEffect } from "react";
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import ToggleButton from '@mui/material/ToggleButton';
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
-import InfoIcon from '@mui/icons-material/Info';
+
 import { useToast } from '@chakra-ui/react';
 import classNames from 'classnames';
-import {HouseXchange} from '../components/houseXchange'
 import {OpenXchange} from '../components/openXchange'
+import { useGetSneaker } from '../services/useRequests';
+import BookFactoryABI from "../abi/bookFactory.json"
+import {
+	$tableAddress,
+	OrderBookAddressGit,
+
+} from '../services/constants';
 
 
 
 export const Xchange = ({ cardObject }) => {
     const toast = useToast();
 
+    const { data, error } = useGetSneaker(cardObject?.sku);
+
     const [orderBookType, setOrderBookType] = useState('house');
 
     const erc20Git = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/ERC20.json'
     const OrderBookGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/abis/OrderBook20.json'
     const OrderBookAddressGit = 'https://raw.githubusercontent.com/poolsharks-protocol/orderbook-metadata/main/deployments.json'
-    const Token1 = "0x0163f21F8AcB86564491676C21Ca235cb9ddbFcD"
-    const Token2 = "0xEAAC1924EDC605928C106C74932387d37B2387Aa"
-    const market1OrderBook = "0x632f332B9B212A6462717ad34CBBB61a55dcBe69";
 
-    const getMarketbySku = () => {
-        const req = axios.get('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json');
-        req.then(res => {
-            const test = res.data[3][cardObject]
-            setCurrentMarket(test)
-            const expires = (new Date((test?.expiration) * 1000)).toLocaleDateString("en-US")
-            setExpiration(expires)
 
-        })
-    }
 
-    const xchange = async (e) => {
-      e.preventDefault();
-      
-        
-        const data = new FormData(e.target);
-        console.log(data.get("Amount"));
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send('eth_requestAccounts', []);
-        const signer = provider.getSigner();
-        const market = new ethers.Contract(currentMarket.address, marketabi, signer);
-        let signedContract = market.connect(signer);
-        setSignedContract(signedContract)
-        let position;
-        if (isYes === true) {
-          position = 1
-        } else { position = 2 };
-        console.log(position);
-        const order = await signedContract.xchange(BigNumber.from(position), BigNumber.from(data.get("Amount")))
-
-    }
 
 
     const handleTransfer = async (e) => {
@@ -96,26 +68,7 @@ export const Xchange = ({ cardObject }) => {
 
 
 
-    const quote = async (e) => {
-        e.preventDefault();
-        // const data = new FormData(e.target);
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send('eth_requestAccounts', []);
-        const signer = provider.getSigner();
-        const orderBook = new ethers.Contract(market1OrderBook, orderBookAbi, signer);
-        signedContract = orderBook.connect(signer);
-        setSignedContract(signedContract)
-        let fromToken;
-        if (isBuy === true) {
-            fromToken = Token1;
-        } else { fromToken = Token2 }
-        const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
-        setCurrentQuote((LowestAsk / (10 ** 18)).toString());
-
-
-        console.log((LowestAsk / (10 ** 18)).toString())
-    }
-
+    
 
     const requestOrderBook = axios.get(OrderBookGit);
     const requestOrderBookAddress = axios.get(OrderBookAddressGit);
@@ -208,7 +161,6 @@ export const Xchange = ({ cardObject }) => {
 
     useEffect(() => {
         grabData();
-        getMarketbySku();
     }, []);
 
 
@@ -255,7 +207,7 @@ export const Xchange = ({ cardObject }) => {
                     {/* { orderBookType === 'house' ?
 
                     <HouseXchange cardObject={cardObject}/> : */}
-                    <OpenXchange />
+                    <OpenXchange cardObject={cardObject} />
 
     
 </div>

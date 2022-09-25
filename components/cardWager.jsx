@@ -13,7 +13,6 @@ export const Card =  ({ cardObject }) => {
 	const cardObjectHref = '/live-market/' + cardObject?.sku;
 
 
-
 	const { data, error } = useGetMarketBySku(cardObject?.sku);
 
 

@@ -94,9 +94,7 @@ const fetcherMultiCalls = (skus, arrayUrl) => {
 
 export const useGetSneaker = (sku) => {
 	const urlWithSku = urlBySku + sku;
-
-	const { data, error } = useSWR(urlWithSku, fetcherFirstResult);
-
+  const { data, error } = useSWR(urlWithSku, fetcherFirstResult);
 	console.log('useRequest', data);
 	return { data, error };
 };
@@ -142,5 +140,5 @@ export const useGetMarketBySku = (sku) => {
 	return { data, error };
 };
 
-export const requestOrderBook = () => axios.get(OrderBookGit);
-export const requestOrderBookAddress = () => axios.get(OrderBookAddressGit);
+export const requestOrderBook = async () => axios.get(OrderBookGit);
+export const requestOrderBookAddress = async () => axios.get(OrderBookAddressGit);
