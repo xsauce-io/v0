@@ -98,7 +98,7 @@ export const OpenXchange = (cardObject) => {
 	// };
 
 	const ratios = async () => {
-	    if (cardObject !== undefined) {
+	    if (currentMarket !== undefined) {
 	        const provider = new ethers.providers.Web3Provider(window.ethereum);
 	        const signer = provider.getSigner();
 	        const contract = new ethers.Contract(currentMarket?.address, marketabi, signer);
