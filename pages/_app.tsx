@@ -25,12 +25,12 @@ export const event = (event_name: string, props: any) => {
 function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
 
-	//HotJar setup
-	const HJID = 3172590;
-	const HJSV = 6;
-	useEffect(() => {
-		hotjar.initialize(HJID, HJSV);
-	}, []);
+	// //HotJar setup
+	// const HJID = 3172590;
+	// const HJSV = 6;
+	// useEffect(() => {
+	// 	hotjar.initialize(HJID, HJSV);
+	// }, []);
 
 	//Mix Panel setup
 	useEffect(() => {
@@ -60,10 +60,29 @@ function MyApp({ Component, pageProps }: AppProps) {
             for(h=0;h<i.length;h++)g(a,i[h]);var j="set set_once union unset remove delete".split(" ");a.get_group=function(){function b(c){d[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));a.push([e,call2])}}for(var d={},e=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<j.length;c++)b(j[c]);return d};b._i.push([e,f,c])};b.__SV=1.2;e=f.createElement("script");e.type="text/javascript";e.async=!0;e.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?
             MIXPANEL_CUSTOM_LIB_URL:"file:"===f.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\\/\\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";g=f.getElementsByTagName("script")[0];g.parentNode.insertBefore(e,g)}})(document,window.mixpanel||[]);
             mixpanel.init('6932a1740fbe2e1b17edefc3fc297840', {debug: true});
-            // mixpanel.track('Sign up');
-  `,
+             mixpanel.track('Sign up');
+			 `,
 					}}
 				/>
+
+				//<!-- Hotjar Tracking Code for -->
+
+				<Script 
+
+				strategy="afterInteractive"
+					dangerouslySetInnerHTML={{
+						__html: `
+
+(function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+h._hjSettings={hjid:3172590,hjsv:6};
+a=o.getElementsByTagName('head')[0];
+r=o.createElement('script');r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+a.appendChild(r);
+})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+						`,
+					}}
+				/>
+
 			)}
 			<Component {...pageProps} />
 

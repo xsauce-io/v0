@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import React from 'react';
+import Script from 'next/script';
 import { DashboardTable } from '../components/dashboardTable';
 
 // Here we have used react-icons package for the icons
@@ -106,7 +107,7 @@ const Home: NextPage = () => {
 			}
 		}
 	}, [sortBy, isAscending]);
-
+	
 	return (
 		<div>
 			<Head>

@@ -10,6 +10,7 @@ import { Skeleton } from '@mui/material';
 import { Tabs } from '../components/tabs';
 import { Layout } from '../components/layout';
 import { ContentHeader } from '../components/contentHeader';
+import Script from 'next/script';
 
 import { ethers, utils } from 'ethers';
 
@@ -113,6 +114,8 @@ const Markets: NextPage = () => {
 		}
 	}, [sortBy, isAscending]);
 
+	
+
 	return (
 		<div>
 			<Head>
@@ -125,6 +128,14 @@ const Markets: NextPage = () => {
 					rel="stylesheet"
 				/>
 			</Head>
+			<Script
+					strategy="afterInteractive"
+					dangerouslySetInnerHTML={{
+						__html: `
+             mixpanel.track('Sign out');
+			 `,
+					}}
+				/>
 
 			<Layout
 				headerSubtitle={'LIVE DERIVATIVES MARKET'}
