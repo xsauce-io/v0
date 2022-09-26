@@ -52,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<title>Xsauce</title>
 			</Head>
 			{typeof window != 'undefined' && !(window as any).mixpanel && (
+				//<!-- Mixpanel Tracking Code for -->
 				<Script
 					strategy="afterInteractive"
 					dangerouslySetInnerHTML={{
@@ -64,11 +65,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 			 `,
 					}}
 				/>
-
-				//<!-- Hotjar Tracking Code for -->
 			)}
 
 			<Script
+				//<!-- Hotjar Tracking Code for -->
 				strategy="afterInteractive"
 				dangerouslySetInnerHTML={{
 					__html: `
@@ -79,6 +79,19 @@ a=o.getElementsByTagName('head')[0];
 r=o.createElement('script');r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
 a.appendChild(r);
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+						`,
+				}}
+			/>
+			<Script
+				src="https://www.googletagmanager.com/gtag/js?id=G-PB1DF7QVNM"
+				strategy="afterInteractive"
+			/>
+
+			<Script
+				strategy="afterInteractive"
+				dangerouslySetInnerHTML={{
+					__html: `
+window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PB1DF7QVNM');
 						`,
 				}}
 			/>
