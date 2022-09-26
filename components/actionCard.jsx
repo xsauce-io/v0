@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import { ToastNotification } from '../components/toast';
+import { ToastNotificationActionBar } from '../components/toastActionBar';
 import alertCircle from '../public/alertCircle.svg'
 import { useRouter } from 'next/router';
 import {
@@ -17,6 +17,8 @@ import {
 	OrderBookGit,
 } from '../services/constants';
 import { useGetMarketBySku } from '../services/useRequests';
+import toast from 'react-hot-toast';
+import { ToastNotification } from './toast';
 
 export const ActionCard = () => {
 	// -------------------------- router ----------------------
@@ -72,17 +74,18 @@ export const ActionCard = () => {
 		if (isSet == true) {
 			return;
 		}
-
+   
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		const address = (await provider.send('eth_requestAccounts', [])).toString();
 		const signer = provider.getSigner();
 		const $table = new ethers.Contract($tableAddress, $tableABI, signer);
-		console.log(address);
 		const allowance = await $table.allowance(address, currentMarket.address);
 
-try {
+
 		if (allowance > 100000 * (10 ** 18)) {
 		} else {
+
+      try {
 			const approvedAmount = BigNumber.from('2')
 				.pow(BigNumber.from('256'))
 				.sub('1');
@@ -90,25 +93,36 @@ try {
 			await $table.approve(
 				currentMarket.address,
 				BigNumber.from(approvedAmount)
-			);
-		}
-  }
-  catch (error) {
-    console.log(error.code)
-    if (error.code === "ACTION_REJECTED") {
-    <ToastNotification icon={alertCircle} subMessage="If you did this by mistake, please go back to live markets and try again" message="You rejected the transaction" t={1}/>
-    }
-  }
+			)}
+      catch (error) {
+    if (error.code == "ACTION_REJECTED") {
+    toast.custom(
+			(t) => (
+				<ToastNotification
+					message={"You rejected the transaction"}
+					subMessage={
+						"If you did this by mistake, please go back to live markets and try again"
+					}
+					icon={<img src="/checkCircle.svg" />}
+					t={t}
+				/>
+			),
+			{ duration: 4000 }
+		);
+  } else {console.log(error.code)}
+};
+}
   
 	};
 
 	const mint = async (e) => {
 		e.preventDefault();
+    let mintedAmount;
 
     try {
 
 		const data = new FormData(e.target);
-		console.log(data.get('Amount'));
+		mintedAmount = data.get('Amount');
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		await provider.send('eth_requestAccounts', []);
 		const signer = provider.getSigner();
@@ -125,14 +139,75 @@ try {
 		} else {
 			position = 2;
 		}
-		console.log(position);
+		
 		const order = await signedContract.mint(
 			BigNumber.from(position),
 			BigNumber.from(data.get('Amount'))
 		);
-	}  catch (error) {
-      console.log(error)
+
+    order.then(()=> {let positionMinted;
+      if (isYes === true) { positionMinted = "Yes"}
+      else {positionMinted = "No"}
+      toast.custom(
+        (t) => (
+          <ToastNotification
+            message={"Transaction Successful"}
+            subMessage={
+              `You bought ${mintedAmount} ${positionMinted} tokens`
+            }
+            icon={<img src="/checkCircle.svg" />}
+            t={t}
+          />
+        ),
+        { duration: 7000 }
+      )})
+	} 
+    catch (error) {
+      if (error.code == "ACTION_REJECTED") {
+      toast.custom(
+        (t) => (
+          <ToastNotification
+            message={"You rejected the transaction"}
+            subMessage={
+              "If you did this by mistake, please go back to live markets and try again"
+            }
+            icon={<img src="/alertTriangle.svg" />}
+            t={t}
+          />
+        ),
+        { duration: 7000 }
+      );
+    } else if(error.reason == "execution reverted: ERC20: insufficient allowance") {
+     
+      toast.custom(
+        (t) => (
+          <ToastNotification
+            message={"Transaction Failed"}
+            subMessage={
+              "You have not approved our contract to interact with your wallet. please make sure you are connected to the right network and try again"
+            }
+            icon={<img src="/alertCircle.svg" />}
+            t={t}
+          />
+        ),
+        { duration: 7000 }
+      )
+    } else {
+      toast.custom(
+      (t) => (
+        <ToastNotification
+          message={"Transaction Failed"}
+          subMessage={
+            "Something went wrong, please make sure you are connected to the right network and try again"
+          }
+          icon={<img src="/alertCircle.svg" />}
+          t={t}
+        />
+      ),
+      { duration: 7000 }
+    )}
   }
+ 
 }
 
 	

@@ -2,6 +2,7 @@ import React from 'react';
 import { BigNumber, ethers, utils } from 'ethers';
 import { useState, useEffect } from 'react';
 import individualBook from "../abi/book.json"
+import allBooks from "../abi/bookFactory.json"
 import marketabi from "../abi/markets.json"
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
@@ -50,16 +51,32 @@ export const OpenXchange = (cardObject) => {
       if (isYes === true) {
         position = 1
       } else { position = 2 };
-      console.log(position);
-      await signedContract.limitOrder(data.address, BigNumber.from(position), ethers.utils.parseUnits(dataForm.get("Amount").toString(), 18), ethers.utils.parseUnits((dataForm.get("Amount") * dataForm.get("LimitPrice")).toString(), 18), ethers.utils.parseUnits(dataForm.get("LimitPrice").toString(), 18),false, false)
+     let token1;
+      if (isBuy === false) {
+        token1 = data.address
+      } else {token1 = $tableAddress}
+      await signedContract.limitOrder(token1, BigNumber.from(position), ethers.utils.parseUnits(dataForm.get("Amount").toString(), 18), ethers.utils.parseUnits((dataForm.get("Amount") * dataForm.get("LimitPrice")).toString(), 18), ethers.utils.parseUnits(dataForm.get("LimitPrice").toString(), 18),false, false)
 
     } catch (error) {
       console.log(error)
   }
 }
 
-	const quote = async (e) => {
-		e.preventDefault();
+
+const getBookFunct = async () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+		await provider.send('eth_requestAccounts', []);
+		const signer = provider.getSigner();
+		const getBook = new ethers.Contract(
+			"0x13E9c4821F85B1F17b90CD8D70169413eB5caceB",
+			allBooks,
+			signer
+		);
+    const bookInfo = await getBook.getBook(data.address,1, $tableAddress,100)
+    console.log(bookInfo)
+}
+
+	const quote = async () => {
 		try {
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		await provider.send('eth_requestAccounts', []);
@@ -71,12 +88,13 @@ export const OpenXchange = (cardObject) => {
 		);
 		signedContract = orderBook.connect(signer);
 		setSignedContract(signedContract);
+    
 		let fromToken;
-		if (isBuy === true) {
-			fromToken = data.address;
-		} else {
+		if ((isBuy === true && isYes === true) || (isBuy === true && isYes === false)) {
 			fromToken = $tableAddress;
-		}
+     } else {
+    fromToken = data.address
+  }
 		const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
 		setCurrentQuote((LowestAsk / 10 ** 18).toString());
 
@@ -86,23 +104,34 @@ export const OpenXchange = (cardObject) => {
   }
 }
 
-	// const grabData = async () => {
-	// const requestOrderBook = axios.get(OrderBookGit);
-	// const requestOrderBookAddress = axios.get(OrderBookAddressGit);
+const quoteClicked = async (e) => {
+  e.preventDefault();
+  try {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send('eth_requestAccounts', []);
+  const signer = provider.getSigner();
+  const orderBook = new ethers.Contract(
+    data.book,
+    individualBook,
+    signer
+  );
+  signedContract = orderBook.connect(signer);
+  setSignedContract(signedContract);
+  let fromToken;
+  if ((isBuy === true && isYes === true) || (isBuy === true && isYes === false)) {
+    fromToken = $tableAddress;
+   } else {
+  fromToken = data.address
+}
+  const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
+  setCurrentQuote((LowestAsk / 10 ** 18).toString());
 
-	// 	axios
-	// 		.all([requestOrderBook, requestOrderBookAddress])
-	// 		.then(
-	// 			axios.spread((...responses) => {
-	// 				setOrderBookAbi(responses[0].data);
-	// 				// TODO fetch object based on chainID now is only Rinkeby
-	// 				setOrderBookAddress(responses[1].data[4].OrderBook20.address);
-	// 			})
-	// 		)
-	// 		.catch((errors) => {
-	// 			console.log(errors);
-	// 		});
-	// };
+  console.log((LowestAsk / 10 ** 18).toString());
+}   catch (error) {
+    console.log(error)
+}
+}
+
 
 	const ratios = async () => {
     try{
@@ -133,6 +162,8 @@ export const OpenXchange = (cardObject) => {
 	// --------------------- useEffects ---------------------------
 	useEffect(() => {
 		ratios();
+    quote();
+   
 		// calculations();
 	}, [currentMarket]);
 
@@ -176,7 +207,7 @@ export const OpenXchange = (cardObject) => {
 				onSubmit={limitOrder}
 				className="flex flex-col justify-center items-center mobile:w-full laptop:w-full"
 			>
-				<div className="bg-white items-center text-left border-b-[1px] p-4   space-y-4 border-[#0C1615] w-full ">
+				<div className="bg-white items-center text-left pt-4 pb-2 px-4 w-full ">
 					<div class="bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615]  dropdown dropdown-end  ">
 						<label tabindex="0" class="flex items-center hover:opacity-60 ">
 							<p className="text-left text-sm ">Select the Wager</p>
@@ -212,6 +243,48 @@ export const OpenXchange = (cardObject) => {
 									}}
 								>
 									No
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+        
+        <div className="bg-white items-center text-left border-b-[1px] pt-2 pb-4 px-4 border-[#0C1615] w-full ">
+					<div class="bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615]  dropdown dropdown-end  ">
+						<label tabindex="0" class="flex items-center hover:opacity-60 ">
+							<p className="text-left text-sm ">Buy or Sell?</p>
+							<div class="flex-1"></div>
+							{isBuy === true ? (
+								<>
+									<span className="text-black">Buy</span>
+								</>
+							) : (
+								<>
+									<span className="text-black">Sell</span>
+								</>
+							)}
+						</label>
+						<ul
+							tabindex="0"
+							class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-[25%] mt-4    "
+						>
+							<li>
+								<a
+									onClick={() => {
+										setIsBuy(true);
+									}}
+									className="flex justify-right"
+								>
+									Buy
+								</a>
+							</li>
+							<li>
+								<a
+									onClick={() => {
+										setIsBuy(false);
+									}}
+								>
+									Sell
 								</a>
 							</li>
 						</ul>
@@ -253,7 +326,7 @@ export const OpenXchange = (cardObject) => {
 						</Tooltip>
 						<p className="pr-4 ">Price : ${currentQuote} </p>
 						<button
-							onClick={quote}
+							onClick={quoteClicked}
 							className="bg-black text-white p-3 text-xs rounded-3xl"
 						>
 							Update Quote
