@@ -32,7 +32,7 @@ export const ActionCard = () => {
 	// ------------------- State Variable --------------------
 	const [isSet, setIsSet] = useState(false);
 	const [alignment, setAlignment] = useState();
-	const [isYes, setIsYes] = useState();
+	const [isYes, setIsYes] = useState(false);
 	const [No, setNo] = useState();
 	const [Yes, setYes] = useState();
 	const [priceOfYes, setPriceYes] = useState();
@@ -93,7 +93,9 @@ export const ActionCard = () => {
 			await $table.approve(
 				currentMarket.address,
 				BigNumber.from(approvedAmount)
-			)}
+			)
+      setIsSet(true);
+    }
       catch (error) {
     if (error.code == "ACTION_REJECTED") {
     toast.custom(
@@ -276,10 +278,9 @@ export const ActionCard = () => {
 	}, [currentMarket]);
 
 	useEffect(() => {
-		if (currentMarket !== undefined && isSet === false) {
+		if (currentMarket !== undefined) {
 			approve$auce();
 		}
-		setIsSet(true);
 	}, [currentMarket]);
 
 	return (
@@ -333,14 +334,14 @@ export const ActionCard = () => {
 									onClick={() => {
 										setIsYes(true);
 									}}
-									className="flex justify-right active:bg-[#ACFF00]"
+                  className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									Yes
 								</a>
 							</li>
 							<li className=" rounded-box">
 								<a
-									className="flex justify-right active:bg-[#ACFF00]"
+									 className="flex justify-right active:bg-[#ACFF00] text-black"
 									onClick={() => {
 										setIsYes(false);
 									}}

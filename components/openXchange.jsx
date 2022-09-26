@@ -224,14 +224,14 @@ const quoteClicked = async (e) => {
 						</label>
 						<ul
 							tabindex="0"
-							class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-[25%] mt-4    "
+							class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-[25%] mt-4"
 						>
 							<li>
 								<a
 									onClick={() => {
 										setIsYes(true);
 									}}
-									className="flex justify-right"
+                  className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									Yes
 								</a>
@@ -241,6 +241,7 @@ const quoteClicked = async (e) => {
 									onClick={() => {
 										setIsYes(false);
 									}}
+                  className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									No
 								</a>
@@ -266,14 +267,14 @@ const quoteClicked = async (e) => {
 						</label>
 						<ul
 							tabindex="0"
-							class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-[25%] mt-4    "
+							class="menu dropdown-content p-2 shadow bg-[#EFF1F3] rounded-box w-[25%] mt-4"
 						>
 							<li>
 								<a
 									onClick={() => {
 										setIsBuy(true);
 									}}
-									className="flex justify-right"
+                  className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									Buy
 								</a>
@@ -283,6 +284,7 @@ const quoteClicked = async (e) => {
 									onClick={() => {
 										setIsBuy(false);
 									}}
+                  className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									Sell
 								</a>
