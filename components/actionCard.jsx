@@ -103,11 +103,11 @@ export const ActionCard = () => {
 					subMessage={
 						"If you did this by mistake, please go back to live markets and try again"
 					}
-					icon={<img src="/checkCircle.svg" />}
+					icon={<img src="/alertCircle.svg" />}
 					t={t}
 				/>
 			),
-			{ duration: 4000 }
+			{ duration: 7000 }
 		);
   } else {console.log(error.code)}
 };
