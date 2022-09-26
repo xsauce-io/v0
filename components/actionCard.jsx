@@ -7,7 +7,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import { useToast } from '@chakra-ui/react';
+import { ToastNotification } from '../components/toast';
+import alertCircle from '../public/alertCircle.svg'
 import { useRouter } from 'next/router';
 import {
 	$tableAddress,
@@ -47,6 +48,8 @@ export const ActionCard = () => {
 	//------------------ Functions ------------------
 
 	const jackpot = async () => {
+    try {
+    
 		if (currentMarket !== undefined) {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			await provider.send('eth_requestAccounts', [0]);
@@ -58,6 +61,11 @@ export const ActionCard = () => {
 
 			setJackpot(totalJackpot);
 		}
+  } catch (error) {
+      console.log(error)
+  }
+
+
 	};
 
 	const approve$auce = async () => {
@@ -72,22 +80,32 @@ export const ActionCard = () => {
 		console.log(address);
 		const allowance = await $table.allowance(address, currentMarket.address);
 
-		if (allowance > 100000 * 10 ** 18) {
+try {
+		if (allowance > 100000 * (10 ** 18)) {
 		} else {
 			const approvedAmount = BigNumber.from('2')
 				.pow(BigNumber.from('256'))
 				.sub('1');
-			console.log(approvedAmount);
 
 			await $table.approve(
 				currentMarket.address,
 				BigNumber.from(approvedAmount)
 			);
 		}
+  }
+  catch (error) {
+    console.log(error.code)
+    if (error.code === "ACTION_REJECTED") {
+    <ToastNotification icon={alertCircle} subMessage="If you did this by mistake, please go back to live markets and try again" message="You rejected the transaction" t={1}/>
+    }
+  }
+  
 	};
 
 	const mint = async (e) => {
 		e.preventDefault();
+
+    try {
 
 		const data = new FormData(e.target);
 		console.log(data.get('Amount'));
@@ -112,51 +130,16 @@ export const ActionCard = () => {
 			BigNumber.from(position),
 			BigNumber.from(data.get('Amount'))
 		);
-	};
+	}  catch (error) {
+      console.log(error)
+  }
+}
 
-	const quote = async (e) => {
-		e.preventDefault();
-		// const data = new FormData(e.target);
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		await provider.send('eth_requestAccounts', []);
-		const signer = provider.getSigner();
-		const orderBook = new ethers.Contract(
-			market1OrderBook,
-			orderBookAbi,
-			signer
-		);
-		signedContract = orderBook.connect(signer);
-		setSignedContract(signedContract);
-		let fromToken;
-		if (isBuy === true) {
-			fromToken = Token1;
-		} else {
-			fromToken = Token2;
-		}
-		const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
-		setCurrentQuote((LowestAsk / 10 ** 18).toString());
+	
 
-		console.log((LowestAsk / 10 ** 18).toString());
-	};
-
-	const grabData = async () => {
-		const requestOrderBook = axios.get(OrderBookGit);
-		const requestOrderBookAddress = axios.get(OrderBookAddressGit);
-		axios
-			.all([requestOrderBook, requestOrderBookAddress])
-			.then(
-				axios.spread((...responses) => {
-					setOrderBookAbi(responses[0].data);
-					// TODO fetch object based on chainID now is only Rinkeby
-					setOrderBookAddress(responses[1].data[4].OrderBook20.address);
-				})
-			)
-			.catch((errors) => {
-				console.log(errors);
-			});
-	};
-
+	
 	const ratios = async () => {
+    try {
 		if (currentMarket !== undefined) {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			const signer = await provider.getSigner();
@@ -178,8 +161,10 @@ export const ActionCard = () => {
 			setYes(YesRatio.toFixed(0));
 			setNo(NoRatio.toFixed(0));
 		}
-	};
-
+	}   catch (error) {
+      console.log(error)
+  }
+  }
 	const prices = async () => {
 		if (currentMarket !== undefined) {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);

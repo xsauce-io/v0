@@ -37,6 +37,7 @@ export const OpenXchange = (cardObject) => {
 
   const limitOrder = async (e) => {
     e.preventDefault();
+    try {
       const dataForm = new FormData(e.target);
       console.log(dataForm.get("Amount"));
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -52,11 +53,14 @@ export const OpenXchange = (cardObject) => {
       console.log(position);
       await signedContract.limitOrder(data.address, BigNumber.from(position), ethers.utils.parseUnits(dataForm.get("Amount").toString(), 18), ethers.utils.parseUnits((dataForm.get("Amount") * dataForm.get("LimitPrice")).toString(), 18), ethers.utils.parseUnits(dataForm.get("LimitPrice").toString(), 18),false, false)
 
+    } catch (error) {
+      console.log(error)
   }
+}
 
 	const quote = async (e) => {
 		e.preventDefault();
-		// const data = new FormData(e.target);
+		try {
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		await provider.send('eth_requestAccounts', []);
 		const signer = provider.getSigner();
@@ -77,7 +81,10 @@ export const OpenXchange = (cardObject) => {
 		setCurrentQuote((LowestAsk / 10 ** 18).toString());
 
 		console.log((LowestAsk / 10 ** 18).toString());
-	};
+	}   catch (error) {
+      console.log(error)
+  }
+}
 
 	// const grabData = async () => {
 	// const requestOrderBook = axios.get(OrderBookGit);
@@ -98,6 +105,7 @@ export const OpenXchange = (cardObject) => {
 	// };
 
 	const ratios = async () => {
+    try{
 	    if (currentMarket !== undefined) {
 	        const provider = new ethers.providers.Web3Provider(window.ethereum);
 	        const signer = provider.getSigner();
@@ -117,7 +125,10 @@ export const OpenXchange = (cardObject) => {
 	        setNo(NoRatio.toFixed(0))
 
 	    }
-	}
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 	// --------------------- useEffects ---------------------------
 	useEffect(() => {
