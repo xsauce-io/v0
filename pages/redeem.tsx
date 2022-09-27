@@ -10,6 +10,7 @@ import axios from 'axios';
 import { Layout } from '../components/layout';
 import { ContentHeader } from '../components/contentHeader';
 import { RedeemCard } from '../components/redeemCard';
+import Script from 'next/script';
 
 const Redeem: NextPage = () => {
 	let [isLoading, setisLoading] = useState(true as boolean);
@@ -54,9 +55,6 @@ const Redeem: NextPage = () => {
 	}, []);
 
 	return (
-		//#F5DEB3 - Vanilla
-		//#E5E5E5 - Gray
-
 		<div>
 			<Head>
 				<title>Xsauce</title>
@@ -105,7 +103,6 @@ const Redeem: NextPage = () => {
 							<ul
 								tabIndex={0}
 								className="menu dropdown-content bg-[#DCDEE1] p-4 shadow rounded-box w-full mt-4 z-10 text-lg"
-								
 							>
 								<li
 									className="py-2 border-b-[1px] border-[#0C1615]"

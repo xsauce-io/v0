@@ -114,8 +114,6 @@ const Markets: NextPage = () => {
 		}
 	}, [sortBy, isAscending]);
 
-	
-
 	return (
 		<div>
 			<Head>
@@ -128,14 +126,6 @@ const Markets: NextPage = () => {
 					rel="stylesheet"
 				/>
 			</Head>
-			<Script
-					strategy="afterInteractive"
-					dangerouslySetInnerHTML={{
-						__html: `
-             mixpanel.track('Sign out');
-			 `,
-					}}
-				/>
 
 			<Layout
 				headerSubtitle={'LIVE DERIVATIVES MARKET'}
