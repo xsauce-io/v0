@@ -16,6 +16,8 @@ import { ethers, utils } from 'ethers';
 
 import { Card } from '../components/cardWager';
 import { useGetSneaker } from '../services/useRequests';
+import toast from 'react-hot-toast';
+import { ToastNotification } from '../components/toast';
 
 const Markets: NextPage = () => {
 	// ------------------- Constants ---------------------
@@ -25,6 +27,8 @@ const Markets: NextPage = () => {
 		NAME: 'name',
 		RETAIL_PRICE: 'retailPrice',
 	};
+
+	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 	// -------------------- Data Fetching ------------------
 
@@ -113,6 +117,24 @@ const Markets: NextPage = () => {
 			}
 		}
 	}, [sortBy, isAscending]);
+
+	useEffect(() => {
+		if (e1 || e2 || e3 || e4) {
+			toast.custom(
+				(t) => (
+					<ToastNotification
+						message={'An Internal Error has occurred'}
+						subMessage={
+							'The data cannot be currently loaded. Please try again later.'
+						}
+						icon={<img src="/alertCircle.svg" />}
+						t={t}
+					/>
+				),
+				{ duration: 7000 }
+			);
+		}
+	}, [e1, e2, e3, e4]);
 
 	return (
 		<div>
@@ -241,9 +263,21 @@ const Markets: NextPage = () => {
 					</ContentHeader>
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response?.map((el: any) => (
-							<Card cardObject={el} />
-						))}
+						{response &&
+						(e1 === undefined ||
+							e2 === undefined ||
+							e3 === undefined ||
+							e4 === undefined)
+							? response?.map((el: any) => <Card cardObject={el} />)
+							: skeletonArray.map(() => (
+									<Skeleton
+										animation="wave"
+										variant="rounded"
+										height={500}
+										sx={{ borderRadius: '100px' }}
+										width={'100%'}
+									/>
+							  ))}
 					</div>
 				</main>
 			</Layout>

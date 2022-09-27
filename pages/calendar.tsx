@@ -20,6 +20,9 @@ import {
 	useGetSneaker,
 	useGetSneakerByLimit,
 } from '../services/useRequests';
+import { Box } from '@mui/system';
+import toast from 'react-hot-toast';
+import { ToastNotification } from '../components/toast';
 
 const Markets: NextPage = () => {
 	// ------------------- Constants ---------------------
@@ -30,6 +33,8 @@ const Markets: NextPage = () => {
 		RETAIL_PRICE: 'retailPrice',
 	};
 
+	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
 	// -------------------- Data Fetching ------------------
 
 	const { data: highlightSneaker, error } = useGetSneaker('DZ5485-612');
@@ -39,6 +44,7 @@ const Markets: NextPage = () => {
 	// ------------------- State Variable --------------------
 
 	const [response, setResponse] = useState(sneakersData);
+	const [responseError, setResponseError] = useState(sneakersDataError);
 	const [highlight, setHighlight] = useState(highlightSneaker);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 	const [isAscending, setIsAscending] = useState(true);
@@ -51,7 +57,8 @@ const Markets: NextPage = () => {
 		setSortBy({
 			state: SORT_BY_STATES.RETAIL_PRICE,
 		});
-	}, [sneakersData, highlightSneaker]);
+		setResponseError(sneakersDataError);
+	}, [sneakersData, highlightSneaker, sneakersDataError]);
 
 	useMemo(() => {
 		if (response) {
@@ -116,6 +123,24 @@ const Markets: NextPage = () => {
 			}
 		}
 	}, [sortBy, isAscending]);
+
+	useEffect(() => {
+		if (sneakersDataError) {
+			toast.custom(
+				(t) => (
+					<ToastNotification
+						message={'An Internal Error has occurred'}
+						subMessage={
+							'The data cannot be currently loaded. Please try again later.'
+						}
+						icon={<img src="/alertCircle.svg" />}
+						t={t}
+					/>
+				),
+				{ duration: 7000 }
+			);
+		}
+	}, [sneakersDataError]);
 
 	return (
 		<div>
@@ -242,9 +267,17 @@ const Markets: NextPage = () => {
 							</div>
 						</div>
 						<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-							{response?.map((el: any) => (
-								<CalendarCard cardObject={el} />
-							))}
+							{response || sneakersDataError === undefined
+								? response?.map((el: any) => <CalendarCard cardObject={el} />)
+								: skeletonArray.map(() => (
+										<Skeleton
+											animation="pulse"
+											variant="rounded"
+											height={300}
+											sx={{ borderRadius: '15px' }}
+											width={'100%'}
+										/>
+								  ))}
 						</div>
 					</div>
 				</main>

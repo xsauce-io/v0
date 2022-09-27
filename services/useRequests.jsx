@@ -17,12 +17,13 @@ const fetcher = (url) =>
 		.then(function (response) {
 			let res = response.data.results;
 			console.log(response.data.results);
+
 			return response.data.results;
 			//return { data: res, error: undefined };
 		})
 		.catch(function (error) {
-			console.error(error);
-			return error;
+			console.error('useRequest fetcher', error);
+			throw error;
 		});
 
 const fetcherFirstResult = (url) =>
@@ -35,8 +36,8 @@ const fetcherFirstResult = (url) =>
 			//return { data: res, error: undefined };
 		})
 		.catch(function (error) {
-			console.error(error);
-			return error;
+			console.error('useRequest', error);
+			throw error;
 		});
 
 const specializedMarketFetcher = (url, sku) =>
@@ -58,8 +59,8 @@ const specializedMarketFetcher = (url, sku) =>
 			return data;
 		})
 		.catch(function (error) {
-			console.error(error);
-			return error;
+			console.error('useRequest', error);
+			throw error;
 		});
 
 const fetcherMultiCalls = (skus, arrayUrl) => {
@@ -79,8 +80,8 @@ const fetcherMultiCalls = (skus, arrayUrl) => {
 		.then(() => {
 			return data;
 		})
-		.catch(function (err) {
-			console.error(err);
+		.catch(function (error) {
+			console.error('useRequest', error);
 			error = err;
 			return error;
 		});
@@ -94,7 +95,7 @@ const fetcherMultiCalls = (skus, arrayUrl) => {
 
 export const useGetSneaker = (sku) => {
 	const urlWithSku = urlBySku + sku;
-  const { data, error } = useSWR(urlWithSku, fetcherFirstResult);
+	const { data, error } = useSWR(urlWithSku, fetcherFirstResult);
 	console.log('useRequest', data);
 	return { data, error };
 };
@@ -105,7 +106,7 @@ export const useGetSneakerByLimit = (limit) => {
 	const urlWithLimit = urlByLimit + limit;
 
 	const { data, error } = useSWR(urlWithLimit, fetcher);
-
+	console.log('sneakerDateErrorUseRequest', error);
 	console.log('useRequest', data);
 	return { data, error };
 };
@@ -141,4 +142,5 @@ export const useGetMarketBySku = (sku) => {
 };
 
 export const requestOrderBook = async () => axios.get(OrderBookGit);
-export const requestOrderBookAddress = async () => axios.get(OrderBookAddressGit);
+export const requestOrderBookAddress = async () =>
+	axios.get(OrderBookAddressGit);

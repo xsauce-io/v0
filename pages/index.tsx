@@ -13,6 +13,9 @@ import { DashboardTable } from '../components/dashboardTable';
 import { Dashboard } from '../components/dashboard';
 import { ContentHeader } from '../components/contentHeader';
 import { useGetSneakerByLimit } from '../services/useRequests';
+import { Skeleton } from '@mui/material';
+import toast from 'react-hot-toast';
+import { ToastNotification } from '../components/toast';
 
 const Home: NextPage = () => {
 	// ------------------- Constants ---------------------
@@ -28,6 +31,8 @@ const Home: NextPage = () => {
 		NAME: 'name',
 		RETAIL_PRICE: 'retailPrice',
 	};
+
+	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 	// -------------------- Data Fetching ------------------
 	const { data: sneakersData, error: sneakersDataError } =
@@ -107,7 +112,25 @@ const Home: NextPage = () => {
 			}
 		}
 	}, [sortBy, isAscending]);
-	
+
+	useEffect(() => {
+		if (sneakersDataError) {
+			toast.custom(
+				(t) => (
+					<ToastNotification
+						message={'An Internal Error has occurred'}
+						subMessage={
+							'The data cannot be currently loaded. Please try again later.'
+						}
+						icon={<img src="/alertCircle.svg" />}
+						t={t}
+					/>
+				),
+				{ duration: 7000 }
+			);
+		}
+	}, [sneakersDataError]);
+
 	return (
 		<div>
 			<Head>
@@ -228,9 +251,20 @@ const Home: NextPage = () => {
 						</div>
 					</ContentHeader>
 					<DashboardTable>
-						{response?.map((el: []) => (
-							<Dashboard positions={el} />
-						))}
+						{response === undefined || sneakersDataError
+							? skeletonArray.map(() => (
+									<>
+										<Skeleton
+											animation="pulse"
+											variant="rounded"
+											height={70}
+											width={'100%'}
+											sx={{ borderRadius: '100px' }}
+										/>
+										<p className="h-4"> </p>
+									</>
+							  ))
+							: response?.map((el: []) => <Dashboard positions={el} />)}
 					</DashboardTable>
 				</>
 			</Layout>
