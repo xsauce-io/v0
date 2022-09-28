@@ -285,11 +285,11 @@ const Markets: NextPage = () => {
 					</ContentHeader>
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-						{response &&
-						(e1 === undefined ||
-							e2 === undefined ||
-							e3 === undefined ||
-							e4 === undefined)
+						{response ||
+						e1 === undefined ||
+						e2 === undefined ||
+						e3 === undefined ||
+						e4 === undefined
 							? response?.map((el: any) => <Card cardObject={el} />)
 							: skeletonArray.map(() => (
 									<Skeleton
