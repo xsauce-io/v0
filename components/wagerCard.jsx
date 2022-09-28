@@ -136,7 +136,7 @@ export const WagerCard = ({ cardObject }) => {
 									cardObject.image?.original ===
 										'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
 										<img
-											className="object-cover mobile:h-[100%]  tablet:h-[80%]] laptop:h-[50%] w-[80%] m-auto desktop:h-[80%] w-[100%] rounded-lg"
+											className="object-cover mobile:h-[100%]  tablet:h-[80%]] laptop:h-[80%] w-[80%] m-auto desktop:h-[85%] w-[100%] rounded-lg"
 											src="/hurache.svg"
 										/>
 									) : (
@@ -211,6 +211,11 @@ export const WagerCard = ({ cardObject }) => {
 									target="blank"
 									rel="noreferrer"
 									href={explorer}
+									onClick={() =>
+										mixpanelTrackProps('View Contract', {
+											address: currentMarket?.address,
+										})
+									}
 								>
 									<p className="underline"> {currentMarket?.address}</p>
 								</a>

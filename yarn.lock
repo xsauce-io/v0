@@ -2180,6 +2180,11 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-5.1.2.tgz#07508b45797cb81ec3f273011b054cd0755eddca"
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
+"@types/mixpanel@^2.14.4":
+  version "2.14.4"
+  resolved "https://registry.yarnpkg.com/@types/mixpanel/-/mixpanel-2.14.4.tgz#c62f4a9ce8d1507adb43e27fd8a4c88088c25e50"
+  integrity sha512-VVnwnH+m3043pVnzwq1FNG5KQf/vxWf5abi6F8qq4ph+wQ6i/SNZo+FK34ilH2ii6p07NELCgLMVztqocdqW3A==
+
 "@types/mocha@^9.1.1":
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-9.1.1.tgz#e7c4f1001eefa4b8afbd1eee27a237fee3bf29c4"

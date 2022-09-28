@@ -187,6 +187,7 @@ const Redeem: NextPage = () => {
 							id="redeem"
 							className="h-[4rem] w-[9rem] text-lg px-4 text-black bg-[#ACFF00] rounded shadow-md hover:bg-white transition duration-300 hover:text-black justify-self-center font-inter "
 							type="submit"
+							onClick={() => mixpanel.track('Redeem')}
 						>
 							Redeem
 						</button>

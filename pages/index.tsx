@@ -171,9 +171,12 @@ const Home: NextPage = () => {
 								>
 									<li>
 										<button
-											onClick={() =>
-												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
-											}
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE });
+												mixpanel.track('Sort ', {
+													sortBy: SORT_BY_STATES.RETAIL_PRICE,
+												});
+											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Retail Price
@@ -181,9 +184,12 @@ const Home: NextPage = () => {
 									</li>
 									<li>
 										<button
-											onClick={() =>
-												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
-											}
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE });
+												mixpanel.track('Sort ', {
+													sortBy: SORT_BY_STATES.RELEASE_DATE,
+												});
+											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Release Date
@@ -192,7 +198,12 @@ const Home: NextPage = () => {
 
 									<li>
 										<button
-											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.NAME });
+												mixpanel.track('Sort ', {
+													sortBy: SORT_BY_STATES.NAME,
+												});
+											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Name
@@ -219,9 +230,12 @@ const Home: NextPage = () => {
 								>
 									<li>
 										<button
-											onClick={() =>
-												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE })
-											}
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE });
+												mixpanel.track('Filter ', {
+													sortBy: SORT_BY_STATES.RETAIL_PRICE,
+												});
+											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Retail Price
@@ -229,9 +243,12 @@ const Home: NextPage = () => {
 									</li>
 									<li>
 										<button
-											onClick={() =>
-												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE })
-											}
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE });
+												mixpanel.track('Filter ', {
+													sortBy: SORT_BY_STATES.RELEASE_DATE,
+												});
+											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Release Date
@@ -240,7 +257,12 @@ const Home: NextPage = () => {
 
 									<li>
 										<button
-											onClick={() => setSortBy({ state: SORT_BY_STATES.NAME })}
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.NAME });
+												mixpanel.track('Filter ', {
+													sortBy: SORT_BY_STATES.NAME,
+												});
+											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
 											Name
