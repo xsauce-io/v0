@@ -170,11 +170,11 @@ const Markets: NextPage = () => {
 
 					<div className="space-y-10">
 						<CalendarHighlight cardObject={highlight} />
-						<div className="flex laptop:flex-row laptop:items-center laptop:space-y-0 mobile:flex-col mobile:space-y-2 tablet:space-x-3 items-center tablet:flex-row">
+						<div className="flex laptop:flex-row laptop:items-center laptop:space-y-0 mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0  items-center tablet:flex-row">
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
-									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615]  hover:opacity-50  w-[12em]"
+									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl  text-sm  bg-[#0C1615]  hover:opacity-50  w-[10em] p-2 px-2"
 								>
 									<img className="" src="/arrowUpDownGrey.svg" />
 
@@ -220,7 +220,7 @@ const Markets: NextPage = () => {
 							<div className="dropdown dropdown-end ">
 								<label
 									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615] hover:opacity-50  w-[12em]"
+									className="text-[14px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm  bg-[#0C1615] hover:opacity-50  w-[10em] p-2 px-2"
 								>
 									<img className="" src="/settingsSlider.svg" />
 

@@ -150,14 +150,14 @@ const Home: NextPage = () => {
 						icon={<img src="/pieChart.svg" />}
 						flexColumn
 					>
-						<div className="flex flex-row tablet:space-x-3  items-center mobile:flex-col space-y-3   tablet:flex-row">
+						<div className="flex flex-row items-center mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0    tablet:flex-row">
 							<text>
 								Total wager lives <span className="text-[#748282]">87</span>
 							</text>
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
-									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615]  hover:opacity-50  w-[12em]"
+									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm bg-[#0C1615]  hover:opacity-50  w-[10em] p-2 px-2"
 								>
 									<img className="" src="/arrowUpDownGrey.svg" />
 
@@ -203,7 +203,7 @@ const Home: NextPage = () => {
 							<div className="dropdown dropdown-end ">
 								<label
 									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl p-3 text-sm px-5 bg-[#0C1615] hover:opacity-50  w-[12em]"
+									className="text-[14px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl  text-sm  bg-[#0C1615] hover:opacity-50  w-[10em] p-2 px-2"
 								>
 									<img className="" src="/settingsSlider.svg" />
 
