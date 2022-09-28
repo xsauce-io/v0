@@ -62,13 +62,13 @@ export const Nav = ({ logoColor }) => {
 		if (wallet) {
 			mixpanelTrackProps('Connect Wallet', {
 				result: 'successful',
-				automatic: clicked,
+				automaticConnection: !clicked,
 				chainId: chainId,
 			});
 		} else {
 			mixpanelTrackProps('Connect Wallet', {
 				result: 'unsuccessful',
-				automatic: clicked,
+				automaticConnection: !clicked,
 				chainId: chainId,
 			});
 		}
@@ -402,7 +402,7 @@ export const Nav = ({ logoColor }) => {
 
 						<button
 							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60"
-							onClick={() => getWallet((clicked = true))}
+							onClick={() => getWallet(true)}
 						>
 							<span className="truncate">
 								{accounts == null ? 'Connect Wallet' : accounts}
@@ -443,7 +443,7 @@ export const Nav = ({ logoColor }) => {
 									<button
 										onClick={() => {
 											faucet();
-											mixpanelTrack('Get Test Tokens');
+											mixpanelTrackProps('Get Test Tokens', { token: '$auce' });
 										}}
 									>
 										<img className="h-[10%] w-[10%]" src="/icon.svg" />
@@ -455,7 +455,11 @@ export const Nav = ({ logoColor }) => {
 										className="active:bg-[#ACFF00] text-black"
 										target="blank"
 										href="https://goerli-faucet.pk910.de/"
-										onClick={() => mixpanelTrack('Get Test ETHGoerli')}
+										onClick={() =>
+											mixpanelTrackProps('Get Test Tokens', {
+												token: 'ETHGoerli',
+											})
+										}
 									>
 										<img className="h-[7%] w-[7%]" src="/eth.png" />
 										Get Test ETH(Goerli)

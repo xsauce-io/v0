@@ -8,7 +8,7 @@ import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { ToastNotificationActionBar } from '../components/toastActionBar';
-import alertCircle from '../public/alertCircle.svg'
+import alertCircle from '../public/alertCircle.svg';
 import { useRouter } from 'next/router';
 import {
 	$tableAddress,
@@ -50,198 +50,218 @@ export const ActionCard = () => {
 	//------------------ Functions ------------------
 
 	const jackpot = async () => {
-    try {
-    
-		if (currentMarket !== undefined) {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send('eth_requestAccounts', [0]);
-			const signer = provider.getSigner();
-			const $table = new ethers.Contract($tableAddress, $tableABI, signer);
-			const totalJackpot = (
-				(await $table.balanceOf(currentMarket.address)) / 1e18
-			).toFixed(2);
+		try {
+			if (currentMarket !== undefined) {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				await provider.send('eth_requestAccounts', [0]);
+				const signer = provider.getSigner();
+				const $table = new ethers.Contract($tableAddress, $tableABI, signer);
+				const totalJackpot = (
+					(await $table.balanceOf(currentMarket.address)) / 1e18
+				).toFixed(2);
 
-			setJackpot(totalJackpot);
+				setJackpot(totalJackpot);
+			}
+		} catch (error) {
+			console.log(error);
 		}
-  } catch (error) {
-      console.log(error)
-  }
-
-
 	};
 
 	const approve$auce = async () => {
 		if (isSet == true) {
 			return;
 		}
-   
+
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		const address = (await provider.send('eth_requestAccounts', [])).toString();
 		const signer = provider.getSigner();
 		const $table = new ethers.Contract($tableAddress, $tableABI, signer);
 		const allowance = await $table.allowance(address, currentMarket.address);
 
-
-		if (allowance > 100000 * (10 ** 18)) {
+		if (allowance > 100000 * 10 ** 18) {
+			mixpanelTrack('Approve Funds', { result: 'insufficient' });
 		} else {
+			try {
+				const approvedAmount = BigNumber.from('2')
+					.pow(BigNumber.from('256'))
+					.sub('1');
 
-      try {
-			const approvedAmount = BigNumber.from('2')
-				.pow(BigNumber.from('256'))
-				.sub('1');
-
-			await $table.approve(
-				currentMarket.address,
-				BigNumber.from(approvedAmount)
-			)
-      setIsSet(true);
-    }
-      catch (error) {
-    if (error.code == "ACTION_REJECTED") {
-    toast.custom(
-			(t) => (
-				<ToastNotification
-					message={"You rejected the transaction"}
-					subMessage={
-						"If you did this by mistake, please go back to live markets and try again"
-					}
-					icon={<img src="/alertCircle.svg" />}
-					t={t}
-				/>
-			),
-			{ duration: 7000 }
-		);
-  } else {console.log(error.code)}
-};
-}
-  
+				await $table.approve(
+					currentMarket.address,
+					BigNumber.from(approvedAmount)
+				);
+				setIsSet(true);
+				mixpanelTrackProps('Approve Funds', { result: 'successful' });
+			} catch (error) {
+				if (error.code == 'ACTION_REJECTED') {
+					toast.custom(
+						(t) => (
+							<ToastNotification
+								message={'You rejected the transaction'}
+								subMessage={
+									'If you did this by mistake, please go back to live markets and try again'
+								}
+								icon={<img src="/alertCircle.svg" />}
+								t={t}
+							/>
+						),
+						{ duration: 7000 }
+					);
+					mixpanelTrackProps('Approve Funds', { result: 'cancelled' });
+				} else {
+					console.log(error.code);
+					mixpanelTrackProps('Approve Funds', { result: 'failed' });
+				}
+			}
+		}
 	};
 
 	const mint = async (e) => {
 		e.preventDefault();
-    let mintedAmount;
+		let mintedAmount;
 
-    try {
-
-		const data = new FormData(e.target);
-		mintedAmount = data.get('Amount');
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		await provider.send('eth_requestAccounts', []);
-		const signer = provider.getSigner();
-		const market = new ethers.Contract(
-			currentMarket.address,
-			marketabi,
-			signer
-		);
-		let signedContract = market.connect(signer);
-		setSignedContract(signedContract);
-		let position;
+		let positionMinted;
 		if (isYes === true) {
-			position = 1;
+			positionMinted = 'Yes';
 		} else {
-			position = 2;
+			positionMinted = 'No';
 		}
-		
-		const order = await signedContract.mint(
-			BigNumber.from(position),
-			BigNumber.from(data.get('Amount'))
-		);
 
-    order.then(()=> {let positionMinted;
-      if (isYes === true) { positionMinted = "Yes"}
-      else {positionMinted = "No"}
-      toast.custom(
-        (t) => (
-          <ToastNotification
-            message={"Transaction Successful"}
-            subMessage={
-              `You bought ${mintedAmount} ${positionMinted} tokens`
-            }
-            icon={<img src="/checkCircle.svg" />}
-            t={t}
-          />
-        ),
-        { duration: 7000 }
-      )})
-	} 
-    catch (error) {
-      if (error.code == "ACTION_REJECTED") {
-      toast.custom(
-        (t) => (
-          <ToastNotification
-            message={"You rejected the transaction"}
-            subMessage={
-              "If you did this by mistake, please go back to live markets and try again"
-            }
-            icon={<img src="/alertTriangle.svg" />}
-            t={t}
-          />
-        ),
-        { duration: 7000 }
-      );
-    } else if(error.reason == "execution reverted: ERC20: insufficient allowance") {
-     
-      toast.custom(
-        (t) => (
-          <ToastNotification
-            message={"Transaction Failed"}
-            subMessage={
-              "You have not approved our contract to interact with your wallet. please make sure you are connected to the right network and try again"
-            }
-            icon={<img src="/alertCircle.svg" />}
-            t={t}
-          />
-        ),
-        { duration: 7000 }
-      )
-    } else {
-      toast.custom(
-      (t) => (
-        <ToastNotification
-          message={"Transaction Failed"}
-          subMessage={
-            "Something went wrong, please make sure you are connected to the right network and try again"
-          }
-          icon={<img src="/alertCircle.svg" />}
-          t={t}
-        />
-      ),
-      { duration: 7000 }
-    )}
-  }
- 
-}
-
-	
-
-	
-	const ratios = async () => {
-    try {
-		if (currentMarket !== undefined) {
+		try {
+			const data = new FormData(e.target);
+			mintedAmount = data.get('Amount');
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const signer = await provider.getSigner();
-			const contract = new ethers.Contract(
-				currentMarket?.address,
+			await provider.send('eth_requestAccounts', []);
+			const signer = provider.getSigner();
+			const market = new ethers.Contract(
+				currentMarket.address,
 				marketabi,
 				signer
 			);
-			const getYes = await contract.totalSupply(1);
-			const getNo = await contract.totalSupply(2);
+			let signedContract = market.connect(signer);
+			setSignedContract(signedContract);
+			let position;
+			if (isYes === true) {
+				position = 1;
+			} else {
+				position = 2;
+			}
 
-			let NoRatio =
-				(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+			const order = await signedContract.mint(
+				BigNumber.from(position),
+				BigNumber.from(data.get('Amount'))
+			);
 
-			let YesRatio =
-				(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
-			console.log(YesRatio);
-
-			setYes(YesRatio.toFixed(0));
-			setNo(NoRatio.toFixed(0));
+			order.then(() => {
+				mixpanelTrackProps('Buy (Mint)', {
+					wager: positionMinted,
+					amount: mintedAmount,
+					result: 'successful',
+				});
+				toast.custom(
+					(t) => (
+						<ToastNotification
+							message={'Transaction Successful'}
+							subMessage={`You bought ${mintedAmount} ${positionMinted} tokens`}
+							icon={<img src="/checkCircle.svg" />}
+							t={t}
+						/>
+					),
+					{ duration: 7000 }
+				);
+			});
+		} catch (error) {
+			if (error.code == 'ACTION_REJECTED') {
+				toast.custom(
+					(t) => (
+						<ToastNotification
+							message={'You rejected the transaction'}
+							subMessage={
+								'If you did this by mistake, please go back to live markets and try again'
+							}
+							icon={<img src="/alertTriangle.svg" />}
+							t={t}
+						/>
+					),
+					{ duration: 7000 }
+				);
+				mixpanelTrackProps('Buy (Mint)', {
+					wager: positionMinted,
+					amount: mintedAmount,
+					result: 'cancelled',
+				});
+			} else if (
+				error.reason == 'execution reverted: ERC20: insufficient allowance'
+			) {
+				toast.custom(
+					(t) => (
+						<ToastNotification
+							message={'Transaction Failed'}
+							subMessage={
+								'You have not approved our contract to interact with your wallet. please make sure you are connected to the right network and try again'
+							}
+							icon={<img src="/alertCircle.svg" />}
+							t={t}
+						/>
+					),
+					{ duration: 7000 }
+				);
+				mixpanelTrackProps('Buy (Mint)', {
+					wager: positionMinted,
+					amount: mintedAmount,
+					result: 'failed',
+					reason: 'insufficient funds',
+				});
+			} else {
+				toast.custom(
+					(t) => (
+						<ToastNotification
+							message={'Transaction Failed'}
+							subMessage={
+								'Something went wrong, please make sure you are connected to the right network and try again'
+							}
+							icon={<img src="/alertCircle.svg" />}
+							t={t}
+						/>
+					),
+					{ duration: 7000 }
+				);
+				mixpanelTrackProps('Buy (Mint)', {
+					wager: positionMinted,
+					amount: mintedAmount,
+					result: 'failed',
+				});
+			}
 		}
-	}   catch (error) {
-      console.log(error)
-  }
-  }
+	};
+
+	const ratios = async () => {
+		try {
+			if (currentMarket !== undefined) {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = await provider.getSigner();
+				const contract = new ethers.Contract(
+					currentMarket?.address,
+					marketabi,
+					signer
+				);
+				const getYes = await contract.totalSupply(1);
+				const getNo = await contract.totalSupply(2);
+
+				let NoRatio =
+					(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+
+				let YesRatio =
+					(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+				console.log(YesRatio);
+
+				setYes(YesRatio.toFixed(0));
+				setNo(NoRatio.toFixed(0));
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	const prices = async () => {
 		if (currentMarket !== undefined) {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -268,8 +288,6 @@ export const ActionCard = () => {
 	useEffect(() => {
 		setCurrentMarket(data);
 	}, [data]);
-
-
 
 	useEffect(() => {
 		ratios();
@@ -334,14 +352,14 @@ export const ActionCard = () => {
 									onClick={() => {
 										setIsYes(true);
 									}}
-                  className="flex justify-right active:bg-[#ACFF00] text-black"
+									className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									Yes
 								</a>
 							</li>
 							<li className=" rounded-box">
 								<a
-									 className="flex justify-right active:bg-[#ACFF00] text-black"
+									className="flex justify-right active:bg-[#ACFF00] text-black"
 									onClick={() => {
 										setIsYes(false);
 									}}

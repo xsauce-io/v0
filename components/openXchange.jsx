@@ -1,9 +1,9 @@
 import React from 'react';
 import { BigNumber, ethers, utils } from 'ethers';
 import { useState, useEffect } from 'react';
-import individualBook from "../abi/book.json"
-import allBooks from "../abi/bookFactory.json"
-import marketabi from "../abi/markets.json"
+import individualBook from '../abi/book.json';
+import allBooks from '../abi/bookFactory.json';
+import marketabi from '../abi/markets.json';
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
@@ -32,145 +32,179 @@ export const OpenXchange = (cardObject) => {
 
 	//--------------------- Fetch Requests  ------------------------
 
-  const { data, error } = useGetMarketBySku(sku);
+	const { data, error } = useGetMarketBySku(sku);
 
 	//--------------------- Handler  Functions ------------------------
 
-  const limitOrder = async (e) => {
-    e.preventDefault();
-    try {
-      const dataForm = new FormData(e.target);
-      console.log(dataForm.get("Amount"));
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send('eth_requestAccounts', []);
-      const signer = provider.getSigner();
-      const market = new ethers.Contract(data.book, individualBook, signer);
-      let signedContract = market.connect(signer);
-      setSignedContract(signedContract)
-      let position;
-      if (isYes === true) {
-        position = 1
-      } else { position = 2 };
-     let token1;
-      if (isBuy === false) {
-        token1 = data.address
-      } else {token1 = $tableAddress}
-      await signedContract.limitOrder(token1, BigNumber.from(position), ethers.utils.parseUnits(dataForm.get("Amount").toString(), 18), ethers.utils.parseUnits((dataForm.get("Amount") * dataForm.get("LimitPrice")).toString(), 18), ethers.utils.parseUnits(dataForm.get("LimitPrice").toString(), 18),false, false)
-
-    } catch (error) {
-      console.log(error)
-  }
-}
-
-
-const getBookFunct = async () => {
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-		await provider.send('eth_requestAccounts', []);
-		const signer = provider.getSigner();
-		const getBook = new ethers.Contract(
-			"0x13E9c4821F85B1F17b90CD8D70169413eB5caceB",
-			allBooks,
-			signer
-		);
-    const bookInfo = await getBook.getBook(data.address,1, $tableAddress,100)
-    console.log(bookInfo)
-}
-
-	const quote = async () => {
+	const limitOrder = async (e) => {
+		e.preventDefault();
+		let position;
+		if (isYes === true) {
+			position = 1;
+		} else {
+			position = 2;
+		}
 		try {
+			const dataForm = new FormData(e.target);
+			console.log(dataForm.get('Amount'));
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			await provider.send('eth_requestAccounts', []);
+			const signer = provider.getSigner();
+			const market = new ethers.Contract(data.book, individualBook, signer);
+			let signedContract = market.connect(signer);
+			setSignedContract(signedContract);
+
+			let token1;
+			if (isBuy === false) {
+				token1 = data.address;
+			} else {
+				token1 = $tableAddress;
+			}
+			await signedContract.limitOrder(
+				token1,
+				BigNumber.from(position),
+				ethers.utils.parseUnits(dataForm.get('Amount').toString(), 18),
+				ethers.utils.parseUnits(
+					(dataForm.get('Amount') * dataForm.get('LimitPrice')).toString(),
+					18
+				),
+				ethers.utils.parseUnits(dataForm.get('LimitPrice').toString(), 18),
+				false,
+				false
+			);
+			mixpanelTrackProps('Order from OpenXchange', {
+				isBuy: isBuy,
+				wager: position,
+				amount: dataForm.get('Amount'),
+				result: 'successful',
+			});
+		} catch (error) {
+			console.log(error);
+			mixpanelTrackProps('Order from OpenXchange', {
+				isBuy: isBuy,
+				wager: position,
+				result: 'failed',
+			});
+		}
+	};
+
+	const getBookFunct = async () => {
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		await provider.send('eth_requestAccounts', []);
 		const signer = provider.getSigner();
-		const orderBook = new ethers.Contract(
-			data.book,
-			individualBook,
+		const getBook = new ethers.Contract(
+			'0x13E9c4821F85B1F17b90CD8D70169413eB5caceB',
+			allBooks,
 			signer
 		);
-		signedContract = orderBook.connect(signer);
-		setSignedContract(signedContract);
-    
-		let fromToken;
-		if ((isBuy === true && isYes === true) || (isBuy === true && isYes === false)) {
-			fromToken = $tableAddress;
-     } else {
-    fromToken = data.address
-  }
-		const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
-		setCurrentQuote((LowestAsk / 10 ** 18).toString());
+		const bookInfo = await getBook.getBook(data.address, 1, $tableAddress, 100);
+		console.log(bookInfo);
+	};
 
-		console.log((LowestAsk / 10 ** 18).toString());
-	}   catch (error) {
-      console.log(error)
-  }
-}
+	const quote = async () => {
+		try {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			await provider.send('eth_requestAccounts', []);
+			const signer = provider.getSigner();
+			const orderBook = new ethers.Contract(data.book, individualBook, signer);
+			signedContract = orderBook.connect(signer);
+			setSignedContract(signedContract);
 
-const quoteClicked = async (e) => {
-  e.preventDefault();
-  try {
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  await provider.send('eth_requestAccounts', []);
-  const signer = provider.getSigner();
-  const orderBook = new ethers.Contract(
-    data.book,
-    individualBook,
-    signer
-  );
-  signedContract = orderBook.connect(signer);
-  setSignedContract(signedContract);
-  let fromToken;
-  if ((isBuy === true && isYes === true) || (isBuy === true && isYes === false)) {
-    fromToken = $tableAddress;
-   } else {
-  fromToken = data.address
-}
-  const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
-  setCurrentQuote((LowestAsk / 10 ** 18).toString());
+			let fromToken;
+			if (
+				(isBuy === true && isYes === true) ||
+				(isBuy === true && isYes === false)
+			) {
+				fromToken = $tableAddress;
+			} else {
+				fromToken = data.address;
+			}
+			const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
+			setCurrentQuote((LowestAsk / 10 ** 18).toString());
 
-  console.log((LowestAsk / 10 ** 18).toString());
-}   catch (error) {
-    console.log(error)
-}
-}
+			console.log((LowestAsk / 10 ** 18).toString());
+			mixpanelTrackProps('Get Quote', {
+				result: 'successful',
+			});
+		} catch (error) {
+			console.log(error);
+			mixpanelTrackProps('Get Quote', {
+				result: 'failed',
+			});
+		}
+	};
 
+	const quoteClicked = async (e) => {
+		e.preventDefault();
+		try {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			await provider.send('eth_requestAccounts', []);
+			const signer = provider.getSigner();
+			const orderBook = new ethers.Contract(data.book, individualBook, signer);
+			signedContract = orderBook.connect(signer);
+			setSignedContract(signedContract);
+			let fromToken;
+			if (
+				(isBuy === true && isYes === true) ||
+				(isBuy === true && isYes === false)
+			) {
+				fromToken = $tableAddress;
+			} else {
+				fromToken = data.address;
+			}
+			const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
+			setCurrentQuote((LowestAsk / 10 ** 18).toString());
+
+			console.log((LowestAsk / 10 ** 18).toString());
+			mixpanelTrackProps('Get Quote', {
+				result: 'successful',
+			});
+		} catch (error) {
+			console.log(error);
+			mixpanelTrackProps('Get Quote', {
+				result: 'failed',
+			});
+		}
+	};
 
 	const ratios = async () => {
-    try{
-	    if (currentMarket !== undefined) {
-	        const provider = new ethers.providers.Web3Provider(window.ethereum);
-	        const signer = provider.getSigner();
-	        const contract = new ethers.Contract(currentMarket?.address, marketabi, signer);
-	        const getYes = await contract.totalSupply(
-	            1
-	        )
-	        const getNo = await contract.totalSupply(
-	            2
-	        )
+		try {
+			if (currentMarket !== undefined) {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner();
+				const contract = new ethers.Contract(
+					currentMarket?.address,
+					marketabi,
+					signer
+				);
+				const getYes = await contract.totalSupply(1);
+				const getNo = await contract.totalSupply(2);
 
-	        let NoRatio = (getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-	        let YesRatio = (getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100
-	        console.log(YesRatio)
+				let NoRatio =
+					(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+				let YesRatio =
+					(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+				console.log(YesRatio);
 
-	        setYes(YesRatio.toFixed(0))
-	        setNo(NoRatio.toFixed(0))
-
-	    }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+				setYes(YesRatio.toFixed(0));
+				setNo(NoRatio.toFixed(0));
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	// --------------------- useEffects ---------------------------
 	useEffect(() => {
 		ratios();
-    quote();
-   
+		quote();
+
 		// calculations();
 	}, [currentMarket]);
 
-  useEffect(() => {
+	useEffect(() => {
 		setCurrentMarket(data);
 	}, [data]);
-
 
 	useEffect(() => {
 		if (isYes === true) {
@@ -187,8 +221,6 @@ const quoteClicked = async (e) => {
 			setOrder('2');
 		}
 	}, [isBuy]);
-
-
 
 	return (
 		<div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
@@ -231,7 +263,7 @@ const quoteClicked = async (e) => {
 									onClick={() => {
 										setIsYes(true);
 									}}
-                  className="flex justify-right active:bg-[#ACFF00] text-black"
+									className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									Yes
 								</a>
@@ -241,7 +273,7 @@ const quoteClicked = async (e) => {
 									onClick={() => {
 										setIsYes(false);
 									}}
-                  className="flex justify-right active:bg-[#ACFF00] text-black"
+									className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									No
 								</a>
@@ -249,8 +281,8 @@ const quoteClicked = async (e) => {
 						</ul>
 					</div>
 				</div>
-        
-        <div className="bg-white items-center text-left border-b-[1px] pt-2 pb-4 px-4 border-[#0C1615] w-full ">
+
+				<div className="bg-white items-center text-left border-b-[1px] pt-2 pb-4 px-4 border-[#0C1615] w-full ">
 					<div class="bg-white items-center p-3  px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615]  dropdown dropdown-end  ">
 						<label tabindex="0" class="flex items-center hover:opacity-60 ">
 							<p className="text-left text-sm ">Buy or Sell?</p>
@@ -274,7 +306,7 @@ const quoteClicked = async (e) => {
 									onClick={() => {
 										setIsBuy(true);
 									}}
-                  className="flex justify-right active:bg-[#ACFF00] text-black"
+									className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									Buy
 								</a>
@@ -284,7 +316,7 @@ const quoteClicked = async (e) => {
 									onClick={() => {
 										setIsBuy(false);
 									}}
-                  className="flex justify-right active:bg-[#ACFF00] text-black"
+									className="flex justify-right active:bg-[#ACFF00] text-black"
 								>
 									Sell
 								</a>
