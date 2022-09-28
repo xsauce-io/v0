@@ -269,6 +269,7 @@ export const Nav = ({ logoColor }) => {
 		const tokenSymbol = '$';
 		const tokenImage = 'https://i.postimg.cc/15tqGBct/emblem.jpg';
 
+		//TO FIX: this try catch does not work
 		try {
 			const wasAdded = await ethereum.request({
 				method: 'wallet_watchAsset',
@@ -282,15 +283,15 @@ export const Nav = ({ logoColor }) => {
 					},
 				},
 			});
-
+			console.log('was added', wasAdded);
 			if (wasAdded) {
-				mixpanelTrackProps('Acquire Test Tokens', {
+				mixpanelTrackProps('Get Test Tokens', {
 					token: 'Xsauce',
 					result: 'completed',
 				});
 				console.log('Now you are official!');
 			} else {
-				mixpanelTrackProps('Acquire Testnet Tokens', {
+				mixpanelTrackProps('Get TestTokens', {
 					token: 'Xsauce',
 					result: 'cancelled',
 				});
@@ -298,9 +299,9 @@ export const Nav = ({ logoColor }) => {
 			}
 		} catch (error) {
 			console.log(error);
-			mixpanelTrackProps('Acquire Testnet Tokens', {
+			mixpanelTrackProps('Get Test Tokens', {
 				token: 'Xsauce',
-				result: 'cancelled',
+				result: 'failed',
 			});
 		}
 	};
@@ -439,7 +440,12 @@ export const Nav = ({ logoColor }) => {
 								className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-[250px] mt-4 z-10"
 							>
 								<li>
-									<button onClick={() => faucet()}>
+									<button
+										onClick={() => {
+											faucet();
+											mixpanelTrack('Get Test Tokens');
+										}}
+									>
 										<img className="h-[10%] w-[10%]" src="/icon.svg" />
 										Get Test Tokens
 									</button>
