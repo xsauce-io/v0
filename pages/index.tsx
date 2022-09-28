@@ -157,7 +157,7 @@ const Home: NextPage = () => {
 							<div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
-									className="text-[14px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm bg-[#0C1615]  hover:opacity-50  w-[10em] p-2 px-2"
+									className="text-[10px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm bg-[#0C1615]  hover:opacity-50  w-[130px]  p-1 px-2"
 								>
 									<img className="" src="/arrowUpDownGrey.svg" />
 
@@ -214,7 +214,7 @@ const Home: NextPage = () => {
 							<div className="dropdown dropdown-end ">
 								<label
 									tabIndex={0}
-									className="text-[14px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl  text-sm  bg-[#0C1615] hover:opacity-50  w-[10em] p-2 px-2"
+									className="text-[10px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl  text-sm  bg-[#0C1615] hover:opacity-50 w-[130px]  p-1 px-2 text-[10px]"
 								>
 									<img className="" src="/settingsSlider.svg" />
 

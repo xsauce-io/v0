@@ -64,7 +64,12 @@ export const Card = ({ cardObject }) => {
 		</React.Fragment>
 	) : (
 		<Link href={cardObjectHref}>
-			<a className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full o">
+			<a
+				className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full o"
+				onClick={() =>
+					mixpanelTrackProps('View Market', { sku: cardObject?.sku })
+				}
+			>
 				<React.Fragment>
 					<div className="flex items-left flex-col space-y-3 justify-center w-full h-full ">
 						{cardObject.image?.original === '' ||
