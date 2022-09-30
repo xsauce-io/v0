@@ -16,6 +16,7 @@ import { useGetSneakerByLimit } from '../services/useRequests';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/toast';
+import { FirstTimeVisitorModal } from '../components/firstTimeVisitorModal';
 
 const Home: NextPage = () => {
 	// ------------------- Constants ---------------------
