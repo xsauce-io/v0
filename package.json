@@ -27,6 +27,7 @@
     "daisyui": "^2.24.0",
     "ethers": "^5.7.0",
     "framer-motion": "^7.0.0",
+    "jquery": "^3.6.1",
     "mocha": "^10.0.0",
     "next": "latest",
     "react": "18.1.0",

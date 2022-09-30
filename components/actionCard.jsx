@@ -1,9 +1,9 @@
 import React from 'react';
 import { BigNumber, ethers, utils } from 'ethers';
-
+import $ from "jquery";
 import marketabi from '../abi/markets.json';
 import $tableABI from '../abi/$tableSauce.json';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo} from 'react';
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
@@ -31,7 +31,7 @@ export const ActionCard = () => {
 
 	// ------------------- State Variable --------------------
 	const [isSet, setIsSet] = useState(false);
-	const [alignment, setAlignment] = useState();
+	const [Total, setTotal] = useState();
 	const [isYes, setIsYes] = useState(false);
 	const [No, setNo] = useState();
 	const [Yes, setYes] = useState();
@@ -295,6 +295,26 @@ export const ActionCard = () => {
 		}
 	};
 
+  const CalculateTotal = () => {
+    if (priceOfYes && priceOfNo !== undefined) {
+    const total = document.getElementById('total');
+      let price;
+    if (isYes === true) {
+       price = priceOfYes
+    } else {
+       price = priceOfNo
+    }
+  const input = document.getElementById('amount')
+
+input.addEventListener('input', updateValue);
+
+function updateValue(e) {
+  total.textContent = "Total: $" + (e.target.value * price).toFixed(2);
+}
+    }
+  }
+
+
 	//------------------ Use Effect / Use memo ------------------
 
 	useEffect(() => {
@@ -312,6 +332,11 @@ export const ActionCard = () => {
 			approve$auce();
 		}
 	}, [currentMarket]);
+
+  // useMemo(() => {
+	// }, [Total]);
+
+  
 
 	return (
 		<div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
@@ -389,8 +414,10 @@ export const ActionCard = () => {
 						<input
 							className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none "
 							name="Amount"
+              id="amount"
 							type="number"
 							placeholder="# of Contracts"
+              onChange={(() => CalculateTotal())}
 							required
 						/>
 					</div>
@@ -405,8 +432,7 @@ export const ActionCard = () => {
 						>
 							<InfoIcon sx={{ fontSize: '18px' }} />
 						</Tooltip>
-						<p className="pr-4 ">
-							Price: ${isYes === true ? priceOfYes : priceOfNo} per contract{' '}
+						<p id="total" className="pr-4"> 
 						</p>
 					</div>
 				</div>
