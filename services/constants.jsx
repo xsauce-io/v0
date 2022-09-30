@@ -28,5 +28,4 @@ export const Book4 = '0xB6351BD90a83Cea1137344D8DA8867b36f6F97DD';
 
 export const urlBySku = process.env.NEXT_PUBLIC_SNEAKER_API + 'limit=10&sku=';
 
-export const urlByLimit =
-	'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=';
+export const urlByLimit = process.env.NEXT_PUBLIC_SNEAKER_API + 'limit=';
