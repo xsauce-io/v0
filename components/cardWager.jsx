@@ -27,21 +27,26 @@ export const Card = ({ cardObject }) => {
 	const ratios = async () => {
 		console.log(data);
 		if (data !== undefined && data.address !== undefined) {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const signer = await provider.getSigner();
-			const contract = new ethers.Contract(data.address, marketAbi, signer);
-			const getYes = await contract.totalSupply(1);
-			const getNo = await contract.totalSupply(2);
+			try {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = await provider.getSigner();
+				const contract = new ethers.Contract(data.address, marketAbi, signer);
+				const getYes = await contract.totalSupply(1);
+				const getNo = await contract.totalSupply(2);
 
-			let NoRatio =
-				(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+				let NoRatio =
+					(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
 
-			let YesRatio =
-				(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
-			console.log(YesRatio);
+				let YesRatio =
+					(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+				console.log(YesRatio);
 
-			setYes(YesRatio.toFixed(0));
-			setNo(NoRatio.toFixed(0));
+				setYes(YesRatio.toFixed(0));
+				setNo(NoRatio.toFixed(0));
+			} catch {
+				(e) =>
+					console.log('card wager meta mask error: cannot display data', e);
+			}
 		}
 	};
 

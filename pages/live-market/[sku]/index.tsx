@@ -12,7 +12,7 @@ import { ActionCard } from '../../../components/actionCard';
 import { Header } from '../../../components/header';
 import { Footer } from '../../../components/footer';
 import { useGetSneaker } from '../../../services/useRequests';
-import BookFactoryABI from "../../../abi/bookFactory.json"
+import BookFactoryABI from '../../../abi/bookFactory.json';
 import {
 	$tableAddress,
 	OrderBookAddressGit,
@@ -30,22 +30,23 @@ const LiveMarket: NextPage = () => {
 	const [admin, setAdmin] = useState(false);
 
 	const adminCheck = async () => {
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		// Prompt user for account connections
-		let wallet = await provider.send('eth_requestAccounts', [0]);
-		let accounts = wallet.toString();
-		console.log(accounts);
+		try {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			// Prompt user for account connections
+			let wallet = await provider.send('eth_requestAccounts', [0]);
+			let accounts = wallet.toString();
+			console.log(accounts);
 
-		if (accounts == 0x50924f626d1ae4813e4a81e2c5589ec3882c13ca) {
-			setAdmin(true);
-		} else {
-			setAdmin(false);
+			if (accounts == 0x50924f626d1ae4813e4a81e2c5589ec3882c13ca) {
+				setAdmin(true);
+			} else {
+				setAdmin(false);
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
-
-
-	
 	// const createNewBook = async (e: any) => {
 	// 	e.preventDefault();
 	// 	const data = new FormData(e.target);

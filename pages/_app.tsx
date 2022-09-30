@@ -24,7 +24,6 @@ export const event = (event_name: string, props: any) => {
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
-	console.log(process.env.NEXT_PUBLIC_TEST);
 	//Mix Panel setup
 	useEffect(() => {
 		const handleRouteChange = (url: any) => {

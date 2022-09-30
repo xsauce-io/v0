@@ -68,51 +68,57 @@ export const ActionCard = () => {
 	};
 
 	const approve$auce = async () => {
-		if (isSet == true) {
-			return;
-		}
+		try {
+			if (isSet == true) {
+				return;
+			}
 
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		const address = (await provider.send('eth_requestAccounts', [])).toString();
-		const signer = provider.getSigner();
-		const $table = new ethers.Contract($tableAddress, $tableABI, signer);
-		const allowance = await $table.allowance(address, currentMarket.address);
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const address = (
+				await provider.send('eth_requestAccounts', [])
+			).toString();
+			const signer = provider.getSigner();
+			const $table = new ethers.Contract($tableAddress, $tableABI, signer);
+			const allowance = await $table.allowance(address, currentMarket.address);
 
-		if (allowance > 100000 * 10 ** 18) {
-			mixpanelTrack('Approve Funds', { result: 'insufficient' });
-		} else {
-			try {
-				const approvedAmount = BigNumber.from('2')
-					.pow(BigNumber.from('256'))
-					.sub('1');
+			if (allowance > 100000 * 10 ** 18) {
+				mixpanelTrack('Approve Funds', { result: 'insufficient' });
+			} else {
+				try {
+					const approvedAmount = BigNumber.from('2')
+						.pow(BigNumber.from('256'))
+						.sub('1');
 
-				await $table.approve(
-					currentMarket.address,
-					BigNumber.from(approvedAmount)
-				);
-				setIsSet(true);
-				mixpanelTrackProps('Approve Funds', { result: 'successful' });
-			} catch (error) {
-				if (error.code == 'ACTION_REJECTED') {
-					toast.custom(
-						(t) => (
-							<ToastNotification
-								message={'You rejected the transaction'}
-								subMessage={
-									'If you did this by mistake, please go back to live markets and try again'
-								}
-								icon={<img src="/alertCircle.svg" />}
-								t={t}
-							/>
-						),
-						{ duration: 7000 }
+					await $table.approve(
+						currentMarket.address,
+						BigNumber.from(approvedAmount)
 					);
-					mixpanelTrackProps('Approve Funds', { result: 'cancelled' });
-				} else {
-					console.log(error.code);
-					mixpanelTrackProps('Approve Funds', { result: 'failed' });
+					setIsSet(true);
+					mixpanelTrackProps('Approve Funds', { result: 'successful' });
+				} catch (error) {
+					if (error.code == 'ACTION_REJECTED') {
+						toast.custom(
+							(t) => (
+								<ToastNotification
+									message={'You rejected the transaction'}
+									subMessage={
+										'If you did this by mistake, please go back to live markets and try again'
+									}
+									icon={<img src="/alertCircle.svg" />}
+									t={t}
+								/>
+							),
+							{ duration: 7000 }
+						);
+						mixpanelTrackProps('Approve Funds', { result: 'cancelled' });
+					} else {
+						console.log(error.code);
+						mixpanelTrackProps('Approve Funds', { result: 'failed' });
+					}
 				}
 			}
+		} catch (error) {
+			console.log('wallet possibly not connected, cannot approve funds');
 		}
 	};
 
@@ -262,24 +268,30 @@ export const ActionCard = () => {
 			console.log(error);
 		}
 	};
+
 	const prices = async () => {
-		if (currentMarket !== undefined) {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const signer = await provider.getSigner();
-			const contract = new ethers.Contract(
-				currentMarket?.address,
-				marketabi,
-				signer
-			);
-			const getYes = await contract.totalSupply(1);
-			const getNo = await contract.totalSupply(2);
+		try {
+			if (currentMarket !== undefined) {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = await provider.getSigner();
+				const contract = new ethers.Contract(
+					currentMarket?.address,
+					marketabi,
+					signer
+				);
+				const getYes = await contract.totalSupply(1);
+				const getNo = await contract.totalSupply(2);
 
-			let priceNo = getNo.toNumber() / (getYes.toNumber() + getNo.toNumber());
+				let priceNo = getNo.toNumber() / (getYes.toNumber() + getNo.toNumber());
 
-			let priceYes = getYes.toNumber() / (getYes.toNumber() + getNo.toNumber());
+				let priceYes =
+					getYes.toNumber() / (getYes.toNumber() + getNo.toNumber());
 
-			setPriceYes(priceYes.toFixed(2));
-			setPriceNo(priceNo.toFixed(2));
+				setPriceYes(priceYes.toFixed(2));
+				setPriceNo(priceNo.toFixed(2));
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 

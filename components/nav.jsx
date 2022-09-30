@@ -7,6 +7,8 @@ import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 
 import { LocalDrawer } from '../components/drawer';
 import SauceTokenABI from '../abi/$tableSauce.json';
+import toast from 'react-hot-toast';
+import { ToastNotification } from './toast';
 
 export const Nav = ({ logoColor }) => {
 	// let [network, setNetwork] = useState();
@@ -19,8 +21,6 @@ export const Nav = ({ logoColor }) => {
 
 	const { width } = useWindowDimensions();
 
-	const [currentDimension, setCurrentDimension] = useState();
-	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	let [accounts, setAccount] = useState(null);
 	const [toggle, setToggle] = useState();
 	const [current, setCurrent] = useState();
@@ -28,62 +28,71 @@ export const Nav = ({ logoColor }) => {
 	const [fullLengthAccount, setFullLengthAccount] = useState(null);
 
 	const getWallet = async (clicked = false) => {
-		if (localStorage.getItem('network') === 'arbitrum') {
-			setToggle(421613);
-		}
+		try {
+			if (localStorage.getItem('network') === 'arbitrum') {
+				setToggle(421613);
+			}
 
-		if (localStorage.getItem('network') === 'mumbai') {
-			setToggle(80001);
-		}
+			if (localStorage.getItem('network') === 'mumbai') {
+				setToggle(80001);
+			}
 
-		if (localStorage.getItem('network') === 'telos') {
-			setToggle(41);
-		}
+			if (localStorage.getItem('network') === 'telos') {
+				setToggle(41);
+			}
 
-		if (localStorage.getItem('network') === 'unknown') {
-			setToggle(null);
-		}
+			if (localStorage.getItem('network') === 'unknown') {
+				setToggle(null);
+			}
 
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		const network = await provider.getNetwork();
-		const chainId = network.chainId;
-		if (chainId !== 421613 || chainId !== 80001 || chainId !== 41) {
-			localStorage.setItem('network', 'unknown');
-		}
-		setCurrent(chainId);
-		chains(chainId);
-		console.log({ here: chainId });
-		let wallet = await provider.send('eth_requestAccounts', [0]);
-		accounts = wallet.toString();
-		setFullLengthAccount(wallet.toString());
-		let truncateAccountName =
-			accounts.substring(0, 4) + '...' + accounts.slice(-4);
-		setAccount(truncateAccountName);
-		if (wallet) {
-			mixpanelTrackProps('Connect Wallet', {
-				result: 'successful',
-				automaticConnection: !clicked,
-				chainId: chainId,
-			});
-		} else {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const network = await provider.getNetwork();
+			const chainId = network.chainId;
+			if (chainId !== 421613 || chainId !== 80001 || chainId !== 41) {
+				localStorage.setItem('network', 'unknown');
+			}
+			setCurrent(chainId);
+			chains(chainId);
+			console.log({ chainzid: chainId });
+
+			let wallet = await provider.send('eth_requestAccounts', [0]);
+
+			accounts = wallet.toString();
+			setFullLengthAccount(wallet.toString());
+			let truncateAccountName =
+				accounts.substring(0, 4) + '...' + accounts.slice(-4);
+			setAccount(truncateAccountName);
+			console.log('hhehhehehe', isConnected);
+
+			if (wallet) {
+				mixpanelTrackProps('Connect Wallet', {
+					result: 'successful',
+					automaticConnection: !clicked,
+					chainId: chainId,
+				});
+			}
+		} catch {
+			console.log('error wallet not connected');
+			toast.custom(
+				(t) => (
+					<ToastNotification
+						message={'Wallet Not Connected'}
+						subMessage={
+							'To see market statistics, your wallet must be connected.'
+						}
+						icon={<img src="/alertTriangle.svg" />}
+						t={t}
+					/>
+				),
+				{ duration: 7000 }
+			);
+
 			mixpanelTrackProps('Connect Wallet', {
 				result: 'unsuccessful',
 				automaticConnection: !clicked,
-				chainId: chainId,
+				//chainId: chainId,
 			});
 		}
-	};
-
-	const copyAddress = async () => {
-		/* Copy the text inside the text field */
-
-		await navigator.clipboard.writeText(fullLengthAccount);
-		navigator.clipboard.readText().then((text) => {
-			console.log('copied text', text);
-		});
-
-		/* Alert the copied text */
-		// alert("Copied Address: " + fullLengthAccount);
 	};
 
 	const copyAddressToClipboard = async () => {
@@ -254,23 +263,24 @@ export const Nav = ({ logoColor }) => {
 	const SauceTokenAddress = '0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D';
 
 	const faucet = async () => {
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		let requestor = (
-			await provider.send('eth_requestAccounts', [0])
-		).toString();
-		const signer = provider.getSigner();
-		const SauceToken = new ethers.Contract(
-			SauceTokenAddress,
-			SauceTokenABI,
-			signer
-		);
-		await SauceToken.sendSauce(requestor);
-
-		const tokenSymbol = '$';
-		const tokenImage = 'https://i.postimg.cc/15tqGBct/emblem.jpg';
-
-		//TO FIX: this try catch does not work
 		try {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			let requestor = (
+				await provider.send('eth_requestAccounts', [0])
+			).toString();
+			const signer = provider.getSigner();
+			const SauceToken = new ethers.Contract(
+				SauceTokenAddress,
+				SauceTokenABI,
+				signer
+			);
+			await SauceToken.sendSauce(requestor);
+
+			const tokenSymbol = '$';
+			const tokenImage = 'https://i.postimg.cc/15tqGBct/emblem.jpg';
+
+			//TO FIX: this try catch does not work
+
 			const wasAdded = await ethereum.request({
 				method: 'wallet_watchAsset',
 				params: {
@@ -308,6 +318,7 @@ export const Nav = ({ logoColor }) => {
 
 	useEffect(() => {
 		getWallet();
+		console.log('once');
 		localStorage.getItem('network');
 	}, []);
 
@@ -528,7 +539,7 @@ export const Nav = ({ logoColor }) => {
 
 						<button
 							className="text-lg flex flex-row text-black items-center bg-[#DCDEE1] font-Inter rounded-3xl py-2 px-6 w-full hover:opacity-60"
-							onClick={() => getWallet()}
+							onClick={() => getWallet(true)}
 						>
 							<span className="truncate">
 								{accounts == null ? 'Connect Wallet' : accounts}
