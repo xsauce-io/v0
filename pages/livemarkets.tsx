@@ -28,6 +28,12 @@ const Markets: NextPage = () => {
 		RETAIL_PRICE: 'retailPrice',
 	};
 
+	const FILTER_BY_STATES = {
+		LIVE: 'live',
+		EXPIRED: 'expired',
+		NONE: 'none',
+	};
+
 	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 	// -------------------- Data Fetching ------------------
@@ -40,15 +46,22 @@ const Markets: NextPage = () => {
 	// ------------------- State Variable --------------------
 
 	const [response, setResponse] = useState([] as any[]);
+	const [storedPersistentResponse, setStoredPersistentResponse] = useState(
+		[] as any[]
+	);
 	const [sortBy, setSortBy] = useState({
 		state: SORT_BY_STATES.RETAIL_PRICE,
 	});
 	const [isAscending, setIsAscending] = useState(true);
+	const [filterBy, setFilterBy] = useState({
+		state: FILTER_BY_STATES.NONE,
+	});
 
 	//------------------ Use Effect / Use memo ------------------
 
 	useEffect(() => {
 		setResponse([s1, s2, s3, s4]);
+		setStoredPersistentResponse([s1, s2, s3, s4]);
 		setSortBy({
 			state: SORT_BY_STATES.RETAIL_PRICE,
 		});
@@ -117,6 +130,37 @@ const Markets: NextPage = () => {
 			}
 		}
 	}, [sortBy, isAscending]);
+
+	// useMemo(() => {
+	// 	if (response) {
+	// 		if (response.length >= 0 && filterBy.state === FILTER_BY_STATES.NONE) {
+	// 			setResponse(storedPersistentResponse);
+	// 		} else if (
+	// 			response.length > 0 &&
+	// 			filterBy.state === FILTER_BY_STATES.EXPIRED
+	// 		) {
+	// 			response.filter((element) => {
+	// 				let today = new Date();
+	// 				const expirationDate = new Date(element.expiration);
+
+	// 				if (today >= expirationDate) {
+	// 					console.log('element expired', expirationDate);
+	// 				}
+	// 				console.log(element.expiration);
+	// 			});
+	// 			console.log('expired', { response });
+	// 		} else if (
+	// 			response.length > 0 &&
+	// 			filterBy.state === FILTER_BY_STATES.LIVE
+	// 		) {
+	// 			response.sort(
+	// 				(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 					a.retailPrice - b.retailPrice
+	// 			);
+	// 			console.log('live', { response });
+	// 		}
+	// 	}
+	// }, [filterBy]);
 
 	useEffect(() => {
 		if (e1 || e2 || e3 || e4) {
@@ -222,10 +266,10 @@ const Markets: NextPage = () => {
 									</li>
 								</ul>
 							</div>
-							<div className="dropdown dropdown-end ">
+							{/* <div className="dropdown dropdown-end ">
 								<label
 									tabIndex={0}
-									className="text-[10px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl  text-sm  bg-[#0C1615] hover:opacity-50  w-[130px]  p-1 px-2"
+									className="text-[10px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm  bg-[#0C1615] hover:opacity-50  w-[130px]  p-1 px-2"
 								>
 									<img className="" src="/settingsSlider.svg" />
 
@@ -240,45 +284,31 @@ const Markets: NextPage = () => {
 									<li>
 										<button
 											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE });
+												setFilterBy({ state: FILTER_BY_STATES.EXPIRED });
 												mixpanel.track('Filter ', {
-													sortBy: SORT_BY_STATES.RETAIL_PRICE,
+													sortBy: FILTER_BY_STATES.EXPIRED,
 												});
 											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
-											Retail Price
+											Expired
 										</button>
 									</li>
 									<li>
 										<button
 											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE });
+												setFilterBy({ state: FILTER_BY_STATES.LIVE });
 												mixpanel.track('Filter ', {
-													sortBy: SORT_BY_STATES.RELEASE_DATE,
+													sortBy: FILTER_BY_STATES.LIVE,
 												});
 											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
-											Release Date
-										</button>
-									</li>
-
-									<li>
-										<button
-											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.NAME });
-												mixpanel.track('Filter ', {
-													sortBy: SORT_BY_STATES.NAME,
-												});
-											}}
-											className="text-black font-Inter active:bg-[#ACFF00]"
-										>
-											Name
+											Live
 										</button>
 									</li>
 								</ul>
-							</div>
+							</div> */}
 						</div>
 					</ContentHeader>
 

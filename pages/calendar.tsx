@@ -33,6 +33,12 @@ const Markets: NextPage = () => {
 		RETAIL_PRICE: 'retailPrice',
 	};
 
+	const FILTER_BY_STATES = {
+		LIVE: 'live',
+		EXPIRED: 'expired',
+		NONE: 'none',
+	};
+
 	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 	// -------------------- Data Fetching ------------------
@@ -47,6 +53,10 @@ const Markets: NextPage = () => {
 	const [responseError, setResponseError] = useState(sneakersDataError);
 	const [highlight, setHighlight] = useState(highlightSneaker);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
+	const [filterBy, setFilterBy] = useState({
+		state: FILTER_BY_STATES.NONE,
+	});
+
 	const [isAscending, setIsAscending] = useState(true);
 
 	//------------------ Use Effect / Use memo ------------------
@@ -56,6 +66,9 @@ const Markets: NextPage = () => {
 		setHighlight(highlightSneaker);
 		setSortBy({
 			state: SORT_BY_STATES.RETAIL_PRICE,
+		});
+		setFilterBy({
+			state: FILTER_BY_STATES.NONE,
 		});
 		setResponseError(sneakersDataError);
 	}, [sneakersData, highlightSneaker, sneakersDataError]);
@@ -228,7 +241,7 @@ const Markets: NextPage = () => {
 									</li>
 								</ul>
 							</div>
-							<div className="dropdown dropdown-end ">
+							{/* <div className="dropdown dropdown-end ">
 								<label
 									tabIndex={0}
 									className="text-[10px] flex flex-row justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm  bg-[#0C1615] hover:opacity-50  w-[130px]  p-1 px-2"
@@ -246,45 +259,31 @@ const Markets: NextPage = () => {
 									<li>
 										<button
 											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE });
+												setSortBy({ state: FILTER_BY_STATES.EXPIRED });
 												mixpanel.track('Filter ', {
-													sortBy: SORT_BY_STATES.RETAIL_PRICE,
+													sortBy: FILTER_BY_STATES.EXPIRED,
 												});
 											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
-											Retail Price
+											Expired
 										</button>
 									</li>
 									<li>
 										<button
 											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE });
+												setSortBy({ state: FILTER_BY_STATES.LIVE });
 												mixpanel.track('Filter ', {
-													sortBy: SORT_BY_STATES.RELEASE_DATE,
+													sortBy: FILTER_BY_STATES.LIVE,
 												});
 											}}
 											className="text-black font-Inter active:bg-[#ACFF00]"
 										>
-											Release Date
-										</button>
-									</li>
-
-									<li>
-										<button
-											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.NAME });
-												mixpanel.track('Filter ', {
-													sortBy: SORT_BY_STATES.NAME,
-												});
-											}}
-											className="text-black font-Inter active:bg-[#ACFF00]"
-										>
-											Name
+											Live
 										</button>
 									</li>
 								</ul>
-							</div>
+							</div> */}
 						</div>
 						<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
 							{response || sneakersDataError === undefined
