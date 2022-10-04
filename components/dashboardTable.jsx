@@ -18,89 +18,84 @@ export const DashboardTable = ({ children }) => {
         <div className="flex flex-col w-full ">
             {width >= screens.desktop ? (
                 <div className="flex flex-row py-4 text-[14px]  items-center w-full px-4 font-Inter">
-                    <div className="flex flex-row pl-4 w-[30%] space-x-2 items-center ">
+                    <div className="flex flex-row pl-4 w-[40%] space-x-2 items-center ">
                         <p >Name of Assets</p>
                         <img src="/up-down.svg" />
                     </div>
 
-                    <div className="flex flex-row w-[18.5%] space-x-2 items-center">
+                    <div className="flex flex-row w-[25%] space-x-2 items-center">
                         <p  >Holdings</p>
                         <img src="/up-down.svg" />
                     </div>
 
-                    <div className="flex flex-row w-[21.5%] space-x-2 items-center">
-                        <p >Total price</p>
-                        <img src="/up-down.svg" />
-                    </div>
-
-                    <div className="flex flex-row w-[20%] space-x-2 items-center">
-                        <p>Return</p>
+                    <div className="flex flex-row w-[25%] space-x-2 items-center">
+                        <p >Avg Buy Price</p>
                         <img src="/up-down.svg" />
                     </div>
 
                     <div className="flex flex-row w-[11%]  space-x-2 items-center">
-                        <p>Contracts</p>
+                        <p>Contract</p>
                         <img src="/up-down.svg" />
                     </div>
                 </div>
             ) : width >= screens.laptop ? (
                 <div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
-                    <div className="flex flex-row pl-4 w-[40%] space-x-2 items-center w-full flex-1 ">
+                    <div className="flex flex-row pl-4 w-[25%] space-x-2 items-center w-full flex-1 ">
                         <p>Name of Asset</p>
                         <img src="/up-down.svg" />
                     </div>
 
-                    <div className="flex flex-row w-[22%] space-x-2 items-center">
+                    <div className="flex flex-row w-[25%] space-x-2 items-center justify-center">
                         <p>Holdings</p>
                         <img src="/up-down.svg" />
                     </div>
 
-                    <div className="flex flex-row w-[24%] space-x-2 items-center">
-                        <p>Return</p>
+                    <div className="flex flex-row w-[25%] space-x-2 items-center justify-center">
+                        <p>Average Buy Price</p>
                         <img src="/up-down.svg" />
                     </div>
 
-                    <div className="flex flex-row w-[19%]  space-x-2 items-center">
-                        <p>Contracts</p>
+                    <div className="flex flex-row w-[25%]  space-x-2 items-center justify-center">
+                        <p>Contract</p>
                         <img src="/up-down.svg" />
                     </div>
                 </div>
             ) : width >= screens.tablet ? (
                 <div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
-                    <div className="flex flex-row pl-4 w-[40%] space-x-2 items-center w-full flex-1 ">
+                    <div className="flex flex-row pl-4 w-[35%] space-x-2 items-center w-full flex-1 ">
                         <p>Name of Asset</p>
                         <img src="/up-down.svg" />
                     </div>
 
-                    <div className="flex flex-row w-[22%] space-x-2 items-center">
+                    <div className="flex flex-row w-[27%] space-x-2 items-center justify-center">
                         <p>Holdings</p>
                         <img src="/up-down.svg" />
                     </div>
 
-                    <div className="flex flex-row w-[24%] space-x-2 items-center">
-                        <p>Return</p>
+                    <div className="flex flex-row w-[25%] space-x-2 items-center">
+                        <p>Avg Buy Price</p>
                         <img src="/up-down.svg" />
                     </div>
 
-                    <div className="flex flex-row w-[19%]  space-x-2 items-center">
-                        <p>Contracts</p>
+                    <div className="flex flex-row w-[17%]  space-x-2 items-center">
+                        <p>Contract</p>
                         <img src="/up-down.svg" />
                     </div>
                 </div>
             ) : (
                 <div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4 space-x-2">
                     <div className="flex flex-row pl-4 w-[40%] items-center ">
-                        <p>Positions</p>
+                        <p>Name of Asset</p>
                         <img src="/up-down.svg" />
                     </div>
 
                     <div className="flex flex-row w-[28.5%] items-center">
-                        <p>Shares</p>
+                        <p>Holdings</p>
                         <img src="/up-down.svg" />
                     </div>
 
                     <div className="flex flex-row w-[32%] items-center ">
-                        <p>Return</p>
+                        <p>Contract</p>
                         <img src="/up-down.svg" />
                     </div>
                 </div>

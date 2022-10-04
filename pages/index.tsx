@@ -424,7 +424,7 @@ if (IsLoaded === true) {
 						</div>
 					</ContentHeader>
 					<DashboardTable>
-						{positions.legnth === 0 
+						{allMarkets.legnth === 0 
 							? skeletonArray.map(() => (
 									<> 
 										<Skeleton
@@ -438,7 +438,7 @@ if (IsLoaded === true) {
 									</>
 							  ))
 							: 
-              positions?.map((el:any) => {
+              allMarkets?.map((el:any) => {
               return <Dashboard positions={el} />})
               }
 					</DashboardTable>

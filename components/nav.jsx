@@ -62,7 +62,7 @@ export const Nav = ({ logoColor }) => {
 			let truncateAccountName =
 				accounts.substring(0, 4) + '...' + accounts.slice(-4);
 			setAccount(truncateAccountName);
-			console.log('hhehhehehe', isConnected);
+			console.log('nice', isConnected);
 
 			if (wallet) {
 				mixpanelTrackProps('Connect Wallet', {
