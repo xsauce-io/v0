@@ -3,6 +3,7 @@ import { ethers } from "hardhat";
 import mocha from "hardhat";
 import { BigNumber } from "ethers";
 import {$tableAddress, goerliOracle} from "../services/constants"
+import MarketAbi from "../abi/markets.json"
 
 
 describe("Market Tests", function() {
@@ -15,12 +16,22 @@ describe("Market Tests", function() {
 
   await marketDtl.deployed();
 
-  marketDtl.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 300 , goerliOracle , 1665158400, $tableAddress,"DH7138-006")
-  marketDtl.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 330 , goerliOracle , 1665763200, $tableAddress,"DR8869-200")
+ const mkt2 = await marketDtl.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 330 , goerliOracle , 1665763200, $tableAddress,"DR8869-200")
 
-  const details = await marketDtl.getAllMarketswSku()
+  await mkt2.wait(1)
+
+  const marketAdd = (await marketDtl.allMarkets(0)).toString()
+  const signers = await ethers.getSigners();
+  const alice = signers[0];
+
+  const contract = await ethers.getContractAt(MarketAbi, marketAdd);
+
+const response = await contract.connect(alice).getAcctInfo(alice.address)
+ 
+
+console.log(response)
   
-  console.log((details[0].predictionPrice).toString());
+  
   });
 
 

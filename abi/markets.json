@@ -158,6 +158,25 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "resolved",
+        "type": "bool"
+      }
+    ],
+    "name": "marketResolved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "id",
         "type": "uint256"
       },
@@ -191,6 +210,55 @@
       {
         "internalType": "uint256",
         "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "acctInfo",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "avgBuyPriceYes",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "avgBuyPriceNo",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountYes",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountNo",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountPaidYes",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountPaidNo",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "Totalbuys",
         "type": "uint256"
       }
     ],
@@ -370,10 +438,84 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getAcctInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "avgBuyPriceYes",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "avgBuyPriceNo",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountYes",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountNo",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountPaidYes",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountPaidNo",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "Totalbuys",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct Market.purchaseInfo",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getData",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "history",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "jackpotYes",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "jackpotNo",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -449,6 +591,25 @@
   {
     "inputs": [],
     "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "participants",
     "outputs": [
       {
         "internalType": "address",
@@ -703,24 +864,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "fromId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "xchange",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

@@ -141,8 +141,15 @@ if (IsLoaded === true) {
       const contract = new ethers.Contract(MarketFactory, MarketFactoryABI, signer); 
 
      const allMarkets = await contract.getAllMarketswSku();
-
-     setAllMarkets(allMarkets)
+     const cleanedAllMarkets = []
+     for (let index = 0; index < allMarkets.length; index++) {
+       const newData = allMarkets[index].sku 
+       const newAdd = allMarkets[index].market
+       const newObj = {sku: newData, address: newAdd }
+       cleanedAllMarkets.push(newObj)
+     }
+     console.log(cleanedAllMarkets) 
+     setAllMarkets(cleanedAllMarkets)
 
      for (let index = 0; index < allMarkets.length; index++) {
       const shoeData = allMarkets[index].sku
@@ -154,22 +161,21 @@ if (IsLoaded === true) {
   } 
     const balanceArray:any = [];
 
-    const showBalances = async () => {
-      if (IsLoaded === true) {
+    // const showBalances = async () => {
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const connected = (await provider.send('eth_requestAccounts', [0])).toString();
-        const signer = provider.getSigner();
-        for (let index = 0; index < allMarketContracts.length; index++) {
-          const contract = new ethers.Contract(allMarkets[index].market, MarketAbi , signer);
-          const sku = allMarkets[index].sku
-          const balance1 = (await contract.balanceOf(connected, 1)).toString()
-          const balance2 = (await contract.balanceOf(connected, 2)).toString()
-          balanceArray.push({sku, yes:balance1, no:balance2})
-        }
-       setComplete(true)
-      }
-    }
+    //     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    //     const connected = (await provider.send('eth_requestAccounts', [0])).toString();
+    //     const signer = provider.getSigner();
+    //     for (let index = 0; index < allMarketContracts.length; index++) {
+    //       const contract = new ethers.Contract(allMarkets[index].market, MarketAbi , signer);
+    //       const sku = allMarkets[index].sku
+    //       const balance1 = (await contract.balanceOf(connected, 1)).toString()
+    //       const balance2 = (await contract.balanceOf(connected, 2)).toString()
+    //       balanceArray.push({sku, yes:balance1, no:balance2})
+    //     }
+    //    setComplete(true)
+    //   }
+    
 
  
 
@@ -185,7 +191,6 @@ if (IsLoaded === true) {
     const run = async () => {
       await checkMarkets();
       await getSneaker()
-       await showBalances();
     }
     run()
   }, [])
@@ -440,7 +445,7 @@ if (IsLoaded === true) {
 							: 
               allMarkets?.map((el:any) => {
               return <Dashboard positions={el} />})
-              }
+}
 					</DashboardTable>
 				</> 
 

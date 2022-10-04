@@ -27,6 +27,36 @@ import type {
   PromiseOrValue,
 } from "../common";
 
+export declare namespace Market {
+  export type PurchaseInfoStruct = {
+    avgBuyPriceYes: PromiseOrValue<BigNumberish>;
+    avgBuyPriceNo: PromiseOrValue<BigNumberish>;
+    amountYes: PromiseOrValue<BigNumberish>;
+    amountNo: PromiseOrValue<BigNumberish>;
+    amountPaidYes: PromiseOrValue<BigNumberish>;
+    amountPaidNo: PromiseOrValue<BigNumberish>;
+    Totalbuys: PromiseOrValue<BigNumberish>;
+  };
+
+  export type PurchaseInfoStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
+    avgBuyPriceYes: BigNumber;
+    avgBuyPriceNo: BigNumber;
+    amountYes: BigNumber;
+    amountNo: BigNumber;
+    amountPaidYes: BigNumber;
+    amountPaidNo: BigNumber;
+    Totalbuys: BigNumber;
+  };
+}
+
 export interface MarketInterface extends utils.Interface {
   functions: {
     "NO()": FunctionFragment;
@@ -42,6 +72,7 @@ export interface MarketInterface extends utils.Interface {
     "favored()": FunctionFragment;
     "feeCollector()": FunctionFragment;
     "fetched()": FunctionFragment;
+    "getAcctInfo(address)": FunctionFragment;
     "getData()": FunctionFragment;
     "history()": FunctionFragment;
     "initialize(uint256,address,uint256,string)": FunctionFragment;
@@ -81,6 +112,7 @@ export interface MarketInterface extends utils.Interface {
       | "favored"
       | "feeCollector"
       | "fetched"
+      | "getAcctInfo"
       | "getData"
       | "history"
       | "initialize"
@@ -150,6 +182,10 @@ export interface MarketInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "fetched", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getAcctInfo",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "getData", values?: undefined): string;
   encodeFunctionData(functionFragment: "history", values?: undefined): string;
   encodeFunctionData(
@@ -260,6 +296,10 @@ export interface MarketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "fetched", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getAcctInfo",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getData", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "history", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
@@ -514,6 +554,11 @@ export interface Market extends BaseContract {
 
     fetched(overrides?: CallOverrides): Promise<[boolean]>;
 
+    getAcctInfo(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[Market.PurchaseInfoStructOutput]>;
+
     getData(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -689,6 +734,11 @@ export interface Market extends BaseContract {
 
   fetched(overrides?: CallOverrides): Promise<boolean>;
 
+  getAcctInfo(
+    user: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<Market.PurchaseInfoStructOutput>;
+
   getData(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -861,6 +911,11 @@ export interface Market extends BaseContract {
     feeCollector(overrides?: CallOverrides): Promise<string>;
 
     fetched(overrides?: CallOverrides): Promise<boolean>;
+
+    getAcctInfo(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<Market.PurchaseInfoStructOutput>;
 
     getData(overrides?: CallOverrides): Promise<void>;
 
@@ -1087,6 +1142,11 @@ export interface Market extends BaseContract {
 
     fetched(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getAcctInfo(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getData(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -1240,6 +1300,11 @@ export interface Market extends BaseContract {
     feeCollector(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     fetched(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getAcctInfo(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getData(
       overrides?: Overrides & { from?: PromiseOrValue<string> }

@@ -60,6 +60,10 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         usdc = IERC20(_usdc);
     }
 
+    function getAcctInfo(address user) external view returns (purchaseInfo memory) {
+        return acctInfo[user];
+    }
+
     function initialize(
         uint _predictionPrice,
         address _oracleFeed,

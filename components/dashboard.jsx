@@ -2,6 +2,9 @@
 import React from "react"
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js'
 import {useGetMarketBySku } from '../services/useRequests';
+import { useState, useEffect} from "react";
+import { ethers } from "ethers";
+import MarketAbi from "../abi/markets.json"
 
 
 
@@ -18,7 +21,32 @@ console.log(s1)
 
   const explorer = 'https://goerli.etherscan.io/address/' + s1?.address;
 
-  let truncateContract = (s1?.address).substring(0, 4) + '...' + (s1?.address).slice(-4);
+  let truncateContract = s1?.address.substring(0, 4) + '...' + s1?.address.slice(-4);
+
+  const [allBalances, setAllBalances] = useState();
+ 
+
+  const showBalances = async () => {
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const connected = (await provider.send('eth_requestAccounts', [0])).toString();
+    const signer = provider.getSigner();
+      const contract = new ethers.Contract(positions.address, MarketAbi , signer);
+      const balances = (await contract.getAcctInfo(connected))
+      const one = (balances.amountNo).toString()
+      const two = (balances.amountYes).toString()
+      const three = (balances.avgBuyPriceNo).toString()
+      const four = (balances.avgBuyPriceYes).toString()
+
+      const newObj = {amountNo: one, amountYes: two, avgBuyPriceNo: three, avgBuyPriceYes: four}
+      
+      setAllBalances(newObj);
+      
+    }
+   
+    showBalances()
+
+
 
   const { width } = useWindowDimensions();
   return (
@@ -32,12 +60,12 @@ console.log(s1)
             {s1?.name}
           </span>
           <span className="flex flex-row  w-[22%] text-xs font-Inter justify-center pl-4">
-            {positions?.yes} Yes Sir
+          {allBalances?.amountYes} Yes / {allBalances?.amountNo} No
           </span>
 
           <span className="flex flex-row w-[38%] text-xs justify-center pr-3">
             <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex ">
-              <p className="text-xs font-Inter"> .50 cents{}</p>
+              <p className="text-xs font-Inter"> {allBalances?.avgBuyPriceYes} cents (yes) / {allBalances?.avgBuyPriceNo} cents (no) </p>
             </span>
           </span>
         
@@ -50,12 +78,12 @@ console.log(s1)
             {s1?.name}
           </span>
           <span className="flex flex-row  w-[25%] text-xs font-Inter justify-center">
-            {positions?.yes} 105 Yes / 20 No
+          {allBalances?.amountYes} Yes / {allBalances?.amountNo} No
           </span>
 
           <span className="flex flex-row w-[25%] text-xs justify-center">
             <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex ">
-              <p className="text-xs font-Inter"> {}105 Yes / 20 No</p>
+              <p className="text-xs font-Inter"> {allBalances?.avgBuyPriceYes} cents (yes) / {allBalances?.avgBuyPriceNo} cents (no)</p>
             </span>
           </span>
           <a href={explorer} className='flex flex-row w-[25%] text-xs font-Inter underline justify-center'>
@@ -66,7 +94,7 @@ console.log(s1)
             {s1?.name}
           </span>
           <span className="flex flex-row  w-[50%] text-xs font-Inter justify-center bg-[#ACFF00] text-black rounded-[40px] py-1 px-2">
-            {positions?.yes} 105 Yes / 20 No
+          {allBalances?.amountYes} Yes / {allBalances?.amountNo} No
           </span>
         
         </a>}
