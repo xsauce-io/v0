@@ -79,12 +79,22 @@ export const Card = ({ cardObject }) => {
 					<div className="flex items-left flex-col space-y-3 justify-center w-full h-full ">
 						{cardObject.image?.original === '' ||
 						cardObject.image?.original ===
-							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
+							'https://image.goat.com/placeholders/product_templates/original/missing.png' &&
+              data?.image === undefined ? (
 							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
 									className="object-cover mobile:w-[40%]  m-auto mobile:h-[100%] scale-100"
-									src="/hurache.svg"
+									src="/11s.svg"
 								/>
+							</div>
+						) : data?.image !== undefined ? (
+							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
+								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
+
+								<img
+									className="object-contain mobile:w-[40%]  m-auto mobile:h-[100%] scale-100"
+									src={data?.image}
+								></img>
 							</div>
 						) : (
 							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
@@ -95,7 +105,7 @@ export const Card = ({ cardObject }) => {
 									src={cardObject.image?.original}
 								></img>
 							</div>
-						)}
+						) }
 
 						<div className="h-full">
 							<div className="px-8  ">

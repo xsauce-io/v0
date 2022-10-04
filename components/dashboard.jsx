@@ -2,7 +2,9 @@
 import React from "react"
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js'
 
+
 export const Dashboard = ({ positions }) => {
+
   const screens = {
     mobile: "300",
     tablet: "640",
@@ -19,10 +21,10 @@ export const Dashboard = ({ positions }) => {
       {width >= screens.desktop ?
         <div className="flex flex-row  text-[12px] rounded-[40px] w-full bg-[#0C1615] text-white font-Inter items-center justify-between py-4 px-8 my-[.5rem]">
           <span className="flex flex-row  w-[30%] font-SG text-sm">
-            {positions?.name}
+            {positions.name}
           </span>
           <span className="flex flex-row  w-[18.5%] text-xs font-Inter">
-            15,000 YES
+            {balances?.yes}
           </span>
           <span className="flex flex-row  w-[21.5%] text-xs font-Inter">
             $7,500
@@ -35,7 +37,7 @@ export const Dashboard = ({ positions }) => {
             </span>
           </span>
           <span className='flex flex-row w-[10%] text-xs font-Inter'>
-            0x75EE1fe...D61Cb&nbsp;&nbsp;↗
+           {positions.address} ↗
           </span>
         </div>
         : width >= screens.tablet ? <div className="flex flex-row  text-[12px] rounded-[40px] w-full bg-[#0C1615] text-white font-Inter items-center justify-between py-4 px-8 my-[.5rem]">
@@ -43,7 +45,7 @@ export const Dashboard = ({ positions }) => {
             {positions?.name}
           </span>
           <span className="flex flex-row  w-[18.5%] text-xs font-Inter">
-            15,000 YES
+            {balances?.yes}
           </span>
 
           <span className="flex flex-row w-[20%] text-xs">
@@ -53,14 +55,14 @@ export const Dashboard = ({ positions }) => {
             </span>
           </span>
           <span className='flex flex-row w-[18%] text-xs font-Inter'>
-            0x75EE1fe...D61Cb&nbsp;&nbsp;↗
+          {positions.name} ↗
           </span>
         </div> : <div className="flex flex-row  text-[12px] rounded-[40px] w-full bg-[#0C1615] text-white font-Inter items-center justify-between py-4 px-8 my-[.5rem]">
           <span className="flex flex-row  w-[40%] font-SG text-xs text-ellipsis overflow-hidden ">
-            {positions?.name}
+            {positions.address}
           </span>
           <span className="flex flex-row  w-[28.5%] text-xs font-Inter">
-            15,000 YES
+            {balances?.yes}
           </span>
 
           <span className="flex flex-row w-[32%]  ">

@@ -17,6 +17,17 @@ contract MarketFactory is Ownable {
  address[] public allMarkets;
  event marketCreated(string sku, uint _predictionPrice, uint256 closingDate);
 
+ struct MarketDetails {
+  string sku;
+  address market;
+  uint256 predictionPrice;
+  uint256 closingDate;
+ }
+
+MarketDetails public mktInfo;
+MarketDetails[] public mktDtlArray;
+
+
 
  constructor() {}
 
@@ -26,7 +37,15 @@ contract MarketFactory is Ownable {
    bytes32 marketKey = keccak256(abi.encodePacked(sku, _predictionPrice, _closingDate));
    markets[marketKey] = address(market);
    allMarkets.push(address(market));
-  
+
+  MarketDetails memory updateMktDetails = mktInfo;
+  updateMktDetails.market = address(market);
+  updateMktDetails.sku = sku;
+  updateMktDetails.predictionPrice = _predictionPrice;
+  updateMktDetails.closingDate = _closingDate;
+
+  mktDtlArray.push(updateMktDetails);
+
    emit marketCreated(sku, _predictionPrice, _closingDate);
   
    return address(market);
@@ -41,6 +60,10 @@ function getMarket(string memory sku, uint256 _predictionPrice, uint256 closingD
 
 function getAllMarkets() external view returns (address[] memory valid) {
     return allMarkets;
+}
+
+function getAllMarketswSku() external view returns (MarketDetails[] memory valid) {
+    return mktDtlArray;
 }
 
 

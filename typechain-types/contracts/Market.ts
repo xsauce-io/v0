@@ -31,6 +31,7 @@ export interface MarketInterface extends utils.Interface {
   functions: {
     "NO()": FunctionFragment;
     "YES()": FunctionFragment;
+    "acctInfo(address)": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "burn(address,uint256,uint256)": FunctionFragment;
@@ -42,10 +43,12 @@ export interface MarketInterface extends utils.Interface {
     "feeCollector()": FunctionFragment;
     "fetched()": FunctionFragment;
     "getData()": FunctionFragment;
+    "history()": FunctionFragment;
     "initialize(uint256,address,uint256,string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(uint256,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
+    "participants(uint256)": FunctionFragment;
     "predictionPrice()": FunctionFragment;
     "priceOfNo()": FunctionFragment;
     "priceOfYes()": FunctionFragment;
@@ -67,6 +70,7 @@ export interface MarketInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "NO"
       | "YES"
+      | "acctInfo"
       | "balanceOf"
       | "balanceOfBatch"
       | "burn"
@@ -78,10 +82,12 @@ export interface MarketInterface extends utils.Interface {
       | "feeCollector"
       | "fetched"
       | "getData"
+      | "history"
       | "initialize"
       | "isApprovedForAll"
       | "mint"
       | "owner"
+      | "participants"
       | "predictionPrice"
       | "priceOfNo"
       | "priceOfYes"
@@ -101,6 +107,10 @@ export interface MarketInterface extends utils.Interface {
 
   encodeFunctionData(functionFragment: "NO", values?: undefined): string;
   encodeFunctionData(functionFragment: "YES", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "acctInfo",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
@@ -141,6 +151,7 @@ export interface MarketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "fetched", values?: undefined): string;
   encodeFunctionData(functionFragment: "getData", values?: undefined): string;
+  encodeFunctionData(functionFragment: "history", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "initialize",
     values: [
@@ -159,6 +170,10 @@ export interface MarketInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "participants",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "predictionPrice",
     values?: undefined
@@ -225,6 +240,7 @@ export interface MarketInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "NO", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "YES", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acctInfo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOfBatch",
@@ -245,6 +261,7 @@ export interface MarketInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "fetched", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getData", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "history", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
@@ -252,6 +269,10 @@ export interface MarketInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "participants",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "predictionPrice",
     data: BytesLike
@@ -301,6 +322,7 @@ export interface MarketInterface extends utils.Interface {
     "TransferBatch(address,address,address,uint256[],uint256[])": EventFragment;
     "TransferSingle(address,address,address,uint256,uint256)": EventFragment;
     "URI(string,uint256)": EventFragment;
+    "marketResolved(uint256,bool)": EventFragment;
     "positionCreated(uint256,uint256)": EventFragment;
   };
 
@@ -309,6 +331,7 @@ export interface MarketInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "TransferBatch"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TransferSingle"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "URI"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "marketResolved"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "positionCreated"): EventFragment;
 }
 
@@ -372,6 +395,17 @@ export type URIEvent = TypedEvent<[string, BigNumber], URIEventObject>;
 
 export type URIEventFilter = TypedEventFilter<URIEvent>;
 
+export interface marketResolvedEventObject {
+  timestamp: BigNumber;
+  resolved: boolean;
+}
+export type marketResolvedEvent = TypedEvent<
+  [BigNumber, boolean],
+  marketResolvedEventObject
+>;
+
+export type marketResolvedEventFilter = TypedEventFilter<marketResolvedEvent>;
+
 export interface positionCreatedEventObject {
   id: BigNumber;
   amount: BigNumber;
@@ -413,6 +447,29 @@ export interface Market extends BaseContract {
     NO(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     YES(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    acctInfo(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<
+      [
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber
+      ] & {
+        avgBuyPriceYes: BigNumber;
+        avgBuyPriceNo: BigNumber;
+        amountYes: BigNumber;
+        amountNo: BigNumber;
+        amountPaidYes: BigNumber;
+        amountPaidNo: BigNumber;
+        Totalbuys: BigNumber;
+      }
+    >;
 
     balanceOf(
       account: PromiseOrValue<string>,
@@ -461,6 +518,12 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    history(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { jackpotYes: BigNumber; jackpotNo: BigNumber }
+    >;
+
     initialize(
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
@@ -482,6 +545,11 @@ export interface Market extends BaseContract {
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
+
+    participants(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     predictionPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -555,6 +623,29 @@ export interface Market extends BaseContract {
 
   YES(overrides?: CallOverrides): Promise<BigNumber>;
 
+  acctInfo(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<
+    [
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber
+    ] & {
+      avgBuyPriceYes: BigNumber;
+      avgBuyPriceNo: BigNumber;
+      amountYes: BigNumber;
+      amountNo: BigNumber;
+      amountPaidYes: BigNumber;
+      amountPaidNo: BigNumber;
+      Totalbuys: BigNumber;
+    }
+  >;
+
   balanceOf(
     account: PromiseOrValue<string>,
     id: PromiseOrValue<BigNumberish>,
@@ -602,6 +693,12 @@ export interface Market extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  history(
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { jackpotYes: BigNumber; jackpotNo: BigNumber }
+  >;
+
   initialize(
     _predictionPrice: PromiseOrValue<BigNumberish>,
     _oracleFeed: PromiseOrValue<string>,
@@ -623,6 +720,11 @@ export interface Market extends BaseContract {
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
+
+  participants(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   predictionPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -696,6 +798,29 @@ export interface Market extends BaseContract {
 
     YES(overrides?: CallOverrides): Promise<BigNumber>;
 
+    acctInfo(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<
+      [
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber
+      ] & {
+        avgBuyPriceYes: BigNumber;
+        avgBuyPriceNo: BigNumber;
+        amountYes: BigNumber;
+        amountNo: BigNumber;
+        amountPaidYes: BigNumber;
+        amountPaidNo: BigNumber;
+        Totalbuys: BigNumber;
+      }
+    >;
+
     balanceOf(
       account: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
@@ -739,6 +864,12 @@ export interface Market extends BaseContract {
 
     getData(overrides?: CallOverrides): Promise<void>;
 
+    history(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { jackpotYes: BigNumber; jackpotNo: BigNumber }
+    >;
+
     initialize(
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
@@ -760,6 +891,11 @@ export interface Market extends BaseContract {
     ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    participants(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     predictionPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -882,6 +1018,15 @@ export interface Market extends BaseContract {
     ): URIEventFilter;
     URI(value?: null, id?: PromiseOrValue<BigNumberish> | null): URIEventFilter;
 
+    "marketResolved(uint256,bool)"(
+      timestamp?: null,
+      resolved?: null
+    ): marketResolvedEventFilter;
+    marketResolved(
+      timestamp?: null,
+      resolved?: null
+    ): marketResolvedEventFilter;
+
     "positionCreated(uint256,uint256)"(
       id?: null,
       amount?: null
@@ -893,6 +1038,11 @@ export interface Market extends BaseContract {
     NO(overrides?: CallOverrides): Promise<BigNumber>;
 
     YES(overrides?: CallOverrides): Promise<BigNumber>;
+
+    acctInfo(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     balanceOf(
       account: PromiseOrValue<string>,
@@ -941,6 +1091,8 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    history(overrides?: CallOverrides): Promise<BigNumber>;
+
     initialize(
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
@@ -962,6 +1114,11 @@ export interface Market extends BaseContract {
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    participants(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     predictionPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1036,6 +1193,11 @@ export interface Market extends BaseContract {
 
     YES(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    acctInfo(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     balanceOf(
       account: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
@@ -1083,6 +1245,8 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    history(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     initialize(
       _predictionPrice: PromiseOrValue<BigNumberish>,
       _oracleFeed: PromiseOrValue<string>,
@@ -1104,6 +1268,11 @@ export interface Market extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    participants(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     predictionPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

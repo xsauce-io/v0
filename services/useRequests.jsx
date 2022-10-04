@@ -63,6 +63,31 @@ const specializedMarketFetcher = (url, sku) =>
 			throw error;
 		});
 
+    const AllMarketFetcher = (url) =>
+	axios
+		.get(url)
+		.then((res) => {
+			const data = res.data[3];
+      for (let index = 0; index < data.length; index++) {
+      let expires = new Date(data[index]?.expiration * 1000).toLocaleDateString(
+				'en-US'
+			);
+      
+			if (expires === undefined) {
+				data[index].expiration = '';
+			} else {
+				data[index].expiration = expires;
+			}
+			console.log(data);
+      }
+			return data;
+		})
+		.catch(function (error) {
+			console.error('useRequest', error);
+			throw error;
+		});
+    
+
 const fetcherMultiCalls = (skus, arrayUrl) => {
 	let skusTest = skus;
 	let data = [];
@@ -99,6 +124,8 @@ export const useGetSneaker = (sku) => {
 	console.log('useRequest', data);
 	return { data, error };
 };
+
+
 
 // ----------------------- ----------- ----------------------
 
@@ -137,10 +164,22 @@ export const useGetMarketBySku = (sku) => {
 		specializedMarketFetcher
 	);
 	console.log('useRequest market data', data);
-
 	return { data, error };
 };
 
 export const requestOrderBook = async () => axios.get(OrderBookGit);
 export const requestOrderBookAddress = async () =>
 	axios.get(OrderBookAddressGit);
+
+
+ // ----------------------- ----------- ----------------------
+
+ export const useGetAllMarkets = () => {
+	const { data, error } = useSWR(
+		marketsDataGit,
+		AllMarketFetcher
+	);
+	console.log('useRequest AllMarkets Data', data);
+
+	return { data, error };
+};

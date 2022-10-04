@@ -27,13 +27,37 @@ import type {
   PromiseOrValue,
 } from "../common";
 
+export declare namespace MarketFactory {
+  export type MarketDetailsStruct = {
+    sku: PromiseOrValue<string>;
+    market: PromiseOrValue<string>;
+    predictionPrice: PromiseOrValue<BigNumberish>;
+    closingDate: PromiseOrValue<BigNumberish>;
+  };
+
+  export type MarketDetailsStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber
+  ] & {
+    sku: string;
+    market: string;
+    predictionPrice: BigNumber;
+    closingDate: BigNumber;
+  };
+}
+
 export interface MarketFactoryInterface extends utils.Interface {
   functions: {
     "allMarkets(uint256)": FunctionFragment;
     "createNewMarket(string,uint256,address,uint256,address,string)": FunctionFragment;
     "getAllMarkets()": FunctionFragment;
+    "getAllMarketswSku()": FunctionFragment;
     "getMarket(string,uint256,uint256)": FunctionFragment;
     "markets(bytes32)": FunctionFragment;
+    "mktDtlArray(uint256)": FunctionFragment;
+    "mktInfo()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -44,8 +68,11 @@ export interface MarketFactoryInterface extends utils.Interface {
       | "allMarkets"
       | "createNewMarket"
       | "getAllMarkets"
+      | "getAllMarketswSku"
       | "getMarket"
       | "markets"
+      | "mktDtlArray"
+      | "mktInfo"
       | "owner"
       | "renounceOwnership"
       | "transferOwnership"
@@ -71,6 +98,10 @@ export interface MarketFactoryInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "getAllMarketswSku",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "getMarket",
     values: [
       PromiseOrValue<string>,
@@ -82,6 +113,11 @@ export interface MarketFactoryInterface extends utils.Interface {
     functionFragment: "markets",
     values: [PromiseOrValue<BytesLike>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "mktDtlArray",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(functionFragment: "mktInfo", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -101,8 +137,17 @@ export interface MarketFactoryInterface extends utils.Interface {
     functionFragment: "getAllMarkets",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllMarketswSku",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getMarket", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "markets", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "mktDtlArray",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "mktInfo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
@@ -192,6 +237,14 @@ export interface MarketFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string[]] & { valid: string[] }>;
 
+    getAllMarketswSku(
+      overrides?: CallOverrides
+    ): Promise<
+      [MarketFactory.MarketDetailsStructOutput[]] & {
+        valid: MarketFactory.MarketDetailsStructOutput[];
+      }
+    >;
+
     getMarket(
       sku: PromiseOrValue<string>,
       _predictionPrice: PromiseOrValue<BigNumberish>,
@@ -203,6 +256,29 @@ export interface MarketFactory extends BaseContract {
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    mktDtlArray(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, BigNumber, BigNumber] & {
+        sku: string;
+        market: string;
+        predictionPrice: BigNumber;
+        closingDate: BigNumber;
+      }
+    >;
+
+    mktInfo(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, BigNumber, BigNumber] & {
+        sku: string;
+        market: string;
+        predictionPrice: BigNumber;
+        closingDate: BigNumber;
+      }
+    >;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -233,6 +309,10 @@ export interface MarketFactory extends BaseContract {
 
   getAllMarkets(overrides?: CallOverrides): Promise<string[]>;
 
+  getAllMarketswSku(
+    overrides?: CallOverrides
+  ): Promise<MarketFactory.MarketDetailsStructOutput[]>;
+
   getMarket(
     sku: PromiseOrValue<string>,
     _predictionPrice: PromiseOrValue<BigNumberish>,
@@ -244,6 +324,29 @@ export interface MarketFactory extends BaseContract {
     arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  mktDtlArray(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, BigNumber, BigNumber] & {
+      sku: string;
+      market: string;
+      predictionPrice: BigNumber;
+      closingDate: BigNumber;
+    }
+  >;
+
+  mktInfo(
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, BigNumber, BigNumber] & {
+      sku: string;
+      market: string;
+      predictionPrice: BigNumber;
+      closingDate: BigNumber;
+    }
+  >;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -274,6 +377,10 @@ export interface MarketFactory extends BaseContract {
 
     getAllMarkets(overrides?: CallOverrides): Promise<string[]>;
 
+    getAllMarketswSku(
+      overrides?: CallOverrides
+    ): Promise<MarketFactory.MarketDetailsStructOutput[]>;
+
     getMarket(
       sku: PromiseOrValue<string>,
       _predictionPrice: PromiseOrValue<BigNumberish>,
@@ -285,6 +392,29 @@ export interface MarketFactory extends BaseContract {
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    mktDtlArray(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, BigNumber, BigNumber] & {
+        sku: string;
+        market: string;
+        predictionPrice: BigNumber;
+        closingDate: BigNumber;
+      }
+    >;
+
+    mktInfo(
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, BigNumber, BigNumber] & {
+        sku: string;
+        market: string;
+        predictionPrice: BigNumber;
+        closingDate: BigNumber;
+      }
+    >;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -336,6 +466,8 @@ export interface MarketFactory extends BaseContract {
 
     getAllMarkets(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getAllMarketswSku(overrides?: CallOverrides): Promise<BigNumber>;
+
     getMarket(
       sku: PromiseOrValue<string>,
       _predictionPrice: PromiseOrValue<BigNumberish>,
@@ -347,6 +479,13 @@ export interface MarketFactory extends BaseContract {
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    mktDtlArray(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    mktInfo(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -378,6 +517,8 @@ export interface MarketFactory extends BaseContract {
 
     getAllMarkets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    getAllMarketswSku(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     getMarket(
       sku: PromiseOrValue<string>,
       _predictionPrice: PromiseOrValue<BigNumberish>,
@@ -389,6 +530,13 @@ export interface MarketFactory extends BaseContract {
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    mktDtlArray(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    mktInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

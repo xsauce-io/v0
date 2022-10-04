@@ -90,13 +90,24 @@
         "type": "uint256"
       },
       {
-        "internalType": "contract IERC20",
-        "name": "_usdc",
+        "internalType": "address",
+        "name": "stable",
         "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "sku",
+        "type": "string"
       }
     ],
     "name": "createNewMarket",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "marketAdd",
+        "type": "address"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -108,6 +119,41 @@
         "internalType": "address[]",
         "name": "valid",
         "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllMarketswSku",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "market",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "predictionPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "closingDate",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct MarketFactory.MarketDetails[]",
+        "name": "valid",
+        "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
@@ -156,6 +202,68 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "mktDtlArray",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "sku",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "market",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "predictionPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "closingDate",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "mktInfo",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "sku",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "market",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "predictionPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "closingDate",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",

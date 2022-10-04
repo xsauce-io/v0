@@ -58,11 +58,35 @@ export const ActionCard = () => {
 				const $table = new ethers.Contract($tableAddress, $tableABI, signer);
 				const totalJackpot = (
 					(await $table.balanceOf(currentMarket.address)) / 1e18
-				).toFixed(2);
+				).toFixed(2) ;
 
-				setJackpot(totalJackpot);
+     
+				const contract = new ethers.Contract(
+					currentMarket?.address,
+					marketabi,
+					signer
+				);
+				const getYes = (await contract.totalSupply(1)).toNumber();
+				const getNo = await contract.totalSupply(2);
+       const input = document.getElementById('amount');
+       const jackpot = document.getElementById('jackpot');
+
+      
+          
+          input.addEventListener('input', updateValue);
+
+function updateValue(e) {
+  if (isYes === true) {
+
+  const ownership = (e.target.value / (getYes + e.target.valueAsNumber));
+  console.log(getYes + e.target.valueAsNumber)
+  jackpot.textContent = "$" + (totalJackpot * ownership).toFixed(2) ;
+  } else {jackpot.textContent = "$" + (e.target.value * getNo).toFixed(2);}
+}
+    
+         } 
 			}
-		} catch (error) {
+		 catch (error) {
 			console.log(error);
 		}
 	};
@@ -324,8 +348,11 @@ function updateValue(e) {
 	useEffect(() => {
 		ratios();
 		prices();
-		jackpot();
 	}, [currentMarket]);
+
+  useEffect(() => {
+		jackpot();
+	}, [currentMarket, isYes]);
 
 	useEffect(() => {
 		if (currentMarket !== undefined) {
@@ -421,7 +448,14 @@ function updateValue(e) {
 							required
 						/>
 					</div>
+          <div className="bg-white font-semibold items-center  px-5 text-left w-[100%] flex ">
+						<p className="text-left text-sm inline-block pr-1">Price per share</p>
+						<p 	className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block "
+						>${isYes === true ? priceOfYes : priceOfNo}</p>
+					</div>
 				</div>
+
+       
 
 				<div className="bg-[#ACFF00] items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]">
 					<div className="font-Inter mobile:text-lg font-medium flex flex-row justify-center items-center">
@@ -432,7 +466,7 @@ function updateValue(e) {
 						>
 							<InfoIcon sx={{ fontSize: '18px' }} />
 						</Tooltip>
-						<p id="total" className="pr-4"> 
+						<p id="total" className="pr-4"> Total: $0.00 
 						</p>
 					</div>
 				</div>
@@ -443,7 +477,7 @@ function updateValue(e) {
 						id="mint"
 						className="w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60"
 					>
-						Buy
+						Place Order
 					</button>
 				</div>
 
@@ -453,8 +487,8 @@ function updateValue(e) {
 							Total possible winnings
 						</p>
 						<div className="flex-1 " />
-						<p className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs">
-							${jackpotTotal}
+						<p id="jackpot" className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs">
+							$
 						</p>
 					</div>
 				</div>

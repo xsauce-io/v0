@@ -4,8 +4,13 @@ import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import React from 'react';
+import {ethers} from 'ethers'
 import Script from 'next/script';
 import { DashboardTable } from '../components/dashboardTable';
+import { MarketFactory, marketsDataGit } from '../services/constants';
+import MarketFactoryABI from '../abi/marketFactory.json';
+import MarketAbi from '../abi/markets.json';
+import { useGetAllMarkets, useGetMarketBySku } from '../services/useRequests';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
@@ -16,8 +21,12 @@ import { useGetSneakerByLimit } from '../services/useRequests';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/toast';
+import { any } from 'hardhat/internal/core/params/argumentTypes';
+declare let window: any;
 
 const Home: NextPage = () => {
+  
+  
 	// ------------------- Constants ---------------------
 	const screens = {
 		mobile: '300',
@@ -33,26 +42,168 @@ const Home: NextPage = () => {
 	};
 
 	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
+  const allMarketSkus: any[] = [];
+  const allMarketContracts: any[] = [];
+  
 
-	// -------------------- Data Fetching ------------------
-	const { data: sneakersData, error: sneakersDataError } =
-		useGetSneakerByLimit('11');
-
+  
 	// ------------------- State Variable --------------------
+  const { data: sneakersData, error: sneakersDataError } = useGetSneakerByLimit('11');
 	const [response, setResponse] = useState(sneakersData);
+  const [responses, setResponses] = useState([] as any);
+
+  const [allMarkets, setAllMarkets] = useState([] as any);
+  const [isDone, setDone] = useState(false)
+  const [isComplete, setComplete] = useState(false);
+  const [positions, setPositions] = useState([] as any)
+  const [IsLoaded, setIsLoading] = useState(false)
+
 	//filter state mana
 	const [isAscending, setIsAscending] = useState(true);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
+
+	// -------------------- Data Fetching ------------------
+ 
+const mergeData = async () => {
+  const newResponseArray:any = []
+  if (isComplete === true) {
+    
+  for (let x = 0; x < balanceArray.length; x++) {
+ 
+    let balanceCurrentObject = balanceArray[x];
+    
+   for (let y = 0; y < responses.length; y++) {
+    let responseCurrentObject = responses[y];
+    
+    if(balanceCurrentObject.sku === responseCurrentObject.sku) {
+      
+     let newMergeObject =
+     {
+      yes: balanceCurrentObject.yes,
+      no: balanceCurrentObject.yes,
+      sku: responseCurrentObject.sku,
+      name:responseCurrentObject.name,
+      address:responseCurrentObject.address,
+      book:responseCurrentObject.book,
+      expiration: responseCurrentObject.expiration
+     } 
+     
+     newResponseArray.push(newMergeObject)
+     
+    }
+
+  
+   }
+    
+
+  }
+  console.log(newResponseArray)
+  setPositions(newResponseArray)
+}
+}
+
+
+
+
+
+
+
+  const getSneaker = async () => {
+if (IsLoaded === true) {
+
+			axios.get(
+				marketsDataGit
+			)
+
+			.then(
+				((res) => {
+          const resArray = [];
+          for (let index = 0; index < allMarketSkus.length; index++) {
+            const element = res.data[3][allMarketSkus[index]];
+            resArray.push(element)
+          }
+
+ 
+
+          setResponses(resArray);
+				})
+			)
+			.catch(function (error) {
+				console.error(error);
+			});
+    } else {}
+	};
+
+    const checkMarkets = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const connected = (await provider.send('eth_requestAccounts', [0])).toString();
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(MarketFactory, MarketFactoryABI, signer); 
+
+     const allMarkets = await contract.getAllMarketswSku();
+
+     setAllMarkets(allMarkets)
+
+     for (let index = 0; index < allMarkets.length; index++) {
+      const shoeData = allMarkets[index].sku
+      const shoeMarket = allMarkets[index].market
+     allMarketSkus.push(shoeData)
+     allMarketContracts.push(shoeMarket)
+    }
+    setIsLoading(true)
+  } 
+    const balanceArray:any = [];
+
+    const showBalances = async () => {
+      if (IsLoaded === true) {
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const connected = (await provider.send('eth_requestAccounts', [0])).toString();
+        const signer = provider.getSigner();
+        for (let index = 0; index < allMarketContracts.length; index++) {
+          const contract = new ethers.Contract(allMarkets[index].market, MarketAbi , signer);
+          const sku = allMarkets[index].sku
+          const balance1 = (await contract.balanceOf(connected, 1)).toString()
+          const balance2 = (await contract.balanceOf(connected, 2)).toString()
+          balanceArray.push({sku, yes:balance1, no:balance2})
+        }
+       setComplete(true)
+      }
+    }
+
+ 
+
+    
 
 	//------------------ Use Effect / Use memo ------------------
 	useEffect(() => {
 		setResponse(sneakersData);
 	}, [sneakersData]);
 
+
+  useEffect(() => {
+    const run = async () => {
+      await checkMarkets();
+      await getSneaker()
+       await showBalances();
+    }
+    run()
+  }, [])
+
+
+  useEffect(() => {
+		mergeData();
+	}, [isComplete]);
+
+  
+ 
+ 
+
+
 	useMemo(() => {
 		if (response) {
 			if (response.length > 0 && isAscending === true) {
-				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) { 
 					response.sort((a: { name: string }, b: { name: string }) =>
 						a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
 					);
@@ -152,7 +303,7 @@ const Home: NextPage = () => {
 					>
 						<div className="flex flex-row items-center mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0    tablet:flex-row">
 							<text>
-								Total wager lives <span className="text-[#748282]">87</span>
+								Total Positions <span className="text-[#748282]">{responses?.length}</span>
 							</text>
 							<div className="dropdown dropdown-end">
 								<label
@@ -273,9 +424,9 @@ const Home: NextPage = () => {
 						</div>
 					</ContentHeader>
 					<DashboardTable>
-						{response === undefined || sneakersDataError
+						{positions.legnth === 0 
 							? skeletonArray.map(() => (
-									<>
+									<> 
 										<Skeleton
 											animation="pulse"
 											variant="rounded"
@@ -286,9 +437,13 @@ const Home: NextPage = () => {
 										<p className="h-4"> </p>
 									</>
 							  ))
-							: response?.map((el: []) => <Dashboard positions={el} />)}
+							: 
+              positions?.map((el:any) => {
+              return <Dashboard positions={el} />})
+              }
 					</DashboardTable>
-				</>
+				</> 
+
 			</Layout>
 		</div>
 	);

@@ -19,12 +19,12 @@ export const DashboardTable = ({ children }) => {
             {width >= screens.desktop ? (
                 <div className="flex flex-row py-4 text-[14px]  items-center w-full px-4 font-Inter">
                     <div className="flex flex-row pl-4 w-[30%] space-x-2 items-center ">
-                        <p >Positions</p>
+                        <p >Name of Assets</p>
                         <img src="/up-down.svg" />
                     </div>
 
                     <div className="flex flex-row w-[18.5%] space-x-2 items-center">
-                        <p  >Shares</p>
+                        <p  >Holdings</p>
                         <img src="/up-down.svg" />
                     </div>
 
@@ -46,12 +46,12 @@ export const DashboardTable = ({ children }) => {
             ) : width >= screens.laptop ? (
                 <div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
                     <div className="flex flex-row pl-4 w-[40%] space-x-2 items-center w-full flex-1 ">
-                        <p>Positions</p>
+                        <p>Name of Asset</p>
                         <img src="/up-down.svg" />
                     </div>
 
                     <div className="flex flex-row w-[22%] space-x-2 items-center">
-                        <p>Shares</p>
+                        <p>Holdings</p>
                         <img src="/up-down.svg" />
                     </div>
 
@@ -68,12 +68,12 @@ export const DashboardTable = ({ children }) => {
             ) : width >= screens.tablet ? (
                 <div className="flex flex-row py-4 text-[14px] font-Inter items-center w-full px-4">
                     <div className="flex flex-row pl-4 w-[40%] space-x-2 items-center w-full flex-1 ">
-                        <p>Positions</p>
+                        <p>Name of Asset</p>
                         <img src="/up-down.svg" />
                     </div>
 
                     <div className="flex flex-row w-[22%] space-x-2 items-center">
-                        <p>Shares</p>
+                        <p>Holdings</p>
                         <img src="/up-down.svg" />
                     </div>
 
