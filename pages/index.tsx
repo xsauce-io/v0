@@ -40,8 +40,6 @@ const Home: NextPage = () => {
 	};
 
 	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
-	const allMarketSkus: any[] = [];
-	const allMarketContracts: any[] = [];
 
 	// ------------------- State Variable --------------------
 	const { data: sneakersData, error: sneakersDataError } =
@@ -49,86 +47,11 @@ const Home: NextPage = () => {
 	const [response, setResponse] = useState(sneakersData);
 	const [responses, setResponses] = useState([] as any);
 
-	const [allMarkets, setAllMarkets] = useState([] as any);
-	const [positions, setPositions] = useState([] as any);
-
 	//filter state mana
 	const [isAscending, setIsAscending] = useState(true);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 
 	// -------------------- Data Fetching ------------------
-
-	// const mergeData = async () => {
-	// 	const newResponseArray: any = [];
-	// 	for (let x = 0; x < balanceArray.length; x++) {
-	// 		let balanceCurrentObject = balanceArray[x];
-
-	// 		for (let y = 0; y < responses.length; y++) {
-	// 			let responseCurrentObject = responses[y];
-
-	// 			if (balanceCurrentObject.sku === responseCurrentObject.sku) {
-	// 				let newMergeObject = {
-	// 					yes: balanceCurrentObject.yes,
-	// 					no: balanceCurrentObject.yes,
-	// 					sku: responseCurrentObject.sku,
-	// 					name: responseCurrentObject.name,
-	// 					address: responseCurrentObject.address,
-	// 					book: responseCurrentObject.book,
-	// 					expiration: responseCurrentObject.expiration,
-	// 				};
-
-	// 				newResponseArray.push(newMergeObject);
-	// 			}
-	// 		}
-	// 	}
-	// 	console.log(newResponseArray);
-	// 	setPositions(newResponseArray);
-	// };
-
-	// const getSneaker = async () => {
-	// 	axios
-	// 		.get(marketsDataGit)
-
-	// 		.then((res) => {
-	// 			const resArray = [];
-	// 			for (let index = 0; index < allMarketSkus.length; index++) {
-	// 				const element = res.data[3][allMarketSkus[index]];
-	// 				resArray.push(element);
-	// 			}
-
-	// 			setResponses(resArray);
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.error(error);
-	// 		});
-	// };
-
-	// const checkMarkets = async () => {
-	// 	const provider = new ethers.providers.Web3Provider(window.ethereum);
-	// 	const connected = (
-	// 		await provider.send('eth_requestAccounts', [0])
-	// 	).toString();
-	// 	const signer = provider.getSigner();
-	// 	const contract = new ethers.Contract(
-	// 		MarketFactory,
-	// 		MarketFactoryABI,
-	// 		signer
-	// 	);
-
-		
-	// 	console.log(cleanedAllMarkets);
-	// 	setAllMarkets(cleanedAllMarkets);
-
-	// 	for (let index = 0; index < allMarkets.length; index++) {
-	// 		const shoeData = allMarkets[index].sku;
-	// 		const shoeMarket = allMarkets[index].market;
-	// 		allMarketSkus.push(shoeData);
-	// 		allMarketContracts.push(shoeMarket);
-	// 	}
-	// };
-	
-
-
 
 	const [allBalances, setAllBalances] = useState([] as any);
 
@@ -181,28 +104,11 @@ const Home: NextPage = () => {
 		setAllBalances(balanceArray);
     
 	};
-  console.log(allBalances)
-
-	useEffect(() => {
-		showBalances();
-	}, []);
+ 
 
 
 
-	// const showBalances = async () => {
 
-	//     const provider = new ethers.providers.Web3Provider(window.ethereum);
-	//     const connected = (await provider.send('eth_requestAccounts', [0])).toString();
-	//     const signer = provider.getSigner();
-	//     for (let index = 0; index < allMarketContracts.length; index++) {
-	//       const contract = new ethers.Contract(allMarkets[index].market, MarketAbi , signer);
-	//       const sku = allMarkets[index].sku
-	//       const balance1 = (await contract.balanceOf(connected, 1)).toString()
-	//       const balance2 = (await contract.balanceOf(connected, 2)).toString()
-	//       balanceArray.push({sku, yes:balance1, no:balance2})
-	//     }
-	//    setIsComplete(true)
-	//   }
 
 	//------------------ Use Effect / Use memo ------------------
 	useEffect(() => {
@@ -210,11 +116,7 @@ const Home: NextPage = () => {
 	}, [sneakersData]);
 
 	useEffect(() => {
-		const run = async () => {
-			// await checkMarkets();
-			// await getSneaker();
-		};
-		run();
+		showBalances();
 	}, []);
 
 	// useMemo(() => {
