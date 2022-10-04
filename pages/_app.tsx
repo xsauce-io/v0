@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import { hotjar } from 'react-hotjar';
+import { FirstTimeVisitorModal } from '../components/firstTimeVisitorModal';
 
 /**
  * Send mix panel event
@@ -104,7 +105,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				}}
 			/>
 			<Component {...pageProps} />
-
+			<FirstTimeVisitorModal />
 			<Toaster
 				position="top-right"
 				gutter={0}

@@ -71,21 +71,21 @@ export const Nav = ({ logoColor }) => {
 					chainId: chainId,
 				});
 			}
-		} catch {
-			console.log('error wallet not connected');
-			toast.custom(
-				(t) => (
-					<ToastNotification
-						message={'Wallet Not Connected'}
-						subMessage={
-							'To see market statistics, your wallet must be connected.'
-						}
-						icon={<img src="/alertTriangle.svg" />}
-						t={t}
-					/>
-				),
-				{ duration: 7000 }
-			);
+		} catch (error) {
+			console.log('error wallet not connected', error);
+			// toast.custom(
+			// 	(t) => (
+			// 		<ToastNotification
+			// 			message={'Wallet Not Connected'}
+			// 			subMessage={
+			// 				'To see market statistics, your wallet must be connected.'
+			// 			}
+			// 			icon={<img src="/alertTriangle.svg" />}
+			// 			t={t}
+			// 		/>
+			// 	),
+			// 	{ duration: 7000 }
+			// );
 
 			mixpanelTrackProps('Connect Wallet', {
 				result: 'unsuccessful',
