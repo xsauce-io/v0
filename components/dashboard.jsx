@@ -35,8 +35,8 @@ console.log(s1)
       const balances = (await contract.getAcctInfo(connected))
       const one = (balances.amountNo).toString()
       const two = (balances.amountYes).toString()
-      const three = (balances.avgBuyPriceNo).toString()
-      const four = (balances.avgBuyPriceYes).toString()
+      const three = (balances.avgBuyPriceNo / 1e18).toFixed(2)
+      const four = (balances.avgBuyPriceYes / 1e18).toFixed(2)
 
       const newObj = {amountNo: one, amountYes: two, avgBuyPriceNo: three, avgBuyPriceYes: four}
       
@@ -65,7 +65,7 @@ console.log(s1)
 
           <span className="flex flex-row w-[38%] text-xs justify-center pr-3">
             <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex ">
-              <p className="text-xs font-Inter"> {allBalances?.avgBuyPriceYes} cents (yes) / {allBalances?.avgBuyPriceNo} cents (no) </p>
+              <p className="text-xs font-Inter"> {allBalances?.avgBuyPriceYes} ¢ (yes) / {allBalances?.avgBuyPriceNo} ¢ (no) </p>
             </span>
           </span>
         
@@ -83,7 +83,7 @@ console.log(s1)
 
           <span className="flex flex-row w-[25%] text-xs justify-center">
             <span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex ">
-              <p className="text-xs font-Inter"> {allBalances?.avgBuyPriceYes} cents (yes) / {allBalances?.avgBuyPriceNo} cents (no)</p>
+              <p className="text-xs font-Inter"> {allBalances?.avgBuyPriceYes} ¢ (yes) / {allBalances?.avgBuyPriceNo} ¢ (no)</p>
             </span>
           </span>
           <a href={explorer} className='flex flex-row w-[25%] text-xs font-Inter underline justify-center'>
