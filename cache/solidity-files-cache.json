@@ -1258,8 +1258,8 @@
       ]
     },
     "/Users/home/Desktop/xsauce.v0/v0/contracts/MarketFactory.sol": {
-      "lastModificationDate": 1664723804295,
-      "contentHash": "341ce8b46b7d9799e380e39b41beee64",
+      "lastModificationDate": 1664921659172,
+      "contentHash": "6b1840a5b3ae4d6296ed4cbf6a779ffd",
       "sourceName": "contracts/MarketFactory.sol",
       "solcConfig": {
         "version": "0.8.16",

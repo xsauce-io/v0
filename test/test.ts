@@ -20,16 +20,16 @@ describe("Market Tests", function() {
 
   await mkt2.wait(1)
 
-  const marketAdd = (await marketDtl.allMarkets(0)).toString()
-  const signers = await ethers.getSigners();
-  const alice = signers[0];
+  const marketAdd = (await marketDtl.getAllMarketswSku())
+//   const signers = await ethers.getSigners();
+//   const alice = signers[0];
 
-  const contract = await ethers.getContractAt(MarketAbi, marketAdd);
+//   const contract = await ethers.getContractAt(MarketAbi, marketAdd);
 
-const response = await contract.connect(alice).getAcctInfo(alice.address)
+// const response = await contract.connect(alice).getAcctInfo(alice.address)
  
 
-console.log(response)
+console.log(marketAdd)
   
   
   });

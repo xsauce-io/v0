@@ -19,6 +19,7 @@ contract MarketFactory is Ownable {
 
  struct MarketDetails {
   string sku;
+  string name;
   address market;
   uint256 predictionPrice;
   uint256 closingDate;
@@ -31,22 +32,23 @@ MarketDetails[] public mktDtlArray;
 
  constructor() {}
 
- function createNewMarket(string memory uri, uint256 _predictionPrice, address _oracleFeed, uint256 _closingDate, address stable , string memory sku) public onlyOwner returns (address marketAdd) {
+ function createNewMarket(string memory uri, uint256 _predictionPrice, address _oracleFeed, uint256 _closingDate, address stable , string memory _sku, string memory _name) public onlyOwner returns (address marketAdd) {
   Market market = new Market(uri, stable);
-  market.initialize(_predictionPrice, _oracleFeed, _closingDate, sku);
-   bytes32 marketKey = keccak256(abi.encodePacked(sku, _predictionPrice, _closingDate));
+  market.initialize(_predictionPrice, _oracleFeed, _closingDate, _sku);
+   bytes32 marketKey = keccak256(abi.encodePacked(_sku, _predictionPrice, _closingDate));
    markets[marketKey] = address(market);
    allMarkets.push(address(market));
 
   MarketDetails memory updateMktDetails = mktInfo;
   updateMktDetails.market = address(market);
-  updateMktDetails.sku = sku;
+  updateMktDetails.sku = _sku;
   updateMktDetails.predictionPrice = _predictionPrice;
   updateMktDetails.closingDate = _closingDate;
+  updateMktDetails.name = _name;
 
   mktDtlArray.push(updateMktDetails);
 
-   emit marketCreated(sku, _predictionPrice, _closingDate);
+   emit marketCreated(_sku, _predictionPrice, _closingDate);
   
    return address(market);
    

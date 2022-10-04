@@ -11,10 +11,10 @@ async function main() {
  await MF.deployed();
 
 
-await MF.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 300 , goerliOracle , 1665158400, $tableAddress,"DH7138-006" )
-await MF.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 330 , goerliOracle , 1665763200, $tableAddress,"DR8869-200")
-await MF.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 230 , goerliOracle ,1665590400, $tableAddress, "DR0501-101")
-const batch4 = await MF.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 260 , goerliOracle ,1666281600 , $tableAddress, "DX2836-001")
+await MF.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 300 , goerliOracle , 1665158400, $tableAddress,"DH7138-006","Air Jordan 4 'Black Canvas'")
+await MF.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 330 , goerliOracle , 1665763200, $tableAddress,"DR8869-200", "Jordan 3 Retro 'Winterized'")
+await MF.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 230 , goerliOracle ,1665590400, $tableAddress, "DR0501-101", "Air Jordan 1 Mid Split (W)")
+const batch4 = await MF.createNewMarket('https://raw.githubusercontent.com/xsauce-io/MarketInfo/main/marketsData.json', 260 , goerliOracle ,1666281600 , $tableAddress, "DX2836-001", "Air Jordan 6 'Black Chrome'")
   
 await batch4.wait(1)
 

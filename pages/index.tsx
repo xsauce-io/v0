@@ -85,55 +85,109 @@ const Home: NextPage = () => {
 	// 	setPositions(newResponseArray);
 	// };
 
-	const getSneaker = async () => {
-		axios
-			.get(marketsDataGit)
+	// const getSneaker = async () => {
+	// 	axios
+	// 		.get(marketsDataGit)
 
-			.then((res) => {
-				const resArray = [];
-				for (let index = 0; index < allMarketSkus.length; index++) {
-					const element = res.data[3][allMarketSkus[index]];
-					resArray.push(element);
-				}
+	// 		.then((res) => {
+	// 			const resArray = [];
+	// 			for (let index = 0; index < allMarketSkus.length; index++) {
+	// 				const element = res.data[3][allMarketSkus[index]];
+	// 				resArray.push(element);
+	// 			}
 
-				setResponses(resArray);
-			})
-			.catch(function (error) {
-				console.error(error);
-			});
-	};
+	// 			setResponses(resArray);
+	// 		})
+	// 		.catch(function (error) {
+	// 			console.error(error);
+	// 		});
+	// };
 
-	const checkMarkets = async () => {
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
+	// const checkMarkets = async () => {
+	// 	const provider = new ethers.providers.Web3Provider(window.ethereum);
+	// 	const connected = (
+	// 		await provider.send('eth_requestAccounts', [0])
+	// 	).toString();
+	// 	const signer = provider.getSigner();
+	// 	const contract = new ethers.Contract(
+	// 		MarketFactory,
+	// 		MarketFactoryABI,
+	// 		signer
+	// 	);
+
+		
+	// 	console.log(cleanedAllMarkets);
+	// 	setAllMarkets(cleanedAllMarkets);
+
+	// 	for (let index = 0; index < allMarkets.length; index++) {
+	// 		const shoeData = allMarkets[index].sku;
+	// 		const shoeMarket = allMarkets[index].market;
+	// 		allMarketSkus.push(shoeData);
+	// 		allMarketContracts.push(shoeMarket);
+	// 	}
+	// };
+	
+
+
+
+	const [allBalances, setAllBalances] = useState([] as any);
+
+	const showBalances = async () => {
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
 		const connected = (
 			await provider.send('eth_requestAccounts', [0])
 		).toString();
 		const signer = provider.getSigner();
-		const contract = new ethers.Contract(
+    const contract2 = new ethers.Contract(
 			MarketFactory,
 			MarketFactoryABI,
 			signer
 		);
-
-		const allMarkets = await contract.getAllMarketswSku();
-		const cleanedAllMarkets = [];
+    const allMarkets = await contract2.getAllMarketswSku();
+  
+		const cleanedAllMarkets: any[] = [];
 		for (let index = 0; index < allMarkets.length; index++) {
-			const newData = allMarkets[index].sku;
-			const newAdd = allMarkets[index].market;
-			const newObj = { sku: newData, address: newAdd };
-			cleanedAllMarkets.push(newObj);
-		}
-		console.log(cleanedAllMarkets);
-		setAllMarkets(cleanedAllMarkets);
+			const r1 = (allMarkets[index].sku).toString();
+      const r2 = (allMarkets[index].market).toString();
+      const r3 = (allMarkets[index].name).toString();
+      const newData = {sku: r1, address: r2, name: r3}
+			cleanedAllMarkets.push(newData);
+    }
+    
+		
+    const balanceArray: any = [];
+		
+    for (let index = 0; index < cleanedAllMarkets?.length; index++) {
+		const contract = new ethers.Contract(cleanedAllMarkets[index]?.address, MarketAbi, signer);
+		const balances = await contract.getAcctInfo(connected);
+		const one = balances.amountNo.toString();
+		const two = balances.amountYes.toString();
+		const three = (balances.avgBuyPriceNo / 1e18).toFixed(2);
+		const four = (balances.avgBuyPriceYes / 1e18).toFixed(2);
 
-		for (let index = 0; index < allMarkets.length; index++) {
-			const shoeData = allMarkets[index].sku;
-			const shoeMarket = allMarkets[index].market;
-			allMarketSkus.push(shoeData);
-			allMarketContracts.push(shoeMarket);
-		}
+		const newObj = {
+			amountNo: one,
+			amountYes: two,
+			avgBuyPriceNo: three,
+			avgBuyPriceYes: four,
+      address:cleanedAllMarkets[index].address,
+      sku:cleanedAllMarkets[index].sku,
+      name:cleanedAllMarkets[index].name
+
+		};
+      balanceArray.push(newObj)
+  }
+		setAllBalances(balanceArray);
+    
 	};
-	const balanceArray: any = [];
+  console.log(allBalances)
+
+	useEffect(() => {
+		showBalances();
+	}, []);
+
+
 
 	// const showBalances = async () => {
 
@@ -157,8 +211,8 @@ const Home: NextPage = () => {
 
 	useEffect(() => {
 		const run = async () => {
-			await checkMarkets();
-			await getSneaker();
+			// await checkMarkets();
+			// await getSneaker();
 		};
 		run();
 	}, []);
@@ -389,7 +443,7 @@ const Home: NextPage = () => {
 						</div>
 					</ContentHeader>
 					<DashboardTable>
-						{allMarkets.length === 0
+						{allBalances.length === 0
 							? skeletonArray.map(() => (
 									<>
 										<Skeleton
@@ -402,7 +456,7 @@ const Home: NextPage = () => {
 										<p className="h-4"> </p>
 									</>
 							  ))
-							: allMarkets?.map((el: any) => {
+							: allBalances?.map((el: any) => {
 									return <Dashboard positions={el} />;
 							  })}
 					</DashboardTable>

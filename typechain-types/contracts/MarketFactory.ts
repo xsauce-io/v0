@@ -30,6 +30,7 @@ import type {
 export declare namespace MarketFactory {
   export type MarketDetailsStruct = {
     sku: PromiseOrValue<string>;
+    name: PromiseOrValue<string>;
     market: PromiseOrValue<string>;
     predictionPrice: PromiseOrValue<BigNumberish>;
     closingDate: PromiseOrValue<BigNumberish>;
@@ -38,10 +39,12 @@ export declare namespace MarketFactory {
   export type MarketDetailsStructOutput = [
     string,
     string,
+    string,
     BigNumber,
     BigNumber
   ] & {
     sku: string;
+    name: string;
     market: string;
     predictionPrice: BigNumber;
     closingDate: BigNumber;
@@ -51,7 +54,7 @@ export declare namespace MarketFactory {
 export interface MarketFactoryInterface extends utils.Interface {
   functions: {
     "allMarkets(uint256)": FunctionFragment;
-    "createNewMarket(string,uint256,address,uint256,address,string)": FunctionFragment;
+    "createNewMarket(string,uint256,address,uint256,address,string,string)": FunctionFragment;
     "getAllMarkets()": FunctionFragment;
     "getAllMarketswSku()": FunctionFragment;
     "getMarket(string,uint256,uint256)": FunctionFragment;
@@ -89,6 +92,7 @@ export interface MarketFactoryInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>
     ]
@@ -229,7 +233,8 @@ export interface MarketFactory extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       stable: PromiseOrValue<string>,
-      sku: PromiseOrValue<string>,
+      _sku: PromiseOrValue<string>,
+      _name: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -261,8 +266,9 @@ export interface MarketFactory extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber, BigNumber] & {
+      [string, string, string, BigNumber, BigNumber] & {
         sku: string;
+        name: string;
         market: string;
         predictionPrice: BigNumber;
         closingDate: BigNumber;
@@ -272,8 +278,9 @@ export interface MarketFactory extends BaseContract {
     mktInfo(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber, BigNumber] & {
+      [string, string, string, BigNumber, BigNumber] & {
         sku: string;
+        name: string;
         market: string;
         predictionPrice: BigNumber;
         closingDate: BigNumber;
@@ -303,7 +310,8 @@ export interface MarketFactory extends BaseContract {
     _oracleFeed: PromiseOrValue<string>,
     _closingDate: PromiseOrValue<BigNumberish>,
     stable: PromiseOrValue<string>,
-    sku: PromiseOrValue<string>,
+    _sku: PromiseOrValue<string>,
+    _name: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -329,8 +337,9 @@ export interface MarketFactory extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
-    [string, string, BigNumber, BigNumber] & {
+    [string, string, string, BigNumber, BigNumber] & {
       sku: string;
+      name: string;
       market: string;
       predictionPrice: BigNumber;
       closingDate: BigNumber;
@@ -340,8 +349,9 @@ export interface MarketFactory extends BaseContract {
   mktInfo(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, BigNumber, BigNumber] & {
+    [string, string, string, BigNumber, BigNumber] & {
       sku: string;
+      name: string;
       market: string;
       predictionPrice: BigNumber;
       closingDate: BigNumber;
@@ -371,7 +381,8 @@ export interface MarketFactory extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       stable: PromiseOrValue<string>,
-      sku: PromiseOrValue<string>,
+      _sku: PromiseOrValue<string>,
+      _name: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -397,8 +408,9 @@ export interface MarketFactory extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber, BigNumber] & {
+      [string, string, string, BigNumber, BigNumber] & {
         sku: string;
+        name: string;
         market: string;
         predictionPrice: BigNumber;
         closingDate: BigNumber;
@@ -408,8 +420,9 @@ export interface MarketFactory extends BaseContract {
     mktInfo(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber, BigNumber] & {
+      [string, string, string, BigNumber, BigNumber] & {
         sku: string;
+        name: string;
         market: string;
         predictionPrice: BigNumber;
         closingDate: BigNumber;
@@ -460,7 +473,8 @@ export interface MarketFactory extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       stable: PromiseOrValue<string>,
-      sku: PromiseOrValue<string>,
+      _sku: PromiseOrValue<string>,
+      _name: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -511,7 +525,8 @@ export interface MarketFactory extends BaseContract {
       _oracleFeed: PromiseOrValue<string>,
       _closingDate: PromiseOrValue<BigNumberish>,
       stable: PromiseOrValue<string>,
-      sku: PromiseOrValue<string>,
+      _sku: PromiseOrValue<string>,
+      _name: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

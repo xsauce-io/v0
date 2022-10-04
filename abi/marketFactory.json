@@ -96,7 +96,12 @@
       },
       {
         "internalType": "string",
-        "name": "sku",
+        "name": "_sku",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
         "type": "string"
       }
     ],
@@ -133,6 +138,11 @@
           {
             "internalType": "string",
             "name": "sku",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
             "type": "string"
           },
           {
@@ -223,6 +233,11 @@
         "type": "string"
       },
       {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
         "internalType": "address",
         "name": "market",
         "type": "address"
@@ -248,6 +263,11 @@
       {
         "internalType": "string",
         "name": "sku",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
         "type": "string"
       },
       {

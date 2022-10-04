@@ -14,12 +14,13 @@ export const OrderBookFactory1155 =
 
 export const goerliOracle = '0x47e6D43624bE3F764f49486Ce35c5380F092Ead9';
 
-export const MarketFactory = "0x6Ec744Cdc7a1ECD1A3E4aC8d2c5F25E60965014D"
+export const MarketFactory = "0x93B8A05E66Bdbf7c61216a530774D14C9C01fb5e"
 
-export const Market1 = "0x2C3C8D622d9905a7D50aE5983df34a4313B86Dd1"
-export const Market2 = "0x2d5b07f710D3067B207f40b60e15230b9580e7b8"
-export const Market3 = "0x2E807D7Aa8c9501A1708Cf30E5e5ddbf11A7f953"
-export const Market4 = "0x47Edf544614F31d694ed05c4c2088d7b2C7A89E8"
+export const Market1 = "0x96E2A596C32e45A508a6b568A5F3F288e70C4674"
+export const Market2 = "0x7B4E8B1C72ef23Eb28a8E469A5D9a1Bc6A1C6346"
+export const Market3 = "0xB8B155E8E93db4fB239DE3eD41b2617dA88F4381"
+export const Market4 = "0x119E34f90FB423C8a270079cd03c03119644b01d"
+
 
 export const Book1 = '0x0c20745D5549687f0dF40e7644382f081de26E4A';
 export const Book2 = '0xFB37c7B4C837f619bD7A308230cC6eE34064e7d4';
