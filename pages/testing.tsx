@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/toast';
 import { ToastNotificationActionBar } from '../components/toastActionBar';
+import { WalletNotConnectedModal } from '../components/walletNotConnectedModal';
 
 import { useWindowDimensions } from '../utils/hooks/useWindowDimensionsTS';
 const screens = {

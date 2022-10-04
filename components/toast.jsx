@@ -14,7 +14,7 @@ export const ToastNotification = ({ subMessage, icon, message, t }) => {
 	if (width <= screens.tablet) {
 		return (
 			<div
-				className={`bg-[#0C1615] p-4  shadow-md rounded-xl w-full  mt-[30px] ${
+				className={`bg-[#DCDEE1 p-4  shadow-md rounded-xl w-full  mt-[30px] ${
 					t.visible ? 'animate-flyIn' : 'animate-leave '
 				}`}
 			>
@@ -41,7 +41,7 @@ export const ToastNotification = ({ subMessage, icon, message, t }) => {
 
 	return (
 		<div
-			className={`bg-[#0C1615] p-4  shadow-md rounded-xl mobile:w-[100%] tablet:max-w-[50%] laptop:max-w-[35%] mt-[15px]  ${
+			className={`bg-[#DCDEE1 p-4  shadow-md rounded-xl mobile:w-[100%] tablet:max-w-[50%] laptop:max-w-[35%] mt-[15px]  ${
 				t.visible ? 'animate-flyIn' : 'animate-leave'
 			}`}
 		>

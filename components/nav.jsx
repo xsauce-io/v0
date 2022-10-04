@@ -9,6 +9,7 @@ import { LocalDrawer } from '../components/drawer';
 import SauceTokenABI from '../abi/$tableSauce.json';
 import toast from 'react-hot-toast';
 import { ToastNotification } from './toast';
+import { WalletNotConnectedModal } from './walletNotConnectedModal';
 
 export const Nav = ({ logoColor }) => {
 	// let [network, setNetwork] = useState();
@@ -26,6 +27,8 @@ export const Nav = ({ logoColor }) => {
 	const [current, setCurrent] = useState();
 	const [isCopied, setIsCopied] = useState(false);
 	const [fullLengthAccount, setFullLengthAccount] = useState(null);
+	const [openWalletNotConnectedModal, setOpenWalletNotConnectedModal] =
+		useState(false);
 
 	const getWallet = async (clicked = false) => {
 		try {
@@ -53,7 +56,7 @@ export const Nav = ({ logoColor }) => {
 			}
 			setCurrent(chainId);
 			chains(chainId);
-			console.log({ chainzid: chainId });
+			console.log({ chainzsid: chainId });
 
 			let wallet = await provider.send('eth_requestAccounts', [0]);
 
@@ -71,21 +74,10 @@ export const Nav = ({ logoColor }) => {
 					chainId: chainId,
 				});
 			}
+			setOpenWalletNotConnectedModal(false);
 		} catch (error) {
 			if (error.code == -32002) {
-				toast.custom(
-					(t) => (
-						<ToastNotification
-							message={'Wallet Not Connected'}
-							subMessage={
-								'To see market statistics, your wallet must be connected.'
-							}
-							icon={<img src="/alertTriangle.svg" />}
-							t={t}
-						/>
-					),
-					{ duration: 7000 }
-				);
+				setOpenWalletNotConnectedModal(true);
 				console.log('error wallet not connected', error);
 			}
 			mixpanelTrackProps('Connect Wallet', {
@@ -320,10 +312,12 @@ export const Nav = ({ logoColor }) => {
 	useEffect(() => {
 		getWallet();
 		localStorage.getItem('network');
-	}, []);
+	}, [openWalletNotConnectedModal]);
 
 	return (
 		<header className="bg-inherit sticky top-0 z-20  border-b-[1px] border-inherit ">
+			<WalletNotConnectedModal open={openWalletNotConnectedModal} />
+
 			<div className="flex items-center h-20 w-full gap-8   ">
 				<div className="flex-1">
 					<a className="block" href="/">
