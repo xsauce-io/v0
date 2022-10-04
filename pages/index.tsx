@@ -50,10 +50,7 @@ const Home: NextPage = () => {
 	const [responses, setResponses] = useState([] as any);
 
 	const [allMarkets, setAllMarkets] = useState([] as any);
-	const [isDone, setDone] = useState(false);
-	const [isComplete, setComplete] = useState(false);
 	const [positions, setPositions] = useState([] as any);
-	const [IsLoaded, setIsLoading] = useState(false);
 
 	//filter state mana
 	const [isAscending, setIsAscending] = useState(true);
@@ -61,54 +58,49 @@ const Home: NextPage = () => {
 
 	// -------------------- Data Fetching ------------------
 
-	const mergeData = async () => {
-		const newResponseArray: any = [];
-		if (isComplete === true) {
-			for (let x = 0; x < balanceArray.length; x++) {
-				let balanceCurrentObject = balanceArray[x];
+	// const mergeData = async () => {
+	// 	const newResponseArray: any = [];
+	// 	for (let x = 0; x < balanceArray.length; x++) {
+	// 		let balanceCurrentObject = balanceArray[x];
 
-				for (let y = 0; y < responses.length; y++) {
-					let responseCurrentObject = responses[y];
+	// 		for (let y = 0; y < responses.length; y++) {
+	// 			let responseCurrentObject = responses[y];
 
-					if (balanceCurrentObject.sku === responseCurrentObject.sku) {
-						let newMergeObject = {
-							yes: balanceCurrentObject.yes,
-							no: balanceCurrentObject.yes,
-							sku: responseCurrentObject.sku,
-							name: responseCurrentObject.name,
-							address: responseCurrentObject.address,
-							book: responseCurrentObject.book,
-							expiration: responseCurrentObject.expiration,
-						};
+	// 			if (balanceCurrentObject.sku === responseCurrentObject.sku) {
+	// 				let newMergeObject = {
+	// 					yes: balanceCurrentObject.yes,
+	// 					no: balanceCurrentObject.yes,
+	// 					sku: responseCurrentObject.sku,
+	// 					name: responseCurrentObject.name,
+	// 					address: responseCurrentObject.address,
+	// 					book: responseCurrentObject.book,
+	// 					expiration: responseCurrentObject.expiration,
+	// 				};
 
-						newResponseArray.push(newMergeObject);
-					}
-				}
-			}
-			console.log(newResponseArray);
-			setPositions(newResponseArray);
-		}
-	};
+	// 				newResponseArray.push(newMergeObject);
+	// 			}
+	// 		}
+	// 	}
+	// 	console.log(newResponseArray);
+	// 	setPositions(newResponseArray);
+	// };
 
 	const getSneaker = async () => {
-		if (IsLoaded === true) {
-			axios
-				.get(marketsDataGit)
+		axios
+			.get(marketsDataGit)
 
-				.then((res) => {
-					const resArray = [];
-					for (let index = 0; index < allMarketSkus.length; index++) {
-						const element = res.data[3][allMarketSkus[index]];
-						resArray.push(element);
-					}
+			.then((res) => {
+				const resArray = [];
+				for (let index = 0; index < allMarketSkus.length; index++) {
+					const element = res.data[3][allMarketSkus[index]];
+					resArray.push(element);
+				}
 
-					setResponses(resArray);
-				})
-				.catch(function (error) {
-					console.error(error);
-				});
-		} else {
-		}
+				setResponses(resArray);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 	};
 
 	const checkMarkets = async () => {
@@ -140,7 +132,6 @@ const Home: NextPage = () => {
 			allMarketSkus.push(shoeData);
 			allMarketContracts.push(shoeMarket);
 		}
-		setIsLoading(true);
 	};
 	const balanceArray: any = [];
 
@@ -156,7 +147,7 @@ const Home: NextPage = () => {
 	//       const balance2 = (await contract.balanceOf(connected, 2)).toString()
 	//       balanceArray.push({sku, yes:balance1, no:balance2})
 	//     }
-	//    setComplete(true)
+	//    setIsComplete(true)
 	//   }
 
 	//------------------ Use Effect / Use memo ------------------
@@ -171,10 +162,6 @@ const Home: NextPage = () => {
 		};
 		run();
 	}, []);
-
-	useEffect(() => {
-		mergeData();
-	}, [isComplete]);
 
 	useMemo(() => {
 		if (response) {
@@ -406,7 +393,7 @@ const Home: NextPage = () => {
 						</div>
 					</ContentHeader>
 					<DashboardTable>
-						{allMarkets.legnth === 0
+						{allMarkets.length === 0
 							? skeletonArray.map(() => (
 									<>
 										<Skeleton
