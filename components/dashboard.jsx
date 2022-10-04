@@ -7,7 +7,7 @@ import MarketAbi from '../abi/markets.json';
 
 export const Dashboard = ({ positions }) => {
 	const { data: s1, error: e1 } = useGetMarketBySku(positions.sku);
-
+	console.log(s1);
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -16,7 +16,6 @@ export const Dashboard = ({ positions }) => {
 	};
 
 	const explorer = 'https://goerli.etherscan.io/address/' + s1?.address;
-	const { width } = useWindowDimensions();
 
 	let truncateContract =
 		s1?.address.substring(0, 4) + '...' + s1?.address.slice(-4);
@@ -31,16 +30,16 @@ export const Dashboard = ({ positions }) => {
 		const signer = provider.getSigner();
 		const contract = new ethers.Contract(positions.address, MarketAbi, signer);
 		const balances = await contract.getAcctInfo(connected);
-		const balanceNo = balances.amountNo.toString();
-		const balanceYes = balances.amountYes.toString();
-		const avgNoBuy = balances.avgBuyPriceNo.toString();
-		const avgYesBuy = balances.avgBuyPriceYes.toString();
+		const one = balances.amountNo.toString();
+		const two = balances.amountYes.toString();
+		const three = (balances.avgBuyPriceNo / 1e18).toFixed(2);
+		const four = (balances.avgBuyPriceYes / 1e18).toFixed(2);
 
 		const newObj = {
-			amountNo: balanceNo,
-			amountYes: balanceYes,
-			avgBuyPriceNo: avgNoBuy,
-			avgBuyPriceYes: avgYesBuy,
+			amountNo: one,
+			amountYes: two,
+			avgBuyPriceNo: three,
+			avgBuyPriceYes: four,
 		};
 
 		setAllBalances(newObj);
@@ -50,6 +49,7 @@ export const Dashboard = ({ positions }) => {
 		showBalances();
 	}, []);
 
+	const { width } = useWindowDimensions();
 	return (
 		<a>
 			{width >= screens.desktop ? (
@@ -65,8 +65,8 @@ export const Dashboard = ({ positions }) => {
 						<span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex ">
 							<p className="text-xs font-Inter">
 								{' '}
-								{allBalances?.avgBuyPriceYes} cents (yes) /{' '}
-								{allBalances?.avgBuyPriceNo} cents (no){' '}
+								{allBalances?.avgBuyPriceYes} ¢ (yes) /{' '}
+								{allBalances?.avgBuyPriceNo} ¢ (no){' '}
 							</p>
 						</span>
 					</span>
@@ -91,8 +91,8 @@ export const Dashboard = ({ positions }) => {
 						<span className="bg-[#ACFF00] text-black rounded-[40px] py-1 px-2 flex ">
 							<p className="text-xs font-Inter">
 								{' '}
-								{allBalances?.avgBuyPriceYes} cents (yes) /{' '}
-								{allBalances?.avgBuyPriceNo} cents (no)
+								{allBalances?.avgBuyPriceYes} ¢ (yes) /{' '}
+								{allBalances?.avgBuyPriceNo} ¢ (no)
 							</p>
 						</span>
 					</span>
