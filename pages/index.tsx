@@ -163,69 +163,65 @@ const Home: NextPage = () => {
 		run();
 	}, []);
 
-	useMemo(() => {
-		if (response) {
-			if (response.length > 0 && isAscending === true) {
-				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-					response.sort((a: { name: string }, b: { name: string }) =>
-						a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-					);
-					console.log({ response });
-				} else if (
-					response.length > 0 &&
-					sortBy.state === SORT_BY_STATES.RELEASE_DATE
-				) {
-					response.sort(
-						(a: { releaseDate: string }, b: { releaseDate: string }) =>
-							a.releaseDate > b.releaseDate
-								? 1
-								: b.releaseDate > a.releaseDate
-								? -1
-								: 0
-					);
-					console.log({ response });
-				} else if (
-					response.length > 0 &&
-					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-				) {
-					response.sort(
-						(a: { retailPrice: number }, b: { retailPrice: number }) =>
-							a.retailPrice - b.retailPrice
-					);
-					console.log({ response });
-				}
-			} else if (response.length > 0 && isAscending === false) {
-				if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-					response.sort((a: { name: string }, b: { name: string }) =>
-						a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
-					);
-					console.log({ response });
-				} else if (
-					response.length > 0 &&
-					sortBy.state === SORT_BY_STATES.RELEASE_DATE
-				) {
-					response.sort(
-						(a: { releaseDate: string }, b: { releaseDate: string }) =>
-							a.releaseDate < b.releaseDate
-								? 1
-								: b.releaseDate < a.releaseDate
-								? -1
-								: 0
-					);
-					console.log({ response });
-				} else if (
-					response.length > 0 &&
-					sortBy.state === SORT_BY_STATES.RETAIL_PRICE
-				) {
-					response.sort(
-						(a: { retailPrice: number }, b: { retailPrice: number }) =>
-							b.retailPrice - a.retailPrice
-					);
-					console.log({ response });
-				}
-			}
-		}
-	}, [sortBy, isAscending]);
+	// useMemo(() => {
+	// 	if (allMarkets) {
+	// 		console.log('here', allMarkets);
+	// 		if (allMarkets.length > 0 && isAscending === true) {
+	// 			if (allMarkets.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+	// 				allMarkets.sort((a: { name: string }, b: { name: string }) =>
+	// 					a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+	// 				);
+	// 			} else if (
+	// 				allMarkets.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RELEASE_DATE
+	// 			) {
+	// 				allMarkets.sort(
+	// 					(a: { releaseDate: string }, b: { releaseDate: string }) =>
+	// 						a.releaseDate > b.releaseDate
+	// 							? 1
+	// 							: b.releaseDate > a.releaseDate
+	// 							? -1
+	// 							: 0
+	// 				);
+	// 			} else if (
+	// 				allMarkets.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+	// 			) {
+	// 				allMarkets.sort(
+	// 					(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 						a.retailPrice - b.retailPrice
+	// 				);
+	// 			}
+	// 		} else if (allMarkets.length > 0 && isAscending === false) {
+	// 			if (allMarkets.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+	// 				allMarkets.sort((a: { name: string }, b: { name: string }) =>
+	// 					a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
+	// 				);
+	// 			} else if (
+	// 				response.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RELEASE_DATE
+	// 			) {
+	// 				response.sort(
+	// 					(a: { releaseDate: string }, b: { releaseDate: string }) =>
+	// 						a.releaseDate < b.releaseDate
+	// 							? 1
+	// 							: b.releaseDate < a.releaseDate
+	// 							? -1
+	// 							: 0
+	// 				);
+	// 			} else if (
+	// 				allMarkets.length > 0 &&
+	// 				sortBy.state === SORT_BY_STATES.RETAIL_PRICE
+	// 			) {
+	// 				allMarkets.sort(
+	// 					(a: { retailPrice: number }, b: { retailPrice: number }) =>
+	// 						b.retailPrice - a.retailPrice
+	// 				);
+	// 				console.log({ allMarkets });
+	// 			}
+	// 		}
+	// 	}
+	// }, [sortBy, isAscending]);
 
 	useEffect(() => {
 		if (sneakersDataError) {
@@ -259,7 +255,7 @@ const Home: NextPage = () => {
 
 			<Layout
 				headerSubtitle={'TOTAL BALANCE'}
-				headerTitle={'$ 144,000.00'}
+				headerTitle={'Positions'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
@@ -271,10 +267,10 @@ const Home: NextPage = () => {
 					>
 						<div className="flex flex-row items-center mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0    tablet:flex-row">
 							<text>
-								Total Positions
+								Total Positions &nbsp;
 								<span className="text-[#748282]">{responses?.length}</span>
 							</text>
-							<div className="dropdown dropdown-end">
+							{/* <div className="dropdown dropdown-end">
 								<label
 									tabIndex={0}
 									className="text-[10px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm bg-[#0C1615]  hover:opacity-50  w-[130px]  p-1 px-2"
@@ -389,7 +385,7 @@ const Home: NextPage = () => {
 										</button>
 									</li>
 								</ul>
-							</div>
+							</div> */}
 						</div>
 					</ContentHeader>
 					<DashboardTable>
