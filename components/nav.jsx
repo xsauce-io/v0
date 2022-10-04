@@ -72,21 +72,22 @@ export const Nav = ({ logoColor }) => {
 				});
 			}
 		} catch (error) {
-			console.log('error wallet not connected', error);
-			// toast.custom(
-			// 	(t) => (
-			// 		<ToastNotification
-			// 			message={'Wallet Not Connected'}
-			// 			subMessage={
-			// 				'To see market statistics, your wallet must be connected.'
-			// 			}
-			// 			icon={<img src="/alertTriangle.svg" />}
-			// 			t={t}
-			// 		/>
-			// 	),
-			// 	{ duration: 7000 }
-			// );
-
+			if (error.code == -32002) {
+				toast.custom(
+					(t) => (
+						<ToastNotification
+							message={'Wallet Not Connected'}
+							subMessage={
+								'To see market statistics, your wallet must be connected.'
+							}
+							icon={<img src="/alertTriangle.svg" />}
+							t={t}
+						/>
+					),
+					{ duration: 7000 }
+				);
+				console.log('error wallet not connected', error);
+			}
 			mixpanelTrackProps('Connect Wallet', {
 				result: 'unsuccessful',
 				automaticConnection: !clicked,
@@ -318,7 +319,6 @@ export const Nav = ({ logoColor }) => {
 
 	useEffect(() => {
 		getWallet();
-		console.log('once');
 		localStorage.getItem('network');
 	}, []);
 

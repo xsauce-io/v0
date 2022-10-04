@@ -20,7 +20,8 @@ export const ToastNotification = ({ subMessage, icon, message, t }) => {
 			>
 				<div className="flex flex-col items-start space-y-1">
 					<div className="flex flex-row w-full">
-						{icon}
+						<div className="flex-2">{icon}</div>
+
 						<div className="flex-1"></div>
 						<button
 							className="text-white text-sm flex-2"
@@ -45,12 +46,13 @@ export const ToastNotification = ({ subMessage, icon, message, t }) => {
 			}`}
 		>
 			<div className="flex flex-row space-x-3 items-start">
-				{icon}
-				<div className="flex flex-col ">
+				<div className="flex-2">{icon}</div>
+
+				<div className="flex flex-col flex-1 ">
 					<div className="text-white text-sm">{message}</div>
 					<div className="text-[#748282] text-xs ">{subMessage}</div>
 				</div>
-				<div>
+				<div className="flex-2">
 					<button
 						className="text-white text-sm"
 						onClick={() => toast.remove(t.id)}
