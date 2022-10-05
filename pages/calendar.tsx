@@ -178,7 +178,7 @@ const Markets: NextPage = () => {
 					{/*Sorting */}
 					<ContentHeader
 						title={'Upcoming Sneaker Drops'}
-						icon={<img className={'h-[35px] w-[35px]'} src="/calendar.svg" />}
+						icon={<img className={'h-[30px] w-[30px]'} src="/calendar.svg" />}
 					/>
 
 					<div className="space-y-10">
