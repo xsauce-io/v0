@@ -210,8 +210,8 @@ const Home: NextPage = () => {
 			</Head>
 
 			<Layout
-				headerSubtitle={'TOTAL BALANCE'}
-				headerTitle={'Positions'}
+				headerSubtitle={'OVERVIEW'}
+				headerTitle={'Dashboard'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
@@ -224,7 +224,7 @@ const Home: NextPage = () => {
 						<div className="flex flex-row items-center mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0    tablet:flex-row">
 							<text>
 								Total Positions &nbsp;
-								<span className="text-[#748282]">{responses?.length}</span>
+								<span className="text-[#748282]">{allBalances?.length}</span>
 							</text>
 							{/* <div className="dropdown dropdown-end">
 								<label
