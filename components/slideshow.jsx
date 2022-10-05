@@ -8,23 +8,26 @@ import styles from './slideshow.module.css';
 
 const Images = [
     {
-        href: "/1.svg",
+        href: "/hand.png",
+        header:"Welcome to the Xchange",
+        text: "Culture is now in your hands. Before you get started, we need to explain a few things."
+        
     },
     {
-        href: "/2.svg",
+        href: "/basics.png",
     },
     {
-        href: "/3.svg",
+        href: "/magglass.png",
     },
     {
-        href: "/4.svg",
+        href: "/money.png",
     },
 ]
 
 
 export const Slideshow = () => {
     //const slides = ["#0088FE", "#00C49F", "#FFBB28"];
-    const delay = 3000;
+    const delay = 7000;
 
     const [index, setIndex] = useState(0);
     const timeoutRef = useRef(null);
@@ -62,8 +65,9 @@ export const Slideshow = () => {
                         key={index}
                     //style={{ backgroundColor }}
                     >
-                        <img className="h-full object-fit" src={image.href}></img>
-
+                        <img className="object-fit" src={image.href}></img>
+                        <h1 className='text-white text-xl'>{image.header}</h1>
+                        <p className="text-white font-SG">{image.text}</p>
                     </div>
                 ))}
                 {/* {slides.map((backgroundColor, index) => (
