@@ -207,7 +207,8 @@ const Markets: NextPage = () => {
 					>
 						<div className="flex mobile:flex-col tablet:flex-row tablet:space-x-3 mobile:space-y-3  tablet:space-y-0 items-center ">
 							<text>
-								Total Live Markets <span className="text-[#748282]">4</span>
+								Total Live Markets &nbsp;
+								<span className="text-[#748282]"> 4</span>
 							</text>
 							<div className="dropdown dropdown-end">
 								<label
