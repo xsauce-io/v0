@@ -10,6 +10,7 @@ import SauceTokenABI from '../abi/$tableSauce.json';
 import toast from 'react-hot-toast';
 import { ToastNotification } from './toast';
 import { WalletNotConnectedModal } from './walletNotConnectedModal';
+import { useRouter } from 'next/router';
 
 export const Nav = ({ logoColor }) => {
 	// let [network, setNetwork] = useState();
@@ -21,6 +22,8 @@ export const Nav = ({ logoColor }) => {
 	};
 
 	const { width } = useWindowDimensions();
+	const router = useRouter();
+	const currentPath = router.pathname;
 
 	let [accounts, setAccount] = useState(null);
 	const [toggle, setToggle] = useState();
@@ -316,7 +319,10 @@ export const Nav = ({ logoColor }) => {
 
 	return (
 		<header className="bg-inherit sticky top-0 z-20  border-b-[1px] border-inherit ">
-			<WalletNotConnectedModal open={openWalletNotConnectedModal} />
+			<WalletNotConnectedModal
+				open={openWalletNotConnectedModal}
+				positionTop={currentPath == '/live-market/[sku]' ? true : false}
+			/>
 
 			<div className="flex items-center h-20 w-full gap-8   ">
 				<div className="flex-1">

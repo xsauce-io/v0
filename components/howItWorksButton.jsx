@@ -28,7 +28,7 @@ export const HowItWorksButton = ({ title }) => {
 	return (
 		<div className="flex flex-col h-full  tablet:w-[50%] laptop:w-[45%]  mobile:w-full rounded-[10px] text-black">
 			<button
-				className="bg-white rounded-t-[10px] py-5 pr-10 pl-5 w-full border-b-[1px] border-[#0C1615] hover:opacity-40 flex  items-center "
+				className="bg-white rounded-[10px] py-5 pr-10 pl-5 w-full border-b-[1px] border-[#0C1615] hover:opacity-40 flex  items-center "
 				onClick={handleClickOpen}
 			>
 				<img className="flex-2" src="/openbook.svg" />
@@ -71,7 +71,7 @@ export const HowItWorksButton = ({ title }) => {
 					</DialogContent>
 				</Box>
 			</Dialog>
-
+			{/* 
 			<div className="bg-[#DCDEE1] rounded-b-[10px] p-4 text-left w-[100%] space-y-2 ">
 				<div className="py-2 flex space-x-2 text-sm">
 					<h1 className=" text-sm font-Inter">FINANCIAL OVERVIEW </h1>
@@ -103,7 +103,7 @@ export const HowItWorksButton = ({ title }) => {
 						<div className=" text-sm font-Inter"> 3,702 $SAUX</div>
 					</div>
 				</grid>
-			</div>
+			</div> */}
 		</div>
 	);
 };
