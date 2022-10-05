@@ -14,18 +14,24 @@ const Images = [
 	},
 	{
 		href: '/basics.png',
+    header:'The Basics',
+    text:"1.) Select a market in the Live Markets tab you want to place a wager on. 2.) Choose either YES or NO to represent which side you are on.\n3.) Select how many tickets you want to buy and submit your transaction!"
 	},
 	{
 		href: '/magglass.png',
+    header:'Tune In',
+    text:'Watch the live market for price updates and news. The buy in price is dynamic and determined by previous buys.'
 	},
 	{
 		href: '/money.png',
+    header: 'Cash Out',
+    text:'If you are on the winning side of a wager you will recieve what you put in + your share of the winnings.'
 	},
 ];
 
 export const Slideshow = () => {
 	//const slides = ["#0088FE", "#00C49F", "#FFBB28"];
-	const delay = 4000;
+	const delay = 8000;
 
 	const [index, setIndex] = useState(0);
 	const timeoutRef = useRef(null);
