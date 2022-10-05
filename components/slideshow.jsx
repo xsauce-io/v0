@@ -20,12 +20,12 @@ const Images = [
 	{
 		href: '/magglass.png',
     header:'Tune In',
-    text:'Watch the live market for price updates and news. The buy in price is dynamic and determined by previous buys.'
+    text:'Watch the live market for price updates and news. The buy in price is dynamic and is determined by previous buys.'
 	},
 	{
 		href: '/money.png',
     header: 'Cash Out',
-    text:'If you are on the winning side of a wager you will recieve what you put in + your share of the winnings.'
+    text:'If you are on the winning side of a wager when it resolves you will recieve back what you put in + your share of the winnings.'
 	},
 ];
 
