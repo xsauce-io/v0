@@ -7,8 +7,6 @@ import { useState, useEffect, useMemo} from 'react';
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import { ToastNotificationActionBar } from '../components/toastActionBar';
-import alertCircle from '../public/alertCircle.svg';
 import { useRouter } from 'next/router';
 import {
 	$tableAddress,
