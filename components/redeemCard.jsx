@@ -2,31 +2,62 @@ import React from "react";
 import { Skeleton } from "@mui/material";
 import Link from 'next/link'
 import { useState, useEffect } from "react";
+import { useGetMarketBySku } from '../services/useRequests';
+import marketAbi from '../abi/markets.json';
+import { ethers } from 'ethers';
 
 
 export const RedeemCard = ({ cardObject }) => {
-  const cardObjectHref = "/live-market/" + cardObject.sku
+
+  const cardObjectHref = "/live-market/" + cardObject?.sku
 
 
-  let No = 40
-  let Yes = 60
+  const { data, error } = useGetMarketBySku(cardObject?.sku);
 
-  const calculations = () => {
+	const calculations = () => {
+		if (data !== undefined) {
+			if (No < Yes) {
+				setFavored(true);
+			} else {
+				setFavored(false);
+			}
+		}
+	};
 
-    if (No < Yes) {
-      setFavored(true)
-    } else {
-      setFavored(false)
-    }
+	const ratios = async () => {
+		console.log(data);
+		if (data !== undefined && data.address !== undefined) {
+			try {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = await provider.getSigner();
+				const contract = new ethers.Contract(data.address, marketAbi, signer);
+				const getYes = await contract.totalSupply(1);
+				const getNo = await contract.totalSupply(2);
 
-  }
+				let NoRatio =
+					(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
 
-  let [favored, setFavored] = useState()
+				let YesRatio =
+					(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+				console.log(YesRatio);
 
+				setYes(YesRatio.toFixed(0));
+				setNo(NoRatio.toFixed(0));
+			} catch {
+				(e) =>
+					console.log('card wager meta mask error: cannot display data', e);
+			}
+		}
+	};
 
-  useEffect(() => {
-    calculations();
-  }, []);
+	const [No, setNo] = useState();
+	const [Yes, setYes] = useState();
+	const [favored, setFavored] = useState();
+
+	useEffect(() => {
+		ratios();
+		calculations();
+	}, [data]);
 
 
   return (
@@ -64,7 +95,7 @@ export const RedeemCard = ({ cardObject }) => {
               <div className="border-b-[1px] border-[#30403F]"></div>
               <div className="px-8 ">
                 <div className="flex flex-col w-full py-4 space-y-3 font-light">
-                  <h1 className="text-[14px] text-white font-Inter ">Will the price be over $300?
+                  <h1 className="text-[14px] text-white font-Inter ">Will the price be over {data?.prediction}?
                   </h1>
 
                   <div className="space-y-3">
@@ -83,7 +114,7 @@ export const RedeemCard = ({ cardObject }) => {
 
                   <div className="w-full">
 
-                    <h2 className="text-[14px] text-[#748282] font-Inter">This wager expires 09.10.2022</h2>
+                    <h2 className="text-[14px] text-[#748282] font-Inter">Expires: {data?.expiration}</h2>
                   </div>
                 </div>
               </div>
