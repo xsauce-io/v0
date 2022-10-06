@@ -8,6 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Box from '@mui/material/Box';
 import Slide from '@mui/material/Slide';
 import { Slideshow } from './slideshow';
+import { Images } from './howItWorksButton';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -59,7 +60,7 @@ export const FirstTimeVisitorModal = () => {
 					</Button>
 				</DialogActions>
 				<DialogContent sx={{ padding: '18px' }}>
-					<Slideshow />
+					<Slideshow content={Images} />
 				</DialogContent>
 			</Box>
 		</Dialog>

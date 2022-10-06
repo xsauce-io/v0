@@ -14,8 +14,9 @@
     display: inline-block;
     height: 400px;
     width: 100%;
-white-space: initial;
-
+    white-space: pre-line;
+    padding-right: 5px;
+    padding-left: 5px;
 
 }
 .slideshowDots {
