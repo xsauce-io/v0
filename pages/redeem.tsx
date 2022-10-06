@@ -10,49 +10,29 @@ import axios from 'axios';
 import { Layout } from '../components/layout';
 import { ContentHeader } from '../components/contentHeader';
 import { RedeemCard } from '../components/redeemCard';
-import Script from 'next/script';
+import {useGetSneaker} from '../services/useRequests';
 
 const Redeem: NextPage = () => {
-	let [isLoading, setisLoading] = useState(true as boolean);
-	let [marketResponse1, setMarketResponse1] = useState([] as any);
-	let [marketResponse2, setMarketResponse2] = useState([] as any);
-	let [marketResponse3, setMarketResponse3] = useState([] as any);
+	let [isLoading, setisLoading] = useState(false as boolean);
 	let [toggled, setisToggled] = useState('1');
 
-	const getSneaker2 = async () => {
-		Promise.all([
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=394805-100'
-			),
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AR9880-023'
-			),
+  const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
+	const { data: s2, error: e2 } = useGetSneaker('DR8869-200');
+	const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
+	const { data: s4, error: e4 } = useGetSneaker('DX2836-001');
 
-			axios.get(
-				'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=AA7293-200'
-			),
-		])
 
-			.then(
-				axios.spread((obj1, obj2, obj3) => {
-					setMarketResponse1([obj1.data.results[0]]);
-					setMarketResponse2([obj2.data.results[0]]);
-					setMarketResponse3([obj3.data.results[0]]);
+  
 
-					setisLoading(false);
+  const loaded = () => {
+    if (s1 !== undefined) {
+    setisLoading(true)
+    }
+  }
 
-					console.log({ obj1 });
-					console.log({ obj2 });
-				})
-			)
-			.catch(function (error) {
-				console.error(error);
-			});
-	};
-
-	useEffect(() => {
-		getSneaker2();
-	}, []);
+  useEffect(() => {
+	loaded();
+	}, [s1]);
 
 	return (
 		<div>
@@ -87,15 +67,19 @@ const Redeem: NextPage = () => {
 							>
 								{toggled === '1' ? (
 									<p className="text-black truncate font-Inter">
-										Nike Air Max 1 Patta Denim
+										{s1?.name}
 									</p>
 								) : toggled === '2' ? (
 									<p className="text-black truncate font-Inter">
-										Jordan 1 Retro High Homage to Home Chicago (Numbered)
+										{s2?.name}
+									</p>
+								) : toggled === '3' ? (
+									<p className="text-black truncate font-Inter">
+										{s3?.name}
 									</p>
 								) : (
 									<p className="text-black truncate font-Inter">
-										Nike Air Max 90 OFF-White Desert Ore
+										{s4?.name}
 									</p>
 								)}
 								<img className="" src="/downArrow.svg" />
@@ -109,7 +93,7 @@ const Redeem: NextPage = () => {
 									onClick={() => setisToggled('1')}
 								>
 									<text className="text-black font-Inter active:bg-[#ACFF00]">
-										Nike Air Max 1 Patta Denim
+										{s1?.name}
 									</text>
 								</li>
 								<li
@@ -117,22 +101,32 @@ const Redeem: NextPage = () => {
 									onClick={() => setisToggled('2')}
 								>
 									<text className="text-black font-Inter active:bg-[#ACFF00]">
-										Jordan 1 Retro High Homage to Home Chicago (Numbered)
+                  {s2?.name}
+									</text>
+								</li>
+                <li
+									className="py-2 border-b-[1px] border-[#0C1615] font-Inter active:bg-[#ACFF00]"
+									onClick={() => setisToggled('3')}
+								>
+									<text className="text-black font-Inter active:bg-[#ACFF00]">
+                  {s3?.name}
 									</text>
 								</li>
 								<li
 									className="py-2 font-Inter active:bg-[#ACFF00]"
-									onClick={() => setisToggled('3')}
+									onClick={() => setisToggled('4')}
 								>
 									<text className="text-black font-Inter active:bg-[#ACFF00]">
-										Nike Air Max 90 OFF-White Desert Ore
+                  {s4?.name}
 									</text>
 								</li>
 							</ul>
 						</div>
 						<div className="mobile:full tablet:w-[60%] flex flex-col space-y-4 laptop:items-center">
 							<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
-								{isLoading === true ? (
+                
+								{!isLoading
+                 ? (
 									<React.Fragment>
 										<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
 											<Skeleton
@@ -168,18 +162,18 @@ const Redeem: NextPage = () => {
 										</div>
 									</React.Fragment>
 								) : toggled == '1' ? (
-									marketResponse1.map((el: any) => (
-										<RedeemCard cardObject={el} />
-									))
-								) : toggled == '2' ? (
-									marketResponse2.map((el: any) => (
-										<RedeemCard cardObject={el} />
-									))
-								) : (
-									marketResponse3.map((el: any) => (
-										<RedeemCard cardObject={el} />
-									))
-								)}
+										<RedeemCard cardObject={s1} />
+									)
+								 : toggled == '2' ? (
+										<RedeemCard cardObject={s2} />
+									)
+								 : toggled == '3' ? (
+										<RedeemCard cardObject={s3} />
+									)
+                  : (
+										<RedeemCard cardObject={s4} />
+									)
+								}
 							</div>
 						</div>
 

@@ -5,7 +5,9 @@ import { useState, useEffect } from "react";
 
 
 export const RedeemCard = ({ cardObject }) => {
-  const cardObjectHref = "/live-market/" + cardObject.sku
+
+  console.log(cardObject)
+  const cardObjectHref = "/live-market/" + cardObject?.sku
 
 
   let No = 40
