@@ -74,11 +74,17 @@ export const HowItWorksButton = ({ title }) => {
 				maxWidth="sm"
 			>
 				<Box sx={{ bgcolor: 'black' }} width={'100%'} height={'100%'}>
-					<DialogActions>
+					<DialogActions
+						sx={{
+							display: 'flex',
+
+							padding: 0,
+						}}
+					>
 						<Button
 							sx={{
 								color: '#ACFF00',
-								fontSize: '30px',
+								fontSize: '20px',
 								display: 'flex',
 								flexDirection: 'column',
 								justifyContent: 'right',
@@ -89,7 +95,13 @@ export const HowItWorksButton = ({ title }) => {
 							&#10005;
 						</Button>
 					</DialogActions>
-					<DialogContent sx={{ padding: '18px' }}>
+					<DialogContent
+						sx={{
+							padding: '15px',
+
+							display: 'flex',
+						}}
+					>
 						<Slideshow content={Images} />
 					</DialogContent>
 				</Box>

@@ -8,6 +8,7 @@
 .slideshowSlider {
     white-space: nowrap;
     transition:ease 1000ms;
+   
 }
 
 .slide {
@@ -17,7 +18,8 @@
     white-space: pre-line;
     padding-right: 5px;
     padding-left: 5px;
-
+   
+    justify-self: flex-start;
 }
 .slideshowDots {
     text-align: center;
@@ -31,6 +33,7 @@
     cursor: pointer;
     margin: 15px 7px 0px;
     background-color: #c4c4c4;
+
 }
 
 .slideshowDotActive {

@@ -60,21 +60,14 @@ export const Slideshow = ({ content }) => {
 				className={styles.slideshowSlider}
 				style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
 			>
-				{content?.map((image, index) => (
+				{content?.map((item, index) => (
 					<div className={styles.slide} key={index}>
-						<img className="object-fit" src={image.href}></img>
-						<h1 className="text-white text-xl ">{image.header}</h1>
-						<p className="text-white font-SG ">{image.text}</p>
+						<img className="object-fit" src={item.href}></img>
+
+						<h1 className="text-white text-xl  ">{item.header}</h1>
+						<p className="text-white font-SG ">{item.text}</p>
 					</div>
 				))}
-				{/* {slides.map((backgroundColor, index) => (
-                    <div
-                        className={styles.slide}
-                        key={index}
-                        style={{ backgroundColor }}>
-
-                    </div>
-                ))} */}
 			</div>
 			<div className={styles.slideshowDots}>
 				{Images.map((_, idx) => (
