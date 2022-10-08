@@ -28,7 +28,7 @@ const Testing: NextPage = () => {
 					}
 					icon={<img src="/checkCircle.svg" />}
 					t={t}
-					onClick={() => alert('view changes')}
+					href={null}
 				/>
 			),
 			{ duration: 2000 }

@@ -40,6 +40,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 		};
 	}, [router.events]);
 
+	useEffect(() => {
+		// Dismiss all active toasts
+		toast.remove();
+	}, [router.events]);
+
 	return (
 		<>
 			<Head>

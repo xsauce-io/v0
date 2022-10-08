@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 import { ToastNotification } from './toast';
 import { WalletNotConnectedModal } from './walletNotConnectedModal';
 import { useRouter } from 'next/router';
+import { ToastNotificationActionBar } from './toastActionBar';
 
 export const Nav = ({ logoColor }) => {
 	// let [network, setNetwork] = useState();
@@ -32,6 +33,11 @@ export const Nav = ({ logoColor }) => {
 	const [fullLengthAccount, setFullLengthAccount] = useState(null);
 	const [openWalletNotConnectedModal, setOpenWalletNotConnectedModal] =
 		useState(false);
+
+	useEffect(() => {
+		// Dismiss all active toasts on page change
+		toast.remove();
+	}, [router.events]);
 
 	const getWallet = async (clicked = false) => {
 		try {
@@ -77,10 +83,23 @@ export const Nav = ({ logoColor }) => {
 					chainId: chainId,
 				});
 			}
-			setOpenWalletNotConnectedModal(false);
+			//setOpenWalletNotConnectedModal(false);
 		} catch (error) {
 			if (error.code == -32002) {
-				setOpenWalletNotConnectedModal(true);
+				toast.custom(
+					(t) => (
+						<ToastNotificationActionBar
+							message={'Your wallet is not connected'}
+							subMessage={
+								'To see market statistics, connect your Metamask wallet and refresh the page.'
+							}
+							icon={<img src="/alertCircle.svg" />}
+							t={t}
+							href="https://geekflare.com/finance/beginners-guide-to-metamask/"
+						/>
+					),
+					{ duration: Infinity }
+				);
 				console.log('error wallet not connected', error);
 			}
 			mixpanelTrackProps('Connect Wallet', {
@@ -319,12 +338,7 @@ export const Nav = ({ logoColor }) => {
 
 	return (
 		<header className="bg-inherit sticky top-0 z-20  border-b-[1px] border-inherit ">
-			<WalletNotConnectedModal
-				open={openWalletNotConnectedModal}
-				positionTop={currentPath == '/live-market/[sku]' ? true : false}
-			/>
-
-			<div className="flex items-center h-20 w-full gap-8   ">
+			<div className="flex items-center h-20 w-full gap-8">
 				<div className="flex-1">
 					<a className="block" href="/">
 						<span className="sr-only">Home</span>
@@ -488,26 +502,29 @@ export const Nav = ({ logoColor }) => {
 						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
-								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[175px] bg-[#DCDEE1] space-x-6 rounded-[40px]"
+								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[175px] bg-[#DCDEE1] space-x-8 rounded-[40px]"
 							>
 								{toggle === 421613 ? (
 									<>
-										<img className="h-[15%] w-[15%]" src="/arbitrum.svg" />
-										<span className="text-black">Arbitrum</span>
+										<img className="h-[10%] w-[10%]" src="/arbitrum.svg" />
+										<span className="text-black text-[14px]">Arbitrum</span>
 									</>
 								) : toggle === 80001 ? (
 									<>
-										<img className="h-[15%] w-[15%]" src="/polygon.svg" />
-										<span className="text-[black]">Polygon</span>
+										<img className="h-[10%] w-[10%]" src="/polygon.svg" />
+										<span className="text-[black] text-[14px]">Polygon</span>
 									</>
 								) : toggle === 41 ? (
 									<>
-										<img className="h-[15%] w-[15%]" src="/telos.png" />
-										<span className="text-[black]">Telos</span>
+										<img
+											className="h-[10%] w-[10%]text-[14px]"
+											src="/telos.png"
+										/>
+										<span className="text-[black] text-[14px]">Telos</span>
 									</>
 								) : (
 									<>
-										<img className="h-[11%] w-[11%]" src="/eth.png" />
+										<img className="h-[9%] w-[9%]" src="/eth.png" />
 										<span className="text-[black] text-[14px]">Goerli</span>
 									</>
 								)}
@@ -519,13 +536,13 @@ export const Nav = ({ logoColor }) => {
 							>
 								<li>
 									<a onClick={() => setState(421613)}>
-										<img className="h-[30%] w-[30%]" src="/arbitrum.svg" />
+										<img className="h-[15%] w-[15%]" src="/arbitrum.svg" />
 										Arbitrum
 									</a>
 								</li>
 								<li>
 									<a>
-										<img className="h-[30%] w-[30%]" src="/fuel.png" />
+										<img className="h-[15%] w-[15%]" src="/fuel.png" />
 										Fuel
 									</a>
 								</li>
