@@ -38,14 +38,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export const HowItWorksButton = ({ title }) => {
 	const [open, setOpen] = React.useState(false);
+	const [resetSlideshow, setResetSlideshow] = React.useState(false);
 
 	const handleClickOpen = () => {
 		setOpen(true);
 		mixpanelTrackProps('Learn How it Works', { type: 'Contemplation' });
+		setResetSlideshow(false);
 	};
 
 	const handleClose = () => {
 		setOpen(false);
+		setResetSlideshow(true);
 	};
 
 	return (
@@ -77,7 +80,6 @@ export const HowItWorksButton = ({ title }) => {
 					<DialogActions
 						sx={{
 							display: 'flex',
-
 							padding: 0,
 						}}
 					>
@@ -98,11 +100,10 @@ export const HowItWorksButton = ({ title }) => {
 					<DialogContent
 						sx={{
 							padding: '15px',
-
 							display: 'flex',
 						}}
 					>
-						<Slideshow content={Images} />
+						<Slideshow content={Images} reset={resetSlideshow} />
 					</DialogContent>
 				</Box>
 			</Dialog>

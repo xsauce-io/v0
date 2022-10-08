@@ -29,7 +29,7 @@ const Images = [
 	},
 ];
 
-export const Slideshow = ({ content }) => {
+export const Slideshow = ({ content, reset }) => {
 	const delay = 8000;
 
 	const [index, setIndex] = useState(0);
@@ -48,6 +48,13 @@ export const Slideshow = ({ content }) => {
 			resetTimeout();
 		};
 	}, [index]);
+
+	useEffect(() => {
+		if (reset === true) {
+			setIndex(0);
+			console.log(reset);
+		}
+	}, [reset]);
 
 	function resetTimeout() {
 		if (timeoutRef.current) {
