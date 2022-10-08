@@ -94,7 +94,7 @@ export const Nav = ({ logoColor }) => {
 								subMessage={
 									'To see market statistics, connect your Metamask wallet and refresh the page.'
 								}
-								icon={<img src="/alertCircle.svg" />}
+								icon={<img src="/alertTriangle.svg" />}
 								t={t}
 								href="https://geekflare.com/finance/beginners-guide-to-metamask/"
 							/>
@@ -110,7 +110,7 @@ export const Nav = ({ logoColor }) => {
 								subMessage={
 									'To enable the Connect Wallet button, log in Metamask and refresh the page.'
 								}
-								icon={<img src="/alertTriangle.svg" />}
+								icon={<img src="/alertCircle.svg" />}
 								t={t}
 								href="https://geekflare.com/finance/beginners-guide-to-metamask/"
 							/>
