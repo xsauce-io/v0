@@ -86,21 +86,38 @@ export const Nav = ({ logoColor }) => {
 			//setOpenWalletNotConnectedModal(false);
 		} catch (error) {
 			if (error.code == -32002) {
-				toast.custom(
-					(t) => (
-						<ToastNotificationActionBar
-							message={'Your wallet is not connected'}
-							subMessage={
-								'To see market statistics, connect your Metamask wallet and refresh the page.'
-							}
-							icon={<img src="/alertCircle.svg" />}
-							t={t}
-							href="https://geekflare.com/finance/beginners-guide-to-metamask/"
-						/>
-					),
-					{ duration: Infinity }
-				);
-				console.log('error wallet not connected', error);
+				if (!clicked) {
+					toast.custom(
+						(t) => (
+							<ToastNotificationActionBar
+								message={'Your wallet is not connected'}
+								subMessage={
+									'To see market statistics, connect your Metamask wallet and refresh the page.'
+								}
+								icon={<img src="/alertCircle.svg" />}
+								t={t}
+								href="https://geekflare.com/finance/beginners-guide-to-metamask/"
+							/>
+						),
+						{ duration: Infinity }
+					);
+					console.log('error wallet not connected', error);
+				} else {
+					toast.custom(
+						(t) => (
+							<ToastNotificationActionBar
+								message={'You are not logged in to Metamask'}
+								subMessage={
+									'To enable the Connect Wallet button, log in Metamask and refresh the page.'
+								}
+								icon={<img src="/alertTriangle.svg" />}
+								t={t}
+								href="https://geekflare.com/finance/beginners-guide-to-metamask/"
+							/>
+						),
+						{ duration: Infinity }
+					);
+				}
 			}
 			mixpanelTrackProps('Connect Wallet', {
 				result: 'unsuccessful',
