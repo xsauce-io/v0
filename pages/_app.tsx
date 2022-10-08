@@ -113,7 +113,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<FirstTimeVisitorModal />
 			<Toaster
 				position="top-right"
-				gutter={0}
+				gutter={8}
 				toastOptions={{ duration: 2000 }}
 				containerStyle={{ top: '104px' }}
 			/>
