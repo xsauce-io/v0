@@ -485,10 +485,10 @@ export const Nav = ({ logoColor }) => {
 
 				<LocalDrawer>
 					<div className="flex flex-col flex-1 justify-center items-center space-y-4 pt-8 font-Inter border-t-[1px] border-white mt-4   ">
-						<div className="dropdown dropdown-end w-full">
+						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
-								className="text-lg flex flex-row text-black justify-center items-center px-4 py-2 bg-[#DCDEE1] space-x-2 rounded-3xl"
+								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[175px] bg-[#DCDEE1] space-x-6 rounded-[40px]"
 							>
 								{toggle === 421613 ? (
 									<>
@@ -507,14 +507,15 @@ export const Nav = ({ logoColor }) => {
 									</>
 								) : (
 									<>
-										<span className="text-[red] text-[14px]">Unknown</span>
+										<img className="h-[11%] w-[11%]" src="/eth.png" />
+										<span className="text-[black] text-[14px]">Goerli</span>
 									</>
 								)}
-								<img src="/dropdown.png" />
+								<img src="/downArrow.svg" />
 							</label>
 							<ul
 								tabindex="0"
-								className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-full mt-4 z-10"
+								className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4"
 							>
 								<li>
 									<a onClick={() => setState(421613)}>
@@ -523,22 +524,16 @@ export const Nav = ({ logoColor }) => {
 									</a>
 								</li>
 								<li>
-									<a onClick={() => setState(80001)}>
-										<img className="h-[30%] w-[30%]" src="/polygon.svg" />
-										Polygon
-									</a>
-								</li>
-								<li>
-									<a onClick={() => setState(41)}>
-										<img className="h-[30%] w-[30%]" src="/telos.png" />
-										Telos
+									<a>
+										<img className="h-[30%] w-[30%]" src="/fuel.png" />
+										Fuel
 									</a>
 								</li>
 							</ul>
 						</div>
 
 						<button
-							className="text-lg flex flex-row text-black items-center bg-[#DCDEE1] font-Inter rounded-3xl py-2 px-6 w-full hover:opacity-60"
+							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
 							onClick={() => getWallet(true)}
 						>
 							<span className="truncate">
@@ -550,9 +545,11 @@ export const Nav = ({ logoColor }) => {
 							>
 								<img
 									className={
-										accounts == null ? 'hidden' : 'visible active:scale-125'
+										accounts == null
+											? 'hidden'
+											: 'visible hover:scale-110 active:scale-125'
 									}
-									src="/copy.png"
+									src="/Images.svg"
 								/>
 								<p
 									className={
@@ -565,6 +562,31 @@ export const Nav = ({ logoColor }) => {
 								</p>
 							</a>
 						</button>
+
+						<button
+							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+							onClick={() => {
+								faucet();
+								mixpanelTrackProps('Get Test Tokens', { token: '$auce' });
+							}}
+						>
+							<img className="h-[10%] w-[10%]" src="/icon.svg" />
+							<text>Get Test Tokens </text>
+						</button>
+
+						<a
+							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+							target="blank"
+							href="https://goerli-faucet.pk910.de/"
+							onClick={() =>
+								mixpanelTrackProps('Get Test Tokens', {
+									token: 'ETHGoerli',
+								})
+							}
+						>
+							<img className="h-[7%] w-[7%]" src="/eth.png" />
+							<text>Get ETH(Goerli) </text>
+						</a>
 					</div>
 				</LocalDrawer>
 			</div>
