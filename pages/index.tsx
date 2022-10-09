@@ -179,7 +179,7 @@ const Home: NextPage = () => {
 			toast.custom(
 				(t) => (
 					<ToastNotification
-						message={'An Internal Error has occurred'}
+						message={'An Internal Error has Occurred'}
 						subMessage={
 							'The data cannot be currently loaded. Please try again later.'
 						}
