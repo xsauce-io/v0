@@ -175,7 +175,7 @@ const Markets: NextPage = () => {
 						t={t}
 					/>
 				),
-				{ duration: 7000 }
+				{ duration: 7000, id: 'data-not-loading-live' }
 			);
 		}
 	}, [e1, e2, e3, e4]);

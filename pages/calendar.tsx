@@ -150,7 +150,7 @@ const Markets: NextPage = () => {
 						t={t}
 					/>
 				),
-				{ duration: 7000 }
+				{ duration: 7000, id: 'data-not-loading-calendar' }
 			);
 		}
 	}, [sneakersDataError]);
