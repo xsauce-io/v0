@@ -180,9 +180,9 @@ export const WagerCard = ({ cardObject }) => {
 								<p className="text-xs"> Sku </p>
 								<p>{cardObject.sku}</p>
 							</div>
-							<div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
-								<p className="text-xs"> Sku </p>
-								<p>{cardObject.sku}</p>
+              <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
+								<p className="text-xs"> Closes </p>
+								<p>{expiration}</p>
 							</div>
 							<div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px]">
 								<p className="text-xs"> Retail price </p>
@@ -199,10 +199,7 @@ export const WagerCard = ({ cardObject }) => {
 									Resell Price {'>'} ${currentMarket?.prediction}
 								</p>
 							</div>
-							<div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
-								<p className="text-xs"> Closes </p>
-								<p>{expiration}</p>
-							</div>
+						
 							<div className="col-span-2 row-span-2 border-t-[1px] rounded-bl-xl rounded-br-xl border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
 								<p className="text-xs"> Contract</p>
 
