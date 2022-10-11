@@ -356,25 +356,29 @@ export const Nav = ({ logoColor }) => {
 	return (
 		<header className="bg-inherit sticky top-0 z-20  border-b-[1px] border-inherit ">
 			<div className="flex items-center h-20 w-full gap-8">
-				<div className="flex-1">
+				<div className=" basis-1/3	">
 					<a className="block" href="/">
 						<span className="sr-only">Home</span>
-						<div className="text-[14px] h-20 flex flex-row items-center">
-							<h1 className="font-Inter pr-2 mobile:pl-5">Xchange</h1>
+						<div className="mobile:text-[12px] tablet:text-[14px] h-20 flex flex-row items-center">
+							<h1 className="font-Inter pr-2  mobile:pl-2 tablet:pl-5">
+								Xchange
+							</h1>
 							{width >= screens.laptop ? (
 								<div className="bg-white text-[10px] font-Inter text-black rounded-[40px] py-1 px-2 mobile:invisible tablet:visible">
 									Beta
 								</div>
 							) : (
-								<></>
+								<div className="bg-white text-[8px] tablet:text-[10px] font-Inter text-black rounded-[40px] py-1 px-2 ">
+									Beta
+								</div>
 							)}
 						</div>
 					</a>
 				</div>
 
-				<div className="flex flex-row justify-center flex-1 ">
+				<div className="flex flex-row justify-center basis-1/3	 ">
 					<svg
-						width="33"
+						width={width >= screens.tablet ? '33' : '23'}
 						height="32"
 						viewBox="0 0 33 29"
 						fill="none"
@@ -394,7 +398,7 @@ export const Nav = ({ logoColor }) => {
 				</div>
 
 				{width >= screens.laptop ? (
-					<div className="flex flex-row  flex-1 justify-end items-center space-x-4 font-Inter">
+					<div className="flex flex-row  basis-1/3	 justify-end items-center space-x-4 font-Inter">
 						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"

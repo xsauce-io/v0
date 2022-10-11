@@ -26,9 +26,9 @@ export const LocalDrawer = ({ children }) => {
 	return (
 		<>
 			{width < screens.laptop ? (
-				<div className="flex-1 flex justify-end">
+				<div className="basis-1/3 flex justify-end">
 					<button
-						className="mobile:block p-5 text-white bg-[inherit] rounded hover:text-[#ACFF00]/75 transition"
+						className="mobile:block p-2 tablet:p-5 text-white bg-[inherit] rounded hover:text-[#ACFF00]/75 transition"
 						onClick={() => setIsDrawerOpen(true)}
 					>
 						<span className="sr-only">Toggle menu</span>
