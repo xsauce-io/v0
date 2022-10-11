@@ -175,18 +175,19 @@ function updateValue(e) {
 				position = 2;
 			}
 
-			const order = await signedContract.mint(
+			  await signedContract.mint(
 				BigNumber.from(position),
 				BigNumber.from(data.get('Amount'))
 			);
 
-			order.then(() => {
+			
 				mixpanelTrackProps('Buy (Mint)', {
 					wager: positionMinted,
 					amount: mintedAmount,
 					result: 'successful',
 				});
-				toast.custom(
+
+        toast.custom(
 					(t) => (
 						<ToastNotification
 							message={'Transaction Successful'}
@@ -197,8 +198,9 @@ function updateValue(e) {
 					),
 					{ duration: 7000 }
 				);
-			});
+			
 		} catch (error) {
+      console.log(error);
 			if (error.code == 'ACTION_REJECTED') {
 				toast.custom(
 					(t) => (
