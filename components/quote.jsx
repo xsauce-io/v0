@@ -22,27 +22,33 @@ export const Quote = () => {
 		// e.preventDefault();
 		// const data = new FormData(e.target);
 		// console.log(data.get("contractNumber"));
-		try {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send('eth_requestAccounts', []);
-			const signer = provider.getSigner();
-			const orderBook = new ethers.Contract(
-				market1OrderBook,
-				orderBookAbi,
-				signer
-			);
-			signedContract = orderBook.connect(signer);
-			setSignedContract(signedContract);
-			const quote = await orderBook.quoteExactAmountOut(
-				market1Add,
-				BigNumber.from('500'),
-				BigNumber.from('1000000000000000000')
-			);
-			setCurrentQuote(quote[0].toString());
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-			console.log(quote[0].toNumber());
-		} catch (error) {
-			console.log(error);
+		if (hasConnectedWalletBefore != null) {
+			try {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				await provider.send('eth_requestAccounts', []);
+				const signer = provider.getSigner();
+				const orderBook = new ethers.Contract(
+					market1OrderBook,
+					orderBookAbi,
+					signer
+				);
+				signedContract = orderBook.connect(signer);
+				setSignedContract(signedContract);
+				const quote = await orderBook.quoteExactAmountOut(
+					market1Add,
+					BigNumber.from('500'),
+					BigNumber.from('1000000000000000000')
+				);
+				setCurrentQuote(quote[0].toString());
+
+				console.log(quote[0].toNumber());
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 

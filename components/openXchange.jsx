@@ -44,47 +44,53 @@ export const OpenXchange = (cardObject) => {
 		} else {
 			position = 2;
 		}
-		try {
-			const dataForm = new FormData(e.target);
-			console.log(dataForm.get('Amount'));
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send('eth_requestAccounts', []);
-			const signer = provider.getSigner();
-			const market = new ethers.Contract(data.book, individualBook, signer);
-			let signedContract = market.connect(signer);
-			setSignedContract(signedContract);
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-			let token1;
-			if (isBuy === false) {
-				token1 = data.address;
-			} else {
-				token1 = $tableAddress;
+		if (hasConnectedWalletBefore != null) {
+			try {
+				const dataForm = new FormData(e.target);
+				console.log(dataForm.get('Amount'));
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				await provider.send('eth_requestAccounts', []);
+				const signer = provider.getSigner();
+				const market = new ethers.Contract(data.book, individualBook, signer);
+				let signedContract = market.connect(signer);
+				setSignedContract(signedContract);
+
+				let token1;
+				if (isBuy === false) {
+					token1 = data.address;
+				} else {
+					token1 = $tableAddress;
+				}
+				await signedContract.limitOrder(
+					token1,
+					BigNumber.from(position),
+					ethers.utils.parseUnits(dataForm.get('Amount').toString(), 18),
+					ethers.utils.parseUnits(
+						(dataForm.get('Amount') * dataForm.get('LimitPrice')).toString(),
+						18
+					),
+					ethers.utils.parseUnits(dataForm.get('LimitPrice').toString(), 18),
+					false,
+					false
+				);
+				mixpanelTrackProps('Order from OpenXchange', {
+					isBuy: isBuy,
+					wager: position,
+					amount: dataForm.get('Amount'),
+					result: 'successful',
+				});
+			} catch (error) {
+				console.log(error);
+				mixpanelTrackProps('Order from OpenXchange', {
+					isBuy: isBuy,
+					wager: position,
+					result: 'failed',
+				});
 			}
-			await signedContract.limitOrder(
-				token1,
-				BigNumber.from(position),
-				ethers.utils.parseUnits(dataForm.get('Amount').toString(), 18),
-				ethers.utils.parseUnits(
-					(dataForm.get('Amount') * dataForm.get('LimitPrice')).toString(),
-					18
-				),
-				ethers.utils.parseUnits(dataForm.get('LimitPrice').toString(), 18),
-				false,
-				false
-			);
-			mixpanelTrackProps('Order from OpenXchange', {
-				isBuy: isBuy,
-				wager: position,
-				amount: dataForm.get('Amount'),
-				result: 'successful',
-			});
-		} catch (error) {
-			console.log(error);
-			mixpanelTrackProps('Order from OpenXchange', {
-				isBuy: isBuy,
-				wager: position,
-				result: 'failed',
-			});
 		}
 	};
 
@@ -102,95 +108,121 @@ export const OpenXchange = (cardObject) => {
 	};
 
 	const quote = async () => {
-		try {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send('eth_requestAccounts', []);
-			const signer = provider.getSigner();
-			const orderBook = new ethers.Contract(data.book, individualBook, signer);
-			signedContract = orderBook.connect(signer);
-			setSignedContract(signedContract);
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-			let fromToken;
-			if (
-				(isBuy === true && isYes === true) ||
-				(isBuy === true && isYes === false)
-			) {
-				fromToken = $tableAddress;
-			} else {
-				fromToken = data.address;
+		if (hasConnectedWalletBefore != null) {
+			try {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				await provider.send('eth_requestAccounts', []);
+				const signer = provider.getSigner();
+				const orderBook = new ethers.Contract(
+					data.book,
+					individualBook,
+					signer
+				);
+				signedContract = orderBook.connect(signer);
+				setSignedContract(signedContract);
+
+				let fromToken;
+				if (
+					(isBuy === true && isYes === true) ||
+					(isBuy === true && isYes === false)
+				) {
+					fromToken = $tableAddress;
+				} else {
+					fromToken = data.address;
+				}
+				const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
+				setCurrentQuote((LowestAsk / 10 ** 18).toString());
+
+				console.log((LowestAsk / 10 ** 18).toString());
+				mixpanelTrackProps('Get Quote', {
+					result: 'successful',
+				});
+			} catch (error) {
+				console.log(error);
+				mixpanelTrackProps('Get Quote', {
+					result: 'failed',
+				});
 			}
-			const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
-			setCurrentQuote((LowestAsk / 10 ** 18).toString());
-
-			console.log((LowestAsk / 10 ** 18).toString());
-			mixpanelTrackProps('Get Quote', {
-				result: 'successful',
-			});
-		} catch (error) {
-			console.log(error);
-			mixpanelTrackProps('Get Quote', {
-				result: 'failed',
-			});
 		}
 	};
 
 	const quoteClicked = async (e) => {
 		e.preventDefault();
-		try {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send('eth_requestAccounts', []);
-			const signer = provider.getSigner();
-			const orderBook = new ethers.Contract(data.book, individualBook, signer);
-			signedContract = orderBook.connect(signer);
-			setSignedContract(signedContract);
-			let fromToken;
-			if (
-				(isBuy === true && isYes === true) ||
-				(isBuy === true && isYes === false)
-			) {
-				fromToken = $tableAddress;
-			} else {
-				fromToken = data.address;
-			}
-			const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
-			setCurrentQuote((LowestAsk / 10 ** 18).toString());
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-			console.log((LowestAsk / 10 ** 18).toString());
-			mixpanelTrackProps('Get Quote', {
-				result: 'successful',
-			});
-		} catch (error) {
-			console.log(error);
-			mixpanelTrackProps('Get Quote', {
-				result: 'failed',
-			});
+		if (hasConnectedWalletBefore != null) {
+			try {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				await provider.send('eth_requestAccounts', []);
+				const signer = provider.getSigner();
+				const orderBook = new ethers.Contract(
+					data.book,
+					individualBook,
+					signer
+				);
+				signedContract = orderBook.connect(signer);
+				setSignedContract(signedContract);
+				let fromToken;
+				if (
+					(isBuy === true && isYes === true) ||
+					(isBuy === true && isYes === false)
+				) {
+					fromToken = $tableAddress;
+				} else {
+					fromToken = data.address;
+				}
+				const LowestAsk = await orderBook.quoteMarketPrice(fromToken);
+				setCurrentQuote((LowestAsk / 10 ** 18).toString());
+
+				console.log((LowestAsk / 10 ** 18).toString());
+				mixpanelTrackProps('Get Quote', {
+					result: 'successful',
+				});
+			} catch (error) {
+				console.log(error);
+				mixpanelTrackProps('Get Quote', {
+					result: 'failed',
+				});
+			}
 		}
 	};
 
 	const ratios = async () => {
-		try {
-			if (currentMarket !== undefined) {
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
-				const signer = provider.getSigner();
-				const contract = new ethers.Contract(
-					currentMarket?.address,
-					marketabi,
-					signer
-				);
-				const getYes = await contract.totalSupply(1);
-				const getNo = await contract.totalSupply(2);
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-				let NoRatio =
-					(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
-				let YesRatio =
-					(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
-				console.log(YesRatio);
+		if (hasConnectedWalletBefore != null) {
+			try {
+				if (currentMarket !== undefined) {
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					const signer = provider.getSigner();
+					const contract = new ethers.Contract(
+						currentMarket?.address,
+						marketabi,
+						signer
+					);
+					const getYes = await contract.totalSupply(1);
+					const getNo = await contract.totalSupply(2);
 
-				setYes(YesRatio.toFixed(0));
-				setNo(NoRatio.toFixed(0));
+					let NoRatio =
+						(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+					let YesRatio =
+						(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+					console.log(YesRatio);
+
+					setYes(YesRatio.toFixed(0));
+					setNo(NoRatio.toFixed(0));
+				}
+			} catch (error) {
+				console.log(error);
 			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
 

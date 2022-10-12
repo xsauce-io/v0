@@ -9,23 +9,29 @@ export const WagerConfig = () => {
 
 	const handleTransfer = async (e) => {
 		e.preventDefault();
-		try {
-			const data = new FormData(e.target);
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send('eth_requestAccounts', []);
-			const signer = await provider.getSigner();
-			const erc1155 = new ethers.Contract(address, erc1155abi, signer);
-			await erc1155.mint(
-				BigNumber.from(data.get('prediction')),
-				BigNumber.from(data.get('contractNumber')),
-				{
-					value: ethers.utils.parseEther(
-						(0.05 * BigNumber.from(data.get('contractNumber'))).toString()
-					),
-				}
-			);
-		} catch (error) {
-			console.log(error);
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
+
+		if (hasConnectedWalletBefore != null) {
+			try {
+				const data = new FormData(e.target);
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				await provider.send('eth_requestAccounts', []);
+				const signer = await provider.getSigner();
+				const erc1155 = new ethers.Contract(address, erc1155abi, signer);
+				await erc1155.mint(
+					BigNumber.from(data.get('prediction')),
+					BigNumber.from(data.get('contractNumber')),
+					{
+						value: ethers.utils.parseEther(
+							(0.05 * BigNumber.from(data.get('contractNumber'))).toString()
+						),
+					}
+				);
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 

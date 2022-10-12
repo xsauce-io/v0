@@ -30,20 +30,26 @@ const LiveMarket: NextPage = () => {
 	const [admin, setAdmin] = useState(false);
 
 	const adminCheck = async () => {
-		try {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			// Prompt user for account connections
-			let wallet = await provider.send('eth_requestAccounts', [0]);
-			let accounts = wallet.toString();
-			console.log(accounts);
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-			if (accounts == 0x50924f626d1ae4813e4a81e2c5589ec3882c13ca) {
-				setAdmin(true);
-			} else {
-				setAdmin(false);
+		if (hasConnectedWalletBefore != null) {
+			try {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				// Prompt user for account connections
+				let wallet = await provider.send('eth_requestAccounts', [0]);
+				let accounts = wallet.toString();
+				console.log(accounts);
+
+				if (accounts == 0x50924f626d1ae4813e4a81e2c5589ec3882c13ca) {
+					setAdmin(true);
+				} else {
+					setAdmin(false);
+				}
+			} catch (error) {
+				console.log(error);
 			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
 
