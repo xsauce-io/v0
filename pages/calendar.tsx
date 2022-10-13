@@ -181,8 +181,8 @@ const Markets: NextPage = () => {
 						icon={<img className={'h-[30px] w-[30px]'} src="/calendar.svg" />}
 					/>
 
-					<div className="space-y-10">
-						<CalendarHighlight cardObject={highlight} />
+					<div className="space-y-10 mb-20">
+						<CalendarHighlight index={1} cardObject={highlight} />
 						<div className="flex laptop:flex-row laptop:items-center laptop:space-y-0 mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0  items-center tablet:flex-row">
 							<div className="dropdown dropdown-end">
 								<label
@@ -287,7 +287,9 @@ const Markets: NextPage = () => {
 						</div>
 						<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
 							{response || sneakersDataError === undefined
-								? response?.map((el: any) => <CalendarCard cardObject={el} />)
+								? response?.map((el: any, index: number) => (
+										<CalendarCard index={index} cardObject={el} />
+								  ))
 								: skeletonArray.map(() => (
 										<Skeleton
 											animation="pulse"

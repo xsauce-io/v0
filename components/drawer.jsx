@@ -25,7 +25,7 @@ export const LocalDrawer = ({ children }) => {
 
 	return (
 		<>
-			{width < screens.laptop ? (
+			{width < screens.smlaptop ? (
 				<div className="basis-1/3 flex justify-end">
 					<button
 						className="mobile:block p-2 tablet:p-5 text-white bg-[inherit] rounded hover:text-[#ACFF00]/75 transition"

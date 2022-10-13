@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 import marketAbi from '../abi/markets.json';
 import axios from 'axios';
 
-export const CalendarCard = ({ cardObject }) => {
+export const CalendarCard = ({ cardObject, index }) => {
 	const randomPlaceholder = [
 		'/hurache.svg',
 		'/octobers.svg',
@@ -22,7 +22,10 @@ export const CalendarCard = ({ cardObject }) => {
 	let [favored, setFavored] = useState();
 
 	return (
-		<div className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full 	">
+		<div
+			index={index}
+			className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full 	"
+		>
 			{cardObject === undefined ? (
 				<React.Fragment>
 					<Skeleton

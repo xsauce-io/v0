@@ -18,6 +18,7 @@ export const Nav = ({ logoColor }) => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',
+		smlaptop: '1024',
 		laptop: '1200',
 		desktop: '1400',
 	};
@@ -428,7 +429,7 @@ export const Nav = ({ logoColor }) => {
 					</svg>
 				</div>
 
-				{width >= screens.laptop ? (
+				{width >= screens.smlaptop ? (
 					<div className="flex flex-row  basis-1/3	 justify-end items-center space-x-4 font-Inter">
 						<div className="dropdown dropdown-end ">
 							<label

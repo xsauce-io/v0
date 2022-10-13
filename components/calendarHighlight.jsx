@@ -6,8 +6,8 @@ import { ethers } from 'ethers';
 import marketAbi from '../abi/markets.json';
 import axios from 'axios';
 
-export const CalendarHighlight = ({ cardObject }) => {
-  console.log(cardObject)
+export const CalendarHighlight = ({ cardObject, index }) => {
+	console.log(cardObject);
 	const randomPlaceholder = [
 		'/hurache.svg',
 		'/octobers.svg',
@@ -23,7 +23,10 @@ export const CalendarHighlight = ({ cardObject }) => {
 	let [favored, setFavored] = useState();
 
 	return (
-		<div className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-1/3 mr-2 mb-20 items-start text-left font-inter min-h-full 	">
+		<div
+			index={index}
+			className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl w-full items-start text-left font-inter min-h-full "
+		>
 			{cardObject === undefined ? (
 				<React.Fragment>
 					<Skeleton
@@ -37,9 +40,9 @@ export const CalendarHighlight = ({ cardObject }) => {
 						{cardObject.image?.original === '' ||
 						cardObject.image?.original ===
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
-							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
+							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
-									className="object-cover mobile:w-[40%]  m-auto mobile:h-[100%] scale-100"
+									className="object-cove m-auto w-auto "
 									src={
 										cardObject?.name[0] === 'J'
 											? randomPlaceholder[3]
@@ -50,17 +53,17 @@ export const CalendarHighlight = ({ cardObject }) => {
 								/>
 							</div>
 						) : (
-							<div className="relative w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
+							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
-              <img
-									className="laptop:object-contain laptop:pt-0 tablet:pt-[10%]  mobile:w-[40%] mobile:pt-[20%] m-auto mobile:h-[100%] scale-110"
+								<img
+									className="object-contain  m-auto w-auto "
 									src={cardObject.image?.original}
 								></img>
 							</div>
 						)}
 
 						<div className="h-full">
-							<div className="px-8  ">
+							<div className="px-8">
 								<h1 className="text-2xl font-normal text-white h-[22%] w-full line-clamp-2 font-SG  ">
 									{cardObject.name}
 								</h1>
