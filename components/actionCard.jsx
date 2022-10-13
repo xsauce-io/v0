@@ -1,9 +1,9 @@
 import React from 'react';
 import { BigNumber, ethers, utils } from 'ethers';
-import $ from "jquery";
+import $ from 'jquery';
 import marketabi from '../abi/markets.json';
 import $tableABI from '../abi/$tableSauce.json';
-import { useState, useEffect, useMemo} from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
@@ -17,6 +17,7 @@ import {
 import { useGetMarketBySku } from '../services/useRequests';
 import toast from 'react-hot-toast';
 import { ToastNotification } from './toast';
+import { ToastNotificationActionBar } from './toastActionBar';
 
 export const ActionCard = () => {
 	// -------------------------- router ----------------------
@@ -28,7 +29,6 @@ export const ActionCard = () => {
 	const { data, error } = useGetMarketBySku(sku);
 
 	// ------------------- State Variable --------------------
-	const [isSet, setIsSet] = useState(false);
 	const [Total, setTotal] = useState();
 	const [isYes, setIsYes] = useState(false);
 	const [No, setNo] = useState();
@@ -36,10 +36,6 @@ export const ActionCard = () => {
 	const [priceOfYes, setPriceYes] = useState();
 	const [priceOfNo, setPriceNo] = useState();
 
-	const [isBuy, setIsBuy] = useState();
-	const [currentQuote, setCurrentQuote] = useState();
-	const [orderBookAbi, setOrderBookAbi] = useState(null);
-	const [orderBookAddress, setOrderBookAddress] = useState(null);
 	const [signedContract, setSignedContract] = useState(null);
 	const [currentMarket, setCurrentMarket] = useState(data);
 	const [expiration, setExpiration] = useState();
@@ -48,99 +44,106 @@ export const ActionCard = () => {
 	//------------------ Functions ------------------
 
 	const jackpot = async () => {
-		try {
-			if (currentMarket !== undefined) {
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
-				await provider.send('eth_requestAccounts', [0]);
-				const signer = provider.getSigner();
-				const $table = new ethers.Contract($tableAddress, $tableABI, signer);
-				const totalJackpot = (
-					(await $table.balanceOf(currentMarket.address)) / 1e18
-				).toFixed(2) ;
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-     
-				const contract = new ethers.Contract(
-					currentMarket?.address,
-					marketabi,
-					signer
-				);
-				const getYes = (await contract.totalSupply(1)).toNumber();
-				const getNo = await contract.totalSupply(2);
-       const input = document.getElementById('amount');
-       const jackpot = document.getElementById('jackpot');
+		if (hasConnectedWalletBefore != null) {
+			try {
+				if (currentMarket !== undefined) {
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					await provider.send('eth_requestAccounts', [0]);
+					const signer = provider.getSigner();
+					const $table = new ethers.Contract($tableAddress, $tableABI, signer);
+					const totalJackpot = (
+						(await $table.balanceOf(currentMarket.address)) / 1e18
+					).toFixed(2);
 
-      
-          
-          input.addEventListener('input', updateValue);
+					const contract = new ethers.Contract(
+						currentMarket?.address,
+						marketabi,
+						signer
+					);
+					const getYes = (await contract.totalSupply(1)).toNumber();
+					const getNo = await contract.totalSupply(2);
+					const input = document.getElementById('amount');
+					const jackpot = document.getElementById('jackpot');
 
-function updateValue(e) {
-  if (isYes === true) {
+					input.addEventListener('input', updateValue);
 
-  const ownership = (e.target.value / (getYes + e.target.valueAsNumber));
-  console.log(getYes + e.target.valueAsNumber)
-  jackpot.textContent = "$" + (totalJackpot * ownership).toFixed(2) ;
-  } else {jackpot.textContent = "$" + (e.target.value * getNo).toFixed(2);}
-}
-    
-         } 
+					function updateValue(e) {
+						if (isYes === true) {
+							const ownership =
+								e.target.value / (getYes + e.target.valueAsNumber);
+							console.log(getYes + e.target.valueAsNumber);
+							jackpot.textContent = '$' + (totalJackpot * ownership).toFixed(2);
+						} else {
+							jackpot.textContent = '$' + (e.target.value * getNo).toFixed(2);
+						}
+					}
+				}
+			} catch (error) {
+				console.log(error);
 			}
-		 catch (error) {
-			console.log(error);
 		}
 	};
 
 	const approve$auce = async () => {
-		try {
-			if (isSet == true) {
-				return;
-			}
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const address = (
-				await provider.send('eth_requestAccounts', [])
-			).toString();
-			const signer = provider.getSigner();
-			const $table = new ethers.Contract($tableAddress, $tableABI, signer);
-			const allowance = await $table.allowance(address, currentMarket.address);
+		if (hasConnectedWalletBefore != null) {
+			try {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const address = (
+					await provider.send('eth_requestAccounts', [])
+				).toString();
+				const signer = provider.getSigner();
+				const $table = new ethers.Contract($tableAddress, $tableABI, signer);
+				const allowance = await $table.allowance(
+					address,
+					currentMarket.address
+				);
 
-			if (allowance > 100000 * 10 ** 18) {
-				mixpanelTrack('Approve Funds', { result: 'insufficient' });
-			} else {
-				try {
-					const approvedAmount = BigNumber.from('2')
-						.pow(BigNumber.from('256'))
-						.sub('1');
+				if (allowance > 100000 * 10 ** 18) {
+					mixpanelTrack('Approve Funds', { result: 'insufficient' });
+				} else {
+					try {
+						const approvedAmount = BigNumber.from('2')
+							.pow(BigNumber.from('256'))
+							.sub('1');
 
-					await $table.approve(
-						currentMarket.address,
-						BigNumber.from(approvedAmount)
-					);
-					setIsSet(true);
-					mixpanelTrackProps('Approve Funds', { result: 'successful' });
-				} catch (error) {
-					if (error.code == 'ACTION_REJECTED') {
-						toast.custom(
-							(t) => (
-								<ToastNotification
-									message={'You rejected the transaction'}
-									subMessage={
-										'If you did this by mistake, please go back to live markets and try again'
-									}
-									icon={<img src="/alertCircle.svg" />}
-									t={t}
-								/>
-							),
-							{ duration: 7000 }
+						await $table.approve(
+							currentMarket.address,
+							BigNumber.from(approvedAmount)
 						);
-						mixpanelTrackProps('Approve Funds', { result: 'cancelled' });
-					} else {
-						console.log(error.code);
-						mixpanelTrackProps('Approve Funds', { result: 'failed' });
+						mixpanelTrackProps('Approve Funds', { result: 'successful' });
+					} catch (error) {
+						if (error.code == 'ACTION_REJECTED') {
+							toast.custom(
+								(t) => (
+									<ToastNotification
+										message={'You rejected the transaction'}
+										subMessage={
+											'If you did this by mistake, please go back to live markets and try again'
+										}
+										icon={<img src="/alertCircle.svg" />}
+										t={t}
+									/>
+								),
+								{ duration: 7000, id: 'reject-transaction' }
+							);
+							mixpanelTrackProps('Approve Funds', { result: 'cancelled' });
+						} else {
+							console.log(error.code);
+							mixpanelTrackProps('Approve Funds', { result: 'failed' });
+						}
 					}
 				}
+			} catch (error) {
+				console.log('wallet possibly not connected, cannot approve funds');
 			}
-		} catch (error) {
-			console.log('wallet possibly not connected, cannot approve funds');
 		}
 	};
 
@@ -154,40 +157,43 @@ function updateValue(e) {
 		} else {
 			positionMinted = 'No';
 		}
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-		try {
-			const data = new FormData(e.target);
-			mintedAmount = data.get('Amount');
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send('eth_requestAccounts', []);
-			const signer = provider.getSigner();
-			const market = new ethers.Contract(
-				currentMarket.address,
-				marketabi,
-				signer
-			);
-			let signedContract = market.connect(signer);
-			setSignedContract(signedContract);
-			let position;
-			if (isYes === true) {
-				position = 1;
-			} else {
-				position = 2;
-			}
+		if (hasConnectedWalletBefore != null) {
+			try {
+				const data = new FormData(e.target);
+				mintedAmount = data.get('Amount');
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				await provider.send('eth_requestAccounts', []);
+				const signer = provider.getSigner();
+				const market = new ethers.Contract(
+					currentMarket.address,
+					marketabi,
+					signer
+				);
+				let signedContract = market.connect(signer);
+				setSignedContract(signedContract);
+				let position;
+				if (isYes === true) {
+					position = 1;
+				} else {
+					position = 2;
+				}
 
-			  await signedContract.mint(
-				BigNumber.from(position),
-				BigNumber.from(data.get('Amount'))
-			);
+				await signedContract.mint(
+					BigNumber.from(position),
+					BigNumber.from(data.get('Amount'))
+				);
 
-			
 				mixpanelTrackProps('Buy (Mint)', {
 					wager: positionMinted,
 					amount: mintedAmount,
 					result: 'successful',
 				});
 
-        toast.custom(
+				toast.custom(
 					(t) => (
 						<ToastNotification
 							message={'Transaction Successful'}
@@ -198,146 +204,164 @@ function updateValue(e) {
 					),
 					{ duration: 7000 }
 				);
-			
-		} catch (error) {
-      console.log(error);
-			if (error.code == 'ACTION_REJECTED') {
-				toast.custom(
-					(t) => (
-						<ToastNotification
-							message={'You rejected the transaction'}
-							subMessage={
-								'If you did this by mistake, please go back to live markets and try again'
-							}
-							icon={<img src="/alertTriangle.svg" />}
-							t={t}
-						/>
-					),
-					{ duration: 7000 }
-				);
-				mixpanelTrackProps('Buy (Mint)', {
-					wager: positionMinted,
-					amount: mintedAmount,
-					result: 'cancelled',
-				});
-			} else if (
-				error.reason == 'execution reverted: ERC20: insufficient allowance'
-			) {
-				toast.custom(
-					(t) => (
-						<ToastNotification
-							message={'Transaction Failed'}
-							subMessage={
-								'You have not approved our contract to interact with your wallet. please make sure you are connected to the right network and try again'
-							}
-							icon={<img src="/alertCircle.svg" />}
-							t={t}
-						/>
-					),
-					{ duration: 7000 }
-				);
-				mixpanelTrackProps('Buy (Mint)', {
-					wager: positionMinted,
-					amount: mintedAmount,
-					result: 'failed',
-					reason: 'insufficient funds',
-				});
-			} else {
-				toast.custom(
-					(t) => (
-						<ToastNotification
-							message={'Transaction Failed'}
-							subMessage={
-								'Something went wrong, please make sure you are connected to the right network and try again'
-							}
-							icon={<img src="/alertCircle.svg" />}
-							t={t}
-						/>
-					),
-					{ duration: 7000 }
-				);
-				mixpanelTrackProps('Buy (Mint)', {
-					wager: positionMinted,
-					amount: mintedAmount,
-					result: 'failed',
-				});
+			} catch (error) {
+				console.log(error);
+				if (error.code == 'ACTION_REJECTED') {
+					toast.custom(
+						(t) => (
+							<ToastNotification
+								message={'You rejected the transaction'}
+								subMessage={
+									'If you did this by mistake, please go back to live markets and try again'
+								}
+								icon={<img src="/alertTriangle.svg" />}
+								t={t}
+							/>
+						),
+						{ duration: 7000 }
+					);
+					mixpanelTrackProps('Buy (Mint)', {
+						wager: positionMinted,
+						amount: mintedAmount,
+						result: 'cancelled',
+					});
+				} else if (
+					error.reason == 'execution reverted: ERC20: insufficient allowance'
+				) {
+					toast.custom(
+						(t) => (
+							<ToastNotificationActionBar
+								message={'You have insufficient funds approved'}
+								subMessage={
+									'You have not approved our contract to interact with your wallet. Click below to approve funds.'
+								}
+								icon={<img src="/alertCircle.svg" />}
+								t={t}
+								showButton={true}
+								buttonText={'Approve Funds'}
+								onClick={() => {
+									approve$auce();
+								}}
+								href="https://consensys.net/blog/metamask/the-seal-of-approval-know-what-youre-consenting-to-with-permissions-and-approvals-in-metamask/"
+							/>
+						),
+						{ duration: 7000 }
+					);
+					mixpanelTrackProps('Buy (Mint)', {
+						wager: positionMinted,
+						amount: mintedAmount,
+						result: 'failed',
+						reason: 'insufficient funds',
+					});
+				} else {
+					toast.custom(
+						(t) => (
+							<ToastNotification
+								message={'Transaction Failed'}
+								subMessage={
+									'Something went wrong, please make sure you are connected to the right network and try again'
+								}
+								icon={<img src="/alertCircle.svg" />}
+								t={t}
+							/>
+						),
+						{ duration: 7000 }
+					);
+					mixpanelTrackProps('Buy (Mint)', {
+						wager: positionMinted,
+						amount: mintedAmount,
+						result: 'failed',
+					});
+				}
 			}
 		}
 	};
 
 	const ratios = async () => {
-		try {
-			if (currentMarket !== undefined) {
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
-				const signer = await provider.getSigner();
-				const contract = new ethers.Contract(
-					currentMarket?.address,
-					marketabi,
-					signer
-				);
-				const getYes = await contract.totalSupply(1);
-				const getNo = await contract.totalSupply(2);
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-				let NoRatio =
-					(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+		if (hasConnectedWalletBefore != null) {
+			try {
+				if (currentMarket !== undefined) {
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					const signer = await provider.getSigner();
+					const contract = new ethers.Contract(
+						currentMarket?.address,
+						marketabi,
+						signer
+					);
+					const getYes = await contract.totalSupply(1);
+					const getNo = await contract.totalSupply(2);
 
-				let YesRatio =
-					(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
-				console.log(YesRatio);
+					let NoRatio =
+						(getNo.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
 
-				setYes(YesRatio.toFixed(0));
-				setNo(NoRatio.toFixed(0));
+					let YesRatio =
+						(getYes.toNumber() / (getYes.toNumber() + getNo.toNumber())) * 100;
+					console.log(YesRatio);
+
+					setYes(YesRatio.toFixed(0));
+					setNo(NoRatio.toFixed(0));
+				}
+			} catch (error) {
+				console.log(error);
 			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
 
 	const prices = async () => {
-		try {
-			if (currentMarket !== undefined) {
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
-				const signer = await provider.getSigner();
-				const contract = new ethers.Contract(
-					currentMarket?.address,
-					marketabi,
-					signer
-				);
-				const getYes = await contract.totalSupply(1);
-				const getNo = await contract.totalSupply(2);
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-				let priceNo = getNo.toNumber() / (getYes.toNumber() + getNo.toNumber());
+		if (hasConnectedWalletBefore != null) {
+			try {
+				if (currentMarket !== undefined) {
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					const signer = await provider.getSigner();
+					const contract = new ethers.Contract(
+						currentMarket?.address,
+						marketabi,
+						signer
+					);
+					const getYes = await contract.totalSupply(1);
+					const getNo = await contract.totalSupply(2);
 
-				let priceYes =
-					getYes.toNumber() / (getYes.toNumber() + getNo.toNumber());
+					let priceNo =
+						getNo.toNumber() / (getYes.toNumber() + getNo.toNumber());
 
-				setPriceYes(priceYes.toFixed(2));
-				setPriceNo(priceNo.toFixed(2));
+					let priceYes =
+						getYes.toNumber() / (getYes.toNumber() + getNo.toNumber());
+
+					setPriceYes(priceYes.toFixed(2));
+					setPriceNo(priceNo.toFixed(2));
+				}
+			} catch (error) {
+				console.log(error);
 			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
 
-  const CalculateTotal = () => {
-    if (priceOfYes && priceOfNo !== undefined) {
-    const total = document.getElementById('total');
-      let price;
-    if (isYes === true) {
-       price = priceOfYes
-    } else {
-       price = priceOfNo
-    }
-  const input = document.getElementById('amount')
+	const CalculateTotal = () => {
+		if (priceOfYes && priceOfNo !== undefined) {
+			const total = document.getElementById('total');
+			let price;
+			if (isYes === true) {
+				price = priceOfYes;
+			} else {
+				price = priceOfNo;
+			}
+			const input = document.getElementById('amount');
 
-input.addEventListener('input', updateValue);
+			input.addEventListener('input', updateValue);
 
-function updateValue(e) {
-  total.textContent = "Total: $" + (e.target.value * price).toFixed(2);
-}
-    }
-  }
-
+			function updateValue(e) {
+				total.textContent = 'Total: $' + (e.target.value * price).toFixed(2);
+			}
+		}
+	};
 
 	//------------------ Use Effect / Use memo ------------------
 
@@ -350,20 +374,9 @@ function updateValue(e) {
 		prices();
 	}, [currentMarket]);
 
-  useEffect(() => {
+	useEffect(() => {
 		jackpot();
 	}, [currentMarket, isYes]);
-
-	useEffect(() => {
-		if (currentMarket !== undefined) {
-			approve$auce();
-		}
-	}, [currentMarket]);
-
-  // useMemo(() => {
-	// }, [Total]);
-
-  
 
 	return (
 		<div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">
@@ -441,21 +454,22 @@ function updateValue(e) {
 						<input
 							className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none "
 							name="Amount"
-              id="amount"
+							id="amount"
 							type="number"
 							placeholder="# of Contracts"
-              onChange={(() => CalculateTotal())}
+							onChange={() => CalculateTotal()}
 							required
 						/>
 					</div>
-          <div className="bg-white font-semibold items-center  px-5 text-left w-[100%] flex ">
-						<p className="text-left text-sm inline-block pr-1">Price per share</p>
-						<p 	className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block "
-						>${isYes === true ? priceOfYes : priceOfNo}</p>
+					<div className="bg-white font-semibold items-center  px-5 text-left w-[100%] flex ">
+						<p className="text-left text-sm inline-block pr-1">
+							Price per share
+						</p>
+						<p className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block ">
+							${isYes === true ? priceOfYes : priceOfNo}
+						</p>
 					</div>
 				</div>
-
-       
 
 				<div className="bg-[#ACFF00] items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]">
 					<div className="font-Inter mobile:text-lg font-medium flex flex-row justify-center items-center">
@@ -466,7 +480,9 @@ function updateValue(e) {
 						>
 							<InfoIcon sx={{ fontSize: '18px' }} />
 						</Tooltip>
-						<p id="total" className="pr-4"> Total: $0.00 
+						<p id="total" className="pr-4">
+							{' '}
+							Total: $0.00
 						</p>
 					</div>
 				</div>
@@ -487,7 +503,10 @@ function updateValue(e) {
 							Total possible winnings
 						</p>
 						<div className="flex-1 " />
-						<p id="jackpot" className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs">
+						<p
+							id="jackpot"
+							className="text-left text-sm font-medium p-2 rounded-2xl text-center bg-[#ACFF00] mobile:text-xs"
+						>
 							$
 						</p>
 					</div>

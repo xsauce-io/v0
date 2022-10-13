@@ -24,7 +24,15 @@ export const Card = ({ cardObject }) => {
 
 	const ratios = async () => {
 		console.log(data);
-		if (data !== undefined && data.address !== undefined) {
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
+
+		if (
+			data !== undefined &&
+			data.address !== undefined &&
+			hasConnectedWalletBefore != null
+		) {
 			try {
 				const provider = new ethers.providers.Web3Provider(window.ethereum);
 				const signer = await provider.getSigner();
@@ -76,9 +84,9 @@ export const Card = ({ cardObject }) => {
 				<React.Fragment>
 					<div className="flex items-left flex-col space-y-3 justify-center w-full h-full ">
 						{cardObject.image?.original === '' ||
-						cardObject.image?.original ===
+						(cardObject.image?.original ===
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' &&
-              data?.image === undefined ? (
+							data?.image === undefined) ? (
 							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
 									className="object-cover mobile:w-[40%]  m-auto mobile:h-[100%] scale-100"
@@ -103,7 +111,7 @@ export const Card = ({ cardObject }) => {
 									src={cardObject.image?.original}
 								></img>
 							</div>
-						) }
+						)}
 
 						<div className="h-full">
 							<div className="px-8  ">

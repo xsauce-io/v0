@@ -40,90 +40,121 @@ export const Nav = ({ logoColor }) => {
 	}, [router.events]);
 
 	const getWallet = async (clicked = false) => {
-		try {
-			if (localStorage.getItem('network') === 'arbitrum') {
-				setToggle(421613);
-			}
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
+		console.log(hasConnectedWalletBefore);
 
-			if (localStorage.getItem('network') === 'mumbai') {
-				setToggle(80001);
-			}
+		if (hasConnectedWalletBefore != null || clicked === true) {
+			console.log(hasConnectedWalletBefore);
+			console.log(clicked);
+			try {
+				if (hasConnectedWalletBefore != null || clicked === true) {
+					if (localStorage.getItem('network') === 'arbitrum') {
+						setToggle(421613);
+					}
 
-			if (localStorage.getItem('network') === 'telos') {
-				setToggle(41);
-			}
+					if (localStorage.getItem('network') === 'mumbai') {
+						setToggle(80001);
+					}
 
-			if (localStorage.getItem('network') === 'unknown') {
-				setToggle(null);
-			}
+					if (localStorage.getItem('network') === 'telos') {
+						setToggle(41);
+					}
 
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const network = await provider.getNetwork();
-			const chainId = network.chainId;
-			if (chainId !== 421613 || chainId !== 80001 || chainId !== 41) {
-				localStorage.setItem('network', 'unknown');
-			}
-			setCurrent(chainId);
-			chains(chainId);
-			console.log({ chainzsid: chainId });
+					if (localStorage.getItem('network') === 'unknown') {
+						setToggle(null);
+					}
 
-			let wallet = await provider.send('eth_requestAccounts', [0]);
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					const network = await provider.getNetwork();
+					const chainId = network.chainId;
+					if (chainId !== 421613 || chainId !== 80001 || chainId !== 41) {
+						localStorage.setItem('network', 'unknown');
+					}
+					setCurrent(chainId);
+					chains(chainId);
+					console.log({ chainzsid: chainId });
 
-			accounts = wallet.toString();
-			setFullLengthAccount(wallet.toString());
-			let truncateAccountName =
-				accounts.substring(0, 4) + '...' + accounts.slice(-4);
-			setAccount(truncateAccountName);
-			console.log('nice', isConnected);
+					let wallet = await provider.send('eth_requestAccounts', [0]);
+					accounts = wallet.toString();
+					setFullLengthAccount(wallet.toString());
+					let truncateAccountName =
+						accounts.substring(0, 4) + '...' + accounts.slice(-4);
+					setAccount(truncateAccountName);
+					console.log('here');
+					if (wallet) {
+						console.log('here', wallet);
+						localStorage.setItem('hasConnectedWalletBefore', '1');
 
-			if (wallet) {
+						mixpanelTrackProps('Connect Wallet', {
+							result: 'successful',
+							automaticConnection: !clicked,
+							chainId: chainId,
+						});
+					}
+				} else {
+					throw Error('Not Connected');
+				}
+				//setOpenWalletNotConnectedModal(false);
+			} catch (error) {
+				if (error.code == -32002) {
+					if (!clicked) {
+						toast.custom(
+							(t) => (
+								<ToastNotificationActionBar
+									message={'Your wallet is not connected'}
+									subMessage={
+										'To see market statistics, connect your Metamask wallet and refresh the page.'
+									}
+									icon={<img src="/alertTriangle.svg" />}
+									t={t}
+									href="https://geekflare.com/finance/beginners-guide-to-metamask/"
+								/>
+							),
+							{ duration: Infinity }
+						);
+						console.log('error wallet not connected', error);
+					} else if (error) {
+						toast.custom(
+							(t) => (
+								<ToastNotificationActionBar
+									message={
+										'Your Metamask wallet is currently busy with another request'
+									}
+									subMessage={
+										'Open your Metamask to manage your current requests and refresh the page.'
+									}
+									icon={<img src="/alertCircle.svg" />}
+									t={t}
+									href="https://geekflare.com/finance/beginners-guide-to-metamask/"
+								/>
+							),
+							{ duration: Infinity }
+						);
+					}
+				}
 				mixpanelTrackProps('Connect Wallet', {
-					result: 'successful',
+					result: 'unsuccessful',
 					automaticConnection: !clicked,
-					chainId: chainId,
+					//chainId: chainId,
 				});
 			}
-			//setOpenWalletNotConnectedModal(false);
-		} catch (error) {
-			if (error.code == -32002) {
-				if (!clicked) {
-					toast.custom(
-						(t) => (
-							<ToastNotificationActionBar
-								message={'Your wallet is not connected'}
-								subMessage={
-									'To see market statistics, connect your Metamask wallet and refresh the page.'
-								}
-								icon={<img src="/alertTriangle.svg" />}
-								t={t}
-								href="https://geekflare.com/finance/beginners-guide-to-metamask/"
-							/>
-						),
-						{ duration: Infinity }
-					);
-					console.log('error wallet not connected', error);
-				} else {
-					toast.custom(
-						(t) => (
-							<ToastNotificationActionBar
-								message={'You are not logged in to Metamask'}
-								subMessage={
-									'To enable the Connect Wallet button, log in Metamask and refresh the page.'
-								}
-								icon={<img src="/alertCircle.svg" />}
-								t={t}
-								href="https://geekflare.com/finance/beginners-guide-to-metamask/"
-							/>
-						),
-						{ duration: Infinity }
-					);
-				}
-			}
-			mixpanelTrackProps('Connect Wallet', {
-				result: 'unsuccessful',
-				automaticConnection: !clicked,
-				//chainId: chainId,
-			});
+		} else {
+			toast.custom(
+				(t) => (
+					<ToastNotificationActionBar
+						message={'Your wallet is not connected'}
+						subMessage={
+							"Click the 'Connect Wallet' button in the menu and refresh the page."
+						}
+						icon={<img src="/alertTriangle.svg" />}
+						t={t}
+						href="https://geekflare.com/finance/beginners-guide-to-metamask/"
+					/>
+				),
+				{ duration: Infinity }
+			);
 		}
 	};
 

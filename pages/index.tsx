@@ -62,53 +62,59 @@ const Home: NextPage = () => {
 	const [allBalances, setAllBalances] = useState([] as any);
 
 	const showBalances = async () => {
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		const connected = (
-			await provider.send('eth_requestAccounts', [0])
-		).toString();
-		const signer = provider.getSigner();
-		const contract2 = new ethers.Contract(
-			MarketFactory,
-			MarketFactoryABI,
-			signer
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
 		);
-		const allMarkets = await contract2.getAllMarketswSku();
 
-		const cleanedAllMarkets: any[] = [];
-		for (let index = 0; index < allMarkets.length; index++) {
-			const r1 = allMarkets[index].sku.toString();
-			const r2 = allMarkets[index].market.toString();
-			const r3 = allMarkets[index].name.toString();
-			const newData = { sku: r1, address: r2, name: r3 };
-			cleanedAllMarkets.push(newData);
-		}
-
-		const balanceArray: any = [];
-
-		for (let index = 0; index < cleanedAllMarkets?.length; index++) {
-			const contract = new ethers.Contract(
-				cleanedAllMarkets[index]?.address,
-				MarketAbi,
+		if (hasConnectedWalletBefore != null) {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const connected = (
+				await provider.send('eth_requestAccounts', [0])
+			).toString();
+			const signer = provider.getSigner();
+			const contract2 = new ethers.Contract(
+				MarketFactory,
+				MarketFactoryABI,
 				signer
 			);
-			const balances = await contract.getAcctInfo(connected);
-			const one = balances.amountNo.toString();
-			const two = balances.amountYes.toString();
-			const three = (balances.avgBuyPriceNo / 1e18).toFixed(2);
-			const four = (balances.avgBuyPriceYes / 1e18).toFixed(2);
+			const allMarkets = await contract2.getAllMarketswSku();
 
-			const newObj = {
-				amountNo: one,
-				amountYes: two,
-				avgBuyPriceNo: three,
-				avgBuyPriceYes: four,
-				address: cleanedAllMarkets[index].address,
-				sku: cleanedAllMarkets[index].sku,
-				name: cleanedAllMarkets[index].name,
-			};
-			balanceArray.push(newObj);
+			const cleanedAllMarkets: any[] = [];
+			for (let index = 0; index < allMarkets.length; index++) {
+				const r1 = allMarkets[index].sku.toString();
+				const r2 = allMarkets[index].market.toString();
+				const r3 = allMarkets[index].name.toString();
+				const newData = { sku: r1, address: r2, name: r3 };
+				cleanedAllMarkets.push(newData);
+			}
+
+			const balanceArray: any = [];
+
+			for (let index = 0; index < cleanedAllMarkets?.length; index++) {
+				const contract = new ethers.Contract(
+					cleanedAllMarkets[index]?.address,
+					MarketAbi,
+					signer
+				);
+				const balances = await contract.getAcctInfo(connected);
+				const one = balances.amountNo.toString();
+				const two = balances.amountYes.toString();
+				const three = (balances.avgBuyPriceNo / 1e18).toFixed(2);
+				const four = (balances.avgBuyPriceYes / 1e18).toFixed(2);
+
+				const newObj = {
+					amountNo: one,
+					amountYes: two,
+					avgBuyPriceNo: three,
+					avgBuyPriceYes: four,
+					address: cleanedAllMarkets[index].address,
+					sku: cleanedAllMarkets[index].sku,
+					name: cleanedAllMarkets[index].name,
+				};
+				balanceArray.push(newObj);
+			}
+			setAllBalances(balanceArray);
 		}
-		setAllBalances(balanceArray);
 	};
 
 	//------------------ Use Effect / Use memo ------------------
