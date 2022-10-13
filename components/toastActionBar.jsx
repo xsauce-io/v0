@@ -7,6 +7,9 @@ export const ToastNotificationActionBar = ({
 	message,
 	t,
 	href,
+	showButton = false,
+	buttonText = '',
+	onClick = () => {},
 }) => {
 	const { width, height } = useWindowDimensions();
 	const screens = {
@@ -41,14 +44,23 @@ export const ToastNotificationActionBar = ({
 							<text className="text-[#748282] text-xs ">{subMessage}</text>
 							<div className="text-[#748282] text-xs border-t-[1px] border-[#30403F] space-x-4 pt-2 flex">
 								<a
-									className="text-black text-xs flex nowrap flex-row space-x-2 justify-center hover:opacity-60 active:opacity-60"
+									className="text-black text-xs flex nowrap flex-row space-x-1 justify-center hover:opacity-60 active:opacity-60"
 									href={href}
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									<text>Click to learn more</text>
-									<img className={'self-center'} src="/slimRightArrow.svg" />
+									<text>Learn more</text>
 								</a>
+								{showButton ? (
+									<div className="text-[#0C1615] text-xs flex nowrap flex-row space-x-2 justify-center hover:opacity-60 active:opacity-60">
+										<button onClick={onClick} className="text-black   ">
+											{buttonText}
+										</button>
+										<img src="/slimRightArrow.svg" />
+									</div>
+								) : (
+									<></>
+								)}
 							</div>
 						</div>
 					</div>
@@ -66,14 +78,23 @@ export const ToastNotificationActionBar = ({
 							<text className="text-[#748282] text-xs ">{subMessage}</text>
 							<div className="text-[#748282] text-xs border-t-[1px] border-[#30403F] space-x-4 pt-2 flex">
 								<a
-									className="text-black text-xs flex nowrap flex-row space-x-2 justify-center hover:opacity-60 active:opacity-60"
+									className="text-[#0C1615] text-xs flex nowrap flex-row space-x-1 justify-center hover:opacity-60 active:opacity-60"
 									href={href}
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									<text>Click to learn more</text>
-									<img className={'self-center'} src="/slimRightArrow.svg" />
+									<text>Learn more</text>
 								</a>
+								{showButton ? (
+									<div className="text-[#0C1615] text-xs flex nowrap flex-row space-x-2 justify-center hover:opacity-60 active:opacity-60">
+										<button onClick={onClick} className="text-black   ">
+											{buttonText}
+										</button>
+										<img src="/slimRightArrow.svg" />
+									</div>
+								) : (
+									<></>
+								)}
 							</div>
 						</div>
 						<div className="flex-2">

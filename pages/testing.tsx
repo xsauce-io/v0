@@ -29,9 +29,14 @@ const Testing: NextPage = () => {
 					icon={<img src="/checkCircle.svg" />}
 					t={t}
 					href={null}
+					showButton={true}
+					buttonText={'Click Here'}
+					onClick={() => {
+						return console.log('clicked here');
+					}}
 				/>
 			),
-			{ duration: 2000 }
+			{ duration: Infinity }
 		);
 
 	const notifyTwo = () =>

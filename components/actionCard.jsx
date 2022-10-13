@@ -17,6 +17,7 @@ import {
 import { useGetMarketBySku } from '../services/useRequests';
 import toast from 'react-hot-toast';
 import { ToastNotification } from './toast';
+import { ToastNotificationActionBar } from './toastActionBar';
 
 export const ActionCard = () => {
 	// -------------------------- router ----------------------
@@ -28,7 +29,6 @@ export const ActionCard = () => {
 	const { data, error } = useGetMarketBySku(sku);
 
 	// ------------------- State Variable --------------------
-	const [isSet, setIsSet] = useState(false);
 	const [Total, setTotal] = useState();
 	const [isYes, setIsYes] = useState(false);
 	const [No, setNo] = useState();
@@ -36,10 +36,6 @@ export const ActionCard = () => {
 	const [priceOfYes, setPriceYes] = useState();
 	const [priceOfNo, setPriceNo] = useState();
 
-	const [isBuy, setIsBuy] = useState();
-	const [currentQuote, setCurrentQuote] = useState();
-	const [orderBookAbi, setOrderBookAbi] = useState(null);
-	const [orderBookAddress, setOrderBookAddress] = useState(null);
 	const [signedContract, setSignedContract] = useState(null);
 	const [currentMarket, setCurrentMarket] = useState(data);
 	const [expiration, setExpiration] = useState();
@@ -48,41 +44,47 @@ export const ActionCard = () => {
 	//------------------ Functions ------------------
 
 	const jackpot = async () => {
-		try {
-			if (currentMarket !== undefined) {
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
-				await provider.send('eth_requestAccounts', [0]);
-				const signer = provider.getSigner();
-				const $table = new ethers.Contract($tableAddress, $tableABI, signer);
-				const totalJackpot = (
-					(await $table.balanceOf(currentMarket.address)) / 1e18
-				).toFixed(2);
+		const hasConnectedWalletBefore = localStorage.getItem(
+			'hasConnectedWalletBefore'
+		);
 
-				const contract = new ethers.Contract(
-					currentMarket?.address,
-					marketabi,
-					signer
-				);
-				const getYes = (await contract.totalSupply(1)).toNumber();
-				const getNo = await contract.totalSupply(2);
-				const input = document.getElementById('amount');
-				const jackpot = document.getElementById('jackpot');
+		if (hasConnectedWalletBefore != null) {
+			try {
+				if (currentMarket !== undefined) {
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					await provider.send('eth_requestAccounts', [0]);
+					const signer = provider.getSigner();
+					const $table = new ethers.Contract($tableAddress, $tableABI, signer);
+					const totalJackpot = (
+						(await $table.balanceOf(currentMarket.address)) / 1e18
+					).toFixed(2);
 
-				input.addEventListener('input', updateValue);
+					const contract = new ethers.Contract(
+						currentMarket?.address,
+						marketabi,
+						signer
+					);
+					const getYes = (await contract.totalSupply(1)).toNumber();
+					const getNo = await contract.totalSupply(2);
+					const input = document.getElementById('amount');
+					const jackpot = document.getElementById('jackpot');
 
-				function updateValue(e) {
-					if (isYes === true) {
-						const ownership =
-							e.target.value / (getYes + e.target.valueAsNumber);
-						console.log(getYes + e.target.valueAsNumber);
-						jackpot.textContent = '$' + (totalJackpot * ownership).toFixed(2);
-					} else {
-						jackpot.textContent = '$' + (e.target.value * getNo).toFixed(2);
+					input.addEventListener('input', updateValue);
+
+					function updateValue(e) {
+						if (isYes === true) {
+							const ownership =
+								e.target.value / (getYes + e.target.valueAsNumber);
+							console.log(getYes + e.target.valueAsNumber);
+							jackpot.textContent = '$' + (totalJackpot * ownership).toFixed(2);
+						} else {
+							jackpot.textContent = '$' + (e.target.value * getNo).toFixed(2);
+						}
 					}
 				}
+			} catch (error) {
+				console.log(error);
 			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
 
@@ -93,10 +95,6 @@ export const ActionCard = () => {
 
 		if (hasConnectedWalletBefore != null) {
 			try {
-				if (isSet == true) {
-					return;
-				}
-
 				const provider = new ethers.providers.Web3Provider(window.ethereum);
 				const address = (
 					await provider.send('eth_requestAccounts', [])
@@ -120,7 +118,6 @@ export const ActionCard = () => {
 							currentMarket.address,
 							BigNumber.from(approvedAmount)
 						);
-						setIsSet(true);
 						mixpanelTrackProps('Approve Funds', { result: 'successful' });
 					} catch (error) {
 						if (error.code == 'ACTION_REJECTED') {
@@ -135,7 +132,7 @@ export const ActionCard = () => {
 										t={t}
 									/>
 								),
-								{ duration: 7000 }
+								{ duration: 7000, id: 'reject-transaction' }
 							);
 							mixpanelTrackProps('Approve Funds', { result: 'cancelled' });
 						} else {
@@ -233,13 +230,19 @@ export const ActionCard = () => {
 				) {
 					toast.custom(
 						(t) => (
-							<ToastNotification
-								message={'Transaction Failed'}
+							<ToastNotificationActionBar
+								message={'You have insufficient funds approved'}
 								subMessage={
-									'You have not approved our contract to interact with your wallet. please make sure you are connected to the right network and try again'
+									'You have not approved our contract to interact with your wallet. Click below to approve funds.'
 								}
 								icon={<img src="/alertCircle.svg" />}
 								t={t}
+								showButton={true}
+								buttonText={'Approve Funds'}
+								onClick={() => {
+									approve$auce();
+								}}
+								href="https://consensys.net/blog/metamask/the-seal-of-approval-know-what-youre-consenting-to-with-permissions-and-approvals-in-metamask/"
 							/>
 						),
 						{ duration: 7000 }
@@ -374,15 +377,6 @@ export const ActionCard = () => {
 	useEffect(() => {
 		jackpot();
 	}, [currentMarket, isYes]);
-
-	useEffect(() => {
-		if (currentMarket !== undefined) {
-			approve$auce();
-		}
-	}, [currentMarket]);
-
-	// useMemo(() => {
-	// }, [Total]);
 
 	return (
 		<div className="flex flex-col justify-start border-[1px] border-[#0C1615] rounded-[10px] text-black">

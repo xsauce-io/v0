@@ -120,7 +120,7 @@ export const Nav = ({ logoColor }) => {
 							(t) => (
 								<ToastNotificationActionBar
 									message={
-										'Your Metamask wallet is currently busy with another request.'
+										'Your Metamask wallet is currently busy with another request'
 									}
 									subMessage={
 										'Open your Metamask to manage your current requests and refresh the page.'
