@@ -49,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<>
 			<Head>
 				<title>Xsauce</title>
+        <meta property="og:image" content='/OG.png'/>
 			</Head>
 			{typeof window != 'undefined' && !(window as any).mixpanel && (
 				//<!-- Mixpanel Tracking Code for -->

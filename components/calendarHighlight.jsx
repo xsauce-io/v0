@@ -23,7 +23,7 @@ export const CalendarHighlight = ({ cardObject }) => {
 	let [favored, setFavored] = useState();
 
 	return (
-		<div className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-1/3 mr-2 mb-10 items-start text-left font-inter min-h-full 	">
+		<div className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-1/3 mr-2 mb-20 items-start text-left font-inter min-h-full 	">
 			{cardObject === undefined ? (
 				<React.Fragment>
 					<Skeleton

@@ -159,6 +159,7 @@ const Home: NextPage = () => {
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
+        
 			</Head>
 
 			<Layout
@@ -193,7 +194,7 @@ const Home: NextPage = () => {
           })}
         </div>
 					<ContentHeader
-						title={'Positions'}
+						title={'Your Positions'}
 						icon={<img src="/pieChart.svg" />}
 						flexColumn
 					>
