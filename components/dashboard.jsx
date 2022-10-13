@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 import MarketAbi from '../abi/markets.json';
 
 export const Dashboard = ({ positions }) => {
-	console.log(positions);
+
 	const screens = {
 		mobile: '300',
 		tablet: '640',

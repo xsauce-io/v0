@@ -7,6 +7,7 @@ import marketAbi from '../abi/markets.json';
 import axios from 'axios';
 
 export const CalendarHighlight = ({ cardObject }) => {
+  console.log(cardObject)
 	const randomPlaceholder = [
 		'/hurache.svg',
 		'/octobers.svg',
@@ -22,7 +23,7 @@ export const CalendarHighlight = ({ cardObject }) => {
 	let [favored, setFavored] = useState();
 
 	return (
-		<div className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full 	">
+		<div className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-1/3 mr-2 mb-10 items-start text-left font-inter min-h-full 	">
 			{cardObject === undefined ? (
 				<React.Fragment>
 					<Skeleton
@@ -51,8 +52,7 @@ export const CalendarHighlight = ({ cardObject }) => {
 						) : (
 							<div className="relative w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
-                <span className='absolute right-5 top-5 bg-[#ACFF00] rounded-xl px-4 py-3 laptop:text-lg tablet:text-[14px] mobile:text-[10px]'>Drop of the Month</span>
-								<img
+              <img
 									className="laptop:object-contain laptop:pt-0 tablet:pt-[10%]  mobile:w-[40%] mobile:pt-[20%] m-auto mobile:h-[100%] scale-110"
 									src={cardObject.image?.original}
 								></img>
