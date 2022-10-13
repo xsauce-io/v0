@@ -16,7 +16,7 @@ const pageNotFound404: NextPage = () => {
 			<div className=" text-black w-screen h-screen">
 				<div className="w-full h-full text-[#0C1615] flex flex-col justify-center items-center ">
 					<p className="text-4xl">404</p>
-					<p className="text-[80px]">Oops</p>
+					<p className="text-[80px]">Oops!</p>
 
 					<p className="text-xl border-b-4 border-[#ACFF00] p-4">
 						Page Not Found
