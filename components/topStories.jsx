@@ -1,16 +1,34 @@
 export const TopStories = () => {
+
+
+const scrollLeft = () => {
+  const input = document.getElementById('container')
+  const scrollAmount = input.clientWidth;
+
+  document.getElementById('container').scrollLeft += scrollAmount;
+}
+
+const scrollRight = () => {
+  const input = document.getElementById('container')
+  const scrollAmount = input.clientWidth;
+
+  document.getElementById('container').scrollLeft -= scrollAmount;
+}
+  
+
+
   return (
     <div className="block relative pb-10">
-    <div className="flex overflow-auto scrollbar-hide">
+    <div id="container" className="flex overflow-auto scrollbar-hide scroll-smooth">
   
-    <div className="flex flex-row font-SG text-lg">
+    <div id="content" className="flex flex-row font-SG text-lg">
       
         <a className="flex flex-col w-[450px] text-left mr-2" target="blank" href="https://hypebeast.com/2022/10/hublot-cooks-damascus-steel-big-bang-unico-gourmet-chef">
         <img src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2022%2F10%2Fhublot-cooks-damascus-steel-big-bang-unico-gourmet-chef-01.jpg?q=90&w=1400&cbr=1&fit=max" className="w-full h-[300px] bg-black" />
         <span className="pt-4">Hublot Cooks Up A Treat With Damascus Steel Big Bang Unico Gourmet</span>
         </a>
 
-        <a className="flex flex-col w-[450px] text-left" target="blank" href="https://www.linkedin.com/posts/xsauce_culture-team-markets-activity-6985365771354861568-Jok1?utm_source=share&utm_medium=member_desktop">
+        <a className="flex flex-col w-[450px] text-left mr-2" target="blank" href="https://www.linkedin.com/posts/xsauce_culture-team-markets-activity-6985365771354861568-Jok1?utm_source=share&utm_medium=member_desktop">
         <div className="w-full h-[300px] bg-black flex flex-row justify-center"><img src="sauce.gif"/></div> 
         <span className="pt-4"> Xsauce team releases thier thesis on the future of investing in culture</span>
       </a>
@@ -46,8 +64,8 @@ export const TopStories = () => {
 
   
     </div>
-    <button className="w-[40px] opacity-50 h-[300px] bg-gradient-to-r from-[#000000] to-white absolute top-0 left-0"></button>
-     <button className="w-[40px] opacity-50 h-[300px] bg-gradient-to-l from-[#000000] to-white  z-10 absolute top-0 right-0 "></button>
+    <button onClick={scrollRight} className="w-[50px]  h-[300px]  absolute top-0 left-0 flex flex-col justify-center items-center"> <img className="w-[70%]" src="/leftBubble.svg"/></button>
+     <button onClick={scrollLeft} className="w-[50px]  h-[300px]   z-10 absolute top-0 right-0 flex flex-col justify-center items-center"><img className="w-[70%]" src="/rightBubble.svg"/></button>
 
   
     </div>
