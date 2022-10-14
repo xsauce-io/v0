@@ -131,23 +131,22 @@ export const WagerCard = ({ cardObject }) => {
 
 						<grid className="bg-white w-full grid  text-[#0C1615] grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
 							<div className="col-span-2 row-span-6 flex justify-center relative ">
-								<div className="w-[70%] py-4 relative">
-									{cardObject.image?.original === '' ||
-									cardObject.image?.original ===
-										'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
+								{cardObject.image?.original === '' ||
+								cardObject.image?.original ===
+									'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
+									<img
+										className="object-cover w-[80%] m-auto h-auto rounded-lg"
+										src="/11s.svg"
+									/>
+								) : (
+									<>
 										<img
-											className="object-cover mobile:h-[100%]  tablet:h-[80%]] laptop:h-[80%] w-[80%] m-auto desktop:h-[85%] w-[100%] rounded-lg"
-											src="/hurache.svg"
+											src={cardObject.image?.original}
+											className="object-cover w-[80%] m-auto h-auto rounded-lg"
 										/>
-									) : (
-										<>
-											<img
-												src={cardObject.image?.original}
-												className="object-cover mobile:h-[100%]  tablet:h-[80%]] laptop: w-[80%] m-auto desktop:h-[100%] w-[100%] rounded-lg "
-											/>
-										</>
-									)}
-								</div>
+									</>
+								)}
+
 								<div
 									className="mr-0 absolute right-3 bottom-3"
 									hidden={
@@ -180,7 +179,7 @@ export const WagerCard = ({ cardObject }) => {
 								<p className="text-xs"> Sku </p>
 								<p>{cardObject.sku}</p>
 							</div>
-              <div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
+							<div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
 								<p className="text-xs"> Closes </p>
 								<p>{expiration}</p>
 							</div>
@@ -199,7 +198,7 @@ export const WagerCard = ({ cardObject }) => {
 									Resell Price {'>'} ${currentMarket?.prediction}
 								</p>
 							</div>
-						
+
 							<div className="col-span-2 row-span-2 border-t-[1px] rounded-bl-xl rounded-br-xl border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
 								<p className="text-xs"> Contract</p>
 

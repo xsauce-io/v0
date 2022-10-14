@@ -82,18 +82,18 @@ export const RedeemCard = ({ cardObject }) => {
 						{cardObject.image?.original === '' ||
 						cardObject.image?.original ===
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
-							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
+							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
-									className="object-cover w-[40%] m-auto laptop:h-[100%] scale-100"
+									className="object-cover w-[50%] m-auto h-auto"
 									src="/hurache.svg"
 								/>
 							</div>
 						) : (
-							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
+							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
 								<img
-									className="object-cover w-[40%] m-auto laptop:h-[100%] scale-125"
+									className="object-cover w-[50%] m-auto h-auto"
 									src={cardObject.image?.original}
 								></img>
 							</div>

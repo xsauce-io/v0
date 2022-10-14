@@ -88,14 +88,17 @@ export const Card = ({ cardObject }) => {
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' &&
 							data?.image === undefined) ? (
 							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
-								<img className="object-cover w-[40%]  m-auto " src="/11s.svg" />
+								<img
+									className="object-cover w-[50%] m-auto h-auto "
+									src="/11s.svg"
+								/>
 							</div>
 						) : data?.image !== undefined ? (
 							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
 								<img
-									className="object-contain w-[40%]  m-auto "
+									className="object-contain w-[50%] m-auto h-auto"
 									src={data?.image}
 								></img>
 							</div>
@@ -104,7 +107,7 @@ export const Card = ({ cardObject }) => {
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
 								<img
-									className="object-contain w-[40%]  m-auto "
+									className="object-contain w-[50%]  m-auto  h-auto"
 									src={cardObject.image?.original}
 								></img>
 							</div>
