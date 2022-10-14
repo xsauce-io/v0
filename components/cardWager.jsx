@@ -87,27 +87,24 @@ export const Card = ({ cardObject }) => {
 						(cardObject.image?.original ===
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' &&
 							data?.image === undefined) ? (
-							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
-								<img
-									className="object-cover mobile:w-[40%]  m-auto mobile:h-[100%] scale-100"
-									src="/11s.svg"
-								/>
+							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
+								<img className="object-cover w-[40%]  m-auto " src="/11s.svg" />
 							</div>
 						) : data?.image !== undefined ? (
-							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
+							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
 								<img
-									className="object-contain mobile:w-[40%]  m-auto mobile:h-[100%] scale-100"
+									className="object-contain w-[40%]  m-auto "
 									src={data?.image}
 								></img>
 							</div>
 						) : (
-							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
+							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
 								<img
-									className="object-contain mobile:w-[40%]  m-auto mobile:h-[100%] scale-100"
+									className="object-contain w-[40%]  m-auto "
 									src={cardObject.image?.original}
 								></img>
 							</div>
@@ -130,12 +127,12 @@ export const Card = ({ cardObject }) => {
 									</h1>
 
 									<div className="space-y-3">
-										<div className="flex flex-row items-center border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[50%] py-2 px-4 space-x-2 items-center font-inter">
+										<div className="flex flex-row items-center border-[#30403F] border-[1px] rounded-[40px]  w-[85%] h-[50%] py-2 px-4 space-x-2 items-center font-inter">
 											<p
 												className={
 													favored == true
-														? 'bg-[#ACFF00] text-black  text-[14px] font-normal rounded-[40px]  flex flex-row justify-center   py-1 border-[1px] border-[#30403F] h-full w-full'
-														: 'text-white  text-sm font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] py-1 border-[#30403F] h-full w-full font-Inter'
+														? 'bg-[#ACFF00] text-black text-[11px] tablet:text-[14px] font-normal rounded-[40px]  flex flex-row justify-center px-1 py-1 border-[1px] border-[#30403F] h-full w-full'
+														: 'text-white   text-[11px] tablet:text-[14px] font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] px-1 py-1 border-[#30403F] h-full w-full font-Inter'
 												}
 											>
 												No - {No} %
@@ -144,14 +141,14 @@ export const Card = ({ cardObject }) => {
 											<p
 												className={
 													favored == false
-														? 'bg-[#ACFF00] text-black  text-[14px] font-normal  rounded-[40px]  flex flex-row justify-center  py-1 border-[1px] border-[#30403F] h-full w-full'
-														: 'text-white text-sm font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] py-1 border-[#30403F] h-full w-full font-Inter'
+														? 'bg-[#ACFF00] text-black text-[11px] tablet:text-[14px] font-normal  rounded-[40px]  flex flex-row justify-center px-1 py-1 border-[1px] border-[#30403F] h-full w-full'
+														: 'text-white  text-[11px] tablet:text-[14px] font-normal  rounded-[40px] flex flex-row justify-center  border-[1px] px-1 py-1 border-[#30403F] h-full w-full font-Inter'
 												}
 											>
 												Yes - {Yes} %
 											</p>
 										</div>
-										<button className="flex flex-row items-center text-white text-[14px]  border-[#30403F] border-[1px] rounded-[40px]  w-[80%] h-[30%] py-2 px-4 items-center font-Inter hover:bg-[#ACFF00] hover:text-black ">
+										<button className="flex flex-row items-center text-white text-[14px]  border-[#30403F] border-[1px] rounded-[40px]  w-[85%] h-[30%] py-2 px-4 items-center font-Inter hover:bg-[#ACFF00] hover:text-black ">
 											{' '}
 											<p> Place a bet on this sneaker</p>{' '}
 											<img
