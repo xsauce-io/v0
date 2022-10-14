@@ -39,7 +39,12 @@ export const FirstTimeVisitorModal = () => {
 			keepMounted
 			onClose={handleClose}
 			PaperProps={{
-				style: { borderRadius: 30, width: '100%', height: 'fit-content' },
+				style: {
+					borderRadius: 30,
+					width: '100%',
+					height: 'fit-content',
+					overflow: 'clip',
+				},
 			}}
 			maxWidth="sm"
 		>
