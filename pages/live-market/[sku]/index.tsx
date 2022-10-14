@@ -143,7 +143,7 @@ const LiveMarket: NextPage = () => {
 						<div className="flex-1">
 							<WagerCard cardObject={data} />
 						</div>
-						<div className="mobile:mt-5 tablet:mt-[143px] sm-laptop:mt-[108px] laptop:mt-40 space-y-4">
+						<div className="space-y-4 flex-1 self-end">
 							<ActionCard />
 							<Xchange cardObject={response} />
 						</div>

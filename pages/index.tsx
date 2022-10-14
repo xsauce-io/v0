@@ -170,10 +170,14 @@ const Home: NextPage = () => {
 					/>
 					<div className="divide-y-2 divide-black">
 						<TopStories />
-						<ContentHeader title={'❄️ Sauced Selections'} flexColumn />
+						<ContentHeader
+							title={'Sauced Selections'}
+							flexColumn
+							icon={<img src="/greenDrop.svg" />}
+						/>
 					</div>
 					<div className="divide-y-2 divide-black  ">
-						<div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-10">
+						<div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-14">
 							{response?.map((el: any, index: number) => {
 								console.log(response);
 								return <CalendarHighlight index={index} cardObject={el} />;
