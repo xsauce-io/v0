@@ -42,7 +42,7 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
 							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
-									className="object-cove m-auto w-auto "
+									className="object-contain h-auto w-[50%] m-auto"
 									src={
 										cardObject?.name[0] === 'J'
 											? randomPlaceholder[3]
@@ -56,7 +56,7 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 								<img
-									className="object-contain  m-auto w-auto "
+									className="object-contain h-auto w-[50%] m-auto"
 									src={cardObject.image?.original}
 								></img>
 							</div>
