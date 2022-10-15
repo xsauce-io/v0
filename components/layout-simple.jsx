@@ -42,7 +42,7 @@ export const LayoutSimple = ({
 			</div>
 
 			<div className="w-full items-center justify-center ">{children}</div>
-			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center mt-20">
+			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center mt-10">
 				<Footer />
 			</div>
 		</div>

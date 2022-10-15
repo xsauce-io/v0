@@ -22,6 +22,8 @@ import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/toast';
 declare let window: any;
+import { FirstTimeVisitorModal } from '../components/firstTimeVisitorModal';
+import { CalendarCard } from '../components/calendarCard';
 
 const Portfolio: NextPage = () => {
 	// ------------------- Constants ---------------------
@@ -46,14 +48,12 @@ const Portfolio: NextPage = () => {
 	const [storedPersistentResponse, setStoredPersistentResponse] = useState(
 		[] as any[]
 	);
-
 	//filter state mana
 	const [isAscending, setIsAscending] = useState(true);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
-
-	// -------------------- Data Fetching ------------------
-
 	const [allBalances, setAllBalances] = useState([] as any);
+
+	const [showPortfolio, setShowPortfolio] = useState(false);
 
 	const showBalances = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
@@ -61,53 +61,60 @@ const Portfolio: NextPage = () => {
 		);
 
 		if (hasConnectedWalletBefore != null) {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const connected = (
-				await provider.send('eth_requestAccounts', [0])
-			).toString();
-			const signer = provider.getSigner();
-			const contract2 = new ethers.Contract(
-				MarketFactory,
-				MarketFactoryABI,
-				signer
-			);
-			const allMarkets = await contract2.getAllMarketswSku();
-
-			const cleanedAllMarkets: any[] = [];
-			for (let index = 0; index < allMarkets.length; index++) {
-				const r1 = allMarkets[index].sku.toString();
-				const r2 = allMarkets[index].market.toString();
-				const r3 = allMarkets[index].name.toString();
-				const newData = { sku: r1, address: r2, name: r3 };
-				cleanedAllMarkets.push(newData);
-			}
-
-			const balanceArray: any = [];
-
-			for (let index = 0; index < cleanedAllMarkets?.length; index++) {
-				const contract = new ethers.Contract(
-					cleanedAllMarkets[index]?.address,
-					MarketAbi,
+			try {
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const connected = (
+					await provider.send('eth_requestAccounts', [0])
+				).toString();
+				setShowPortfolio(true);
+				const signer = provider.getSigner();
+				const contract2 = new ethers.Contract(
+					MarketFactory,
+					MarketFactoryABI,
 					signer
 				);
-				const balances = await contract.getAcctInfo(connected);
-				const one = balances.amountNo.toString();
-				const two = balances.amountYes.toString();
-				const three = (balances.avgBuyPriceNo / 1e18).toFixed(2);
-				const four = (balances.avgBuyPriceYes / 1e18).toFixed(2);
 
-				const newObj = {
-					amountNo: one,
-					amountYes: two,
-					avgBuyPriceNo: three,
-					avgBuyPriceYes: four,
-					address: cleanedAllMarkets[index].address,
-					sku: cleanedAllMarkets[index].sku,
-					name: cleanedAllMarkets[index].name,
-				};
-				balanceArray.push(newObj);
+				const allMarkets = await contract2.getAllMarketswSku();
+
+				const cleanedAllMarkets: any[] = [];
+				for (let index = 0; index < allMarkets.length; index++) {
+					const r1 = allMarkets[index].sku.toString();
+					const r2 = allMarkets[index].market.toString();
+					const r3 = allMarkets[index].name.toString();
+					const newData = { sku: r1, address: r2, name: r3 };
+					cleanedAllMarkets.push(newData);
+				}
+
+				const balanceArray: any = [];
+
+				for (let index = 0; index < cleanedAllMarkets?.length; index++) {
+					const contract = new ethers.Contract(
+						cleanedAllMarkets[index]?.address,
+						MarketAbi,
+						signer
+					);
+					const balances = await contract.getAcctInfo(connected);
+					const one = balances.amountNo.toString();
+					const two = balances.amountYes.toString();
+					const three = (balances.avgBuyPriceNo / 1e18).toFixed(2);
+					const four = (balances.avgBuyPriceYes / 1e18).toFixed(2);
+
+					const newObj = {
+						amountNo: one,
+						amountYes: two,
+						avgBuyPriceNo: three,
+						avgBuyPriceYes: four,
+						address: cleanedAllMarkets[index].address,
+						sku: cleanedAllMarkets[index].sku,
+						name: cleanedAllMarkets[index].name,
+					};
+					balanceArray.push(newObj);
+				}
+				setAllBalances(balanceArray);
+			} catch {
+				console.log('failed balance retrieval');
+				setShowPortfolio(false);
 			}
-			setAllBalances(balanceArray);
 		}
 	};
 
@@ -116,6 +123,8 @@ const Portfolio: NextPage = () => {
 	useEffect(() => {
 		showBalances();
 	}, []);
+
+	useEffect(() => {}, [showPortfolio]);
 
 	return (
 		<div>
@@ -135,7 +144,7 @@ const Portfolio: NextPage = () => {
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
-				<>
+				<div className="relative min-h-[60vh]">
 					<ContentHeader
 						title={'Your Positions'}
 						icon={<img src="/pieChart.svg" />}
@@ -144,30 +153,47 @@ const Portfolio: NextPage = () => {
 						<div className="flex flex-row items-center mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0    tablet:flex-row">
 							<text>
 								Total Positions &nbsp;
-								<span className="text-[#748282]">{allBalances?.length}</span>
+								{showPortfolio ? (
+									<span className="text-[#748282]">{allBalances?.length}</span>
+								) : (
+									<></>
+								)}
 							</text>
 						</div>
 					</ContentHeader>
-
-					<DashboardTable>
-						{allBalances.length === 0
-							? skeletonArray.map(() => (
-									<>
-										<Skeleton
-											animation="pulse"
-											variant="rounded"
-											height={70}
-											width={'100%'}
-											sx={{ borderRadius: '100px' }}
-										/>
-										<p className="h-4"> </p>
-									</>
-							  ))
-							: allBalances?.map((el: any) => {
-									return <Dashboard positions={el} />;
-							  })}
-					</DashboardTable>
-				</>
+					{showPortfolio ? (
+						<DashboardTable>
+							{allBalances.length === 0
+								? skeletonArray.map(() => (
+										<>
+											<Skeleton
+												animation="pulse"
+												variant="rounded"
+												height={70}
+												width={'100%'}
+												sx={{ borderRadius: '100px' }}
+											/>
+											<p className="h-4"> </p>
+										</>
+								  ))
+								: allBalances?.map((el: any) => {
+										return <Dashboard positions={el} />;
+								  })}
+						</DashboardTable>
+					) : (
+						<div className="w-full h-full bg-[#c4c4c4] absolute top-4 bg-opacity-50 flex flex justify-center items-center text-center">
+							<div
+								className={
+									'py-4 px-4 w-full bg-[#ACFF00]   border-y-[1px] border-[#0C1615]'
+								}
+							>
+								<text className="mobile:text-sm tablet:text-xl font-normal font-Inter">
+									Connect your wallet to see your Portfolio
+								</text>
+							</div>
+						</div>
+					)}
+				</div>
 			</Layout>
 		</div>
 	);
