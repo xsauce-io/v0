@@ -75,7 +75,7 @@ export const LocalDrawer = ({ children }) => {
 								className="text-white transition hover:text-[#ACFF00]"
 								href="/"
 							>
-								Dashboard
+								Home
 							</a>
 						</li>
 
@@ -103,6 +103,14 @@ export const LocalDrawer = ({ children }) => {
 								href="/redeem"
 							>
 								Cash Out
+							</a>
+						</li>
+						<li>
+							<a
+								className="text-white transition hover:text-[#ACFF00]"
+								href="/portfolio"
+							>
+								Portfolio
 							</a>
 						</li>
 					</ul>

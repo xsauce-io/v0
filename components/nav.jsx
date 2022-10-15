@@ -555,33 +555,33 @@ export const Nav = ({ logoColor }) => {
 						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
-								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[175px] bg-[#DCDEE1] space-x-8 rounded-[40px]"
+								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-3 w-[175px] bg-[#DCDEE1] space-x-6 rounded-[40px]"
 							>
 								{toggle === 421613 ? (
 									<>
-										<img className="h-[10%] w-[10%]" src="/arbitrum.svg" />
+										<img className="h-auto w-[10%]" src="/arbitrum.svg" />
 										<span className="text-black text-[14px]">Arbitrum</span>
 									</>
 								) : toggle === 80001 ? (
 									<>
-										<img className="h-[10%] w-[10%]" src="/polygon.svg" />
+										<img className="h-auto w-[10%]" src="/polygon.svg" />
 										<span className="text-[black] text-[14px]">Polygon</span>
 									</>
 								) : toggle === 41 ? (
 									<>
 										<img
-											className="h-[10%] w-[10%]text-[14px]"
+											className="h-auto w-[10%]text-[14px]"
 											src="/telos.png"
 										/>
 										<span className="text-[black] text-[14px]">Telos</span>
 									</>
 								) : (
 									<>
-										<img className="h-[9%] w-[9%]" src="/eth.png" />
+										<img className="h-auto w-[9%]" src="/eth.png" />
 										<span className="text-[black] text-[14px]">Goerli</span>
 									</>
 								)}
-								<img src="/downArrow.svg" />
+								<img src="/downArrow.svg" className="h-auto w-[20px]" />
 							</label>
 							<ul
 								tabindex="0"
@@ -640,7 +640,7 @@ export const Nav = ({ logoColor }) => {
 								mixpanelTrackProps('Get Test Tokens', { token: '$auce' });
 							}}
 						>
-							<img className="h-[10%] w-[10%]" src="/icon.svg" />
+							<img className="h-auto w-[10%]" src="/icon.svg" />
 							<text>Get Test Tokens </text>
 						</button>
 
@@ -654,7 +654,7 @@ export const Nav = ({ logoColor }) => {
 								})
 							}
 						>
-							<img className="h-[7%] w-[7%]" src="/eth.png" />
+							<img className="h-auto w-[7%]" src="/eth.png" />
 							<text>Get ETH(Goerli) </text>
 						</a>
 					</div>
