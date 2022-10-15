@@ -61,7 +61,7 @@ export const Slideshow = ({ content, reset }) => {
 		}
 	}
 	return (
-		//full slider container but hides all but one content card
+		//full slider container but hides all but one page
 		<div className={'m-auto overflow-hidden max-w-[600px]'}>
 			{/* full container doing affect */}
 			<div
