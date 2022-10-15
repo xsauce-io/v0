@@ -1,6 +1,5 @@
 import { style } from '@mui/system';
 import React, { useState, useEffect, useRef } from 'react';
-import styles from './slideshow.module.css';
 
 // ---------------- IMPORTANT -----------------
 // This component can only be used in jsx files.
@@ -62,26 +61,39 @@ export const Slideshow = ({ content, reset }) => {
 		}
 	}
 	return (
-		<div className={styles.slideshow}>
+		//full slider container but hides all but one content card
+		<div className={'m-auto overflow-hidden max-w-[600px]'}>
+			{/* full container doing affect */}
 			<div
-				className={styles.slideshowSlider}
+				className={'whitespace-nowrap ease-in-out duration-1000'}
 				style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
 			>
+				{/* each page of the slider */}
 				{content?.map((item, index) => (
-					<div className={styles.slide} key={index}>
-						<img className="object-fit" src={item.href}></img>
-
-						<h1 className="text-white text-xl  ">{item.header}</h1>
-						<p className="text-white font-SG ">{item.text}</p>
+					<div
+						className={
+							'inline-block h-[200px] w-full whitespace-pre-line pr-1 pl-1 justify-start '
+						}
+						key={index}
+					>
+						<img className="object-fit w-full h-auto" src={item.href}></img>
+						<h1 className="text-white mobile:text-md tablet:text-xl ">
+							{item.header}
+						</h1>
+						<p className="text-white mobile:text-xs tablet:text-lg font-SG ">
+							{item.text}
+						</p>
 					</div>
 				))}
 			</div>
-			<div className={styles.slideshowDots}>
+			<div className="text-center">
 				{Images.map((_, idx) => (
 					<div
 						key={idx}
 						className={
-							index === idx ? styles.slideshowDotActive : styles.slideshowDot
+							index === idx
+								? 'inline-block h-[20px] w-[20px] rounded-2xl cursor-pointer mt-[15px] mx-[7px] mb-[0px] bg-[#ACFF00]'
+								: 'inline-block h-[20px] w-[20px] rounded-2xl cursor-pointer mt-[15px] mx-[7px] mb-[0px] bg-[#c4c4c4]'
 						}
 						onClick={() => setIndex(idx)}
 					></div>
