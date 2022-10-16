@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
-import React from "react";
+import { useRouter } from 'next/router';
+import React from 'react';
 import Link from 'next/link';
 
 export const Tabs = ({ children, bgColor }) => {
-    const router = useRouter();
+	const router = useRouter();
 
 
     return (
@@ -25,6 +25,9 @@ export const Tabs = ({ children, bgColor }) => {
                     </Link>
                     <Link href="/redeem">
                         <a className={router.pathname == "/redeem" ? "tab border-[#ACFF00] border-b-[3px] transition text-black px-0 mobile:text-xs tablet:text-sm" : "tab transition text-[#748282] px-0 mobile:text-xs tablet:text-sm"} style={router.pathname == "/redeem" ? { color: 'inherit' } : null}>Cash Out</a>
+                    </Link>
+                    <Link href="/redeem">
+                        <a className={router.pathname == "/portfolio" ? "tab border-[#ACFF00] border-b-[3px] transition text-black px-0 mobile:text-xs tablet:text-sm" : "tab transition text-[#748282] px-0 mobile:text-xs tablet:text-sm"} style={router.pathname == "/portfolio" ? { color: 'inherit' } : null}>Portfolio</a>
                     </Link>
                 </div>
             </div>

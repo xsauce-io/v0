@@ -74,7 +74,7 @@ export const Layout = ({
 					<div className="mobile:px-5 laptop:px-40">{children}</div>
 				</Tabs>
 			</div>
-			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center mt-20">
+			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center mt-10">
 				<Footer />
 			</div>
 		</div>
