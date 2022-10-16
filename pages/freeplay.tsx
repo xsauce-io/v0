@@ -98,11 +98,11 @@ const FreePlay: NextPage = () => {
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
-				<>
+				<div className='w-full'>
         
 					<FreePrediction/>
 					
-				</>
+				</div>
 			</Layout>
 		</div>
 	);

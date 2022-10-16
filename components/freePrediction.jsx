@@ -11,13 +11,14 @@ export const FreePrediction = () => {
 
   
 	const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
-console.log(s1)
 	return (
     
 		<React.Fragment>
-   <FreePlayGraph/>
-
-			<div className=" ">
+  
+ 
+			<div className="flex flex-row pt-10 items-center justify-center">
+     
+      <div className='z-10'>
 				{e1 === "" ? (
 					<React.Fragment>
 						<Skeleton variant="text" />
@@ -26,14 +27,12 @@ console.log(s1)
 					</React.Fragment>
 				) : (
 					<React.Fragment>
-						<div className="text-3xl py-4 text-left mb-10 text-[#0C1615]">
+						<div className="text-3xl text-center text-[#0C1615] relative">
 							{' '}
 							{s1?.name}
 						</div>
 
-						<grid className="bg-white w-full grid  text-[#0C1615] grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
-							<div className="col-span-2 row-span-6 flex justify-center relative ">
-								{s1?.image.original === '' ||
+            {s1?.image.original === '' ||
 								s1?.image.original ===
 									'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
 									<img
@@ -44,7 +43,7 @@ console.log(s1)
 									<>
 										<img
 											src={s1?.image.original}
-											className="object-cover w-[80%] m-auto h-auto rounded-lg"
+											className="object-cover w-[30%] m-auto h-auto rounded-lg"
 										/>
 									</>
 								)}
@@ -57,12 +56,22 @@ console.log(s1)
 											'https://image.goat.com/placeholders/product_templates/original/missing.png'
 									}
 								>
-									<ExpandImageModal shoeImage={s1?.image.original} />
 								</div>
+                </React.Fragment>
+                )}
+                </div>
+                  </div>
+                  <div className='w-full pb-5'>
+      <FreePlayGraph/>
+      {/* <SubmitPrediction/> */}
+      </div>
+
+						<grid className="bg-white w-full grid  text-[#0C1615] grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
+						
 
 
-							</div>
-							<div className="col-span-2 row-span-6 text-left border-t-[1px] border-[#0C1615] px-6 py-10">
+
+							<div className="col-span-2 row-span-6 text-left px-6 py-10">
 								<p className="text-xl font-medium font-SG py-4">
 									Product Description
 								</p>
@@ -85,30 +94,20 @@ console.log(s1)
 							</div>
 							<div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
 								<p className="text-xs"> Closes </p>
-								<p>10-28-1997</p>
+								<p>10-28-2022</p>
 							</div>
-							<div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px]">
+							<div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 border-r-[1px] rounded-bl-xl">
 								<p className="text-xs"> Retail price </p>
 								<p>${s1?.retailPrice}</p>
 							</div>
-							<div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
+							<div className="col-span-1 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 rounded-br-xl">
 								<p className="text-xs"> Estimated resell price</p>
 								<p>${s1?.estimatedMarketValue}</p>
 							</div>
-							<div className="col-span-2 row-span-2 border-t-[1px] border-[#0C1615] bg-[#DCDEE1] text-left px-6 py-3 ">
-								<p className="text-xs"> Wager </p>
-								<p>
-									{' '}
-									What Price
-								</p>
-							</div>
+					
 
 						
 						</grid>
 
 					</React.Fragment>
 				)}
-			</div>
-		</React.Fragment>
-	);
-};

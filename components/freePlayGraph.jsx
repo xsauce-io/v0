@@ -6,22 +6,22 @@ ChartJS.register(LineElement, PointElement, LinearScale, Title, Tooltip, Categor
 const data1 = [];
 let prev = 100;
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 500; i++) {
   prev += 5 - Math.random() * 10;
   data1.push({x: i, y: prev});
 }
 
-const totalDuration = 10000;
+const totalDuration = 5000;
 const delayBetweenPoints = totalDuration / data1.length;
+console.log(delayBetweenPoints)
 
-
-const previousY = (ctx) => {console.log(ctx); 
+const previousY = (ctx) => {
 ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
 }
 const animation = {
   x: {
     type: 'number',
-    easing: 'easeOutQuart',
+    easing: 'easeOutCubic',
     duration: delayBetweenPoints,
     from: NaN, // the point is initially skipped
     delay(ctx) {
@@ -34,7 +34,7 @@ const animation = {
   },
   y: {
     type: 'number',
-    easing: 'easeOutQuart',
+    easing: 'linear',
     duration: delayBetweenPoints,
     from: previousY,
     delay(ctx) {
@@ -53,10 +53,9 @@ const animation = {
 const data = {
   datasets: [{
     borderColor: "#000000",
-    borderWidth: 2,
+    borderWidth: 1.2,
     radius: 0,
     data: data1,
-   
     
   },]
 }
@@ -105,13 +104,13 @@ const options = {
 
   scales: {
     x: {
-      display:false,
+      display:true,
       type: 'linear',
       position: 'left'
     },
     y : {
         type: 'linear',
-	display: false,
+	display: true,
 	position: 'left',
     
     }
