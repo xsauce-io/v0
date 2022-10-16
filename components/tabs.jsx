@@ -14,6 +14,9 @@ export const Tabs = ({ children, bgColor }) => {
                     <Link href="/">
                         <a className={router.pathname == "/" ? "tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm " : "tab transition mobile:text-xs tablet:text-sm text-[#748282] px-0 "} style={router.pathname == "/" ? { color: 'inherit' } : null}>Dashboard</a>
                     </Link>
+                    <Link href="/freeplay">
+                        <a className={router.pathname == "/freeplay" ? "tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm " : "tab transition mobile:text-xs tablet:text-sm text-[#748282] px-0 "} style={router.pathname == "/freeplay" ? { color: 'inherit' } : null}>Free Play</a>
+                    </Link>
                     <Link href="/calendar">
                         <a className={router.pathname == "/calendar" ? "tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm " : "tab transition mobile:text-xs tablet:text-sm text-[#748282] px-0 "} style={router.pathname == "/calendar" ? { color: 'inherit' } : null}>Calendar</a>
                     </Link>

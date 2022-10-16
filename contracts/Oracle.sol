@@ -11,6 +11,8 @@ contract Oracle is IOracle, Ownable {
 
     using Chainlink for Chainlink.Request;
 
+    event RequestPrice(bool status);
+
     constructor(string memory _sku) {
         setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
         setChainlinkOracle(0xCC79157eb46F5624204f47AB42b3906cAA40eaB7);
@@ -42,7 +44,7 @@ contract Oracle is IOracle, Ownable {
      * Receive the response in the form of uint256
      */
     function fulfill(bytes32 _requestId, uint256 _price) public recordChainlinkFulfillment(_requestId) {
-        emit RequestPrice(_requestId, _price);
+        emit RequestPrice(true);
         price = _price;
     }
 

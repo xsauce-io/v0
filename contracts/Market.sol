@@ -2,7 +2,7 @@
 pragma solidity ^0.8.16;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
 import "./interfaces/IOracle.sol";
@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "hardhat/console.sol";
 
-contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
+contract Market is ERC1155, AccessControl, ERC1155Burnable, ERC1155Supply {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
@@ -53,11 +53,18 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
 
     event positionCreated(uint id, uint256 amount);
     event marketResolved(uint256 timestamp, bool resolved);
+    bytes32 public constant ADMIN = keccak256("ADMIN");
 
-    constructor(string memory uri_, address _usdc) ERC1155(uri_) {
+
+    constructor(string memory _uri, address _usdc, address _admin ) ERC1155(_uri) {
         _mint(address(this), 1, 1, "");
         _mint(address(this), 2, 1, "");
         usdc = IERC20(_usdc);
+        _setupRole(ADMIN, _admin);
+    }
+
+        function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, AccessControl) returns (bool) {
+        return super.supportsInterface(interfaceId);
     }
 
     function getAcctInfo(address user) external view returns (purchaseInfo memory) {
@@ -69,14 +76,16 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         address _oracleFeed,
         uint256 _closingDate,
         string memory _sku
-    ) external onlyOwner {
+    ) external {
+      require(hasRole(ADMIN, msg.sender), "Not an Admin");
         closingDate = _closingDate;
         oracleFeed = IOracle(_oracleFeed);
         predictionPrice = _predictionPrice;
         sku = _sku;
     }
 
-    function resolveAssetPrice() public onlyOwner {
+    function resolveAssetPrice() public {
+      require(hasRole(ADMIN, msg.sender), "Not an Admin");
         // require((priceRequested - block.timestamp > 5 minutes), 'Pre-Market Still Open');
         if (predictionPrice > oracleFeed.price()) {
             favored = true;
@@ -87,7 +96,8 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         emit marketResolved(block.timestamp, resolved);
     }
 
-    function getData() public onlyOwner {
+    function getData() public {
+      require(hasRole(ADMIN, msg.sender), "Not an Admin");
         oracleFeed.requestPrice();
         fetched = true;
         priceRequested = block.timestamp;
@@ -113,7 +123,8 @@ contract Market is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
         }
     }
 
-    function setURI(string memory newuri) public onlyOwner {
+    function setURI(string memory newuri) public  {
+      require(hasRole(ADMIN, msg.sender), "Not an Admin");
         _setURI(newuri);
     }
 

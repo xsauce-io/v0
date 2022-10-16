@@ -32,8 +32,9 @@ MarketDetails[] public mktDtlArray;
 
  constructor() {}
 
- function createNewMarket(string memory uri, uint256 _predictionPrice, address _oracleFeed, uint256 _closingDate, address stable , string memory _sku, string memory _name) public onlyOwner returns (address marketAdd) {
-  Market market = new Market(uri, stable);
+ function createNewMarket(address _admin, string memory _uri, uint256 _predictionPrice, address _oracleFeed, uint256 _closingDate, address _stable , string memory _sku, string memory _name) public onlyOwner returns (address marketAdd) {
+  
+  Market market = new Market(_uri, _stable, _admin);
   market.initialize(_predictionPrice, _oracleFeed, _closingDate, _sku);
    bytes32 marketKey = keccak256(abi.encodePacked(_sku, _predictionPrice, _closingDate));
    markets[marketKey] = address(market);

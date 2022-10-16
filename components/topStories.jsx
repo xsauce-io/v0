@@ -16,7 +16,7 @@ export const TopStories = () => {
 
 	return (
 		<div className="block relative pb-10">
-			<div className="flex overflow-auto scrollbar-hide scroll-smooth" id="container">
+			<div className="flex overflow-auto scrollbar-hide scroll-smooth rounded-lg" id="container">
 				<div className="flex flex-row font-SG text-lg space-x-2">
 					<a
 						className="flex flex-col mobile:w-[300px] tablet:w-[450px] text-left "
