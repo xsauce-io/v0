@@ -52,7 +52,7 @@ const FreePlay: NextPage = () => {
 
 	// -------------------- Data Fetching ------------------
 
-	
+
 
 	//------------------ Use Effect / Use memo ------------------
 	useEffect(() => {
@@ -60,7 +60,7 @@ const FreePlay: NextPage = () => {
 		setStoredPersistentResponse([s1, s2, s3]);
 	}, [s1, s2, s3]);
 
-	
+
 	useEffect(() => {
 		if (e1 || e2 || e3) {
 			toast.custom(
@@ -89,7 +89,7 @@ const FreePlay: NextPage = () => {
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-        <link rel="icon" type='favicon' href='/greenDrop.svg'/>
+				<link rel="icon" type='favicon' href='/greenDrop.svg' />
 			</Head>
 
 			<Layout
@@ -98,11 +98,18 @@ const FreePlay: NextPage = () => {
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
-				<div className='w-full'>
-        
-					<FreePrediction/>
-					
-				</div>
+				<>
+					<ContentHeader
+						title={'Free Play'}
+
+						icon={<img src="/greenDrop.svg" />}
+					/>
+					<div className='w-full'>
+
+						<FreePrediction />
+
+					</div>
+				</>
 			</Layout>
 		</div>
 	);
