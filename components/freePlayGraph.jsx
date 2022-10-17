@@ -125,7 +125,7 @@ export const FreePlayGraph = () => {
 
 
   return (
-    <div>
+    <div className='w-full'>
       <Chart
         type='line'
         data={data}
