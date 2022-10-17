@@ -79,11 +79,11 @@ const options = {
       fill: "start",
       backgroundColor: (context) => {
         const ctx = context.chart.ctx;
-        const gradient = ctx.createLinearGradient(0, 0, 0, 420);
-        gradient.addColorStop(0, "rgba(172, 255, 0, 0.8)");
-        gradient.addColorStop(.4, "rgba(172, 255, 0, .6)");
-        gradient.addColorStop(.6, "rgba(172, 255, 0, .4)");
-        gradient.addColorStop(1, "rgba(172, 255, 0, 0)");
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+
+        gradient.addColorStop(0, "rgba(172, 255, 0, 1)");
+        gradient.addColorStop(0.5, "rgba(172, 255, 0, .2)");
+        gradient.addColorStop(1, "rgba(255, 255, 255, .0)");
         return gradient;
       },
 
@@ -103,15 +103,23 @@ const options = {
   responsive: true,
 
   scales: {
+   
     x: {
       display: true,
       type: 'linear',
-      position: 'left'
+      position: 'left',
+      grid: {
+         display: false
+      }
     },
     y: {
       type: 'linear',
       display: true,
       position: 'left',
+      grid: {
+         display: false
+      }
+      
 
     }
   }

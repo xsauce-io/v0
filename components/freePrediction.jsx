@@ -27,11 +27,11 @@ export const FreePrediction = () => {
 						<div className='flex-1'>
 							What will the resell price of the <span className='font-bold'>{s1?.name}</span> be on <span className='font-bold'>October 31st, 2022?</span>
 						</div>
-						<div className='flex-1 flex flex-col space-y-3'>
-							<div className="bg-white  items-center py-4 px-5 text-left w-[100%] border-[1px] rounded-[80px] border-[#0C1615] flex focus:outline-2 focus:outline-offset-2 hover:outline-1">
-								<p className="text-left text-md inline-block pr-1">Prediction Price:</p>
+						<div className='flex flex-col flex-1 space-y-3 '>
+							<div className="flex flex-row bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] rounded-[80px] border-[#0C1615] focus:outline-2 focus:outline-offset-2 hover:outline-1">
+								<p className="flex-1 text-left mobile:text-sm laptop:text-md pr-1">Prediction Price:</p>
 								<input
-									className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none "
+									className="flex-1 text-right mobile:text-sm laptop:text-md mobile:w-[10%] appearance-none focus:none focus:outline-none"
 									name="Amount"
 									id="amount"
 									type="number"
@@ -39,7 +39,6 @@ export const FreePrediction = () => {
 									// onChange={() => CalculateTotal()}
 									required
 								/>
-
 							</div>
 
 							<button
@@ -67,10 +66,10 @@ export const FreePrediction = () => {
 							</React.Fragment>
 						) : (
 							<>
-								<div className="flex flex-row bg-white rounded-lg px-4 space-x-4 justify-center items-center">
+								<div className="flex mobile:flex-col mobile:space-y-4 tablet:flex-row bg-white rounded-lg tablet:px-4 tablet:space-x-4 tablet:space-y-0 justify-center items-center">
 									<img
 										src="/WOF.png"
-										className="object-cover w-[40%] m-auto h-auto rounded-lg'>"
+										className="object-cover mobile:w-[100%] tablet:w-[40%] m-auto h-auto rounded-lg'>"
 									/>
 									<p className='px-4 '>The Air Jordan 1 Retro High OG ‘Lost &amp; Found’ brings back the iconic silhouette that started it all. Featuring the high-cut shape of the original 1985 release, the leather upper combines a white base with a black signature Swoosh and scarlet overlays at the forefoot and heel. Cracked black leather appears on the padded collar, while a vintage pre-yellowed finish is applied to the white rubber midsole. </p>
 
