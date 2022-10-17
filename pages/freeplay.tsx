@@ -82,7 +82,7 @@ const FreePlay: NextPage = () => {
 	return (
 		<div>
 			<Head>
-				<title>Xsauce | Culture is Currency</title>
+				<title>Xsauce | Free Play</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
