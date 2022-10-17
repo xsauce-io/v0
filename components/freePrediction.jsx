@@ -19,7 +19,10 @@ export const FreePrediction = () => {
 			<div className="flex flex-row pt-10 pb-10">
      <div className='bg-white w-[40%] rounded-lg font-SG p-4'>
       <h1 className='text-center pb-2'>Get 3 predictions in a row to spin the wheel</h1>
-      <img className='pb-2' src='/WOF.png'/>
+      <img
+											src={s1?.image.original}
+											className="object-cover w-full m-auto h-auto rounded-lg font-SG p-4'>"
+										/>
       <div className='flex flex-col justify-around h-[50%]'>
         <div>
          What will the reselll price of the <p className='font-bold'>{s1?.name}</p> be on <p className='font-bold'>October 31st, 2022?</p>
@@ -70,12 +73,12 @@ export const FreePrediction = () => {
 										src="/11s.svg"
 									/>
 								) : (
-									<div className="bg-white mb-2 rounded-lg flex flex-row">
+									<div className="bg-white mb-2 rounded-lg flex flex-row py-6 px-4">
 										<img
-											src={s1?.image.original}
+											src="/WOF.png"
 											className="object-cover w-[40%] m-auto h-auto rounded-lg font-SG p-4'>"
 										/>
-                    <p className='py-6 px-4'>{s1?.story}</p>
+                    <p className='py-6 px-4'>The Air Jordan 1 Retro High OG ‘Lost &amp; Found’ brings back the iconic silhouette that started it all. Featuring the high-cut shape of the original 1985 release, the leather upper combines a white base with a black signature Swoosh and scarlet overlays at the forefoot and heel. Cracked black leather appears on the padded collar, while a vintage pre-yellowed finish is applied to the white rubber midsole. </p>
                     
 									</div>
 								)}
