@@ -16,20 +16,20 @@ export const FreePrediction = () => {
 	return (
 
 		<React.Fragment>
-			<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-10">
-				<div className='bg-white w-full laptop:w-[40%] rounded-lg font-SG p-6'>
+			<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
+				<div className='bg-white w-full laptop:w-[40%] rounded-lg font-SG p-6 border-[1px] border-[#0C1615] '>
 					<h1 className='text-center text-xl font-medium '> Get 3 predictions in a row to spin the wheel</h1>
 					<img
 						src={s1?.image.original}
-						className="object-cover w-[50%] laptop:w-[100%] m-auto h-auto rounded-lg font-SG'>"
+						className="object-cover w-[50%] laptop:w-[100%] m-auto h-auto rounded-lg "
 					/>
-					<div className='flex flex-col justify-around'>
-						<div>
+					<div className='flex flex-col space-y-5'>
+						<div className='flex-1'>
 							What will the resell price of the <span className='font-bold'>{s1?.name}</span> be on <span className='font-bold'>October 31st, 2022?</span>
 						</div>
-						<div>
-							<div className="bg-white mb-3 items-center py-3 px-5 text-left w-[100%] border-[1px] rounded-3xl border-[#0C1615] flex focus:outline-2 focus:outline-offset-2 hover:outline-1">
-								<p className="text-left text-sm inline-block pr-1">Prediction Price:</p>
+						<div className='flex-1 flex flex-col space-y-3'>
+							<div className="bg-white  items-center py-4 px-5 text-left w-[100%] border-[1px] rounded-[80px] border-[#0C1615] flex focus:outline-2 focus:outline-offset-2 hover:outline-1">
+								<p className="text-left text-md inline-block pr-1">Prediction Price:</p>
 								<input
 									className="flex-1 text-right mobile:text-sm laptop:text-md  inline-block appearance-none focus:none focus:outline-none "
 									name="Amount"
@@ -45,18 +45,21 @@ export const FreePrediction = () => {
 							<button
 								type="submit"
 								id="mint"
-								className="w-full font-medium mb-6 text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60"
+								className="w-full font-medium mb-6 text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-60"
 							>
 								Submit
 							</button>
+							<div className='pt-5'>
 							<h1 className='font-bold'>Current Resell Price:
-								<span className='bg-[#ACFF00] py-1 px-2 rounded-full ml-1 text-sm font-normal'>${s1?.estimatedMarketValue}</span>
+								<span className='bg-[#ACFF00] py-2 px-3 rounded-full ml-2 text-sm font-normal'>${s1?.estimatedMarketValue}</span>
 							</h1>
+							</div>
 						</div>
+						
 					</div>
 				</div>
-				<div className='flex flex-col w-full space-y-4 laptop:w-[60%] laptop:space-y-4'>
-					<div className='bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center'>
+				<div className='flex flex-col justify-center w-full space-y-4 laptop:w-[60%] laptop:space-y-4 '>
+					<div className='bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center border-[1px] border-[#0C1615] '>
 
 						{e1 === "" ? (
 							<React.Fragment>
@@ -64,9 +67,7 @@ export const FreePrediction = () => {
 							</React.Fragment>
 						) : (
 							<>
-
-
-								<div className="flex flex-row bg-white mb-2 rounded-lg  px-4">
+								<div className="flex flex-row bg-white rounded-lg px-4 space-x-4 justify-center items-center">
 									<img
 										src="/WOF.png"
 										className="object-cover w-[40%] m-auto h-auto rounded-lg'>"
@@ -78,7 +79,7 @@ export const FreePrediction = () => {
 							</>
 						)}
 					</div>
-					<div className='bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center'>
+					<div className='bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center border-[1px] border-[#0C1615] '>
 						<FreePlayGraph />
 					</div>
 				</div>
