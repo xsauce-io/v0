@@ -140,7 +140,7 @@ const Portfolio: NextPage = () => {
 
 			<Layout
 				headerSubtitle={'OVERVIEW'}
-				headerTitle={'Dashboard'}
+				headerTitle={'Portfolio'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
