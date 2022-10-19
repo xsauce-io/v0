@@ -71,7 +71,14 @@ export const FreePrediction = () => {
 										src="/prizes.svg"
 										className="object-cover mobile:w-[100%] tablet:w-[40%] m-auto h-auto rounded-lg hover:animate-spin"
 									/>
-									<p className='px-4 '>The Air Jordan 1 Retro High OG ‘Lost &amp; Found’ brings back the iconic silhouette that started it all. Featuring the high-cut shape of the original 1985 release, the leather upper combines a white base with a black signature Swoosh and scarlet overlays at the forefoot and heel. Cracked black leather appears on the padded collar, while a vintage pre-yellowed finish is applied to the white rubber midsole. </p>
+									<p className='px-4 '>How to Play<ul className='space-y-3 pt-4'><li>
+                  1.) Select a market in the Live Markets tab to place a wager on.
+                  </li>
+                  <li>
+                  2.) Choose either YES or NO to represent which side you are on.
+                  </li>
+                  <li>
+                  3.) Select how many tickets you want to buy and submit your transaction! </li></ul></p>
 
 								</div>
 

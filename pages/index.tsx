@@ -3,6 +3,7 @@ import { Layout } from '../components/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
+import {Banner} from '../components/banner';
 import React from 'react';
 import { ethers } from 'ethers';
 import { TopStories } from '../components/topStories';
@@ -158,19 +159,21 @@ const Home: NextPage = () => {
 			</Head>
 
 			<Layout
-				headerSubtitle={'OVERVIEW'}
-				headerTitle={'Dashboard'}
+				headerSubtitle={'HOME'}
+				headerTitle={'Welcome 👋'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
 				<>
-					<ContentHeader
+        <Banner/>
+        <ContentHeader
 						title={'Top Stories'}
 						icon={<img src="/news.svg" />}
 						flexColumn
 					/>
+          <TopStories/>
 					<div className="divide-y-2 divide-black">
-						<TopStories />
+					
 						<ContentHeader
 							title={'Sauced Selections'}
 							flexColumn
@@ -185,7 +188,7 @@ const Home: NextPage = () => {
 							})}
 						</div>
 						<ContentHeader
-							title={'Your Positions'}
+							title={'Your Predictions'}
 							icon={<img src="/pieChart.svg" />}
 							flexColumn
 						>

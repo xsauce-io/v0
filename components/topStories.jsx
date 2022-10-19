@@ -1,3 +1,5 @@
+import React from "react";
+
 export const TopStories = () => {
 
   const scrollLeft = () => {
@@ -15,6 +17,9 @@ export const TopStories = () => {
   }
 
 	return (
+   
+
+    
 		<div className="block relative pb-10">
 			<div className="flex overflow-auto scrollbar-hide scroll-smooth rounded-lg" id="container">
 				<div className="flex flex-row font-SG text-lg space-x-2">
@@ -43,7 +48,7 @@ export const TopStories = () => {
 						/>
 						<span className="pt-4">
 							{' '}
-							Xsauce's team releases their thesis on the future of investing in
+							Our thesis on the future of investing in
 							culture
 						</span>
 					</a>

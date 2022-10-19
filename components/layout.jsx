@@ -5,7 +5,6 @@ import { Announcement } from './announcement';
 import { HowItWorksButton } from './howItWorksButton';
 import { Header } from './header';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import { FinancialOverviewCard } from './financialOverviewCard';
 import { ContractsCard } from './contractsCard';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
@@ -67,7 +66,7 @@ export const Layout = ({
 						</div>
 					</div>
 				) : (
-					<></>
+          <></>
 				)}
 
 				<Tabs bgColor={headerBg}>

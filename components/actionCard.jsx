@@ -204,6 +204,9 @@ export const ActionCard = () => {
 					),
 					{ duration: 7000 }
 				);
+        market.on("positionCreated", (id, amount)  => {
+          alert("You are a genius", "id:", id, "amount:", amount)
+        })
 			} catch (error) {
 				console.log(error);
 				if (error.code == 'ACTION_REJECTED') {
@@ -277,6 +280,7 @@ export const ActionCard = () => {
 		}
 	};
 
+  
 	const ratios = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
 			'hasConnectedWalletBefore'
