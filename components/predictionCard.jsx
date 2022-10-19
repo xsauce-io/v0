@@ -1,12 +1,11 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
-import marketAbi from '../abi/markets.json';
-import axios from 'axios';
+import Link from 'next/link';
 
-export const CalendarCard = ({ cardObject, index }) => {
+export const PredictionCard = ({ cardObject, index }) => {
+  const cardObjectHref = '/free-play/' + cardObject?.sku;
+
 	const randomPlaceholder = [
 		'/hurache.svg',
 		'/octobers.svg',
@@ -22,10 +21,14 @@ export const CalendarCard = ({ cardObject, index }) => {
 	let [favored, setFavored] = useState();
 
 	return (
-		<div
+    <Link href={cardObjectHref}>
+		<a
 			index={index}
-			className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full 	"
-		>
+			className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full"
+			onClick={() =>
+        mixpanelTrackProps('View Market', { sku: cardObject?.sku })
+      }
+    >
 			{cardObject === undefined ? (
 				<React.Fragment>
 					<Skeleton
@@ -62,13 +65,13 @@ export const CalendarCard = ({ cardObject, index }) => {
 							</div>
 						)}
 
-						<div className="h-full">
+						<div className={cardObject?.name[0] === 'J'? "h-full bg-[gray]":"h-full"}>
 							<div className="px-8 mt-2 ">
 								<h1 className="text-2xl font-normal text-white h-[22%] w-full line-clamp-2 font-SG  ">
 									{cardObject.name}
 								</h1>
 								<h2 className=" text-lg font-light text-left w-full text-white py-4 font-Inter">
-									Retail Price &ensp; &ensp; &ensp; {cardObject.retailPrice == 0 ? 'N/A':'$'+ cardObject.retailPrice}
+									Retail Price: &ensp; &ensp; &ensp; {cardObject.retailPrice == 0 ? 'N/A':'$'+ cardObject.retailPrice}
 								</h2>
 							</div>
 							<div className="border-b-[1px] border-[#30403F]"></div>
@@ -85,6 +88,7 @@ export const CalendarCard = ({ cardObject, index }) => {
 					</div>
 				</React.Fragment>
 			)}
-		</div>
+		</a>
+    </Link>
 	);
 };

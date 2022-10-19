@@ -2,8 +2,7 @@ import type { NextPage } from 'next';
 import { Layout } from '../components/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
-import axios from 'axios';
-import {Banner} from '../components/banner';
+import {MktBanner} from '../components/marketPlaceBanner';
 import React from 'react';
 import { ethers } from 'ethers';
 import { TopStories } from '../components/topStories';
@@ -165,7 +164,8 @@ const Home: NextPage = () => {
 				showFinancialOverview={false}
 			>
 				<>
-        <Banner/>
+        <MktBanner/>
+        
         <ContentHeader
 						title={'Top Stories'}
 						icon={<img src="/news.svg" />}

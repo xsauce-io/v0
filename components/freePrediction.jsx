@@ -5,23 +5,34 @@ import { Skeleton } from '@mui/material';
 import { Tooltip } from '@mui/material';
 import { ExpandImageModal } from './expandImageModal';
 import { FreePlayGraph } from '../components/freePlayGraph';
+import { PredictionCard } from '../components/predictionCard';
 
 import { useGetSneaker } from '../services/useRequests';
-
+import { useGetSneakerByLimit } from '../services/useRequests';
 export const FreePrediction = () => {
 
+  const { data: sneakersData, error: sneakersDataError } =
+  useGetSneakerByLimit('12');
 
+  const [response, setResponse] = useState(sneakersData);
+  const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 	const { data: s1, error: e1 } = useGetSneaker('DZ5485-612');
+
+  useEffect(() => {
+		setResponse(sneakersData);
+  }, [sneakersData])
 	return (
 
 		<React.Fragment>
 			<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
-				<div className='bg-white w-full laptop:w-[40%] rounded-lg font-SG p-6 border-[1px] border-[#0C1615] '>
-					<h1 className='text-center text-xl font-medium '> Get 3 predictions in a row to spin the wheel</h1>
-					<img
+				<div className='bg-white w-full laptop:w-[50%] rounded-lg font-SG p-6 border-[1px] border-[#0C1615] '>
+          <span className='flex flex-row justify-end'>
+					<h1 className='w-fit text-right px-3 py-2 rounded text-xl font-medium bg-[#ACFF00] '> Pick of the Day</h1>
+					</span>
+          <img
 						src={s1?.image.original}
-						className="object-cover w-[50%] laptop:w-[100%] m-auto h-auto rounded-lg "
+						className="object-cover w-[50%] laptop:w-[30%] m-auto h-auto rounded-lg "
 					/>
 					<div className='flex flex-col space-y-5'>
 						<div className='flex-1'>
@@ -57,7 +68,7 @@ export const FreePrediction = () => {
 						
 					</div>
 				</div>
-				<div className='flex flex-col justify-center w-full space-y-4 laptop:w-[60%] laptop:space-y-4 '>
+				<div className='flex flex-col justify-center w-full space-y-4 laptop:w-[50%] laptop:space-y-4 '>
 					<div className='bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center border-[1px] border-[#0C1615] '>
 
 						{e1 === "" ? (
@@ -66,32 +77,40 @@ export const FreePrediction = () => {
 							</React.Fragment>
 						) : (
 							<>
-								<div className="flex mobile:flex-col mobile:space-y-4 tablet:flex-row bg-white rounded-lg tablet:px-4 tablet:space-x-4 tablet:space-y-0 justify-center items-center">
+								<div className="flex mobile:flex-col mobile:space-y-4 tablet:flex-col bg-white rounded-lg tablet:px-4 tablet:space-x-4 tablet:space-y-0 justify-center items-center">
 									<img
 										src="/prizes.svg"
 										className="object-cover mobile:w-[100%] tablet:w-[40%] m-auto h-auto rounded-lg hover:animate-spin"
 									/>
-									<p className='px-4 '>How to Play<ul className='space-y-3 pt-4'><li>
-                  1.) Select a market in the Live Markets tab to place a wager on.
-                  </li>
-                  <li>
-                  2.) Choose either YES or NO to represent which side you are on.
-                  </li>
-                  <li>
-                  3.) Select how many tickets you want to buy and submit your transaction! </li></ul></p>
-
+									<h1 className='px-4 text-[30px] font-bold'><br/>SELECT A SNEAKER<br/>ENTER A PRICE PREDICTION<br/>EARN PRIZES</h1>
+                
 								</div>
 
 							</>
 						)}
 					</div>
-					<div className='bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center border-[1px] border-[#0C1615] '>
+					{/* <div className='bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center border-[1px] border-[#0C1615] '>
 						<FreePlayGraph />
-					</div>
+					</div> */}
+         
 				</div>
 
 			</div>
-
+      <div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-3 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
+							{response || sneakersDataError === undefined
+								? response?.map((el, index ) => (
+										<PredictionCard index={index} cardObject={el} />
+								  ))
+								: skeletonArray.map(() => (
+										<Skeleton
+											animation="pulse"
+											variant="rounded"
+											height={300}
+											sx={{ borderRadius: '15px' }}
+											width={'100%'}
+										/>
+								  ))}
+						</div>
 
 			<grid className="bg-white w-full grid  text-[#0C1615] grid-rows-[repeat(16, minmax(0, 1fr))]  grid-cols-2 flex justify-center rounded-xl border-[1px] border-[#0C1615]">
 

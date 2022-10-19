@@ -6,6 +6,7 @@ import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
 import { FreePrediction } from '../components/freePrediction';
 import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
+import {Banner} from '../components/banner';
 
 
 
@@ -98,7 +99,9 @@ const FreePlay: NextPage = () => {
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
+        
 				<>
+        <Banner/>
 					<ContentHeader
 						title={'Free Play'}
 
