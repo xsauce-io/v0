@@ -13,22 +13,26 @@ export const Images = [
 	{
 		href: '/hand.png',
 		header: 'Welcome to the Xchange',
-		text: 'Culture is now in your hands. Before you get started, we need to explain a few things.',
+		text:
+			'Culture is now in your hands. Before you get started, we need to explain a few things.',
 	},
 	{
 		href: '/basics.png',
 		header: 'The Basics',
-		text: '1.) Select a market in the Live Markets tab to place a wager on. \n2.) Choose either YES or NO to represent which side you are on. \n3.) Select how many tickets you want to buy and submit your transaction!',
+		text:
+			'1.) Select a market in the Live Markets tab to place a wager on. \n2.) Choose either YES or NO to represent which side you are on. \n3.) Select how many tickets you want to buy and submit your transaction!',
 	},
 	{
 		href: '/magglass.png',
 		header: 'Tune In',
-		text: 'Watch the live market for price updates and news. The buy-in price is dynamic and is determined by previous buys.',
+		text:
+			'Watch the live market for price updates and news. The buy-in price is dynamic and is determined by previous buys.',
 	},
 	{
 		href: '/money.png',
 		header: 'Cash Out',
-		text: 'If you are on the winning side of a wager when it resolves you will receive back what you put in + your share of the winnings.',
+		text:
+			'If you are on the winning side of a wager when it resolves you will receive back what you put in + your share of the winnings.',
 	},
 ];
 
@@ -81,7 +85,7 @@ export const HowItWorksButton = ({ title }) => {
 				}}
 				maxWidth="sm"
 			>
-				<Box sx={{ bgcolor: 'black' }} width={'100%'} height={'100%'}>
+				<Box sx={{ bgcolor: '#0C1615' }} width={'100%'} height={'100%'}>
 					<DialogActions
 						sx={{
 							display: 'flex',
@@ -113,7 +117,7 @@ export const HowItWorksButton = ({ title }) => {
 					</DialogContent>
 				</Box>
 			</Dialog>
-			{/* 
+			{/*
 			<div className="bg-[#DCDEE1] rounded-b-[10px] p-4 text-left w-[100%] space-y-2 ">
 				<div className="py-2 flex space-x-2 text-sm">
 					<h1 className=" text-sm font-Inter">FINANCIAL OVERVIEW </h1>

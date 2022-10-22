@@ -1,23 +1,22 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout';
+import { Layout } from '../components/layout/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 
 import React from 'react';
-import { FreePrediction } from '../components/freePrediction';
+import { FreePrediction } from '../components/freePlay/freePrediction';
 import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
-import {Banner} from '../components/banner';
+import { Banner } from '../components/freePlay/banner';
 
 
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 
-import { Dashboard } from '../components/dashboard';
-import { ContentHeader } from '../components/contentHeader';
+import { ContentHeader } from '../components/layout/contentHeader';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/toast';
+import { ToastNotification } from '../components/common/toast';
 
 
 const FreePlay: NextPage = () => {
@@ -99,9 +98,9 @@ const FreePlay: NextPage = () => {
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
-        
+
 				<>
-        <Banner/>
+					<Banner />
 					<ContentHeader
 						title={'Free Play'}
 

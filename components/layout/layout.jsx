@@ -1,7 +1,6 @@
 import { Nav } from './nav';
 import { Footer } from './footer';
 import { Tabs } from './tabs';
-import { Announcement } from './announcement';
 import { HowItWorksButton } from './howItWorksButton';
 import { Header } from './header';
 import PropTypes from 'prop-types';
@@ -66,7 +65,7 @@ export const Layout = ({
 						</div>
 					</div>
 				) : (
-          <></>
+					<></>
 				)}
 
 				<Tabs bgColor={headerBg}>

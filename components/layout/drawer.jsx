@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { Drawer, Box, Typography } from '@mui/material';
 import { useState } from 'react';
-import { ethers, utils } from 'ethers';
-import { Onboard } from '../components/onBoardingModal';
-import PropTypes from 'prop-types';
+
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 import {
 	Laptop,

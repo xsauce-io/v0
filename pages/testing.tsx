@@ -1,9 +1,9 @@
 import { duration } from '@mui/material';
 import type { NextPage } from 'next';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/toast';
-import { ToastNotificationActionBar } from '../components/toastActionBar';
-import { WalletNotConnectedModal } from '../components/walletNotConnectedModal';
+import { ToastNotification } from '../components/common/toast';
+import { ToastNotificationActionBar } from '../components/common/toastActionBar';
+import { WalletNotConnectedModal } from '../components/common/walletNotConnectedModal';
 
 import { useWindowDimensions } from '../utils/hooks/useWindowDimensionsTS';
 const screens = {

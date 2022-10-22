@@ -1,22 +1,15 @@
 import type { NextPage } from 'next';
-import { Nav } from '../../../components/nav';
-// import { Card } from '../components/card'
-import { WagerCard } from '../../../components/wagerCard';
+import { Nav } from '../../../components/layout/nav';
+import { WagerCard } from '../../../components/livemarket[sku]/wagerCard';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
-import { Xchange } from '../../../components/xchange';
-import { ActionCard } from '../../../components/actionCard';
-import { Header } from '../../../components/header';
-import { Footer } from '../../../components/footer';
+import { Xchange } from '../../../components/livemarket[sku]/xchange';
+import { ActionCard } from '../../../components/livemarket[sku]/actionCard';
+import { Footer } from '../../../components/layout/footer';
 import { useGetSneaker } from '../../../services/useRequests';
-import BookFactoryABI from '../../../abi/bookFactory.json';
-import {
-	$tableAddress,
-	OrderBookAddressGit,
-} from '../../../services/constants';
+
 
 declare var window: any;
 
@@ -144,7 +137,7 @@ const LiveMarket: NextPage = () => {
 							<WagerCard cardObject={data} />
 						</div>
 						<div className="space-y-4 flex-1 self-end">
-							<ActionCard  />
+							<ActionCard />
 							<Xchange cardObject={response} />
 						</div>
 					</div>

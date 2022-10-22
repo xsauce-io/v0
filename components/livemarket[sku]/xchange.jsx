@@ -1,16 +1,14 @@
 import React from 'react';
 import { BigNumber, ethers, utils } from 'ethers';
-import marketabi from '../abi/markets.json';
+import marketabi from '../../abi/markets.json';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
 
 import { useToast } from '@chakra-ui/react';
 import classNames from 'classnames';
-import { OpenXchange } from '../components/openXchange';
-import { useGetSneaker } from '../services/useRequests';
-import BookFactoryABI from '../abi/bookFactory.json';
-import { $tableAddress, OrderBookAddressGit } from '../services/constants';
+import { OpenXchange } from './openXchange';
+import { useGetSneaker } from '../../services/useRequests';
 
 export const Xchange = ({ cardObject }) => {
 	const toast = useToast();

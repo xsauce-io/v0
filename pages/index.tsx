@@ -1,31 +1,22 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
-import { MktBanner } from '../components/marketPlaceBanner';
 import React from 'react';
 import { ethers } from 'ethers';
-import { TopStories } from '../components/topStories';
-import { DashboardTable } from '../components/dashboardTable';
 import { MarketFactory, marketsDataGit } from '../services/constants';
 import MarketFactoryABI from '../abi/marketFactory.json';
 import MarketAbi from '../abi/markets.json';
-import { CalendarHighlight } from '../components/calendarHighlight';
 import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 
-import { Dashboard } from '../components/dashboard';
-import { ContentHeader } from '../components/contentHeader';
-import { Skeleton } from '@mui/material';
+
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/toast';
+import { ToastNotification } from '../components/common/toast';
 declare let window: any;
-import { FirstTimeVisitorModal } from '../components/firstTimeVisitorModal';
-import { CalendarCard } from '../components/calendarCard';
-import { Nav } from '../components/nav';
-import { useWindowDimensions } from '../utils/hooks/useWindowDimensionsTS';
+
+import { Nav } from '../components/layout/nav';
 import Link from 'next/link';
 
 const Home: NextPage = () => {
@@ -167,7 +158,7 @@ const Home: NextPage = () => {
 
 
 			<Nav logoColor={"#ACFF00"} />
-			<div className='flex h-[calc(100vh-80px)] flex-col tablet:flex-row justify-center items-center laptop:h-[calc(100vh-80px)] mx-5 laptop:mx-20 mt-80px'>
+			<div className='flex  flex-col tablet:flex-row justify-center items-center laptop:h-[calc(100vh-80px)] mx-5 laptop:mx-20 mt-80px'>
 				<ul className='flex flex-col font-SG font-medium tablet:w-[50%] cursor-pointer justify-center items-start lg-desktop:items-end text-[20px] tablet:text-[30px] laptop:text-[40px] lg-desktop:text-[55px] p-4 tablet:p-8' >
 
 
@@ -176,7 +167,7 @@ const Home: NextPage = () => {
 							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full  px-4 py-2 flex flex-row justify-start items-center active'>
 
 								<img className="w-[25px] invisible group-hover:flex group-hover:visible mr-4 " src='/jordans.svg' />
-								<span className=''>Launch App</span>
+								<span className=''>Open App</span>
 							</li>
 						</a>
 					</Link>

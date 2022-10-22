@@ -3,7 +3,7 @@ import { Skeleton } from '@mui/material';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import marketAbi from '../abi/markets.json';
+import marketAbi from '../../abi/markets.json';
 import axios from 'axios';
 
 export const CalendarCard = ({ cardObject, index }) => {
@@ -39,9 +39,9 @@ export const CalendarCard = ({ cardObject, index }) => {
 						{cardObject.image?.original === '' ||
 						cardObject.image?.original ===
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
-							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
+							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
-									className="object-cover mobile:w-[40%]  m-auto mobile:h-[100%] scale-100"
+									className="object-cover w-[40%]  m-auto h-auto scale-80"
 									src={
 										cardObject?.name[0] === 'J'
 											? randomPlaceholder[3]
@@ -52,11 +52,11 @@ export const CalendarCard = ({ cardObject, index }) => {
 								/>
 							</div>
 						) : (
-							<div className="w-full h-1/4 bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
+							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
 								<img
-									className="object-contain mobile:w-[40%]  m-auto mobile:h-[100%] scale-110"
+									className="object-contain w-[40%]  m-auto h-auto "
 									src={cardObject.image?.original}
 								></img>
 							</div>
@@ -68,15 +68,27 @@ export const CalendarCard = ({ cardObject, index }) => {
 									{cardObject.name}
 								</h1>
 								<h2 className=" text-lg font-light text-left w-full text-white py-4 font-Inter">
-									Retail Price &ensp; &ensp; &ensp; {cardObject.retailPrice == 0 ? 'N/A':'$'+ cardObject.retailPrice}
+									Retail Price &ensp; &ensp; &ensp;{' '}
+									{cardObject.retailPrice == 0
+										? 'N/A'
+										: '$' + cardObject.retailPrice}
 								</h2>
 							</div>
 							<div className="border-b-[1px] border-[#30403F]"></div>
 							<div className="px-8 ">
 								<div className="flex flex-col w-full py-4 space-y-3 font-light">
 									<div className="w-full">
-										<h2 className={cardObject?.name[0] === 'J'? "text-[14px] text-white font-Inter":"text-[14px] text-[#748282] font-Inter"}>
-											Release Date: {cardObject.releaseDate === undefined ? "Not Available Yet" : cardObject.releaseDate}
+										<h2
+											className={
+												cardObject?.name[0] === 'J'
+													? 'text-[14px] text-white font-Inter'
+													: 'text-[14px] text-[#748282] font-Inter'
+											}
+										>
+											Release Date:{' '}
+											{cardObject.releaseDate === undefined
+												? 'Not Available Yet'
+												: cardObject.releaseDate}
 										</h2>
 									</div>
 								</div>

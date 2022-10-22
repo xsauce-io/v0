@@ -1,17 +1,13 @@
 import React, { useEffect, useMemo } from 'react';
-
 import { useState } from 'react';
 import { ethers, utils } from 'ethers';
-
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
-
-import { LocalDrawer } from '../components/drawer';
-import SauceTokenABI from '../abi/$tableSauce.json';
+import { LocalDrawer } from '/components/layout/drawer';
+import SauceTokenABI from '../../abi/$tableSauce.json';
 import toast from 'react-hot-toast';
-import { ToastNotification } from './toast';
-import { WalletNotConnectedModal } from './walletNotConnectedModal';
+
 import { useRouter } from 'next/router';
-import { ToastNotificationActionBar } from './toastActionBar';
+import { ToastNotificationActionBar } from '../common/toastActionBar';
 
 export const Nav = ({ logoColor }) => {
 	// ----------------------------------------------------

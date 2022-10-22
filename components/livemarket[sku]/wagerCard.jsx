@@ -11,9 +11,9 @@ import {
 	OrderBookAddressGit,
 	OrderBookGit,
 	OrderBookFactoryGit,
-} from '../services/constants';
+} from '../../services/constants';
 import { useRouter } from 'next/router';
-import { useGetMarketBySku } from '../services/useRequests';
+import { useGetMarketBySku } from '../../services/useRequests';
 // import AspectRatio from '@mui/joy/AspectRatio';
 
 export const WagerCard = ({ cardObject }) => {

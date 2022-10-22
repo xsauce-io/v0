@@ -7,7 +7,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import { hotjar } from 'react-hotjar';
-import { FirstTimeVisitorModal } from '../components/firstTimeVisitorModal';
+import { FirstTimeVisitorModal } from '../components/layout/firstTimeVisitorModal';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth/core/types';
 
@@ -26,8 +26,8 @@ export const event = (event_name: string, props: any) => {
 	}
 };
 
-function MyApp({ Component, pageProps}: AppProps<{
-  session: Session;
+function MyApp({ Component, pageProps }: AppProps<{
+	session: Session;
 }>) {
 	const router = useRouter();
 	//Mix Panel setup
@@ -51,11 +51,11 @@ function MyApp({ Component, pageProps}: AppProps<{
 	}, [router.events]);
 
 	return (
-		    <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
+		<SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
 
 			<Head>
 				<title>Xsauce</title>
-        <meta property="og:image" content='/OG.png'/>
+				<meta property="og:image" content='/OG.png' />
 			</Head>
 			{typeof window != 'undefined' && !(window as any).mixpanel && (
 				//<!-- Mixpanel Tracking Code for -->

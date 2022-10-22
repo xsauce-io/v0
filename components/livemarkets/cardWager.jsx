@@ -3,9 +3,9 @@ import { Skeleton } from '@mui/material';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import marketAbi from '../abi/markets.json';
+import marketAbi from '../../abi/markets.json';
 import { Router, useRouter } from 'next/router';
-import { useGetMarketBySku } from '../services/useRequests';
+import { useGetMarketBySku } from '../../services/useRequests';
 
 export const Card = ({ cardObject }) => {
 	const cardObjectHref = '/live-market/' + cardObject?.sku;

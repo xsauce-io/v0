@@ -1,18 +1,16 @@
 import type { NextPage } from 'next';
-import { Nav } from '../../components/nav';
 // import { Card } from '../components/card'
 import { ProductDetails } from '../../components/productDetails';
 import { Wagerinput } from '../../components/wagerinput';
-import { Announcement } from '../../components/announcement';
 import { PreCard } from '../../components/preCard';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tooltip } from '@mui/material';
-import { Countdown } from '../../components/countdown';
+import { Countdown } from '../../components/layout/countdown';
 import InfoIcon from '@mui/icons-material/Info';
 import Head from 'next/head';
-import { Layout } from '../../components/layout';
+import { Layout } from '../../components/layout/layout';
 
 const PreMarket: NextPage = () => {
 	const router = useRouter();
@@ -98,7 +96,7 @@ const PreMarket: NextPage = () => {
 									Wager: Resell Price is {'>'} $400
 								</h3>
 
-								<Wagerinput />
+								{/* //<Wagerinput /> */}
 								<h3 className="font-SG pt-10 mobile:text-[18px] font-medium flex flex-row justify-center">
 									Closes: 09.10.2022 @ 12:00 PM EST
 								</h3>

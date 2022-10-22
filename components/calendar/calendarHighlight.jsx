@@ -3,7 +3,7 @@ import { Skeleton } from '@mui/material';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import marketAbi from '../abi/markets.json';
+import marketAbi from '../../abi/markets.json';
 import axios from 'axios';
 
 export const CalendarHighlight = ({ cardObject, index }) => {
@@ -42,7 +42,7 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
 							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
-									className="object-contain h-auto w-[50%] m-auto"
+									className="object-contain h-auto w-[40%] m-auto scale-80"
 									src={
 										cardObject?.name[0] === 'J'
 											? randomPlaceholder[3]
@@ -56,7 +56,7 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 								<img
-									className="object-contain h-auto w-[50%] m-auto"
+									className="object-contain h-auto w-[40%] m-auto"
 									src={cardObject.image?.original}
 								></img>
 							</div>

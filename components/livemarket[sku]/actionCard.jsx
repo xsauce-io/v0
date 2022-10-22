@@ -1,24 +1,21 @@
 import { BigNumber, ethers, utils } from 'ethers';
-import marketabi from '../abi/markets.json';
-import $tableABI from '../abi/$tableSauce.json';
+import marketabi from '../../abi/markets.json';
+import $tableABI from '../../abi/$tableSauce.json';
 import { useState, useEffect, useMemo } from 'react';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useRouter } from 'next/router';
-import { $tableAddress } from '../services/constants';
-import { useGetMarketBySku } from '../services/useRequests';
+import { $tableAddress } from '../../services/constants';
+import { useGetMarketBySku } from '../../services/useRequests';
 import toast from 'react-hot-toast';
-import { ToastNotification } from './toast';
-import { ToastNotificationActionBar } from './toastActionBar';
+import { ToastNotification } from '../common/toast';
+import { ToastNotificationActionBar } from '../common/toastActionBar';
 import React from 'react';
 
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Box from '@mui/material/Box';
-import Slide from '@mui/material/Slide';
-import { Slideshow } from './slideshow';
 
 export const Images = [
 	{
