@@ -41,6 +41,9 @@ module.exports = {
 					'0%': { transform: 'translateX(100%);' },
 					'100%': { transform: 'translateX(0%);' },
 				},
+
+        
+        
 			},
 			animation: {
 				flyIn: 'flyIn 400ms ease-out',

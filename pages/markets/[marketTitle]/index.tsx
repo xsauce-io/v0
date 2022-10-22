@@ -88,7 +88,7 @@ const LiveMarket: NextPage = () => {
 	return (
 		<div className="bg-[#EFF1F3]">
 			<Head>
-				<title>Xsauce</title>
+				<title>Xsauce | Culture is Currency</title>
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
