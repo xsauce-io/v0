@@ -1,14 +1,13 @@
 import type { NextPage } from 'next';
 import { Nav } from '../../../components/layout/nav';
-import { WagerCard } from '../../../components/livemarket[sku]/wagerCard';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
-import { Footer } from '../../../components/footer';
+import { Footer } from '../../../components/layout/footer';
 import { useGetSneaker } from '../../../services/useRequests';
 
-import { FreePlayGraph } from '../../../components/freePlayGraph';
+import { FreePlayGraph } from '../../../components/freePlay/freePlayGraph';
 
 declare var window: any;
 
