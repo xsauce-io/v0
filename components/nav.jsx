@@ -14,7 +14,9 @@ import { useRouter } from 'next/router';
 import { ToastNotificationActionBar } from './toastActionBar';
 
 export const Nav = ({ logoColor }) => {
-	// let [network, setNetwork] = useState();
+	// ----------------------------------------------------
+	// ----------------------  Variables and Constants ------------------------
+	// ----------------------------------------------------
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -22,7 +24,11 @@ export const Nav = ({ logoColor }) => {
 		laptop: '1200',
 		desktop: '1400',
 	};
+	const SauceTokenAddress = '0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D';
 
+	// ----------------------------------------------------
+	// ----------------------  States ------------------------
+	// ----------------------------------------------------
 	const { width } = useWindowDimensions();
 	const router = useRouter();
 	const currentPath = router.pathname;
@@ -32,13 +38,14 @@ export const Nav = ({ logoColor }) => {
 	const [current, setCurrent] = useState();
 	const [isCopied, setIsCopied] = useState(false);
 	const [fullLengthAccount, setFullLengthAccount] = useState(null);
-	const [openWalletNotConnectedModal, setOpenWalletNotConnectedModal] =
-		useState(false);
+	const [
+		openWalletNotConnectedModal,
+		setOpenWalletNotConnectedModal,
+	] = useState(false);
 
-	useEffect(() => {
-		// Dismiss all active toasts on page change
-		toast.remove();
-	}, [router.events]);
+	// ----------------------------------------------------
+	// ----------------------Function------------------------
+	// ----------------------------------------------------
 
 	const getWallet = async (clicked = false) => {
 		const hasConnectedWalletBefore = localStorage.getItem(
@@ -324,8 +331,6 @@ export const Nav = ({ logoColor }) => {
 		// localStorage.setItem('networkNum', '3');
 	};
 
-	const SauceTokenAddress = '0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D';
-
 	const faucet = async () => {
 		try {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -380,27 +385,37 @@ export const Nav = ({ logoColor }) => {
 		}
 	};
 
+	// ----------------------------------------------------
+	// ---------------------- Use Effect ------------------
+	// ----------------------------------------------------
+
+	useEffect(() => {
+		// Dismiss all active toasts on page change
+		toast.remove();
+	}, [router.events]);
+
 	useEffect(() => {
 		getWallet();
 		localStorage.getItem('network');
 	}, [openWalletNotConnectedModal]);
 
+	// ----------------------------------------------------
+	// ---------------------- Render ------------------------
+	// ----------------------------------------------------
+
 	return (
 		<header className=" sticky top-0 z-20 ">
-			<div className="flex items-center h-20 w-full gap-8 mobile:px-4 laptop:px-20">
+			<div className="flex items-center h-20 w-full gap-8 px-4 laptop:px-20">
 				<div className=" basis-1/3	">
-         
-					 <a className="block" href="/">
+					<a className="block" href="/">
 						<span className="sr-only">Home</span>
-						<div className="mobile:text-[12px] tablet:text-[14px] h-20 flex flex-row items-center">
-            <img src='/logo.svg' />
+						<div className="text-[12px] tablet:text-[14px] h-20 flex flex-row items-center">
+							<img src="/logo.svg" />
 						</div>
-					</a> 
+					</a>
 				</div>
 
-				<div className="flex flex-row justify-center basis-1/3	 ">
-					
-				</div>
+				<div className="flex flex-row justify-center basis-1/3	 "></div>
 
 				{width >= screens.smlaptop ? (
 					<div className="flex flex-row  basis-1/3	 justify-end items-center space-x-4 font-Inter">
