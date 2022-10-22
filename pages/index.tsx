@@ -24,16 +24,11 @@ import { ToastNotification } from '../components/toast';
 declare let window: any;
 import { FirstTimeVisitorModal } from '../components/firstTimeVisitorModal';
 import { CalendarCard } from '../components/calendarCard';
+import { Nav } from '../components/nav';
+import { useWindowDimensions } from '../utils/hooks/useWindowDimensionsTS';
 
 const Home: NextPage = () => {
 	// ------------------- Constants ---------------------
-	const screens = {
-		mobile: '300',
-		tablet: '640',
-		smlaptop: '1024',
-		laptop: '1200',
-		desktop: '1400',
-	};
 	const SORT_BY_STATES = {
 		RELEASE_DATE: 'releaseDate',
 		NAME: 'name',
@@ -144,8 +139,10 @@ const Home: NextPage = () => {
 		}
 	}, [e1, e2, e3]);
 
+
+
 	return (
-		<div>
+		<div className="w-full items-center justify-center text-black">
 			<Head>
 				<title>Xsauce | Culture is Currency</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -156,70 +153,36 @@ const Home: NextPage = () => {
 				/>
         <link rel="icon" type='favicon' href='/greenDrop.svg'/>
 			</Head>
+      
 
-			<Layout
-				headerSubtitle={'HOME'}
-				headerTitle={'Welcome 👋'}
-				showHowItWorksButton={true}
-				showFinancialOverview={false}
-			>
-				<>
-        <MktBanner/>
-        
-        <ContentHeader
-						title={'Top Stories'}
-						icon={<img src="/news.svg" />}
-						flexColumn
-					/>
-          <TopStories/>
-					<div className="divide-y-2 divide-black">
-					
-						<ContentHeader
-							title={'Sauced Selections'}
-							flexColumn
-							icon={<img src="/greenDrop.svg" />}
-						/>
-					</div>
-					<div className="divide-y-2 divide-black  ">
-						<div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-14">
-							{response?.map((el: any, index: number) => {
-								console.log(response);
-								return <CalendarHighlight index={index} cardObject={el} />;
-							})}
-						</div>
-						<ContentHeader
-							title={'Your Predictions'}
-							icon={<img src="/pieChart.svg" />}
-							flexColumn
-						>
-							<div className="flex flex-row items-center mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0    tablet:flex-row">
-								<text>
-									Total Positions &nbsp;
-									<span className="text-[#748282]">{allBalances?.length}</span>
-								</text>
-							</div>
-						</ContentHeader>
-					</div>
-					<DashboardTable>
-						{allBalances.length === 0
-							? skeletonArray.map(() => (
-									<>
-										<Skeleton
-											animation="pulse"
-											variant="rounded"
-											height={70}
-											width={'100%'}
-											sx={{ borderRadius: '100px' }}
-										/>
-										<p className="h-4"> </p>
-									</>
-							  ))
-							: allBalances?.map((el: any) => {
-									return <Dashboard positions={el} />;
-							  })}
-					</DashboardTable>
-				</>
-			</Layout>
+	<Nav logoColor={"#ACFF00"}/>
+  {/* <h1 className='font-bold font-SG laptop:p-6 text-[60px] w-full text-center'>The Future of Culture is Here</h1> */}
+  <div className='flex flex-row justify-center items-center laptop:h-[calc(100vh-80px)]'>
+  <ul className=' font-SG font-medium laptop:w-[50%] flex flex-col justify-center items-center text-[40px] p-8' >
+
+    <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl px-3 py-2 flex flex-row justify-center items-center'>
+      <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
+      <span className='ml-2'>Launch App</span>
+    </li>
+    <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-3 py-2 flex flex-row justify-center items-center'>
+    <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
+    <span className='ml-2'>What is Xsauce? </span>
+      </li>
+      <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-3 py-2 flex flex-row justify-center items-center'>
+      <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
+      <span className='ml-2'>Documentation  </span>
+      </li >
+      <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-fit px-3 py-2 flex flex-row justify-center items-center'>
+      <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
+      <span className='ml-2'>Drop us a line </span>
+      
+      </li>
+
+  </ul>
+  <div className='laptop:w-[50%] flex flex-row justify-start items-center  '>
+  <img className='w-[80%]' src='/visual.png'/>
+  </div>
+  </div>
 		</div>
 	);
 };

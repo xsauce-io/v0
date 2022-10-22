@@ -386,47 +386,20 @@ export const Nav = ({ logoColor }) => {
 	}, [openWalletNotConnectedModal]);
 
 	return (
-		<header className="bg-inherit sticky top-0 z-20  border-b-[1px] border-inherit ">
-			<div className="flex items-center h-20 w-full gap-8">
+		<header className=" sticky top-0 z-20 ">
+			<div className="flex items-center h-20 w-full gap-8 mobile:px-4 laptop:px-20">
 				<div className=" basis-1/3	">
-					<a className="block" href="/">
+         
+					 <a className="block" href="/">
 						<span className="sr-only">Home</span>
 						<div className="mobile:text-[12px] tablet:text-[14px] h-20 flex flex-row items-center">
-							<h1 className="font-Inter pr-2  mobile:pl-2 tablet:pl-5">
-								Xchange
-							</h1>
-							{width >= screens.laptop ? (
-								<div className="bg-white text-[10px] font-Inter text-black rounded-[40px] py-1 px-2 mobile:invisible tablet:visible">
-									Beta
-								</div>
-							) : (
-								<div className="bg-white text-[8px] tablet:text-[10px] font-Inter text-black rounded-[40px] py-1 px-2 ">
-									Beta
-								</div>
-							)}
+            <img src='/logo.svg' />
 						</div>
-					</a>
+					</a> 
 				</div>
 
 				<div className="flex flex-row justify-center basis-1/3	 ">
-					<svg
-						width={width >= screens.tablet ? '33' : '23'}
-						height="32"
-						viewBox="0 0 33 29"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M22.6347 17.7117L31.0665 25.0761C32.8526 26.6404 32.5987 29.0007 30.1236 29.0007H25.4634C24.729 29.0007 24.0218 28.7354 23.505 28.2505L17.0678 22.295C16.7505 22.0022 16.2337 22.0022 15.9164 22.295L9.43388 28.2505C8.91709 28.7262 8.21897 28.9915 7.48459 28.9915H2.75189C0.29488 28.9915 -0.929093 26.2653 0.829802 24.6918L8.6995 17.6385C9.20722 17.1811 9.19815 16.4309 8.68136 15.9918L1.46445 9.8259C-0.366972 8.27984 0.838868 5.48962 3.33215 5.48962H7.61152C8.32777 5.48962 9.01682 5.74578 9.52454 6.20319L15.9073 11.8843L22.6347 17.7117Z"
-							fill={logoColor}
-						/>
-						<path
-							fillRule="evenodd"
-							clipRule="evenodd"
-							d="M21.2002 4.42065C19.9736 5.73654 18.9956 6.78574 18.9956 9L19.6487 8.99942C19.903 11.6696 22.1342 13.759 24.8469 13.759C27.73 13.759 30.0691 11.3988 30.0691 8.48961H29.9799C29.8495 6.47727 28.9228 5.49696 27.7687 4.2761C26.8424 3.29619 25.7695 2.16131 24.8444 0.213421C24.7106 -0.0775251 24.2901 -0.0678269 24.1563 0.223119C23.2474 2.22434 22.1494 3.40235 21.2002 4.42065Z"
-							fill={logoColor}
-						/>
-					</svg>
+					
 				</div>
 
 				{width >= screens.smlaptop ? (
@@ -434,7 +407,7 @@ export const Nav = ({ logoColor }) => {
 						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
-								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-2 w-[130px] bg-[#DCDEE1] space-x-2 rounded-[40px]"
+								className="text-[14px] flex flex-row text-white justify-center items-center px-4 py-2 w-[130px] bg-[#0C1615] space-x-2 rounded-[40px]"
 							>
 								{toggle === 421613 ? (
 									<>
@@ -461,7 +434,7 @@ export const Nav = ({ logoColor }) => {
 							</label>
 							<ul
 								tabindex="0"
-								className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4"
+								className="menu dropdown-content bg-[#0C1615] text-white p-2 shadow rounded-box w-52 mt-4"
 							>
 								<li>
 									<a onClick={() => setState(421613)}>
@@ -479,7 +452,7 @@ export const Nav = ({ logoColor }) => {
 						</div>
 
 						<button
-							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60"
+							className="text-[14px] flex flex-row justify-center text-white font-Inter items-center bg-[#0C1615] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60"
 							onClick={() => getWallet(true)}
 						>
 							<span className="truncate">
@@ -493,7 +466,7 @@ export const Nav = ({ logoColor }) => {
 									className={
 										accounts == null
 											? 'hidden'
-											: 'visible hover:scale-110 active:scale-125'
+											: 'visible hover:scale-110 active:scale-125 text-white'
 									}
 									src="/Images.svg"
 								/>
@@ -509,13 +482,13 @@ export const Nav = ({ logoColor }) => {
 							</a>
 						</button>
 
-						<div className="dropdown dropdown-end ">
-							<label tabindex="0" className="text-lg text-black ">
+						<div className="dropdown dropdown-end">
+							<label tabindex="0" className="text-lg text-white">
 								<img className="w-[37px]" src="/menu.svg" />
 							</label>
 							<ul
 								tabindex="0"
-								className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-[250px] mt-4 z-10"
+								className="menu dropdown-content bg-[#0C1615]  text-white p-2 shadow rounded-box w-[250px] mt-4 z-10"
 							>
 								<li>
 									<button
@@ -530,7 +503,7 @@ export const Nav = ({ logoColor }) => {
 								</li>
 								<li>
 									<a
-										className="active:bg-[#ACFF00] text-black"
+										className="active:bg-[#ACFF00] text-white"
 										target="blank"
 										href="https://goerli-faucet.pk910.de/"
 										onClick={() =>
@@ -555,7 +528,7 @@ export const Nav = ({ logoColor }) => {
 						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
-								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-3 w-[175px] bg-[#DCDEE1] space-x-6 rounded-[40px]"
+								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-3 w-[175px] bg-[#ACFF00] space-x-6 rounded-[40px]"
 							>
 								{toggle === 421613 ? (
 									<>
@@ -585,7 +558,7 @@ export const Nav = ({ logoColor }) => {
 							</label>
 							<ul
 								tabindex="0"
-								className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4"
+								className="menu dropdown-content bg-[#ACFF00] text-white p-2 shadow rounded-box w-52 mt-4"
 							>
 								<li>
 									<a onClick={() => setState(421613)}>
@@ -603,7 +576,7 @@ export const Nav = ({ logoColor }) => {
 						</div>
 
 						<button
-							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#DCDEE1] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
 							onClick={() => getWallet(true)}
 						>
 							<span className="truncate">
@@ -619,7 +592,7 @@ export const Nav = ({ logoColor }) => {
 											? 'hidden'
 											: 'visible hover:scale-110 active:scale-125'
 									}
-									src="/Images.svg"
+									src="/Images2.svg"
 								/>
 								<p
 									className={

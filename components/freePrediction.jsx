@@ -68,7 +68,7 @@ export const FreePrediction = () => {
               <button
 								type="selection"
 								id="long"
-								className={isLong ? "flex flex-col items-center w-1/2 font-medium text-xl py-4 text-black bg-[gray] rounded-tl-[80px] rounded-bl-[80px]" : "flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]" }
+								className={isLong ? "flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] opacity-80 rounded-tl-[80px] rounded-bl-[80px]" : "flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]" }
                 onClick={() => setisLong(true)}
 							>
 								Long 2x <img  className="mobile:w-[10px] laptop:w-[25px]" src='/upTrend.png' />
@@ -76,7 +76,7 @@ export const FreePrediction = () => {
             <button
 								type="selection"
 								id="short"
-								className={ isLong ? "flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]" : "flex flex-col items-center w-1/2 font-medium text-xl py-4 text-black bg-[gray] rounded-tr-[80px] rounded-br-[80px]"}
+								className={ isLong ? "flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]" : "flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white opacity-70 bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px]"}
                 onClick={() => setisLong(false)}
 							>
 								Short 2x <img className="mobile:w-[10px] laptop:w-[25px]" src='/downTrend.png' />
