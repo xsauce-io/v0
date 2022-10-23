@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Nav } from '../../../components/nav';
+import { Nav } from '../../../components/layout/nav';
 // import { Card } from '../components/card'
 import { TreeMap } from '../../../components/treemap';
 import { useRouter } from 'next/router';
@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 
-import { Footer } from '../../../components/footer';
+import { Footer } from '../../../components/layout/footer';
 import { useGetSneaker } from '../../../services/useRequests';
 import BookFactoryABI from '../../../abi/bookFactory.json';
 import {
