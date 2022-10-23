@@ -157,13 +157,19 @@ const Home: NextPage = () => {
 
 	<Nav logoColor={"#ACFF00"}/>
   {/* <h1 className='font-bold font-SG laptop:p-6 text-[60px] w-full text-center'>The Future of Culture is Here</h1> */}
-  <div className='flex flex-row justify-center items-center laptop:h-[calc(100vh-80px)]'>
-  <ul className=' font-SG font-medium laptop:w-[50%] flex flex-col justify-center items-center text-[40px] p-8' >
-
+  <div className='flex mobile:flex-col justify-center laptop:flex-row justify-center items-center laptop:h-[calc(100vh-80px)]'>
+  <ul className=' font-SG font-medium mobile:text-[30px] laptop:w-[50%] flex flex-col justify-start items-center text-[40px] p-8' >
+<a href='/markets'>
     <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl px-3 py-2 flex flex-row justify-center items-center'>
       <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
       <span className='ml-2'>Launch App</span>
     </li>
+    </a>
+    <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-fit px-3 py-2 flex flex-row justify-center items-center'>
+      <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
+      <span className='ml-2'>Drip Feed </span>
+      
+      </li>
     <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-3 py-2 flex flex-row justify-center items-center'>
     <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
     <span className='ml-2'>What is Xsauce? </span>
@@ -177,9 +183,10 @@ const Home: NextPage = () => {
       <span className='ml-2'>Drop us a line </span>
       
       </li>
+     
 
   </ul>
-  <div className='laptop:w-[50%] flex flex-row justify-start items-center  '>
+  <div className='flex mobile:justify-center laptop:w-[50%] flex-row justify-start items-center  '>
   <img className='w-[80%]' src='/visual.png'/>
   </div>
   </div>
