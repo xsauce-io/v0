@@ -458,10 +458,7 @@ export const Nav = ({ logoColor }) => {
 										<span className="text-[black] text-[14px]">Goerli</span>
 									</>
 								)}
-								<img
-									src="/downArrowDark
-								.svg"
-								/>
+								<img src="/downArrowDark.svg" />
 							</label>
 							<ul
 								tabindex="0"
