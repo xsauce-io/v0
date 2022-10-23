@@ -144,7 +144,7 @@ const Home: NextPage = () => {
 	// ----------------------------------------------------
 
 	return (
-		<div className="w-screen h-screen text-black">
+		<div className="w-screen h-screen text-black bg-white">
 			<Head>
 				<title>Xsauce | Culture is Currency</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
