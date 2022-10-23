@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
-import { hotjar } from 'react-hotjar';
 import { FirstTimeVisitorModal } from '../components/layout/firstTimeVisitorModal';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth/core/types';

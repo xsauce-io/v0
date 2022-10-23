@@ -435,7 +435,7 @@ export const Nav = ({ logoColor }) => {
 						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
-								className="text-[14px] flex flex-row text-white justify-center items-center px-4 py-2 w-[130px] bg-[#0C1615] space-x-2 rounded-[40px]"
+								className="text-[14px] flex flex-row  justify-center items-center px-4 py-2 w-[130px] bg-white text-[#0C1615] space-x-2 rounded-[40px]"
 							>
 								{toggle === 421613 ? (
 									<>
@@ -480,7 +480,7 @@ export const Nav = ({ logoColor }) => {
 						</div>
 
 						<button
-							className="text-[14px] flex flex-row justify-center text-white font-Inter items-center bg-[#0C1615] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60"
+							className="text-[14px] flex flex-row justify-center  font-Inter items-center  bg-white text-[#0C1615]  rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60"
 							onClick={() => getWallet(true)}
 						>
 							<span className="truncate">
@@ -512,11 +512,11 @@ export const Nav = ({ logoColor }) => {
 
 						<div className="dropdown dropdown-end">
 							<label tabindex="0" className="text-lg text-white">
-								<img className="w-[37px]" src="/menu.svg" />
+								<img className="w-[37px]" src="/menuLight.svg" />
 							</label>
 							<ul
 								tabindex="0"
-								className="menu dropdown-content bg-[#0C1615]  text-white p-2 shadow rounded-box w-[250px] mt-4 z-10"
+								className="menu dropdown-content bg-white text-[#0C1615] p-2 shadow rounded-box w-[250px] mt-4 z-10"
 							>
 								<li>
 									<button
@@ -531,7 +531,7 @@ export const Nav = ({ logoColor }) => {
 								</li>
 								<li>
 									<a
-										className="active:bg-[#ACFF00] text-white"
+										className="active:bg-[#ACFF00] bg-white text-[#0C1615]"
 										target="blank"
 										href="https://goerli-faucet.pk910.de/"
 										onClick={() =>
