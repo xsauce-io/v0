@@ -428,11 +428,11 @@ export const Nav = ({ logoColor }) => {
 					</a>
 				</div>
 
-				<div className="flex flex-row justify-center basis-1/3	 "></div>
+				<div className="flex flex-row justify-center basis-1/3 "></div>
 
 				{width >= screens.smlaptop ? (
 					<div className="flex flex-row  basis-1/3  justify-end items-center space-x-4 font-Inter">
-						<div className="dropdown dropdown-end ">
+						<div className="dropdown dropdown-end   ">
 							<label
 								tabindex="0"
 								className="text-[14px] flex flex-row  justify-center items-center px-4 py-2 w-[130px] bg-white text-[#0C1615] space-x-2 rounded-[40px]"
@@ -458,19 +458,22 @@ export const Nav = ({ logoColor }) => {
 										<span className="text-[black] text-[14px]">Goerli</span>
 									</>
 								)}
-								<img src="/downArrow.svg" />
+								<img
+									src="/downArrowDark
+								.svg"
+								/>
 							</label>
 							<ul
 								tabindex="0"
-								className="menu dropdown-content bg-[#0C1615] text-white p-2 shadow rounded-box w-52 mt-4"
+								className="menu dropdown-content bg-white text-[#0C1615] text-white p-2 shadow rounded-box w-52 mt-4"
 							>
-								<li>
+								<li className=" bg-white text-[#0C1615]">
 									<a onClick={() => setState(421613)}>
 										<img className="h-[30%] w-[30%]" src="/arbitrum.svg" />
 										Arbitrum
 									</a>
 								</li>
-								<li>
+								<li className=" bg-white text-[#0C1615]">
 									<a>
 										<img className="h-[30%] w-[30%]" src="/fuel.png" />
 										Fuel
