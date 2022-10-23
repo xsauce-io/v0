@@ -16,7 +16,7 @@ import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/common/toast';
 declare let window: any;
 
-import { Nav } from '../components/layout/nav';
+import { HomeNav } from '../components/home/homeNav';
 import Link from 'next/link';
 
 const Home: NextPage = () => {
@@ -157,17 +157,18 @@ const Home: NextPage = () => {
 			</Head>
 
 
-			<Nav logoColor={"#ACFF00"} />
+			{/* //Note this is a custom home navigator  */}
+			<HomeNav logoColor={"#0C1615"} />
 			<div className='flex  flex-col tablet:flex-row justify-center items-center laptop:h-[calc(100vh-80px)] mx-5 laptop:mx-20 mt-80px'>
 				<ul className='flex flex-col font-SG font-medium tablet:w-[50%] cursor-pointer justify-center items-start lg-desktop:items-end text-[20px] tablet:text-[30px] laptop:text-[40px] lg-desktop:text-[55px] p-4 tablet:p-8' >
 
 
 					<Link href='/markets'>
 						<a className=' flex flex-row w-full' >
-							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full  px-4 py-2 flex flex-row justify-start items-center active'>
+							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-4 py-2 flex flex-row justify-start items-center active'>
 
 								<img className="w-[25px] invisible group-hover:flex group-hover:visible mr-4 " src='/jordans.svg' />
-								<span className=''>App</span>
+								<span className=''>Launch App</span>
 							</li>
 						</a>
 					</Link>
@@ -178,7 +179,7 @@ const Home: NextPage = () => {
 					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
 						target={'_blank'}
 						rel={'noreferrer'} >
-						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl px-4 py-2 flex flex-row justify-start items-center'>
 							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
 							<span className=''>What is Xsauce</span>
 						</li>
@@ -187,7 +188,7 @@ const Home: NextPage = () => {
 					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
 						target={'_blank'}
 						rel={'noreferrer'} >
-						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-4 py-2 flex flex-row justify-start items-center'>
 							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
 							<span className=''>Drip Feed </span>
 						</li>
@@ -198,7 +199,7 @@ const Home: NextPage = () => {
 					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
 						target={'_blank'}
 						rel={'noreferrer'} >
-						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-4 py-2 flex flex-row justify-start items-center'>
 							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
 							<span className=' '>Documentation </span>
 						</li>
@@ -208,9 +209,11 @@ const Home: NextPage = () => {
 					<a className='flex flex-row w-full' href="https://docs.xsauce.io/connect/socials"
 						target={'_blank'}
 						rel={'noreferrer'}>
-						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-4 py-2 flex flex-row justify-start items-center'>
+
 							<img className="w-[25px] invisible group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
 							<span className=''>Drop us a line </span>
+
 						</li>
 					</a>
 
