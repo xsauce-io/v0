@@ -401,8 +401,8 @@ export const Nav = ({ logoColor }) => {
 
 	return (
 		<header className=" sticky top-0 z-20 ">
-			<div className="flex items-center h-20 w-full gap-8 mobile:px-4 laptop:px-20">
-				<div className=" basis-1/3	">
+			<div className="flex items-center h-20 w-full gap-8 px-0">
+				<div className="basis-1/3">
 					<a className="block" href="/">
 						<span className="sr-only">Home</span>
 						<div className="mobile:text-[12px] tablet:text-[14px] h-20 flex flex-row items-center">
@@ -431,7 +431,7 @@ export const Nav = ({ logoColor }) => {
 				<div className="flex flex-row justify-center basis-1/3	 "></div>
 
 				{width >= screens.smlaptop ? (
-					<div className="flex flex-row  basis-1/3	 justify-end items-center space-x-4 font-Inter">
+					<div className="flex flex-row  basis-1/3  justify-end items-center space-x-4 font-Inter">
 						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
