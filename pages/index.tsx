@@ -162,12 +162,12 @@ const Home: NextPage = () => {
 				<ul className='flex flex-col font-SG font-medium tablet:w-[50%] cursor-pointer justify-center items-start lg-desktop:items-end text-[20px] tablet:text-[30px] laptop:text-[40px] lg-desktop:text-[55px] p-4 tablet:p-8' >
 
 
-					<Link href='/freeplay'>
+					<Link href='/markets'>
 						<a className=' flex flex-row w-full' >
 							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full  px-4 py-2 flex flex-row justify-start items-center active'>
 
 								<img className="w-[25px] invisible group-hover:flex group-hover:visible mr-4 " src='/jordans.svg' />
-								<span className=''>Open App</span>
+								<span className=''>App</span>
 							</li>
 						</a>
 					</Link>
@@ -180,7 +180,7 @@ const Home: NextPage = () => {
 						rel={'noreferrer'} >
 						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
 							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
-							<span className=''>About Xsauce</span>
+							<span className=''>What is Xsauce</span>
 						</li>
 					</a>
 
