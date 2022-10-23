@@ -17,7 +17,7 @@ import {
 	$tableAddress,
 	OrderBookAddressGit,
 } from '../../../services/constants';
-import { FreePlayGraph } from '../../../components/freePlayGraph';
+import { FreePlayGraph } from '../../../components/linegraph';
 
 declare var window: any;
 
