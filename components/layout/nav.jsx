@@ -1,20 +1,18 @@
 import React, { useEffect, useMemo } from 'react';
-
 import { useState } from 'react';
 import { ethers, utils } from 'ethers';
-
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
-
-import { LocalDrawer } from '../components/drawer';
-import SauceTokenABI from '../abi/$tableSauce.json';
+import { LocalDrawer } from '/components/layout/drawer';
+import SauceTokenABI from '../../abi/$tableSauce.json';
 import toast from 'react-hot-toast';
-import { ToastNotification } from './toast';
-import { WalletNotConnectedModal } from './walletNotConnectedModal';
+
 import { useRouter } from 'next/router';
-import { ToastNotificationActionBar } from './toastActionBar';
+import { ToastNotificationActionBar } from '../common/toastActionBar';
 
 export const Nav = ({ logoColor }) => {
-	// let [network, setNetwork] = useState();
+	// ----------------------------------------------------
+	// ----------------------  Variables and Constants ------------------------
+	// ----------------------------------------------------
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -22,7 +20,11 @@ export const Nav = ({ logoColor }) => {
 		laptop: '1200',
 		desktop: '1400',
 	};
+	const SauceTokenAddress = '0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D';
 
+	// ----------------------------------------------------
+	// ----------------------  States ------------------------
+	// ----------------------------------------------------
 	const { width } = useWindowDimensions();
 	const router = useRouter();
 	const currentPath = router.pathname;
@@ -32,13 +34,14 @@ export const Nav = ({ logoColor }) => {
 	const [current, setCurrent] = useState();
 	const [isCopied, setIsCopied] = useState(false);
 	const [fullLengthAccount, setFullLengthAccount] = useState(null);
-	const [openWalletNotConnectedModal, setOpenWalletNotConnectedModal] =
-		useState(false);
+	const [
+		openWalletNotConnectedModal,
+		setOpenWalletNotConnectedModal,
+	] = useState(false);
 
-	useEffect(() => {
-		// Dismiss all active toasts on page change
-		toast.remove();
-	}, [router.events]);
+	// ----------------------------------------------------
+	// ----------------------Function------------------------
+	// ----------------------------------------------------
 
 	const getWallet = async (clicked = false) => {
 		const hasConnectedWalletBefore = localStorage.getItem(
@@ -324,8 +327,6 @@ export const Nav = ({ logoColor }) => {
 		// localStorage.setItem('networkNum', '3');
 	};
 
-	const SauceTokenAddress = '0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D';
-
 	const faucet = async () => {
 		try {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -380,30 +381,54 @@ export const Nav = ({ logoColor }) => {
 		}
 	};
 
+	// ----------------------------------------------------
+	// ---------------------- Use Effect ------------------
+	// ----------------------------------------------------
+
+	useEffect(() => {
+		// Dismiss all active toasts on page change
+		toast.remove();
+	}, [router.events]);
+
 	useEffect(() => {
 		getWallet();
 		localStorage.getItem('network');
 	}, [openWalletNotConnectedModal]);
 
+	// ----------------------------------------------------
+	// ---------------------- Render ------------------------
+	// ----------------------------------------------------
+
 	return (
 		<header className=" sticky top-0 z-20 ">
 			<div className="flex items-center h-20 w-full gap-8 mobile:px-4 laptop:px-20">
 				<div className=" basis-1/3	">
-         
-					 <a className="block" href="/">
+					<a className="block" href="/">
 						<span className="sr-only">Home</span>
 						<div className="mobile:text-[12px] tablet:text-[14px] h-20 flex flex-row items-center">
-            <svg width="42" height="38" viewBox="0 0 42 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M29.501 23.2074L40.4906 32.8571C42.8185 34.9069 42.4876 37.9996 39.2617 37.9996H33.1878C32.2307 37.9996 31.3089 37.652 30.6354 37.0167L22.2454 29.213C21.8319 28.8294 21.1583 28.8294 20.7447 29.213L12.2957 37.0167C11.6221 37.64 10.7122 37.9876 9.75507 37.9876H3.58669C0.384333 37.9876 -1.21094 34.4154 1.08153 32.3536L11.3385 23.1115C12.0003 22.5121 11.9884 21.5291 11.3149 20.9538L1.9087 12.8743C-0.478294 10.8485 1.09334 7.19238 4.34297 7.19238H9.9205C10.854 7.19238 11.7521 7.52803 12.4139 8.12739L20.7329 15.5715L29.501 23.2074Z" fill={logoColor}/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M25.0014 11.8361C25.0005 11.8902 25 11.9448 25 12L25.0068 12C25.1753 15.7255 28.4671 18.7 32.5 18.7C36.5376 18.7 39.8323 15.7187 39.9938 11.9871L40 11.9871C40 11.9328 39.9996 11.8791 39.9988 11.8258C39.9996 11.784 40 11.742 40 11.7H39.9962C39.9168 8.75634 38.6098 7.40441 36.9633 5.70147C35.7001 4.39492 34.2372 2.88175 32.9757 0.284562C32.7932 -0.103367 32.2198 -0.0904358 32.0374 0.297493C30.798 2.96578 29.3006 4.53646 28.0062 5.8942C26.3913 7.58821 25.0924 8.95074 25.0047 11.7H25C25 11.7455 25.0005 11.7908 25.0014 11.8361Z" fill={logoColor}/>
-</svg>
+							<svg
+								width="42"
+								height="38"
+								viewBox="0 0 42 38"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M29.501 23.2074L40.4906 32.8571C42.8185 34.9069 42.4876 37.9996 39.2617 37.9996H33.1878C32.2307 37.9996 31.3089 37.652 30.6354 37.0167L22.2454 29.213C21.8319 28.8294 21.1583 28.8294 20.7447 29.213L12.2957 37.0167C11.6221 37.64 10.7122 37.9876 9.75507 37.9876H3.58669C0.384333 37.9876 -1.21094 34.4154 1.08153 32.3536L11.3385 23.1115C12.0003 22.5121 11.9884 21.5291 11.3149 20.9538L1.9087 12.8743C-0.478294 10.8485 1.09334 7.19238 4.34297 7.19238H9.9205C10.854 7.19238 11.7521 7.52803 12.4139 8.12739L20.7329 15.5715L29.501 23.2074Z"
+									fill={logoColor}
+								/>
+								<path
+									fill-rule="evenodd"
+									clip-rule="evenodd"
+									d="M25.0014 11.8361C25.0005 11.8902 25 11.9448 25 12L25.0068 12C25.1753 15.7255 28.4671 18.7 32.5 18.7C36.5376 18.7 39.8323 15.7187 39.9938 11.9871L40 11.9871C40 11.9328 39.9996 11.8791 39.9988 11.8258C39.9996 11.784 40 11.742 40 11.7H39.9962C39.9168 8.75634 38.6098 7.40441 36.9633 5.70147C35.7001 4.39492 34.2372 2.88175 32.9757 0.284562C32.7932 -0.103367 32.2198 -0.0904358 32.0374 0.297493C30.798 2.96578 29.3006 4.53646 28.0062 5.8942C26.3913 7.58821 25.0924 8.95074 25.0047 11.7H25C25 11.7455 25.0005 11.7908 25.0014 11.8361Z"
+									fill={logoColor}
+								/>
+							</svg>
 						</div>
-					</a> 
+					</a>
 				</div>
 
-				<div className="flex flex-row justify-center basis-1/3	 ">
-					
-				</div>
+				<div className="flex flex-row justify-center basis-1/3	 "></div>
 
 				{width >= screens.smlaptop ? (
 					<div className="flex flex-row  basis-1/3	 justify-end items-center space-x-4 font-Inter">

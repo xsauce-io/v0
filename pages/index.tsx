@@ -1,34 +1,28 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
-import {MktBanner} from '../components/marketPlaceBanner';
 import React from 'react';
 import { ethers } from 'ethers';
-import { TopStories } from '../components/topStories';
-import { DashboardTable } from '../components/dashboardTable';
 import { MarketFactory, marketsDataGit } from '../services/constants';
 import MarketFactoryABI from '../abi/marketFactory.json';
 import MarketAbi from '../abi/markets.json';
-import { CalendarHighlight } from '../components/calendarHighlight';
 import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 
-import { Dashboard } from '../components/dashboard';
-import { ContentHeader } from '../components/contentHeader';
-import { Skeleton } from '@mui/material';
+
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/toast';
+import { ToastNotification } from '../components/common/toast';
 declare let window: any;
-import { FirstTimeVisitorModal } from '../components/firstTimeVisitorModal';
-import { CalendarCard } from '../components/calendarCard';
-import { Nav } from '../components/nav';
-import { useWindowDimensions } from '../utils/hooks/useWindowDimensionsTS';
+
+import { Nav } from '../components/layout/nav';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
-	// ------------------- Constants ---------------------
+	// ----------------------------------------------------
+	// -------------------- Constants ---------------------
+	// -----------------------------------------------------
 	const SORT_BY_STATES = {
 		RELEASE_DATE: 'releaseDate',
 		NAME: 'name',
@@ -37,7 +31,9 @@ const Home: NextPage = () => {
 
 	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
-	// ------------------- State Variable --------------------
+	// ----------------------------------------------------
+	// -------------------- State Variables ---------------------
+	// ------------------------------------------------------------
 	const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
 	const { data: s2, error: e2 } = useGetSneaker('DR8869-200');
 	const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
@@ -50,11 +46,12 @@ const Home: NextPage = () => {
 	//filter state mana
 	const [isAscending, setIsAscending] = useState(true);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
-
-	// -------------------- Data Fetching ------------------
-
 	const [allBalances, setAllBalances] = useState([] as any);
 
+
+	// ----------------------------------------------------
+	// -------------------- Functions ---------------------
+	// ----------------------------------------------------
 	const showBalances = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
 			'hasConnectedWalletBefore'
@@ -111,7 +108,9 @@ const Home: NextPage = () => {
 		}
 	};
 
-	//------------------ Use Effect / Use memo ------------------
+	// ----------------------------------------------------
+	//------------------ Use Effect / Use Memo ------------------
+	// ----------------------------------------------------
 	useEffect(() => {
 		setResponse([s1, s2, s3]);
 		setStoredPersistentResponse([s1, s2, s3]);
@@ -140,9 +139,12 @@ const Home: NextPage = () => {
 	}, [e1, e2, e3]);
 
 
+	// ----------------------------------------------------
+	// ----------------------Render------------------------
+	// ----------------------------------------------------
 
 	return (
-		<div className="w-full items-center justify-center text-black">
+		<div className="w-screen h-screen text-black bg-white">
 			<Head>
 				<title>Xsauce | Culture is Currency</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -151,46 +153,74 @@ const Home: NextPage = () => {
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-        <link rel="icon" type='favicon' href='/greenDrop.svg'/>
+				<link rel="icon" type='favicon' href='/greenDrop.svg' />
 			</Head>
-      
 
-	<Nav logoColor={"#ACFF00"}/>
-  {/* <h1 className='font-bold font-SG laptop:p-6 text-[60px] w-full text-center'>The Future of Culture is Here</h1> */}
-  <div className='flex mobile:flex-col justify-center laptop:flex-row justify-center items-center laptop:h-[calc(100vh-80px)]'>
-  <ul className=' font-SG font-medium mobile:text-[30px] laptop:w-[50%] flex flex-col justify-start items-center text-[40px] p-8' >
-<a href='/markets'>
-    <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl px-3 py-2 flex flex-row justify-center items-center'>
-      <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
-      <span className='ml-2'>Launch App</span>
-    </li>
-    </a>
-    <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-fit px-3 py-2 flex flex-row justify-center items-center'>
-      <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
-      <span className='ml-2'>Drip Feed </span>
-      
-      </li>
-    <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-3 py-2 flex flex-row justify-center items-center'>
-    <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
-    <span className='ml-2'>What is Xsauce? </span>
-      </li>
-      <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  px-3 py-2 flex flex-row justify-center items-center'>
-      <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
-      <span className='ml-2'>Documentation  </span>
-      </li >
-      <li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-fit px-3 py-2 flex flex-row justify-center items-center'>
-      <img className="w-[5%] invisible group-hover:visible" src='/jordans.svg'/>
-      <span className='ml-2'>Drop us a line </span>
-      
-      </li>
-     
 
-  </ul>
-  <div className='flex mobile:justify-center laptop:w-[50%] flex-row justify-start items-center  '>
-  <img className='w-[80%]' src='/visual.png'/>
-  </div>
-  </div>
-		</div>
+			<Nav logoColor={"#ACFF00"} />
+			<div className='flex  flex-col tablet:flex-row justify-center items-center laptop:h-[calc(100vh-80px)] mx-5 laptop:mx-20 mt-80px'>
+				<ul className='flex flex-col font-SG font-medium tablet:w-[50%] cursor-pointer justify-center items-start lg-desktop:items-end text-[20px] tablet:text-[30px] laptop:text-[40px] lg-desktop:text-[55px] p-4 tablet:p-8' >
+
+
+					<Link href='/markets'>
+						<a className=' flex flex-row w-full' >
+							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full  px-4 py-2 flex flex-row justify-start items-center active'>
+
+								<img className="w-[25px] invisible group-hover:flex group-hover:visible mr-4 " src='/jordans.svg' />
+								<span className=''>App</span>
+							</li>
+						</a>
+					</Link>
+
+
+
+
+					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
+						target={'_blank'}
+						rel={'noreferrer'} >
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
+							<span className=''>What is Xsauce</span>
+						</li>
+					</a>
+
+					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
+						target={'_blank'}
+						rel={'noreferrer'} >
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
+							<span className=''>Drip Feed </span>
+						</li>
+					</a>
+
+
+
+					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
+						target={'_blank'}
+						rel={'noreferrer'} >
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
+							<span className=' '>Documentation </span>
+						</li>
+					</a>
+
+
+					<a className='flex flex-row w-full' href="https://docs.xsauce.io/connect/socials"
+						target={'_blank'}
+						rel={'noreferrer'}>
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+							<img className="w-[25px] invisible group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
+							<span className=''>Drop us a line </span>
+						</li>
+					</a>
+
+
+				</ul>
+				<div className='tablet:w-[50%] flex flex-row justify-start items-center  '>
+					<img className='w-full p-4 tablet:p-8' src='/visual.png' />
+				</div>
+			</div >
+		</div >
 	);
 };
 

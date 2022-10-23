@@ -8,7 +8,7 @@ import { ethers, utils, BigNumber } from 'ethers';
 import { Layout } from '../components/layout';
 
 import { ContentHeader } from '../components/contentHeader';
-import { Card } from '../components/cardWager';
+import { Card } from '../components/livemarkets/cardWager';
 import marketFactoryabi from '../abi/marketFactory.json';
 
 declare var window: any;
@@ -36,8 +36,8 @@ const Markets: NextPage = () => {
 		url: 'https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&brand=adidas&name=yeezy-350&gender=men',
 	};
 
-	const handleSortByReleaseDateClick = () => {};
-	const handleSortByRetailPriceClick = () => {};
+	const handleSortByReleaseDateClick = () => { };
+	const handleSortByRetailPriceClick = () => { };
 
 	// fetch sneaker data
 	const getSneaker = async () => {
@@ -146,8 +146,8 @@ const Markets: NextPage = () => {
 						a.releaseDate > b.releaseDate
 							? 1
 							: b.releaseDate > a.releaseDate
-							? -1
-							: 0
+								? -1
+								: 0
 				);
 				console.log({ response });
 			} else if (
@@ -175,8 +175,8 @@ const Markets: NextPage = () => {
 						a.releaseDate < b.releaseDate
 							? 1
 							: b.releaseDate < a.releaseDate
-							? -1
-							: 0
+								? -1
+								: 0
 				);
 				console.log({ response });
 			} else if (

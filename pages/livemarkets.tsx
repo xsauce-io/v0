@@ -1,23 +1,17 @@
 import type { NextPage } from 'next';
-import { Nav } from '../components/nav';
-import { Announcement } from '../components/announcement';
+
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState, useEffect, useMemo } from 'react';
-import axios from 'axios';
-import { RepeatOneSharp } from '@mui/icons-material';
+
 import { Skeleton } from '@mui/material';
-import { Tabs } from '../components/tabs';
-import { Layout } from '../components/layout';
-import { ContentHeader } from '../components/contentHeader';
-import Script from 'next/script';
+import { Layout } from '../components/layout/layout';
+import { ContentHeader } from '../components/layout/contentHeader';
 
-import { ethers, utils } from 'ethers';
-
-import { Card } from '../components/cardWager';
+import { Card } from '../components/livemarkets/cardWager';
 import { useGetSneaker } from '../services/useRequests';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/toast';
+import { ToastNotification } from '../components/common/toast';
 
 const Markets: NextPage = () => {
 	// ------------------- Constants ---------------------
@@ -84,8 +78,8 @@ const Markets: NextPage = () => {
 							a.releaseDate > b.releaseDate
 								? 1
 								: b.releaseDate > a.releaseDate
-								? -1
-								: 0
+									? -1
+									: 0
 					);
 					console.log({ response });
 				} else if (
@@ -113,8 +107,8 @@ const Markets: NextPage = () => {
 							a.releaseDate < b.releaseDate
 								? 1
 								: b.releaseDate < a.releaseDate
-								? -1
-								: 0
+									? -1
+									: 0
 					);
 					console.log({ response });
 				} else if (
@@ -180,17 +174,19 @@ const Markets: NextPage = () => {
 		}
 	}, [e1, e2, e3, e4]);
 
+	// ----------------- Render ------------------
+
 	return (
 		<div>
 			<Head>
-      <title>Xsauce | Markets</title>
+				<title>Xsauce | Markets</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-        <link rel="icon" type='favicon' href='/greenDrop.svg'/>
+				<link rel="icon" type='favicon' href='/greenDrop.svg' />
 			</Head>
 
 			<Layout
@@ -315,20 +311,20 @@ const Markets: NextPage = () => {
 
 					<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-2 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
 						{response ||
-						e1 === undefined ||
-						e2 === undefined ||
-						e3 === undefined ||
-						e4 === undefined
+							e1 === undefined ||
+							e2 === undefined ||
+							e3 === undefined ||
+							e4 === undefined
 							? response?.map((el: any) => <Card cardObject={el} />)
 							: skeletonArray.map(() => (
-									<Skeleton
-										animation="wave"
-										variant="rounded"
-										height={500}
-										sx={{ borderRadius: '100px' }}
-										width={'100%'}
-									/>
-							  ))}
+								<Skeleton
+									animation="wave"
+									variant="rounded"
+									height={500}
+									sx={{ borderRadius: '100px' }}
+									width={'100%'}
+								/>
+							))}
 					</div>
 				</main>
 			</Layout>

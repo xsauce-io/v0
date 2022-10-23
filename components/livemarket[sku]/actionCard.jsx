@@ -1,50 +1,41 @@
 import { BigNumber, ethers, utils } from 'ethers';
-import marketabi from '../abi/markets.json';
-import $tableABI from '../abi/$tableSauce.json';
+import marketabi from '../../abi/markets.json';
+import $tableABI from '../../abi/$tableSauce.json';
 import { useState, useEffect, useMemo } from 'react';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useRouter } from 'next/router';
-import {
-	$tableAddress,
-} from '../services/constants';
-import { useGetMarketBySku } from '../services/useRequests';
+import { $tableAddress } from '../../services/constants';
+import { useGetMarketBySku } from '../../services/useRequests';
 import toast from 'react-hot-toast';
-import { ToastNotification } from './toast';
-import { ToastNotificationActionBar } from './toastActionBar';
+import { ToastNotification } from '../common/toast';
+import { ToastNotificationActionBar } from '../common/toastActionBar';
 import React from 'react';
 
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Box from '@mui/material/Box';
-import Slide from '@mui/material/Slide';
-import { Slideshow } from './slideshow';
 
 export const Images = [
-  {
-    href: '/pending.gif',
-    header: 'Transaction Pending',
-    text: 'This usually takes 10 secs - 1 minute',
-  },
-  {
-    href: '/checkMark.gif',
-    header: 'Transaction Complete',
-    text: 'Good to Go',
-  },
-
+	{
+		href: '/pending.gif',
+		header: 'Transaction Pending',
+		text: 'This usually takes 10 secs - 1 minute',
+	},
+	{
+		href: '/checkMark.gif',
+		header: 'Transaction Complete',
+		text: 'Good to Go',
+	},
 ];
 
+export const ActionCard = () => {
+	const [open, setOpen] = React.useState(false);
 
-export const ActionCard = ({ title }) => {
-  const [open, setOpen] = React.useState(false);
-
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	// -------------------------- router ----------------------
 	const router = useRouter();
@@ -68,8 +59,6 @@ export const ActionCard = ({ title }) => {
 	const [jackpotTotal, setJackpot] = useState();
 
 	//------------------ Functions ------------------
-
-
 
 	const jackpot = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
@@ -177,9 +166,8 @@ export const ActionCard = ({ title }) => {
 
 	const mint = async (e) => {
 		e.preventDefault();
-    
+
 		let mintedAmount;
-   
 
 		let positionMinted;
 		if (isYes === true) {
@@ -211,21 +199,20 @@ export const ActionCard = ({ title }) => {
 				} else {
 					position = 2;
 				}
-        
 
 				const txn = await signedContract.mint(
 					BigNumber.from(position),
 					BigNumber.from(data.get('Amount'))
 				);
-        setPending(true);
-        setOpen(true);
-       
-        await txn.wait()
-      
-        setPending(false);
-        setTimeout(() => {
-          setOpen(false);
-        }, 3000)
+				setPending(true);
+				setOpen(true);
+
+				await txn.wait();
+
+				setPending(false);
+				setTimeout(() => {
+					setOpen(false);
+				}, 3000);
 
 				mixpanelTrackProps('Buy (Mint)', {
 					wager: positionMinted,
@@ -317,7 +304,6 @@ export const ActionCard = ({ title }) => {
 		}
 	};
 
-  
 	const ratios = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
 			'hasConnectedWalletBefore'
@@ -530,7 +516,6 @@ export const ActionCard = ({ title }) => {
 
 				<div className="bg-white items-center text-left  p-4 space-y-4  w-full border-b-[1px] border-b-[#0C1615]">
 					<button
-          
 						type="submit"
 						id="mint"
 						className="w-full font-medium  text-xl py-4  text-white bg-[#0C1615] rounded-[80px] hover:opacity-60"
@@ -538,83 +523,73 @@ export const ActionCard = ({ title }) => {
 						Place Order
 					</button>
 
-
-			<Dialog
-				open={open}
-				keepMounted
-				onClose={handleClose}
-				PaperProps={{
-					style: {
-						borderRadius: 30,
-						width: '100%',
-						height: 'fit-content',
-						overflow: 'clip',
-					},
-				}}
-				maxWidth="sm"
-			>
-				<Box sx={{ bgcolor: 'black' }} width={'100%'} height={'100%'}>
-					<DialogActions
-						sx={{
-							display: 'flex',
-
-							padding: 0,
+					<Dialog
+						open={open}
+						keepMounted
+						onClose={handleClose}
+						PaperProps={{
+							style: {
+								borderRadius: 30,
+								width: '100%',
+								height: 'fit-content',
+								overflow: 'clip',
+							},
 						}}
+						maxWidth="sm"
 					>
-					
-					</DialogActions>
-					<DialogContent
-						sx={{
-							padding: '15px',
-							display: 'flex',
-						}}
-					>
+						<Box sx={{ bgcolor: 'black' }} width={'100%'} height={'100%'}>
+							<DialogActions
+								sx={{
+									display: 'flex',
 
-						{pending === true ? 
-            <div
-						className={
-							'flex flex-col shrink-0 h-[40%] w-[100%]  p-5  whitespace-pre-line pr-1 pl-1 justify-start '
-						}
-					
-					>
-						<img className="object-fit w-auto h-auto " src={Images[0].href}></img>
-						<h1 className="text-white mobile:text-lg tablet:text-2xl mb-4 ">
-							{Images[0].header}
-						</h1>
-						<p className="text-white mobile:text-sm tablet:text-[13px] font-SG ">
-							{Images[0].text}
-						</p>
-					</div>
-            
-            
-            
-            
-            
-            
-            
-            
-            :  <div
-						className={
-							'flex flex-col shrink-0 h-[40%] w-[100%]  p-5  whitespace-pre-line pr-1 pl-1 justify-start '
-						}
-					
-					>
-						<img className="object-fit w-1/3 mx-auto my-16" src={Images[1].href}></img>
-						<h1 className="text-white mobile:text-lg tablet:text-2xl mb-4">
-							{Images[1].header}
-						</h1>
-						<p className="text-white mobile:text-sm tablet:text-[13px] font-SG ">
-							{Images[1].text}
-						</p>
-					</div>}
-					</DialogContent>
-				</Box>
-			</Dialog>
-	
-
-
+									padding: 0,
+								}}
+							></DialogActions>
+							<DialogContent
+								sx={{
+									padding: '15px',
+									display: 'flex',
+								}}
+							>
+								{pending === true ? (
+									<div
+										className={
+											'flex flex-col shrink-0 h-[40%] w-[100%]  p-5  whitespace-pre-line pr-1 pl-1 justify-start '
+										}
+									>
+										<img
+											className="object-fit w-auto h-auto "
+											src={Images[0].href}
+										></img>
+										<h1 className="text-white mobile:text-lg tablet:text-2xl mb-4 ">
+											{Images[0].header}
+										</h1>
+										<p className="text-white mobile:text-sm tablet:text-[13px] font-SG ">
+											{Images[0].text}
+										</p>
+									</div>
+								) : (
+									<div
+										className={
+											'flex flex-col shrink-0 h-[40%] w-[100%]  p-5  whitespace-pre-line pr-1 pl-1 justify-start '
+										}
+									>
+										<img
+											className="object-fit w-1/3 mx-auto my-16"
+											src={Images[1].href}
+										></img>
+										<h1 className="text-white mobile:text-lg tablet:text-2xl mb-4">
+											{Images[1].header}
+										</h1>
+										<p className="text-white mobile:text-sm tablet:text-[13px] font-SG ">
+											{Images[1].text}
+										</p>
+									</div>
+								)}
+							</DialogContent>
+						</Box>
+					</Dialog>
 				</div>
- 
 
 				<div className="bg-[#DCDEE1] items-center text-left rounded-b-[10px] p-3  space-y-4  w-full ">
 					<div className="w-full  flex px-5 items-center">

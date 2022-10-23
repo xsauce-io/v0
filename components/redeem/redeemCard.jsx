@@ -2,8 +2,8 @@ import React from 'react';
 import { Skeleton } from '@mui/material';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useGetMarketBySku } from '../services/useRequests';
-import marketAbi from '../abi/markets.json';
+import { useGetMarketBySku } from '../../services/useRequests';
+import marketAbi from '../../abi/markets.json';
 import { ethers } from 'ethers';
 
 export const RedeemCard = ({ cardObject }) => {
@@ -66,7 +66,7 @@ export const RedeemCard = ({ cardObject }) => {
 
 	return (
 		<a
-			className="transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl flex flex-col 
+			className="transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl flex flex-col
  laptop:h-full w-full items-start text-left font-inter min-h-fit"
 		>
 			{cardObject === undefined ? (
