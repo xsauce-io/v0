@@ -173,6 +173,8 @@ const Home: NextPage = () => {
 					</Link>
 
 
+
+
 					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
 						target={'_blank'}
 						rel={'noreferrer'} >
@@ -181,6 +183,16 @@ const Home: NextPage = () => {
 							<span className=''>About Xsauce</span>
 						</li>
 					</a>
+
+					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
+						target={'_blank'}
+						rel={'noreferrer'} >
+						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full px-4 py-2 flex flex-row justify-start items-center'>
+							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
+							<span className=''>Drip Feed </span>
+						</li>
+					</a>
+
 
 
 					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"

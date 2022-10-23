@@ -6,8 +6,17 @@ import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 import { Footer } from '../../../components/layout/footer';
 import { useGetSneaker } from '../../../services/useRequests';
+<<<<<<< HEAD
 
 import { FreePlayGraph } from '../../../components/freePlay/freePlayGraph';
+=======
+import BookFactoryABI from '../../../abi/bookFactory.json';
+import {
+	$tableAddress,
+	OrderBookAddressGit,
+} from '../../../services/constants';
+import { FreePlayGraph } from '../../../components/linegraph';
+>>>>>>> main
 
 declare var window: any;
 

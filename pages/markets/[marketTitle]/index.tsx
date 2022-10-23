@@ -1,15 +1,20 @@
 import type { NextPage } from 'next';
-import { Nav } from '../../../components/layout/nav';
+import { Nav } from '../../../components/nav';
+// import { Card } from '../components/card'
+import { TreeMap } from '../../../components/treemap';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 
-import { Footer } from '../../../components/layout/footer';
+import { Footer } from '../../../components/footer';
 import { useGetSneaker } from '../../../services/useRequests';
-
-import { FreePlayGraph } from '../../../components/freePlay/freePlayGraph';
+import BookFactoryABI from '../../../abi/bookFactory.json';
+import {
+	$tableAddress,
+	OrderBookAddressGit,
+} from '../../../services/constants';
+import { Linegraph } from '../../../components/linegraph';
 
 declare var window: any;
 
@@ -17,9 +22,9 @@ const LiveMarket: NextPage = () => {
 	const router = useRouter();
 	const { marketTitle } = router.query;
 
-	const { data, error } = useGetSneaker(marketTitle);
+	// const { data, error } = useGetSneaker(sku);
 
-	const [response, setResponse] = useState(data);
+	// const [response, setResponse] = useState(data);
 	const [admin, setAdmin] = useState(false);
 
 	const adminCheck = async () => {
@@ -64,18 +69,18 @@ const LiveMarket: NextPage = () => {
 	// 	console.log(NewBook);
 	// };
 
-	useEffect(() => {
-		setResponse(data);
-	}, [data]);
+	// useEffect(() => {
+	// 	setResponse(data);
+	// }, [data]);
 
 	useEffect(() => {
 		if (!router.isReady) return;
 		adminCheck();
 	}, [router.isReady]);
 
-	if (!data || error) {
-		return <div>loading</div>;
-	}
+	// if (!data || error) {
+	// 	return <div>loading</div>;
+	// }
 
 	return (
 		<div className="bg-[#EFF1F3]">
@@ -133,17 +138,17 @@ const LiveMarket: NextPage = () => {
 					)} */}
 					<div className='flex mobile:flex-col tablet:flex-col laptop:flex-row'>
 						<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
-							<div className='bg-white w-full laptop:w-full rounded-lg font-SG p-6 border-[1px] border-[#0C1615] '>
+							<div className='bg-white laptop:w-[40%] rounded-lg font-SG p-6 border-[1px] border-[#0C1615] '>
 								<span className='flex flex-row justify-end'>
 									<h1 className='w-fit text-right px-3 py-2 rounded text-xl font-medium bg-[#ACFF00] '> Pick of the Day</h1>
 								</span>
-								<img
-									src={response?.image.original}
-									className="object-cover w-[50%] laptop:w-[30%] m-auto h-auto rounded-lg "
-								/>
+								{/* <img
+						src={response?.image.original}
+						className="object-cover w-[50%] laptop:w-[30%] m-auto h-auto rounded-lg "
+					/> */}
 								<div className='flex flex-col space-y-5'>
 									<div className='flex-1'>
-										What will the resell price of the <span className='font-bold'>{response?.name}</span> be on <span className='font-bold'>October 31st, 2022?</span>
+										What will the resell price of the <span className='font-bold'>{marketTitle}</span> be on <span className='font-bold'>October 31st, 2022?</span>
 									</div>
 									<div className='flex flex-col flex-1 space-y-3 '>
 										<div className="flex flex-row bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] rounded-[80px] border-[#0C1615] focus:outline-2 focus:outline-offset-2 hover:outline-1">
@@ -167,25 +172,31 @@ const LiveMarket: NextPage = () => {
 											Submit
 										</button>
 										<div className='pt-5'>
-											<h1 className='font-bold'>Current Resell Price:
-												<span className='bg-[#ACFF00] py-2 px-3 rounded-full ml-2 text-sm font-normal'>${response?.estimatedMarketValue}</span>
-											</h1>
+											{/* <h1 className='font-bold'>Current Resell Price:
+								<span className='bg-[#ACFF00] py-2 px-3 rounded-full ml-2 text-sm font-normal'>${response?.estimatedMarketValue}</span>
+							</h1> */}
 										</div>
 									</div>
 
 								</div>
-								<div className='bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center '>
 
-									<FreePlayGraph />
-								</div>
+
+							</div>
+
+							<div className='bg-white rounded-lg font-SG p-6 flex-1 flex-col justify-center items-center '>
+								<h1>{marketTitle} Price</h1>
+								<Linegraph />
 							</div>
 
 
-
 						</div>
-
-
-
+					</div>
+					<div className='flex flex-row'>
+						<div className='bg-white rounded-lg font-SG p-6 flex-1 flex-col justify-center items-center text-left laptop:mr-4'>
+							<span className='font-bold laptop:text-2xl'>{marketTitle}</span>
+							<p className='laptop:text-xl mt-5'>The Culture Index is a basket of the top 30 streetwear items represented by their resale value. This index was designed to give maximum diversity across streetwear</p>
+						</div>
+						<TreeMap />
 					</div>
 				</div>
 			</main>

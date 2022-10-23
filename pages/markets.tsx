@@ -19,7 +19,7 @@ import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/common/toast';
 
 
-const FreePlay: NextPage = () => {
+const Markets: NextPage = () => {
 	// ------------------- Constants ---------------------
 	const screens = {
 		mobile: '300',
@@ -82,7 +82,7 @@ const FreePlay: NextPage = () => {
 	return (
 		<div>
 			<Head>
-				<title>Xsauce | Free Play</title>
+				<title>Xsauce | Markets</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
@@ -93,13 +93,15 @@ const FreePlay: NextPage = () => {
 			</Head>
 
 			<Layout
-				headerSubtitle={'PREDICT'}
-				headerTitle={'Free Play'}
+				headerSubtitle={'INVEST'}
+				headerTitle={'Markets'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
+        logoColor={'#FFFFFF'}
 			>
 
 				<>
+<<<<<<< HEAD:pages/freeplay.tsx
 					<Banner />
 					<ContentHeader
 						title={'Free Play'}
@@ -107,6 +109,10 @@ const FreePlay: NextPage = () => {
 						icon={<img src="/greenDrop.svg" />}
 					/>
 					<div className='w-full'>
+=======
+				
+					<div className='w-full mt-10'>
+>>>>>>> main:pages/markets.tsx
 
 						<FreePrediction />
 
@@ -117,4 +123,4 @@ const FreePlay: NextPage = () => {
 	);
 };
 
-export default FreePlay;
+export default Markets;

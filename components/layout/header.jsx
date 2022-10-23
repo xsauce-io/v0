@@ -7,7 +7,7 @@ export const Header = ({ title, children, subtitle }) => {
 
     return (
 
-        <div className='w-[100%] mobile:mt-[5rem] tablet:mt-[2rem] text-inherit min-h-[200px] '>
+        <div className='w-[100%] mobile:mt-[2rem] tablet:mt-[2rem] text-inherit min-h-[130px] '>
             <grid className="grid grid-cols-1 tablet:grid-cols-3">
                 <div className="col-span-1 font-SG flex flex-col justify-center">
                     <p className="text-[#748282] text-xs font-Inter " >{subtitle}</p>
