@@ -97,22 +97,12 @@ const Markets: NextPage = () => {
 				headerTitle={'Markets'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
-        logoColor={'#FFFFFF'}
+				logoColor={'#FFFFFF'}
 			>
 
 				<>
-<<<<<<< HEAD:pages/freeplay.tsx
-					<Banner />
-					<ContentHeader
-						title={'Free Play'}
 
-						icon={<img src="/greenDrop.svg" />}
-					/>
-					<div className='w-full'>
-=======
-				
 					<div className='w-full mt-10'>
->>>>>>> main:pages/markets.tsx
 
 						<FreePrediction />
 
