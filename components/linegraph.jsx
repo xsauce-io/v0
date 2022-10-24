@@ -3,69 +3,69 @@ import { ResponsiveLine } from '@nivo/line'
 
 export const Linegraph = () => {
 
+
+
+
+function Last7Days () {
+  var result = [];
+   
+    for (var i=0; i<6; i++) {
+        let hour;
+        var d = new Date();
+        const CurrentHour = d.getHours() - (2 * i);
+        if(CurrentHour > 12 ) {hour = (CurrentHour - 12) + ":00 PM" }
+        if(CurrentHour <= 12 ) {hour = CurrentHour + ":00 AM" }
+      
+
+      
+    
+        result.push( hour )
+    }
+    return(result.reverse());
+   
+ }
+
+const interval = Last7Days();
+
   const data = [{
     
-      "id": "japan",
+      "id": "price",
       "color": "hsl(138, 70%, 50%)",
       "data": [
         {
-          "x": "plane",
+          "x": interval[0],
           "y": 182
         },
         {
-          "x": "helicopter",
+          "x": interval[1],
           "y": 141
         },
         {
-          "x": "boat",
+          "x": interval[2],
           "y": 159
         },
         {
-          "x": "train",
+          "x": interval[3],
           "y": 143
         },
         {
-          "x": "subway",
+          "x": interval[4],
           "y": 33
         },
         {
-          "x": "bus",
+          "x": interval[5],
           "y": 147
         },
-        {
-          "x": "car",
-          "y": 21
-        },
-        {
-          "x": "moto",
-          "y": 98
-        },
-        {
-          "x": "bicycle",
-          "y": 298
-        },
-        {
-          "x": "horse",
-          "y": 167
-        },
-        {
-          "x": "skateboard",
-          "y": 134
-        },
-        {
-          "x": "others",
-          "y": 300
-        }
       ]
     
     }
   ]
 
   return (
-    <div className='w-full h-[350px]'>
+    <div className='w-full h-[250px]'>
     <ResponsiveLine
     data={data}
-    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+    margin={{ top: 30, right: 50, bottom: 50, left: 60 }}
     xScale={{ type: 'point' }}
     yScale={{
         type: 'linear',
@@ -82,7 +82,6 @@ export const Linegraph = () => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'transportation',
         legendOffset: 36,
         legendPosition: 'middle'
     }}
@@ -91,8 +90,8 @@ export const Linegraph = () => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'count',
-        legendOffset: -40,
+        legend: 'Price',
+        legendOffset: -45,
         legendPosition: 'middle'
     }}
     pointSize={10}

@@ -14,7 +14,7 @@ import {
 	$tableAddress,
 	OrderBookAddressGit,
 } from '../../../services/constants';
-import { FreePlayGraph, Linegraph } from '../../../components/linegraph';
+import { Linegraph } from '../../../components/linegraph';
 
 declare var window: any;
 
@@ -137,20 +137,36 @@ const LiveMarket: NextPage = () => {
 						<></>
 					)} */}
           <div className='flex mobile:flex-col tablet:flex-col laptop:flex-row'>
-          <div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
-				<div className='bg-white laptop:w-[40%] rounded-lg font-SG p-6 border-[1px] border-[#0C1615] '>
-          <span className='flex flex-row justify-end'>
-					<h1 className='w-fit text-right px-3 py-2 rounded text-xl font-medium bg-[#ACFF00] '> Pick of the Day</h1>
-					</span>
+          <div className="w-full flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
+				<div className='bg-white laptop:w-[60%] rounded-lg font-SG p-6  '>
+          <ul className='flex flex-row justify-between items-center'>
+          <li className='mr-2'>
+					<button className='w-full px-3 py-2 rounded text-xl font-medium bg-[#ACFF00]'> Mint </button>
+          </li>
+          <li className='mr-2'>
+					<button className='w-full px-3 py-2 rounded text-xl font-medium bg-[#ACFF00]'> Withdraw</button>
+          </li>
+          <li className='mr-2'>
+					<button className='w-full px-3 py-2 rounded text-xl font-medium bg-[#ACFF00]'> Stake</button>
+          </li>
+
+          <li className='mr-2'>
+					<button className='w-full px-3 py-2 rounded text-xl font-medium bg-[#ACFF00]'> Unstake</button>
+          </li>
+
+          <li className='mr-2'>
+					<button className='w-full px-3 py-2 rounded text-xl font-medium bg-[#ACFF00]'> Switch</button>
+          </li>
+          </ul>
           {/* <img
 						src={response?.image.original}
 						className="object-cover w-[50%] laptop:w-[30%] m-auto h-auto rounded-lg "
 					/> */}
 					<div className='flex flex-col space-y-5'>
-						<div className='flex-1'>
+						{/* <div className='flex-1'>
 							What will the resell price of the <span className='font-bold'>{marketTitle}</span> be on <span className='font-bold'>October 31st, 2022?</span>
-						</div>
-						<div className='flex flex-col flex-1 space-y-3 '>
+						</div> */}
+						<div className='flex flex-col flex-1 space-y-3 mt-6 '>
 							<div className="flex flex-row bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] rounded-[80px] border-[#0C1615] focus:outline-2 focus:outline-offset-2 hover:outline-1">
 								<p className="flex-1 text-left mobile:text-sm laptop:text-md pr-1">Prediction Price:</p>
 								<input
@@ -183,7 +199,7 @@ const LiveMarket: NextPage = () => {
          
 				</div>
        
-        <div className='bg-white rounded-lg font-SG p-6 flex-1 flex-col justify-center items-center '>
+        <div className='w-[40%] bg-white rounded-lg font-SG p-2 flex flex-col justify-center items-center '>
             <h1>{marketTitle} Price</h1>
 <Linegraph />
 </div>
