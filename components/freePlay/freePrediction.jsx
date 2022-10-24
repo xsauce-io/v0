@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Skeleton } from '@mui/material';
 import { FutureCard } from './futureCard';
-
+import { FutureIndexSection } from './futureIndexSection';
 import { useGetSneaker } from '../../services/useRequests';
 
 export const FreePrediction = () => {
 	const { data: s1, error: e1 } = useGetSneaker('DZ5485-612');
-	const { data: s2, error: e2 } = useGetSneaker('DZ5485-612');
-	const { data: s3, error: e3 } = useGetSneaker('DZ5485-612');
 
-	const [isLong, setisLong] = useState(true);
+	const [isLong, setIsLong] = useState(true);
 	const [Market, setMarket] = useState(0);
 	const skeletonArray = [1, 2, 3];
 	const Markets = [
@@ -34,9 +32,7 @@ export const FreePrediction = () => {
 	];
 
 	const cardObjectHref = '/markets/' + Markets[Market].title;
-
-	// useEffect(() => {
-	// }, [Market])
+	useEffect(() => {}, [Market]);
 	return (
 		<React.Fragment>
 			<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
@@ -52,23 +48,9 @@ export const FreePrediction = () => {
 							🔍 &nbsp;<span className="underline">See Composition</span>
 						</a>
 					</span>
-					<div className="m-auto py-4 tablet:w-[250px] h-[250px] ">
-						<img
-							src={Markets[Market].href}
-							className="object-contain w-full h-full "
-						/>
-					</div>
+
 					<div className="flex flex-col space-y-5">
-						<div className="flex-1 font-bold text-2xl text-center">
-							{Markets[Market].title} -
-							<span className="font-normal">
-								{Markets[Market].subTitle}
-								<br />
-								<span className="text-sm">
-									{Markets[Market].rankProfile}
-								</span>{' '}
-							</span>
-						</div>
+						<FutureIndexSection market={Markets[Market]} />
 						<div className="flex flex-col flex-1 ">
 							<div className="flex flex-row">
 								<button
@@ -79,9 +61,9 @@ export const FreePrediction = () => {
 											? 'flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] opacity-80 rounded-tl-[80px] rounded-bl-[80px]'
 											: 'flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]'
 									}
-									onClick={() => setisLong(true)}
+									onClick={() => setIsLong(true)}
 								>
-									Long 2x{' '}
+									Long 2x
 									<img
 										className="mobile:w-[10px] laptop:w-[25px]"
 										src="/upTrend.png"
@@ -95,9 +77,9 @@ export const FreePrediction = () => {
 											? 'flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]'
 											: 'flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white opacity-70 bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px]'
 									}
-									onClick={() => setisLong(false)}
+									onClick={() => setIsLong(false)}
 								>
-									Short 2x{' '}
+									Short 2x
 									<img
 										className="mobile:w-[10px] laptop:w-[25px]"
 										src="/downTrend.png"
