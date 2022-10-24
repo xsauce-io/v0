@@ -1,32 +1,30 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout';
+import { Layout } from '../components/layout/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import React from 'react';
 import { ethers } from 'ethers';
-import { TopStories } from '../components/topStories';
-import { DashboardTable } from '../components/dashboardTable';
+import { DashboardTable } from '../components/portfolio/dashboardTable';
 import { MarketFactory, marketsDataGit } from '../services/constants';
 import MarketFactoryABI from '../abi/marketFactory.json';
 import MarketAbi from '../abi/markets.json';
-import { CalendarHighlight } from '../components/calendarHighlight';
-import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 
-import { Dashboard } from '../components/dashboard';
-import { ContentHeader } from '../components/contentHeader';
+import { Dashboard } from '../components/portfolio/dashboard';
+import { ContentHeader } from '../components/layout/contentHeader';
 import { Skeleton } from '@mui/material';
-import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/toast';
+
 declare let window: any;
-import { FirstTimeVisitorModal } from '../components/firstTimeVisitorModal';
-import { CalendarCard } from '../components/calendarCard';
+
 
 const Portfolio: NextPage = () => {
+	// --------------------------------------------------
 	// ------------------- Constants ---------------------
+	// --------------------------------------------------
+
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -42,7 +40,10 @@ const Portfolio: NextPage = () => {
 
 	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
+	// --------------------------------------------------
 	// ------------------- State Variable --------------------
+	// --------------------------------------------------
+
 
 	const [response, setResponse] = useState([] as any);
 	const [storedPersistentResponse, setStoredPersistentResponse] = useState(
@@ -54,6 +55,10 @@ const Portfolio: NextPage = () => {
 	const [allBalances, setAllBalances] = useState([] as any);
 
 	const [showPortfolio, setShowPortfolio] = useState(false);
+
+	// --------------------------------------------------
+	// ------------------Function------------------------
+	// --------------------------------------------------
 
 	const showBalances = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
@@ -117,14 +122,19 @@ const Portfolio: NextPage = () => {
 			}
 		}
 	};
-
-	//------------------ Use Effect / Use memo ------------------
+	// --------------------------------------------------
+	// ----------------- Use Effect / Use memo ----------
+	// --------------------------------------------------
 
 	useEffect(() => {
 		showBalances();
 	}, []);
 
-	useEffect(() => {}, [showPortfolio]);
+	useEffect(() => { }, [showPortfolio]);
+
+	// --------------------------------------------------
+	// --------------------Render -----------------------
+	// --------------------------------------------------
 
 	return (
 		<div>
@@ -143,6 +153,7 @@ const Portfolio: NextPage = () => {
 				headerTitle={'Portfolio'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
+				logoColor={'#FFFFFF'}
 			>
 				<div className="relative min-h-[60vh]">
 					<ContentHeader
@@ -165,20 +176,20 @@ const Portfolio: NextPage = () => {
 						<DashboardTable>
 							{allBalances.length === 0
 								? skeletonArray.map(() => (
-										<>
-											<Skeleton
-												animation="pulse"
-												variant="rounded"
-												height={70}
-												width={'100%'}
-												sx={{ borderRadius: '100px' }}
-											/>
-											<p className="h-4"> </p>
-										</>
-								  ))
+									<>
+										<Skeleton
+											animation="pulse"
+											variant="rounded"
+											height={70}
+											width={'100%'}
+											sx={{ borderRadius: '100px' }}
+										/>
+										<p className="h-4"> </p>
+									</>
+								))
 								: allBalances?.map((el: any) => {
-										return <Dashboard positions={el} />;
-								  })}
+									return <Dashboard positions={el} />;
+								})}
 						</DashboardTable>
 					) : (
 						<div className="w-full h-full bg-[#c4c4c4] absolute top-4 bg-opacity-50 flex flex justify-center items-center text-center">

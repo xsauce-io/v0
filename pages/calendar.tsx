@@ -1,20 +1,11 @@
 import type { NextPage } from 'next';
-import { Nav } from '../components/nav';
-import { Announcement } from '../components/announcement';
 import Head from 'next/head';
-import Image from 'next/image';
 import { useState, useEffect, useMemo } from 'react';
-import axios from 'axios';
-import { RepeatOneSharp } from '@mui/icons-material';
 import { Skeleton } from '@mui/material';
-import { Tabs } from '../components/tabs';
-import { Layout } from '../components/layout';
-import { ContentHeader } from '../components/contentHeader';
-
-import { ethers, utils } from 'ethers';
-
-import { CalendarCard } from '../components/calendarCard';
-import { CalendarHighlight } from '../components/calendarHighlight';
+import { Layout } from '../components/layout/layout';
+import { ContentHeader } from '../components/layout/contentHeader';
+import { CalendarCard } from '../components/calendar/calendarCard';
+import { CalendarHighlight } from '../components/calendar/calendarHighlight';
 import {
 	useGetMarketBySku,
 	useGetSneaker,
@@ -22,7 +13,7 @@ import {
 } from '../services/useRequests';
 import { Box } from '@mui/system';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/toast';
+import { ToastNotification } from '../components/common/toast';
 
 const Markets: NextPage = () => {
 	// ------------------- Constants ---------------------
@@ -90,8 +81,8 @@ const Markets: NextPage = () => {
 							a.releaseDate > b.releaseDate
 								? 1
 								: b.releaseDate > a.releaseDate
-								? -1
-								: 0
+									? -1
+									: 0
 					);
 					console.log({ response });
 				} else if (
@@ -119,8 +110,8 @@ const Markets: NextPage = () => {
 							a.releaseDate < b.releaseDate
 								? 1
 								: b.releaseDate < a.releaseDate
-								? -1
-								: 0
+									? -1
+									: 0
 					);
 					console.log({ response });
 				} else if (
@@ -158,14 +149,14 @@ const Markets: NextPage = () => {
 	return (
 		<div>
 			<Head>
-      <title>Xsauce | Calender </title>
+				<title>Xsauce | Calender </title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-        <link rel="icon" type='favicon' href='/greenDrop.svg'/>
+				<link rel="icon" type='favicon' href='/greenDrop.svg' />
 			</Head>
 
 			<Layout
@@ -288,17 +279,17 @@ const Markets: NextPage = () => {
 						<div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
 							{response || sneakersDataError === undefined
 								? response?.map((el: any, index: number) => (
-										<CalendarCard index={index} cardObject={el} />
-								  ))
+									<CalendarCard index={index} cardObject={el} />
+								))
 								: skeletonArray.map(() => (
-										<Skeleton
-											animation="pulse"
-											variant="rounded"
-											height={300}
-											sx={{ borderRadius: '15px' }}
-											width={'100%'}
-										/>
-								  ))}
+									<Skeleton
+										animation="pulse"
+										variant="rounded"
+										height={300}
+										sx={{ borderRadius: '15px' }}
+										width={'100%'}
+									/>
+								))}
 						</div>
 					</div>
 				</main>

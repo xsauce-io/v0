@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Skeleton } from '@mui/material';
 import { FutureCard } from './futureCard';
+import { FutureIndexSection } from './futureIndexSection';
+import { useGetSneaker } from '../../services/useRequests';
 
-import { useGetSneaker } from '../services/useRequests';
-import { useGetSneakerByLimit } from '../services/useRequests';
 export const FreePrediction = () => {
 	const { data: s1, error: e1 } = useGetSneaker('DZ5485-612');
-	const { data: s2, error: e2 } = useGetSneaker('DZ5485-612');
-	const { data: s3, error: e3 } = useGetSneaker('DZ5485-612');
 
 	const [isLong, setIsLong] = useState(true);
 	const [Market, setMarket] = useState(0);
@@ -34,9 +32,7 @@ export const FreePrediction = () => {
 	];
 
 	const cardObjectHref = '/markets/' + Markets[Market].title;
-
-	// useEffect(() => {
-	// }, [Market])
+	useEffect(() => {}, [Market]);
 	return (
 		<React.Fragment>
 			<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
@@ -52,21 +48,9 @@ export const FreePrediction = () => {
 							🔍 &nbsp;<span className="underline">See Composition</span>
 						</a>
 					</span>
-					<div className="m-auto py-4 tablet:w-[250px] h-[250px] transition ease-in-out delay-1000  duration-300  ">
-						<img
-							src={Markets[Market].href}
-							className="object-contain w-full h-full transition ease-in-out delay-1500  "
-						/>
-					</div>
+
 					<div className="flex flex-col space-y-5">
-						<div className="flex-1 font-bold text-2xl text-center transition ease-in-out delay-1000 ">
-							{Markets[Market].title} -
-							<span className="font-normal">
-								{Markets[Market].subTitle}
-								<br />
-								<span className="text-sm">{Markets[Market].rankProfile}</span>
-							</span>
-						</div>
+						<FutureIndexSection market={Markets[Market]} />
 						<div className="flex flex-col flex-1 ">
 							<div className="flex flex-row">
 								<button

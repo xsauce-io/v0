@@ -18,8 +18,10 @@ declare let window: any;
 
 import { HomeNav } from '../components/home/homeNav';
 import Link from 'next/link';
+import { Layout } from '../components/layout/layout';
+import { ContentHeader } from '../components/layout/contentHeader';
 
-const Home: NextPage = () => {
+const DripFeed: NextPage = () => {
 	// ----------------------------------------------------
 	// -------------------- Constants ---------------------
 	// -----------------------------------------------------
@@ -144,9 +146,9 @@ const Home: NextPage = () => {
 	// ----------------------------------------------------
 
 	return (
-		<div className="w-screen h-screen text-black bg-white">
+		<div>
 			<Head>
-				<title>Xsauce | Culture is Currency</title>
+				<title>Xsauce | Markets</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
@@ -156,71 +158,90 @@ const Home: NextPage = () => {
 				<link rel="icon" type='favicon' href='/greenDrop.svg' />
 			</Head>
 
+			<Layout
+				headerSubtitle={'LIVE DERIVATIVES MARKET'}
+				showHowItWorksButton={true}
+				showFinancialOverview={false}
+				headerTitle={'Xchange'}
+				logoColor={'#FFFFFF'}
+			>
+				<main className="flex w-full flex-1 flex-col text-center">
+					{/*Sorting */}
+					<ContentHeader
+						title={'Predict the live market'}
+						icon={<img src="/candle.svg" />}
+					>
+						<div className="flex mobile:flex-col tablet:flex-row tablet:space-x-3 mobile:space-y-3  tablet:space-y-0 items-center ">
+							<text>
+								Total Live Markets &nbsp;
+								<span className="text-[#748282]"> {response.length}</span>
+							</text>
+							<div className="dropdown dropdown-end">
+								<label
+									tabIndex={0}
+									className="text-[10px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm  bg-[#0C1615]  hover:opacity-50  w-[130px] p-1 px-2"
+								>
+									<img className="" src="/arrowUpDownGrey.svg" />
 
-			{/* //Note this is a custom home navigator  */}
-			<HomeNav logoColor={"#0C1615"} />
-			<div className='flex  flex-col tablet:flex-row justify-center items-center laptop:h-[calc(100vh-80px)] mx-5 laptop:mx-20 mt-80px'>
-				<ul className='flex flex-col font-SG font-medium tablet:w-[50%] cursor-pointer justify-center items-start lg-desktop:items-end text-[20px] tablet:text-[30px] laptop:text-[40px] lg-desktop:text-[55px] p-4 tablet:p-8' >
+									<span className="flex-1 text-white font-Inter ">Sort On</span>
+
+									<img className="" src="/downArrowGrey.svg" />
+								</label>
+								<ul
+									tabIndex={0}
+									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
+								>
+									<li>
+										<button
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE });
+												mixpanel.track('Sort ', {
+													sortBy: SORT_BY_STATES.RETAIL_PRICE,
+												});
+											}}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
+											Retail Price
+										</button>
+									</li>
+									<li>
+										<button
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE });
+												mixpanel.track('Sort ', {
+													sortBy: SORT_BY_STATES.RELEASE_DATE,
+												});
+											}}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
+											Release Date
+										</button>
+									</li>
+
+									<li>
+										<button
+											onClick={() => {
+												setSortBy({ state: SORT_BY_STATES.NAME });
+												mixpanel.track('Sort ', {
+													sortBy: SORT_BY_STATES.NAME,
+												});
+											}}
+											className="text-black font-Inter active:bg-[#ACFF00]"
+										>
+											Name
+										</button>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+					</ContentHeader>
 
 
-					<Link href='/markets'>
-						<a className=' flex flex-row w-full' >
-							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  laptop:w-1/2 px-4 py-2 flex flex-row justify-start items-center active'>
-
-								<img className="w-[25px] invisible group-hover:flex group-hover:visible mr-4 " src='/jordans.svg' />
-								<span className=''>Launch App</span>
-							</li>
-						</a>
-					</Link>
-
-					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
-						target={'_blank'}
-						rel={'noreferrer'} >
-						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 px-4 py-2 flex flex-row justify-start items-center'>
-							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
-							<span className=''>What is Xsauce</span>
-						</li>
-					</a>
-
-					<Link href='/markets'>
-						<a className=' flex flex-row w-full'  >
-							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 laptop:w-1/2 px-4 py-2 flex flex-row justify-start items-center'>
-								<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
-								<span className=''>Drip Feed </span>
-							</li>
-						</a>
-					</Link>
-
-
-					<a className=' flex flex-row w-full' href="https://docs.xsauce.io/applications/prediction-markets-v.0-beta"
-						target={'_blank'}
-						rel={'noreferrer'} >
-						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 px-4 py-2 flex flex-row justify-start items-center'>
-							<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
-							<span className=' '>Documentation </span>
-						</li>
-					</a>
-
-
-					<a className='flex flex-row w-full' href="https://docs.xsauce.io/connect/socials"
-						target={'_blank'}
-						rel={'noreferrer'}>
-						<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl  w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center'>
-
-							<img className="w-[25px] invisible group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
-							<span className=''>Drop us a line</span>
-
-						</li>
-					</a>
-
-
-				</ul>
-				<div className='tablet:w-[50%] flex flex-row justify-start items-center  '>
-					<img className='w-full p-4 tablet:p-8' src='/visual.png' />
-				</div>
-			</div >
-		</div >
+				</main>
+			</Layout>
+		</div>
 	);
 };
 
-export default Home;
+export default DripFeed;

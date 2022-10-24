@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { useWindowDimensions } from '../utils/hooks/useWindowDimensionsTS';
+import { useWindowDimensions } from '/utils/hooks/useWindowDimensionsTS';
 
 export const ToastNotificationActionBar = ({
 	subMessage,

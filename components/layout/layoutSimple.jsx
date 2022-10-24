@@ -1,13 +1,6 @@
 import { Nav } from './nav';
 import { Footer } from './footer';
-import { Tabs } from './tabs';
-import { Announcement } from './announcement';
-import { HowItWorksButton } from './howItWorksButton';
-import { Header } from './header';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { FinancialOverviewCard } from './financialOverviewCard';
-import { ContractsCard } from './contractsCard';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 
 // props for bg color, hero header, hero subheader, optional hero box,  Nav colors (text and Icons), tab header and icon

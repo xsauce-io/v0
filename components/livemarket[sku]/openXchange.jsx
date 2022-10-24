@@ -1,15 +1,14 @@
 import React from 'react';
 import { BigNumber, ethers, utils } from 'ethers';
 import { useState, useEffect } from 'react';
-import individualBook from '../abi/book.json';
-import allBooks from '../abi/bookFactory.json';
-import marketabi from '../abi/markets.json';
-import axios from 'axios';
+import individualBook from '../../abi/book.json';
+import allBooks from '../../abi/bookFactory.json';
+import marketabi from '../../abi/markets.json';
 import { Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useRouter } from 'next/router';
-import { useGetMarketBySku } from '../services/useRequests';
-import { $tableAddress } from '../services/constants';
+import { useGetMarketBySku } from '../../services/useRequests';
+import { $tableAddress } from '../../services/constants';
 
 export const OpenXchange = (cardObject) => {
 	// ----------------------- Variables and State Variable ------------------------
