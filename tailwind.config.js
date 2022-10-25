@@ -23,6 +23,11 @@ module.exports = {
 			'lg-desktop': '2000px',
 		},
 		extend: {
+			backgroundImage: theme => ({
+				'hero': "url('/public/landingBackgroundDrop.png')",
+				'heroo': "url('../public/landingBackgroundDrop.png')",
+			  }),
+
 			scale: {
 				80: '0.8',
 			},

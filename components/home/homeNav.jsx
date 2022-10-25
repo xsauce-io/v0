@@ -101,40 +101,41 @@ export const HomeNav = ({ logoColor }) => {
 				}
 				//setOpenWalletNotConnectedModal(false);
 			} catch (error) {
+				//No toasts shall display on index
 				if (error.code == -32002) {
 					if (!clicked) {
-						toast.custom(
-							(t) => (
-								<ToastNotificationActionBar
-									message={'Your wallet is not connected'}
-									subMessage={
-										'To see market statistics, connect your Metamask wallet and refresh the page.'
-									}
-									icon={<img src="/alertTriangle.svg" />}
-									t={t}
-									href="https://geekflare.com/finance/beginners-guide-to-metamask/"
-								/>
-							),
-							{ duration: Infinity }
-						);
+						// toast.custom(
+						// 	(t) => (
+						// 		<ToastNotificationActionBar
+						// 			message={'Your wallet is not connected'}
+						// 			subMessage={
+						// 				'To see market statistics, connect your Metamask wallet and refresh the page.'
+						// 			}
+						// 			icon={<img src="/alertTriangle.svg" />}
+						// 			t={t}
+						// 			href="https://geekflare.com/finance/beginners-guide-to-metamask/"
+						// 		/>
+						// 	),
+						// 	{ duration: Infinity }
+						// );
 						console.log('error wallet not connected', error);
 					} else if (error) {
-						toast.custom(
-							(t) => (
-								<ToastNotificationActionBar
-									message={
-										'Your Metamask wallet is currently busy with another request'
-									}
-									subMessage={
-										'Open your Metamask to manage your current requests and refresh the page.'
-									}
-									icon={<img src="/alertCircle.svg" />}
-									t={t}
-									href="https://geekflare.com/finance/beginners-guide-to-metamask/"
-								/>
-							),
-							{ duration: Infinity }
-						);
+						// toast.custom(
+						// 	(t) => (
+						// 		<ToastNotificationActionBar
+						// 			message={
+						// 				'Your Metamask wallet is currently busy with another request'
+						// 			}
+						// 			subMessage={
+						// 				'Open your Metamask to manage your current requests and refresh the page.'
+						// 			}
+						// 			icon={<img src="/alertCircle.svg" />}
+						// 			t={t}
+						// 			href="https://geekflare.com/finance/beginners-guide-to-metamask/"
+						// 		/>
+						// 	),
+						// 	{ duration: Infinity }
+						// );
 					}
 				}
 				mixpanelTrackProps('Connect Wallet', {
@@ -399,8 +400,8 @@ export const HomeNav = ({ logoColor }) => {
 	// ----------------------------------------------------
 
 	return (
-		<header className=" sticky top-0 z-20 ">
-			<div className="flex items-center h-20 w-full gap-8 mobile:px-4 laptop:px-20">
+		<header className="sticky top-0 z-20 ">
+			<div className="flex items-center h-20 w-full  bg-white gap-8 mobile:px-4 laptop:px-20">
 				<div className=" basis-1/3	">
 					<a className="block" href="/">
 						<span className="sr-only">Home</span>
