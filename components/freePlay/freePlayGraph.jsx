@@ -103,7 +103,7 @@ const options = {
   responsive: true,
 
   scales: {
-   
+
     x: {
       display: true,
       type: 'linear',
@@ -119,7 +119,7 @@ const options = {
       grid: {
          display: false
       }
-      
+
 
     }
   }
@@ -129,9 +129,6 @@ const options = {
 
 
 export const FreePlayGraph = () => {
-
-
-
   return (
     <div className='w-full'>
       <Chart

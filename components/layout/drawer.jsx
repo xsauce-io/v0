@@ -35,7 +35,7 @@ export const LocalDrawer = ({ children }) => {
 							className="w-5 h-5"
 							fill="none"
 							viewBox="0 0 24 24"
-							stroke="#000000"
+							stroke="#FFFFFF"
 							stroke-width="2"
 						>
 							<path
