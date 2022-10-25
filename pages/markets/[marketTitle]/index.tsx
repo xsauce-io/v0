@@ -15,17 +15,26 @@ import {
 	OrderBookAddressGit,
 } from '../../../services/constants';
 import { Linegraph } from '../../../components/linegraph';
+import { MintTab } from '../../../components/marketTabs/mint'
+import { WithdrawTab } from '../../../components/marketTabs/withdraw'
+import { StakeTab } from '../../../components/marketTabs/stake'
+import { UnstakeTab } from '../../../components/marketTabs/unstake'
+import { SwitchTab } from '../../../components/marketTabs/switch'
 
 declare var window: any;
 
 const LiveMarket: NextPage = () => {
 	const router = useRouter();
-	const { marketTitle } = router.query;
+	const  mkt  = router.query;
+  const mktTitl = mkt.marketTitle;
+
+  console.log(mktTitl)
 
 	// const { data, error } = useGetSneaker(sku);
 
 	// const [response, setResponse] = useState(data);
 	const [admin, setAdmin] = useState(false);
+  const [Tab, setTab] = useState(0);
 
 	const adminCheck = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
@@ -50,6 +59,7 @@ const LiveMarket: NextPage = () => {
 			}
 		}
 	};
+
 
 	// const createNewBook = async (e: any) => {
 	// 	e.preventDefault();
@@ -81,7 +91,6 @@ const LiveMarket: NextPage = () => {
 	// if (!data || error) {
 	// 	return <div>loading</div>;
 	// }
-
 	return (
 		<div className="bg-[#EFF1F3]">
 			<Head>
@@ -105,7 +114,7 @@ const LiveMarket: NextPage = () => {
 				{/* <Announcement /> */}
 				<Nav logoColor="#ACFF00" />
 			</div>
-			<main className="flex w-full mobile:px-5 laptop:px-48 flex-1 flex-col text-center pb-40 mt-16 ">
+			<main className="flex w-full mobile:px-5 laptop:px-40 flex-1 flex-col text-center mb-40 mt-10 ">
 				<h1>{admin}</h1>
 
 				<div className="flex flex-col ">
@@ -136,55 +145,26 @@ const LiveMarket: NextPage = () => {
 					) : (
 						<></>
 					)} */}
-          <div className='flex mobile:flex-col tablet:flex-col laptop:flex-row'>
-          <div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
-				<div className='bg-white laptop:w-[40%] rounded-lg font-SG p-6 border-[1px] border-[#0C1615] '>
-          <span className='flex flex-row justify-end'>
-					<h1 className='w-fit text-right px-3 py-2 rounded text-xl font-medium bg-[#ACFF00] '> Pick of the Day</h1>
-					</span>
-          {/* <img
-						src={response?.image.original}
-						className="object-cover w-[50%] laptop:w-[30%] m-auto h-auto rounded-lg "
-					/> */}
-					<div className='flex flex-col space-y-5'>
-						<div className='flex-1'>
-							What will the resell price of the <span className='font-bold'>{marketTitle}</span> be on <span className='font-bold'>October 31st, 2022?</span>
-						</div>
-						<div className='flex flex-col flex-1 space-y-3 '>
-							<div className="flex flex-row bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] rounded-[80px] border-[#0C1615] focus:outline-2 focus:outline-offset-2 hover:outline-1">
-								<p className="flex-1 text-left mobile:text-sm laptop:text-md pr-1">Prediction Price:</p>
-								<input
-									className="flex-1 text-right mobile:text-sm laptop:text-md mobile:w-[10%] appearance-none focus:none focus:outline-none"
-									name="Amount"
-									id="amount"
-									type="number"
-									placeholder="$375"
-									// onChange={() => CalculateTotal()}
-									required
-								/>
-							</div>
-
-										<button
-											type="submit"
-											id="mint"
-											className="w-full font-medium mb-6 text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-60"
-										>
-											Submit
-										</button>
-										<div className='pt-5'>
-											{/* <h1 className='font-bold'>Current Resell Price:
-								<span className='bg-[#ACFF00] py-2 px-3 rounded-full ml-2 text-sm font-normal'>${response?.estimatedMarketValue}</span>
-							</h1> */}
-							</div>
-						</div>
-						
+          <div className='flex mobile:flex-col tablet:flex-col laptop:flex-row mt-6'>
+          <div className="flex flex-col space-y-4 laptop:flex-row laptop:w-full laptop:space-x-4 laptop:space-y-0 pb-4">
+				<div className='bg-white laptop:w-fit rounded-lg font-SG p-6'>
+          <div className='flex flex-row bg-black rounded-lg pt-3 px-3'>
+            <ul className='flex flex-row justify-center items-center '>
+					<button onClick={() => setTab(0)} className={Tab === 0 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black' }> Mint</button>
+          <button onClick={() => setTab(1)} className={Tab === 1 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Withdraw</button>
+          <button onClick={() => setTab(2)}  className={Tab === 2 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Stake</button>
+          <button onClick={() => setTab(3)}  className={Tab === 3 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Unstake</button>
+          <button onClick={() => setTab(4)}  className={Tab === 4 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Switch</button>
+          </ul>
 					</div>
+          {Tab === 0 ?  <MintTab market={mktTitl} />  : Tab === 1 ? <WithdrawTab /> : Tab === 2 ? <StakeTab/> : Tab === 3 ? <UnstakeTab/> : Tab === 4 ? <SwitchTab/> : <></>}
+				
          
          
 				</div>
        
-        <div className='bg-white rounded-lg font-SG p-6 flex-1 flex-col justify-center items-center '>
-            <h1>{marketTitle} Price</h1>
+        <div className='bg-white rounded-lg font-SG p-2 w-[60%] flex flex-col justify-center items-center '>
+            <h1>{mktTitl} Price</h1>
 <Linegraph />
 </div>
          
@@ -193,7 +173,7 @@ const LiveMarket: NextPage = () => {
 					</div>
 					<div className='flex flex-row'>
 						<div className='bg-white rounded-lg font-SG p-6 flex-1 flex-col justify-center items-center text-left laptop:mr-4'>
-							<span className='font-bold laptop:text-2xl'>{marketTitle}</span>
+							<span className='font-bold laptop:text-2xl'>{mktTitl}</span>
 							<p className='laptop:text-xl mt-5'>The Culture Index is a basket of the top 30 streetwear items represented by their resale value. This index was designed to give maximum diversity across streetwear</p>
 						</div>
 						<TreeMap />
