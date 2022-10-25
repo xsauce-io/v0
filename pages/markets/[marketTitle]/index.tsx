@@ -1,25 +1,20 @@
 import type { NextPage } from 'next';
 import { Nav } from '../../../components/layout/nav';
 // import { Card } from '../components/card'
-import { TreeMap } from '../../../components/treemap';
+import { TreeMap } from '../../../components/markets[title]/treemap';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 
 import { Footer } from '../../../components/layout/footer';
-import { useGetSneaker } from '../../../services/useRequests';
-import BookFactoryABI from '../../../abi/bookFactory.json';
-import {
-	$tableAddress,
-	OrderBookAddressGit,
-} from '../../../services/constants';
-import { Linegraph } from '../../../components/linegraph';
-import { MintTab } from '../../../components/marketTabs/mint'
-import { WithdrawTab } from '../../../components/marketTabs/withdraw'
-import { StakeTab } from '../../../components/marketTabs/stake'
-import { UnstakeTab } from '../../../components/marketTabs/unstake'
-import { SwitchTab } from '../../../components/marketTabs/switch'
+
+import { Linegraph } from '../../../components/markets[title]/linegraph';
+import { MintTab } from '../../../components/markets[title]/marketTabs/mint'
+import { WithdrawTab } from '../../../components/markets[title]/marketTabs/withdraw'
+import { StakeTab } from '../../../components/markets[title]/marketTabs/stake'
+import { UnstakeTab } from '../../../components/markets[title]/marketTabs/unstake'
+import { SwitchTab } from '../../../components/markets[title]/marketTabs/switch'
 
 declare var window: any;
 
@@ -158,16 +153,16 @@ const LiveMarket: NextPage = () => {
           </ul>
 					</div>
           {Tab === 0 ?  <MintTab market={mktTitl} />  : Tab === 1 ? <WithdrawTab market={mktTitl} /> : Tab === 2 ? <StakeTab market={mktTitl}/> : Tab === 3 ? <UnstakeTab market={mktTitl}/> : Tab === 4 ? <SwitchTab market={mktTitl}/> : <></>}
-				
-         
-         
+
+
+
 				</div>
-       
+
         <div className='bg-white rounded-lg font-SG p-2 w-[60%] flex flex-col justify-center items-center '>
             <h1>{mktTitl} Price</h1>
 <Linegraph />
 </div>
-         
+
 
 						</div>
 					</div>
