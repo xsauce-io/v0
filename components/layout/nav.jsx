@@ -458,7 +458,7 @@ export const Nav = ({ logoColor }) => {
 										<span className="text-[black] text-[14px]">Goerli</span>
 									</>
 								)}
-								<img src="/downArrowDark.svg" />
+								<img src="/downArrow.svg" />
 							</label>
 							<ul
 								tabindex="0"
@@ -551,22 +551,25 @@ export const Nav = ({ logoColor }) => {
 					<></>
 				)}
 
-				<LocalDrawer>
-					<div className="flex flex-col flex-1 justify-center items-center space-y-4 pt-8 font-Inter border-t-[1px] border-white mt-4   ">
+				<LocalDrawer backgroundColor='#0C1615' >
+
+				<div className="flex flex-col flex-1 justify-center items-center  font-Inter  mt-4 ">
+					<div className='my-10 border-[1px] border-white w-full'/>
+
 						<div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
-								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-3 w-[175px] bg-[#ACFF00] space-x-6 rounded-[40px]"
+								className="text-[14px] flex flex-row text-black justify-center items-center px-4 py-3 w-[175px]  bg-[#DCDEE1] space-x-6 rounded-[40px]"
 							>
 								{toggle === 421613 ? (
 									<>
 										<img className="h-auto w-[10%]" src="/arbitrum.svg" />
-										<span className="text-black text-[14px]">Arbitrum</span>
+										<span className="text-[14px]">Arbitrum</span>
 									</>
 								) : toggle === 80001 ? (
 									<>
 										<img className="h-auto w-[10%]" src="/polygon.svg" />
-										<span className="text-[black] text-[14px]">Polygon</span>
+										<span className=" text-[14px]">Polygon</span>
 									</>
 								) : toggle === 41 ? (
 									<>
@@ -574,19 +577,19 @@ export const Nav = ({ logoColor }) => {
 											className="h-auto w-[10%]text-[14px]"
 											src="/telos.png"
 										/>
-										<span className="text-[black] text-[14px]">Telos</span>
+										<span className=" text-[14px]">Telos</span>
 									</>
 								) : (
 									<>
 										<img className="h-auto w-[9%]" src="/eth.png" />
-										<span className="text-[black] text-[14px]">Goerli</span>
+										<span className=" text-[14px]">Goerli</span>
 									</>
 								)}
-								<img src="/downArrow.svg" className="h-auto w-[20px]" />
+								<img src="/caretDown.svg" className="h-auto w-[20px]" />
 							</label>
 							<ul
 								tabindex="0"
-								className="menu dropdown-content bg-[#ACFF00] text-white p-2 shadow rounded-box w-52 mt-4"
+								className="menu dropdown-content bg-[#DCDEE1] text-black p-2 shadow rounded-box w-52 mt-4"
 							>
 								<li>
 									<a onClick={() => setState(421613)}>
@@ -604,7 +607,7 @@ export const Nav = ({ logoColor }) => {
 						</div>
 
 						<button
-							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+							className="text-[14px] flex flex-row justify-center font-Inter items-center mt-4  bg-[#DCDEE1] text-black rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
 							onClick={() => getWallet(true)}
 						>
 							<span className="truncate">
@@ -634,8 +637,10 @@ export const Nav = ({ logoColor }) => {
 							</a>
 						</button>
 
+						<div className='my-10 border-[1px] border-white w-full'></div>
+
 						<button
-							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+							className="text-[14px] flex flex-row justify-center  font-Inter items-center bg-[#DCDEE1] text-black rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
 							onClick={() => {
 								faucet();
 								mixpanelTrackProps('Get Test Tokens', { token: '$auce' });
@@ -646,7 +651,7 @@ export const Nav = ({ logoColor }) => {
 						</button>
 
 						<a
-							className="text-[14px] flex flex-row justify-center text-black font-Inter items-center bg-[#ACFF00] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+							className="text-[14px] flex flex-row justify-center  font-Inter items-center mt-4 bg-[#DCDEE1] text-black rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
 							target="blank"
 							href="https://goerli-faucet.pk910.de/"
 							onClick={() =>
@@ -658,6 +663,8 @@ export const Nav = ({ logoColor }) => {
 							<img className="h-auto w-[7%]" src="/eth.png" />
 							<text>Get ETH(Goerli) </text>
 						</a>
+						<div className='my-10 border-[1px] border-white w-full'></div>
+
 					</div>
 				</LocalDrawer>
 			</div>

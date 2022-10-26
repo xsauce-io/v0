@@ -9,7 +9,7 @@ import {
 	Screenshot,
 } from '@mui/icons-material';
 
-export const LocalDrawer = ({ children }) => {
+export const LocalDrawer = ({ children, drawerIconColor, backgroundColor }) => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -20,6 +20,7 @@ export const LocalDrawer = ({ children }) => {
 
 	const { width } = useWindowDimensions();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
 
 	return (
 		<>
@@ -35,7 +36,7 @@ export const LocalDrawer = ({ children }) => {
 							className="w-5 h-5"
 							fill="none"
 							viewBox="0 0 24 24"
-							stroke="#FFFFFF"
+							stroke={drawerIconColor ? drawerIconColor : '#FFFFFF'}
 							stroke-width="2"
 						>
 							<path
@@ -50,71 +51,25 @@ export const LocalDrawer = ({ children }) => {
 				<></>
 			)}
 			<Drawer
-				PaperProps={{
-					sx: {
-						backgroundColor: '#0C1615',
-					},
-				}}
+				PaperProps={ {backgroundColor: '#000'} }
 				anchor="right"
 				open={isDrawerOpen}
 				onClose={() => setIsDrawerOpen(false)}
 			>
-				<div className="h-20 border-b-[1px] border-white  mx-8 "></div>
-				<Box
-					p={4}
+					<Box
+						p={4}
 					width="250px"
-					textAlign="left"
-					role="presentation"
-					sx={{ backgroundColor: '#0C1615', height: '100' }}
-				>
-					<ul className="space-y-8 text-l font-SG pb-6">
-						<li>
-							<a
-								className="text-white transition hover:text-[#ACFF00]"
-								href="/"
-							>
-								Home
-							</a>
-						</li>
 
-						<li>
-							<a
-								className="text-white transition hover:text-[#ACFF00]"
-								href="/calendar"
-							>
-								Calendar
-							</a>
-						</li>
+						textAlign="left"
+						role="presentation"
+						backgroundColor={backgroundColor ? backgroundColor : "#fff"}
+						sx={{ height: '100%' }}
+					>
 
-						<li>
-							<a
-								className="text-white transition hover:text-[#ACFF00]"
-								href="/livemarkets"
-							>
-								Live Market
-							</a>
-						</li>
 
-						<li>
-							<a
-								className="text-white transition hover:text-[#ACFF00]"
-								href="/redeem"
-							>
-								Cash Out
-							</a>
-						</li>
-						<li>
-							<a
-								className="text-white transition hover:text-[#ACFF00]"
-								href="/portfolio"
-							>
-								Portfolio
-							</a>
-						</li>
-					</ul>
 
-					{children}
-				</Box>
+						{children}
+					</Box>
 			</Drawer>
 		</>
 	);
