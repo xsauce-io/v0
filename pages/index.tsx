@@ -146,11 +146,19 @@ const Home: NextPage = () => {
 			</div >
 
 			<div id="whatIsXsauceSection" className="flex flex-col border-[1px] justify-center items-center px-5 tablet:flex-row h-[calc(100vh-80px)] laptop:px-20 " style={{backgroundImage: `url(/bgLandingDrop.png)`}} >
-				<div className='tablet:w-[50%] flex flex-col justify-start items-center space-y-4 '>
-					<p className='w-full px-4 tablet:px-8 font-Inter text-xl text-white'>The Xsauce prediction market allows users to place wagers on the over/under price of a sneaker by a specified date.
-						Xsauce is nothing like a traditional bookmaker. The protocol does not collect house fees nor take part in any predictions on the platform.
+
+				<div className='tablet:w-[70%] flex flex-col justify-start items-center space-y-4 '>
+					<h1 className='w-full px-4 tablet:px-8 font-SG  text-3xl text-white'>
+					What is Xsauce
+					</h1>
+					<p className='w-full px-4 tablet:px-8 font-SG text-xl text-white'>
+						Xsauce is a dynamic, decentralized ecosystem which allows you to translate your knowledge of culture into money in your pocket. The founding belief of Xsauce is that cultural assets are a legitimate asset class.
 					</p>
-					<p className='w-full px-4 tablet:px-8 font-Inter text-xl text-white'> The Xsauce prediction market exists for educational and informational purposes and only charges a small fee on wagers to ensure the integrity of the markets.
+					<p className='w-full px-4 tablet:px-8 font-SG  text-xl text-white'>
+						For clarity, when we say cultural assets, we are referring to assets that derive their value from cultural significance rather than a pure measure of utility.
+					</p>
+					<p className='w-full px-4 tablet:px-8 font-SG  text-xl text-white'>
+					Our immediate focus is on hyped or rare sneakers as they offer sustained value as evidenced through the rapidly growing $10 billion+ sneaker resale market.
 					</p>
 				</div>
 

@@ -20,16 +20,16 @@ declare var window: any;
 
 const LiveMarket: NextPage = () => {
 	const router = useRouter();
-	const  mkt  = router.query;
-  const mktTitl = mkt.marketTitle;
+	const mkt = router.query;
+	const mktTitl = mkt.marketTitle;
 
-  console.log(mktTitl)
+	console.log(mktTitl)
 
 	// const { data, error } = useGetSneaker(sku);
 
 	// const [response, setResponse] = useState(data);
 	const [admin, setAdmin] = useState(false);
-  const [Tab, setTab] = useState(0);
+	const [Tab, setTab] = useState(0);
 
 	const adminCheck = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
@@ -107,7 +107,7 @@ const LiveMarket: NextPage = () => {
 				}}
 			>
 				{/* <Announcement /> */}
-				<Nav logoColor="#ACFF00" />
+				<Nav logoColor="#FFFFFF" />
 			</div>
 			<main className="flex w-full mobile:px-5 laptop:px-40 flex-1 flex-col text-center mb-40 mt-10 ">
 				<h1>{admin}</h1>
@@ -140,38 +140,41 @@ const LiveMarket: NextPage = () => {
 					) : (
 						<></>
 					)} */}
-          <div className='flex mobile:flex-col tablet:flex-col laptop:flex-row mt-6'>
-          <div className="flex flex-col space-y-4 laptop:flex-row laptop:w-full laptop:space-x-4 laptop:space-y-0 pb-4">
-				<div className='bg-white laptop:w-fit rounded-lg font-SG p-6'>
-          <div className='flex flex-row bg-black rounded-lg pt-3 px-3'>
-            <ul className='flex flex-row justify-center items-center '>
-					<button onClick={() => setTab(0)} className={Tab === 0 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black' }> Mint</button>
-          <button onClick={() => setTab(1)} className={Tab === 1 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Withdraw</button>
-          <button onClick={() => setTab(2)}  className={Tab === 2 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Stake</button>
-          <button onClick={() => setTab(3)}  className={Tab === 3 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Unstake</button>
-          <button onClick={() => setTab(4)}  className={Tab === 4 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] text-black': 'w-fit text-white  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Switch</button>
-          </ul>
-					</div>
-          {Tab === 0 ?  <MintTab market={mktTitl} />  : Tab === 1 ? <WithdrawTab market={mktTitl} /> : Tab === 2 ? <StakeTab market={mktTitl}/> : Tab === 3 ? <UnstakeTab market={mktTitl}/> : Tab === 4 ? <SwitchTab market={mktTitl}/> : <></>}
+					<div className='flex flex-col flex-col laptop:flex-row mt-6 text-[#0C1615]'>
+						<div className="flex flex-col space-y-4 laptop:flex-row laptop:w-full laptop:space-x-4 laptop:space-y-0 pb-4">
+							<div className='bg-white rounded-lg font-SG p-6 laptop:w-fit'>
+								<div className='flex flex-row  rounded-lg pt-3 px-3 '>
+									<ul className='flex flex-row flex-wrap justify-center items-center'>
+										<button onClick={() => setTab(0)} className={Tab === 0 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] ' : 'w-fit text-black bg-[#DCDEE1] px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Mint</button>
+										<button onClick={() => setTab(1)} className={Tab === 1 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] ' : 'w-fit text-black bg-[#DCDEE1] px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black '}> Withdraw</button>
+										<button onClick={() => setTab(2)} className={Tab === 2 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00]  ' : 'w-fit text-black bg-[#DCDEE1]  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Stake</button>
+										<button onClick={() => setTab(3)} className={Tab === 3 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] ' : 'w-fit text-black bg-[#DCDEE1]  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Unstake</button>
+										<button onClick={() => setTab(4)} className={Tab === 4 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] ' : 'w-fit text-black bg-[#DCDEE1]  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Switch</button>
+									</ul>
+								</div>
+								<div className='w-full h-full border-2 rounded-md p-4'>
+								{Tab === 0 ? <MintTab market={mktTitl} /> : Tab === 1 ? <WithdrawTab market={mktTitl} /> : Tab === 2 ? <StakeTab market={mktTitl} /> : Tab === 3 ? <UnstakeTab market={mktTitl} /> : Tab === 4 ? <SwitchTab market={mktTitl} /> : <></>}
+								</div>
 
 
+							</div>
 
-				</div>
-
-        <div className='bg-white rounded-lg font-SG p-2 w-[60%] flex flex-col justify-center items-center '>
-            <h1>{mktTitl} Price</h1>
-<Linegraph />
-</div>
+							<div className='flex flex-col bg-white rounded-lg font-SG p-2 w-full laptop:w-[60%] justify-center items-center text-[#0C1615]'>
+								<h1>{mktTitl}Price</h1>
+								<Linegraph />
+							</div>
 
 
 						</div>
 					</div>
-					<div className='flex flex-row'>
-						<div className='bg-white rounded-lg font-SG p-6 flex-1 flex-col justify-center items-center text-left laptop:mr-4'>
+					<div className='flex flex-col space-y-4 laptop:flex-row laptop:space-y-0 laptop:space-x-4 text-[#0C1615]'>
+						<div className='bg-white rounded-lg font-SG p-6 flex-1 flex-col justify-center items-center text-left '>
 							<span className='font-bold laptop:text-2xl'>{mktTitl}</span>
 							<p className='laptop:text-xl mt-5'>The Culture Index is a basket of the top 30 streetwear items represented by their resale value. This index was designed to give maximum diversity across streetwear</p>
 						</div>
+						<div className='w-full laptop:w-[60%]' >
 						<TreeMap />
+						</div>
 					</div>
 				</div>
 			</main>

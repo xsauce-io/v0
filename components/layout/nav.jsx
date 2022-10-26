@@ -401,7 +401,7 @@ export const Nav = ({ logoColor }) => {
 
 	return (
 		<header className=" sticky top-0 z-20 ">
-			<div className="flex items-center h-20 w-full gap-8 px-0">
+			<div className="flex items-center h-20 w-full gap-8 px-0 bg-[#0C1615]">
 				<div className="basis-1/3">
 					<a className="block" href="/">
 						<span className="sr-only">Home</span>

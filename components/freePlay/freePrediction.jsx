@@ -3,6 +3,7 @@ import { Skeleton } from '@mui/material';
 import { FutureCard } from './futureCard';
 import { FutureIndexSection } from './futureIndexSection';
 import { useGetSneaker } from '../../services/useRequests';
+import Image from 'next/image';
 
 export const FreePrediction = () => {
 	const { data: s1, error: e1 } = useGetSneaker('DZ5485-612');
@@ -45,7 +46,7 @@ export const FreePrediction = () => {
 							href={cardObjectHref}
 							className="mobile:w-full text-center text-sm laptop:w-fit text-right px-3 py-2 text-lg font-medium "
 						>
-							🔍 &nbsp;<span className="underline">See Composition</span>
+							<Image src='/search-icon-svg.svg' width={12} height={12}  /> <span className="underline">See Composition</span>
 						</a>
 					</span>
 
