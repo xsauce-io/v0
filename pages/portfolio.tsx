@@ -193,15 +193,11 @@ const Portfolio: NextPage = () => {
 						</DashboardTable>
 					) : (
 						<div className="w-full h-full bg-[#c4c4c4] backdrop-blur-sm absolute top-4 bg-opacity-60 flex flex justify-center items-center text-center rounded-2xl">
-							<div
-								className={
-									'py-4 px-4 w-full  '
-								}
-							>
+
 								<text className="mobile:text-sm tablet:text-xl font-normal font-Inter">
-									Connect your wallet to see your Portfolio
+									Connect your wallet to view your Portfolio
 								</text>
-							</div>
+
 						</div>
 					)}
 				</div>
