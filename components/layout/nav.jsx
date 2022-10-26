@@ -512,7 +512,7 @@ export const Nav = ({ logoColor }) => {
 
 						<div className="dropdown dropdown-end">
 							<label tabindex="0" className="text-lg text-white">
-								<img className="w-[37px]" src="/menuLight.svg" />
+								<img className="w-[37px]" src="/menulight.svg" />
 							</label>
 							<ul
 								tabindex="0"
