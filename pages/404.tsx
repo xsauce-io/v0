@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout';
+import { Layout } from '../components/layout/layout';
 import { Nav } from '../components/layout/nav';
 import { LayoutSimple } from '../components/layout/layoutSimple';
 import Link from 'next/link';
