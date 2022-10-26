@@ -57,7 +57,7 @@ export const Layout = ({
 			</div>
 
 			<div className="w-full items-center justify-center ">
-				{showFinancialOverview === true && width >= '1200' ? (
+				{/* {showFinancialOverview === true && width >= '1200' ? (
 					<div className="relative mobile:px-5 laptop:px-40">
 						<div className="laptop:absolute bottom-[-147px] right-0 flex space-x-2 w-[62%] px-40 justify-end ">
 							<FinancialOverviewCard />
@@ -66,7 +66,7 @@ export const Layout = ({
 					</div>
 				) : (
 					<></>
-				)}
+				)} */}
 
 				<Tabs bgColor={headerBg}>
 					<div className="mobile:px-5 laptop:px-40">{children}</div>

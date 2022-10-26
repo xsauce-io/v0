@@ -109,7 +109,7 @@ const Home: NextPage = () => {
 
 					<Link href='/markets'>
 						<a className='flex flex-row w-full'  >
-							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 laptop:w-1/2 px-4 py-2 flex flex-row justify-start items-center'>
+							<li className='group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center'>
 								<img className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible" src='/jordans.svg' />
 								<span className=''>Drip Feed </span>
 							</li>
@@ -151,13 +151,13 @@ const Home: NextPage = () => {
 					<h1 className='w-full px-4 tablet:px-8 font-SG  text-3xl text-white'>
 					What is Xsauce
 					</h1>
-					<p className='w-full px-4 tablet:px-8 font-SG text-xl text-white'>
+					<p className='w-full px-4 tablet:px-8 font-SG text-md tablet:text-xl text-white'>
 						Xsauce is a dynamic, decentralized ecosystem which allows you to translate your knowledge of culture into money in your pocket. The founding belief of Xsauce is that cultural assets are a legitimate asset class.
 					</p>
-					<p className='w-full px-4 tablet:px-8 font-SG  text-xl text-white'>
+					<p className='w-full px-4 tablet:px-8 font-SG text-md  tablet:text-xl text-white'>
 						For clarity, when we say cultural assets, we are referring to assets that derive their value from cultural significance rather than a pure measure of utility.
 					</p>
-					<p className='w-full px-4 tablet:px-8 font-SG  text-xl text-white'>
+					<p className='w-full px-4 tablet:px-8 font-SG text-md tablet:text-xl text-white'>
 					Our immediate focus is on hyped or rare sneakers as they offer sustained value as evidenced through the rapidly growing $10 billion+ sneaker resale market.
 					</p>
 				</div>
