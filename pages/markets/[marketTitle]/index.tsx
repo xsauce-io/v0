@@ -152,7 +152,7 @@ const LiveMarket: NextPage = () => {
 										<button onClick={() => setTab(4)} className={Tab === 4 ? 'w-fit text-black px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 bg-[#ACFF00] ' : 'w-fit text-black bg-[#DCDEE1]  px-3 py-3 rounded-tl-lg rounded-tr-lg text-md font-medium mr-2 hover:bg-[#ACFF00] hover:text-black'}> Switch</button>
 									</ul>
 								</div>
-								<div className='w-full h-full border-2 rounded-md p-4'>
+								<div className='w-full h-fit border-2 rounded-md p-4'>
 								{Tab === 0 ? <MintTab market={mktTitl} /> : Tab === 1 ? <WithdrawTab market={mktTitl} /> : Tab === 2 ? <StakeTab market={mktTitl} /> : Tab === 3 ? <UnstakeTab market={mktTitl} /> : Tab === 4 ? <SwitchTab market={mktTitl} /> : <></>}
 								</div>
 

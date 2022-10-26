@@ -44,9 +44,9 @@ export const FreePrediction = () => {
 								mixpanelTrackProps('View Market', Markets[Market].title)
 							}
 							href={cardObjectHref}
-							className="mobile:w-full text-center text-sm laptop:w-fit text-right px-3 py-2 text-lg font-medium "
+							className="flex justify-center w-full tablet:w-fit text-center text-sm text-right px-3 py-2 text-lg font-medium space-x-1 bg-[#ACFF00] rounded-md"
 						>
-							<Image src='/search-icon-svg.svg' width={12} height={12}  /> <span className="underline">See Composition</span>
+							<Image src='/search-icon-svg.svg' width={11} height={11} /> <span className="">See Composition</span>
 						</a>
 					</span>
 
@@ -58,13 +58,13 @@ export const FreePrediction = () => {
 									type="selection"
 									id="long"
 									className={
-										isLong
-											? 'flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] opacity-80 rounded-tl-[80px] rounded-bl-[80px]'
-											: 'flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]'
+										!isLong
+											? 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-white bg-[#0C1615] rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]'
+											: 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-black bg-[#748282] rounded-tl-[80px] rounded-bl-[80px] '
 									}
 									onClick={() => setIsLong(true)}
 								>
-									Long 2x
+									<p>Long 2x</p>
 									<img
 										className="mobile:w-[10px] laptop:w-[25px]"
 										src="/upTrend.png"
@@ -75,12 +75,12 @@ export const FreePrediction = () => {
 									id="short"
 									className={
 										isLong
-											? 'flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]'
-											: 'flex flex-col items-center w-1/2 font-medium text-xl py-4 text-white opacity-70 bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px]'
+											? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-xl py-6 text-white bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]'
+											: 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-black bg-[#748282] rounded-tr-[80px] rounded-br-[80px]'
 									}
 									onClick={() => setIsLong(false)}
 								>
-									Short 2x
+									<p>Short 2x</p>
 									<img
 										className="mobile:w-[10px] laptop:w-[25px]"
 										src="/downTrend.png"

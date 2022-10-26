@@ -192,10 +192,10 @@ const Portfolio: NextPage = () => {
 								})}
 						</DashboardTable>
 					) : (
-						<div className="w-full h-full bg-[#c4c4c4] absolute top-4 bg-opacity-50 flex flex justify-center items-center text-center">
+						<div className="w-full h-full bg-[#c4c4c4] backdrop-blur-sm absolute top-4 bg-opacity-60 flex flex justify-center items-center text-center rounded-2xl">
 							<div
 								className={
-									'py-4 px-4 w-full bg-[#ACFF00]   border-y-[1px] border-[#0C1615]'
+									'py-4 px-4 w-full  '
 								}
 							>
 								<text className="mobile:text-sm tablet:text-xl font-normal font-Inter">

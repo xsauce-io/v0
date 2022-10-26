@@ -156,10 +156,11 @@ const DripFeed: NextPage = () => {
 			</Head>
 
 			<Layout
-				headerSubtitle={'OVERVIEW'}
-				headerTitle={'Dashboard'}
+				headerSubtitle={'GET THE XSAUCE'}
+				headerTitle={'Drip Feed'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
+				logoColor={'#FFFFFF'}
 			>
 				<>
 					<ContentHeader
