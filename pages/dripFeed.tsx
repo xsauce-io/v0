@@ -1,41 +1,47 @@
 import type { NextPage } from 'next';
+import { Layout } from '../components/layout/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
+import axios from 'axios';
 import React from 'react';
 import { ethers } from 'ethers';
+import { TopStories } from '../components/dripFeed/topStories';
+import { DashboardTable } from '../components/portfolio/dashboardTable';
 import { MarketFactory, marketsDataGit } from '../services/constants';
 import MarketFactoryABI from '../abi/marketFactory.json';
 import MarketAbi from '../abi/markets.json';
+import { CalendarHighlight } from '../components/calendar/calendarHighlight';
 import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 
-
+import { Dashboard } from '../components/portfolio/dashboard';
+import { ContentHeader } from '../components/layout/contentHeader';
+import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/common/toast';
 declare let window: any;
 
-import { HomeNav } from '../components/home/homeNav';
-import Link from 'next/link';
-import { Layout } from '../components/layout/layout';
-import { ContentHeader } from '../components/layout/contentHeader';
 
 const DripFeed: NextPage = () => {
-	// ----------------------------------------------------
-	// -------------------- Constants ---------------------
-	// -----------------------------------------------------
+	// ------------------- Constants ---------------------
+	const screens = {
+		mobile: '300',
+		tablet: '640',
+		smlaptop: '1024',
+		laptop: '1200',
+		desktop: '1400',
+	};
 	const SORT_BY_STATES = {
 		RELEASE_DATE: 'releaseDate',
 		NAME: 'name',
 		RETAIL_PRICE: 'retailPrice',
 	};
 
-	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
+	const skeletonArray = [1, 2, 3, 4];
 
-	// ----------------------------------------------------
-	// -------------------- State Variables ---------------------
-	// ------------------------------------------------------------
+	// ------------------- State Variable --------------------
 	const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
 	const { data: s2, error: e2 } = useGetSneaker('DR8869-200');
 	const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
@@ -48,12 +54,11 @@ const DripFeed: NextPage = () => {
 	//filter state mana
 	const [isAscending, setIsAscending] = useState(true);
 	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
+
+	// -------------------- Data Fetching ------------------
+
 	const [allBalances, setAllBalances] = useState([] as any);
 
-
-	// ----------------------------------------------------
-	// -------------------- Functions ---------------------
-	// ----------------------------------------------------
 	const showBalances = async () => {
 		const hasConnectedWalletBefore = localStorage.getItem(
 			'hasConnectedWalletBefore'
@@ -110,9 +115,7 @@ const DripFeed: NextPage = () => {
 		}
 	};
 
-	// ----------------------------------------------------
-	//------------------ Use Effect / Use Memo ------------------
-	// ----------------------------------------------------
+	//------------------ Use Effect / Use memo ------------------
 	useEffect(() => {
 		setResponse([s1, s2, s3]);
 		setStoredPersistentResponse([s1, s2, s3]);
@@ -140,105 +143,81 @@ const DripFeed: NextPage = () => {
 		}
 	}, [e1, e2, e3]);
 
-
-	// ----------------------------------------------------
-	// ----------------------Render------------------------
-	// ----------------------------------------------------
-
 	return (
 		<div>
 			<Head>
-				<title>Xsauce | Markets</title>
+				<title>Xsauce</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-				<link rel="icon" type='favicon' href='/greenDrop.svg' />
 			</Head>
 
 			<Layout
-				headerSubtitle={'LIVE DERIVATIVES MARKET'}
+				headerSubtitle={'OVERVIEW'}
+				headerTitle={'Dashboard'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
-				headerTitle={'Xchange'}
-				logoColor={'#FFFFFF'}
 			>
-				<main className="flex w-full flex-1 flex-col text-center">
-					{/*Sorting */}
+				<>
 					<ContentHeader
-						title={'Predict the live market'}
-						icon={<img src="/candle.svg" />}
-					>
-						<div className="flex mobile:flex-col tablet:flex-row tablet:space-x-3 mobile:space-y-3  tablet:space-y-0 items-center ">
-							<text>
-								Total Live Markets &nbsp;
-								<span className="text-[#748282]"> {response.length}</span>
-							</text>
-							<div className="dropdown dropdown-end">
-								<label
-									tabIndex={0}
-									className="text-[10px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm  bg-[#0C1615]  hover:opacity-50  w-[130px] p-1 px-2"
-								>
-									<img className="" src="/arrowUpDownGrey.svg" />
-
-									<span className="flex-1 text-white font-Inter ">Sort On</span>
-
-									<img className="" src="/downArrowGrey.svg" />
-								</label>
-								<ul
-									tabIndex={0}
-									className="menu dropdown-content bg-[#DCDEE1] p-2 shadow rounded-box w-52 mt-4"
-								>
-									<li>
-										<button
-											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.RETAIL_PRICE });
-												mixpanel.track('Sort ', {
-													sortBy: SORT_BY_STATES.RETAIL_PRICE,
-												});
-											}}
-											className="text-black font-Inter active:bg-[#ACFF00]"
-										>
-											Retail Price
-										</button>
-									</li>
-									<li>
-										<button
-											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.RELEASE_DATE });
-												mixpanel.track('Sort ', {
-													sortBy: SORT_BY_STATES.RELEASE_DATE,
-												});
-											}}
-											className="text-black font-Inter active:bg-[#ACFF00]"
-										>
-											Release Date
-										</button>
-									</li>
-
-									<li>
-										<button
-											onClick={() => {
-												setSortBy({ state: SORT_BY_STATES.NAME });
-												mixpanel.track('Sort ', {
-													sortBy: SORT_BY_STATES.NAME,
-												});
-											}}
-											className="text-black font-Inter active:bg-[#ACFF00]"
-										>
-											Name
-										</button>
-									</li>
-								</ul>
-							</div>
-
+						title={'Top Stories'}
+						icon={<img src="/news.svg" />}
+						flexColumn
+					/>
+					<div className="divide-y-2 divide-black">
+						<TopStories />
+						<ContentHeader
+							title={'Sauced Selections'}
+							flexColumn
+							icon={<img src="/greenDrop.svg" />}
+						/>
+					</div>
+					<div className="divide-y-2 divide-black  ">
+						<div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-14">
+							{response?.map((el: any, index: number) => {
+								console.log(response);
+								return <CalendarHighlight index={index} cardObject={el} />;
+							})}
 						</div>
-					</ContentHeader>
 
+					</div>
+					{/* <div className="divide-y-2 divide-black  ">
 
-				</main>
+						<ContentHeader
+							title={'Your Positions'}
+							icon={<img src="/pieChart.svg" />}
+							flexColumn
+						>
+							<div className="flex flex-row items-center mobile:flex-col tablet:space-x-3 mobile:space-y-3  tablet:space-y-0    tablet:flex-row">
+								<text>
+									Total Positions &nbsp;
+									<span className="text-[#748282]">{allBalances?.length}</span>
+								</text>
+							</div>
+						</ContentHeader>
+						<DashboardTable>
+							{allBalances.length === 0
+								? skeletonArray.map(() => (
+									<>
+										<Skeleton
+											animation="pulse"
+											variant="rounded"
+											height={70}
+											width={'100%'}
+											sx={{ borderRadius: '100px' }}
+										/>
+										<p className="h-4"> </p>
+									</>
+								))
+								: allBalances?.map((el: any) => {
+									return <Dashboard positions={el} />;
+								})}
+						</DashboardTable>
+					</div> */}
+				</>
 			</Layout>
 		</div>
 	);
