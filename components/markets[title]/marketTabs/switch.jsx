@@ -9,43 +9,52 @@ export const SwitchTab = (market) => {
     <div className="flex flex-col mt-4">
       <h1 className="font-bold text-left py-4 text-xl">{market?.market}</h1>
       <div className="flex flex-col flex-1 ">
-        <div className="flex flex-row mb-3">
-          <button
-            type="selection"
+      <div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px] mb-4">
+					<button
+						type="selection"
             id="staked"
-            className={
-              isStaked
-                ? "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tl-[80px] rounded-bl-[80px]"
-                : "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]"
-            }
-            onClick={() => setIsStaked(true)}
-          >
-            Staked Tokens
+						className={
+							!isStaked
+								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-sm py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
+								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-sm py-3 text-white  bg-[#0C1615] rounded-[40px]'
+						}
+						onClick={() => setIsStaked(true)}
+					>
+						<p>Staked Tokens</p>
+						<img
+							className="mobile:w-[10px] laptop:w-[25px]"
+							src="/upTrend.png"
+						/>
+					</button>
+					<button
+						type="selection"
+						id="unStaked"
+						className={
+							isStaked
+								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-sm  py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium text-sm py-3 text-white  bg-[#0C1615] rounded-[40px] '
+						}
+						onClick={() => setIsStaked(false)}
+					>
+						<p>Unstaked Tokens</p>
+						<img
+							className="mobile:w-[10px] laptop:w-[25px]"
+							src="/downTrend.png"
+						/>
+					</button>
+				</div>
 
-          </button>
-          <button
-            type="selection"
-            id="unstaked"
-            className={
-              isStaked
-                ? "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]"
-                : "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tr-[80px] rounded-br-[80px]"
-            }
-            onClick={() => setIsStaked(false)}
-          >
-            Unstaked Tokens
-
-          </button>
-        </div>
         <div className="flex flex-row">
+        <div className="flex flex-row w-full bg-white border-2 border-[#0C1615] rounded-[40px]">
+
           <button
             type="selection"
             id="fromLong"
             className={
-              fromLong
-                ? "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tl-[80px] rounded-bl-[80px]"
-                : "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]"
-            }
+							!fromLong
+								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-sm py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
+								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-sm py-3 text-white  bg-[#0C1615] rounded-[40px]'
+						}
             onClick={() => setFromLong(true)}
           >
             From &nbsp; <span className="text-[#ACFF00]">Long</span>&nbsp; &rarr; &nbsp; <span className="text-[red]">Short</span>
@@ -55,16 +64,17 @@ export const SwitchTab = (market) => {
             type="selection"
             id="short"
             className={
-              fromLong
-                ? "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]"
-                : "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tr-[80px] rounded-br-[80px]"
-            }
+							fromLong
+								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-sm  py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium text-sm py-3 text-white  bg-[#0C1615] rounded-[40px] '
+						}
             onClick={() => setFromLong(false)}
           >
                From &nbsp; <span className="text-[red]">Short</span>&nbsp; &rarr; &nbsp; <span className="text-[#ACFF00]">Long</span>
 
 
-          </button>
+            </button>
+            </div>
         </div>
 
 

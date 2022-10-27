@@ -13,44 +13,40 @@ export const WithdrawTab = (market) => {
         {market?.market}
       </h1>
       <div className="flex flex-col flex-1 ">
-        <div className="flex flex-row">
-          <button
-            type="selection"
-            id="long"
-            className={
-              isLong
-                ? "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tl-[80px] rounded-bl-[80px]"
-                : "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]"
-            }
-            onClick={() =>
-              setIsLong(true)
-            }
-          >
-            Long 2x
-            <img
-              className="ml-2 mobile:w-[10px] laptop:w-[25px]"
-              src="/upTrend.png"
-            />
-          </button>
-          <button
-            type="selection"
-            id="short"
-            className={
-              isLong
-                ? "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]"
-                : "flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tr-[80px] rounded-br-[80px]"
-            }
-            onClick={() =>
-              setIsLong(false)
-            }
-          >
-            Short 2x
-            <img
-              className="ml-2 mobile:w-[10px] laptop:w-[25px]"
-              src="/downTrend.png"
-            />
-          </button>
-        </div>
+      <div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
+					<button
+						type="selection"
+						id="long"
+						className={
+							!isLong
+								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-xl py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
+								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-xl py-3 text-white  bg-[#0C1615] rounded-[40px]'
+						}
+						onClick={() => setIsLong(true)}
+					>
+						<p>Long 2x</p>
+						<img
+							className="mobile:w-[10px] laptop:w-[25px]"
+							src="/upTrend.png"
+						/>
+					</button>
+					<button
+						type="selection"
+						id="short"
+						className={
+							isLong
+								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-xl py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium text-xl py-3 text-white  bg-[#0C1615] rounded-[40px] '
+						}
+						onClick={() => setIsLong(false)}
+					>
+						<p>Short 2x</p>
+						<img
+							className="mobile:w-[10px] laptop:w-[25px]"
+							src="/downTrend.png"
+						/>
+					</button>
+				</div>
         <div className="mt-5 flex flex-row  bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
           <p className="flex-1 text-left mobile:text-sm laptop:text-md pr-1">
             Amount:

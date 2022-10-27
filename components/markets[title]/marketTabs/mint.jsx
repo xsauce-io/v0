@@ -8,20 +8,20 @@ export const MintTab = (market) => {
 		<div className="flex flex-col mt-4">
 			<h1 className="font-bold text-left py-4 text-xl">{market?.market}</h1>
 			<div className="flex flex-col flex-1 ">
-				<div className="flex flex-row">
+				<div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
 					<button
 						type="selection"
 						id="long"
 						className={
-							isLong
-								? 'flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tl-[80px] rounded-bl-[80px]'
-								: 'flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]'
+							!isLong
+								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-xl py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
+								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-xl py-3 text-white  bg-[#0C1615] rounded-[40px]'
 						}
 						onClick={() => setIsLong(true)}
 					>
-						Long 2x
+						<p>Long 2x</p>
 						<img
-							className="ml-2 mobile:w-[10px] laptop:w-[25px]"
+							className="mobile:w-[10px] laptop:w-[25px]"
 							src="/upTrend.png"
 						/>
 					</button>
@@ -30,14 +30,14 @@ export const MintTab = (market) => {
 						id="short"
 						className={
 							isLong
-								? 'flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]'
-								: 'flex flex-row justify-center items-center w-1/2 font-medium text-md py-4 text-white bg-black rounded-tr-[80px] rounded-br-[80px]'
+								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-xl py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium text-xl py-3 text-white  bg-[#0C1615] rounded-[40px] '
 						}
 						onClick={() => setIsLong(false)}
 					>
-						Short 2x
+						<p>Short 2x</p>
 						<img
-							className="ml-2 mobile:w-[10px] laptop:w-[25px]"
+							className="mobile:w-[10px] laptop:w-[25px]"
 							src="/downTrend.png"
 						/>
 					</button>
