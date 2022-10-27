@@ -53,14 +53,14 @@ export const FreePrediction = () => {
 					<div className="flex flex-col space-y-5">
 						<FutureIndexSection market={Markets[Market]} />
 						<div className="flex flex-col flex-1 ">
-							<div className="flex flex-row">
+							<div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
 								<button
 									type="selection"
 									id="long"
 									className={
 										!isLong
-											? 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-white bg-[#0C1615] rounded-tl-[80px] rounded-bl-[80px] active:bg-[#ACFF00]'
-											: 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-black bg-[#748282] rounded-tl-[80px] rounded-bl-[80px] '
+											? 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  active:bg-[#ACFF00]'
+											: 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-white  bg-[#0C1615] rounded-[40px]'
 									}
 									onClick={() => setIsLong(true)}
 								>
@@ -75,8 +75,8 @@ export const FreePrediction = () => {
 									id="short"
 									className={
 										isLong
-											? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-xl py-6 text-white bg-[#0C1615] rounded-tr-[80px] rounded-br-[80px] active:bg-[#ACFF00]'
-											: 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-black bg-[#748282] rounded-tr-[80px] rounded-br-[80px]'
+											? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-xl py-6 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] active:bg-[#ACFF00]'
+											: 'flex flex-row justify-center items-center space-x-2  w-1/2 font-medium text-xl py-6 text-white  bg-[#0C1615] rounded-[40px] '
 									}
 									onClick={() => setIsLong(false)}
 								>

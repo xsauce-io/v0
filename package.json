@@ -18,7 +18,6 @@
     "@mui/joy": "^5.0.0-alpha.39",
     "@mui/material": "^5.9.3",
     "@mui/styles": "^5.9.3",
-    "@next-auth/mongodb-adapter": "^1.1.1",
     "@nivo/core": "^0.80.0",
     "@nivo/line": "^0.80.0",
     "@nivo/treemap": "^0.80.0",
@@ -29,8 +28,7 @@
     "@types/mocha": "^9.1.1",
     "@types/react-slick": "^0.23.10",
     "axios": "^0.27.2",
-    "chart.js": "^3.9.1",
-    "chartjs-chart-treemap": "^2.1.2",
+
     "daisyui": "^2.24.0",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.0",
@@ -39,10 +37,10 @@
     "mocha": "^10.0.0",
     "mongodb": "^4.10.0",
     "next": "latest",
-    "next-auth": "^4.14.0",
+
     "nodemailer": "^6.8.0",
     "react": "18.1.0",
-    "react-chartjs-2": "^4.3.1",
+
     "react-dom": "18.1.0",
     "react-hot-toast": "^2.4.0",
     "react-hotjar": "^5.1.0",

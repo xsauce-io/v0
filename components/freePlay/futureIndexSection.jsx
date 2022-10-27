@@ -11,7 +11,7 @@ export const FutureIndexSection = ({ market }) => {
 		}, 400);
 	}, [market]);
 	return (
-		<div className={` ${loading ? 'visible animate-fadeIn' : ''}`}>
+		<div >
 			<div className={`m-auto py-4 tablet:w-[250px] h-[250px] `}>
 				<img src={market.href} className="object-contain w-full h-full " />
 			</div>
