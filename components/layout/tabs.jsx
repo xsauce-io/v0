@@ -40,6 +40,22 @@ export const Tabs = ({ children, bgColor }) => {
 							Markets
 						</a>
 					</Link>
+
+					{/* <Link href="/freePlay">
+						<a
+							className={
+								router.pathname == '/freePlay'
+									? 'tab border-[#ACFF00] border-b-[3px] transition text-black px-0 mobile:text-xs tablet:text-sm'
+									: 'tab transition text-[#748282] px-0 mobile:text-xs tablet:text-sm'
+							}
+							style={
+								router.pathname == '/freePlay' ? { color: 'inherit' } : null
+							}
+						>
+							Free play
+						</a>
+					</Link> */}
+
 					<Link href="/calendar">
 						<a
 							className={

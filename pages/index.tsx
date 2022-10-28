@@ -155,9 +155,7 @@ const Home: NextPage = () => {
 					<p className='w-full px-4 tablet:px-8 font-SG text-md  tablet:text-xl text-white'>
 						For clarity, when we say cultural assets, we are referring to assets that derive their value from cultural significance rather than a pure measure of utility.
 					</p>
-					<p className='w-full px-4 tablet:px-8 font-SG text-md tablet:text-xl text-white'>
-					Our immediate focus is on hyped or rare sneakers as they offer sustained value as evidenced through the rapidly growing $10 billion+ sneaker resale market.
-					</p>
+
 				</div>
 
 			</div>

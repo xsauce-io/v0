@@ -35,7 +35,7 @@ export const TreeMap = () => {
 	};
 
 	return (
-		<div className="w-full h-[300px] bg-white rounded-lg p-4">
+		<div className="w-full h-[300px] bg-white rounded-lg p-2 tablet:p-4">
 			<ResponsiveTreeMap
 				data={data}
 				identity="name"

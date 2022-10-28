@@ -1,26 +1,26 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout/layout';
+import { Layout } from '../layout/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import React from 'react';
 import { ethers } from 'ethers';
-import { TopStories } from '../components/dripFeed/topStories';
-import { DashboardTable } from '../components/portfolio/dashboardTable';
-import { MarketFactory, marketsDataGit } from '../services/constants';
-import MarketFactoryABI from '../abi/marketFactory.json';
-import MarketAbi from '../abi/markets.json';
-import { CalendarHighlight } from '../components/calendar/calendarHighlight';
-import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
+import { TopStories } from '../dripFeed/topStories';
+import { DashboardTable } from '../portfolio/dashboardTable';
+import { MarketFactory, marketsDataGit } from '../../services/constants';
+import MarketFactoryABI from '../../abi/marketFactory.json';
+import MarketAbi from '../../abi/markets.json';
+import { CalendarHighlight } from '../calendar/calendarHighlight';
+import { useGetMarketBySku, useGetSneaker } from '../../services/useRequests';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 
-import { Dashboard } from '../components/portfolio/dashboard';
-import { ContentHeader } from '../components/layout/contentHeader';
+import { Dashboard } from '../portfolio/dashboard';
+import { ContentHeader } from '../layout/contentHeader';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/common/toast';
+import { ToastNotification } from '../common/toast';
 declare let window: any;
 
 
@@ -157,7 +157,7 @@ const DripFeed: NextPage = () => {
 
 			<Layout
 				headerSubtitle={'GET THE XSAUCE'}
-				headerTitle={'Drip Feed'}
+				headerTitle={'Market News'}
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 				logoColor={'#FFFFFF'}
