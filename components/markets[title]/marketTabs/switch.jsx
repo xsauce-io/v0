@@ -15,8 +15,8 @@ export const SwitchTab = (market) => {
             id="staked"
 						className={
 							!isStaked
-								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-sm py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
-								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-sm py-3 text-white  bg-[#0C1615] rounded-[40px]'
+								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-xs tablet:text-md py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
+								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-xs tablet:text-md py-3 text-white  bg-[#0C1615] rounded-[40px]'
 						}
 						onClick={() => setIsStaked(true)}
 					>
@@ -31,8 +31,8 @@ export const SwitchTab = (market) => {
 						id="unStaked"
 						className={
 							isStaked
-								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-sm  py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
-								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium text-sm py-3 text-white  bg-[#0C1615] rounded-[40px] '
+								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-xs tablet:text-md  py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium text-sm text-xs tablet:text-md py-3 text-white  bg-[#0C1615] rounded-[40px] '
 						}
 						onClick={() => setIsStaked(false)}
 					>
@@ -44,7 +44,7 @@ export const SwitchTab = (market) => {
 					</button>
 				</div>
 
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row">
         <div className="flex flex-row w-full bg-white border-2 border-[#0C1615] rounded-[40px]">
 
           <button
@@ -52,8 +52,8 @@ export const SwitchTab = (market) => {
             id="fromLong"
             className={
 							!fromLong
-								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-sm py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
-								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-sm py-3 text-white  bg-[#0C1615] rounded-[40px]'
+								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-xs tablet:text-xl py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
+								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-xs tablet:text-xl py-3 text-white  bg-[#0C1615] rounded-[40px]'
 						}
             onClick={() => setFromLong(true)}
           >
@@ -65,8 +65,8 @@ export const SwitchTab = (market) => {
             id="short"
             className={
 							fromLong
-								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-sm  py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
-								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium text-sm py-3 text-white  bg-[#0C1615] rounded-[40px] '
+								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-xs tablet:text-xl  py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-xs tablet:text-xl py-3 text-white  bg-[#0C1615] rounded-[40px] '
 						}
             onClick={() => setFromLong(false)}
           >
@@ -75,15 +75,15 @@ export const SwitchTab = (market) => {
 
             </button>
             </div>
-        </div>
+        </div> */}
 
 
         <div className="mt-5 flex flex-row  bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
-          <p className="flex-1 text-left mobile:text-sm laptop:text-md pr-1">
+          <p className="flex-1 text-left text-xs tablet:text-xl pr-1">
             Amount:
           </p>
           <input
-            className="flex-1 text-right mobile:text-sm laptop:text-md mobile:w-[10%] appearance-none focus:none focus:outline-none"
+            className="flex-1 text-right text-xs tablet:text-xl mobile:w-[10%] appearance-none focus:none focus:outline-none"
             name="Amount"
             id="amount"
             type="number"
@@ -96,7 +96,7 @@ export const SwitchTab = (market) => {
         <button
           type="submit"
           id="mint"
-          className="w-full font-medium mb-6 mt-3 text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-70 active:bg-[#ACFF00]"
+          className="w-full font-medium mb-6 mt-3 text-xs tablet:text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-70 active:bg-[#ACFF00]"
         >
          Switch
         </button>
