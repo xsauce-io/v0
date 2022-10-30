@@ -23,7 +23,7 @@ export const TopStories = () => {
 
 		<div className="block relative ">
 			<div className="flex flex-row items-center overflow-y-clip overflow-x-auto scrollbar-hide scroll-smooth rounded-lg  " id="container">
-				<div className="flex flex-row items-center font-SG text-lg space-x-2 mobile:h-[300px] tablet:h-[380px]  ">
+				<div className="flex flex-row items-center font-SG text-lg space-x-2 mobile:h-[300px] tablet:h-[350px]  ">
 					<a
 						className="flex flex-col mobile:w-[90vw] tablet:w-[450px] text-left h-full  "
 						target="blank"
@@ -129,8 +129,8 @@ export const TopStories = () => {
 						</p>
 					</a>
 				</div>
-				<div className="w-[50px] mobile:h-[250px] tablet:h-[300px] z-10 absolute top-0 left-0 flex flex-col justify-center items-center"> <button className="w-full flex flex-row justify-center items-center" onClick={scrollRight}><img className="w-[70%]" src="/leftBubble.svg" /></button></div>
-				<div className="w-[50px] mobile:h-[250px] tablet:h-[300px] z-10 absolute top-0 right-0 flex flex-col justify-center items-center">   <button className="w-full flex flex-row justify-center items-center" onClick={scrollLeft}><img className="w-[70%]" src="/rightBubble.svg" /></button></div>
+				<div className="w-[50px] mobile:h-[250px] tablet:h-[300px] z-10 absolute top-0 left-0 flex flex-col justify-center items-center"> <button className="w-full h-full flex flex-row justify-center items-center" onClick={scrollRight}><img className="w-[70%]" src="/leftBubble.svg" /></button></div>
+				<div className="w-[50px] mobile:h-[250px] tablet:h-[300px] z-10 absolute top-0 right-0 flex flex-col justify-center items-center">   <button className="w-full  h-full flex flex-row justify-center items-center" onClick={scrollLeft}><img className="w-[70%]" src="/rightBubble.svg" /></button></div>
 			</div>
 		</div>
 	);
