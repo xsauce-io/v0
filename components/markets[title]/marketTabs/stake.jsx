@@ -45,7 +45,7 @@ export const StakeTab = (market) => {
 					</button>
 				</div>
 
-				<div className="flex flex-row mt-3 bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
+				<div className="flex flex-row mt-3 bg-white items-center py-3 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
 					<p className="flex-1 text-left text-xs tablet:text-xl pr-1">
 						Amount:
 					</p>
