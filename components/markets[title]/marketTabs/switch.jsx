@@ -20,7 +20,7 @@ export const SwitchTab = (market) => {
             }
             onClick={() => setIsStaked(true)}
           >
-            <p>Staked Tokens</p>
+            <p>Staked <span className="hidden tablet:inline-block">Tokens</span></p>
             <img
               className="mobile:w-[10px] laptop:w-[20px]"
               src="/upTrend.png"
@@ -31,12 +31,12 @@ export const SwitchTab = (market) => {
             id="unStaked"
             className={
               isStaked
-                ? 'flex flex-row justify-center items-center space-x-1 tablet:space-x-2 tablet:py-3.5 w-1/2 font-medium text-[10px] tablet:text-[16px]   text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
-                : 'flex flex-row justify-center items-center space-x-1 tablet:space-x-2 tablet:py-3.5 w-[55%] font-medium text-[10px] tablet:text-[16px]  text-white  bg-[#0C1615] rounded-[40px] '
+                ? 'flex flex-row justify-center items-center space-x-1 tablet:space-x-2 tablet:py-3.5 py-3 w-1/2 font-medium text-[9px] tablet:text-[16px]   text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+                : 'flex flex-row justify-center items-center space-x-1 tablet:space-x-2 tablet:py-3.5 py-3 w-[55%] font-medium text-[9px] tablet:text-[16px]  text-white  bg-[#0C1615] rounded-[40px] '
             }
             onClick={() => setIsStaked(false)}
           >
-            <p>Unstaked Tokens</p>
+            <p>Unstaked <span className="hidden tablet:inline-block">Tokens</span></p>
             <img
               className="mobile:w-[10px] laptop:w-[20px]"
               src="/downTrend.png"
