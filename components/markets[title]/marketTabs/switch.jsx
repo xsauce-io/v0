@@ -31,8 +31,8 @@ export const SwitchTab = (market) => {
             id="unStaked"
             className={
               isStaked
-                ? 'flex flex-row justify-center items-center space-x-2 tablet:py-4 py-3 w-1/2 font-medium text-xs  tablet:text-[16px]   text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
-                : 'flex flex-row justify-center items-center space-x-2 tablet:py-4 py-3 w-[55%] font-medium text-xs  tablet:text-[16px]  text-white  bg-[#0C1615] rounded-[40px] '
+                ? 'flex flex-row justify-center items-center space-x-2 tablet:py-4 py-4 w-1/2 font-medium text-xs  tablet:text-[16px]   text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+                : 'flex flex-row justify-center items-center space-x-2 tablet:py-4 py-4 w-[55%] font-medium text-xs  tablet:text-[16px]  text-white  bg-[#0C1615] rounded-[40px] '
             }
             onClick={() => setIsStaked(false)}
           >
