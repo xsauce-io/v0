@@ -58,6 +58,8 @@ export const TreeMap = () => {
 					from: 'color',
 					modifiers: [['darker', 0.1]],
 				}}
+				nodeOpacity={0.9}
+				colors={["#ACFF00", '#fff', '#000']}
 			/>
 		</div>
 	);

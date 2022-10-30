@@ -97,10 +97,12 @@ export const Linegraph = () => {
         pointSize={10}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}
-        pointBorderColor={{ from: 'serieColor' }}
+        pointBorderColor={{ from: 'color' }}
         pointLabelYOffset={-12}
         enableArea={true}
         useMesh={true}
+        nodeOpacity={.7}
+        colors={['#ACFF00']}
       />
     </div>
   )
