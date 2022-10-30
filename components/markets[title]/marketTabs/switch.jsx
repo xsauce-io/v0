@@ -15,8 +15,8 @@ export const SwitchTab = (market) => {
             id="staked"
             className={
               !isStaked
-                ? 'flex flex-row justify-center items-center space-x-1 tablet:space-x-2  tablet:py-3.5  w-1/2  font-medium text-[10px]  tablet:text-[16px]  text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
-                : 'flex flex-row justify-center items-center space-x-1 tablet:space-x-2 tablet:py-3.5 w-[55%] font-medium text-[10px]  tablet:text-[16px]  text-white  bg-[#0C1615] rounded-[40px]'
+                ? 'flex flex-row justify-center items-center space-x-2  tablet:py-3.5  w-1/2  font-medium text-xs   tablet:text-[16px]  text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
+                : 'flex flex-row justify-center items-center space-x-2 tablet:py-3.5 w-[55%] font-medium text-xs   tablet:text-[16px]  text-white  bg-[#0C1615] rounded-[40px]'
             }
             onClick={() => setIsStaked(true)}
           >
@@ -31,8 +31,8 @@ export const SwitchTab = (market) => {
             id="unStaked"
             className={
               isStaked
-                ? 'flex flex-row justify-center items-center space-x-1 tablet:space-x-2 tablet:py-3.5 py-3 w-1/2 font-medium text-[9px] tablet:text-[16px]   text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
-                : 'flex flex-row justify-center items-center space-x-1 tablet:space-x-2 tablet:py-3.5 py-3 w-[55%] font-medium text-[9px] tablet:text-[16px]  text-white  bg-[#0C1615] rounded-[40px] '
+                ? 'flex flex-row justify-center items-center space-x-2 tablet:py-3.5 py-3 w-1/2 font-medium text-xs  tablet:text-[16px]   text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+                : 'flex flex-row justify-center items-center space-x-2 tablet:py-3.5 py-3 w-[55%] font-medium text-xs  tablet:text-[16px]  text-white  bg-[#0C1615] rounded-[40px] '
             }
             onClick={() => setIsStaked(false)}
           >
