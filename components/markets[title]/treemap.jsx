@@ -3,15 +3,15 @@ import { ResponsiveTreeMap } from '@nivo/treemap';
 export const TreeMap = () => {
 	const data = {
 		name: 'viz',
-		color: 'hsl(200, 70%, 50%)',
+		color: '#ACFF00',
 		children: [
 			{
 				name: 'stack',
-				color: 'hsl(205, 70%, 50%)',
+				color: '#ACFF00',
 				children: [
 					{
 						name: 'Yeezy 350z Yeichel',
-						color: 'hsl(261, 70%, 50%)',
+						color: 'hsl(, 70%, 50%)',
 						loc: 100,
 					},
 					{
@@ -26,7 +26,7 @@ export const TreeMap = () => {
 					},
 					{
 						name: 'layers',
-						color: 'hsl(29, 70%, 50%)',
+						color: '##ACFF00',
 						loc: 700,
 					},
 				],
