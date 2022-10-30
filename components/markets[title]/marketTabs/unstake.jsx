@@ -2,13 +2,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 export const UnstakeTab = (market) => {
-  const [isLong, setIsLong] = useState(true);
+	const [isLong, setIsLong] = useState(true);
 
-  return (
-    <div className="flex flex-col mt-4">
-      <h1 className="font-bold text-left py-4 text-xl">{market?.market}</h1>
-      <div className="flex flex-col flex-1 ">
-      <div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
+	return (
+		<div className="flex flex-col ">
+			<h1 className="font-bold text-left py-4 text-xl">{market?.market}</h1>
+			<div className="flex flex-col flex-1 ">
+				<div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
 					<button
 						type="selection"
 						id="long"
@@ -21,7 +21,7 @@ export const UnstakeTab = (market) => {
 					>
 						<p>Long </p>
 						<img
-							className="mobile:w-[10px] laptop:w-[25px]"
+							className="mobile:w-[10px] laptop:w-[20px]"
 							src="/upTrend.png"
 						/>
 					</button>
@@ -37,34 +37,34 @@ export const UnstakeTab = (market) => {
 					>
 						<p>Short </p>
 						<img
-							className="mobile:w-[10px] laptop:w-[25px]"
+							className="mobile:w-[10px] laptop:w-[20px]"
 							src="/downTrend.png"
 						/>
 					</button>
 				</div>
-        <div className="mt-5 flex flex-row  bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
-          <p className="flex-1 text-left text-xs tablet:text-xl pr-1">
-            Amount:
-          </p>
-          <input
-            className="flex-1 text-right text-xs tablet:text-xl mobile:w-[10%] appearance-none focus:none focus:outline-none"
-            name="Amount"
-            id="amount"
-            type="number"
-            placeholder="$200"
-            // onChange={() => CalculateTotal()}
-            required
-          />
-        </div>
+				<div className="mt-3 flex flex-row  bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
+					<p className="flex-1 text-left text-xs tablet:text-xl pr-1">
+						Amount:
+					</p>
+					<input
+						className="flex-1 text-right text-xs tablet:text-xl mobile:w-[10%] appearance-none focus:none focus:outline-none"
+						name="Amount"
+						id="amount"
+						type="number"
+						placeholder="$200"
+						// onChange={() => CalculateTotal()}
+						required
+					/>
+				</div>
 
-        <button
-          type="submit"
-          id="mint"
-          className="w-full font-medium mb-6 mt-3 text-xs tablet:text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-70 active:bg-[#ACFF00]"
-        >
-          {isLong ? "Unstake Long Tokens" : "Unstake Short Tokens"}
-        </button>
-      </div>
-    </div>
-  );
+				<button
+					type="submit"
+					id="mint"
+					className="w-full font-medium my-3 text-xs tablet:text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-70 active:bg-[#ACFF00]"
+				>
+					{isLong ? "Unstake Long Tokens" : "Unstake Short Tokens"}
+				</button>
+			</div>
+		</div>
+	);
 };
