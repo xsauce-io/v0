@@ -63,30 +63,30 @@ const specializedMarketFetcher = (url, sku) =>
 			throw error;
 		});
 
-    const AllMarketFetcher = (url) =>
+const AllMarketFetcher = (url) =>
 	axios
 		.get(url)
 		.then((res) => {
 			const data = res.data[3];
-      for (let index = 0; index < data.length; index++) {
-      let expires = new Date(data[index]?.expiration * 1000).toLocaleDateString(
-				'en-US'
-			);
-      
-			if (expires === undefined) {
-				data[index].expiration = '';
-			} else {
-				data[index].expiration = expires;
+			for (let index = 0; index < data.length; index++) {
+				let expires = new Date(data[index]?.expiration * 1000).toLocaleDateString(
+					'en-US'
+				);
+
+				if (expires === undefined) {
+					data[index].expiration = '';
+				} else {
+					data[index].expiration = expires;
+				}
+				console.log(data);
 			}
-			console.log(data);
-      }
 			return data;
 		})
 		.catch(function (error) {
 			console.error('useRequest', error);
 			throw error;
 		});
-    
+
 
 const fetcherMultiCalls = (skus, arrayUrl) => {
 	let skusTest = skus;
@@ -119,7 +119,7 @@ const fetcherMultiCalls = (skus, arrayUrl) => {
 // ----------------------- ----------- ----------------------
 
 export const useGetSneaker = (sku) => {
-	const urlWithSku = urlBySku + sku;
+	const urlWithSku = '/api/sneakerSku/' + sku;
 	const { data, error } = useSWR(urlWithSku, fetcherFirstResult);
 	console.log('useRequest', data);
 	return { data, error };
@@ -130,8 +130,8 @@ export const useGetSneaker = (sku) => {
 // ----------------------- ----------- ----------------------
 
 export const useGetSneakerByLimit = (limit) => {
-	const urlWithLimit = urlByLimit + limit;
-
+	const urlWithLimit = '/api/sneakerLimit/' + limit;
+	console.log(urlWithLimit)
 	const { data, error } = useSWR(urlWithLimit, fetcher);
 	console.log('sneakerDateErrorUseRequest', error);
 	console.log('useRequest', data);
@@ -172,9 +172,9 @@ export const requestOrderBookAddress = async () =>
 	axios.get(OrderBookAddressGit);
 
 
- // ----------------------- ----------- ----------------------
+// ----------------------- ----------- ----------------------
 
- export const useGetAllMarkets = () => {
+export const useGetAllMarkets = () => {
 	const { data, error } = useSWR(
 		marketsDataGit,
 		AllMarketFetcher

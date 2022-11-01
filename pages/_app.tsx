@@ -7,8 +7,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import { FirstTimeVisitorModal } from '../components/layout/firstTimeVisitorModal';
-import { SessionProvider } from 'next-auth/react';
-import { Session } from 'next-auth/core/types';
+
 
 /**
  * Send mix panel event
@@ -26,7 +25,7 @@ export const event = (event_name: string, props: any) => {
 };
 
 function MyApp({ Component, pageProps }: AppProps<{
-	session: Session;
+
 }>) {
 	const router = useRouter();
 	//Mix Panel setup
@@ -50,8 +49,7 @@ function MyApp({ Component, pageProps }: AppProps<{
 	}, [router.events]);
 
 	return (
-		<SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
-
+<>
 			<Head>
 				<title>Xsauce</title>
 				<meta property="og:image" content='/OG.png' />
@@ -123,7 +121,7 @@ function MyApp({ Component, pageProps }: AppProps<{
 				toastOptions={{ duration: 2000 }}
 				containerStyle={{ top: '104px' }}
 			/>
-		</SessionProvider>
+		</>
 
 	);
 }
