@@ -15,7 +15,7 @@ const Tester = () => {
 	async function callAPI(sneak) {
 		try {
 			const response = await axios.get(
-				`https://7004dufqxk.execute-api.us-east-1.amazonaws.com/v2/sneakers?limit=10&sku=${sneak}`
+				``
 			);
 			const price = response.data.results[0].estimatedMarketValue;
 			bigData = BigNumber.from(price);
