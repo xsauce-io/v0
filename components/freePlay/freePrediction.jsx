@@ -32,6 +32,11 @@ export const FreePrediction = () => {
 		},
 	];
 
+
+  const handleCallback = (childData) => {
+ setMarket(childData)
+}
+
 	const cardObjectHref = '/markets/' + Markets[Market].title;
 	useEffect(() => {}, [Market]);
 	return (
@@ -50,8 +55,8 @@ export const FreePrediction = () => {
 						</a>
 					</span>
 
-					<div className="flex flex-col space-y-5">
-						<FutureIndexSection market={Markets[Market]} />
+					<div className="flex flex-col space-y-9">
+						<FutureIndexSection handleCallback={handleCallback} market={Markets[Market]} />
 						<div className="flex flex-col flex-1 ">
 							<div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
 								<button
@@ -122,7 +127,7 @@ export const FreePrediction = () => {
 				</div>
 
 				<div className="flex flex-col w-full laptop:w-[30%]">
-					<div className="w-full h-full grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-auto grid-rows-3 gap-y-6 place-items-stretch gap-x-6">
+					<div className="w-full h-full grid mobile:hidden tablet:grid laptop:grid-cols-auto grid-rows-3 gap-y-6 place-items-stretch gap-x-6">
 						{Markets !== undefined
 							? Markets?.map((el, index) => (
 									<button onClick={() => setMarket(index)}>
