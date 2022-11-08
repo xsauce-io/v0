@@ -1,7 +1,6 @@
-import Image from "next/image";
 import React from "react";
 
-export const TopStories = () => {
+export const DripFeedTopStories = () => {
 
 	const scrollLeft = () => {
 		const input = document.getElementById('container')
