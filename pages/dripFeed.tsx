@@ -27,8 +27,6 @@ const DripFeed: NextPage = () => {
 				headerSubtitle={'GET THE XSAUCE'}
 				headerTitle={'Market News'}
 				showHowItWorksButton={true}
-				showFinancialOverview={false}
-				logoColor={'#FFFFFF'}
 			>
 				<>
 					<ContentHeader

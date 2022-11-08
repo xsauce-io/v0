@@ -10,7 +10,7 @@ const pageNotFound404: NextPage = () => {
 		<LayoutReduced
 			headerBg={undefined}
 			headerColor={undefined}
-			logoColor={undefined}
+
 		>
 			<div className=" text-black w-screen h-screen">
 				<div className="w-full h-full text-[#0C1615] flex flex-col justify-center items-center ">

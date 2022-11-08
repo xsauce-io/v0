@@ -22,7 +22,7 @@ const Home: NextPage = () => {
 			</Head>
 
 			{/* Note this is a custom navigator component for home  */}
-			<HomeNavBar logoColor={'#0C1615'} />
+			<HomeNavBar  />
 
 			<div
 				id="mainSection"

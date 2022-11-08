@@ -97,7 +97,7 @@ const LiveMarket: NextPage = () => {
 				}}
 			>
 				{/* <Announcement /> */}
-				<LayoutNavBar logoColor="#ACFF00" />
+				<LayoutNavBar />
 			</div>
 			<main className="flex w-full mobile:px-5 laptop:px-48 flex-1 flex-col text-center pb-40 mt-16 ">
 				<h1>{admin}</h1>

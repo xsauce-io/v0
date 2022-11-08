@@ -24,8 +24,7 @@ const Markets: NextPage = () => {
 				headerSubtitle={'INVEST'}
 				headerTitle={'Markets'}
 				showHowItWorksButton={true}
-				showFinancialOverview={false}
-				logoColor={'#FFFFFF'}
+
 			>
 				<>
 					<div className="w-full mt-10">

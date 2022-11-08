@@ -5,33 +5,33 @@ import React from 'react';
 import { Skeleton } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Layout } from '../components/layout/layout';
-import { ContentHeader } from '../components/layout/contentHeader';
-import { RedeemCard } from '../components/redeem/redeemCard';
-import { useGetSneaker } from '../services/useRequests';
+// import { Layout } from '../components/layout/layout';
+// import { ContentHeader } from '../components/layout/contentHeader';
+// import { RedeemCard } from '../components/redeem/redeemCard';
+// import { useGetSneaker } from '../services/useRequests';
 
 const Redeem: NextPage = () => {
 	let [isLoading, setisLoading] = useState(false as boolean);
 	let [toggled, setisToggled] = useState('1');
 
-	const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
-	const { data: s2, error: e2 } = useGetSneaker('DR8869-200');
-	const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
-	const { data: s4, error: e4 } = useGetSneaker('DX2836-001');
+	// const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
+	// const { data: s2, error: e2 } = useGetSneaker('DR8869-200');
+	// const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
+	// const { data: s4, error: e4 } = useGetSneaker('DX2836-001');
 
-	const loaded = () => {
-		if (s1 !== undefined) {
-			setisLoading(true);
-		}
-	};
+	// const loaded = () => {
+	// 	if (s1 !== undefined) {
+	// 		setisLoading(true);
+	// 	}
+	// };
 
-	useEffect(() => {
-		loaded();
-	}, [s1]);
+	// useEffect(() => {
+	// 	loaded();
+	// }, [s1]);
 
 	return (
 		<div>
-			<Head>
+			{/* <Head>
 				<title>Xsauce | Cash Out</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -45,9 +45,9 @@ const Redeem: NextPage = () => {
 			<Layout
 				headerTitle={'Redeem Positions'}
 				headerSubtitle={'MONEY WELL EARNED'}
-				showFinancialOverview={false}
+
 				showHowItWorksButton={true}
-				logoColor={'#FFFFFF'}
+
 			>
 				<main className="flex w-full items-center justify-center flex-col h-[calc(100%-85px)]">
 					<form className="flex w-full h-full items-center justify-center flex-col space-y-5">
@@ -168,7 +168,7 @@ const Redeem: NextPage = () => {
 						</button>
 					</form>
 				</main>
-			</Layout>
+			</Layout> */}
 		</div>
 	);
 };

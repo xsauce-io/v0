@@ -31,7 +31,7 @@ const Markets: NextPage = () => {
 				headerSubtitle={'RELEASE SCHEDULE'}
 				showHowItWorksButton={true}
 				headerTitle={'Calendar'}
-				logoColor={'#ffffff'}
+
 			>
 				<main className="flex w-full flex-1 flex-col text-center">
 					{/*Sorting */}

@@ -105,7 +105,7 @@ const MarketByTitle: NextPage = () => {
 					borderColor: '#0C1615',
 				}}
 			>
-				<LayoutNavBar logoColor="#FFFFFF" />
+				<LayoutNavBar />
 			</div>
 			<main className="flex w-full mobile:px-5 laptop:px-40 flex-1 flex-col text-center mb-40 mt-10 ">
 				<h1>{admin}</h1>

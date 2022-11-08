@@ -8,7 +8,7 @@ export const LayoutReduced = ({
 	children,
 	headerBg,
 	headerColor,
-	logoColor,
+
 }) => {
 
 
@@ -23,7 +23,7 @@ export const LayoutReduced = ({
 				}}
 			>
 				{/* <Announcement /> */}
-				<LayoutNavBar logoColor={logoColor} />
+				<LayoutNavBar  />
 			</div>
 
 			<div className="w-full items-center justify-center ">{children}</div>
@@ -38,13 +38,13 @@ LayoutREduced.defaultProps = {
 	headerBg: '#0C1615',
 	headerColor: 'white',
 	headerTitle: 'Xchange',
-	logoColor: '#ACFF00',
+
 
 };
 
 LayoutReduced.propTypes = {
 	headerBg: PropTypes.string,
 	children: PropTypes.element,
-	logoColor: PropTypes.string,
+
 
 };

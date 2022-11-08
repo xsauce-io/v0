@@ -142,7 +142,7 @@ const Portfolio: NextPage = () => {
 				headerSubtitle={'OVERVIEW'}
 				headerTitle={'Portfolio'}
 				showHowItWorksButton={true}
-				logoColor={'#FFFFFF'}
+
 			>
 				<div className="relative min-h-[60vh]">
 					<ContentHeader

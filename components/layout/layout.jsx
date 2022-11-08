@@ -14,7 +14,6 @@ export const Layout = ({
 	headerTitle,
 	headerSubtitle,
 	showHowItWorksButton,
-	logoColor,
 }) => {
 
 	return (
@@ -28,7 +27,7 @@ export const Layout = ({
 				}}
 			>
 
-				<LayoutNavBar logoColor={logoColor} />
+				<LayoutNavBar  />
 				<LayoutHeader title={headerTitle} subtitle={headerSubtitle}>
 					{showHowItWorksButton === true ? <LayoutHowItWorksButton /> : <></>}
 					{/* {showFinancialOverview === true && width < '1200' ? (
@@ -72,7 +71,6 @@ Layout.defaultProps = {
 	headerColor: 'white',
 	headerTitle: 'Xchange',
 	headerSubtitle: '',
-	logoColor: '#ACFF00',
 	tabHeader: 'Position',
 	showHowItWorksButton: false,
 };
@@ -80,5 +78,4 @@ Layout.defaultProps = {
 Layout.propTypes = {
 	headerBg: PropTypes.string,
 	children: PropTypes.element,
-	logoColor: PropTypes.string,
 };
