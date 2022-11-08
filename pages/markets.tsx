@@ -4,9 +4,9 @@ import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 
 import React from 'react';
-import { FreePrediction } from '../components/freePlay/freePrediction';
+import { FreePrediction } from '../components/freePlay-components/freePrediction';
 import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
-import { Banner } from '../components/freePlay/banner';
+import { Banner } from '../components/freePlay-components/Banner';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
@@ -14,7 +14,7 @@ import { Banner } from '../components/freePlay/banner';
 import { ContentHeader } from '../components/layout/contentHeader';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/common/toast';
+import { ToastNotification } from '../components/common/Toast';
 import {
 	marketsUseGetSneakerSku1,
 	marketsUseGetSneakerSku2,

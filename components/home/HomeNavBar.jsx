@@ -6,7 +6,7 @@ import { LocalDrawer } from '/components/layout/drawer';
 import SauceTokenABI from '../../abi/$tableSauce.json';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { ToastNotificationActionBar } from '../common/toastActionBar';
+import { ToastNotificationActionBar } from '../common/ToastActionBar';
 
 export const HomeNavBar = ({ logoColor }) => {
 	// ----------------------------------------------------

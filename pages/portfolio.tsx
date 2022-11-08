@@ -12,7 +12,7 @@ import { PortfolioTableItem } from '../components/portfolio/PortfolioTableItem';
 import { ContentHeader } from '../components/layout/contentHeader';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/common/toast';
+import { ToastNotification } from '../components/common/Toast';
 
 declare let window: any;
 

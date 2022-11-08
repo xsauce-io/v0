@@ -2,8 +2,8 @@ import React from 'react';
 import { Skeleton } from '@mui/material';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useGetMarketBySku } from '../../services/useRequests';
-import marketAbi from '../../abi/markets.json';
+import { useGetMarketBySku } from '../../../services/useRequests';
+import marketAbi from '../../../abi/markets.json';
 import { ethers } from 'ethers';
 
 export const RedeemCard = ({ cardObject }) => {
@@ -80,7 +80,7 @@ export const RedeemCard = ({ cardObject }) => {
 				<React.Fragment>
 					<div className="flex items-left flex-col laptop:space-y-3 laptop:justify-center  w-full h-full">
 						{cardObject.image?.original === '' ||
-						cardObject.image?.original ===
+							cardObject.image?.original ===
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
 							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img

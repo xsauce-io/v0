@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useGetSneaker } from '../../services/useRequests';
 import { calendarUseGetSneakerSku } from '../../services/dataVariables';
-import { ToastNotification } from '../common/toast';
+import { ToastNotification } from '../common/Toast';
 import { Highlight } from '@chakra-ui/react';
 import toast from 'react-hot-toast';
 

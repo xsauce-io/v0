@@ -8,7 +8,7 @@ import {
     useGetSneakerByLimit,
 } from '../../services/useRequests';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../common/toast';
+import { ToastNotification } from '../common/Toast';
 import {
     calendarUseGetSneakerByLimit,
 } from '../../services/dataVariables';

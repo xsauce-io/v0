@@ -7,7 +7,7 @@ import { BigNumber, ethers, utils } from 'ethers';
 import { Footer } from '../../../layout/footer';
 import { useGetSneaker } from '../../../../services/useRequests';
 
-import { FreePlayGraph } from '../../../freePlay/freePlayGraph';
+//import { FreePlayGraph } from '../../../freePlay-components/freePlayGraph';
 
 declare var window: any;
 
@@ -182,7 +182,7 @@ const LiveMarket: NextPage = () => {
 									</div>
 								</div>
 								<div className="bg-white rounded-lg font-SG p-6 flex-1 flex justify-center items-center ">
-									<FreePlayGraph />
+									{/* <FreePlayGraph /> */}
 								</div>
 							</div>
 						</div>

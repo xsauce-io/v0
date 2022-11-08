@@ -8,8 +8,8 @@ import { useRouter } from 'next/router';
 import { $tableAddress } from '../../services/constants';
 import { useGetMarketBySku } from '../../services/useRequests';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../common/toast';
-import { ToastNotificationActionBar } from '../common/toastActionBar';
+import { ToastNotification } from '../common/Toast';
+import { ToastNotificationActionBar } from '../common/ToastActionBar';
 import React from 'react';
 
 import Dialog from '@mui/material/Dialog';

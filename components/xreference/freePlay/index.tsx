@@ -3,18 +3,18 @@ import { Layout } from '../../layout/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
-import { FreePrediction } from '../../freePlay/freePrediction';
+import { FreePrediction } from '../../freePlay-components/freePrediction';
 import {
 	useGetMarketBySku,
 	useGetSneaker,
 } from '../../../services/useRequests';
-import { Banner } from '../../freePlay/banner';
+import { Banner } from '../../freePlay-components/Banner';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 import { ContentHeader } from '../../layout/contentHeader';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../../common/toast';
+import { ToastNotification } from '../../common/Toast';
 const FreePlay: NextPage = () => {
 	// ------------------- Constants ---------------------
 	const screens = {

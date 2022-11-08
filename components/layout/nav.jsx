@@ -7,7 +7,7 @@ import SauceTokenABI from '../../abi/$tableSauce.json';
 import toast from 'react-hot-toast';
 
 import { useRouter } from 'next/router';
-import { ToastNotificationActionBar } from '../common/toastActionBar';
+import { ToastNotificationActionBar } from '../common/ToastActionBar';
 
 export const Nav = ({ logoColor }) => {
 	// ----------------------------------------------------
@@ -553,8 +553,8 @@ export const Nav = ({ logoColor }) => {
 
 				<LocalDrawer backgroundColor='#0C1615' >
 
-				<div className="flex flex-col flex-1 justify-center items-center  font-Inter  mt-4 ">
-					<div className='my-10 border-[1px] border-white w-full'/>
+					<div className="flex flex-col flex-1 justify-center items-center  font-Inter  mt-4 ">
+						<div className='my-10 border-[1px] border-white w-full' />
 
 						<div className="dropdown dropdown-end ">
 							<label
