@@ -87,7 +87,7 @@ export const CalendarHighlight = () => {
 							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 								<img
-									className="object-contain h-auto w-[40%] m-auto"
+									className="object-contain h-auto w-[30%] m-auto"
 									src={highlightSneakerData.image?.original}
 								></img>
 							</div>
