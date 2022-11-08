@@ -1,7 +1,7 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
 
-export const FutureCard = ({ cardObject }) => {
+export const MarketsFutureCard = ({ cardObject }) => {
 	return cardObject === undefined ? (
 		<React.Fragment>
 			<Skeleton
@@ -26,9 +26,7 @@ export const FutureCard = ({ cardObject }) => {
 						<h1 className="text-2xl text-black font-normal h-[22%] w-full line-clamp-2 font-SG  ">
 							{cardObject.title}
 						</h1>
-						{/* <h2 className=" text-lg font-light text-left w-full text-white py-4 font-Inter">
-									Retail Price: &ensp; &ensp; &ensp;
-								</h2> */}
+
 					</div>
 				</div>
 			</div>

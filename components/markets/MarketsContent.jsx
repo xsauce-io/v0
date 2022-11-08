@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Skeleton } from '@mui/material';
-import { FutureCard } from './futureCard';
-import { FutureIndexSection } from './futureIndexSection';
 import { useGetSneaker } from '../../services/useRequests';
 import Image from 'next/image';
+import { MarketsFutureIndexSection } from './MarketsFutureIndexSection';
+import { MarketsFutureCard } from './MarketsFutureCard';
 
-export const FreePrediction = () => {
+export const MarketsContent = () => {
 	const { data: s1, error: e1 } = useGetSneaker('DZ5485-612');
 
 	const [isLong, setIsLong] = useState(true);
@@ -38,7 +38,7 @@ export const FreePrediction = () => {
 }
 
 	const cardObjectHref = '/markets/' + Markets[Market].title;
-	useEffect(() => {}, [Market]);
+	useEffect(() => { }, [Market]);
 	return (
 		<React.Fragment>
 			<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
@@ -130,19 +130,19 @@ export const FreePrediction = () => {
 					<div className="w-full h-full grid mobile:hidden tablet:grid laptop:grid-cols-auto grid-rows-3 gap-y-6 place-items-stretch gap-x-6">
 						{Markets !== undefined
 							? Markets?.map((el, index) => (
-									<button onClick={() => setMarket(index)}>
-										<FutureCard index={index} cardObject={el} />
-									</button>
-							  ))
+								<button onClick={() => setMarket(index)}>
+									<MarketsFutureCard index={index} cardObject={el} />
+								</button>
+							))
 							: skeletonArray.map(() => (
-									<Skeleton
-										animation="pulse"
-										variant="rounded"
-										height={300}
-										sx={{ borderRadius: '15px' }}
-										width={'100%'}
-									/>
-							  ))}
+								<Skeleton
+									animation="pulse"
+									variant="rounded"
+									height={300}
+									sx={{ borderRadius: '15px' }}
+									width={'100%'}
+								/>
+							))}
 					</div>
 				</div>
 			</div>

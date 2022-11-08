@@ -8,7 +8,7 @@ import MarketAbi from '../../abi/markets.json';
 import { useGetSneaker } from '../../services/useRequests';
 import { DripFeedCard } from './DripFeedCard';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../common/toast';
+import { ToastNotification } from '../common/Toast';
 import {
     dripFeedUseGetSneakerSku1,
     dripFeedUseGetSneakerSku2,

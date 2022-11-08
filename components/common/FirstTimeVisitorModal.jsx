@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Onboard } from './onBoardingModal';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -7,8 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Box from '@mui/material/Box';
 import Slide from '@mui/material/Slide';
-import { Slideshow } from './slideshow';
-import { Images } from './howItWorksButton';
+import { FirstTimeVisitorSlideshow } from './FirstTimeVisitorSlideshow';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -65,7 +64,7 @@ export const FirstTimeVisitorModal = () => {
 					</Button>
 				</DialogActions>
 				<DialogContent sx={{ padding: '18px' }}>
-					<Slideshow content={Images} />
+					<FirstTimeVisitorSlideshow />
 				</DialogContent>
 			</Box>
 		</Dialog>

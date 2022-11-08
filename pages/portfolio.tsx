@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout/layout';
+import { Layout } from '../components/layout/Layout';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import React from 'react';
@@ -9,10 +9,10 @@ import { MarketFactory } from '../services/constants';
 import MarketFactoryABI from '../abi/marketFactory.json';
 import MarketAbi from '../abi/markets.json';
 import { PortfolioTableItem } from '../components/portfolio/PortfolioTableItem';
-import { ContentHeader } from '../components/layout/contentHeader';
+import { ContentHeader } from '../components/common/ContentHeader';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../components/common/toast';
+import { ToastNotification } from '../components/common/Toast';
 
 declare let window: any;
 
@@ -142,7 +142,6 @@ const Portfolio: NextPage = () => {
 				headerSubtitle={'OVERVIEW'}
 				headerTitle={'Portfolio'}
 				showHowItWorksButton={true}
-				showFinancialOverview={false}
 				logoColor={'#FFFFFF'}
 			>
 				<div className="relative min-h-[60vh]">

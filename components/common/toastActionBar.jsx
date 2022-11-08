@@ -9,7 +9,7 @@ export const ToastNotificationActionBar = ({
 	href,
 	showButton = false,
 	buttonText = '',
-	onClick = () => {},
+	onClick = () => { },
 }) => {
 	const { width, height } = useWindowDimensions();
 	const screens = {
@@ -24,9 +24,8 @@ export const ToastNotificationActionBar = ({
 		<>
 			{width <= screens.tablet ? (
 				<div
-					className={`bg-[#DCDEE1] p-4  shadow-md rounded-xl w-full mt-[15px] ${
-						t.visible ? 'animate-flyIn' : 'animate-leave '
-					}`}
+					className={`bg-[#DCDEE1] p-4  shadow-md rounded-xl w-full mt-[15px] ${t.visible ? 'animate-flyIn' : 'animate-leave '
+						}`}
 				>
 					<div className="flex flex-col items-start space-y-1">
 						<div className="flex flex-row w-full">
@@ -67,9 +66,8 @@ export const ToastNotificationActionBar = ({
 				</div>
 			) : (
 				<div
-					className={`bg-[#DCDEE1] p-4  shadow-md rounded-xl mobile:w-[100%] tablet:max-w-[50%] laptop:max-w-[35%]   ${
-						t.visible ? 'animate-flyIn' : 'animate-leave '
-					}`}
+					className={`bg-[#DCDEE1] p-4  shadow-md rounded-xl mobile:w-[100%] tablet:max-w-[50%] laptop:max-w-[35%]   ${t.visible ? 'animate-flyIn' : 'animate-leave '
+						}`}
 				>
 					<div className="flex flex-row space-x-3 items-start">
 						<div className="flex-2">{icon}</div>

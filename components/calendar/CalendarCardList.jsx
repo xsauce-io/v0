@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Skeleton } from '@mui/material';
-import { ContentHeader } from '../layout/contentHeader';
+import { ContentHeader } from '../common/ContentHeader';
 import { CalendarCard } from './calendarCard';
 import {
     useGetMarketBySku,
@@ -8,7 +8,7 @@ import {
     useGetSneakerByLimit,
 } from '../../services/useRequests';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../common/toast';
+import { ToastNotification } from '../common/Toast';
 import {
     calendarUseGetSneakerByLimit,
 } from '../../services/dataVariables';

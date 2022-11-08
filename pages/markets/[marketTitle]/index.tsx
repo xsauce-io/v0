@@ -1,29 +1,29 @@
 import type { NextPage } from 'next';
-import { Nav } from '../../../components/layout/nav';
+import { LayoutNavBar } from '../../../components/layout/LayoutNavBar';
 // import { Card } from '../components/card'
-import { TreeMap } from '../../../components/markets[title]/treemap';
+import { MarketTreeMap } from '../../../components/markets[title]/MarketTreeMap';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 
-import { Footer } from '../../../components/layout/footer';
+import { LayoutFooter } from '../../../components/layout/LayoutFooter';
 
-import { Linegraph } from '../../../components/markets[title]/linegraph';
-import { MintTab } from '../../../components/markets[title]/marketTabs/mint'
-import { WithdrawTab } from '../../../components/markets[title]/marketTabs/withdraw'
-import { StakeTab } from '../../../components/markets[title]/marketTabs/stake'
-import { UnstakeTab } from '../../../components/markets[title]/marketTabs/unstake'
-import { SwitchTab } from '../../../components/markets[title]/marketTabs/switch'
+import { MarketLineGraph } from '../../../components/markets[title]/MarketLineGraph';
+import { MintTab } from '../../../components/markets[title]/marketTabs/mint';
+import { WithdrawTab } from '../../../components/markets[title]/marketTabs/withdraw';
+import { StakeTab } from '../../../components/markets[title]/marketTabs/stake';
+import { UnstakeTab } from '../../../components/markets[title]/marketTabs/unstake';
+import { SwitchTab } from '../../../components/markets[title]/marketTabs/switch';
 
 declare var window: any;
 
-const LiveMarket: NextPage = () => {
+const MarketByTitle: NextPage = () => {
 	const router = useRouter();
 	const mkt = router.query;
 	const mktTitl = mkt.marketTitle;
 
-	console.log(mktTitl)
+	console.log(mktTitl);
 
 	// const { data, error } = useGetSneaker(sku);
 
@@ -54,7 +54,6 @@ const LiveMarket: NextPage = () => {
 			}
 		}
 	};
-
 
 	// const createNewBook = async (e: any) => {
 	// 	e.preventDefault();
@@ -106,8 +105,7 @@ const LiveMarket: NextPage = () => {
 					borderColor: '#0C1615',
 				}}
 			>
-				{/* <Announcement /> */}
-				<Nav logoColor="#FFFFFF" />
+				<LayoutNavBar logoColor="#FFFFFF" />
 			</div>
 			<main className="flex w-full mobile:px-5 laptop:px-40 flex-1 flex-col text-center mb-40 mt-10 ">
 				<h1>{admin}</h1>
@@ -121,69 +119,113 @@ const LiveMarket: NextPage = () => {
 
 						<p>GO BACK</p>
 					</button>
-					{/* {admin === true ? (
-						<form  className="space-x-2 ml-4">
-							<input
-								className="desktop:w-1/3 py-4 pl-3  text-[12px] shadow-md rounded-lg appearance-none focus:ring focus:outline-none focus:ring-black"
-								name="Token2"
-								type="string"
-								placeholder="Sneaker Contract Address"
-							/>
 
-							<button
-								type="submit"
-								className="bg-black text-white rounded-lg py-3 px-2 mt-3"
-							>
-								Create New OrderBook
-							</button>
-						</form>
-					) : (
-						<></>
-					)} */}
-					<div className='flex flex-col flex-col laptop:flex-row mt-6 text-[#0C1615]'>
+					<div className="flex flex-col flex-col laptop:flex-row mt-6 text-[#0C1615]">
 						<div className="flex flex-col space-y-4 laptop:flex-row laptop:w-full laptop:space-x-4 laptop:space-y-0 pb-4">
-							<div className='bg-white rounded-lg font-SG p-2 tablet:p-4 laptop:w-[40%] flex tablet:flex-col'>
-								<div className='flex flex-row  rounded-lg pt-3 px-0 tablet:px-3 '>
-									<ul className='flex flex-col tablet:flex-row flex-wrap justify-start items-end space-y-2 tablet:space-y-0 tablet:justify-center tablet:items-end'>
-										<button onClick={() => setTab(0)} className={Tab === 0 ? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]': 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'}> Mint</button>
-										<button onClick={() => setTab(1)} className={Tab === 1 ? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]' : 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'}> Withdraw</button>
-										<button onClick={() => setTab(2)} className={Tab === 2 ? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]' : 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'}> Stake</button>
-										<button onClick={() => setTab(3)} className={Tab === 3 ? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]' : 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'}> Unstake</button>
-										<button onClick={() => setTab(4)} className={Tab === 4 ? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]' : 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'}> Switch</button>
+							<div className="bg-white rounded-lg font-SG p-2 tablet:p-4 laptop:w-[40%] flex tablet:flex-col">
+								<div className="flex flex-row  rounded-lg pt-3 px-0 tablet:px-3 ">
+									<ul className="flex flex-col tablet:flex-row flex-wrap justify-start items-end space-y-2 tablet:space-y-0 tablet:justify-center tablet:items-end">
+										<button
+											onClick={() => setTab(0)}
+											className={
+												Tab === 0
+													? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]'
+													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
+											}
+										>
+											{' '}
+											Mint
+										</button>
+										<button
+											onClick={() => setTab(1)}
+											className={
+												Tab === 1
+													? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]'
+													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
+											}
+										>
+											{' '}
+											Withdraw
+										</button>
+										<button
+											onClick={() => setTab(2)}
+											className={
+												Tab === 2
+													? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]'
+													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
+											}
+										>
+											{' '}
+											Stake
+										</button>
+										<button
+											onClick={() => setTab(3)}
+											className={
+												Tab === 3
+													? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]'
+													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
+											}
+										>
+											{' '}
+											Unstake
+										</button>
+										<button
+											onClick={() => setTab(4)}
+											className={
+												Tab === 4
+													? 'w-fit text-black p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1 tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 bg-[#ACFF00]'
+													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
+											}
+										>
+											{' '}
+											Switch
+										</button>
 									</ul>
 								</div>
-								<div className='w-full h-fit border-2 rounded-md p-4 flex-1'>
-									{Tab === 0 ? <MintTab market={mktTitl} /> : Tab === 1 ? <WithdrawTab market={mktTitl} /> : Tab === 2 ? <StakeTab market={mktTitl} /> : Tab === 3 ? <UnstakeTab market={mktTitl} /> : Tab === 4 ? <SwitchTab market={mktTitl} /> : <></>}
+								<div className="w-full h-fit border-2 rounded-md p-4 flex-1">
+									{Tab === 0 ? (
+										<MintTab market={mktTitl} />
+									) : Tab === 1 ? (
+										<WithdrawTab market={mktTitl} />
+									) : Tab === 2 ? (
+										<StakeTab market={mktTitl} />
+									) : Tab === 3 ? (
+										<UnstakeTab market={mktTitl} />
+									) : Tab === 4 ? (
+										<SwitchTab market={mktTitl} />
+									) : (
+										<></>
+									)}
 								</div>
-
-
 							</div>
 
-							<div className='flex flex-col bg-white rounded-lg font-SG p-1 laptop:w-[60%]  justify-center items-center text-[#0C1615]'>
+							<div className="flex flex-col bg-white rounded-lg font-SG p-1 laptop:w-[60%]  justify-center items-center text-[#0C1615]">
 								<h1>{mktTitl}Price</h1>
-								<Linegraph />
+								<MarketLineGraph />
 							</div>
-
-
 						</div>
 					</div>
-					<div className='flex flex-col  space-y-4 laptop:flex-row laptop:space-y-0 laptop:space-x-4  text-[#0C1615] w-full'>
-						<div className='bg-white rounded-lg font-SG p-4 tablet:p-4 flex-1 flex-col justify-center items-center text-left laptop:w-[40%] w-full '>
-							<span className='font-bold laptop:text-2xl'>{mktTitl}</span>
-							<p className='laptop:text-xl mt-5'>The Culture Index is a basket of the top 30 streetwear items represented by their resale value. This index was designed to give maximum diversity across streetwear</p>
+					<div className="flex flex-col  space-y-4 laptop:flex-row laptop:space-y-0 laptop:space-x-4  text-[#0C1615] w-full">
+						<div className="bg-white rounded-lg font-SG p-4 tablet:p-4 flex-1 flex-col justify-center items-center text-left laptop:w-[40%] w-full ">
+							<span className="font-bold laptop:text-2xl">{mktTitl}</span>
+							<p className="laptop:text-xl mt-5">
+								The Culture Index is a basket of the top 30 streetwear items
+								represented by their resale value. This index was designed to
+								give maximum diversity across streetwear
+							</p>
 						</div>
-						<div className='w-full laptop:w-[60%] '  >
-							<TreeMap />
+						<div className="w-full laptop:w-[60%] ">
+							<MarketTreeMap />
 						</div>
 					</div>
 				</div>
 			</main>
 
 			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center text-[#0C1615] ">
-				<Footer />
+				<LayoutFooter />
 			</div>
 		</div>
 	);
 };
 
-export default LiveMarket;
+export default MarketByTitle;
