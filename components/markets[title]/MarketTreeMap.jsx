@@ -1,6 +1,6 @@
 import { ResponsiveTreeMap } from '@nivo/treemap';
 
-export const TreeMap = () => {
+export const MarketTreeMap = () => {
 	const data = {
 		name: 'viz',
 		color: '#ACFF00',

@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@nivo/line'
 
 
-export const Linegraph = () => {
+export const MarketLineGraph = () => {
 
 
 
