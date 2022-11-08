@@ -1,20 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useState, useEffect, useMemo } from 'react';
-import { Skeleton } from '@mui/material';
 import { Layout } from '../components/layout/layout';
 import { ContentHeader } from '../components/layout/contentHeader';
 import { CalendarCardList } from '../components/calendar/CalendarCardList';
 import { CalendarHighlight } from '../components/calendar/CalendarHighlight';
-import {
-	useGetMarketBySku,
-	useGetSneaker,
-	useGetSneakerByLimit,
-} from '../services/useRequests';
-import {
-	calendarUseGetSneakerByLimit,
-	calendarUseGetSneakerSku,
-} from '../services/dataVariables';
 
 const Markets: NextPage = () => {
 	// ------------------- Constants ---------------------
