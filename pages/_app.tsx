@@ -6,8 +6,7 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
-import { FirstTimeVisitorModal } from '../components/layout/firstTimeVisitorModal';
-
+import { FirstTimeVisitorModal } from '../components/common/FirstTimeVisitorModal';
 
 /**
  * Send mix panel event
@@ -24,9 +23,7 @@ export const event = (event_name: string, props: any) => {
 	}
 };
 
-function MyApp({ Component, pageProps }: AppProps<{
-
-}>) {
+function MyApp({ Component, pageProps }: AppProps<{}>) {
 	const router = useRouter();
 	//Mix Panel setup
 	useEffect(() => {
@@ -49,10 +46,10 @@ function MyApp({ Component, pageProps }: AppProps<{
 	}, [router.events]);
 
 	return (
-<>
+		<>
 			<Head>
 				<title>Xsauce</title>
-				<meta property="og:image" content='/OG.png' />
+				<meta property="og:image" content="/OG.png" />
 			</Head>
 			{typeof window != 'undefined' && !(window as any).mixpanel && (
 				//<!-- Mixpanel Tracking Code for -->
@@ -122,7 +119,6 @@ function MyApp({ Component, pageProps }: AppProps<{
 				containerStyle={{ top: '104px' }}
 			/>
 		</>
-
 	);
 }
 

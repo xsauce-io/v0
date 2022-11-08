@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Link from 'next/link';
 
-export const Tabs = ({ children, bgColor }) => {
+export const LayoutTabs = ({ children, bgColor }) => {
 	const router = useRouter();
 
 	return (

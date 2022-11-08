@@ -1,14 +1,13 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout/layout';
-import { Nav } from '../components/layout/nav';
-import { LayoutSimple } from '../components/layout/layoutSimple';
+import { Layout } from '../components/layout/Layout';
+import { LayoutReduced } from '../components/layout/LayoutReduced';
 import Link from 'next/link';
 
 declare var window: any;
 
 const pageNotFound404: NextPage = () => {
 	return (
-		<LayoutSimple
+		<LayoutReduced
 			headerBg={undefined}
 			headerColor={undefined}
 			logoColor={undefined}
@@ -28,7 +27,7 @@ const pageNotFound404: NextPage = () => {
 					</Link>
 				</div>
 			</div>
-		</LayoutSimple>
+		</LayoutReduced>
 	);
 };
 

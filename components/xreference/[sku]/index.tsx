@@ -1,15 +1,14 @@
 import type { NextPage } from 'next';
-import { Nav } from '../../../components/layout/nav';
-import { WagerCard } from '../../../components/livemarket[sku]/wagerCard';
+import { LayoutNavBar } from '../../layout/LayoutNavBar';
+// import { WagerCard } from '../../../components/livemarket[sku]/wagerCard';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
-import { Xchange } from '../../../components/livemarket[sku]/xchange';
-import { ActionCard } from '../../../components/livemarket[sku]/actionCard';
-import { Footer } from '../../../components/layout/footer';
+// import { Xchange } from '../../../components/livemarket[sku]/xchange';
+// import { ActionCard } from '../../../components/livemarket[sku]/actionCard';
+import { LayoutFooter } from '../../layout/LayoutFooter';
 import { useGetSneaker } from '../../../services/useRequests';
-
 
 declare var window: any;
 
@@ -98,7 +97,7 @@ const LiveMarket: NextPage = () => {
 				}}
 			>
 				{/* <Announcement /> */}
-				<Nav logoColor="#ACFF00" />
+				<LayoutNavBar logoColor="#ACFF00" />
 			</div>
 			<main className="flex w-full mobile:px-5 laptop:px-48 flex-1 flex-col text-center pb-40 mt-16 ">
 				<h1>{admin}</h1>
@@ -132,7 +131,7 @@ const LiveMarket: NextPage = () => {
 						<></>
 					)} */}
 
-					<div className="tablet:flex flex-row items-center tablet:space-x-4">
+					{/* <div className="tablet:flex flex-row items-center tablet:space-x-4">
 						<div className="flex-1">
 							<WagerCard cardObject={data} />
 						</div>
@@ -140,12 +139,12 @@ const LiveMarket: NextPage = () => {
 							<ActionCard />
 							<Xchange cardObject={response} />
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</main>
 
 			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center text-[#0C1615] ">
-				<Footer />
+				<LayoutFooter />
 			</div>
 		</div>
 	);

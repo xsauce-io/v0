@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout/layout';
+import { Layout } from '../components/layout/Layout';
 import Head from 'next/head';
 import React from 'react';
 import { DripFeedTopStories } from '../components/dripFeed/DripFeedTopStories';
 import { DripFeedCardList } from '../components/dripFeed/DripFeedCardList';
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
-import { ContentHeader } from '../components/layout/contentHeader';
+import { ContentHeader } from '../components/common/ContentHeader';
 
 const DripFeed: NextPage = () => {
 	// -------------------- Rendered Content ------------------

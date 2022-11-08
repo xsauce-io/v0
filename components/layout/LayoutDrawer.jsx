@@ -3,13 +3,8 @@ import { Drawer, Box, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
-import {
-	Laptop,
-	ScreenRotationAltSharp,
-	Screenshot,
-} from '@mui/icons-material';
 
-export const LocalDrawer = ({ children, drawerIconColor, backgroundColor }) => {
+export const LayoutDrawer = ({ children, drawerIconColor, backgroundColor }) => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -51,25 +46,25 @@ export const LocalDrawer = ({ children, drawerIconColor, backgroundColor }) => {
 				<></>
 			)}
 			<Drawer
-				PaperProps={ {backgroundColor: '#000'} }
+				PaperProps={{ backgroundColor: '#000' }}
 				anchor="right"
 				open={isDrawerOpen}
 				onClose={() => setIsDrawerOpen(false)}
 			>
-					<Box
-						p={4}
+				<Box
+					p={4}
 					width="250px"
 
-						textAlign="left"
-						role="presentation"
-						backgroundColor={backgroundColor ? backgroundColor : "#fff"}
-						sx={{ height: '100%' }}
-					>
+					textAlign="left"
+					role="presentation"
+					backgroundColor={backgroundColor ? backgroundColor : "#fff"}
+					sx={{ height: '100%' }}
+				>
 
 
 
-						{children}
-					</Box>
+					{children}
+				</Box>
 			</Drawer>
 		</>
 	);

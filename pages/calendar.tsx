@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Layout } from '../components/layout/layout';
-import { ContentHeader } from '../components/layout/contentHeader';
+import { Layout } from '../components/layout/Layout';
+import { ContentHeader } from '../components/common/ContentHeader';
 import { CalendarCardList } from '../components/calendar/CalendarCardList';
 import { CalendarHighlight } from '../components/calendar/CalendarHighlight';
 
@@ -30,7 +30,6 @@ const Markets: NextPage = () => {
 			<Layout
 				headerSubtitle={'RELEASE SCHEDULE'}
 				showHowItWorksButton={true}
-				showFinancialOverview={false}
 				headerTitle={'Calendar'}
 				logoColor={'#ffffff'}
 			>

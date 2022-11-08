@@ -28,7 +28,7 @@ const Images = [
 	},
 ];
 
-export const Slideshow = ({ content, reset }) => {
+export const FirstTimeVisitorSlideshow = ({ content, reset }) => {
 	const delay = 8000;
 
 	const [index, setIndex] = useState(0);

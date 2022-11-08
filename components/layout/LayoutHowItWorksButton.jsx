@@ -1,5 +1,4 @@
 import React from 'react';
-import { Onboard } from './onBoardingModal';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -7,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Box from '@mui/material/Box';
 import Slide from '@mui/material/Slide';
-import { Slideshow } from './slideshow';
+import { LayoutHowItWorksSlideshow } from './LayoutHowItWorksSlideshow';
 
 export const Images = [
 	{
@@ -40,7 +39,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const HowItWorksButton = ({ title }) => {
+export const LayoutHowItWorksButton = ({ title }) => {
 	const [open, setOpen] = React.useState(false);
 	const [resetSlideshow, setResetSlideshow] = React.useState(false);
 
@@ -113,43 +112,11 @@ export const HowItWorksButton = ({ title }) => {
 							display: 'flex',
 						}}
 					>
-						<Slideshow content={Images} reset={resetSlideshow} />
+						<LayoutHowItWorksSlideshow content={Images} reset={resetSlideshow} />
 					</DialogContent>
 				</Box>
 			</Dialog>
-			{/*
-			<div className="bg-[#DCDEE1] rounded-b-[10px] p-4 text-left w-[100%] space-y-2 ">
-				<div className="py-2 flex space-x-2 text-sm">
-					<h1 className=" text-sm font-Inter">FINANCIAL OVERVIEW </h1>
-					<button className="rounded-2xl px-3 bg-[#ACFF00] text-xs hover:opacity-60 font-Inter">
-						Redeem
-					</button>
-				</div>
-				<grid className="grid grid-cols-2">
-					<div className="grid grid-rows-2">
-						<div className=" flex ">
-							<p className="inline-block mr-1 text-xs font-Inter">Positions</p>
-						</div>
-						<div className=" text-sm font-Inter">12 positions</div>
-					</div>
-					<div className="grid grid-rows-2">
-						<div className=" text-xs font-Inter">Xsauce tokens</div>
-						<div className=" text-sm font-Inter">3,702 $SAUX</div>
-					</div>
-				</grid>
-				<grid className="grid grid-cols-2">
-					<div className="grid grid-rows-2">
-						<div className=" flex ">
-							<p className="inline-block mr-1 text-xs font-Inter">Positions</p>
-						</div>
-						<div className=" text-sm font-Inter">12 positions</div>
-					</div>
-					<div className="grid grid-rows-2">
-						<div className=" text-xs font-Inter">Xsauce tokens</div>
-						<div className=" text-sm font-Inter"> 3,702 $SAUX</div>
-					</div>
-				</grid>
-			</div> */}
+
 		</div>
 	);
 };

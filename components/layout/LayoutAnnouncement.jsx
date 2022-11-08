@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Announcement = () => {
+export const LayoutAnnouncement = () => {
 	return (
 		<div className=" p-2 text-inherit bg-inherit font-SG flex flex-row justify-center items-center mobile:text-sm laptop:text-[12px] w-full">
 			<p>

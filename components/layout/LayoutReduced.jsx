@@ -1,24 +1,16 @@
-import { Nav } from './nav';
-import { Footer } from './footer';
+import { LayoutNavBar } from './LayoutNavBar';
+import { LayoutFooter } from './LayoutFooter';
 import PropTypes from 'prop-types';
-import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 
 // props for bg color, hero header, hero subheader, optional hero box,  Nav colors (text and Icons), tab header and icon
 
-export const LayoutSimple = ({
+export const LayoutReduced = ({
 	children,
 	headerBg,
 	headerColor,
 	logoColor,
 }) => {
-	const screens = {
-		mobile: '300',
-		tablet: '640',
-		laptop: '1200',
-		desktop: '1400',
-	};
 
-	const { width } = useWindowDimensions();
 
 	return (
 		<div className="bg-[#EFF1F3] text-black w-screen">
@@ -31,31 +23,28 @@ export const LayoutSimple = ({
 				}}
 			>
 				{/* <Announcement /> */}
-				<Nav logoColor={logoColor} />
+				<LayoutNavBar logoColor={logoColor} />
 			</div>
 
 			<div className="w-full items-center justify-center ">{children}</div>
 			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center mt-10">
-				<Footer />
+				<LayoutFooter />
 			</div>
 		</div>
 	);
 };
 
-LayoutSimple.defaultProps = {
+LayoutREduced.defaultProps = {
 	headerBg: '#0C1615',
 	headerColor: 'white',
 	headerTitle: 'Xchange',
-	headerSubtitle: '',
 	logoColor: '#ACFF00',
-	tabHeader: 'Position',
-	showFinancialOverview: true,
-	showHowItWorksButton: false,
+
 };
 
-LayoutSimple.propTypes = {
+LayoutReduced.propTypes = {
 	headerBg: PropTypes.string,
 	children: PropTypes.element,
 	logoColor: PropTypes.string,
-	showFinancialOverview: PropTypes.bool,
+
 };

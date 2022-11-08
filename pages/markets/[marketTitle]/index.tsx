@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Nav } from '../../../components/layout/nav';
+import { LayoutNavBar } from '../../../components/layout/LayoutNavBar';
 // import { Card } from '../components/card'
 import { MarketTreeMap } from '../../../components/markets[title]/MarketTreeMap';
 import { useRouter } from 'next/router';
@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 
-import { Footer } from '../../../components/layout/footer';
+import { LayoutFooter } from '../../../components/layout/LayoutFooter';
 
 import { MarketLineGraph } from '../../../components/markets[title]/MarketLineGraph';
 import { MintTab } from '../../../components/markets[title]/marketTabs/mint';
@@ -18,7 +18,7 @@ import { SwitchTab } from '../../../components/markets[title]/marketTabs/switch'
 
 declare var window: any;
 
-const LiveMarket: NextPage = () => {
+const MarketByTitle: NextPage = () => {
 	const router = useRouter();
 	const mkt = router.query;
 	const mktTitl = mkt.marketTitle;
@@ -105,7 +105,7 @@ const LiveMarket: NextPage = () => {
 					borderColor: '#0C1615',
 				}}
 			>
-				<Nav logoColor="#FFFFFF" />
+				<LayoutNavBar logoColor="#FFFFFF" />
 			</div>
 			<main className="flex w-full mobile:px-5 laptop:px-40 flex-1 flex-col text-center mb-40 mt-10 ">
 				<h1>{admin}</h1>
@@ -222,10 +222,10 @@ const LiveMarket: NextPage = () => {
 			</main>
 
 			<div className="mobile:px-5 laptop:px-40 w-full items-center justify-center text-[#0C1615] ">
-				<Footer />
+				<LayoutFooter />
 			</div>
 		</div>
 	);
 };
 
-export default LiveMarket;
+export default MarketByTitle;

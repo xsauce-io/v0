@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout/layout';
+import { Layout } from '../components/layout/Layout';
 import Head from 'next/head';
 import React from 'react';
 import { MarketsContent } from '../components/markets/MarketsContent';

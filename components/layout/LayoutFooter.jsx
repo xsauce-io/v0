@@ -4,7 +4,7 @@ import Script from 'next/script';
 import React from 'react';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 
-export const Footer = ({ children }) => {
+export const LayoutFooter = () => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -13,15 +13,6 @@ export const Footer = ({ children }) => {
 	};
 
 	const { width } = useWindowDimensions();
-
-	// <Script
-	// 	strategy="afterInteractive"
-	// 	dangerouslySetInnerHTML={{
-	// 		__html: `
-	//          function mixpanelTrackDocsClick() { mixpanel.track('Sign out');}
-	// 		 `,
-	// 	}}
-	// />;
 
 	return (
 		<footer>
@@ -226,8 +217,4 @@ export const Footer = ({ children }) => {
 			)}
 		</footer>
 	);
-};
-
-Footer.defaultProps = {
-	children: '',
 };

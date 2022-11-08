@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { ethers, utils } from 'ethers';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
-import { LocalDrawer } from '/components/layout/drawer';
+import { LayoutDrawer } from '/components/layout/layoutDrawer';
 import SauceTokenABI from '../../abi/$tableSauce.json';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -551,7 +551,7 @@ export const HomeNavBar = ({ logoColor }) => {
 					<></>
 				)}
 
-				<LocalDrawer drawerIconColor={'#000'}>
+				<LayoutDrawer drawerIconColor={'#000'}>
 
 					<div className="flex flex-col flex-1 justify-center items-center  font-Inter border-t-[1px] border-white mt-4 ">
 						<div className='my-10 border-[1px] border-[#0C1615] w-full' />
@@ -666,7 +666,7 @@ export const HomeNavBar = ({ logoColor }) => {
 						<div className='my-10 border-[1px] border-[#0C1615] w-full'></div>
 
 					</div>
-				</LocalDrawer>
+				</LayoutDrawer>
 			</div>
 		</header>
 	);

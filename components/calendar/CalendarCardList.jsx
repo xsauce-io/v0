@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Skeleton } from '@mui/material';
-import { ContentHeader } from '../layout/contentHeader';
+import { ContentHeader } from '../common/ContentHeader';
 import { CalendarCard } from './calendarCard';
 import {
     useGetMarketBySku,

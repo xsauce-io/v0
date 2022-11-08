@@ -1,18 +1,16 @@
 import type { NextPage } from 'next';
-import { Layout } from '../../layout/layout';
+import { Layout } from '../../layout/Layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
-import { FreePrediction } from '../../freePlay-components/freePrediction';
 import {
 	useGetMarketBySku,
 	useGetSneaker,
 } from '../../../services/useRequests';
-import { Banner } from '../../freePlay-components/Banner';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
-import { ContentHeader } from '../../layout/contentHeader';
+import { ContentHeader } from '../../common/ContentHeader';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../../common/Toast';
 const FreePlay: NextPage = () => {
@@ -76,21 +74,14 @@ const FreePlay: NextPage = () => {
 				/>
 				<link rel="icon" type="favicon" href="/greenDrop.svg" />
 			</Head>
-			<Layout
-				headerSubtitle={'PREDICT'}
-				headerTitle={'Free Play'}
-				showHowItWorksButton={true}
-				showFinancialOverview={false}
-			>
+			<Layout headerSubtitle={'PREDICT'} headerTitle={'Free Play'}>
 				<>
-					<Banner />
+					{/* //<Banner /> */}
 					<ContentHeader
 						title={'Free Play'}
 						icon={<img src="/greenDrop.svg" />}
 					/>
-					<div className="w-full">
-						<FreePrediction />
-					</div>
+					<div className="w-full">{/* <FreePrediction /> */}</div>
 				</>
 			</Layout>
 		</div>
