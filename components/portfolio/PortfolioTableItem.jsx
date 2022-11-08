@@ -1,11 +1,8 @@
 import React from 'react';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
-import { useGetMarketBySku } from '../../services/useRequests';
-import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
-import MarketAbi from '../../abi/markets.json';
 
-export const Dashboard = ({ positions }) => {
+
+export const PortfolioTableItem = ({ positions }) => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',

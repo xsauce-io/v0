@@ -1,63 +1,49 @@
 import type { NextPage } from 'next';
 import { Layout } from '../components/layout/layout';
 import Head from 'next/head';
-import { useState, useEffect, useMemo } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import { ethers } from 'ethers';
-import { DashboardTable } from '../components/portfolio/dashboardTable';
-import { MarketFactory, marketsDataGit } from '../services/constants';
+import { PortfolioTableContainer } from '../components/portfolio/PortfolioTableContainer';
+import { MarketFactory } from '../services/constants';
 import MarketFactoryABI from '../abi/marketFactory.json';
 import MarketAbi from '../abi/markets.json';
-
-// Here we have used react-icons package for the icons
-// And react-slick as our Carousel Lib
-
-import { Dashboard } from '../components/portfolio/dashboard';
+import { PortfolioTableItem } from '../components/portfolio/PortfolioTableItem';
 import { ContentHeader } from '../components/layout/contentHeader';
 import { Skeleton } from '@mui/material';
+import toast from 'react-hot-toast';
+import { ToastNotification } from '../components/common/toast';
 
 declare let window: any;
 
-
 const Portfolio: NextPage = () => {
 	// --------------------------------------------------
-	// ------------------- Constants ---------------------
+	// ------------- Constants & Variables --------------
 	// --------------------------------------------------
 
-	const screens = {
-		mobile: '300',
-		tablet: '640',
-		smlaptop: '1024',
-		laptop: '1200',
-		desktop: '1400',
-	};
-	const SORT_BY_STATES = {
-		RELEASE_DATE: 'releaseDate',
-		NAME: 'name',
-		RETAIL_PRICE: 'retailPrice',
-	};
-
-	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
+	const skeletonArray = [1, 2, 3, 4];
 
 	// --------------------------------------------------
-	// ------------------- State Variable --------------------
+	// ------------------ State Variable ----------------
 	// --------------------------------------------------
 
-
-	const [response, setResponse] = useState([] as any);
-	const [storedPersistentResponse, setStoredPersistentResponse] = useState(
-		[] as any[]
-	);
-	//filter state mana
-	const [isAscending, setIsAscending] = useState(true);
-	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 	const [allBalances, setAllBalances] = useState([] as any);
-
 	const [showPortfolio, setShowPortfolio] = useState(false);
 
 	// --------------------------------------------------
-	// ------------------Function------------------------
+	// ----------------- Use Effect / Use memo ----------
+	// --------------------------------------------------
+
+	useEffect(() => {
+		showBalances();
+	}, []);
+
+	useEffect(() => {
+		showBalances();
+	}, [showPortfolio]);
+
+	// --------------------------------------------------
+	// ------------------ Functions ----------------------
 	// --------------------------------------------------
 
 	const showBalances = async () => {
@@ -116,21 +102,25 @@ const Portfolio: NextPage = () => {
 					balanceArray.push(newObj);
 				}
 				setAllBalances(balanceArray);
-			} catch {
-				console.log('failed balance retrieval');
-				setShowPortfolio(false);
+			} catch (error) {
+				console.log(error, 'failed balance retrieval');
+				//setShowPortfolio(false);
+				toast.custom(
+					(t) => (
+						<ToastNotification
+							message={'An Internal Error has Occurred'}
+							subMessage={
+								'The data cannot currently be loaded. Please try again later.'
+							}
+							icon={<img src="/alertCircle.svg" />}
+							t={t}
+						/>
+					),
+					{ duration: 7000, id: 'data-not-loading-calendar' }
+				);
 			}
 		}
 	};
-	// --------------------------------------------------
-	// ----------------- Use Effect / Use memo ----------
-	// --------------------------------------------------
-
-	useEffect(() => {
-		showBalances();
-	}, []);
-
-	useEffect(() => { }, [showPortfolio]);
 
 	// --------------------------------------------------
 	// --------------------Render -----------------------
@@ -173,31 +163,29 @@ const Portfolio: NextPage = () => {
 						</div>
 					</ContentHeader>
 					{showPortfolio ? (
-						<DashboardTable>
+						<PortfolioTableContainer>
 							{allBalances.length === 0
 								? skeletonArray.map(() => (
-									<>
-										<Skeleton
-											animation="pulse"
-											variant="rounded"
-											height={70}
-											width={'100%'}
-											sx={{ borderRadius: '100px' }}
-										/>
-										<p className="h-4"> </p>
-									</>
-								))
+										<>
+											<Skeleton
+												animation="pulse"
+												variant="rounded"
+												height={70}
+												width={'100%'}
+												sx={{ borderRadius: '100px' }}
+											/>
+											<p className="h-4"> </p>
+										</>
+								  ))
 								: allBalances?.map((el: any) => {
-									return <Dashboard positions={el} />;
-								})}
-						</DashboardTable>
+										return <PortfolioTableItem positions={el} />;
+								  })}
+						</PortfolioTableContainer>
 					) : (
 						<div className="w-full h-full bg-[#c4c4c4] backdrop-blur-sm absolute top-4 bg-opacity-60 flex flex justify-center items-center text-center rounded-2xl">
-
-								<text className="mobile:text-sm tablet:text-xl font-normal font-Inter">
-									Connect your wallet to view your Portfolio
-								</text>
-
+							<text className="mobile:text-sm tablet:text-xl font-normal font-Inter">
+								Connect your wallet to view your Portfolio
+							</text>
 						</div>
 					)}
 				</div>

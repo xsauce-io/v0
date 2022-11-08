@@ -1,19 +1,20 @@
 import type { NextPage } from 'next';
-import { Layout } from '../../components/layout/layout';
+import { Layout } from '../../layout/layout';
 import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
-import { FreePrediction } from '../../components/freePlay/freePrediction';
-import { useGetMarketBySku, useGetSneaker } from '../../services/useRequests';
-import {Banner} from '../../components/freePlay/banner';
-
-
+import { FreePrediction } from '../../freePlay/freePrediction';
+import {
+	useGetMarketBySku,
+	useGetSneaker,
+} from '../../../services/useRequests';
+import { Banner } from '../../freePlay/banner';
 
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
-import { ContentHeader } from '../../components/layout/contentHeader';
+import { ContentHeader } from '../../layout/contentHeader';
 import toast from 'react-hot-toast';
-import { ToastNotification } from '../../components/common/toast';
+import { ToastNotification } from '../../common/toast';
 const FreePlay: NextPage = () => {
 	// ------------------- Constants ---------------------
 	const screens = {
@@ -73,7 +74,7 @@ const FreePlay: NextPage = () => {
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-				<link rel="icon" type='favicon' href='/greenDrop.svg' />
+				<link rel="icon" type="favicon" href="/greenDrop.svg" />
 			</Head>
 			<Layout
 				headerSubtitle={'PREDICT'}
@@ -81,15 +82,13 @@ const FreePlay: NextPage = () => {
 				showHowItWorksButton={true}
 				showFinancialOverview={false}
 			>
-
 				<>
-        <Banner/>
+					<Banner />
 					<ContentHeader
 						title={'Free Play'}
-
 						icon={<img src="/greenDrop.svg" />}
 					/>
-					<div className='w-full'>
+					<div className="w-full">
 						<FreePrediction />
 					</div>
 				</>

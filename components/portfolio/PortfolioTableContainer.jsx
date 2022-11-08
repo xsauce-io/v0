@@ -1,7 +1,7 @@
 import React from 'react';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 
-export const DashboardTable = ({ children }) => {
+export const PortfolioTableContainer = ({ children }) => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',
