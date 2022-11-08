@@ -11,7 +11,6 @@ import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/toast';
 import {
     calendarUseGetSneakerByLimit,
-    calendarUseGetSneakerSku,
 } from '../../services/dataVariables';
 
 export const CalendarCardList = () => {

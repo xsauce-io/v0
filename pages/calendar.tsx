@@ -19,47 +19,11 @@ import {
 const Markets: NextPage = () => {
 	// ------------------- Constants ---------------------
 
-	const SORT_BY_STATES = {
-		RELEASE_DATE: 'releaseDate',
-		NAME: 'name',
-		RETAIL_PRICE: 'retailPrice',
-	};
-
-	const FILTER_BY_STATES = {
-		LIVE: 'live',
-		EXPIRED: 'expired',
-		NONE: 'none',
-	};
-
-	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
 	// -------------------- Data Fetching ------------------
-
-	const { data: highlightSneaker, error } = useGetSneaker(
-		calendarUseGetSneakerSku
-	);
-	const { data: sneakersData, error: sneakersDataError } = useGetSneakerByLimit(
-		calendarUseGetSneakerByLimit
-	);
 
 	// ------------------- State Variable --------------------
 
-	const [response, setResponse] = useState(sneakersData);
-	const [responseError, setResponseError] = useState(sneakersDataError);
-	const [highlight, setHighlight] = useState(highlightSneaker);
-	const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
-	const [filterBy, setFilterBy] = useState({
-		state: FILTER_BY_STATES.NONE,
-	});
-
-	const [isAscending, setIsAscending] = useState(true);
-
 	//------------------ Use Effect / Use memo ------------------
-
-	useEffect(() => {
-		setResponse(sneakersData);
-		setHighlight(highlightSneaker);
-	}, [sneakersData, highlightSneaker, sneakersDataError]);
 
 	return (
 		<div>
@@ -89,7 +53,7 @@ const Markets: NextPage = () => {
 					/>
 
 					<div className="space-y-10 mb-20">
-						<CalendarHighlight index={1} cardObject={highlight} />
+						<CalendarHighlight />
 						<CalendarCardList />
 					</div>
 				</main>

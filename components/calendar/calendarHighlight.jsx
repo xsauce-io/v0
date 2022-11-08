@@ -2,12 +2,16 @@ import React from 'react';
 import { Skeleton } from '@mui/material';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
-import marketAbi from '../../abi/markets.json';
-import axios from 'axios';
+import { useGetSneaker } from '../../services/useRequests';
+import { calendarUseGetSneakerSku } from '../../services/dataVariables';
+import { ToastNotification } from '../common/toast';
+import { Highlight } from '@chakra-ui/react';
+import toast from 'react-hot-toast';
 
-export const CalendarHighlight = ({ cardObject, index }) => {
-	console.log(cardObject);
+
+export const CalendarHighlight = () => {
+	// ------------------- Constants ---------------------
+
 	const randomPlaceholder = [
 		'/hurache.svg',
 		'/octobers.svg',
@@ -16,18 +20,45 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 		'/11s.svg',
 	];
 
-	const [No, setNo] = useState();
-	const [Yes, setYes] = useState();
-	const [expiration, setExpiration] = useState();
+	// ------------------- State Variable --------------------
 
-	let [favored, setFavored] = useState();
+
+	// -------------------- Data Fetching ------------------
+
+
+	const { data: highlightSneakerData, error: highlightSneakerError } = useGetSneaker(
+		calendarUseGetSneakerSku
+	);
+
+	//------------------ Use Effect / Use memo ------------------
+
+	useEffect(() => {
+	}, [highlightSneakerData, highlightSneakerError]);
+
+	useEffect(() => {
+		if (highlightSneakerError) {
+			toast.custom(
+				(t) => (
+					<ToastNotification
+						message={'An Internal Error has Occurred'}
+						subMessage={
+							'The data cannot be currently loaded. Please try again later.'
+						}
+						icon={<img src="/alertCircle.svg" />}
+						t={t}
+					/>
+				),
+				{ duration: 7000, id: 'data-not-loading-calendar' }
+			);
+		}
+	}, [highlightSneakerError]);
 
 	return (
 		<div
-			index={index}
+
 			className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl w-full items-start text-left font-inter min-h-full "
 		>
-			{cardObject === undefined ? (
+			{highlightSneakerData === undefined ? (
 				<React.Fragment>
 					<Skeleton
 						variant="rectangular"
@@ -37,18 +68,18 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 			) : (
 				<React.Fragment>
 					<div className="flex items-left flex-col space-y-3 justify-center w-full h-full ">
-						{cardObject.image?.original === '' ||
-						cardObject.image?.original ===
+						{highlightSneakerData.image?.original === '' ||
+							highlightSneakerData.image?.original ===
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
 							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
 									className="object-contain h-auto w-[40%] m-auto scale-80"
 									src={
-										cardObject?.name[0] === 'J'
+										highlightSneakerData?.name[0] === 'J'
 											? randomPlaceholder[3]
-											: cardObject?.name[0] === 'Y'
-											? randomPlaceholder[2]
-											: randomPlaceholder[4]
+											: highlightSneakerData?.name[0] === 'Y'
+												? randomPlaceholder[2]
+												: randomPlaceholder[4]
 									}
 								/>
 							</div>
@@ -57,7 +88,7 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 								<img
 									className="object-contain h-auto w-[40%] m-auto"
-									src={cardObject.image?.original}
+									src={highlightSneakerData.image?.original}
 								></img>
 							</div>
 						)}
@@ -65,10 +96,10 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 						<div className="h-full">
 							<div className="px-8">
 								<h1 className="text-2xl font-normal text-white h-[22%] w-full line-clamp-2 font-SG  ">
-									{cardObject.name}
+									{highlightSneakerData.name}
 								</h1>
 								<h2 className=" text-lg font-light text-left w-full text-white py-4 font-Inter">
-									Retail Price &ensp; &ensp; &ensp; ${cardObject.retailPrice}
+									Retail Price &ensp; &ensp; &ensp; ${highlightSneakerData.retailPrice}
 								</h2>
 							</div>
 							<div className="border-b-[1px] border-[#30403F]"></div>
@@ -76,7 +107,7 @@ export const CalendarHighlight = ({ cardObject, index }) => {
 								<div className="flex flex-col w-full py-4 space-y-3 font-light">
 									<div className="w-full">
 										<h2 className="text-[14px] text-[#748282] font-Inter">
-											Release Date: {cardObject.releaseDate}
+											Release Date: {highlightSneakerData.releaseDate}
 										</h2>
 									</div>
 								</div>
