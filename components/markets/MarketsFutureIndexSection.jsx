@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const FutureIndexSection = ({ market }) => {
+export const MarketsFutureIndexSection = ({ market }) => {
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
