@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 
-export const LayoutDrawer = ({ children, drawerIconColor, backgroundColor }) => {
+export const NavBarDrawerContainer = ({ children, drawerIconColor, backgroundColor }) => {
 	const screens = {
 		mobile: '300',
 		tablet: '640',
@@ -53,16 +53,12 @@ export const LayoutDrawer = ({ children, drawerIconColor, backgroundColor }) => 
 			>
 				<Box
 					p={4}
-					width="250px"
-
+					width="280px"
 					textAlign="left"
 					role="presentation"
 					backgroundColor={backgroundColor ? backgroundColor : "#fff"}
 					sx={{ height: '100%' }}
 				>
-
-
-
 					{children}
 				</Box>
 			</Drawer>

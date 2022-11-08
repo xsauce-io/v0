@@ -2,8 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { ethers, utils } from 'ethers';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
-import { LayoutDrawer } from '/components/layout/layoutDrawer';
-import SauceTokenABI from '../../abi/$tableSauce.json';
+import {NavBarDrawerContainer} from './NavBarDrawerContainer'
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { ToastNotificationActionBar } from '../common/ToastActionBar';
@@ -22,37 +21,47 @@ export const NavBar = ({ logoColor, theme }) => {
 
     if (theme === NAVBAR_THEME.dark) {
         themeObject = {
+            name: 'darkTheme',
             logoColor: "#fff",
             textColor: "text-[#0C1615]",
-            buttonColor:  "bg-white",
+            buttonColor: "bg-white",
             menuButtonColor: "white",
             bgColor: "bg-[#0C1615]",
             iconTextColor: "#0C1615",
-            name: 'darkTheme',
             drawerIconColor: '#fff',
+            drawerIconAsText: '#fff',
+            drawerButtonColor: 'bg-[#0C1615]',
+            drawerTextColor: 'text-[#fff]',
             drawerBackgroundColor: '#0C1615'
         }
     } else if (theme == NAVBAR_THEME.light) {
         themeObject = {
+            name: 'lightTheme',
             logoColor: "#0C1615",
             textColor: "text-white",
             buttonColor: "bg-[#0C1615]",
             menuButtonColor: "#0C1615",
             bgColor: "bg-white",
             iconTextColor: "#fff",
-            name: 'lightTheme',
-            drawerIconColor: '#000',
-            drawerBackgroundColor: '#0C1615'
+            drawerIconColor: "#000",
+            drawerIconAsText: "#000",
+            drawerButtonColor: 'bg-[#fff]',
+            drawerTextColor: 'text-[#0C1615]',
+            drawerBackgroundColor: '#fff'
         }
     } else {
         themeObject = {
+            name: 'darkTheme',
             logoColor: "#fff",
             textColor: "text-[#0C1615]",
-            buttonColor:  "bg-white",
+            buttonColor: "bg-white",
+            menuButtonColor: "white",
             bgColor: "bg-[#0C1615]",
-            iconTextColors: "#0C1615",
-            name: 'darkTheme',
+            iconTextColor: "#0C1615",
             drawerIconColor: '#fff',
+            drawerIconAsText: '#fff',
+            drawerButtonColor: 'bg-[#0C1615]',
+            drawerTextColor: 'text-[#fff]',
             drawerBackgroundColor: '#0C1615'
         }
     }
@@ -445,7 +454,7 @@ export const NavBar = ({ logoColor, theme }) => {
 
     return (
         <header className="sticky top-0 z-20 ">
-            <div className={`flex items-center h-20 ${themeObject.bgColor} w-full gap-8 ` }>
+            <div className={`flex items-center h-20 ${themeObject.bgColor} w-full gap-8 `}>
                 <div className="basis-1/3">
                     <a className="block" href="/">
                         <span className="sr-only">Home</span>
@@ -503,8 +512,8 @@ export const NavBar = ({ logoColor, theme }) => {
                                     </>
                                 )}
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.6666 6.66666L7.8382 9.49508L5.00977 6.66666" stroke={themeObject.iconTextColor} stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+                                    <path d="M10.6666 6.66666L7.8382 9.49508L5.00977 6.66666" stroke={themeObject.iconTextColor} stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
 
                             </label>
                             <ul
@@ -545,10 +554,10 @@ export const NavBar = ({ logoColor, theme }) => {
                                     }
 
                                 ><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12.4733 14.1667H5.6533C4.71997 14.1667 3.95996 13.4067 3.95996 12.4733V5.65336C3.95996 4.72003 4.71997 3.96002 5.6533 3.96002H12.4733C13.4066 3.96002 14.1666 4.72003 14.1666 5.65336V12.4733C14.1666 13.4067 13.4066 14.1667 12.4733 14.1667Z" stroke={themeObject.iconTextColor} stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M2.32682 11.5463C2.02016 11.2397 1.8335 10.813 1.8335 10.3463V3.52635C1.8335 2.59301 2.5935 1.83301 3.52684 1.83301H10.3468C10.8735 1.83301 11.3468 2.073 11.6602 2.453" stroke={themeObject.iconTextColor} stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</div>
+                                        <path d="M12.4733 14.1667H5.6533C4.71997 14.1667 3.95996 13.4067 3.95996 12.4733V5.65336C3.95996 4.72003 4.71997 3.96002 5.6533 3.96002H12.4733C13.4066 3.96002 14.1666 4.72003 14.1666 5.65336V12.4733C14.1666 13.4067 13.4066 14.1667 12.4733 14.1667Z" stroke={themeObject.iconTextColor} stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2.32682 11.5463C2.02016 11.2397 1.8335 10.813 1.8335 10.3463V3.52635C1.8335 2.59301 2.5935 1.83301 3.52684 1.83301H10.3468C10.8735 1.83301 11.3468 2.073 11.6602 2.453" stroke={themeObject.iconTextColor} stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
                                 <p
                                     className={
                                         isCopied == false
@@ -564,18 +573,18 @@ export const NavBar = ({ logoColor, theme }) => {
                         <div className="dropdown dropdown-end">
                             <label tabindex="0" className={`text-lg ${themeObject.textColor}`}>
                                 <div className="w-[37px]"  >
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="16" cy="16" r="16" fill={themeObject.menuButtonColor}/>
-<path d="M22 17C22.5523 17 23 16.5523 23 16C23 15.4477 22.5523 15 22 15C21.4477 15 21 15.4477 21 16C21 16.5523 21.4477 17 22 17Z" fill={themeObject.iconTextColor}/>
-<path d="M16 17C16.5523 17 17 16.5523 17 16C17 15.4477 16.5523 15 16 15C15.4477 15 15 15.4477 15 16C15 16.5523 15.4477 17 16 17Z" fill={themeObject.iconTextColor}/>
-<path d="M10 17C10.5523 17 11 16.5523 11 16C11 15.4477 10.5523 15 10 15C9.44771 15 9 15.4477 9 16C9 16.5523 9.44771 17 10 17Z" fill={themeObject.iconTextColor}/>
-</svg>
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="16" cy="16" r="16" fill={themeObject.menuButtonColor} />
+                                        <path d="M22 17C22.5523 17 23 16.5523 23 16C23 15.4477 22.5523 15 22 15C21.4477 15 21 15.4477 21 16C21 16.5523 21.4477 17 22 17Z" fill={themeObject.iconTextColor} />
+                                        <path d="M16 17C16.5523 17 17 16.5523 17 16C17 15.4477 16.5523 15 16 15C15.4477 15 15 15.4477 15 16C15 16.5523 15.4477 17 16 17Z" fill={themeObject.iconTextColor} />
+                                        <path d="M10 17C10.5523 17 11 16.5523 11 16C11 15.4477 10.5523 15 10 15C9.44771 15 9 15.4477 9 16C9 16.5523 9.44771 17 10 17Z" fill={themeObject.iconTextColor} />
+                                    </svg>
 
                                 </div>
                             </label>
                             <ul
                                 tabindex="0"
-                                className={`menu dropdown-content ${themeObject.textColor}  p-2 shadow rounded-box w-[250px] mt-4 z-10`}
+                                className={`menu dropdown-content ${themeObject.textColor} ${themeObject.buttonColor}  p-2 shadow rounded-box w-[250px] mt-4 z-10`}
                             >
                                 <li>
                                     <button
@@ -610,45 +619,45 @@ export const NavBar = ({ logoColor, theme }) => {
                     <></>
                 )}
 
-                <LayoutDrawer drawerIconColor={themeObject.drawerIconColor}>
-
-                    <div className="flex flex-col flex-1 justify-center items-center  font-Inter border-t-[1px] border-white mt-4 ">
-                        <div className='my-10 border-[1px] border-[#0C1615] w-full' />
+                <NavBarDrawerContainer drawerIconColor={themeObject.drawerIconColor} backgroundColor={themeObject.drawerBackgroundColor}>
+                    <div className="flex flex-col flex-1 justify-center items-center font-Inter  mt-4 ">
 
                         <div className="dropdown dropdown-end ">
                             <label
                                 tabindex="0"
-                                className="text-[14px] flex flex-row text-white justify-center items-center px-4 py-3 w-[175px]  bg-[#0C1615] space-x-6 rounded-[40px]"
+                                className={`text-lg flex flex-row  justify-start items-center p-4  w-full   ${themeObject.drawerButtonColor} ${themeObject.drawerTextColor} space-x-4  hover:opacity-60`}
                             >
                                 {toggle === 421613 ? (
                                     <>
                                         <img className="h-auto w-[10%]" src="/arbitrum.svg" />
-                                        <span className="text-[14px]">Arbitrum</span>
+                                        <span className="text-lg">Arbitrum</span>
                                     </>
                                 ) : toggle === 80001 ? (
                                     <>
                                         <img className="h-auto w-[10%]" src="/polygon.svg" />
-                                        <span className=" text-[14px]">Polygon</span>
+                                        <span className=" text-lg">Polygon</span>
                                     </>
                                 ) : toggle === 41 ? (
                                     <>
                                         <img
-                                            className="h-auto w-[10%]text-[14px]"
+                                            className="h-auto w-[10%] text-lg"
                                             src="/telos.png"
                                         />
-                                        <span className=" text-[14px]">Telos</span>
+                                        <span className=" text-lg">Telos</span>
                                     </>
                                 ) : (
                                     <>
                                         <img className="h-auto w-[9%]" src="/eth.png" />
-                                        <span className=" text-[14px]">Goerli</span>
+                                        <span className="text-lg">Goerli</span>
                                     </>
                                 )}
-                                <img src="/downArrow.svg" className="h-auto w-[20px]" />
+                                <svg width="25" height="25" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.6666 6.66666L7.8382 9.49508L5.00977 6.66666" stroke={themeObject.drawerIconAsText} stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
                             </label>
                             <ul
                                 tabindex="0"
-                                className={`menu dropdown-content bg-[#0C1615] text-white p-2 shadow rounded-box w-52 mt-4`}
+                                className={`menu dropdown-content  ${themeObject.drawerButtonColor} ${themeObject.drawerTextColor} p-4 shadow w-full mt-4`}
                             >
                                 <li>
                                     <a onClick={() => setState(421613)}>
@@ -666,7 +675,7 @@ export const NavBar = ({ logoColor, theme }) => {
                         </div>
 
                         <button
-                            className="text-[14px] flex flex-row justify-center text-white font-Inter items-center mt-4  bg-[#0C1615] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+                            className={`text-lg flex flex-row justify-start p-4  font-Inter items-center mt-4 ${themeObject.drawerButtonColor} ${themeObject.drawerTextColor}  space-x-4  w-full hover:opacity-60`}
                             onClick={() => getWallet(true)}
                         >
                             <span className="truncate">
@@ -676,14 +685,18 @@ export const NavBar = ({ logoColor, theme }) => {
                                 onClick={() => copyAddressToClipboard()}
                                 className={'relative'}
                             >
-                                <img
+                                <div
                                     className={
                                         accounts == null
                                             ? 'hidden'
                                             : 'visible hover:scale-110 active:scale-125'
                                     }
-                                    src="/Images2.svg"
-                                />
+
+                                > <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.4733 14.1667H5.6533C4.71997 14.1667 3.95996 13.4067 3.95996 12.4733V5.65336C3.95996 4.72003 4.71997 3.96002 5.6533 3.96002H12.4733C13.4066 3.96002 14.1666 4.72003 14.1666 5.65336V12.4733C14.1666 13.4067 13.4066 14.1667 12.4733 14.1667Z" stroke={themeObject.drawerIconAsText} stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2.32682 11.5463C2.02016 11.2397 1.8335 10.813 1.8335 10.3463V3.52635C1.8335 2.59301 2.5935 1.83301 3.52684 1.83301H10.3468C10.8735 1.83301 11.3468 2.073 11.6602 2.453" stroke={themeObject.drawerIconAsText} stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
                                 <p
                                     className={
                                         isCopied == false
@@ -696,10 +709,9 @@ export const NavBar = ({ logoColor, theme }) => {
                             </a>
                         </button>
 
-                        <div className='my-10 border-[1px] border-[#0C1615] w-full'></div>
 
                         <button
-                            className="text-[14px] flex flex-row justify-center text-white font-Inter items-center   bg-[#0C1615] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+                            className={`text-lg flex flex-row justify-start  font-Inter items-center mt-4 ${themeObject.drawerButtonColor} ${themeObject.drawerTextColor}  space-x-4 p-4  w-full hover:opacity-60`}
                             onClick={() => {
                                 faucet();
                                 mixpanelTrackProps('Get Test Tokens', { token: '$auce' });
@@ -710,7 +722,7 @@ export const NavBar = ({ logoColor, theme }) => {
                         </button>
 
                         <a
-                            className="text-[14px] flex flex-row justify-center text-white font-Inter items-center mt-4 bg-[#0C1615] rounded-[40px] space-x-2 py-3  w-[175px] hover:opacity-60"
+                            className={`text-lg flex flex-row justify-start font-Inter items-center mt-4 ${themeObject.drawerButtonColor} ${themeObject.drawerTextColor}   space-x-4  p-4  w-full hover:opacity-60`}
                             target="blank"
                             href="https://goerli-faucet.pk910.de/"
                             onClick={() =>
@@ -722,10 +734,9 @@ export const NavBar = ({ logoColor, theme }) => {
                             <img className="h-auto w-[7%]" src="/eth.png" />
                             <text>Get ETH(Goerli) </text>
                         </a>
-                        <div className='my-10 border-[1px] border-[#0C1615] w-full'></div>
 
                     </div>
-                </LayoutDrawer>
+                </NavBarDrawerContainer>
             </div>
         </header>
     );
