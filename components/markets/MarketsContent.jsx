@@ -56,7 +56,7 @@ export const MarketsContent = () => {
 					</span>
 
 					<div className="flex flex-col space-y-9">
-						<FutureIndexSection handleCallback={handleCallback} market={Markets[Market]} />
+						<MarketsFutureIndexSection handleCallback={handleCallback} market={Markets[Market]} />
 						<div className="flex flex-col flex-1 ">
 							<div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
 								<button

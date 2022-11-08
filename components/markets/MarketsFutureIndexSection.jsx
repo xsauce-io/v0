@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 
-export const FutureIndexSection = ({ market, handleCallback }) => {
+export const MarketsFutureIndexSection = ({ market, handleCallback }) => {
 	const [loading, setLoading] = useState(false);
 
   const screens = {
