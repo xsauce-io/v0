@@ -88,13 +88,12 @@ export const LayoutHowItWorksButton = ({ title }) => {
 					<DialogActions
 						sx={{
 							display: 'flex',
-
 							padding: 0,
 						}}
 					>
 						<Button
 							sx={{
-								color: '#ACFF00',
+								color: 'white',
 								fontSize: '20px',
 								display: 'flex',
 								flexDirection: 'column',
@@ -108,6 +107,7 @@ export const LayoutHowItWorksButton = ({ title }) => {
 					</DialogActions>
 					<DialogContent
 						sx={{
+
 							padding: '15px',
 							display: 'flex',
 						}}

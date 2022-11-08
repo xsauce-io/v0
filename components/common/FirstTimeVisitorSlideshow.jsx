@@ -28,7 +28,7 @@ const Images = [
 	},
 ];
 
-export const FirstTimeVisitorSlideshow = ({ content, reset }) => {
+export const FirstTimeVisitorSlideshow = ({ reset }) => {
 	const delay = 8000;
 
 	const [index, setIndex] = useState(0);
@@ -71,7 +71,7 @@ export const FirstTimeVisitorSlideshow = ({ content, reset }) => {
 				style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
 			>
 				{/* each page of the slider */}
-				{content?.map((item, index) => (
+				{Images?.map((item, index) => (
 					<div
 						className={
 							'flex flex-col shrink-0 h-[40%] w-[100%]  p-5  whitespace-pre-line pr-1 pl-1 justify-start '
