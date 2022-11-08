@@ -33,9 +33,9 @@ export const MarketsContent = () => {
 	];
 
 
-  const handleCallback = (childData) => {
- setMarket(childData)
-}
+	const handleCallback = (childData) => {
+		setMarket(childData)
+	}
 
 	const cardObjectHref = '/markets/' + Markets[Market].title;
 	useEffect(() => { }, [Market]);
@@ -49,9 +49,9 @@ export const MarketsContent = () => {
 								mixpanelTrackProps('View Market', Markets[Market].title)
 							}
 							href={cardObjectHref}
-							className="flex justify-center w-full tablet:w-fit text-center text-sm text-right px-3 py-2 text-lg font-medium space-x-1 bg-[#ACFF00] rounded-md"
+							className="flex justify-center w-full tablet:w-fit text-center  text-right p-3  text-lg font-medium space-x-1 bg-[#ACFF00] rounded-md"
 						>
-							<Image src='/search-icon-svg.svg' width={11} height={11} /> <span className="">See Composition</span>
+							<span >See Composition</span>
 						</a>
 					</span>
 
