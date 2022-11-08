@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { ToastNotificationActionBar } from '../common/toastActionBar';
 
-export const HomeNav = ({ logoColor }) => {
+export const HomeNavBar = ({ logoColor }) => {
 	// ----------------------------------------------------
 	// ----------------------  Variables and Constants ------------------------
 	// ----------------------------------------------------
@@ -554,7 +554,7 @@ export const HomeNav = ({ logoColor }) => {
 				<LocalDrawer drawerIconColor={'#000'}>
 
 					<div className="flex flex-col flex-1 justify-center items-center  font-Inter border-t-[1px] border-white mt-4 ">
-					<div className='my-10 border-[1px] border-[#0C1615] w-full'/>
+						<div className='my-10 border-[1px] border-[#0C1615] w-full' />
 
 						<div className="dropdown dropdown-end ">
 							<label
