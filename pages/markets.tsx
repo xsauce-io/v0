@@ -8,8 +8,6 @@ import { FreePrediction } from '../components/freePlay/freePrediction';
 import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
 import { Banner } from '../components/freePlay/banner';
 
-
-
 // Here we have used react-icons package for the icons
 // And react-slick as our Carousel Lib
 
@@ -17,7 +15,11 @@ import { ContentHeader } from '../components/layout/contentHeader';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/common/toast';
-
+import {
+	marketsUseGetSneakerSku1,
+	marketsUseGetSneakerSku2,
+	marketsUseGetSneakerSku3,
+} from '../services/dataVariables';
 
 const Markets: NextPage = () => {
 	// ------------------- Constants ---------------------
@@ -37,9 +39,9 @@ const Markets: NextPage = () => {
 	const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 	// ------------------- State Variable --------------------
-	const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
-	const { data: s2, error: e2 } = useGetSneaker('DR8869-200');
-	const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
+	const { data: s1, error: e1 } = useGetSneaker(marketsUseGetSneakerSku1);
+	const { data: s2, error: e2 } = useGetSneaker(marketsUseGetSneakerSku2);
+	const { data: s3, error: e3 } = useGetSneaker(marketsUseGetSneakerSku3);
 
 	const [response, setResponse] = useState([] as any);
 	const [storedPersistentResponse, setStoredPersistentResponse] = useState(
@@ -52,14 +54,11 @@ const Markets: NextPage = () => {
 
 	// -------------------- Data Fetching ------------------
 
-
-
 	//------------------ Use Effect / Use memo ------------------
 	useEffect(() => {
 		setResponse([s1, s2, s3]);
 		setStoredPersistentResponse([s1, s2, s3]);
 	}, [s1, s2, s3]);
-
 
 	useEffect(() => {
 		if (e1 || e2 || e3) {
@@ -89,7 +88,7 @@ const Markets: NextPage = () => {
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-				<link rel="icon" type='favicon' href='/greenDrop.svg' />
+				<link rel="icon" type="favicon" href="/greenDrop.svg" />
 			</Head>
 
 			<Layout
@@ -99,13 +98,9 @@ const Markets: NextPage = () => {
 				showFinancialOverview={false}
 				logoColor={'#FFFFFF'}
 			>
-
 				<>
-
-					<div className='w-full mt-10'>
-
+					<div className="w-full mt-10">
 						<FreePrediction />
-
 					</div>
 				</>
 			</Layout>

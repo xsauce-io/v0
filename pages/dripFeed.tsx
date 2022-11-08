@@ -10,7 +10,7 @@ import { DashboardTable } from '../components/portfolio/dashboardTable';
 import { MarketFactory, marketsDataGit } from '../services/constants';
 import MarketFactoryABI from '../abi/marketFactory.json';
 import MarketAbi from '../abi/markets.json';
-import { CalendarHighlight } from '../components/calendar/calendarHighlight';
+import { CalendarHighlight } from '../components/calendar/CalendarHighlight';
 import { useGetMarketBySku, useGetSneaker } from '../services/useRequests';
 
 // Here we have used react-icons package for the icons
@@ -21,8 +21,12 @@ import { ContentHeader } from '../components/layout/contentHeader';
 import { Skeleton } from '@mui/material';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../components/common/toast';
+import {
+	dripFeedUseGetSneakerSku1,
+	dripFeedUseGetSneakerSku2,
+	dripFeedUseGetSneakerSku3,
+} from '../services/dataVariables';
 declare let window: any;
-
 
 const DripFeed: NextPage = () => {
 	// ------------------- Constants ---------------------
@@ -42,9 +46,9 @@ const DripFeed: NextPage = () => {
 	const skeletonArray = [1, 2, 3, 4];
 
 	// ------------------- State Variable --------------------
-	const { data: s1, error: e1 } = useGetSneaker('DH7138-006');
-	const { data: s2, error: e2 } = useGetSneaker('DR8869-200');
-	const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
+	const { data: s1, error: e1 } = useGetSneaker(dripFeedUseGetSneakerSku1);
+	const { data: s2, error: e2 } = useGetSneaker(dripFeedUseGetSneakerSku2);
+	const { data: s3, error: e3 } = useGetSneaker(dripFeedUseGetSneakerSku3);
 
 	const [response, setResponse] = useState([] as any);
 	const [storedPersistentResponse, setStoredPersistentResponse] = useState(
@@ -183,7 +187,6 @@ const DripFeed: NextPage = () => {
 								return <CalendarHighlight index={index} cardObject={el} />;
 							})}
 						</div>
-
 					</div>
 					{/* <div className="divide-y-2 divide-black  ">
 

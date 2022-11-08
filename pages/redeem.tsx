@@ -19,14 +19,11 @@ const Redeem: NextPage = () => {
 	const { data: s3, error: e3 } = useGetSneaker('DR0501-101');
 	const { data: s4, error: e4 } = useGetSneaker('DX2836-001');
 
-
-
-
 	const loaded = () => {
 		if (s1 !== undefined) {
-			setisLoading(true)
+			setisLoading(true);
 		}
-	}
+	};
 
 	useEffect(() => {
 		loaded();
@@ -42,7 +39,7 @@ const Redeem: NextPage = () => {
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-				<link rel="icon" type='favicon' href='/greenDrop.svg' />
+				<link rel="icon" type="favicon" href="/greenDrop.svg" />
 			</Head>
 
 			<Layout
@@ -64,21 +61,13 @@ const Redeem: NextPage = () => {
 								className="text-xl flex flex-column justify-center text-center items-center border-[#0C1615] border-2 rounded-3xl p-2 text-sm px-8 bg-white space-x-5 hover:opacity-50"
 							>
 								{toggled === '1' ? (
-									<p className="text-black truncate font-Inter">
-										{s1?.name}
-									</p>
+									<p className="text-black truncate font-Inter">{s1?.name}</p>
 								) : toggled === '2' ? (
-									<p className="text-black truncate font-Inter">
-										{s2?.name}
-									</p>
+									<p className="text-black truncate font-Inter">{s2?.name}</p>
 								) : toggled === '3' ? (
-									<p className="text-black truncate font-Inter">
-										{s3?.name}
-									</p>
+									<p className="text-black truncate font-Inter">{s3?.name}</p>
 								) : (
-									<p className="text-black truncate font-Inter">
-										{s4?.name}
-									</p>
+									<p className="text-black truncate font-Inter">{s4?.name}</p>
 								)}
 								<img className="" src="/downArrow.svg" />
 							</label>
@@ -122,56 +111,50 @@ const Redeem: NextPage = () => {
 						</div>
 						<div className="mobile:full tablet:w-[60%] flex flex-col space-y-4 laptop:items-center">
 							<div className="mobile:flex w-full flex-1 flex-col laptop:w-[390px]">
-
-								{!isLoading
-									? (
-										<React.Fragment>
-											<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '12px',
-													}}
-													width={400}
-													height={300}
-												/>
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '8px',
-													}}
-													width={400}
-													height={30}
-												/>
-												<Skeleton
-													variant="rectangular"
-													sx={{
-														zIndex: '2',
-														backgroundColor: 'gray',
-														borderRadius: '8px',
-													}}
-													width={300}
-													height={30}
-												/>
-											</div>
-										</React.Fragment>
-									) : toggled == '1' ? (
-										<RedeemCard cardObject={s1} />
-									)
-										: toggled == '2' ? (
-											<RedeemCard cardObject={s2} />
-										)
-											: toggled == '3' ? (
-												<RedeemCard cardObject={s3} />
-											)
-												: (
-													<RedeemCard cardObject={s4} />
-												)
-								}
+								{!isLoading ? (
+									<React.Fragment>
+										<div className="transition duration-500 hover:scale-105 flex flex-col overflow-hidden rounded-2xl items-left m-auto laptop:h-[400px] space-y-3">
+											<Skeleton
+												variant="rectangular"
+												sx={{
+													zIndex: '2',
+													backgroundColor: 'gray',
+													borderRadius: '12px',
+												}}
+												width={400}
+												height={300}
+											/>
+											<Skeleton
+												variant="rectangular"
+												sx={{
+													zIndex: '2',
+													backgroundColor: 'gray',
+													borderRadius: '8px',
+												}}
+												width={400}
+												height={30}
+											/>
+											<Skeleton
+												variant="rectangular"
+												sx={{
+													zIndex: '2',
+													backgroundColor: 'gray',
+													borderRadius: '8px',
+												}}
+												width={300}
+												height={30}
+											/>
+										</div>
+									</React.Fragment>
+								) : toggled == '1' ? (
+									<RedeemCard cardObject={s1} />
+								) : toggled == '2' ? (
+									<RedeemCard cardObject={s2} />
+								) : toggled == '3' ? (
+									<RedeemCard cardObject={s3} />
+								) : (
+									<RedeemCard cardObject={s4} />
+								)}
 							</div>
 						</div>
 

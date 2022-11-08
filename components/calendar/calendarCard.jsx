@@ -15,12 +15,6 @@ export const CalendarCard = ({ cardObject, index }) => {
 		'/11s.svg',
 	];
 
-	const [No, setNo] = useState();
-	const [Yes, setYes] = useState();
-	const [expiration, setExpiration] = useState();
-
-	let [favored, setFavored] = useState();
-
 	return (
 		<div
 			index={index}
@@ -37,7 +31,7 @@ export const CalendarCard = ({ cardObject, index }) => {
 				<React.Fragment>
 					<div className="flex items-left flex-col justify-center w-full h-full ">
 						{cardObject.image?.original === '' ||
-						cardObject.image?.original ===
+							cardObject.image?.original ===
 							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
 							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
@@ -46,8 +40,8 @@ export const CalendarCard = ({ cardObject, index }) => {
 										cardObject?.name[0] === 'J'
 											? randomPlaceholder[3]
 											: cardObject?.name[0] === 'Y'
-											? randomPlaceholder[2]
-											: randomPlaceholder[4]
+												? randomPlaceholder[2]
+												: randomPlaceholder[4]
 									}
 								/>
 							</div>
