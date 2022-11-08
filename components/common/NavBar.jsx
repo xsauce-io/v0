@@ -5,15 +5,14 @@ import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 import {NavBarDrawerContainer} from './NavBarDrawerContainer'
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { ToastNotificationActionBar } from '../common/ToastActionBar';
-import { light } from '@mui/material/styles/createPalette';
+import { ToastNotificationActionBar } from './ToastActionBar';
 
 export const NAVBAR_THEME = {
     light: "light",
     dark: "dark",
 
 }
-export const NavBar = ({ logoColor, theme }) => {
+export const NavBar = ({ padding, theme }) => {
     // ----------------------------------------------------
     // ----------  Variables and Constants ----------------
     // ----------------------------------------------------
@@ -454,7 +453,7 @@ export const NavBar = ({ logoColor, theme }) => {
 
     return (
         <header className="sticky top-0 z-20 ">
-            <div className={`flex items-center h-20 ${themeObject.bgColor} w-full gap-8 `}>
+            <div className={`flex items-center h-20 ${themeObject.bgColor} w-full gap-8 ${padding? "mobile:px-5 laptop:px-40" : "" }`}>
                 <div className="basis-1/3">
                     <a className="block" href="/">
                         <span className="sr-only">Home</span>

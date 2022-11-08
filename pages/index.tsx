@@ -22,12 +22,15 @@ const Home: NextPage = () => {
 			</Head>
 
 			{/* Note this is a custom navigator component for home  */}
-			<HomeNavBar  />
+
+
+			<HomeNavBar />
 
 			<div
 				id="mainSection"
 				className="flex flex-col tablet:flex-row justify-center items-center h-[calc(100vh-80px)] px-5 laptop:px-20 mt-80px font-Inter"
 			>
+
 				<ul className="flex flex-col font-SG font-medium tablet:w-[50%] font-Inter cursor-pointer justify-center items-start lg-desktop:items-end text-[20px] tablet:text-[30px] laptop:text-[40px] lg-desktop:text-[55px] p-4 tablet:p-8">
 					<Link href="/markets">
 						<a className=" flex flex-row w-full">
