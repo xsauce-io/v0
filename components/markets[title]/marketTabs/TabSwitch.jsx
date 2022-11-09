@@ -22,7 +22,7 @@ export const TabSwitch = (market) => {
           >
             <p>Staked <span className="hidden tablet:inline-block">Tokens</span></p>
             <img
-              className="mobile:w-[10px] laptop:w-[20px]"
+              className="mobile:hidden tablet:flex tablet:w-[15px] laptop:w-[20px]"
               src="/upTrend.png"
             />
           </button>
@@ -38,7 +38,7 @@ export const TabSwitch = (market) => {
           >
             <p>Unstaked <span className="hidden tablet:inline-block">Tokens</span></p>
             <img
-              className="mobile:w-[10px] laptop:w-[20px]"
+              className="mobile:hidden tablet:flex tablet:w-[15px] laptop:w-[20px]"
               src="/downTrend.png"
             />
           </button>

@@ -42,7 +42,7 @@ export const MarketsContent = () => {
 	return (
 		<React.Fragment>
 			<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
-				<div className="bg-white shadow-lg h-fit mobile:w-full laptop:w-[70%] rounded-lg font-SG p-12 ">
+				<div className="bg-white shadow-lg h-fit mobile:w-full laptop:w-[70%] rounded-lg font-SG p-4 tablet:p-8 laptop:p-12 ">
 					<span className="flex flex-row justify-end">
 						<a
 							onClick={() =>
@@ -71,7 +71,7 @@ export const MarketsContent = () => {
 								>
 									<p>Long 2x</p>
 									<img
-										className="mobile:w-[10px] laptop:w-[25px]"
+										className="mobile:hidden tablet:flex  tablet:w-[15px] laptop:w-[25px]"
 										src="/upTrend.png"
 									/>
 								</button>
@@ -87,7 +87,7 @@ export const MarketsContent = () => {
 								>
 									<p>Short 2x</p>
 									<img
-										className="mobile:w-[10px] laptop:w-[25px]"
+										className="mobile:hidden tablet:flex tablet:w-[15px] laptop:w-[25px]"
 										src="/downTrend.png"
 									/>
 								</button>

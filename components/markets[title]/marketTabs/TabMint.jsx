@@ -21,7 +21,7 @@ export const TabMint= (market) => {
 					>
 						<p>Long 2x</p>
 						<img
-							className="mobile:w-[10px] laptop:w-[20px]"
+							className="mobile:hidden tablet:flex  tablet:w-[15px] laptop:w-[20px]"
 							src="/upTrend.png"
 						/>
 					</button>
@@ -37,7 +37,7 @@ export const TabMint= (market) => {
 					>
 						<p>Short 2x</p>
 						<img
-							className="mobile:w-[10px] laptop:w-[20px]"
+							className="mobile:hidden tablet:flex  tablet:w-[15px] laptop:w-[20px]"
 							src="/downTrend.png"
 						/>
 					</button>
