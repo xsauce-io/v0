@@ -5,7 +5,7 @@ import { ContentHeader } from '../components/common/ContentHeader';
 import { CalendarCardList } from '../components/calendar/CalendarCardList';
 import { CalendarHighlight } from '../components/calendar/CalendarHighlight';
 
-const Markets: NextPage = () => {
+const Calendar: NextPage = () => {
 	// ------------------- Constants ---------------------
 
 	// -------------------- Data Fetching ------------------
@@ -50,4 +50,4 @@ const Markets: NextPage = () => {
 	);
 };
 
-export default Markets;
+export default Calendar;
