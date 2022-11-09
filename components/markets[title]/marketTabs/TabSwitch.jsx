@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const TabSwitch = (market) => {
   const [isStaked, setIsStaked] = useState(true);

@@ -2,9 +2,8 @@ import useSWR, { mutate } from 'swr';
 import axios from 'axios';
 import {
 	marketsDataGit,
-	OrderBookGit,
-	urlByLimit,
-	urlBySku,
+
+
 } from './constants';
 
 // ----------------------- ----------- ----------------------
@@ -143,7 +142,7 @@ export const useGetSneakerByLimit = (limit) => {
 export const useGetMultiSneakers = (skuArray) => {
 	const skuUrls = [];
 	for (let i = 0; i < skuArray.length; i++) {
-		let skuUrl = urlBySku + skuArray[i];
+		let skuUrl = '/api/sneakerSku/' + skuArray[i];
 		skuUrls.push(skuUrl);
 	}
 	console.log(skuUrls);
@@ -167,7 +166,7 @@ export const useGetMarketBySku = (sku) => {
 	return { data, error };
 };
 
-export const requestOrderBook = async () => axios.get(OrderBookGit);
+//export const requestOrderBook = async () => axios.get(OrderBookGit);
 export const requestOrderBookAddress = async () =>
 	axios.get(OrderBookAddressGit);
 
