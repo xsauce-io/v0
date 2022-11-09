@@ -21,10 +21,10 @@ export const DripFeedTopStories = () => {
 
 
 		<div className="block relative ">
-			<div className="flex flex-row items-center overflow-y-clip overflow-x-auto scrollbar-hide scroll-smooth rounded-lg  " id="container">
-				<div className="flex flex-row items-center font-SG text-lg space-x-2 mobile:h-[300px] tablet:h-[350px]  ">
+			<div className="flex flex-row items-center overflow-y-clip overflow-x-auto scrollbar-hide scroll-smooth rounded-lg" id="container">
+				<div className="flex flex-row items-center font-SG text-lg space-x-2 mobile:h-[300px] tablet:h-[350px]">
 					<a
-						className="flex flex-col mobile:w-[90vw] tablet:w-[450px] text-left h-full  "
+						className="flex flex-col mobile:w-[90vw] tablet:w-[450px] text-left h-full"
 						target="blank"
 						href="https://hypebeast.com/2022/10/hublot-cooks-damascus-steel-big-bang-unico-gourmet-chef"
 					>
@@ -40,12 +40,12 @@ export const DripFeedTopStories = () => {
 					</a>
 
 					<a
-						className="flex flex-col mobile:w-[90vw] tablet:w-[450px] text-left h-full "
+						className="flex flex-col mobile:w-[90vw] tablet:w-[450px] text-left h-full"
 						target="blank"
 						href="https://www.linkedin.com/posts/xsauce_culture-team-markets-activity-6985365771354861568-Jok1?utm_source=share&utm_medium=member_desktop"
 					>
 						<img
-							className="object-contain w-auto h-[200px] tablet:h-[80%] bg-black "
+							className="object-contain w-auto h-[200px] tablet:h-[80%] bg-black"
 							src="sauce.gif"
 						/>
 						<p className="pt-2 pl-2 h-[50px]">

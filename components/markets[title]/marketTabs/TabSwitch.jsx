@@ -21,10 +21,7 @@ export const TabSwitch = (market) => {
             onClick={() => setIsStaked(true)}
           >
             <p>Staked <span className="hidden tablet:inline-block">Tokens</span></p>
-            <img
-              className="mobile:hidden tablet:flex tablet:w-[15px] laptop:w-[20px]"
-              src="/upTrend.png"
-            />
+
           </button>
           <button
             type="selection"
@@ -37,15 +34,40 @@ export const TabSwitch = (market) => {
             onClick={() => setIsStaked(false)}
           >
             <p>Unstaked <span className="hidden tablet:inline-block">Tokens</span></p>
-            <img
-              className="mobile:hidden tablet:flex tablet:w-[15px] laptop:w-[20px]"
-              src="/downTrend.png"
-            />
+
           </button>
         </div>
 
-        {/* <div className="flex flex-row">
-        <div className="flex flex-row w-full bg-white border-2 border-[#0C1615] rounded-[40px]">
+
+        <div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px] mb-3">
+          <button
+             type="selection"
+            id="fromLong"
+            className={
+              !fromLong
+                ? 'flex flex-row justify-center items-center space-x-2  py-3    w-1/2  font-medium text-xs   tablet:text-lg  text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
+                : 'flex flex-row justify-center items-center space-x-2   py-3   w-[55%] font-medium text-xs   tablet:text-lg   text-white   bg-[#0C1615] rounded-[40px]'
+            }
+            onClick={() => setFromLong(true)}
+          >
+            <p>From Long to Short</p>
+
+          </button>
+          <button
+             type="selection"
+            id="fromShort"
+            className={
+              fromLong
+                ? 'flex flex-row justify-center items-center space-x-2  py-3   w-1/2 font-medium text-xs   tablet:text-lg   text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+                : 'flex flex-row justify-center items-center space-x-2  py-3   w-[55%] font-medium text-xs   tablet:text-lg text-white  bg-[#0C1615] rounded-[40px] '
+            }
+            onClick={() => setFromLong(false)}
+          >
+            <p>From Short to Long</p>
+
+          </button>
+        </div>
+        {/* <div className="flex flex-row w-full bg-white border-2 border-[#0C1615] rounded-[40px]">
 
           <button
             type="selection"
@@ -74,8 +96,8 @@ export const TabSwitch = (market) => {
 
 
             </button>
-            </div>
-        </div> */}
+            </div> */}
+
 
 
         <div className=" flex flex-row  bg-white items-center py-3 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
