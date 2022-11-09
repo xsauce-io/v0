@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout/Layout';
 import { LayoutReduced } from '../components/layout/LayoutReduced';
 import Link from 'next/link';
 
