@@ -10,11 +10,11 @@ import { BigNumber, ethers, utils } from 'ethers';
 import { LayoutFooter } from '../../../components/layout/LayoutFooter';
 
 import { MarketLineGraph } from '../../../components/markets[title]/MarketLineGraph';
-import { MintTab } from '../../../components/markets[title]/marketTabs/mint';
-import { WithdrawTab } from '../../../components/markets[title]/marketTabs/withdraw';
-import { StakeTab } from '../../../components/markets[title]/marketTabs/stake';
-import { UnstakeTab } from '../../../components/markets[title]/marketTabs/unstake';
-import { SwitchTab } from '../../../components/markets[title]/marketTabs/switch';
+import { TabMint } from '../../../components/markets[title]/marketTabs/TabMint';
+import { TabWithdraw } from '../../../components/markets[title]/marketTabs/TabWithdraw';
+import { TabStake } from '../../../components/markets[title]/marketTabs/TabStake';
+import { TabUnstake } from '../../../components/markets[title]/marketTabs/TabUnstake';
+import { TabSwitch } from '../../../components/markets[title]/marketTabs/TabSwitch';
 
 declare var window: any;
 
@@ -133,7 +133,7 @@ const MarketByTitle: NextPage = () => {
 													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
 											}
 										>
-											{' '}
+
 											Mint
 										</button>
 										<button
@@ -144,7 +144,7 @@ const MarketByTitle: NextPage = () => {
 													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
 											}
 										>
-											{' '}
+
 											Withdraw
 										</button>
 										<button
@@ -155,7 +155,7 @@ const MarketByTitle: NextPage = () => {
 													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
 											}
 										>
-											{' '}
+
 											Stake
 										</button>
 										<button
@@ -166,7 +166,7 @@ const MarketByTitle: NextPage = () => {
 													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
 											}
 										>
-											{' '}
+
 											Unstake
 										</button>
 										<button
@@ -177,22 +177,22 @@ const MarketByTitle: NextPage = () => {
 													: 'w-fit text-black bg-[#DCDEE1] p-2 rounded-tl-lg rounded-bl-lg font-medium text-xs tablet:mr-1  tablet:px-3  tablet:py-3 tablet:rounded-tl-lg tablet:rounded-tr-lg tablet:rounded-bl-none tablet:text-base laptop:text-sm laptop:p-2 desktop:text-base desktop:p-2 hover:bg-[#ACFF00] hover:text-black'
 											}
 										>
-											{' '}
+
 											Switch
 										</button>
 									</ul>
 								</div>
 								<div className="w-full h-fit border-2 rounded-md p-4 flex-1">
 									{Tab === 0 ? (
-										<MintTab market={mktTitl} />
+										<TabMint market={mktTitl} />
 									) : Tab === 1 ? (
-										<WithdrawTab market={mktTitl} />
+										<TabWithdraw market={mktTitl} />
 									) : Tab === 2 ? (
-										<StakeTab market={mktTitl} />
+										<TabStake market={mktTitl} />
 									) : Tab === 3 ? (
-										<UnstakeTab market={mktTitl} />
+										<TabUnstake market={mktTitl} />
 									) : Tab === 4 ? (
-										<SwitchTab market={mktTitl} />
+										<TabSwitch market={mktTitl} />
 									) : (
 										<></>
 									)}
@@ -211,7 +211,7 @@ const MarketByTitle: NextPage = () => {
 							<p className="laptop:text-xl mt-5">
 								The Culture Index is a basket of the top 30 streetwear items
 								represented by their resale value. This index was designed to
-								give maximum diversity across streetwear
+								give maximum diversity across streetwear.
 							</p>
 						</div>
 						<div className="w-full laptop:w-[60%] ">

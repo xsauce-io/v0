@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-export const SwitchTab = (market) => {
+export const TabSwitch = (market) => {
   const [isStaked, setIsStaked] = useState(true);
   const [fromLong, setFromLong] = useState(true);
 

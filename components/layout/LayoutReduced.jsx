@@ -34,7 +34,7 @@ export const LayoutReduced = ({
 	);
 };
 
-LayoutREduced.defaultProps = {
+LayoutReduced.defaultProps = {
 	headerBg: '#0C1615',
 	headerColor: 'white',
 	headerTitle: 'Xchange',

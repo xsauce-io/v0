@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 
-export const WithdrawTab = (market) => {
+export const TabWithdraw = (market) => {
   const [isLong, setIsLong] = useState(
     true
   );

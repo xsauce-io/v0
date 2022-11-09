@@ -1,7 +1,7 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React from "react";
+import { useEffect, useState } from "react";
 
-export const MintTab = (market) => {
+export const TabUnstake = (market) => {
 	const [isLong, setIsLong] = useState(true);
 
 	return (
@@ -15,11 +15,11 @@ export const MintTab = (market) => {
 						className={
 							!isLong
 								? 'flex flex-row justify-center items-center space-x-2  w-1/2  font-medium text-xs tablet:text-xl py-3 text-black bg-white  border-r-0 border-[#0C1615] rounded-tl-[40px] rounded-bl-[40px]  '
-								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-xs tablet:text-xl text-white  bg-[#0C1615] rounded-[40px]'
+								: 'flex flex-row justify-center items-center space-x-2 w-[55%] font-medium text-xs tablet:text-xl py-3 text-white  bg-[#0C1615] rounded-[40px]'
 						}
 						onClick={() => setIsLong(true)}
 					>
-						<p>Long 2x</p>
+						<p>Long </p>
 						<img
 							className="mobile:w-[10px] laptop:w-[20px]"
 							src="/upTrend.png"
@@ -30,12 +30,12 @@ export const MintTab = (market) => {
 						id="short"
 						className={
 							isLong
-								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium  text-xs tablet:text-xl py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
-								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium  text-xs tablet:text-xl py-3 text-white  bg-[#0C1615] rounded-[40px] '
+								? 'flex flex-row justify-center items-center space-x-2 w-1/2 font-medium text-xs tablet:text-xl py-3 text-black bg-white  border-l-0 border-[#0C1615] rounded-tr-[40px] rounded-br-[40px] '
+								: 'flex flex-row justify-center items-center space-x-2  w-[55%] font-medium text-xs tablet:text-xl py-3 text-white  bg-[#0C1615] rounded-[40px] '
 						}
 						onClick={() => setIsLong(false)}
 					>
-						<p>Short 2x</p>
+						<p>Short </p>
 						<img
 							className="mobile:w-[10px] laptop:w-[20px]"
 							src="/downTrend.png"
@@ -43,11 +43,11 @@ export const MintTab = (market) => {
 					</button>
 				</div>
 				<div className="mt-3 flex flex-row  bg-white items-center py-3 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
-					<p className="flex-1 text-left text-xs tablet:text-xl  pr-1">
+					<p className="flex-1 text-left text-xs tablet:text-xl pr-1">
 						Amount:
 					</p>
 					<input
-						className="flex-1 text-right text-xs tablet:text-xl laptop:text-md mobile:w-[10%] appearance-none focus:none focus:outline-none"
+						className="flex-1 text-right text-xs tablet:text-xl mobile:w-[10%] appearance-none focus:none focus:outline-none"
 						name="Amount"
 						id="amount"
 						type="number"
@@ -60,9 +60,9 @@ export const MintTab = (market) => {
 				<button
 					type="submit"
 					id="mint"
-					className="w-full font-medium text-xs tablet:text-xl my-3 text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-70 active:bg-[#ACFF00]"
+					className="w-full font-medium my-3 text-xs tablet:text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-70 active:bg-[#ACFF00]"
 				>
-					{isLong ? 'Mint Long' : 'Mint Short'}
+					{isLong ? "Unstake Long Tokens" : "Unstake Short Tokens"}
 				</button>
 			</div>
 		</div>
