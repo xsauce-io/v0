@@ -7,7 +7,7 @@ export const WalletNotConnectedModal = ({ open, positionTop }) => {
 	}
 	return (
 		<div
-			className={`fixed  right-5 laptop:right-40  bg-[#0C1615] p-4  shadow-md rounded-xl mobile:w-[90%] tablet:max-w-[45%] laptop:max-w-[28%] h-[200px] border-2 border-[#748282] opacity-80 ${positionTop ? 'top-24' : 'top-48'
+			className={`fixed  right-5 laptop:right-40  bg-[#0C1615] p-4  shadow-md rounded-xl mobile:w-[90%] tablet:max-w-[45%] laptop:max-w-[28%] h-[200px] border-2 border-[#748282] opacity-90 ${positionTop ? 'top-24' : 'top-48'
 				}`}
 		>
 			<div className="flex flex-col items-center justify-center">

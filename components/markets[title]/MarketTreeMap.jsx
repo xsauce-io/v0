@@ -35,7 +35,6 @@ export const MarketTreeMap = () => {
 	};
 
 	return (
-		<div className="w-full h-[300px] bg-white rounded-lg p-2 tablet:p-4">
 			<ResponsiveTreeMap
 				data={data}
 				identity="name"
@@ -61,6 +60,6 @@ export const MarketTreeMap = () => {
 				nodeOpacity={0.9}
 				colors={["#ACFF00", '#fff', '#000']}
 			/>
-		</div>
+
 	);
 };

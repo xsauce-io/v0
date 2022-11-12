@@ -60,7 +60,7 @@ export const MarketsContent = () => {
 						<div className="flex flex-col flex-1 ">
 							<div className="w-fit p-1 group relative hover:visible ">
 								<img src="/information-icon-black.svg" className='w-6 h-6' />
-								<span className='absolute bg-black invisible group-hover:visible -top-36 left-0 w-[250px] text-sm bg-black p-3 text-white  opacity-80 rounded-2xl'>Leverage is like turbo. It doubles (2x) your gains AND your losses. The amount of leverage is also dynamic and changes based on the amount of longs and shorts in each index.
+								<span className='absolute bg-black invisible group-hover:visible -top-36 left-0 w-[250px] text-sm bg-black p-3 text-white  opacity-90 rounded-2xl'>Leverage is like turbo. It doubles (2x) your gains AND your losses. The amount of leverage is also dynamic and changes based on the amount of longs and shorts in each index.
 								</span>
 							</div>
 							<div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
@@ -122,7 +122,7 @@ export const MarketsContent = () => {
 							<div className="pt-5 flex items ">
 							<div className="w-fit group inline-block px-1 relative hover:visible">
 								<img src="/information-icon-black.svg" className='w-6 h-6' />
-								<span className='absolute bg-black invisible group-hover:visible top-8 left-0 w-[250px] text-sm bg-black p-3 text-white  opacity-80 rounded-2xl'>This is the total value of the index. Your expected returns will be calculated based on the price of the index when you opened a long or short position.
+								<span className='absolute bg-black invisible group-hover:visible top-8 left-0 w-[250px] text-sm bg-black p-3 text-white  opacity-90 rounded-2xl'>This is the total value of the index. Your expected returns will be calculated based on the price of the index when you opened a long or short position.
 								</span>
 							</div>
 								<h1 className="font-bold">

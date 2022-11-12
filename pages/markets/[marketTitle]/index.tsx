@@ -199,9 +199,21 @@ const MarketByTitle: NextPage = () => {
 								</div>
 							</div>
 
-							<div className="flex flex-col bg-white rounded-lg font-SG p-1 laptop:w-[60%]  justify-center items-center text-[#0C1615]">
-								<h1>{mktTitl}Price</h1>
+							<div className="flex flex-col bg-white rounded-lg font-SG py-4 laptop:w-[60%] justify-center items-center text-[#0C1615]">
+								<div className="flex flex-row w-full justify-center px-10">
+									<h1 className='flex-1'>
+										{mktTitl}Price
+									</h1>
+									<div className="w-fit px-1 group relative hover:visible ">
+										<img src="/information-icon-black.svg" className='w-6 h-6' />
+										<span className='absolute bg-black invisible group-hover:visible bottom-8 -right-4 w-[240px] text-sm bg-black p-3 text-white opacity-90 rounded-2xl text-left '>
+										This graph tracks the historical value of this index.
+										</span>
+									</div>
+								</div>
+
 								<MarketLineGraph />
+
 							</div>
 						</div>
 					</div>
@@ -214,8 +226,18 @@ const MarketByTitle: NextPage = () => {
 								give maximum diversity across streetwear.
 							</p>
 						</div>
-						<div className="w-full laptop:w-[60%] ">
+						<div className="w-full laptop:w-[60%] bg-white rounded-lg p-2 tablet:p-4">
+							<div className="flex flex-row w-full justify-end px-3 ">
+								<div className="w-fit px-1 group relative hover:visible ">
+										<img src="/information-icon-black.svg" className='w-6 h-6' />
+										<span className='absolute bg-black invisible group-hover:visible bottom-8 right-0 w-[240px] text-sm bg-black p-3 text-white opacity-90 rounded-2xl text-left '>
+										This treemap visualizes the index composition.
+										</span>
+								</div>
+							</div>
+							<div className='h-[400px]'>
 							<MarketTreeMap />
+							</div>
 						</div>
 					</div>
 				</div>
