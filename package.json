@@ -9,6 +9,7 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@chainlink/contracts": "^0.4.1",
     "@chakra-ui/react": "^2.2.6",
     "@emotion/react": "^11.10.0",
@@ -28,7 +29,6 @@
     "@types/mocha": "^9.1.1",
     "@types/react-slick": "^0.23.10",
     "axios": "^0.27.2",
-
     "daisyui": "^2.24.0",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.0",
@@ -37,10 +37,8 @@
     "mocha": "^10.0.0",
     "mongodb": "^4.10.0",
     "next": "latest",
-
     "nodemailer": "^6.8.0",
     "react": "18.1.0",
-
     "react-dom": "18.1.0",
     "react-hot-toast": "^2.4.0",
     "react-hotjar": "^5.1.0",

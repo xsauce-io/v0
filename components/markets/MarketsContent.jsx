@@ -58,6 +58,8 @@ export const MarketsContent = () => {
 					<div className="flex flex-col space-y-9">
 						<MarketsFutureIndexSection handleCallback={handleCallback} market={Markets[Market]} />
 						<div className="flex flex-col flex-1 ">
+							<div className="w-fit p-2 mb-2 group relative hover:visible"><img src="/information-icon-black.svg" className='w-8 h-8'></img><span className='absolute bg-black invisible group-hover:visible -top-20 left-10 w-[300px] text-sm bg-black p-3 text-white  opacity-80 rounded-2xl'>Leverage is like turbo. It doubles (2x) your gains AND your losses. The amount of leverage is also dynamic and changes based on the amount of longs and shorts in each index.
+							</span></div>
 							<div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
 								<button
 									type="selection"
