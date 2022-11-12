@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { LostFamButton } from '../LostFamButton'
 
 
 export const TabStake = (market) => {
@@ -8,7 +9,10 @@ export const TabStake = (market) => {
 
 	return (
 		<div className="flex flex-col ">
-			<h1 className="font-bold text-left py-4 text-xl">{market?.market}</h1>
+			<div className='flex flex-row w-full items-center justify-center'>
+				<h1 className="font-bold text-left py-2 text-md tablet:text-xl flex-1">{market?.market}</h1>
+				<LostFamButton/>
+			</div>
 			<div className="flex flex-col flex-1 ">
 				<div className="flex flex-row bg-white border-2 border-[#0C1615] rounded-[40px]">
 					<button
