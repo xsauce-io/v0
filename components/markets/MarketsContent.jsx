@@ -114,7 +114,7 @@ export const MarketsContent = () => {
 								id="mint"
 								className="w-full font-medium mb-6 mt-3 text-xl py-4 text-white bg-[#0C1615] rounded-[80px] hover:opacity-70 active:bg-[#ACFF00]"
 							>
-								{isLong ? 'Mint Long' : 'Mint Short'}
+								{isLong ? 'Go Long' : 'Go Short'}
 							</button>
 							<div className="pt-5">
 								<h1 className="font-bold">
