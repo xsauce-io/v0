@@ -183,6 +183,7 @@ const MarketByTitle: NextPage = () => {
 									</ul>
 								</div>
 								<div className="w-full h-fit border-2 rounded-md p-4 flex-1">
+
 									{Tab === 0 ? (
 										<TabMint market={mktTitl} />
 									) : Tab === 1 ? (
