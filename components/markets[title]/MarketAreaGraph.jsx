@@ -45,23 +45,38 @@ const data = [
     amt: 2100,
     },
     {
-        name: 'Jul',
+        name: 'Aug',
         uv: 2490,
         pv: 5300,
         amt: 2100,
     },
     {
-        name: 'Jul',
+        name: 'Sept',
         uv: 2490,
         pv: 6300,
         amt: 2100,
     },
     {
-        name: 'Jul',
-        uv: 3490,
+        name: 'Oct',
+        uv: 5490,
         pv: 4300,
         amt: 2100,
-      },
+    },
+
+    {
+        name: 'Nov',
+        uv: 4490,
+        pv: 4300,
+        amt: 2100,
+    },
+    {
+        name: 'Dec',
+        uv: 1490,
+        pv: 4300,
+        amt: 2100,
+    },
+
+
 ];
 
 export const MarketAreaGraph =() => {
