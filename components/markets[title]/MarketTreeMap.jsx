@@ -1,65 +1,45 @@
-import { ResponsiveTreeMap } from '@nivo/treemap';
+import React, { PureComponent } from 'react';
+import { Treemap, ResponsiveContainer } from 'recharts';
 
-export const MarketTreeMap = () => {
-	const data = {
-		name: 'viz',
-		color: '#ACFF00',
+const data = [
+
+	{
+		name: 'nike',
 		children: [
+			{ name: 'Nike Air Force', size: 7313 },
+		],
+	},
+	{
+		name: 'Jordan',
+		children: [
+			{ name: 'Jordan 4 Retro', size: 2859 },
+		],
+	},
+	{ name: 'Jordan Super.Fly 4D', size: 4614 },
+
+	{
+		name: 'Adidas',
+		children: [
+			{ name: 'Adidas Campus 80s', size: 3286 },
 			{
-				name: 'stack',
-				color: '#ACFF00',
+				name: 'label',
 				children: [
-					{
-						name: 'Yeezy 350z Yeichel',
-						color: 'hsl(, 70%, 50%)',
-						loc: 100,
-					},
-					{
-						name: 'xAxis',
-						color: 'hsl(36, 70%, 50%)',
-						loc: 200,
-					},
-					{
-						name: 'yAxis',
-						color: 'hsl(244, 70%, 50%)',
-						loc: 57,
-					},
-					{
-						name: 'layers',
-						color: '##ACFF00',
-						loc: 700,
-					},
+					{ name: 'Adidas Superstar', size: 9956 },
+					{ name: 'Adidas Forum Low', size: 3899 },
 				],
 			},
+
+
 		],
-	};
+	},
+];
+
+export const MarketTreeMap = () => {
 
 	return (
-			<ResponsiveTreeMap
-				data={data}
-				identity="name"
-				value="loc"
-				label="id"
-				leavesOnly={true}
-				valueFormat=".02s"
-				margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-				labelSkipSize={12}
-				labelTextColor={{
-					from: 'color',
-					modifiers: [['darker', 1.2]],
-				}}
-				parentLabelPosition="left"
-				parentLabelTextColor={{
-					from: 'color',
-					modifiers: [['darker', 2]],
-				}}
-				borderColor={{
-					from: 'color',
-					modifiers: [['darker', 0.1]],
-				}}
-				nodeOpacity={0.9}
-				colors={["#ACFF00", '#fff', '#000']}
-			/>
-
+		<ResponsiveContainer width="100%" height="100%">
+			<Treemap width={400} height={200} data={data} dataKey="size" ratio={4 / 3} stroke="#fff"  fill="#0C1615" className='text-[red]' />
+		</ResponsiveContainer>
 	);
-};
+
+}
