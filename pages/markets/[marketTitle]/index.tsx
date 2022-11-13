@@ -24,8 +24,6 @@ const MarketByTitle: NextPage = () => {
 	const mkt = router.query;
 	const mktTitl = mkt.marketTitle;
 
-	console.log(mktTitl);
-
 	// const { data, error } = useGetSneaker(sku);
 
 	// const [response, setResponse] = useState(data);
@@ -43,7 +41,6 @@ const MarketByTitle: NextPage = () => {
 				// Prompt user for account connections
 				let wallet = await provider.send('eth_requestAccounts', [0]);
 				let accounts = wallet.toString();
-				console.log(accounts);
 
 				if (accounts == 0x50924f626d1ae4813e4a81e2c5589ec3882c13ca) {
 					setAdmin(true);

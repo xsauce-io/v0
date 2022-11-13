@@ -103,7 +103,6 @@ const Portfolio: NextPage = () => {
 				}
 				setAllBalances(balanceArray);
 			} catch (error) {
-				console.log(error, 'failed balance retrieval');
 				//setShowPortfolio(false);
 				toast.custom(
 					(t) => (

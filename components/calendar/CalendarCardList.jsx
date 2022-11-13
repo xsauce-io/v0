@@ -68,7 +68,7 @@ export const CalendarCardList = () => {
                     response.sort((a, b) =>
                         a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
                     );
-                    console.log({ response });
+
                 } else if (
                     response.length > 0 &&
                     sortBy.state === SORT_BY_STATES.RELEASE_DATE
@@ -81,7 +81,7 @@ export const CalendarCardList = () => {
                                     ? -1
                                     : 0
                     );
-                    console.log({ response });
+
                 } else if (
                     response.length > 0 &&
                     sortBy.state === SORT_BY_STATES.RETAIL_PRICE
@@ -90,7 +90,7 @@ export const CalendarCardList = () => {
                         (a, b) =>
                             a.retailPrice - b.retailPrice
                     );
-                    console.log({ response });
+
                 }
             }
         }
@@ -164,8 +164,9 @@ export const CalendarCardList = () => {
                     ? response?.map((element, index) => (
                         <CalendarCard index={index} cardObject={element} />
                     ))
-                    : skeletonArray.map(() => (
+                    : skeletonArray.map((index) => (
                         <Skeleton
+                            index={index}
                             animation="pulse"
                             variant="rounded"
                             height={300}

@@ -51,7 +51,6 @@ export const LayoutHowItWorksSlideshow = ({ content, reset }) => {
 	useEffect(() => {
 		if (reset === true) {
 			setIndex(0);
-			console.log(reset);
 		}
 	}, [reset]);
 

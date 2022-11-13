@@ -130,9 +130,7 @@ export const useGetSneaker = (sku) => {
 
 export const useGetSneakerByLimit = (limit) => {
 	const urlWithLimit = '/api/sneakerLimit/' + limit;
-	console.log(urlWithLimit)
 	const { data, error } = useSWR(urlWithLimit, fetcher);
-	console.log('sneakerDateErrorUseRequest', error);
 	console.log('useRequest', data);
 	return { data, error };
 };
@@ -145,7 +143,6 @@ export const useGetMultiSneakers = (skuArray) => {
 		let skuUrl = '/api/sneakerSku/' + skuArray[i];
 		skuUrls.push(skuUrl);
 	}
-	console.log(skuUrls);
 	const { data, error, isValidating } = useSWR(
 		['/skus', skuUrls],
 		fetcherMultiCalls

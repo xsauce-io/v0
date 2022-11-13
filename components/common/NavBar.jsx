@@ -98,11 +98,9 @@ export const NavBar = ({ padding, theme }) => {
         const hasConnectedWalletBefore = localStorage.getItem(
             'hasConnectedWalletBefore'
         );
-        console.log(hasConnectedWalletBefore);
 
         if (hasConnectedWalletBefore != null || clicked === true) {
-            console.log(hasConnectedWalletBefore);
-            console.log(clicked);
+
             try {
                 if (hasConnectedWalletBefore != null || clicked === true) {
                     if (localStorage.getItem('network') === 'arbitrum') {
@@ -129,7 +127,7 @@ export const NavBar = ({ padding, theme }) => {
                     }
                     setCurrent(chainId);
                     chains(chainId);
-                    console.log({ chainzsid: chainId });
+
 
                     let wallet = await provider.send('eth_requestAccounts', [0]);
                     accounts = wallet.toString();
@@ -137,9 +135,7 @@ export const NavBar = ({ padding, theme }) => {
                     let truncateAccountName =
                         accounts.substring(0, 4) + '...' + accounts.slice(-4);
                     setAccount(truncateAccountName);
-                    console.log('here');
                     if (wallet) {
-                        console.log('here', wallet);
                         localStorage.setItem('hasConnectedWalletBefore', '1');
 
                         mixpanelTrackProps('Connect Wallet', {
@@ -170,7 +166,6 @@ export const NavBar = ({ padding, theme }) => {
                         // 	),
                         // 	{ duration: Infinity }
                         // );
-                        console.log('error wallet not connected', error);
                     } else if (error) {
                         // toast.custom(
                         // 	(t) => (
@@ -215,25 +210,22 @@ export const NavBar = ({ padding, theme }) => {
     };
 
     const copyAddressToClipboard = async () => {
-        console.log(fullLengthAccount);
-        console.log(accounts);
+
 
         await navigator.clipboard
             .writeText(fullLengthAccount)
             .then(setIsCopied(true));
         navigator.clipboard.readText().then((text) => {
-            console.log('copied text', text);
         });
         setTimeout(() => {
             setIsCopied(false);
-            console.log('done timer');
         }, 2000);
     };
 
     const setState = (NetworkIndex) => {
         setToggle(NetworkIndex);
         chains(NetworkIndex);
-        console.log({ setState: NetworkIndex });
+
     };
 
     const chains = async (NetworkIndex) => {
@@ -252,7 +244,7 @@ export const NavBar = ({ padding, theme }) => {
                 // if it is not, then install it into the user MetaMask
                 if (error.code === 4001) {
                     setToggle(current);
-                    console.log({ catch: current });
+
                 }
 
                 if (error.code === 4902) {
@@ -295,7 +287,7 @@ export const NavBar = ({ padding, theme }) => {
             } catch (error) {
                 if (error.code === 4001) {
                     setToggle(current);
-                    console.log({ catch: current });
+
                 }
 
                 // This error code indicates that the chain has not been added to MetaMask
@@ -341,7 +333,7 @@ export const NavBar = ({ padding, theme }) => {
             } catch (error) {
                 if (error.code === 4001) {
                     setToggle(current);
-                    console.log({ catch: current });
+
                 }
                 // This error code indicates that the chain has not been added to MetaMask
                 // if it is not, then install it into the user MetaMask
@@ -410,22 +402,21 @@ export const NavBar = ({ padding, theme }) => {
                     },
                 },
             });
-            console.log('was added', wasAdded);
             if (wasAdded) {
                 mixpanelTrackProps('Get Test Tokens', {
                     token: 'Xsauce',
                     result: 'completed',
                 });
-                console.log('Now you are official!');
+
             } else {
                 mixpanelTrackProps('Get TestTokens', {
                     token: 'Xsauce',
                     result: 'cancelled',
                 });
-                console.log('All good');
+
             }
         } catch (error) {
-            console.log(error);
+
             mixpanelTrackProps('Get Test Tokens', {
                 token: 'Xsauce',
                 result: 'failed',

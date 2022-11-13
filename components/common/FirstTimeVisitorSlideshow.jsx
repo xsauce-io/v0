@@ -51,7 +51,7 @@ export const FirstTimeVisitorSlideshow = ({ reset }) => {
 	useEffect(() => {
 		if (reset === true) {
 			setIndex(0);
-			console.log(reset);
+
 		}
 	}, [reset]);
 

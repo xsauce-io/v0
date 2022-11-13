@@ -1,11 +1,70 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { Layout } from '../components/layout/Layout';
 import { ContentHeader } from '../components/common/ContentHeader';
 import { CalendarCardList } from '../components/calendar/CalendarCardList';
 import { CalendarHighlight } from '../components/calendar/CalendarHighlight';
+import { gql } from "@apollo/client";
+import client from "../lib/apollo-client";
+import { interfaces } from '../typechain-types/contracts';
 
-const Calendar: NextPage = () => {
+export const getServerSideProps = async () => {
+	try {
+		const { data } = await client.query({
+			query: gql`
+			query Sneakers {
+						sneakers {
+							sneaker {
+							count
+							results {
+								brand
+								sku
+								gender
+								releaseDate
+								colorway
+								name
+								retailPrice
+								releaseYear
+								retailPrice
+								estimatedMarketValue
+								image {
+								original
+								}
+								links {
+								stockX
+								stadiumGoods
+								flightClub
+								}
+							  }
+							}
+						  }
+						}
+		`,
+		});
+
+		return {
+			props: {
+				data: data.sneakers[0].sneaker.results[0]
+			},
+		}
+	} catch (error: any) {
+		return {
+			props: {
+				error: error.message
+			},
+		}
+	}
+
+
+}
+
+type PageProps = {
+	data: any,
+	error:any
+}
+
+
+const Calendar: NextPage<PageProps> = ({ data, error }) => {
 	// ------------------- Constants ---------------------
 
 	// -------------------- Data Fetching ------------------
@@ -41,7 +100,7 @@ const Calendar: NextPage = () => {
 					/>
 
 					<div className="space-y-10 mb-20">
-						<CalendarHighlight />
+						<CalendarHighlight highlightSneakerData={data} />
 						<CalendarCardList />
 					</div>
 				</main>
