@@ -13,7 +13,7 @@ import {
     calendarUseGetSneakerByLimit,
 } from '../../services/dataVariables';
 
-export const CalendarCardList = () => {
+export const CalendarCardList = ({ calendarSneakerCollectionData, calendarSneakerCollectionDataError }) => {
     // ------------------- Constants ---------------------
 
     const SORT_BY_STATES = {
@@ -22,29 +22,27 @@ export const CalendarCardList = () => {
         RETAIL_PRICE: 'retailPrice',
     };
 
-    const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
     // -------------------- Data Fetching ------------------
 
-    const { data: sneakersData, error: sneakersDataError } = useGetSneakerByLimit(
-        calendarUseGetSneakerByLimit
-    );
+    // const { data: sneakersData, error: sneakersDataError } = useGetSneakerByLimit(
+    //     calendarUseGetSneakerByLimit
+    // );
 
     // ------------------- State Variable --------------------
 
-    const [response, setResponse] = useState(sneakersData);
-    const [responseError, setResponseError] = useState(sneakersDataError);
+    const [response, setResponse] = useState(calendarSneakerCollectionData);
     const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 
     //------------------ Use Effect / Use memo ------------------
 
-    useEffect(() => {
-        setResponse(sneakersData);
-        setResponseError(sneakersDataError);
-    }, [sneakersData, sneakersDataError]);
+    // useEffect(() => {
+    //     setResponse(calendarSneakerCollectionData);
+    // }, [calendarSneakerCollectionData]);
 
     useEffect(() => {
-        if (sneakersDataError) {
+        if (calendarSneakerCollectionDataError) {
             toast.custom(
                 (t) => (
                     <ToastNotification
@@ -59,7 +57,7 @@ export const CalendarCardList = () => {
                 { duration: 7000, id: 'data-not-loading-calendar' }
             );
         }
-    }, [sneakersDataError]);
+    }, [calendarSneakerCollectionDataError]);
 
     useMemo(() => {
         if (response) {
@@ -160,7 +158,7 @@ export const CalendarCardList = () => {
                 </div>
             </div>
             <div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-                {response || sneakersDataError === undefined
+                {response || calendarSneakerCollectionDataError === undefined
                     ? response?.map((element, index) => (
                         <CalendarCard index={index} cardObject={element} />
                     ))

@@ -9,48 +9,95 @@ import client from "../lib/apollo-client";
 import { interfaces } from '../typechain-types/contracts';
 
 export const getServerSideProps = async () => {
+
 	try {
-		const { data } = await client.query({
+		const { data: highlightSneakerData } = await client.query({
 			query: gql`
-			query Sneakers {
-						sneakers {
-							sneaker {
-							count
-							results {
-								brand
-								sku
-								gender
-								releaseDate
-								colorway
-								name
-								retailPrice
-								releaseYear
-								retailPrice
-								estimatedMarketValue
-								image {
-								original
-								}
-								links {
-								stockX
-								stadiumGoods
-								flightClub
-								}
-							  }
+				query getSneakerByTitle($title: String!) {
+					values: sneaker(where: {title: $title}, stage: PUBLISHED) {
+						sneaker {
+						count
+						results
+						{
+							brand
+							name
+							sku
+							gender
+							releaseDate
+							colorway
+							name
+							retailPrice
+							releaseYear
+							retailPrice
+							estimatedMarketValue
+							image {
+							original
 							}
-						  }
+							links {
+							stockX
+							stadiumGoods
+							flightClub
+							}
+
 						}
-		`,
+					}
+					}
+				}
+			`,
+			variables: {
+				title: "CalendarHighlightSneaker"
+			}
+		});
+
+		const { data: calendarSneakerCollectionData } = await client.query({
+			query: gql`
+				query getSneakerCollectionByTitle($title: String!) {
+					values: sneakerCollection(where: { title: $title}, stage:  PUBLISHED) {
+						sneakers {
+						count
+						results{
+							brand
+							name
+							sku
+							gender
+							releaseDate
+							colorway
+							name
+							retailPrice
+							releaseYear
+							retailPrice
+							estimatedMarketValue
+							image {
+							original
+							}
+							links {
+							stockX
+							stadiumGoods
+							flightClub
+							}
+						}
+						}
+					}
+					}
+
+			`,
+			variables: {
+				title: "CalendarSneakerCollection"
+			}
 		});
 
 		return {
 			props: {
-				data: data.sneakers[0].sneaker.results[0]
+				_highlightSneakerData: highlightSneakerData.values.sneaker.results[0],
+				_calendarSneakerCollectionData: calendarSneakerCollectionData.values.sneakers.results
 			},
 		}
 	} catch (error: any) {
 		return {
+			//TODO: Handle fetching errors separately
 			props: {
-				error: error.message
+				_highlightSneakerDataError: error.message,
+				_calendarSneakerCollectionDataError: error.message
 			},
 		}
 	}
@@ -59,24 +106,19 @@ export const getServerSideProps = async () => {
 }
 
 type PageProps = {
-	data: any,
-	error:any
+	_highlightSneakerData: any,
+	_highlightSneakerDataError: any,
+	_calendarSneakerCollectionData: any,
+	_calendarSneakerCollectionDataError: any,
 }
 
 
-const Calendar: NextPage<PageProps> = ({ data, error }) => {
-	// ------------------- Constants ---------------------
-
-	// -------------------- Data Fetching ------------------
-
-	// ------------------- State Variable --------------------
-
-	//------------------ Use Effect / Use memo ------------------
+const Calendar: NextPage<PageProps> = ({ _highlightSneakerData, _highlightSneakerDataError, _calendarSneakerCollectionData , _calendarSneakerCollectionDataError }) => {
 
 	return (
 		<div>
 			<Head>
-				<title>Xsauce | Calender </title>
+				<title>Xsauce | Calendar </title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
@@ -100,8 +142,8 @@ const Calendar: NextPage<PageProps> = ({ data, error }) => {
 					/>
 
 					<div className="space-y-10 mb-20">
-						<CalendarHighlight highlightSneakerData={data} />
-						<CalendarCardList />
+						<CalendarHighlight highlightSneakerData={_highlightSneakerData} highlightSneakerDataError={_highlightSneakerDataError} />
+						<CalendarCardList calendarSneakerCollectionData={_calendarSneakerCollectionData} calendarSneakerCollectionDataError={_calendarSneakerCollectionDataError} />
 					</div>
 				</main>
 			</Layout>

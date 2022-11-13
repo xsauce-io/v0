@@ -8,7 +8,7 @@ import { ToastNotification } from '../common/Toast';
 import toast from 'react-hot-toast';
 
 
-export const CalendarHighlight = ({highlightSneakerData}) => {
+export const CalendarHighlight = ({highlightSneakerData, highlightSneakerDataError}) => {
 	// ------------------- Constants ---------------------
 
 	const randomPlaceholder = [
@@ -31,8 +31,6 @@ export const CalendarHighlight = ({highlightSneakerData}) => {
 
 
 	useEffect(() => {
-		console.log("high", highlightSneakerData)
-		console.log("high", highlightSneakerData)
 		if (highlightSneakerData == undefined) {
 			toast.custom(
 				(t) => (
@@ -48,7 +46,7 @@ export const CalendarHighlight = ({highlightSneakerData}) => {
 				{ duration: 7000, id: 'data-not-loading-calendar' }
 			);
 		}
-	}, [highlightSneakerData]);
+	}, [highlightSneakerData, highlightSneakerDataError]);
 
 	return (
 		<div
