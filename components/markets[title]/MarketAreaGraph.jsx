@@ -85,7 +85,7 @@ export const MarketAreaGraph =() => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Area type="monotone" dataKey="uv" stroke="#ACFF00" fill="#ACFF00" />
+          <Area type="linear" dataKey="uv" stroke="#ACFF00" fill="#ACFF00" />
         </AreaChart>
       </ResponsiveContainer>
     );
