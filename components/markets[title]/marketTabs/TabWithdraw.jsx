@@ -11,7 +11,7 @@ export const TabWithdraw = (market) => {
   return (
     <div className="flex flex-col ">
       <div className='flex flex-col tablet:flex-row w-full items-center justify-center'>
-				<h1 className="font-bold text-left tablet:py-2 text-md tablet:text-xl">{market?.market}</h1>
+				<h1 className="font-bold text-left tablet:py-2 text-md tablet:text-xl flex-1">{market?.market}</h1>
 				<LostFamButton/>
 			</div>
       <div className="flex flex-col flex-1 ">
