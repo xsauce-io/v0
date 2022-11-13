@@ -8,6 +8,7 @@ import Head from 'next/head';
 import { BigNumber, ethers, utils } from 'ethers';
 
 import { LayoutFooter } from '../../../components/layout/LayoutFooter';
+import { MarketAreaGraph } from '../../../components/markets[title]/MarketAreaGraph';
 
 import { MarketLineGraph } from '../../../components/markets[title]/MarketLineGraph';
 import { TabMint } from '../../../components/markets[title]/marketTabs/TabMint';
@@ -213,7 +214,8 @@ const MarketByTitle: NextPage = () => {
 									</div>
 								</div>
 
-								<MarketLineGraph />
+								{/* <MarketLineGraph /> */}
+								<MarketAreaGraph/>
 
 							</div>
 						</div>
