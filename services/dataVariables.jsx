@@ -8,7 +8,7 @@
 
 /* Calendar */
 
-export const calendarUseGetSneakerSku = 'DZ5485-612';
+export const calendarUseGetSneakerSku = '555088-702';
 export const calendarUseGetSneakerByLimit = '28';
 
 // * DripFeed

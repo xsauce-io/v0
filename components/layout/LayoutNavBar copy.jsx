@@ -86,9 +86,9 @@ export const LayoutNavBar = ({ logoColor }) => {
 					let truncateAccountName =
 						accounts.substring(0, 4) + '...' + accounts.slice(-4);
 					setAccount(truncateAccountName);
-					console.log('here');
+
 					if (wallet) {
-						console.log('here', wallet);
+
 						localStorage.setItem('hasConnectedWalletBefore', '1');
 
 						mixpanelTrackProps('Connect Wallet', {

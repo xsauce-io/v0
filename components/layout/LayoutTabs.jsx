@@ -12,15 +12,15 @@ export const LayoutTabs = ({ children, bgColor }) => {
 				style={{ backgroundColor: bgColor }}
 			>
 				<div className="tabs border-[#000] border-b-[1px] border-t-[0px] w-full text-white space-x-3 tablet:space-x-8 ">
-					<Link href="/dripFeed">
+					<Link href="/">
 						<a
 							className={
-								router.pathname == '/dripFeed'
+								router.pathname == '/'
 									? 'tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm '
 									: 'tab transition mobile:text-xs tablet:text-sm text-[#748282] px-0 '
 							}
 							style={
-								router.pathname == '/dripFeed' ? { color: 'inherit' } : null
+								router.pathname == '/' ? { color: 'inherit' } : null
 							}
 						>
 							Drip Feed
