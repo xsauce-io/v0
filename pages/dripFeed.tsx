@@ -7,57 +7,36 @@ import { DripFeedCardList } from '../components/dripFeed/DripFeedCardList';
 import { ContentHeader } from '../components/common/ContentHeader';
 import { gql } from "@apollo/client";
 import client from "../lib/apollo-client";
+import { DisplayGroup, useGetSneakersByDisplayGroupQuery } from '../operations/generated/graphql';
 
 export const getServerSideProps = async () => {
 
+
 	try {
-		const { data: saucedSelectionSneakersData } = await client.query({
-			query: gql`
-				query getSneakersByDisplayGroup($displayGroup: DisplayGroup) {
-					values: sneakers(where: {displayGroup: $displayGroup}, stage: PUBLISHED) {
-						sneaker {
-						results
-						{
-							brand
-							name
-							sku
-							gender
-							releaseDate
-							colorway
-							name
-							retailPrice
-							releaseYear
-							retailPrice
-							estimatedMarketValue
-							image {
-							original
-							}
-							links {
-							stockX
-							stadiumGoods
-							flightClub
-							}
-						}
-						}
-					}
-					}
-
-			`,
-			variables: {
-				displayGroup: "saucedSelection"
-			}
+		const { data: saucedSelectionSneakersData, error: saucedSelectionSneakerDataError, loading: loading } =  useGetSneakersByDisplayGroupQuery({
+			  variables: {
+			     displayGroup: DisplayGroup.SaucedSelection,
+			   },
 		});
-
-		const formattedSaucedSelectionSneakersData = saucedSelectionSneakersData.values.map((el: any) => {
-			return el.sneaker.results[0]
-		})
-		console.log("formatted",formattedSaucedSelectionSneakersData)
-		return {
-
-			props: {
-				_saucedSelectionSneakersData: formattedSaucedSelectionSneakersData,
-			},
+		while (loading) {
+			//
 		}
+		if (saucedSelectionSneakersData ) {
+			const formattedSaucedSelectionSneakersData = saucedSelectionSneakersData.values.map((el: any) => {
+				return el.sneaker.results[0]
+			})
+			console.log("formatted",formattedSaucedSelectionSneakersData)
+			return {
+
+				props: {
+					_saucedSelectionSneakersData: formattedSaucedSelectionSneakersData,
+					_saucedSelectionSneakerDataError: saucedSelectionSneakerDataError
+				},
+			}
+		} else {
+			throw("Sauced Selection Failed to Fetch")
+		}
+
 	} catch (error: any) {
 		return {
 			//TODO: Handle fetching errors separately
@@ -79,7 +58,6 @@ const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSel
 	// -------------------- Rendered Content ------------------
 
 	console.log("sauced baby", _saucedSelectionSneakersData)
-	console.log("sauced error baby",_saucedSelectionSneakersDataError )
 
 	return (
 		<div>

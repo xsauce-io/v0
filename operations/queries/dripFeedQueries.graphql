@@ -1,0 +1,29 @@
+query getSneakersByDisplayGroup($displayGroup: DisplayGroup) {
+    values: sneakers(where: {displayGroup: $displayGroup}, stage: PUBLISHED) {
+        sneaker {
+        results
+        {
+            brand
+            name
+            sku
+            gender
+            releaseDate
+            colorway
+            name
+            retailPrice
+            releaseYear
+            retailPrice
+            estimatedMarketValue
+            image {
+            original
+            }
+            links {
+            stockX
+            stadiumGoods
+            flightClub
+            }
+
+        }
+        }
+    }
+}
