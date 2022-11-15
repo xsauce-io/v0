@@ -98,11 +98,9 @@ export const NavBar = ({ padding, theme }) => {
         const hasConnectedWalletBefore = localStorage.getItem(
             'hasConnectedWalletBefore'
         );
-        console.log(hasConnectedWalletBefore);
 
         if (hasConnectedWalletBefore != null || clicked === true) {
-            console.log(hasConnectedWalletBefore);
-            console.log(clicked);
+
             try {
                 if (hasConnectedWalletBefore != null || clicked === true) {
                     if (localStorage.getItem('network') === 'arbitrum') {
@@ -129,7 +127,6 @@ export const NavBar = ({ padding, theme }) => {
                     }
                     setCurrent(chainId);
                     chains(chainId);
-                    console.log({ chainzsid: chainId });
 
                     let wallet = await provider.send('eth_requestAccounts', [0]);
                     accounts = wallet.toString();
@@ -215,18 +212,14 @@ export const NavBar = ({ padding, theme }) => {
     };
 
     const copyAddressToClipboard = async () => {
-        console.log(fullLengthAccount);
-        console.log(accounts);
 
         await navigator.clipboard
             .writeText(fullLengthAccount)
             .then(setIsCopied(true));
         navigator.clipboard.readText().then((text) => {
-            console.log('copied text', text);
         });
         setTimeout(() => {
             setIsCopied(false);
-            console.log('done timer');
         }, 2000);
     };
 
@@ -410,19 +403,16 @@ export const NavBar = ({ padding, theme }) => {
                     },
                 },
             });
-            console.log('was added', wasAdded);
             if (wasAdded) {
                 mixpanelTrackProps('Get Test Tokens', {
                     token: 'Xsauce',
                     result: 'completed',
                 });
-                console.log('Now you are official!');
             } else {
                 mixpanelTrackProps('Get TestTokens', {
                     token: 'Xsauce',
                     result: 'cancelled',
                 });
-                console.log('All good');
             }
         } catch (error) {
             console.log(error);
