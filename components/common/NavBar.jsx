@@ -88,9 +88,9 @@ export const NavBar = ({ padding, theme }) => {
 	const [toggle, setToggle] = useState();
 	const [current, setCurrent] = useState();
     const [isCopied, setIsCopied] = useState(false);
-    const [network, setNetwork] = useState(false);
+    const [network, setNetwork] = useState(null);
 	const [fullLengthAccount, setFullLengthAccount] = useState(null);
-	const { active, chainId, account, deactivate } = useWeb3React();
+	const {library,  active, chainId, account, deactivate } = useWeb3React();
 	const [isSelectWalletOpen, setIsSelectWalletOpen] = useState(false);
 
 	// ----------------------------------------------------
@@ -108,9 +108,42 @@ export const NavBar = ({ padding, theme }) => {
 
     }
 
-    const switchNetwork = () => {
-
+    const switchNetwork = async () => {
+        //Note the Network is Telo
+        const telosChainId = 41
+        try {
+          await library.provider.request({
+            method: "wallet_switchEthereumChain" ,
+              params: [{chainId: `0x${telosChainId}`}]
+          })
+            setNetwork(chainId);
+        } catch (error){
+            if (error.code === 4902) {
+                try {
+                    let id = ethers.utils.hexValue(41);
+                    await window.ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [
+                            {
+                                chainName: 'Telos Testnet',
+                                chainId: id,
+                                rpcUrls: ['https://testnet.telos.net/evm'],
+                                blockExplorerUrls: ['https://testnet.teloscan.io'],
+                                nativeCurrency: {
+                                    name: 'Telos',
+                                    symbol: 'TLOS',
+                                    decimals: 18,
+                                },
+                            },
+                        ],
+                    });
+                } catch (addError) {
+                    console.error(addError);
+                }
+            }
+        }
     }
+
 	const getWallet = async (clicked = false) => {
 		const hasConnectedWalletBefore = localStorage.getItem(
 			'hasConnectedWalletBefore'
@@ -491,7 +524,7 @@ export const NavBar = ({ padding, theme }) => {
 
 				{width >= screens.smlaptop ? (
 					<div className="flex flex-row basis-1/3 justify-end items-center space-x-4 font-Inter">
-						{!active ? (
+						{!account  ? (
 							<>
 								<button
 									className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
@@ -502,8 +535,14 @@ export const NavBar = ({ padding, theme }) => {
 									Connect Wallet
 								</button>
 							</>
-						):(
-							<>
+						):   (
+                                <>
+                                <button
+									className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
+									onClick={() => switchNetwork()}
+								>
+									Switch Network
+								</button>
 
 								<button
 									className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}

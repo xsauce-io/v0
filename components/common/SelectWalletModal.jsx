@@ -1,16 +1,18 @@
-
-  import { Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import { SettingsPowerRounded } from "@mui/icons-material";
-  import { useWeb3React } from "@web3-react/core";
+import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
-  import { connectors } from "../../utils/connectors";
+import { connectors } from "../../utils/connectors";
+
   export function SelectWalletModal({ isOpen, closeModal}) {
     const { activate } = useWeb3React();
+    const [network, setNetwork] = useState(false);
 
-
+    // --------------Functions ------------------
     const setProvider = (type) => {
       window.localStorage.setItem("provider", type);
     };
+
 
 
 
@@ -55,6 +57,7 @@ import { useEffect, useState } from "react";
                   onClick={() => {
                     activate(connectors.walletConnect);
                     setProvider("walletConnect");
+
                     closeModal();
                   }}
                 >
