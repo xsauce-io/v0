@@ -2,22 +2,38 @@ import React, { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { ethers, utils } from 'ethers';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
-import {NavBarDrawerContainer} from './NavBarDrawerContainer'
+import { NavBarDrawerContainer} from './NavBarDrawerContainer'
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { ToastNotificationActionBar } from './ToastActionBar';
+import { useWeb3React } from '@web3-react/core';
+import { connectors } from '/utils/connectors.js'
+import { useDisclosure } from '@chakra-ui/react';
+import { SelectWalletModal } from '/components/common/SelectWalletModal';
 
 export const NAVBAR_THEME = {
     light: "light",
     dark: "dark",
 
 }
+
 export const NavBar = ({ padding, theme }) => {
     // ----------------------------------------------------
     // ----------  Variables and Constants ----------------
     // ----------------------------------------------------
     let themeObject;
 
+    const SauceTokenAddress = '0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D';
+
+    const screens = {
+        mobile: '300',
+        tablet: '640',
+        smlaptop: '1024',
+        laptop: '1200',
+        desktop: '1400',
+    };
+
+    //theme setting
     if (theme === NAVBAR_THEME.dark) {
         themeObject = {
             name: 'darkTheme',
@@ -64,22 +80,13 @@ export const NavBar = ({ padding, theme }) => {
             drawerBackgroundColor: '#0C1615'
         }
     }
-    const screens = {
-        mobile: '300',
-        tablet: '640',
-        smlaptop: '1024',
-        laptop: '1200',
-        desktop: '1400',
-    };
-    const SauceTokenAddress = '0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D';
+
 
     // ----------------------------------------------------
     // ----------------------  States ------------------------
     // ----------------------------------------------------
     const { width } = useWindowDimensions();
     const router = useRouter();
-    const currentPath = router.pathname;
-
     let [accounts, setAccount] = useState(null);
     const [toggle, setToggle] = useState();
     const [current, setCurrent] = useState();
@@ -89,10 +96,22 @@ export const NavBar = ({ padding, theme }) => {
         openWalletNotConnectedModal,
         setOpenWalletNotConnectedModal,
     ] = useState(false);
+    const [isConnected, setConnected] = useState(false);
+
+    const { active, activate, deactivate } = useWeb3React();
+    const [isSelectWalletOpen, setIsSelectWalletOpen] = useState(false);
 
     // ----------------------------------------------------
     // ----------------------Function------------------------
     // ----------------------------------------------------
+
+    const onSelectWalletClose = () => {
+        setIsSelectWalletOpen(false);
+    }
+    const handleConnectWallet = () => {
+        activate(connectors.injected);
+        setConnected(true);
+    }
 
     const getWallet = async (clicked = false) => {
         const hasConnectedWalletBefore = localStorage.getItem(
@@ -212,7 +231,6 @@ export const NavBar = ({ padding, theme }) => {
     };
 
     const copyAddressToClipboard = async () => {
-
         await navigator.clipboard
             .writeText(fullLengthAccount)
             .then(setIsCopied(true));
@@ -442,6 +460,7 @@ export const NavBar = ({ padding, theme }) => {
     // ----------------------------------------------------
 
     return (
+
         <header className="sticky top-0 z-20 ">
             <div className={`flex items-center h-20 ${themeObject.bgColor} w-full gap-8 ${padding? "mobile:px-5 laptop:px-40" : "" }`}>
                 <div className="basis-1/3">
@@ -526,7 +545,9 @@ export const NavBar = ({ padding, theme }) => {
 
                         <button
                             className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
-                            onClick={() => getWallet(true)}
+                            onClick={() => {
+                                setIsSelectWalletOpen(true)
+                            }}
                         >
                             <span className="truncate">
                                 {accounts == null ? 'Connect Wallet' : accounts}
@@ -727,6 +748,9 @@ export const NavBar = ({ padding, theme }) => {
                     </div>
                 </NavBarDrawerContainer>
             </div>
+            <SelectWalletModal isOpen={isSelectWalletOpen} closeModal={onSelectWalletClose} />
+
         </header>
+
     );
 };

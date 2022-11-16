@@ -57,7 +57,6 @@ export const DripFeedCardList = () => {
         <div className="divide-y-2 divide-black  ">
             <div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-14">
                 {response?.map((element, index) => {
-                    console.log(response);
                     return <DripFeedCard index={index} cardObject={element} />;
                 })}
             </div>
