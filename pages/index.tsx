@@ -93,6 +93,7 @@ const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSel
 				/>
 			</Head>
 
+
 			<Layout
 				headerSubtitle={'GET THE XSAUCE'}
 				headerTitle={'Market News'}
@@ -106,6 +107,7 @@ const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSel
 					/>
 					<div className="divide-y-2 divide-black">
 						<DripFeedTopStories  />
+
 						<ContentHeader
 							title={'Sauced Selections'}
 							flexColumn
@@ -113,6 +115,7 @@ const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSel
 						/>
 					</div>
 					<DripFeedCardList saucedSelectionSneakersData={_saucedSelectionSneakersData} saucedSelectionSneakersDataError={_saucedSelectionSneakersDataError} />
+
 				</>
 			</Layout>
 		</div>
