@@ -9,6 +9,7 @@ import { ToastNotificationActionBar } from './ToastActionBar';
 import { useWeb3React } from '@web3-react/core';
 import { truncateText } from '/utils/truncate.js'
 import { SelectWalletModal } from '/components/common/SelectWalletModal';
+import {networks} from '/utils/networks.js'
 
 export const NAVBAR_THEME = {
 	light: 'light',
@@ -20,6 +21,8 @@ export const NavBar = ({ padding, theme }) => {
 	// ----------  Variables and Constants ----------------
 	// ----------------------------------------------------
 	let themeObject;
+
+	const defaultChainId = 5 //goerli
 
 	const SauceTokenAddress = '0x12d9dda76a85E503A9eBc0b265Ef51e4aa90CD7D';
 
@@ -104,12 +107,11 @@ export const NavBar = ({ padding, theme }) => {
 	};
 
 	const switchNetwork = async () => {
-		//Note the Network is Telo
-		const telosChainId = 41
+
 		try {
 			await library.provider.request({
 				method: "wallet_switchEthereumChain",
-				params: [{ chainId: `0x${telosChainId}` }]
+				params: [{ chainId: `0x${defaultChainId}` }]
 			})
 		} catch (error) {
 			if (error.code === 4902) {
@@ -118,17 +120,7 @@ export const NavBar = ({ padding, theme }) => {
 					await window.ethereum.request({
 						method: 'wallet_addEthereumChain',
 						params: [
-							{
-								chainName: 'Telos Testnet',
-								chainId: id,
-								rpcUrls: ['https://testnet.telos.net/evm'],
-								blockExplorerUrls: ['https://testnet.teloscan.io'],
-								nativeCurrency: {
-									name: 'Telos',
-									symbol: 'TLOS',
-									decimals: 18,
-								},
-							},
+							networks.goerli
 						],
 					});
 				} catch (addError) {
@@ -524,7 +516,7 @@ export const NavBar = ({ padding, theme }) => {
 									Connect Wallet
 								</button>
 							</>
-						) : (chainId == 41) ?
+						) : (chainId == defaultChainId) ?
 							<>
 								{/* <div className="dropdown dropdown-end ">
                                     <label
@@ -576,8 +568,8 @@ export const NavBar = ({ padding, theme }) => {
                                     </ul>
                                 </div> */}
 								<div className={ `flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor}  rounded-[40px]  py-2  hover:opacity-60`}>
-									<img className="h-[15px] w-[15px]" src="/telos.png" />
-									<span className="text-[14px] px-1">Telos</span>
+									<img className="h-[15px] w-[10px]" src="/eth.png" />
+									<span className="text-[14px] px-2">Goerli</span>
 								</div>
 
 								<button
