@@ -4,6 +4,7 @@ import Head from 'next/head';
 import React from 'react';
 import { DripFeedTopStories } from '../components/dripFeed/DripFeedTopStories';
 import { DripFeedCardList } from '../components/dripFeed/DripFeedCardList';
+
 import { ContentHeader } from '../components/common/ContentHeader';
 import { gql } from "@apollo/client";
 import client from "../lib/apollo-client";
@@ -93,6 +94,7 @@ const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSel
 				/>
 			</Head>
 
+
 			<Layout
 				headerSubtitle={'GET THE XSAUCE'}
 				headerTitle={'Market News'}
@@ -105,13 +107,15 @@ const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSel
 						flexColumn
 					/>
 					<div className="divide-y-2 divide-black">
-						<DripFeedTopStories  />
+						<DripFeedTopStories />
+
 						<ContentHeader
 							title={'Sauced Selections'}
 							flexColumn
 							icon={<img src="/greenDrop.svg" />}
 						/>
 					</div>
+
 					<DripFeedCardList saucedSelectionSneakersData={_saucedSelectionSneakersData} saucedSelectionSneakersDataError={_saucedSelectionSneakersDataError} />
 				</>
 			</Layout>

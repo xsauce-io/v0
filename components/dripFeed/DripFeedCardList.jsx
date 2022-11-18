@@ -46,8 +46,8 @@ export const DripFeedCardList = ({saucedSelectionSneakersData, saucedSelectionSn
 
         <div className="divide-y-2 divide-black  ">
             <div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-14">
-                {saucedSelectionSneakersData?.map((element, index) => {
 
+                {saucedSelectionSneakersData?.map((element, index) => {
                     return <DripFeedCard index={index} cardObject={element} />;
                 })}
             </div>
