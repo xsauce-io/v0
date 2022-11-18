@@ -20,17 +20,17 @@ import { connectors } from "../../utils/connectors";
         <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center ">
           <div className="w-full h-full bg-black opacity-50 absolute" onClick={closeModal}  />
           <div className="w-[300px] bg-white text-black top-0 relative p-6 rounded-3xl" w="300px" >
-            <div className="flex flex-row space-x-2 items-center justify-center py-4 ">
-              <div>Select Wallet</div>
-            <button className="w-5 h-5 bg-black" onClick={closeModal}
-
-              />
+            <div className="flex flex-row space-x-2 pb-4 ">
+              <text className="text-xl flex-1">Select Wallet</text>
+                <button className="w-5 h-5  justify-self-end" onClick={closeModal}>
+                  <Image alt="close" src="/xClose.svg" fill={'cover'} />
+                </button>
             </div>
 
             <div paddingBottom="1.5rem">
               <div className="flex flex-col w-full space-y-2">
                 <button
-                  className="border-[1px] border-black p-1 rounded-3xl"
+                  className="bg-[#EFF1F3] p-3 rounded-3xl hover:opacity-60"
                   onClick={ () => {
                     activate(connectors.coinbaseWallet);
                     setProvider("coinbaseWallet");
@@ -50,7 +50,7 @@ import { connectors } from "../../utils/connectors";
                   </div>
                 </button>
                 <button
-                  className="border-[1px] border-black p-1 rounded-3xl"
+                  className="bg-[#EFF1F3] p-3 rounded-3xl hover:opacity-60"
                   onClick={() => {
                     activate(connectors.walletConnect);
                     setProvider("walletConnect");
@@ -70,14 +70,14 @@ import { connectors } from "../../utils/connectors";
                   </div>
                 </button>
                 <button
-                  className="border-[1px] border-black p-1 rounded-3xl"
+                  className="bg-[#EFF1F3] p-3 rounded-3xl hover:opacity-60"
                   onClick={() => {
                      activate(connectors.injected);
                     setProvider("injected");
                     closeModal();
                   }}
                 >
-                  <div className="flex flex-row w-full  px-5 justify-start space-x-2  w-full"  >
+                  <div className="flex flex-row w-full px-5 justify-start space-x-2  w-full"  >
                     <Image
                       src="/metamask-icon.png"
                       alt="Metamask Logo"

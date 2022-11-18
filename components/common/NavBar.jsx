@@ -9,18 +9,48 @@ import { ToastNotificationActionBar } from './ToastActionBar';
 import { useWeb3React } from '@web3-react/core';
 import { truncateText } from '/utils/truncate.js'
 import { SelectWalletModal } from '/components/common/SelectWalletModal';
-import {networks} from '/utils/networks.js'
+import { networks } from '/utils/networks.js';
+import {CopyAddressButton} from '/components/common/CopyAddressButton'
 
 export const NAVBAR_THEME = {
 	light: 'light',
 	dark: 'dark',
 };
 
+export const dark =  {
+		name: 'darkTheme',
+		logoColor: '#fff',
+		textColor: 'text-[#0C1615]',
+		buttonColor: 'bg-white',
+		menuButtonColor: 'white',
+		bgColor: 'bg-[#0C1615]',
+		iconTextColor: '#0C1615',
+		drawerIconColor: '#fff',
+		drawerIconAsText: '#fff',
+		drawerButtonColor: 'bg-[#0C1615]',
+		drawerTextColor: 'text-[#fff]',
+		drawerBackgroundColor: '#0C1615',
+	};
+export const light = {
+			name: 'lightTheme',
+			logoColor: '#0C1615',
+			textColor: 'text-white',
+			buttonColor: 'bg-[#0C1615]',
+			menuButtonColor: '#0C1615',
+			bgColor: 'bg-white',
+			iconTextColor: '#fff',
+			drawerIconColor: '#000',
+			drawerIconAsText: '#000',
+			drawerButtonColor: 'bg-[#fff]',
+			drawerTextColor: 'text-[#0C1615]',
+			drawerBackgroundColor: '#fff',
+}
+
 export const NavBar = ({ padding, theme }) => {
 	// ----------------------------------------------------
 	// ----------  Variables and Constants ----------------
 	// ----------------------------------------------------
-	let themeObject;
+	let themeObject = theme === NAVBAR_THEME.dark?  dark: light  ;
 
 	const defaultChainId = 5 //goerli
 
@@ -34,54 +64,6 @@ export const NavBar = ({ padding, theme }) => {
 		desktop: '1400',
 	};
 
-	//theme setting
-	//TODO: export these themes
-	if (theme === NAVBAR_THEME.dark) {
-		themeObject = {
-			name: 'darkTheme',
-			logoColor: '#fff',
-			textColor: 'text-[#0C1615]',
-			buttonColor: 'bg-white',
-			menuButtonColor: 'white',
-			bgColor: 'bg-[#0C1615]',
-			iconTextColor: '#0C1615',
-			drawerIconColor: '#fff',
-			drawerIconAsText: '#fff',
-			drawerButtonColor: 'bg-[#0C1615]',
-			drawerTextColor: 'text-[#fff]',
-			drawerBackgroundColor: '#0C1615',
-		};
-	} else if (theme == NAVBAR_THEME.light) {
-		themeObject = {
-			name: 'lightTheme',
-			logoColor: '#0C1615',
-			textColor: 'text-white',
-			buttonColor: 'bg-[#0C1615]',
-			menuButtonColor: '#0C1615',
-			bgColor: 'bg-white',
-			iconTextColor: '#fff',
-			drawerIconColor: '#000',
-			drawerIconAsText: '#000',
-			drawerButtonColor: 'bg-[#fff]',
-			drawerTextColor: 'text-[#0C1615]',
-			drawerBackgroundColor: '#fff',
-		};
-	} else {
-		themeObject = {
-			name: 'darkTheme',
-			logoColor: '#fff',
-			textColor: 'text-[#0C1615]',
-			buttonColor: 'bg-white',
-			menuButtonColor: 'white',
-			bgColor: 'bg-[#0C1615]',
-			iconTextColor: '#0C1615',
-			drawerIconColor: '#fff',
-			drawerIconAsText: '#fff',
-			drawerButtonColor: 'bg-[#0C1615]',
-			drawerTextColor: 'text-[#fff]',
-			drawerBackgroundColor: '#0C1615',
-		};
-	}
 
 	// ----------------------------------------------------
 	// ----------------------  States ------------------------
@@ -510,10 +492,9 @@ export const NavBar = ({ padding, theme }) => {
 									className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
 									onClick={() => {
 										setIsSelectWalletOpen(true);
-										switchNetwork()
 									}}
 								>
-									Connect Wallet
+									Connect
 								</button>
 							</>
 						) : (chainId == defaultChainId) ?
@@ -567,55 +548,13 @@ export const NavBar = ({ padding, theme }) => {
                                         </li>
                                     </ul>
                                 </div> */}
-								<div className={ `flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor}  rounded-[40px]  py-2  hover:opacity-60`}>
+								<div className={ `flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] py-2 `}>
 									<img className="h-[15px] w-[10px]" src="/eth.png" />
 									<span className="text-[14px] px-2">Goerli</span>
 								</div>
 
-								<button
-									className={`text-[14px] flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
-									onClick={() => {
-										console.log("will open dropdown ")
-									}}
-								>
-									<span className="truncate">{truncateText(account)}</span>
-									<a
-										onClick={() => copyAddressToClipboard()}
-										className={'relative'}
-									>
-										<div className={`visible hover:scale-110 active:scale-125`}>
-											<svg
-												width="16"
-												height="16"
-												viewBox="0 0 16 16"
-												fill="none"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													d="M12.4733 14.1667H5.6533C4.71997 14.1667 3.95996 13.4067 3.95996 12.4733V5.65336C3.95996 4.72003 4.71997 3.96002 5.6533 3.96002H12.4733C13.4066 3.96002 14.1666 4.72003 14.1666 5.65336V12.4733C14.1666 13.4067 13.4066 14.1667 12.4733 14.1667Z"
-													stroke={themeObject.iconTextColor}
-													stroke-linecap="round"
-													stroke-linejoin="round"
-												/>
-												<path
-													d="M2.32682 11.5463C2.02016 11.2397 1.8335 10.813 1.8335 10.3463V3.52635C1.8335 2.59301 2.5935 1.83301 3.52684 1.83301H10.3468C10.8735 1.83301 11.3468 2.073 11.6602 2.453"
-													stroke={themeObject.iconTextColor}
-													stroke-linecap="round"
-													stroke-linejoin="round"
-												/>
-											</svg>
-										</div>
-										<p
-											className={
-												isCopied == false
-													? 'hidden'
-													: ` transition ease-in-out duration-300 delay-150 visible z-10 absolute ${themeObject.buttonColor} opacity-70 px-2 py-0.5`
-											}
-										>
-											Copied
-										</p>
-									</a>
-									</button>
+								<CopyAddressButton account={account} themeObject={themeObject} />
+
 									<div className="dropdown dropdown-end">
 										<label
 											tabindex="0"
@@ -692,52 +631,9 @@ export const NavBar = ({ padding, theme }) => {
 										onClick={() => switchNetwork()}
 									>
 										Switch Network
-									</button>
+										</button>
+										<CopyAddressButton account={account} themeObject={themeObject} />
 
-									<button
-										className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
-										onClick={() => {
-											console.log("will open dropdown ")
-										}}
-									>
-										<span className="truncate">{truncateText(account)}</span>
-										<a
-											onClick={() => copyAddressToClipboard()}
-											className={'relative'}
-										>
-											<div className={`visible hover:scale-110 active:scale-125`}>
-												<svg
-													width="16"
-													height="16"
-													viewBox="0 0 16 16"
-													fill="none"
-													xmlns="http://www.w3.org/2000/svg"
-												>
-													<path
-														d="M12.4733 14.1667H5.6533C4.71997 14.1667 3.95996 13.4067 3.95996 12.4733V5.65336C3.95996 4.72003 4.71997 3.96002 5.6533 3.96002H12.4733C13.4066 3.96002 14.1666 4.72003 14.1666 5.65336V12.4733C14.1666 13.4067 13.4066 14.1667 12.4733 14.1667Z"
-														stroke={themeObject.iconTextColor}
-														stroke-linecap="round"
-														stroke-linejoin="round"
-													/>
-													<path
-														d="M2.32682 11.5463C2.02016 11.2397 1.8335 10.813 1.8335 10.3463V3.52635C1.8335 2.59301 2.5935 1.83301 3.52684 1.83301H10.3468C10.8735 1.83301 11.3468 2.073 11.6602 2.453"
-														stroke={themeObject.iconTextColor}
-														stroke-linecap="round"
-														stroke-linejoin="round"
-													/>
-												</svg>
-											</div>
-											<p
-												className={
-													isCopied == false
-														? 'hidden'
-														: ` transition ease-in-out duration-300 delay-150 visible z-10 absolute ${themeObject.buttonColor} opacity-70 px-2 py-0.5`
-												}
-											>
-												Copied
-											</p>
-										</a>
-									</button>
 
 
 
@@ -753,7 +649,7 @@ export const NavBar = ({ padding, theme }) => {
 					backgroundColor={themeObject.drawerBackgroundColor}
 				>
 					<div className="flex flex-col flex-1 justify-center items-center font-Inter  mt-4 ">
-						<div className="dropdown dropdown-end ">
+						{/* <div className="dropdown dropdown-end ">
 							<label
 								tabindex="0"
 								className={`text-lg flex flex-row  justify-start items-center p-4  w-full   ${themeObject.drawerButtonColor} ${themeObject.drawerTextColor} space-x-4  hover:opacity-60`}
@@ -812,58 +708,9 @@ export const NavBar = ({ padding, theme }) => {
 									</a>
 								</li>
 							</ul>
-						</div>
+						</div> */}
 
-						<button
-							className={`text-lg flex flex-row justify-start p-4  font-Inter items-center mt-4 ${themeObject.drawerButtonColor} ${themeObject.drawerTextColor}  space-x-4  w-full hover:opacity-60`}
-							onClick={() => getWallet(true)}
-						>
-							<span className="truncate">
-								{account}
-							</span>
-							<a
-								onClick={() => copyAddressToClipboard()}
-								className={'relative'}
-							>
-								<div
-									className={
-										account == null
-											? 'hidden'
-											: 'visible hover:scale-110 active:scale-125'
-									}
-								>
-									<svg
-										width="20"
-										height="20"
-										viewBox="0 0 16 16"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M12.4733 14.1667H5.6533C4.71997 14.1667 3.95996 13.4067 3.95996 12.4733V5.65336C3.95996 4.72003 4.71997 3.96002 5.6533 3.96002H12.4733C13.4066 3.96002 14.1666 4.72003 14.1666 5.65336V12.4733C14.1666 13.4067 13.4066 14.1667 12.4733 14.1667Z"
-											stroke={themeObject.drawerIconAsText}
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-										<path
-											d="M2.32682 11.5463C2.02016 11.2397 1.8335 10.813 1.8335 10.3463V3.52635C1.8335 2.59301 2.5935 1.83301 3.52684 1.83301H10.3468C10.8735 1.83301 11.3468 2.073 11.6602 2.453"
-											stroke={themeObject.drawerIconAsText}
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
-								</div>
-								<p
-									className={
-										isCopied == false
-											? 'hidden'
-											: ' transition ease-in-out duration-300 delay-150 visible z-10 absolute bg-white opacity-70 px-2 py-0.5'
-									}
-								>
-									Copied
-								</p>
-							</a>
-						</button>
+						<CopyAddressButton account={account} themeObject={themeObject} />
 
 						<button
 							className={`text-lg flex flex-row justify-start  font-Inter items-center mt-4 ${themeObject.drawerButtonColor} ${themeObject.drawerTextColor}  space-x-4 p-4  w-full hover:opacity-60`}
