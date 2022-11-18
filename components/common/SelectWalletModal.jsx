@@ -13,9 +13,6 @@ import { connectors } from "../../utils/connectors";
       window.localStorage.setItem("provider", type);
     };
 
-
-
-
     return (
       <>
         {isOpen
@@ -34,7 +31,7 @@ import { connectors } from "../../utils/connectors";
               <div className="flex flex-col w-full space-y-2">
                 <button
                   className="border-[1px] border-black p-1 rounded-3xl"
-                  onClick={() => {
+                  onClick={ () => {
                     activate(connectors.coinbaseWallet);
                     setProvider("coinbaseWallet");
                     closeModal();
@@ -75,7 +72,7 @@ import { connectors } from "../../utils/connectors";
                 <button
                   className="border-[1px] border-black p-1 rounded-3xl"
                   onClick={() => {
-                    activate(connectors.injected);
+                     activate(connectors.injected);
                     setProvider("injected");
                     closeModal();
                   }}

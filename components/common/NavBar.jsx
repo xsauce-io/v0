@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { ToastNotificationActionBar } from './ToastActionBar';
 import { useWeb3React } from '@web3-react/core';
-import { truncateText } from  '/utils/truncate.js'
+import { truncateText } from '/utils/truncate.js'
 import { SelectWalletModal } from '/components/common/SelectWalletModal';
 
 export const NAVBAR_THEME = {
@@ -32,7 +32,7 @@ export const NavBar = ({ padding, theme }) => {
 	};
 
 	//theme setting
-    //TODO: export these themes
+	//TODO: export these themes
 	if (theme === NAVBAR_THEME.dark) {
 		themeObject = {
 			name: 'darkTheme',
@@ -87,10 +87,8 @@ export const NavBar = ({ padding, theme }) => {
 	const router = useRouter();
 	const [toggle, setToggle] = useState();
 	const [current, setCurrent] = useState();
-    const [isCopied, setIsCopied] = useState(false);
-    const [network, setNetwork] = useState(null);
-	const [fullLengthAccount, setFullLengthAccount] = useState(null);
-	const {library,  active, chainId, account, deactivate } = useWeb3React();
+	const [isCopied, setIsCopied] = useState(false);
+	const { library, active, chainId, account, deactivate } = useWeb3React();
 	const [isSelectWalletOpen, setIsSelectWalletOpen] = useState(false);
 
 	// ----------------------------------------------------
@@ -100,49 +98,45 @@ export const NavBar = ({ padding, theme }) => {
 	const onSelectWalletClose = () => {
 		setIsSelectWalletOpen(false);
 	};
+
 	const handleDisconnect = () => {
 		deactivate();
-    };
+	};
 
-    const handleNetwork = () => {
-
-    }
-
-    const switchNetwork = async () => {
-        //Note the Network is Telo
-        const telosChainId = 41
-        try {
-          await library.provider.request({
-            method: "wallet_switchEthereumChain" ,
-              params: [{chainId: `0x${telosChainId}`}]
-          })
-            setNetwork(chainId);
-        } catch (error){
-            if (error.code === 4902) {
-                try {
-                    let id = ethers.utils.hexValue(41);
-                    await window.ethereum.request({
-                        method: 'wallet_addEthereumChain',
-                        params: [
-                            {
-                                chainName: 'Telos Testnet',
-                                chainId: id,
-                                rpcUrls: ['https://testnet.telos.net/evm'],
-                                blockExplorerUrls: ['https://testnet.teloscan.io'],
-                                nativeCurrency: {
-                                    name: 'Telos',
-                                    symbol: 'TLOS',
-                                    decimals: 18,
-                                },
-                            },
-                        ],
-                    });
-                } catch (addError) {
-                    console.error(addError);
-                }
-            }
-        }
-    }
+	const switchNetwork = async () => {
+		//Note the Network is Telo
+		const telosChainId = 41
+		try {
+			await library.provider.request({
+				method: "wallet_switchEthereumChain",
+				params: [{ chainId: `0x${telosChainId}` }]
+			})
+		} catch (error) {
+			if (error.code === 4902) {
+				try {
+					let id = ethers.utils.hexValue(41);
+					await window.ethereum.request({
+						method: 'wallet_addEthereumChain',
+						params: [
+							{
+								chainName: 'Telos Testnet',
+								chainId: id,
+								rpcUrls: ['https://testnet.telos.net/evm'],
+								blockExplorerUrls: ['https://testnet.teloscan.io'],
+								nativeCurrency: {
+									name: 'Telos',
+									symbol: 'TLOS',
+									decimals: 18,
+								},
+							},
+						],
+					});
+				} catch (addError) {
+					console.error(addError);
+				}
+			}
+		}
+	}
 
 	const getWallet = async (clicked = false) => {
 		const hasConnectedWalletBefore = localStorage.getItem(
@@ -263,7 +257,7 @@ export const NavBar = ({ padding, theme }) => {
 		await navigator.clipboard
 			.writeText(account.toString())
 			.then(setIsCopied(true));
-		navigator.clipboard.readText().then((text) => {});
+		navigator.clipboard.readText();
 		setTimeout(() => {
 			setIsCopied(false);
 		}, 2000);
@@ -478,11 +472,6 @@ export const NavBar = ({ padding, theme }) => {
 		toast.remove();
 	}, [router.events]);
 
-	// useEffect(() => {
-	// 	//getWallet();
-	// 	localStorage.getItem('network');
-	// }, [openWalletNotConnectedModal]);
-
 	// ----------------------------------------------------
 	// ---------------------- Render ------------------------
 	// ----------------------------------------------------
@@ -490,9 +479,8 @@ export const NavBar = ({ padding, theme }) => {
 	return (
 		<header className="sticky top-0 z-20 ">
 			<div
-				className={`flex items-center h-20 ${
-					themeObject.bgColor
-				} w-full gap-8 ${padding ? 'mobile:px-5 laptop:px-40' : ''}`}
+				className={`flex items-center h-20 ${themeObject.bgColor
+					} w-full gap-8 ${padding ? 'mobile:px-5 laptop:px-40' : ''}`}
 			>
 				<div className="basis-1/3">
 					<a className="block" href="/">
@@ -524,28 +512,76 @@ export const NavBar = ({ padding, theme }) => {
 
 				{width >= screens.smlaptop ? (
 					<div className="flex flex-row basis-1/3 justify-end items-center space-x-4 font-Inter">
-						{!account  ? (
+						{!active ? (
 							<>
 								<button
 									className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
 									onClick={() => {
 										setIsSelectWalletOpen(true);
+										switchNetwork()
 									}}
 								>
 									Connect Wallet
 								</button>
 							</>
-						):   (
-                                <>
-                                <button
-									className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
-									onClick={() => switchNetwork()}
-								>
-									Switch Network
-								</button>
+						) : (chainId == 41) ?
+							<>
+								{/* <div className="dropdown dropdown-end ">
+                                    <label
+                                        tabindex="0"
+                                        className={`text-[14px] flex flex-row ${themeObject.textColor} justify-center items-center px-4 py-2 w-[130px] ${themeObject.buttonColor} space-x-2 rounded-[40px]`}
+                                    >
+                                        {toggle === 421613 ? (
+                                            <>
+                                                <img className="h-[15%] w-[15%]" src="/arbitrum.svg" />
+                                                <span className="">Arbitrum</span>
+                                            </>
+                                        ) : toggle === 80001 ? (
+                                            <>
+                                                <img className="h-[15%] w-[15%]" src="/polygon.svg" />
+                                                <span className="">Polygon</span>
+                                            </>
+                                        ) : toggle === 41 ? (
+                                            <>
+                                                <img className="h-[15%] w-[15%]" src="/telos.png" />
+                                                <span className="">Telos</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <img className="h-[12%] w-[12%]" src="/eth.png" />
+                                                <span className="text-[14px]">Goerli</span>
+                                            </>
+                                        )}
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.6666 6.66666L7.8382 9.49508L5.00977 6.66666" stroke={themeObject.iconTextColor} stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+                                    </label>
+                                    <ul
+                                        tabindex="0"
+                                        className={`menu dropdown-content ${themeObject.buttonColor} ${themeObject.textColor} p-2 shadow rounded-box w-52 mt-4`}
+                                    >
+                                        <li>
+                                            <a onClick={() => setState(421613)}>
+                                                <img className="h-[30%] w-[30%]" src="/arbitrum.svg" />
+                                                Arbitrum
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                <img className="h-[30%] w-[30%]" src="/fuel.png" />
+                                                Fuel
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div> */}
+								<div className={ `flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor}  rounded-[40px]  py-2  hover:opacity-60`}>
+									<img className="h-[15px] w-[15px]" src="/telos.png" />
+									<span className="text-[14px] px-1">Telos</span>
+								</div>
 
 								<button
-									className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
+									className={`text-[14px] flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
 									onClick={() => {
 										console.log("will open dropdown ")
 									}}
@@ -587,82 +623,139 @@ export const NavBar = ({ padding, theme }) => {
 											Copied
 										</p>
 									</a>
-								</button>
-								<div className="dropdown dropdown-end">
-									<label
-										tabindex="0"
-										className={`text-lg ${themeObject.textColor}`}
+									</button>
+									<div className="dropdown dropdown-end">
+										<label
+											tabindex="0"
+											className={`text-lg ${themeObject.textColor}`}
+										>
+											<div className="w-[37px]">
+												<svg
+													width="32"
+													height="32"
+													viewBox="0 0 32 32"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+												>
+													<circle
+														cx="16"
+														cy="16"
+														r="16"
+														fill={themeObject.menuButtonColor}
+													/>
+													<path
+														d="M22 17C22.5523 17 23 16.5523 23 16C23 15.4477 22.5523 15 22 15C21.4477 15 21 15.4477 21 16C21 16.5523 21.4477 17 22 17Z"
+														fill={themeObject.iconTextColor}
+													/>
+													<path
+														d="M16 17C16.5523 17 17 16.5523 17 16C17 15.4477 16.5523 15 16 15C15.4477 15 15 15.4477 15 16C15 16.5523 15.4477 17 16 17Z"
+														fill={themeObject.iconTextColor}
+													/>
+													<path
+														d="M10 17C10.5523 17 11 16.5523 11 16C11 15.4477 10.5523 15 10 15C9.44771 15 9 15.4477 9 16C9 16.5523 9.44771 17 10 17Z"
+														fill={themeObject.iconTextColor}
+													/>
+												</svg>
+											</div>
+										</label>
+										<ul
+											tabindex="0"
+											className={`menu dropdown-content ${themeObject.textColor} ${themeObject.buttonColor}  p-2 shadow rounded-box w-[250px] mt-4 z-10`}
+										>
+											<li>
+												<button
+													onClick={() => {
+														faucet();
+														mixpanelTrackProps('Get Test Tokens', {
+															token: '$auce',
+														});
+													}}
+												>
+													<img className="h-[10%] w-[10%]" src="/icon.svg" />
+													Get Test Tokens
+												</button>
+											</li>
+											<li>
+												<a
+													className={`active:bg-[#ACFF00] ${themeObject.textColor}`}
+													target="blank"
+													href="https://goerli-faucet.pk910.de/"
+													onClick={() =>
+														mixpanelTrackProps('Get Test Tokens', {
+															token: 'ETHGoerli',
+														})
+													}
+												>
+													<img className="h-[7%] w-[7%]" src="/eth.png" />
+													Get Test ETH(Goerli)
+												</a>
+											</li>
+										</ul>
+									</div>
+							</>
+							: (
+								<>
+									<button
+										className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} bg-[yellow] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
+										onClick={() => switchNetwork()}
 									>
-										<div className="w-[37px]">
-											<svg
-												width="32"
-												height="32"
-												viewBox="0 0 32 32"
-												fill="none"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<circle
-													cx="16"
-													cy="16"
-													r="16"
-													fill={themeObject.menuButtonColor}
-												/>
-												<path
-													d="M22 17C22.5523 17 23 16.5523 23 16C23 15.4477 22.5523 15 22 15C21.4477 15 21 15.4477 21 16C21 16.5523 21.4477 17 22 17Z"
-													fill={themeObject.iconTextColor}
-												/>
-												<path
-													d="M16 17C16.5523 17 17 16.5523 17 16C17 15.4477 16.5523 15 16 15C15.4477 15 15 15.4477 15 16C15 16.5523 15.4477 17 16 17Z"
-													fill={themeObject.iconTextColor}
-												/>
-												<path
-													d="M10 17C10.5523 17 11 16.5523 11 16C11 15.4477 10.5523 15 10 15C9.44771 15 9 15.4477 9 16C9 16.5523 9.44771 17 10 17Z"
-													fill={themeObject.iconTextColor}
-												/>
-											</svg>
-										</div>
-									</label>
-									<ul
-										tabindex="0"
-										className={`menu dropdown-content ${themeObject.textColor} ${themeObject.buttonColor}  p-2 shadow rounded-box w-[250px] mt-4 z-10`}
+										Switch Network
+									</button>
+
+									<button
+										className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
+										onClick={() => {
+											console.log("will open dropdown ")
+										}}
 									>
-										<li>
-											<button
-												onClick={() => {
-													faucet();
-													mixpanelTrackProps('Get Test Tokens', {
-														token: '$auce',
-													});
-												}}
-											>
-												<img className="h-[10%] w-[10%]" src="/icon.svg" />
-												Get Test Tokens
-											</button>
-										</li>
-										<li>
-											<a
-												className={`active:bg-[#ACFF00] ${themeObject.textColor}`}
-												target="blank"
-												href="https://goerli-faucet.pk910.de/"
-												onClick={() =>
-													mixpanelTrackProps('Get Test Tokens', {
-														token: 'ETHGoerli',
-													})
+										<span className="truncate">{truncateText(account)}</span>
+										<a
+											onClick={() => copyAddressToClipboard()}
+											className={'relative'}
+										>
+											<div className={`visible hover:scale-110 active:scale-125`}>
+												<svg
+													width="16"
+													height="16"
+													viewBox="0 0 16 16"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+												>
+													<path
+														d="M12.4733 14.1667H5.6533C4.71997 14.1667 3.95996 13.4067 3.95996 12.4733V5.65336C3.95996 4.72003 4.71997 3.96002 5.6533 3.96002H12.4733C13.4066 3.96002 14.1666 4.72003 14.1666 5.65336V12.4733C14.1666 13.4067 13.4066 14.1667 12.4733 14.1667Z"
+														stroke={themeObject.iconTextColor}
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													/>
+													<path
+														d="M2.32682 11.5463C2.02016 11.2397 1.8335 10.813 1.8335 10.3463V3.52635C1.8335 2.59301 2.5935 1.83301 3.52684 1.83301H10.3468C10.8735 1.83301 11.3468 2.073 11.6602 2.453"
+														stroke={themeObject.iconTextColor}
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													/>
+												</svg>
+											</div>
+											<p
+												className={
+													isCopied == false
+														? 'hidden'
+														: ` transition ease-in-out duration-300 delay-150 visible z-10 absolute ${themeObject.buttonColor} opacity-70 px-2 py-0.5`
 												}
 											>
-												<img className="h-[7%] w-[7%]" src="/eth.png" />
-												Get Test ETH(Goerli)
-											</a>
-										</li>
-									</ul>
-								</div>{' '}
-							</>
-						) }
+												Copied
+											</p>
+										</a>
+									</button>
+
+
+
+								</>
+
+							)}
 					</div>
 				) : (
 					<></>
 				)}
-
 				<NavBarDrawerContainer
 					drawerIconColor={themeObject.drawerIconColor}
 					backgroundColor={themeObject.drawerBackgroundColor}

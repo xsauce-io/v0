@@ -3,7 +3,7 @@ import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { InjectedConnector } from "@web3-react/injected-connector";
 
 //TODO: CHANGE SUPPORTED CHAINED
-const injected = new InjectedConnector({ supportedChainIds: [1, 2, 3, 41, 80001] });
+const injected = new InjectedConnector();
 
 const walletConnect = new WalletConnectConnector({
     rcpUrl: "",
