@@ -5,11 +5,10 @@ import { useState, useEffect } from 'react';
 import { useGetSneaker } from '../../services/useRequests';
 import { calendarUseGetSneakerSku } from '../../services/dataVariables';
 import { ToastNotification } from '../common/Toast';
-import { Highlight } from '@chakra-ui/react';
 import toast from 'react-hot-toast';
 
 
-export const CalendarHighlight = () => {
+export const CalendarHighlight = ({highlightSneakerData, highlightSneakerDataError}) => {
 	// ------------------- Constants ---------------------
 
 	const randomPlaceholder = [
@@ -26,17 +25,13 @@ export const CalendarHighlight = () => {
 	// -------------------- Data Fetching ------------------
 
 
-	const { data: highlightSneakerData, error: highlightSneakerError } = useGetSneaker(
-		calendarUseGetSneakerSku
-	);
 
 	//------------------ Use Effect / Use memo ------------------
 
-	useEffect(() => {
-	}, [highlightSneakerData, highlightSneakerError]);
+
 
 	useEffect(() => {
-		if (highlightSneakerError) {
+		if (highlightSneakerData == undefined) {
 			toast.custom(
 				(t) => (
 					<ToastNotification
@@ -51,11 +46,10 @@ export const CalendarHighlight = () => {
 				{ duration: 7000, id: 'data-not-loading-calendar' }
 			);
 		}
-	}, [highlightSneakerError]);
+	}, [highlightSneakerData, highlightSneakerDataError]);
 
 	return (
 		<div
-
 			className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl w-full items-start text-left font-inter min-h-full "
 		>
 			{highlightSneakerData === undefined ? (

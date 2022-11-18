@@ -503,6 +503,7 @@ export const NavBar = ({ padding, theme }) => {
                                     <label
                                         tabindex="0"
                                         className={`text-[14px] flex flex-row ${themeObject.textColor} justify-center items-center px-4 py-2 w-[130px] ${themeObject.buttonColor} space-x-2 rounded-[40px]`}
+
                                     >
                                         {toggle === 421613 ? (
                                             <>
