@@ -379,7 +379,7 @@ export const NavBar = ({ padding, theme }) => {
 			}
 		} else {
 			// if no window.ethereum then MetaMask is not installed
-			toggle = null;
+			setToggle(null);
 		}
 
 		// localStorage.setItem('network', 'telos');
