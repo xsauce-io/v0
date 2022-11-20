@@ -4,8 +4,8 @@
  * @returns formatted data ready to use my the view
  */
 
- export function formatHighlighSneaker(data: any) {
-	const formattedHighlightSneakerData = data.values.sneaker.results[0]
-	console.log("formatted", formattedHighlightSneakerData)
-	return formattedHighlightSneakerData;
+ export function formatCalendarSneakerList(data: any) {
+	const formattedCalendarSneakerList = data.values.sneakers.results
+	console.log("formatted", formattedCalendarSneakerList)
+	return formattedCalendarSneakerList;
 }

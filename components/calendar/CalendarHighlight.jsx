@@ -2,11 +2,9 @@ import React from 'react';
 import { Skeleton } from '@mui/material';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useGetSneaker } from '../../services/useRequests';
-import { calendarUseGetSneakerSku } from '../../constants/dataVariables';
 import { ToastNotification } from '../common/Toast';
 import toast from 'react-hot-toast';
-import { useGetCalendarHighlightSneaker } from '../../services/highlightSneaker/useRequest';
+import { useGetCalendarHighlightSneaker } from '../../services/calendar/highlightSneaker/useRequest';
 
 
 export const CalendarHighlight = () => {

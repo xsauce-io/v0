@@ -4,112 +4,6 @@ import { Layout } from '../components/layout/Layout';
 import { ContentHeader } from '../components/common/ContentHeader';
 import { CalendarCardList } from '../components/calendar/CalendarCardList';
 import { CalendarHighlight } from '../components/calendar/CalendarHighlight';
-import { gql } from "@apollo/client";
-import client from "../lib/apollo-client";
-
-// export const getServerSideProps = async () => {
-
-// 	try {
-// 		const { data: highlightSneakerData } = await client.query({
-// 			query: gql`
-// 				query getSneakerByTitle($title: String!) {
-// 					values: sneaker(where: {title: $title}, stage: PUBLISHED) {
-// 						sneaker {
-// 						count
-// 						results
-// 						{
-// 							brand
-// 							name
-// 							sku
-// 							gender
-// 							releaseDate
-// 							colorway
-// 							name
-// 							retailPrice
-// 							releaseYear
-// 							retailPrice
-// 							estimatedMarketValue
-// 							image {
-// 							original
-// 							}
-// 							links {
-// 							stockX
-// 							stadiumGoods
-// 							flightClub
-// 							}
-
-// 						}
-// 					}
-// 					}
-// 				}
-// 			`,
-// 			variables: {
-// 				title: "CalendarHighlightSneaker"
-// 			}
-// 		});
-
-// 		const { data: calendarSneakerCollectionData } = await client.query({
-// 			query: gql`
-// 				query getSneakerCollectionByTitle($title: String!) {
-// 					values: sneakerCollection(where: { title: $title}, stage:  PUBLISHED) {
-// 						sneakers {
-// 						count
-// 						results{
-// 							brand
-// 							name
-// 							sku
-// 							gender
-// 							releaseDate
-// 							colorway
-// 							name
-// 							retailPrice
-// 							releaseYear
-// 							retailPrice
-// 							estimatedMarketValue
-// 							image {
-// 							original
-// 							}
-// 							links {
-// 							stockX
-// 							stadiumGoods
-// 							flightClub
-// 							}
-// 						}
-// 						}
-// 					}
-// 					}
-
-// 			`,
-// 			variables: {
-// 				title: "CalendarSneakerCollection"
-// 			}
-// 		});
-
-// 		return {
-// 			props: {
-// 				_highlightSneakerData: highlightSneakerData.values.sneaker.results[0],
-// 				_calendarSneakerCollectionData: calendarSneakerCollectionData.values.sneakers.results
-// 			},
-// 		}
-// 	} catch (error: any) {
-// 		return {
-// 			//TODO: Handle fetching errors separately
-// 			props: {
-// 				_highlightSneakerDataError: error.message,
-// 				_calendarSneakerCollectionDataError: error.message
-// 			},
-// 		}
-// 	}
-
-
-// }
-
-type PageProps = {
-	_highlightSneakerData: any,
-	_highlightSneakerDataError: any,
-	_calendarSneakerCollectionData: any,
-	_calendarSneakerCollectionDataError: any,
-}
 
 
 const Calendar: NextPage = () => {
@@ -142,8 +36,8 @@ const Calendar: NextPage = () => {
 
 					<div className="space-y-10 mb-20">
 						 <CalendarHighlight/>
-						{/*<CalendarCardList calendarSneakerCollectionData={_calendarSneakerCollectionData} calendarSneakerCollectionDataError={_calendarSneakerCollectionDataError} />
-					*/}</div>
+						 <CalendarCardList />
+					</div>
 				</main>
 			</Layout>
 		</div>

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
+import { useGetSneakerByTitleQuery } from "../../generated/graphql"
+import { formatHighlightSneaker } from './helpers';
+
 /**
  *
  */
-
-import { useGetSneakerByTitleQuery } from "../generated/graphql"
-import { formatHighlighSneaker } from './helpers';
 
 export const useGetCalendarHighlightSneaker = () => {
 
@@ -15,17 +15,18 @@ export const useGetCalendarHighlightSneaker = () => {
     })
 
     useEffect(() => {
-
     }, [data, error, loading])
 
     if (data) {
-        const formattedHighlightSneakerData = formatHighlighSneaker(data);
+        const formattedHighlightSneakerData = formatHighlightSneaker(data);
         return {highlightSneakerData: formattedHighlightSneakerData, highlightSneakerDataError: undefined, highlightSneakerDataLoading: undefined}
     } else if (error) {
         return {highlightSneakerData: undefined, highlightSneakerDataError: error, highlightSneakerDataLoading: undefined}
-
     } else if (loading) {
         return {highlightSneakerData: undefined, highlightSneakerDataError: undefined, highlightSneakerDataLoading: true}
+    } else {
+        return {highlightSneakerData: undefined, highlightSneakerDataError: undefined, highlightSneakerDataLoading: true}
+
     }
 
 }

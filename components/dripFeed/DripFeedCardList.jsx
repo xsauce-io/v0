@@ -5,7 +5,7 @@ import { DripFeedCard } from './DripFeedCard';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/Toast';
 import { DisplayGroup, useGetSneakersByDisplayGroupQuery } from '../../services/generated/graphql.tsx';
-import { useGetSauceSelection } from '../../services/saucedSelection/useRequest';
+import { useGetSauceSelection } from '../../services/dripFeed/saucedSelection/useRequest';
 
 
 export const DripFeedCardList = ({}) => {
@@ -53,12 +53,13 @@ export const DripFeedCardList = ({}) => {
 
         <div className="divide-y-2 divide-black  ">
             <div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-14">
-                {saucedSelectionSneakersDataLoading ? <>Heloo</> :
+                {saucedSelectionSneakersDataLoading ? <>Hello</>
+                    :
 
-                saucedSelectionSneakersData.map((element, index) => {
+                    saucedSelectionSneakersData.map((element, index) => {
 
-                    return <DripFeedCard index={index} cardObject={element} />;
-                })
+                        return <DripFeedCard index={index} cardObject={element} />;
+                    })
                 }
             </div>
         </div>
