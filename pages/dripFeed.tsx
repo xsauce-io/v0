@@ -9,55 +9,55 @@ import { gql } from "@apollo/client";
 import client from "../lib/apollo-client";
 import { DisplayGroup, useGetSneakersByDisplayGroupQuery } from '../operations/generated/graphql';
 
-export const getServerSideProps = async () => {
+// export const getServerSideProps = async () => {
 
 
-	try {
-		const { data: saucedSelectionSneakersData, error: saucedSelectionSneakerDataError, loading: loading } =  useGetSneakersByDisplayGroupQuery({
-			  variables: {
-			     displayGroup: DisplayGroup.SaucedSelection,
-			   },
-		});
-		while (loading) {
-			//
-		}
-		if (saucedSelectionSneakersData ) {
-			const formattedSaucedSelectionSneakersData = saucedSelectionSneakersData.values.map((el: any) => {
-				return el.sneaker.results[0]
-			})
-			console.log("formatted",formattedSaucedSelectionSneakersData)
-			return {
+// 	try {
+// 		const { data: saucedSelectionSneakersData, error: saucedSelectionSneakerDataError, loading: loading } =  useGetSneakersByDisplayGroupQuery({
+// 			  variables: {
+// 			     displayGroup: DisplayGroup.SaucedSelection,
+// 			   },
+// 		});
+// 		while (loading) {
+// 			//
+// 		}
+// 		if (saucedSelectionSneakersData ) {
+// 			const formattedSaucedSelectionSneakersData = saucedSelectionSneakersData.values.map((el: any) => {
+// 				return el.sneaker.results[0]
+// 			})
+// 			console.log("formatted",formattedSaucedSelectionSneakersData)
+// 			return {
 
-				props: {
-					_saucedSelectionSneakersData: formattedSaucedSelectionSneakersData,
-					_saucedSelectionSneakerDataError: saucedSelectionSneakerDataError
-				},
-			}
-		} else {
-			throw("Sauced Selection Failed to Fetch")
-		}
+// 				props: {
+// 					_saucedSelectionSneakersData: formattedSaucedSelectionSneakersData,
+// 					_saucedSelectionSneakerDataError: saucedSelectionSneakerDataError
+// 				},
+// 			}
+// 		} else {
+// 			throw("Sauced Selection Failed to Fetch")
+// 		}
 
-	} catch (error: any) {
-		return {
-			//TODO: Handle fetching errors separately
-			props: {
-				_saucedSelectionDataError: error.message,
-			},
-		}
-	}
+// 	} catch (error: any) {
+// 		return {
+// 			//TODO: Handle fetching errors separately
+// 			props: {
+// 				_saucedSelectionDataError: error.message,
+// 			},
+// 		}
+// 	}
 
 
-}
+// }
 
-type PageProps = {
-	_saucedSelectionSneakersData: any,
-	_saucedSelectionSneakersDataError: any,
-}
+// type PageProps = {
+// 	_saucedSelectionSneakersData: any,
+// 	_saucedSelectionSneakersDataError: any,
+// }
 
-const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSelectionSneakersDataError }) => {
+const DripFeed: NextPage = ({ }) => {
 	// -------------------- Rendered Content ------------------
 
-	console.log("sauced baby", _saucedSelectionSneakersData)
+
 
 	return (
 		<div>
@@ -90,7 +90,7 @@ const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSel
 							icon={<img src="/greenDrop.svg" />}
 						/>
 					</div>
-					<DripFeedCardList saucedSelectionSneakersData={_saucedSelectionSneakersData} saucedSelectionSneakersDataError={_saucedSelectionSneakersDataError} />
+					<DripFeedCardList  />
 				</>
 			</Layout>
 		</div>

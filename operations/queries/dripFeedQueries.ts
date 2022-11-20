@@ -1,3 +1,6 @@
+import { gql } from "@apollo/client";
+
+export const GET_SNEAKERS_BY_DISPLAY_GROUP = gql`
 query getSneakersByDisplayGroup($displayGroup: DisplayGroup) {
     values: sneakers(where: {displayGroup: $displayGroup}, stage: PUBLISHED) {
         sneaker {
@@ -22,8 +25,7 @@ query getSneakersByDisplayGroup($displayGroup: DisplayGroup) {
             stadiumGoods
             flightClub
             }
-
         }
         }
     }
-}
+}`;

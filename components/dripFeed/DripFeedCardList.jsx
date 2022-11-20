@@ -9,19 +9,31 @@ import { useGetSneaker } from '../../services/useRequests';
 import { DripFeedCard } from './DripFeedCard';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/Toast';
+import { useQuery } from '@apollo/client';
+
+import { DisplayGroup, useGetSneakersByDisplayGroupQuery } from '../../operations/generated/graphql.tsx';
 
 
-export const DripFeedCardList = ({saucedSelectionSneakersData, saucedSelectionSneakersDataError}) => {
+export const DripFeedCardList = ({}) => {
     // ------------------- Constants ---------------------
     const skeletonArray = [1, 2, 3];
 
-    // ------------------- State Variable --------------------
+    // ------------------- State Variable --------------------\
 
+    const { data: saucedSelectionSneakersData, error: saucedSelectionSneakersDataError, loading: saucedSelectionSneakersDataLoading } =  useGetSneakersByDisplayGroupQuery({
+		variables: {
+		   displayGroup: DisplayGroup.SaucedSelection,
+		 },
+    });
+
+    console.log("saucedSelectionDate", saucedSelectionSneakersData)
     // -------------------- Client Side Data Fetching ------------------
 
 
     //------------------ Use Effect / Use memo ------------------
+    // useEffect(() => {
 
+    // },[saucedSelectionSneakersData,saucedSelectionSneakersDataError,saucedSelectionSneakersDataLoading])
 
 
     useEffect(() => {
@@ -42,11 +54,18 @@ export const DripFeedCardList = ({saucedSelectionSneakersData, saucedSelectionSn
         }
     }, [saucedSelectionSneakersDataError]);
 
+
+    if (saucedSelectionSneakersDataLoading) {
+        return <>loading</>
+    }
+
     return (
 
         <div className="divide-y-2 divide-black  ">
             <div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-14">
-                {saucedSelectionSneakersData?.map((element, index) => {
+                {saucedSelectionSneakersDataLoading ? <>Heloo</> :
+
+                saucedSelectionSneakersData?.map((element, index) => {
 
                     return <DripFeedCard index={index} cardObject={element} />;
                 })}
