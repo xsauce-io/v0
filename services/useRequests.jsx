@@ -25,6 +25,7 @@ const fetcher = (url) =>
 			throw error;
 		});
 
+// ----------------------- ----------- ----------------------
 const fetcherFirstResult = (url) =>
 	axios
 		.get(url)
@@ -38,7 +39,7 @@ const fetcherFirstResult = (url) =>
 			console.error('useRequest', error);
 			throw error;
 		});
-
+// ----------------------- ----------- ----------------------
 const specializedMarketFetcher = (url, sku) =>
 	axios
 		.get(url)
@@ -61,7 +62,7 @@ const specializedMarketFetcher = (url, sku) =>
 			console.error('useRequest', error);
 			throw error;
 		});
-
+// ----------------------- ----------- ----------------------
 const AllMarketFetcher = (url) =>
 	axios
 		.get(url)
@@ -86,7 +87,7 @@ const AllMarketFetcher = (url) =>
 			throw error;
 		});
 
-
+// ----------------------- ----------- ----------------------
 const fetcherMultiCalls = (skus, arrayUrl) => {
 	let skusTest = skus;
 	let data = [];

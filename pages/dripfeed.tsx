@@ -4,6 +4,7 @@ import Head from 'next/head';
 import React from 'react';
 import { DripFeedTopStories } from '../components/dripFeed/DripFeedTopStories';
 import { DripFeedCardList } from '../components/dripFeed/DripFeedCardList';
+
 import { ContentHeader } from '../components/common/ContentHeader';
 
 
@@ -21,6 +22,7 @@ const DripFeed: NextPage = ({ }) => {
 				/>
 			</Head>
 
+
 			<Layout
 				headerSubtitle={'GET THE XSAUCE'}
 				headerTitle={'Market News'}
@@ -33,7 +35,8 @@ const DripFeed: NextPage = ({ }) => {
 						flexColumn
 					/>
 					<div className="divide-y-2 divide-black">
-						<DripFeedTopStories  />
+						<DripFeedTopStories />
+
 						<ContentHeader
 							title={'Sauced Selections'}
 							flexColumn

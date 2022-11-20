@@ -1,5 +1,8 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+import { Web3ReactProvider } from '@web3-react/core';
+import {ethers} from 'ethers'
+import { Web3Provider } from "@ethersproject/providers";
 import toast, { ToastBar, Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
 import Head from 'next/head';
@@ -24,6 +27,11 @@ export const event = (event_name: string, props: any) => {
 	}
 };
 
+function getLibrary(provider: any) {
+	return new ethers.providers.Web3Provider(provider);
+}
+
+
 function MyApp({ Component, pageProps }: AppProps<{}>) {
 	const router = useRouter();
 	//Mix Panel setup
@@ -46,7 +54,9 @@ function MyApp({ Component, pageProps }: AppProps<{}>) {
 		toast.remove();
 	}, [router.events]);
 
+
 	return (
+		<Web3ReactProvider getLibrary={getLibrary}>
 		<>
 		<ApolloProvider client={client}>
 			<Head>
@@ -122,6 +132,7 @@ function MyApp({ Component, pageProps }: AppProps<{}>) {
 				/>
 			</ApolloProvider>
 		</>
+		</Web3ReactProvider>
 	);
 }
 
