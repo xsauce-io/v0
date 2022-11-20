@@ -104,12 +104,12 @@ import client from "../lib/apollo-client";
 
 // }
 
-// type PageProps = {
-// 	_highlightSneakerData: any,
-// 	_highlightSneakerDataError: any,
-// 	_calendarSneakerCollectionData: any,
-// 	_calendarSneakerCollectionDataError: any,
-// }
+type PageProps = {
+	_highlightSneakerData: any,
+	_highlightSneakerDataError: any,
+	_calendarSneakerCollectionData: any,
+	_calendarSneakerCollectionDataError: any,
+}
 
 
 const Calendar: NextPage = () => {
@@ -141,8 +141,8 @@ const Calendar: NextPage = () => {
 					/>
 
 					<div className="space-y-10 mb-20">
-						{/* <CalendarHighlight highlightSneakerData={_highlightSneakerData} highlightSneakerDataError={_highlightSneakerDataError} />
-						<CalendarCardList calendarSneakerCollectionData={_calendarSneakerCollectionData} calendarSneakerCollectionDataError={_calendarSneakerCollectionDataError} />
+						 <CalendarHighlight/>
+						{/*<CalendarCardList calendarSneakerCollectionData={_calendarSneakerCollectionData} calendarSneakerCollectionDataError={_calendarSneakerCollectionDataError} />
 					*/}</div>
 				</main>
 			</Layout>

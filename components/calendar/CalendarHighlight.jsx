@@ -6,9 +6,10 @@ import { useGetSneaker } from '../../services/useRequests';
 import { calendarUseGetSneakerSku } from '../../constants/dataVariables';
 import { ToastNotification } from '../common/Toast';
 import toast from 'react-hot-toast';
+import { useGetCalendarHighlightSneaker } from '../../services/highlightSneaker/useRequest';
 
 
-export const CalendarHighlight = ({highlightSneakerData, highlightSneakerDataError}) => {
+export const CalendarHighlight = () => {
 	// ------------------- Constants ---------------------
 
 	const randomPlaceholder = [
@@ -19,19 +20,12 @@ export const CalendarHighlight = ({highlightSneakerData, highlightSneakerDataErr
 		'/11s.svg',
 	];
 
-	// ------------------- State Variable --------------------
-
-
-	// -------------------- Data Fetching ------------------
-
-
-
-	//------------------ Use Effect / Use memo ------------------
-
-
-
+	// ------------------- State Variable -----------------------
+	// -------------------- Data Fetching -----------------------
+	const { highlightSneakerData, highlightSneakerDataError, highlightSneakerDataLoading } = useGetCalendarHighlightSneaker();
+	// ----------------- Use Effect / Use memo ------------------
 	useEffect(() => {
-		if (highlightSneakerData == undefined) {
+		if (highlightSneakerDataError) {
 			toast.custom(
 				(t) => (
 					<ToastNotification

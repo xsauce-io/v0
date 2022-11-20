@@ -1,17 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Skeleton } from '@mui/material';
-import { ContentHeader } from '../common/ContentHeader';
 import { CalendarCard } from './CalendarCard';
-import {
-    useGetMarketBySku,
-    useGetSneaker,
-    useGetSneakerByLimit,
-} from '../../services/useRequests';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/Toast';
-import {
-    calendarUseGetSneakerByLimit,
-} from '../../constants/dataVariables';
+
 
 export const CalendarCardList = ({ calendarSneakerCollectionData, calendarSneakerCollectionDataError }) => {
     // ------------------- Constants ---------------------

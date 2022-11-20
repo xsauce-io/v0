@@ -5,59 +5,10 @@ import React from 'react';
 import { DripFeedTopStories } from '../components/dripFeed/DripFeedTopStories';
 import { DripFeedCardList } from '../components/dripFeed/DripFeedCardList';
 import { ContentHeader } from '../components/common/ContentHeader';
-import { gql } from "@apollo/client";
-import client from "../lib/apollo-client";
 
-// export const getServerSideProps = async () => {
-
-
-// 	try {
-// 		const { data: saucedSelectionSneakersData, error: saucedSelectionSneakerDataError, loading: loading } =  useGetSneakersByDisplayGroupQuery({
-// 			  variables: {
-// 			     displayGroup: DisplayGroup.SaucedSelection,
-// 			   },
-// 		});
-// 		while (loading) {
-// 			//
-// 		}
-// 		if (saucedSelectionSneakersData ) {
-// 			const formattedSaucedSelectionSneakersData = saucedSelectionSneakersData.values.map((el: any) => {
-// 				return el.sneaker.results[0]
-// 			})
-// 			console.log("formatted",formattedSaucedSelectionSneakersData)
-// 			return {
-
-// 				props: {
-// 					_saucedSelectionSneakersData: formattedSaucedSelectionSneakersData,
-// 					_saucedSelectionSneakerDataError: saucedSelectionSneakerDataError
-// 				},
-// 			}
-// 		} else {
-// 			throw("Sauced Selection Failed to Fetch")
-// 		}
-
-// 	} catch (error: any) {
-// 		return {
-// 			//TODO: Handle fetching errors separately
-// 			props: {
-// 				_saucedSelectionDataError: error.message,
-// 			},
-// 		}
-// 	}
-
-
-// }
-
-// type PageProps = {
-// 	_saucedSelectionSneakersData: any,
-// 	_saucedSelectionSneakersDataError: any,
-// }
 
 const DripFeed: NextPage = ({ }) => {
 	// -------------------- Rendered Content ------------------
-
-
-
 	return (
 		<div>
 			<Head>

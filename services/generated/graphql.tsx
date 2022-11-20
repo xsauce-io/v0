@@ -4341,6 +4341,13 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type GetSneakerByTitleQueryVariables = Exact<{
+  title: Scalars['String'];
+}>;
+
+
+export type GetSneakerByTitleQuery = { __typename?: 'Query', values?: { __typename?: 'Sneaker', sneaker?: { __typename?: 'SneakerApi_Root', count?: number | null, results?: Array<{ __typename?: 'SneakerApi_Result', brand?: string | null, name?: string | null, sku?: string | null, gender?: string | null, releaseDate?: string | null, colorway?: string | null, retailPrice?: number | null, releaseYear?: string | null, estimatedMarketValue?: number | null, image?: { __typename?: 'SneakerApi_Img', original?: string | null } | null, links?: { __typename?: 'SneakerApi_Links', stockX?: string | null, stadiumGoods?: string | null, flightClub?: string | null } | null } | null> | null } | null } | null };
+
 export type GetSneakersByDisplayGroupQueryVariables = Exact<{
   displayGroup?: InputMaybe<DisplayGroup>;
 }>;
@@ -4349,6 +4356,64 @@ export type GetSneakersByDisplayGroupQueryVariables = Exact<{
 export type GetSneakersByDisplayGroupQuery = { __typename?: 'Query', values: Array<{ __typename?: 'Sneaker', sneaker?: { __typename?: 'SneakerApi_Root', results?: Array<{ __typename?: 'SneakerApi_Result', brand?: string | null, name?: string | null, sku?: string | null, gender?: string | null, releaseDate?: string | null, colorway?: string | null, retailPrice?: number | null, releaseYear?: string | null, estimatedMarketValue?: number | null, image?: { __typename?: 'SneakerApi_Img', original?: string | null } | null, links?: { __typename?: 'SneakerApi_Links', stockX?: string | null, stadiumGoods?: string | null, flightClub?: string | null } | null } | null> | null } | null }> };
 
 
+export const GetSneakerByTitleDocument = gql`
+    query getSneakerByTitle($title: String!) {
+  values: sneaker(where: {title: $title}, stage: PUBLISHED) {
+    sneaker {
+      count
+      results {
+        brand
+        name
+        sku
+        gender
+        releaseDate
+        colorway
+        name
+        retailPrice
+        releaseYear
+        retailPrice
+        estimatedMarketValue
+        image {
+          original
+        }
+        links {
+          stockX
+          stadiumGoods
+          flightClub
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetSneakerByTitleQuery__
+ *
+ * To run a query within a React component, call `useGetSneakerByTitleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSneakerByTitleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSneakerByTitleQuery({
+ *   variables: {
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useGetSneakerByTitleQuery(baseOptions: Apollo.QueryHookOptions<GetSneakerByTitleQuery, GetSneakerByTitleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSneakerByTitleQuery, GetSneakerByTitleQueryVariables>(GetSneakerByTitleDocument, options);
+      }
+export function useGetSneakerByTitleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSneakerByTitleQuery, GetSneakerByTitleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSneakerByTitleQuery, GetSneakerByTitleQueryVariables>(GetSneakerByTitleDocument, options);
+        }
+export type GetSneakerByTitleQueryHookResult = ReturnType<typeof useGetSneakerByTitleQuery>;
+export type GetSneakerByTitleLazyQueryHookResult = ReturnType<typeof useGetSneakerByTitleLazyQuery>;
+export type GetSneakerByTitleQueryResult = Apollo.QueryResult<GetSneakerByTitleQuery, GetSneakerByTitleQueryVariables>;
 export const GetSneakersByDisplayGroupDocument = gql`
     query getSneakersByDisplayGroup($displayGroup: DisplayGroup) {
   values: sneakers(where: {displayGroup: $displayGroup}, stage: PUBLISHED) {
