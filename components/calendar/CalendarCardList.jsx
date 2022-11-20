@@ -1,19 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Skeleton } from '@mui/material';
-import { ContentHeader } from '../common/ContentHeader';
 import { CalendarCard } from './CalendarCard';
-import {
-    useGetMarketBySku,
-    useGetSneaker,
-    useGetSneakerByLimit,
-} from '../../services/useRequests';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/Toast';
-import {
-    calendarUseGetSneakerByLimit,
-} from '../../services/dataVariables';
+import { useGetCalendarSneakerList } from '../../services/calendar/calendarSneakerList/useRequest';
 
-export const CalendarCardList = ({ calendarSneakerCollectionData, calendarSneakerCollectionDataError }) => {
+
+export const CalendarCardList = () => {
     // ------------------- Constants ---------------------
 
     const SORT_BY_STATES = {
@@ -26,23 +19,25 @@ export const CalendarCardList = ({ calendarSneakerCollectionData, calendarSneake
 
     // -------------------- Data Fetching ------------------
 
-    // const { data: sneakersData, error: sneakersDataError } = useGetSneakerByLimit(
-    //     calendarUseGetSneakerByLimit
-    // );
+    const { calendarSneakerListData, calendarSneakerListDataError, calendarSneakerListDataLoading } = useGetCalendarSneakerList()
+
 
     // ------------------- State Variable --------------------
 
-    const [response, setResponse] = useState(calendarSneakerCollectionData);
+    const [response, setResponse] = useState([]);
     const [sortBy, setSortBy] = useState({ state: SORT_BY_STATES.RELEASE_DATE });
 
     //------------------ Use Effect / Use memo ------------------
 
-    // useEffect(() => {
-    //     setResponse(calendarSneakerCollectionData);
-    // }, [calendarSneakerCollectionData]);
+    useEffect(() => {
+        if (calendarSneakerListData) {
+            setResponse(calendarSneakerListData);
+
+        }
+    }, [calendarSneakerListData]);
 
     useEffect(() => {
-        if (calendarSneakerCollectionDataError) {
+        if (calendarSneakerListDataError) {
             toast.custom(
                 (t) => (
                     <ToastNotification
@@ -57,7 +52,7 @@ export const CalendarCardList = ({ calendarSneakerCollectionData, calendarSneake
                 { duration: 7000, id: 'data-not-loading-calendar' }
             );
         }
-    }, [calendarSneakerCollectionDataError]);
+    }, [calendarSneakerListDataError]);
 
     useMemo(() => {
         if (response) {
@@ -158,7 +153,7 @@ export const CalendarCardList = ({ calendarSneakerCollectionData, calendarSneake
                 </div>
             </div>
             <div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-                {response || calendarSneakerCollectionDataError === undefined
+                {response || calendarSneakerListDataError === undefined
                     ? response?.map((element, index) => (
                         <CalendarCard index={index} cardObject={element} />
                     ))

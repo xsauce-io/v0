@@ -9,6 +9,8 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import { FirstTimeVisitorModal } from '../components/common/FirstTimeVisitorModal';
+import { ApolloProvider } from '@apollo/client';
+import client from '../lib/apollo-client.js'
 
 /**
  * Send mix panel event
@@ -56,6 +58,7 @@ function MyApp({ Component, pageProps }: AppProps<{}>) {
 	return (
 		<Web3ReactProvider getLibrary={getLibrary}>
 		<>
+		<ApolloProvider client={client}>
 			<Head>
 				<title>Xsauce</title>
 				<meta property="og:image" content="/OG.png" />
@@ -126,7 +129,8 @@ function MyApp({ Component, pageProps }: AppProps<{}>) {
 				gutter={8}
 				toastOptions={{ duration: 2000 }}
 				containerStyle={{ top: '104px' }}
-			/>
+				/>
+			</ApolloProvider>
 		</>
 		</Web3ReactProvider>
 	);

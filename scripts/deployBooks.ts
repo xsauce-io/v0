@@ -1,6 +1,6 @@
 import {ethers} from "hardhat"
 import BookFactoryAbi from "../abi/bookFactory.json"
-import {OrderBookFactory1155, $tableAddress, Market1, Market2, Market3, Market4 } from "../services/constants"
+import {OrderBookFactory1155, $tableAddress, Market1, Market2, Market3, Market4 } from "../constants/constants"
 
 
 async function main() {
@@ -31,4 +31,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-

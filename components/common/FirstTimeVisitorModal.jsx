@@ -33,40 +33,41 @@ export const FirstTimeVisitorModal = () => {
 	}, []);
 
 	return (
-		<Dialog
-			open={open}
-			keepMounted
-			onClose={handleClose}
-			PaperProps={{
-				style: {
-					borderRadius: 30,
-					width: '100%',
-					height: 'fit-content',
-					overflow: 'clip',
-				},
-			}}
-			maxWidth="sm"
-		>
-			<Box sx={{ bgcolor: '#0C1615' }} width={'100%'} height={'100%'}>
-				<DialogActions>
-					<Button
-						sx={{
-							color: '#ACFF00',
-							fontSize: '30px',
-							display: 'flex',
-							flexDirection: 'column',
-							justifyContent: 'right',
-							paddingRight: '18px',
-						}}
-						onClick={handleClose}
-					>
-						&#10005;
-					</Button>
-				</DialogActions>
-				<DialogContent sx={{ padding: '18px' }}>
-					<FirstTimeVisitorSlideshow />
-				</DialogContent>
-			</Box>
-		</Dialog>
+		<></>
+		// <Dialog
+		// 	open={open}
+		// 	keepMounted
+		// 	onClose={handleClose}
+		// 	PaperProps={{
+		// 		style: {
+		// 			borderRadius: 30,
+		// 			width: '100%',
+		// 			height: 'fit-content',
+		// 			overflow: 'clip',
+		// 		},
+		// 	}}
+		// 	maxWidth="sm"
+		// >
+		// 	<Box sx={{ bgcolor: '#0C1615' }} width={'100%'} height={'100%'}>
+		// 		<DialogActions>
+		// 			<Button
+		// 				sx={{
+		// 					color: '#ACFF00',
+		// 					fontSize: '30px',
+		// 					display: 'flex',
+		// 					flexDirection: 'column',
+		// 					justifyContent: 'right',
+		// 					paddingRight: '18px',
+		// 				}}
+		// 				onClick={handleClose}
+		// 			>
+		// 				&#10005;
+		// 			</Button>
+		// 		</DialogActions>
+		// 		<DialogContent sx={{ padding: '18px' }}>
+		// 			<FirstTimeVisitorSlideshow />
+		// 		</DialogContent>
+		// 	</Box>
+		// </Dialog>
 	);
 };

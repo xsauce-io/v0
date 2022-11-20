@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import { ethers } from 'ethers';
 import { PortfolioTableContainer } from '../components/portfolio/PortfolioTableContainer';
-import { MarketFactory } from '../services/constants';
+import { MarketFactory } from '../constants/constants';
 import MarketFactoryABI from '../abi/marketFactory.json';
 import MarketAbi from '../abi/markets.json';
 import { PortfolioTableItem } from '../components/portfolio/PortfolioTableItem';

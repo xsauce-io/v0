@@ -1,27 +1,29 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
-import { ethers } from 'ethers';
-import { MarketFactory } from '../../services/constants';
-import MarketFactoryABI from '../../abi/marketFactory.json';
-import MarketAbi from '../../abi/markets.json';
-import { useGetSneaker } from '../../services/useRequests';
 import { DripFeedCard } from './DripFeedCard';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/Toast';
+import { DisplayGroup, useGetSneakersByDisplayGroupQuery } from '../../services/generated/graphql.tsx';
+import { useGetSauceSelection } from '../../services/dripFeed/saucedSelection/useRequest';
 
 
-export const DripFeedCardList = ({saucedSelectionSneakersData, saucedSelectionSneakersDataError}) => {
+export const DripFeedCardList = ({}) => {
     // ------------------- Constants ---------------------
     const skeletonArray = [1, 2, 3];
 
-    // ------------------- State Variable --------------------
+    // ------------------- State Variable --------------------\
 
+    const { saucedSelectionSneakersData, saucedSelectionSneakersDataError, saucedSelectionSneakersDataLoading } = useGetSauceSelection();
+
+    console.log("saucedSelectionDate", saucedSelectionSneakersData)
     // -------------------- Client Side Data Fetching ------------------
 
 
     //------------------ Use Effect / Use memo ------------------
+    // useEffect(() => {
 
+    // },[saucedSelectionSneakersData,saucedSelectionSneakersDataError,saucedSelectionSneakersDataLoading])
 
 
     useEffect(() => {
@@ -42,14 +44,23 @@ export const DripFeedCardList = ({saucedSelectionSneakersData, saucedSelectionSn
         }
     }, [saucedSelectionSneakersDataError]);
 
+
+    if (saucedSelectionSneakersDataLoading) {
+        return <>loading</>
+    }
+
     return (
 
         <div className="divide-y-2 divide-black  ">
             <div className="flex flex-col space-y-4  tablet:flex-row tablet:space-x-4 tablet:space-y-0 pb-14">
+                {saucedSelectionSneakersDataLoading ? <>Hello</>
+                    :
 
-                {saucedSelectionSneakersData?.map((element, index) => {
-                    return <DripFeedCard index={index} cardObject={element} />;
-                })}
+                    saucedSelectionSneakersData.map((element, index) => {
+
+                        return <DripFeedCard index={index} cardObject={element} />;
+                    })
+                }
             </div>
         </div>
 

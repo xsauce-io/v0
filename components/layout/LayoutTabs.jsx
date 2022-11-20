@@ -12,33 +12,27 @@ export const LayoutTabs = ({ children, bgColor }) => {
 				style={{ backgroundColor: bgColor }}
 			>
 				<div className="tabs border-[#000] border-b-[1px] border-t-[0px] w-full text-white space-x-3 tablet:space-x-8 ">
-					<Link href='/dripfeed'>
-						<a
-							className={
+					<Link href="/dripfeed" className={
 								router.pathname == '/dripfeed'
 									? 'tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm '
 									: 'tab transition mobile:text-xs tablet:text-sm text-[#748282] px-0 '
 							}
 							style={
 								router.pathname == '/dripfeed' ? { color: 'inherit' } : null
-							}
-						>
+							}>
+
 							Drip Feed
-						</a>
+
 					</Link>
-					<Link href="/markets">
-						<a
-							className={
+					<Link href="/markets" className={
 								router.pathname == '/markets'
 									? 'tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm '
 									: 'tab transition mobile:text-xs tablet:text-sm text-[#748282] px-0 '
 							}
 							style={
 								router.pathname == '/markets' ? { color: 'inherit' } : null
-							}
-						>
-							Markets
-						</a>
+							}>
+						Markets
 					</Link>
 
 					{/* <Link href="/freePlay">
@@ -56,8 +50,7 @@ export const LayoutTabs = ({ children, bgColor }) => {
 						</a>
 					</Link> */}
 
-					<Link href="/calendar">
-						<a
+					<Link href="/calendar"
 							className={
 								router.pathname == '/calendar'
 									? 'tab border-[#ACFF00] border-b-[3px] transition px-0 mobile:text-xs tablet:text-sm '
@@ -65,25 +58,19 @@ export const LayoutTabs = ({ children, bgColor }) => {
 							}
 							style={
 								router.pathname == '/calendar' ? { color: 'inherit' } : null
-							}
-						>
-							Calendar
-						</a>
+							}>
+						Calendar
 					</Link>
 
-					<Link href="/portfolio">
-						<a
-							className={
+					<Link href="/portfolio" className={
 								router.pathname == '/portfolio'
 									? 'tab border-[#ACFF00] border-b-[3px] transition text-black px-0 mobile:text-xs tablet:text-sm'
 									: 'tab transition text-[#748282] px-0 mobile:text-xs tablet:text-sm'
 							}
 							style={
 								router.pathname == '/portfolio' ? { color: 'inherit' } : null
-							}
-						>
-							Portfolio
-						</a>
+							}>
+						Portfolio
 					</Link>
 				</div>
 			</div>

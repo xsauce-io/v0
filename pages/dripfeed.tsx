@@ -6,82 +6,10 @@ import { DripFeedTopStories } from '../components/dripFeed/DripFeedTopStories';
 import { DripFeedCardList } from '../components/dripFeed/DripFeedCardList';
 
 import { ContentHeader } from '../components/common/ContentHeader';
-import { gql } from "@apollo/client";
-import client from "../lib/apollo-client";
-
-export const getServerSideProps = async () => {
-
-	try {
-		const { data: saucedSelectionSneakersData } = await client.query({
-			query: gql`
-				query getSneakersByDisplayGroup($displayGroup: DisplayGroup) {
-					values: sneakers(where: {displayGroup: $displayGroup}, stage: PUBLISHED) {
-						sneaker {
-						results
-						{
-							brand
-							name
-							sku
-							gender
-							releaseDate
-							colorway
-							name
-							retailPrice
-							releaseYear
-							retailPrice
-							estimatedMarketValue
-							image {
-							original
-							}
-							links {
-							stockX
-							stadiumGoods
-							flightClub
-							}
-						}
-						}
-					}
-					}
-
-			`,
-			variables: {
-				displayGroup: "saucedSelection"
-			}
-		});
-
-		const formattedSaucedSelectionSneakersData = saucedSelectionSneakersData.values.map((el: any) => {
-			return el.sneaker.results[0]
-		})
-		console.log("formatted",formattedSaucedSelectionSneakersData)
-		return {
-
-			props: {
-				_saucedSelectionSneakersData: formattedSaucedSelectionSneakersData,
-			},
-		}
-	} catch (error: any) {
-		return {
-			//TODO: Handle fetching errors separately
-			props: {
-				_saucedSelectionDataError: error.message,
-			},
-		}
-	}
 
 
-}
-
-type PageProps = {
-	_saucedSelectionSneakersData: any,
-	_saucedSelectionSneakersDataError: any,
-}
-
-const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSelectionSneakersDataError }) => {
+const DripFeed: NextPage = ({ }) => {
 	// -------------------- Rendered Content ------------------
-
-	console.log("sauced baby", _saucedSelectionSneakersData)
-	console.log("sauced error baby",_saucedSelectionSneakersDataError )
-
 	return (
 		<div>
 			<Head>
@@ -115,8 +43,7 @@ const DripFeed: NextPage<PageProps> = ({_saucedSelectionSneakersData, _saucedSel
 							icon={<img src="/greenDrop.svg" />}
 						/>
 					</div>
-
-					<DripFeedCardList saucedSelectionSneakersData={_saucedSelectionSneakersData} saucedSelectionSneakersDataError={_saucedSelectionSneakersDataError} />
+					<DripFeedCardList  />
 				</>
 			</Layout>
 		</div>
