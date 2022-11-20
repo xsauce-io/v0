@@ -53,7 +53,7 @@ const Home: NextPage = () => {
 						</li>
 					</a>
 
-					<Link href="/dripFeed" className="flex flex-row w-full">
+					<Link href="/dripfeed" className="flex flex-row w-full">
 							<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center">
 								<img
 									className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
