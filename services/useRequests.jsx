@@ -4,7 +4,7 @@ import {
 	marketsDataGit,
 
 
-} from './constants';
+} from '../constants/constants';
 
 // ----------------------- ----------- ----------------------
 // ----------------------- Fetchers ----------------------

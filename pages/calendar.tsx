@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Layout } from '../components/layout/Layout';
 import { ContentHeader } from '../components/common/ContentHeader';
 import { CalendarCardList } from '../components/calendar/CalendarCardList';
-import { CalendarHighlight } from '../components/calendar/calendarHighlight';
+import { CalendarHighlight } from '../components/calendar/CalendarHighlight';
 import { gql } from "@apollo/client";
 import client from "../lib/apollo-client";
 

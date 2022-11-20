@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import { ethers } from "hardhat";
-import {$tableAddress} from "../services/constants";
+import {$tableAddress} from "../constants/constants";
 
 
 async function main() {
@@ -28,4 +28,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-
