@@ -59,7 +59,7 @@ const Home: NextPage = () => {
 									className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
 									src="/jordans.svg"
 								/>
-								<span>Drip Feed </span>
+								<span>Drip Feed</span>
 							</li>
 
 					</Link>
@@ -75,7 +75,7 @@ const Home: NextPage = () => {
 								className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
 								src="/jordans.svg"
 							/>
-							<span>Documentation </span>
+							<span>Documentation</span>
 						</li>
 					</a>
 
