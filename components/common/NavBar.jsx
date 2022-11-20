@@ -8,49 +8,49 @@ import { useRouter } from 'next/router';
 import { ToastNotificationActionBar } from './ToastActionBar';
 import { useWeb3React } from '@web3-react/core';
 import { truncateText } from '/utils/truncate.js'
-import { SelectWalletModal } from '/components/common/SelectWalletModal';
+import { SelectWalletModal } from './SelectWalletModal';
 import { networks } from '/utils/networks.js';
-import {CopyAddressButton} from '/components/common/CopyAddressButton'
+import { CopyAddressButton } from '/components/common/CopyAddressButton'
 
 export const NAVBAR_THEME = {
 	light: 'light',
 	dark: 'dark',
 };
 
-export const dark =  {
-		name: 'darkTheme',
-		logoColor: '#fff',
-		textColor: 'text-[#0C1615]',
-		buttonColor: 'bg-white',
-		menuButtonColor: 'white',
-		bgColor: 'bg-[#0C1615]',
-		iconTextColor: '#0C1615',
-		drawerIconColor: '#fff',
-		drawerIconAsText: '#fff',
-		drawerButtonColor: 'bg-[#0C1615]',
-		drawerTextColor: 'text-[#fff]',
-		drawerBackgroundColor: '#0C1615',
-	};
+export const dark = {
+	name: 'darkTheme',
+	logoColor: '#fff',
+	textColor: 'text-[#0C1615]',
+	buttonColor: 'bg-white',
+	menuButtonColor: 'white',
+	bgColor: 'bg-[#0C1615]',
+	iconTextColor: '#0C1615',
+	drawerIconColor: '#fff',
+	drawerIconAsText: '#fff',
+	drawerButtonColor: 'bg-[#0C1615]',
+	drawerTextColor: 'text-[#fff]',
+	drawerBackgroundColor: '#0C1615',
+};
 export const light = {
-			name: 'lightTheme',
-			logoColor: '#0C1615',
-			textColor: 'text-white',
-			buttonColor: 'bg-[#0C1615]',
-			menuButtonColor: '#0C1615',
-			bgColor: 'bg-white',
-			iconTextColor: '#fff',
-			drawerIconColor: '#000',
-			drawerIconAsText: '#000',
-			drawerButtonColor: 'bg-[#fff]',
-			drawerTextColor: 'text-[#0C1615]',
-			drawerBackgroundColor: '#fff',
+	name: 'lightTheme',
+	logoColor: '#0C1615',
+	textColor: 'text-white',
+	buttonColor: 'bg-[#0C1615]',
+	menuButtonColor: '#0C1615',
+	bgColor: 'bg-white',
+	iconTextColor: '#fff',
+	drawerIconColor: '#000',
+	drawerIconAsText: '#000',
+	drawerButtonColor: 'bg-[#fff]',
+	drawerTextColor: 'text-[#0C1615]',
+	drawerBackgroundColor: '#fff',
 }
 
 export const NavBar = ({ padding, theme }) => {
 	// ----------------------------------------------------
 	// ----------  Variables and Constants ----------------
 	// ----------------------------------------------------
-	let themeObject = theme === NAVBAR_THEME.dark?  dark: light  ;
+	let themeObject = theme === NAVBAR_THEME.dark ? dark : light;
 
 	const defaultChainId = 5 //goerli
 
@@ -72,7 +72,6 @@ export const NavBar = ({ padding, theme }) => {
 	const router = useRouter();
 	const [toggle, setToggle] = useState();
 	const [current, setCurrent] = useState();
-	const [isCopied, setIsCopied] = useState(false);
 	const { library, active, chainId, account, deactivate } = useWeb3React();
 	const [isSelectWalletOpen, setIsSelectWalletOpen] = useState(false);
 
@@ -225,16 +224,6 @@ export const NavBar = ({ padding, theme }) => {
 				{ duration: Infinity }
 			);
 		}
-	};
-
-	const copyAddressToClipboard = async () => {
-		await navigator.clipboard
-			.writeText(account.toString())
-			.then(setIsCopied(true));
-		navigator.clipboard.readText();
-		setTimeout(() => {
-			setIsCopied(false);
-		}, 2000);
 	};
 
 	const setState = (NetworkIndex) => {
@@ -447,7 +436,7 @@ export const NavBar = ({ padding, theme }) => {
 	}, [router.events]);
 
 	// ----------------------------------------------------
-	// ---------------------- Render ------------------------
+	// ---------------------- Render ----------------------
 	// ----------------------------------------------------
 
 	return (
@@ -549,81 +538,81 @@ export const NavBar = ({ padding, theme }) => {
                                         </li>
                                     </ul>
                                 </div> */}
-								<div className={ `flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] py-2 `}>
+								<div className={`flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] py-2 `}>
 									<img className="h-[15px] w-[10px]" src="/eth.png" />
 									<span className="text-[14px] px-2">Goerli</span>
 								</div>
 
 								<CopyAddressButton account={account} themeObject={themeObject} />
 
-									<div className="dropdown dropdown-end">
-										<label
-											tabindex="0"
-											className={`text-lg ${themeObject.textColor}`}
-										>
-											<div className="w-[37px]">
-												<svg
-													width="32"
-													height="32"
-													viewBox="0 0 32 32"
-													fill="none"
-													xmlns="http://www.w3.org/2000/svg"
-												>
-													<circle
-														cx="16"
-														cy="16"
-														r="16"
-														fill={themeObject.menuButtonColor}
-													/>
-													<path
-														d="M22 17C22.5523 17 23 16.5523 23 16C23 15.4477 22.5523 15 22 15C21.4477 15 21 15.4477 21 16C21 16.5523 21.4477 17 22 17Z"
-														fill={themeObject.iconTextColor}
-													/>
-													<path
-														d="M16 17C16.5523 17 17 16.5523 17 16C17 15.4477 16.5523 15 16 15C15.4477 15 15 15.4477 15 16C15 16.5523 15.4477 17 16 17Z"
-														fill={themeObject.iconTextColor}
-													/>
-													<path
-														d="M10 17C10.5523 17 11 16.5523 11 16C11 15.4477 10.5523 15 10 15C9.44771 15 9 15.4477 9 16C9 16.5523 9.44771 17 10 17Z"
-														fill={themeObject.iconTextColor}
-													/>
-												</svg>
-											</div>
-										</label>
-										<ul
-											tabindex="0"
-											className={`menu dropdown-content ${themeObject.textColor} ${themeObject.buttonColor}  p-2 shadow rounded-box w-[250px] mt-4 z-10`}
-										>
-											<li>
-												<button
-													onClick={() => {
-														faucet();
-														mixpanelTrackProps('Get Test Tokens', {
-															token: '$auce',
-														});
-													}}
-												>
-													<img className="h-[10%] w-[10%]" src="/icon.svg" />
-													Get Test Tokens
-												</button>
-											</li>
-											<li>
-												<a
-													className={`active:bg-[#ACFF00] ${themeObject.textColor}`}
-													target="blank"
-													href="https://goerli-faucet.pk910.de/"
-													onClick={() =>
-														mixpanelTrackProps('Get Test Tokens', {
-															token: 'ETHGoerli',
-														})
-													}
-												>
-													<img className="h-[7%] w-[7%]" src="/eth.png" />
-													Get Test ETH(Goerli)
-												</a>
-											</li>
-										</ul>
-									</div>
+								<div className="dropdown dropdown-end">
+									<label
+										tabindex="0"
+										className={`text-lg ${themeObject.textColor}`}
+									>
+										<div className="w-[37px]">
+											<svg
+												width="32"
+												height="32"
+												viewBox="0 0 32 32"
+												fill="none"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<circle
+													cx="16"
+													cy="16"
+													r="16"
+													fill={themeObject.menuButtonColor}
+												/>
+												<path
+													d="M22 17C22.5523 17 23 16.5523 23 16C23 15.4477 22.5523 15 22 15C21.4477 15 21 15.4477 21 16C21 16.5523 21.4477 17 22 17Z"
+													fill={themeObject.iconTextColor}
+												/>
+												<path
+													d="M16 17C16.5523 17 17 16.5523 17 16C17 15.4477 16.5523 15 16 15C15.4477 15 15 15.4477 15 16C15 16.5523 15.4477 17 16 17Z"
+													fill={themeObject.iconTextColor}
+												/>
+												<path
+													d="M10 17C10.5523 17 11 16.5523 11 16C11 15.4477 10.5523 15 10 15C9.44771 15 9 15.4477 9 16C9 16.5523 9.44771 17 10 17Z"
+													fill={themeObject.iconTextColor}
+												/>
+											</svg>
+										</div>
+									</label>
+									<ul
+										tabindex="0"
+										className={`menu dropdown-content ${themeObject.textColor} ${themeObject.buttonColor}  p-2 shadow rounded-box w-[250px] mt-4 z-10`}
+									>
+										<li>
+											<button
+												onClick={() => {
+													faucet();
+													mixpanelTrackProps('Get Test Tokens', {
+														token: '$auce',
+													});
+												}}
+											>
+												<img className="h-[10%] w-[10%]" src="/icon.svg" />
+												Get Test Tokens
+											</button>
+										</li>
+										<li>
+											<a
+												className={`active:bg-[#ACFF00] ${themeObject.textColor}`}
+												target="blank"
+												href="https://goerli-faucet.pk910.de/"
+												onClick={() =>
+													mixpanelTrackProps('Get Test Tokens', {
+														token: 'ETHGoerli',
+													})
+												}
+											>
+												<img className="h-[7%] w-[7%]" src="/eth.png" />
+												Get Test ETH(Goerli)
+											</a>
+										</li>
+									</ul>
+								</div>
 							</>
 							: (
 								<>
@@ -632,8 +621,8 @@ export const NavBar = ({ padding, theme }) => {
 										onClick={() => switchNetwork()}
 									>
 										Switch Network
-										</button>
-										<CopyAddressButton account={account} themeObject={themeObject} />
+									</button>
+									<CopyAddressButton account={account} themeObject={themeObject} />
 
 
 
