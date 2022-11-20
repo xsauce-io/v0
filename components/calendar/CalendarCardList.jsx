@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/Toast';
 import {
     calendarUseGetSneakerByLimit,
-} from '../../services/dataVariables';
+} from '../../constants/dataVariables';
 
 export const CalendarCardList = ({ calendarSneakerCollectionData, calendarSneakerCollectionDataError }) => {
     // ------------------- Constants ---------------------

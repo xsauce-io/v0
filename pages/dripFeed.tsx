@@ -7,7 +7,6 @@ import { DripFeedCardList } from '../components/dripFeed/DripFeedCardList';
 import { ContentHeader } from '../components/common/ContentHeader';
 import { gql } from "@apollo/client";
 import client from "../lib/apollo-client";
-import { DisplayGroup, useGetSneakersByDisplayGroupQuery } from '../operations/generated/graphql';
 
 // export const getServerSideProps = async () => {
 

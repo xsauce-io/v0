@@ -9,8 +9,6 @@ import { useGetSneaker } from '../../services/useRequests';
 import { DripFeedCard } from './DripFeedCard';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/Toast';
-import { useQuery } from '@apollo/client';
-
 import { DisplayGroup, useGetSneakersByDisplayGroupQuery } from '../../operations/generated/graphql.tsx';
 
 
