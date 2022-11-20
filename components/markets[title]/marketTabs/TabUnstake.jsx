@@ -51,7 +51,7 @@ export const TabUnstake = (market) => {
 						Amount:
 					</p>
 					<input
-						className="flex-1 text-right text-xs tablet:text-xl mobile:w-[10%] appearance-none focus:none focus:outline-none"
+						className="flex-1 bg-white  text-right text-xs tablet:text-xl mobile:w-[10%] appearance-none focus:none focus:outline-none"
 						name="Amount"
 						id="amount"
 						type="number"

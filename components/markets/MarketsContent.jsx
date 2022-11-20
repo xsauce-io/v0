@@ -102,7 +102,7 @@ export const MarketsContent = () => {
 									Amount:
 								</p>
 								<input
-									className="flex-1 text-right mobile:text-sm laptop:text-md mobile:w-[10%] appearance-none focus:none focus:outline-none"
+									className="flex-1 bg-white  text-right mobile:text-sm laptop:text-md mobile:w-[10%] appearance-none focus:none focus:outline-none"
 									name="Amount"
 									id="amount"
 									type="number"
