@@ -13,8 +13,8 @@ export const CalendarHighlight = () => {
 		'/hurache.svg',
 		'/octobers.svg',
 		'/yeezy.svg',
-		'/jordans.svg',
-		'/11s.svg',
+		'/jordans-placeholder-img-svg.svg',
+		'/jordan-11-placeholder-img-svg.svg',
 	];
 
 	// ------------------- State Variable -----------------------

@@ -99,11 +99,11 @@ export const CalendarCardList = () => {
                         tabIndex={0}
                         className="text-[10px]  flex flex-row justify-center  text-center items-center border-[#0C1615] border-2 rounded-3xl text-sm bg-[#0C1615] hover:opacity-50  w-[130px] p-1 px-2"
                     >
-                        <img src="/arrowUpDownGrey.svg" />
+                        <img src="/arrow-up-down-grey-icon-svg.svg" />
 
                         <span className="flex-1 text-white font-Inter ">Sort On</span>
 
-                        <img src="/downArrowGrey.svg" />
+                        <img src="/down-arrow-grey-icon-svg.svg" />
                     </label>
                     <ul
                         tabIndex={0}

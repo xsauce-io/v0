@@ -495,7 +495,7 @@ export const NavBar = ({ padding, theme }) => {
                                     >
                                         {toggle === 421613 ? (
                                             <>
-                                                <img className="h-[15%] w-[15%]" src="/arbitrum.svg" />
+                                                <img className="h-[15%] w-[15%]" src="/arbitrum-icon-svg.svg" />
                                                 <span className="">Arbitrum</span>
                                             </>
                                         ) : toggle === 80001 ? (
@@ -525,7 +525,7 @@ export const NavBar = ({ padding, theme }) => {
                                     >
                                         <li>
                                             <a onClick={() => setState(421613)}>
-                                                <img className="h-[30%] w-[30%]" src="/arbitrum.svg" />
+                                                <img className="h-[30%] w-[30%]" src="/arbitrum-icon-svg.svg" />
                                                 Arbitrum
                                             </a>
                                         </li>
@@ -645,7 +645,7 @@ export const NavBar = ({ padding, theme }) => {
 							>
 								{toggle === 421613 ? (
 									<>
-										<img className="h-auto w-[10%]" src="/arbitrum.svg" />
+										<img className="h-auto w-[10%]" src="/arbitrum-icon-svg.svg" />
 										<span className="text-lg">Arbitrum</span>
 									</>
 								) : toggle === 80001 ? (
@@ -686,7 +686,7 @@ export const NavBar = ({ padding, theme }) => {
 							>
 								<li>
 									<a onClick={() => setState(421613)}>
-										<img className="h-[15%] w-[15%]" src="/arbitrum.svg" />
+										<img className="h-[15%] w-[15%]" src="/arbitrum-icon-svg.svg" />
 										Arbitrum
 									</a>
 								</li>

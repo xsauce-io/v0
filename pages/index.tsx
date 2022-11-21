@@ -36,7 +36,7 @@ const Home: NextPage = () => {
 							<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center active">
 								<img
 									className="w-[25px] invisible group-hover:flex group-hover:visible mr-4 "
-									src="/jordans.svg"
+									src="/jordans-placeholder-img-svg.svg"
 								/>
 								<span>Launch App</span>
 							</li>
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
 						<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 px-4 py-2 flex flex-row justify-start items-center">
 							<img
 								className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
-								src="/jordans.svg"
+								src="/jordans-placeholder-img-svg.svg"
 							/>
 							<span>What is Xsauce</span>
 						</li>
@@ -57,7 +57,7 @@ const Home: NextPage = () => {
 							<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center">
 								<img
 									className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
-									src="/jordans.svg"
+									src="/jordans-placeholder-img-svg.svg"
 								/>
 								<span>Drip Feed</span>
 							</li>
@@ -73,7 +73,7 @@ const Home: NextPage = () => {
 						<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 px-4 py-2 flex flex-row justify-start items-center">
 							<img
 								className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
-								src="/jordans.svg"
+								src="/jordans-placeholder-img-svg.svg"
 							/>
 							<span>Documentation</span>
 						</li>
@@ -83,7 +83,7 @@ const Home: NextPage = () => {
 						<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl  w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center">
 							<img
 								className="w-[25px] invisible group-hover:flex mr-4 group-hover:visible"
-								src="/jordans.svg"
+								src="/jordans-placeholder-img-svg.svg"
 							/>
 							<span>Drop us a line</span>
 						</li>
@@ -97,7 +97,7 @@ const Home: NextPage = () => {
 			<div
 				id="whatIsXsauceSection"
 				className="flex flex-col border-[1px] justify-center items-center px-5 tablet:flex-row h-[calc(100vh-80px)] laptop:px-20 "
-				style={{ backgroundImage: `url(/bgLandingDrop.png)` }}
+				style={{ backgroundImage: `url(/xsauce-drops-bg-green-image.png)` }}
 			>
 				<div className="tablet:w-[70%] flex flex-col justify-start items-center space-y-4 ">
 					<h1 className="w-full px-4 tablet:px-8 font-SG  text-3xl text-white">

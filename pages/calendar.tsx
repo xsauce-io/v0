@@ -31,7 +31,7 @@ const Calendar: NextPage = () => {
 					{/*Sorting */}
 					<ContentHeader
 						title={'Upcoming Sneaker Drops'}
-						icon={<img className={'h-[30px] w-[30px]'} src="/calendar.svg" />}
+						icon={<img className={'h-[30px] w-[30px]'} src="/calendar-black-icon-svg.svg" />}
 					/>
 
 					<div className="space-y-10 mb-20">

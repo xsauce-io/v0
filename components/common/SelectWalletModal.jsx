@@ -57,7 +57,7 @@ export function SelectWalletModal({ isOpen, closeModal }) {
                 >
                   <div className="flex flex-row w-full px-5 justify-start space-x-2 w-full">
                     <Image
-                      src="/coinbasewallet-icon.png"
+                      src="/coinbasewallet-icon-png.png"
                       alt="Coinbase Wallet Logo"
                       width={25}
                       height={25}

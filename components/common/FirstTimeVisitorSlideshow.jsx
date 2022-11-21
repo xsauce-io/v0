@@ -11,7 +11,7 @@ const Images = [
 		text: 'Culture is now in your hands. Before you get started, we need to explain a few things. The Xchange requires a web3 wallet to hold your funds. If you don’t have one yet, you’ll need to set one up. ',
 	},
 	{
-		href: '/basics.png',
+		href: '/traffic-light-image-png.png',
 		header: 'The Basics',
 		text: '1.) Connect your preferred web3 wallet \n2.) Select an index under the “Markets” tab. \n3.) Decide whether you think the price of the index will go up (Choose Go Long) or if the price of the index will go down (Choose Go Short)',
 	},

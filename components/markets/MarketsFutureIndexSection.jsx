@@ -48,7 +48,7 @@ export const MarketsFutureIndexSection = ({ market, handleCallback }) => {
 								tabindex="0"
 								className="text-[14px] flex flex-row text-black justify-center"
 							>
-						
+
 								<div className="flex-1 font-bold text-2xl text-center">
                 {market.title} -
                 <span className="font-normal">
@@ -57,7 +57,7 @@ export const MarketsFutureIndexSection = ({ market, handleCallback }) => {
                   <span className="text-sm">{market.rankProfile}</span>
                 </span>
               </div>
-								<img src="/downArrowDark.svg" className="h-auto w-[22px] ml-1" />
+								<img src="/down-arrow-black-icon-svg.svg" className="h-auto w-[22px] ml-1" />
 							</label>
 							<ul
 								tabindex="0"
@@ -82,7 +82,7 @@ export const MarketsFutureIndexSection = ({ market, handleCallback }) => {
 									</a>
 								</li>
 							</ul>
-						</div> 
+						</div>
             </>
       )
 }

@@ -119,7 +119,7 @@ export const LayoutFooter = () => {
 							rel={'noreferrer'}
 						>
 							<button onClick={() => mixpanelTrack('View AngelList Page ')}>
-								<img className="" src="/angelListIcon.svg" />
+								<img className="" src="/angel-list-icon-svg.svg" />
 							</button>
 						</a>
 						<div className="flex-1"></div>
@@ -206,7 +206,7 @@ export const LayoutFooter = () => {
 							rel={'noreferrer'}
 						>
 							<button onClick={() => mixpanelTrack('View AngelList Page')}>
-								<img className="" src="/angelListIcon.svg" />
+								<img className="" src="/angel-list-icon-svg.svg" />
 							</button>
 						</a>
 					</div>
