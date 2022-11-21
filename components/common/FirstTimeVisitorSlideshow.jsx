@@ -9,22 +9,22 @@ const Images = [
 	{
 		href: '/hand.png',
 		header: 'Welcome to the Xchange',
-		text: 'Culture is now in your hands. Before you get started, we need to explain a few things.',
+		text: 'Culture is now in your hands. Before you get started, we need to explain a few things. The Xchange requires a web3 wallet to hold your funds. If you don’t have one yet, you’ll need to set one up. ',
 	},
 	{
 		href: '/basics.png',
 		header: 'The Basics',
-		text: '1.) Select a market in the Live Markets tab you want to place a wager on. 2.) Choose either YES or NO to represent which side you are on.\n3.) Select how many tickets you want to buy and submit your transaction!',
+		text: '1.) Connect your preferred web3 wallet \n2.) Select an index under the “Markets” tab. \n3.) Decide whether you think the price of the index will go up (Choose Go Long) or if the price of the index will go down (Choose Go Short)',
 	},
 	{
 		href: '/magglass.png',
 		header: 'Tune In',
-		text: 'Watch the live market for price updates and news. The buy in price is dynamic and is determined by previous buys.',
+		text: 'Watch for new drops, collabs or other news regarding the markets. It’s likely that this information will impact resale prices and the value of each index.',
 	},
 	{
 		href: '/money.png',
 		header: 'Cash Out',
-		text: 'If you are on the winning side of a wager when it resolves you will receive back what you put in + your share of the winnings.',
+		text: 'Choose “Withdraw” to close your position and redeem your profits',
 	},
 ];
 
