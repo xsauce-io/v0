@@ -10,8 +10,7 @@ import { BigNumber, ethers, utils } from 'ethers';
 import { LayoutFooter } from '../../../components/layout/LayoutFooter';
 import { MarketAreaGraph } from '../../../components/markets[title]/MarketAreaGraph';
 
-import { MarketLineGraph } from '../../../components/markets[title]/MarketLineGraph';
-import { TabMint } from '../../../components/markets[title]/marketTabs/TabMint';
+import { TabInvest } from '../../../components/markets[title]/marketTabs/TabInvest';
 import { TabWithdraw } from '../../../components/markets[title]/marketTabs/TabWithdraw';
 import { TabStake } from '../../../components/markets[title]/marketTabs/TabStake';
 import { TabUnstake } from '../../../components/markets[title]/marketTabs/TabUnstake';
@@ -183,7 +182,7 @@ const MarketByTitle: NextPage = () => {
 								<div className="w-full h-fit border-2 rounded-md p-4 flex-1">
 
 									{Tab === 0 ? (
-										<TabMint market={mktTitl} />
+										<TabInvest market={mktTitl} />
 									) : Tab === 1 ? (
 										<TabWithdraw market={mktTitl} />
 									) : Tab === 2 ? (
@@ -199,7 +198,7 @@ const MarketByTitle: NextPage = () => {
 							</div>
 
 							<div className="flex flex-col bg-white rounded-lg font-SG py-4 laptop:w-[60%] justify-center items-center text-[#0C1615]">
-								<div className="flex flex-row w-full justify-center px-10">
+								<div className="flex flex-row w-full justify-center px-6 ">
 									<h1 className='flex-1'>
 										{mktTitl}Price
 									</h1>
@@ -210,10 +209,7 @@ const MarketByTitle: NextPage = () => {
 										</span>
 									</div>
 								</div>
-
-								{/* <MarketLineGraph /> */}
 								<MarketAreaGraph/>
-
 							</div>
 						</div>
 					</div>
@@ -226,8 +222,8 @@ const MarketByTitle: NextPage = () => {
 								give maximum diversity across streetwear.
 							</p>
 						</div>
-						<div className="w-full laptop:w-[60%] bg-white rounded-lg p-2 tablet:p-4">
-							<div className="flex flex-row w-full justify-end px-3 ">
+						<div className="w-full laptop:w-[60%] bg-white rounded-lg p-2 pt-0 tablet:p-4 tablet:pt-0">
+							<div className="flex flex-row w-full justify-end p-2 ">
 								<div className="w-fit px-1 group relative hover:visible ">
 										<img src="/information-icon-black.svg" className='w-6 h-6' />
 										<span className='absolute bg-black invisible group-hover:visible bottom-8 right-0 w-[240px] text-sm bg-black p-3 text-white opacity-90 rounded-2xl text-left '>

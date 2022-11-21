@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { LostFamButton } from '../LostFamButton'
-export const TabMint= (market) => {
+export const TabInvest= (market) => {
 	const [isLong, setIsLong] = useState(true);
 
 	return (
