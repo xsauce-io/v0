@@ -2,8 +2,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Web3ReactProvider } from '@web3-react/core';
 import {ethers} from 'ethers'
-import { Web3Provider } from "@ethersproject/providers";
-import toast, { ToastBar, Toaster } from 'react-hot-toast';
+import toast, {  Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';

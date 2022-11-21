@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Script from 'next/script';
 import React from 'react';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 

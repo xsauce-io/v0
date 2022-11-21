@@ -1,10 +1,6 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
-import marketAbi from '../../abi/markets.json';
-import axios from 'axios';
+
 
 export const CalendarCard = ({ cardObject, index }) => {
 	const randomPlaceholder = [

@@ -1,10 +1,9 @@
 
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import React from 'react';
 import { DripFeedCard } from './DripFeedCard';
 import toast from 'react-hot-toast';
 import { ToastNotification } from '../common/Toast';
-import { DisplayGroup, useGetSneakersByDisplayGroupQuery } from '../../services/generated/graphql.tsx';
 import { useGetSauceSelection } from '../../services/dripFeed/saucedSelection/useRequest';
 
 

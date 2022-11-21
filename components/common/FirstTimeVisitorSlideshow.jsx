@@ -1,4 +1,3 @@
-import { style } from '@mui/system';
 import React, { useState, useEffect, useRef } from 'react';
 
 // ---------------- IMPORTANT -----------------

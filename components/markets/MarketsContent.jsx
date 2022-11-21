@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Skeleton } from '@mui/material';
 import { useGetSneaker } from '../../services/useRequests';
-import Image from 'next/image';
 import { MarketsFutureIndexSection } from './MarketsFutureIndexSection';
 import { MarketsFutureCard } from './MarketsFutureCard';
 

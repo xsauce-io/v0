@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { ToastNotificationActionBar } from './ToastActionBar';
 import { useWeb3React } from '@web3-react/core';
-import { truncateText } from '/utils/truncate.js'
 import { SelectWalletModal } from './SelectWalletModal';
 import { networks } from '/utils/networks.js';
 import { CopyAddressButton } from '/components/common/CopyAddressButton'

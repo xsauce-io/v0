@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
-import { Drawer, Box, Typography } from '@mui/material';
+import React from 'react';
+import { Drawer, Box } from '@mui/material';
 import { useState } from 'react';
 
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
@@ -15,7 +15,6 @@ export const NavBarDrawerContainer = ({ children, drawerIconColor, backgroundCol
 
 	const { width } = useWindowDimensions();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
 
 	return (
 		<>
