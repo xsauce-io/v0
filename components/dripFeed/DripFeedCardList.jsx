@@ -34,7 +34,7 @@ export const DripFeedCardList = ({}) => {
                         subMessage={
                             'The data cannot be currently loaded. Please try again later.'
                         }
-                        icon={<img src="/alertCircle.svg" />}
+                        icon={<img src="/alert-circle-red-icon-svg.svg" />}
                         t={t}
                     />
                 ),

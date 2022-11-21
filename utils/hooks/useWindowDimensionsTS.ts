@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export const useWindowDimensions =  () => {
 interface screen {
   width: number | undefined;
   height: number | undefined;
 }
- 
+
  const [windowDimensions, setWindowDimensions] = useState<screen | undefined>({
         width: undefined,
         height: undefined,

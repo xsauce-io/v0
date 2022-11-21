@@ -12,7 +12,7 @@ export const WalletNotConnectedModal = ({ open, positionTop }) => {
 		>
 			<div className="flex flex-col items-center justify-center">
 				<div className="self-center text-sm  flex-1 ">
-					<img src="/alertTriangle.svg" width="100px" />
+					<img src="/alert-triangle-yellow-icon-svg.svg" width="100px" />
 				</div>
 				<div className="text-white text-xl flex-2 ">
 					Your wallet is not connected

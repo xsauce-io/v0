@@ -174,7 +174,7 @@ export const NavBar = ({ padding, theme }) => {
 						// 			subMessage={
 						// 				'To see market statistics, connect your Metamask wallet and refresh the page.'
 						// 			}
-						// 			icon={<img src="/alertTriangle.svg" />}
+						// 			icon={<img src="/alert-triangle-yellow-icon-svg.svg" />}
 						// 			t={t}
 						// 			href="https://geekflare.com/finance/beginners-guide-to-metamask/"
 						// 		/>
@@ -192,7 +192,7 @@ export const NavBar = ({ padding, theme }) => {
 						// 			subMessage={
 						// 				'Open your Metamask to manage your current requests and refresh the page.'
 						// 			}
-						// 			icon={<img src="/alertCircle.svg" />}
+						// 			icon={<img src="/alert-circle-red-icon-svg.svg" />}
 						// 			t={t}
 						// 			href="https://geekflare.com/finance/beginners-guide-to-metamask/"
 						// 		/>
@@ -215,7 +215,7 @@ export const NavBar = ({ padding, theme }) => {
 						subMessage={
 							"Click the 'Connect Wallet' button in the menu and refresh the page."
 						}
-						icon={<img src="/alertTriangle.svg" />}
+						icon={<img src="/alert-triangle-yellow-icon-svg.svg" />}
 						t={t}
 						href="https://geekflare.com/finance/beginners-guide-to-metamask/"
 					/>
