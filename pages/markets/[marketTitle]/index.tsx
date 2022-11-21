@@ -132,7 +132,7 @@ const MarketByTitle: NextPage = () => {
 											}
 										>
 
-											Invest
+											Buy
 										</button>
 										<button
 											onClick={() => setTab(1)}
