@@ -101,7 +101,7 @@ export const LayoutFooter = () => {
 							rel={'noreferrer'}
 						>
 							<button onClick={() => mixpanelTrack('View Github Page ')}>
-								<img className="" src="/githubIcon.svg" />
+								<img className="" src="/github-icon-svg.svg" />
 							</button>
 						</a>
 						<a
@@ -188,7 +188,7 @@ export const LayoutFooter = () => {
 							rel={'noreferrer'}
 						>
 							<button onClick={() => mixpanelTrack('View Github Page')}>
-								<img className="" src="/githubIcon.svg" />
+								<img className="" src="/github-icon-svg.svg" />
 							</button>
 						</a>
 						<a

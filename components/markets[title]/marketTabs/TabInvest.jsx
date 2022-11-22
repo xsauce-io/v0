@@ -42,7 +42,7 @@ export const TabInvest= (market) => {
 						<p>Short 2x</p>
 						<img
 							className="mobile:hidden tablet:flex  tablet:w-[15px] laptop:w-[20px]"
-							src="/downTrend.png"
+							src="/down-trend-red-icon-png.png"
 						/>
 					</button>
 				</div>

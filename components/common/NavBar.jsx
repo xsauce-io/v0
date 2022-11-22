@@ -510,7 +510,7 @@ export const NavBar = ({ padding, theme }) => {
                                             </>
                                         ) : (
                                             <>
-                                                <img className="h-[12%] w-[12%]" src="/eth.png" />
+                                                <img className="h-[12%] w-[12%]" src="/goerli-eth-icon-png.png" />
                                                 <span className="text-[14px]">Goerli</span>
                                             </>
                                         )}
@@ -531,14 +531,14 @@ export const NavBar = ({ padding, theme }) => {
                                         </li>
                                         <li>
                                             <a>
-                                                <img className="h-[30%] w-[30%]" src="/fuel.png" />
+                                                <img className="h-[30%] w-[30%]" src="/fuel-icon-png.png" />
                                                 Fuel
                                             </a>
                                         </li>
                                     </ul>
                                 </div> */}
 								<div className={`flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] py-2 `}>
-									<img className="h-[15px] w-[10px]" src="/eth.png" />
+									<img className="h-[15px] w-[10px]" src="/goerli-eth-icon-png.png" />
 									<span className="text-[14px] px-2">Goerli</span>
 								</div>
 
@@ -606,7 +606,7 @@ export const NavBar = ({ padding, theme }) => {
 													})
 												}
 											>
-												<img className="h-[7%] w-[7%]" src="/eth.png" />
+												<img className="h-[7%] w-[7%]" src="/goerli-eth-icon-png.png" />
 												Get Test ETH(Goerli)
 											</a>
 										</li>
@@ -660,7 +660,7 @@ export const NavBar = ({ padding, theme }) => {
 									</>
 								) : (
 									<>
-										<img className="h-auto w-[9%]" src="/eth.png" />
+										<img className="h-auto w-[9%]" src="/goerli-eth-icon-png.png" />
 										<span className="text-lg">Goerli</span>
 									</>
 								)}
@@ -692,7 +692,7 @@ export const NavBar = ({ padding, theme }) => {
 								</li>
 								<li>
 									<a>
-										<img className="h-[15%] w-[15%]" src="/fuel.png" />
+										<img className="h-[15%] w-[15%]" src="/fuel-icon-png.png" />
 										Fuel
 									</a>
 								</li>
@@ -722,7 +722,7 @@ export const NavBar = ({ padding, theme }) => {
 								})
 							}
 						>
-							<img className="h-auto w-[7%]" src="/eth.png" />
+							<img className="h-auto w-[7%]" src="/goerli-eth-icon-png.png" />
 							<text>Get ETH(Goerli) </text>
 						</a>
 					</div>

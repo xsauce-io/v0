@@ -15,7 +15,7 @@ export const MarketsContent = () => {
 			title: 'Culture Index',
 			subTitle: 'Top 30 in Streetwear',
 			rankProfile: '(Ranked by Volume)',
-			href: '/cultureIndex.jpg',
+			href: '/culture-index-image-jpg.jpg',
 		},
 		{
 			title: 'Nike Index',
@@ -92,7 +92,7 @@ export const MarketsContent = () => {
 									<p>Short 2x</p>
 									<img
 										className="mobile:hidden tablet:flex tablet:w-[15px] laptop:w-[25px]"
-										src="/downTrend.png"
+										src="/down-trend-red-icon-png.png"
 									/>
 								</button>
 							</div>

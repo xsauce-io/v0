@@ -65,7 +65,7 @@ export const MarketsFutureIndexSection = ({ market, handleCallback }) => {
 							>
 								<li>
 									<a className='active:bg-white active:text-black' onClick={() => setState(0)}>
-										<img className="h-[15%] w-[15%]" src="/cultureIndex.jpg" />
+										<img className="h-[15%] w-[15%]" src="/culture-index-image-jpg.jpg" />
 										Culture Index
 									</a>
 								</li>
