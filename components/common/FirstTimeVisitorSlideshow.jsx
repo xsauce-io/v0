@@ -6,7 +6,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const Images = [
 	{
-		href: '/hand.png',
+		href: '/hand-wave-green-img-png.png',
 		header: 'Welcome to the Xchange',
 		text: 'Culture is now in your hands. Before you get started, we need to explain a few things. The Xchange requires a web3 wallet to hold your funds. If you don’t have one yet, you’ll need to set one up. ',
 	},

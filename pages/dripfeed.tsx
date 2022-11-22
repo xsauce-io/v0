@@ -39,7 +39,7 @@ const DripFeed: NextPage = ({ }) => {
 						<ContentHeader
 							title={'Sauced Selections'}
 							flexColumn
-							icon={<img src="/greenDrop.svg" />}
+							icon={<img src="/sauce-drop-green-svg.svg" />}
 						/>
 					</div>
 					<DripFeedCardList  />

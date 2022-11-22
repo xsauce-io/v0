@@ -10,9 +10,9 @@ export const CalendarHighlight = () => {
 	// ------------------- Constants ---------------------
 
 	const randomPlaceholder = [
-		'/hurache.svg',
+		'/hurache-placeholder-img-svg.svg',
 		'/octobers.svg',
-		'/yeezy.svg',
+		'/yeezy-placeholder-img-svg.svg',
 		'/jordans-placeholder-img-svg.svg',
 		'/jordan-11-placeholder-img-svg.svg',
 	];

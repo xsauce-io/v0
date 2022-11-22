@@ -17,7 +17,7 @@ const Markets: NextPage = () => {
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
 					rel="stylesheet"
 				/>
-				<link rel="icon" type="favicon" href="/greenDrop.svg" />
+				<link rel="icon" type="favicon" href="/sauce-drop-green-svg.svg" />
 			</Head>
 
 			<Layout

@@ -76,7 +76,7 @@ export const MarketsContent = () => {
 									<p>Long 2x</p>
 									<img
 										className="mobile:hidden tablet:flex  tablet:w-[15px] laptop:w-[25px]"
-										src="/upTrend.png"
+										src="/up-trend-green-icon-png.png"
 									/>
 								</button>
 								<button

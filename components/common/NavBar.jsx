@@ -591,7 +591,7 @@ export const NavBar = ({ padding, theme }) => {
 													});
 												}}
 											>
-												<img className="h-[10%] w-[10%]" src="/icon.svg" />
+												<img className="h-[10%] w-[10%]" src="/xsauce-icon-svg.svg" />
 												Get Test Tokens
 											</button>
 										</li>
@@ -708,7 +708,7 @@ export const NavBar = ({ padding, theme }) => {
 								mixpanelTrackProps('Get Test Tokens', { token: '$auce' });
 							}}
 						>
-							<img className="h-auto w-[10%]" src="/icon.svg" />
+							<img className="h-auto w-[10%]" src="/xsauce-icon-svg.svg" />
 							<text>Get Test Tokens </text>
 						</button>
 
