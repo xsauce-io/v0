@@ -1,13 +1,25 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import React from 'react';
+import React, { useState } from 'react';
 import { HomeNavBar } from '../components/home/HomeNavBar';
 import Link from 'next/link';
+
+const enum INDEX_BUTTONS  {
+	launchApp = "launchApp",
+	whatIsXsauce = "watIsXsauce",
+	dripFeed = "dripFeed",
+	documentation = "documentation",
+	dropUsALine = "dropUsALine"
+
+}
 
 const Home: NextPage = () => {
 	// ----------------------------------------------------
 	// ----------------------Rendered Content -------------
 	// ----------------------------------------------------
+
+	const [hoveredButton, setHoveredButton] = useState(INDEX_BUTTONS.launchApp);
+
 	return (
 		<div className="w-screen h-fit text-black bg-white">
 			<Head>
@@ -33,9 +45,9 @@ const Home: NextPage = () => {
 
 				<ul className="flex flex-col font-SG font-medium tablet:w-[50%] font-Inter cursor-pointer justify-center items-start lg-desktop:items-end text-[20px] tablet:text-[30px] laptop:text-[40px] lg-desktop:text-[55px] p-4 tablet:p-8">
 					<Link href="/markets" className=" flex flex-row w-full">
-							<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center active">
+							<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.launchApp? 'bg-[#ACFF00] rounded-xl': ''}`} onMouseOver={() => setHoveredButton(INDEX_BUTTONS.launchApp)}>
 								<img
-									className="w-[25px] invisible group-hover:flex group-hover:visible mr-4 "
+									className={`w-[25px] mr-4 ${hoveredButton === INDEX_BUTTONS.launchApp? 'flex visible': 'invisible'}`}
 									src="/jordans-placeholder-img-svg.svg"
 								/>
 								<span>Launch App</span>
@@ -44,9 +56,9 @@ const Home: NextPage = () => {
 					</Link>
 
 					<a className=" flex flex-row w-full" href="#whatIsXsauceSection">
-						<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 px-4 py-2 flex flex-row justify-start items-center">
-							<img
-								className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
+					<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.whatIsXsauce? 'bg-[#ACFF00] rounded-xl': ''}`} onMouseOver={() => setHoveredButton(INDEX_BUTTONS.whatIsXsauce)}>
+								<img
+									className={`w-[25px] mr-4 ${hoveredButton === INDEX_BUTTONS.whatIsXsauce? 'flex visible': 'invisible'}`}
 								src="/jordans-placeholder-img-svg.svg"
 							/>
 							<span>What is Xsauce</span>
@@ -54,9 +66,9 @@ const Home: NextPage = () => {
 					</a>
 
 					<Link href="/dripfeed" className="flex flex-row w-full">
-							<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center">
+					<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.dripFeed? 'bg-[#ACFF00] rounded-xl': ''}`} onMouseOver={() => setHoveredButton(INDEX_BUTTONS.dripFeed)}>
 								<img
-									className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
+									className={`w-[25px] mr-4 ${hoveredButton === INDEX_BUTTONS.dripFeed? 'flex visible': 'invisible'}`}
 									src="/jordans-placeholder-img-svg.svg"
 								/>
 								<span>Drip Feed</span>
@@ -70,9 +82,9 @@ const Home: NextPage = () => {
 						target={'_blank'}
 						rel={'noreferrer'}
 					>
-						<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 px-4 py-2 flex flex-row justify-start items-center">
-							<img
-								className="w-[25px] invisible  group-hover:flex mr-4 group-hover:visible"
+						<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 break-all px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.documentation? 'bg-[#ACFF00] rounded-xl': ''}`} onMouseOver={() => setHoveredButton(INDEX_BUTTONS.documentation)}>
+								<img
+									className={`w-[25px] mr-4 ${hoveredButton === INDEX_BUTTONS.documentation? 'flex visible': 'invisible'}`}
 								src="/jordans-placeholder-img-svg.svg"
 							/>
 							<span>Documentation</span>
@@ -80,12 +92,12 @@ const Home: NextPage = () => {
 					</a>
 
 					<a className="flex flex-row w-full" href="mailto:info@xsauce.io">
-						<li className="group text-black hover:bg-[#ACFF00] hover:rounded-xl  w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center">
-							<img
-								className="w-[25px] invisible group-hover:flex mr-4 group-hover:visible"
+					<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.dropUsALine? 'bg-[#ACFF00] rounded-xl': ''}`} onMouseOver={() => setHoveredButton(INDEX_BUTTONS.dropUsALine)}>
+								<img
+									className={`w-[25px] mr-4 ${hoveredButton === INDEX_BUTTONS.dropUsALine? 'flex visible': 'invisible'}`}
 								src="/jordans-placeholder-img-svg.svg"
 							/>
-							<span>Drop us a line</span>
+							<span className='w-fit'>Drop us a line</span>
 						</li>
 					</a>
 				</ul>
