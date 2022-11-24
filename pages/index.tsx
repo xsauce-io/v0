@@ -82,7 +82,9 @@ const Home: NextPage = () => {
 						target={'_blank'}
 						rel={'noreferrer'}
 					>
-						<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4 break-all px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.documentation? 'bg-[#ACFF00] rounded-xl': ''}`} onMouseOver={() => setHoveredButton(INDEX_BUTTONS.documentation)}>
+						<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4
+							break-all px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.documentation ? 'bg-[#ACFF00] rounded-xl' : ''}`}
+							onMouseOver={() => setHoveredButton(INDEX_BUTTONS.documentation)}>
 								<img
 									className={`w-[25px] mr-4 ${hoveredButton === INDEX_BUTTONS.documentation? 'flex visible': 'invisible'}`}
 								src="/jordans-placeholder-img-svg.svg"
@@ -92,7 +94,8 @@ const Home: NextPage = () => {
 					</a>
 
 					<a className="flex flex-row w-full" href="mailto:info@xsauce.io">
-					<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.dropUsALine? 'bg-[#ACFF00] rounded-xl': ''}`} onMouseOver={() => setHoveredButton(INDEX_BUTTONS.dropUsALine)}>
+						<li className={`group text-black hover:bg-[#ACFF00] hover:rounded-xl w-full laptop:w-3/4  px-4 py-2 flex flex-row justify-start items-center active ${hoveredButton === INDEX_BUTTONS.dropUsALine ? 'bg-[#ACFF00] rounded-xl' : ''}`}
+							onMouseOver={() => setHoveredButton(INDEX_BUTTONS.dropUsALine)}>
 								<img
 									className={`w-[25px] mr-4 ${hoveredButton === INDEX_BUTTONS.dropUsALine? 'flex visible': 'invisible'}`}
 								src="/jordans-placeholder-img-svg.svg"
