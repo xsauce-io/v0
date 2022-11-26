@@ -1,9 +1,9 @@
 import { theme } from '@chakra-ui/react';
 import React from 'react';
 import { truncateText } from '/utils/truncate.js'
-import {useState} from 'react'
-export const CopyAddressButton = ({ account, themeObject }) => {
+import { useState } from 'react'
 
+export const CopyAddressButton = ({ account, themeObject }) => {
 
 	const [isCopied, setIsCopied] = useState(false);
 
@@ -16,7 +16,6 @@ export const CopyAddressButton = ({ account, themeObject }) => {
 			setIsCopied(false);
 		}, 2000);
 	};
-
 
 	return (
 		<>
