@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 import { useWeb3React } from '@web3-react/core';
 import { SelectWalletModal } from './SelectWalletModal';
-import { CopyAddressButton } from './CopyAddressButton'
-import { theme } from '@chakra-ui/react';
+import { CopyAddressButton } from './CopyAddressButton';
+
 
 export const NavBarDrawerContainer = ({ themeObject }) => {
 
@@ -34,9 +34,6 @@ export const NavBarDrawerContainer = ({ themeObject }) => {
 	const { width } = useWindowDimensions();
 	const { library, active, chainId, account, deactivate } = useWeb3React();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-	const router = useRouter();
-	const [toggle, setToggle] = useState();
-	const [current, setCurrent] = useState();
 	const [isSelectWalletOpen, setIsSelectWalletOpen] = useState(false);
 
 	// ----------------------------------------------------
@@ -77,11 +74,10 @@ export const NavBarDrawerContainer = ({ themeObject }) => {
 
 	const faucet = async () => {
 		try {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			let requestor = (
-				await provider.send('eth_requestAccounts', [0])
+				await library.provider.send('eth_requestAccounts', [0])
 			).toString();
-			const signer = provider.getSigner();
+			const signer = library.provider.getSigner();
 			const SauceToken = new ethers.Contract(
 				SauceTokenAddress,
 				SauceTokenABI,
@@ -94,7 +90,7 @@ export const NavBarDrawerContainer = ({ themeObject }) => {
 
 			//TO FIX: this try catch does not work
 
-			const wasAdded = await ethereum.request({
+			const wasAdded = await library.provider.request({
 				method: 'wallet_watchAsset',
 				params: {
 					type: 'ERC20',

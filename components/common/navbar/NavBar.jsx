@@ -24,11 +24,8 @@ export const dark = {
 	menuButtonColor: 'white',
 	bgColor: 'bg-[#0C1615]',
 	iconTextColor: '#0C1615',
-	 drawerIconColor: '#fff',
-	// drawerIconAsText: '#fff',
-	// drawerButtonColor: 'bg-[#0C1615]',
-	// drawerTextColor: 'text-[#fff]',
-	// drawerBackgroundColor: '#0C1615',
+	drawerIconColor: '#fff',
+
 };
 export const light = {
 	name: 'lightTheme',
@@ -38,11 +35,8 @@ export const light = {
 	menuButtonColor: '#0C1615',
 	bgColor: 'bg-white',
 	iconTextColor: '#fff',
-	 drawerIconColor: '#000',
-	// drawerIconAsText: '#000',
-	// drawerButtonColor: 'bg-[#fff]',
-	// drawerTextColor: 'text-[#0C1615]',
-	// drawerBackgroundColor: '#fff',
+	drawerIconColor: '#000',
+
 }
 
 export const NavBar = ({ padding, theme }) => {
@@ -268,7 +262,9 @@ export const NavBar = ({ padding, theme }) => {
 										className={`menu dropdown-content ${themeObject.textColor} ${themeObject.buttonColor}  p-2 shadow rounded-box w-[250px] mt-4 z-10`}
 									>
 										<li>
-											<button
+												<button
+												className={`active:bg-[#ACFF00] ${themeObject.textColor}`}
+
 												onClick={() => {
 													faucet();
 													mixpanelTrackProps('Get Test Tokens', {
