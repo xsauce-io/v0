@@ -1,6 +1,6 @@
 import { Image } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
-import { connectors } from "../../utils/connectors";
+import { connectors } from "/utils/connectors";
 
 export function SelectWalletModal({ isOpen, closeModal }) {
   const { activate } = useWeb3React();
