@@ -106,11 +106,10 @@ export const NavBar = ({ padding, theme }) => {
 
 	const faucet = async () => {
 		try {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			let requestor = (
-				await provider.send('eth_requestAccounts', [0])
+				await library.provider.send('eth_requestAccounts', [0])
 			).toString();
-			const signer = provider.getSigner();
+			const signer = library.provider.getSigner();
 			const SauceToken = new ethers.Contract(
 				SauceTokenAddress,
 				SauceTokenABI,
@@ -123,7 +122,7 @@ export const NavBar = ({ padding, theme }) => {
 
 			//TO FIX: this try catch does not work
 
-			const wasAdded = await ethereum.request({
+			const wasAdded = await library.provider.request({
 				method: 'wallet_watchAsset',
 				params: {
 					type: 'ERC20',
@@ -154,7 +153,6 @@ export const NavBar = ({ padding, theme }) => {
 			});
 		}
 	};
-
 	// ----------------------------------------------------
 	// ---------------------- Use Effect ------------------
 	// ----------------------------------------------------
