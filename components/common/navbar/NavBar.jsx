@@ -57,14 +57,11 @@ export const NavBar = ({ padding, theme }) => {
 		desktop: '1400',
 	};
 
-
 	// ----------------------------------------------------
 	// ----------------------  States ------------------------
 	// ----------------------------------------------------
 	const { width } = useWindowDimensions();
 	const router = useRouter();
-	const [toggle, setToggle] = useState();
-	const [current, setCurrent] = useState();
 	const { library, active, chainId, account, deactivate } = useWeb3React();
 	const [isSelectWalletOpen, setIsSelectWalletOpen] = useState(false);
 
