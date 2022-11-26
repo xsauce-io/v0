@@ -9,7 +9,6 @@ import { useGetSauceSelection } from '../../services/dripFeed/saucedSelection/us
 
 export const DripFeedCardList = ({}) => {
     // ------------------- Constants ---------------------
-    const skeletonArray = [1, 2, 3];
 
     // ------------------- State Variable --------------------\
 
@@ -20,10 +19,6 @@ export const DripFeedCardList = ({}) => {
 
 
     //------------------ Use Effect / Use memo ------------------
-    // useEffect(() => {
-
-    // },[saucedSelectionSneakersData,saucedSelectionSneakersDataError,saucedSelectionSneakersDataLoading])
-
 
     useEffect(() => {
         if (saucedSelectionSneakersDataError) {
