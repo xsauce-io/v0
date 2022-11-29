@@ -6,14 +6,14 @@ import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 import { useWeb3React } from '@web3-react/core';
 import { SelectWalletModal } from './SelectWalletModal';
 import { CopyAddressButton } from './CopyAddressButton';
-import { DrawerContainerTheme, THEME} from './navbar.theme.js';
+import { DrawerContainerTheme, THEME_TYPE} from './navbar.theme.js';
 
-export const NavBarDrawerContainer = (props) => {
+export const NavBarDrawerContainer = ({themeType}) => {
 
 	// ----------------------------------------------------
 	// ----------------------  Constants -------------------
 	// ----------------------------------------------------
-	let theme = props.theme === THEME.dark ? DrawerContainerTheme.dark : DrawerContainerTheme.light;
+	let theme = themeType === THEME_TYPE.dark ? DrawerContainerTheme.dark : DrawerContainerTheme.light;
 
 	const screens = {
 		mobile: '300',
@@ -184,7 +184,7 @@ export const NavBarDrawerContainer = (props) => {
 									<span className="text-[14px] px-2">Goerli</span>
 								</div>
 
-								<CopyAddressButton account={account} theme={props.theme} />
+								<CopyAddressButton account={account} theme={theme} />
 
 								<div className="dropdown">
 									<label
@@ -259,7 +259,7 @@ export const NavBarDrawerContainer = (props) => {
 									>
 										Switch Network
 									</button>
-									<CopyAddressButton account={account} theme={props.theme} />
+									<CopyAddressButton account={account} themeType={themeType} />
 								</div>
 
 							)}

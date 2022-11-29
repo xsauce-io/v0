@@ -9,14 +9,14 @@ import { useWeb3React } from '@web3-react/core';
 import { SelectWalletModal } from './SelectWalletModal';
 import { networks } from '/utils/networks.js';
 import { CopyAddressButton } from '/components/common/navbar/CopyAddressButton'
-import { NavBarTheme, THEME} from './navbar.theme.js';
+import { NavBarTheme, THEME_TYPE} from './navbar.theme.js';
 
 
-export const NavBar = (props) => {
+export const NavBar = ({themeType, padding}) => {
 	// ----------------------------------------------------
 	// ----------  Variables and Constants ----------------
 	// ----------------------------------------------------
-	let theme = props.theme === THEME.dark ? NavBarTheme.dark : NavBarTheme.light;
+	let theme = themeType === THEME_TYPE.dark ? NavBarTheme.dark : NavBarTheme.light;
 
 	const defaultChainId = 5 //goerli
 
@@ -139,7 +139,7 @@ export const NavBar = (props) => {
 	return (
 		<header className="sticky top-0 z-20 ">
 			<div
-				className={`flex items-center h-20 ${theme.twBgColor} w-full gap-8 ${props.padding ? 'mobile:px-5 laptop:px-40' : ''}`}
+				className={`flex items-center h-20 ${theme.twBgColor} w-full gap-8 ${padding ? 'mobile:px-5 laptop:px-40' : ''}`}
 			>
 				<div className="basis-1/3">
 					<a className="block" href="/">
@@ -189,7 +189,7 @@ export const NavBar = (props) => {
 									<span className="text-[14px] px-2">Goerli</span>
 								</div>
 
-								<CopyAddressButton account={account} theme={props.theme} />
+								<CopyAddressButton account={account} themeType={themeType} />
 
 								<div className="dropdown dropdown-end">
 									<label
@@ -270,7 +270,7 @@ export const NavBar = (props) => {
 									>
 										Switch Network
 									</button>
-									<CopyAddressButton account={account} theme={props.theme} />
+									<CopyAddressButton account={account} themeType={themeType} />
 								</>
 
 							)}
@@ -278,7 +278,7 @@ export const NavBar = (props) => {
 				) : (
 					<></>
 				)}
-				<NavBarDrawerContainer theme={props.theme} />
+				<NavBarDrawerContainer themeType={themeType} />
 			</div>
 			<SelectWalletModal
 				isOpen={isSelectWalletOpen}

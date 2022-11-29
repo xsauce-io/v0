@@ -1,11 +1,11 @@
 import React from 'react';
 import { truncateText } from '/utils/truncate.js'
 import { useState } from 'react'
-import { THEME, CopyAddressButtonTheme } from './navbar.theme';
+import {  CopyAddressButtonTheme, THEME_TYPE } from './navbar.theme';
 
-export const CopyAddressButton = ({account, theme}) => {
+export const CopyAddressButton = ({account, themeType}) => {
 	//const {account} = props.account
-	let themeProperties = theme === THEME.dark ? CopyAddressButtonTheme.dark : CopyAddressButtonTheme.light;
+	let theme = themeType === THEME_TYPE.dark ? CopyAddressButtonTheme.dark : CopyAddressButtonTheme.light;
 
 
 	const [isCopied, setIsCopied] = useState(false);
@@ -23,7 +23,7 @@ export const CopyAddressButton = ({account, theme}) => {
 	return (
 		<>
 			<button
-				className={`text-[14px] flex flex-row flex-1 justify-center font-Inter items-center ${themeProperties.twButtonColor}  ${themeProperties.twTextColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
+				className={`text-[14px] flex flex-row flex-1 justify-center font-Inter items-center ${theme.twButtonColor}  ${theme.twTextColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
 				onClick={() => {
 					console.log("will open dropdown ")
 				}}
@@ -59,7 +59,7 @@ export const CopyAddressButton = ({account, theme}) => {
 						className={
 							isCopied == false
 								? 'hidden'
-								: ` transition ease-in-out duration-300 delay-150 visible z-10 absolute ${themeProperties.twButtonColor} opacity-70 px-2 py-0.5`
+								: ` transition ease-in-out duration-300 delay-150 visible z-10 absolute ${theme.twButtonColor} opacity-70 px-2 py-0.5`
 						}
 					>
 						Copied
