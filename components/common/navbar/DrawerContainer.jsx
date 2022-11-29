@@ -6,13 +6,14 @@ import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
 import { useWeb3React } from '@web3-react/core';
 import { SelectWalletModal } from './SelectWalletModal';
 import { CopyAddressButton } from './CopyAddressButton';
+import { DrawerContainerTheme, THEME} from './navbar.theme.js';
 
-
-export const NavBarDrawerContainer = ({ themeObject }) => {
+export const NavBarDrawerContainer = (props) => {
 
 	// ----------------------------------------------------
 	// ----------------------  Constants -------------------
 	// ----------------------------------------------------
+	let theme = props.theme === THEME.dark ? DrawerContainerTheme.dark : DrawerContainerTheme.light;
 
 	const screens = {
 		mobile: '300',
@@ -135,7 +136,7 @@ export const NavBarDrawerContainer = ({ themeObject }) => {
 							className="w-5 h-5"
 							fill="none"
 							viewBox="0 0 24 24"
-							stroke={themeObject.drawerIconColor ? themeObject.drawerIconColor : '#FFFFFF'}
+							stroke={theme.drawerIconColor ? theme.drawerIconColor : '#FFFFFF'}
 							stroke-width="2"
 						>
 							<path
@@ -183,7 +184,7 @@ export const NavBarDrawerContainer = ({ themeObject }) => {
 									<span className="text-[14px] px-2">Goerli</span>
 								</div>
 
-								<CopyAddressButton account={account} themeObject={themeObject} />
+								<CopyAddressButton account={account} theme={props.theme} />
 
 								<div className="dropdown">
 									<label
@@ -258,7 +259,7 @@ export const NavBarDrawerContainer = ({ themeObject }) => {
 									>
 										Switch Network
 									</button>
-									<CopyAddressButton account={account} themeObject={themeObject} />
+									<CopyAddressButton account={account} theme={props.theme} />
 								</div>
 
 							)}

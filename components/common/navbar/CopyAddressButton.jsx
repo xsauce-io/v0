@@ -1,9 +1,12 @@
-import { theme } from '@chakra-ui/react';
 import React from 'react';
 import { truncateText } from '/utils/truncate.js'
 import { useState } from 'react'
+import { THEME, CopyAddressButtonTheme } from './navbar.theme';
 
-export const CopyAddressButton = ({ account, themeObject }) => {
+export const CopyAddressButton = ({ account, themeProp }) => {
+
+	let theme = themeProp === THEME.dark ? CopyAddressButtonTheme.dark : CopyAddressButtonTheme.light;
+
 
 	const [isCopied, setIsCopied] = useState(false);
 
@@ -20,7 +23,7 @@ export const CopyAddressButton = ({ account, themeObject }) => {
 	return (
 		<>
 			<button
-				className={`text-[14px] flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor}  rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
+				className={`text-[14px] flex flex-row flex-1 justify-center font-Inter items-center ${theme.twButtonColor}  ${theme.twTextColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
 				onClick={() => {
 					console.log("will open dropdown ")
 				}}
@@ -40,13 +43,13 @@ export const CopyAddressButton = ({ account, themeObject }) => {
 						>
 							<path
 								d="M12.4733 14.1667H5.6533C4.71997 14.1667 3.95996 13.4067 3.95996 12.4733V5.65336C3.95996 4.72003 4.71997 3.96002 5.6533 3.96002H12.4733C13.4066 3.96002 14.1666 4.72003 14.1666 5.65336V12.4733C14.1666 13.4067 13.4066 14.1667 12.4733 14.1667Z"
-								stroke={themeObject.iconTextColor}
+								stroke={theme.iconTextColor}
 								stroke-linecap="round"
 								stroke-linejoin="round"
 							/>
 							<path
 								d="M2.32682 11.5463C2.02016 11.2397 1.8335 10.813 1.8335 10.3463V3.52635C1.8335 2.59301 2.5935 1.83301 3.52684 1.83301H10.3468C10.8735 1.83301 11.3468 2.073 11.6602 2.453"
-								stroke={themeObject.iconTextColor}
+								stroke={theme.iconTextColor}
 								stroke-linecap="round"
 								stroke-linejoin="round"
 							/>
@@ -56,7 +59,7 @@ export const CopyAddressButton = ({ account, themeObject }) => {
 						className={
 							isCopied == false
 								? 'hidden'
-								: ` transition ease-in-out duration-300 delay-150 visible z-10 absolute ${themeObject.buttonColor} opacity-70 px-2 py-0.5`
+								: ` transition ease-in-out duration-300 delay-150 visible z-10 absolute ${theme.twButtonColor} opacity-70 px-2 py-0.5`
 						}
 					>
 						Copied

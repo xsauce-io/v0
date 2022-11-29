@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavBar } from '../common/navbar/NavBar'
-import { NAVBAR_THEME } from '../common/navbar/NavBar';
+import { THEME } from '../common/navbar/navbar.theme';
 export const LayoutNavBar = () => {
 	return (
-		<NavBar theme={NAVBAR_THEME.dark} />
+		<NavBar theme={THEME.dark} />
 	)
 }

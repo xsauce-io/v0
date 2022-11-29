@@ -2,48 +2,21 @@ import React, { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { ethers, utils } from 'ethers';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
-import { NavBarDrawerContainer } from './NavBarDrawerContainer';
+import { NavBarDrawerContainer } from './DrawerContainer';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { ToastNotificationActionBar } from '../ToastActionBar';
 import { useWeb3React } from '@web3-react/core';
 import { SelectWalletModal } from './SelectWalletModal';
 import { networks } from '/utils/networks.js';
 import { CopyAddressButton } from '/components/common/navbar/CopyAddressButton'
+import { NavBarTheme, THEME} from './navbar.theme.js';
 
-export const NAVBAR_THEME = {
-	light: 'light',
-	dark: 'dark',
-};
 
-export const dark = {
-	name: 'darkTheme',
-	logoColor: '#fff',
-	textColor: 'text-[#0C1615]',
-	buttonColor: 'bg-white',
-	menuButtonColor: 'white',
-	bgColor: 'bg-[#0C1615]',
-	iconTextColor: '#0C1615',
-	drawerIconColor: '#fff',
-
-};
-export const light = {
-	name: 'lightTheme',
-	logoColor: '#0C1615',
-	textColor: 'text-white',
-	buttonColor: 'bg-[#0C1615]',
-	menuButtonColor: '#0C1615',
-	bgColor: 'bg-white',
-	iconTextColor: '#fff',
-	drawerIconColor: '#000',
-
-}
-
-export const NavBar = ({ padding, theme }) => {
+export const NavBar = (props) => {
 	// ----------------------------------------------------
 	// ----------  Variables and Constants ----------------
 	// ----------------------------------------------------
-	let themeObject = theme === NAVBAR_THEME.dark ? dark : light;
+	let theme = props.theme === THEME.dark ? NavBarTheme.dark : NavBarTheme.light;
 
 	const defaultChainId = 5 //goerli
 
@@ -166,7 +139,7 @@ export const NavBar = ({ padding, theme }) => {
 	return (
 		<header className="sticky top-0 z-20 ">
 			<div
-				className={`flex items-center h-20 ${themeObject.bgColor} w-full gap-8 ${padding ? 'mobile:px-5 laptop:px-40' : ''}`}
+				className={`flex items-center h-20 ${theme.twBgColor} w-full gap-8 ${props.padding ? 'mobile:px-5 laptop:px-40' : ''}`}
 			>
 				<div className="basis-1/3">
 					<a className="block" href="/">
@@ -181,13 +154,13 @@ export const NavBar = ({ padding, theme }) => {
 							>
 								<path
 									d="M29.501 23.2074L40.4906 32.8571C42.8185 34.9069 42.4876 37.9996 39.2617 37.9996H33.1878C32.2307 37.9996 31.3089 37.652 30.6354 37.0167L22.2454 29.213C21.8319 28.8294 21.1583 28.8294 20.7447 29.213L12.2957 37.0167C11.6221 37.64 10.7122 37.9876 9.75507 37.9876H3.58669C0.384333 37.9876 -1.21094 34.4154 1.08153 32.3536L11.3385 23.1115C12.0003 22.5121 11.9884 21.5291 11.3149 20.9538L1.9087 12.8743C-0.478294 10.8485 1.09334 7.19238 4.34297 7.19238H9.9205C10.854 7.19238 11.7521 7.52803 12.4139 8.12739L20.7329 15.5715L29.501 23.2074Z"
-									fill={themeObject.logoColor}
+									fill={theme.logoColor}
 								/>
 								<path
 									fill-rule="evenodd"
 									clip-rule="evenodd"
 									d="M25.0014 11.8361C25.0005 11.8902 25 11.9448 25 12L25.0068 12C25.1753 15.7255 28.4671 18.7 32.5 18.7C36.5376 18.7 39.8323 15.7187 39.9938 11.9871L40 11.9871C40 11.9328 39.9996 11.8791 39.9988 11.8258C39.9996 11.784 40 11.742 40 11.7H39.9962C39.9168 8.75634 38.6098 7.40441 36.9633 5.70147C35.7001 4.39492 34.2372 2.88175 32.9757 0.284562C32.7932 -0.103367 32.2198 -0.0904358 32.0374 0.297493C30.798 2.96578 29.3006 4.53646 28.0062 5.8942C26.3913 7.58821 25.0924 8.95074 25.0047 11.7H25C25 11.7455 25.0005 11.7908 25.0014 11.8361Z"
-									fill={themeObject.logoColor}
+									fill={theme.logoColor}
 								/>
 							</svg>
 						</div>
@@ -201,7 +174,7 @@ export const NavBar = ({ padding, theme }) => {
 						{!active ? (
 							<>
 								<button
-									className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
+									className={`text-[14px] flex flex-row justify-center font-Inter items-center ${theme.twButtonColor} ${theme.twTextColor} rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
 									onClick={() => {
 										setIsSelectWalletOpen(true);
 									}}
@@ -211,17 +184,17 @@ export const NavBar = ({ padding, theme }) => {
 							</>
 						) : (chainId == defaultChainId) ?
 							<>
-								<div className={`flex flex-row flex-1 justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} rounded-[40px] py-2 `}>
+								<div className={`flex flex-row flex-1 justify-center  font-Inter items-center ${theme.twButtonColor} ${theme.twTextColor} rounded-[40px] py-2 `}>
 									<img className="h-[15px] w-[10px]" src="/goerli-eth-icon-png.png" />
 									<span className="text-[14px] px-2">Goerli</span>
 								</div>
 
-								<CopyAddressButton account={account} themeObject={themeObject} />
+								<CopyAddressButton account={account} theme={props.theme} />
 
 								<div className="dropdown dropdown-end">
 									<label
 										tabindex="0"
-										className={`text-lg ${themeObject.textColor}`}
+										className={`text-lg ${theme.twTextColor}`}
 									>
 										<div className="w-[37px]">
 											<svg
@@ -235,30 +208,30 @@ export const NavBar = ({ padding, theme }) => {
 													cx="16"
 													cy="16"
 													r="16"
-													fill={themeObject.menuButtonColor}
+													fill={theme.menuButtonColor}
 												/>
 												<path
 													d="M22 17C22.5523 17 23 16.5523 23 16C23 15.4477 22.5523 15 22 15C21.4477 15 21 15.4477 21 16C21 16.5523 21.4477 17 22 17Z"
-													fill={themeObject.iconTextColor}
+													fill={theme.iconTextColor}
 												/>
 												<path
 													d="M16 17C16.5523 17 17 16.5523 17 16C17 15.4477 16.5523 15 16 15C15.4477 15 15 15.4477 15 16C15 16.5523 15.4477 17 16 17Z"
-													fill={themeObject.iconTextColor}
+													fill={theme.iconTextColor}
 												/>
 												<path
 													d="M10 17C10.5523 17 11 16.5523 11 16C11 15.4477 10.5523 15 10 15C9.44771 15 9 15.4477 9 16C9 16.5523 9.44771 17 10 17Z"
-													fill={themeObject.iconTextColor}
+													fill={theme.iconTextColor}
 												/>
 											</svg>
 										</div>
 									</label>
 									<ul
 										tabindex="0"
-										className={`menu dropdown-content ${themeObject.textColor} ${themeObject.buttonColor}  p-2 shadow rounded-box w-[250px] mt-4 z-10`}
+										className={`menu dropdown-content ${theme.twButtonColor} ${theme.twTextColor} p-2 shadow rounded-box w-[250px] mt-4 z-10`}
 									>
 										<li>
 												<button
-												className={`active:bg-[#ACFF00] ${themeObject.textColor}`}
+												className={`active:bg-[#ACFF00] ${theme.twTextColor}`}
 
 												onClick={() => {
 													faucet();
@@ -273,7 +246,7 @@ export const NavBar = ({ padding, theme }) => {
 										</li>
 										<li>
 											<a
-												className={`active:bg-[#ACFF00] ${themeObject.textColor}`}
+												className={`active:bg-[#ACFF00] ${theme.twTextColor}`}
 												target="blank"
 												href="https://goerli-faucet.pk910.de/"
 												onClick={() =>
@@ -292,12 +265,12 @@ export const NavBar = ({ padding, theme }) => {
 							: (
 								<>
 									<button
-										className={`text-[14px] flex flex-row justify-center ${themeObject.textColor} font-Inter items-center ${themeObject.buttonColor} bg-[yellow] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
+										className={`text-[14px] flex flex-row justify-center  font-Inter items-center ${theme.twButtonColor} ${theme.twTextColor} bg-[yellow] rounded-[40px] space-x-2 py-2  w-[175px] hover:opacity-60`}
 										onClick={() => switchNetwork()}
 									>
 										Switch Network
 									</button>
-									<CopyAddressButton account={account} themeObject={themeObject} />
+									<CopyAddressButton account={account} theme={props.theme} />
 								</>
 
 							)}
@@ -305,7 +278,7 @@ export const NavBar = ({ padding, theme }) => {
 				) : (
 					<></>
 				)}
-				<NavBarDrawerContainer themeObject={themeObject} />
+				<NavBarDrawerContainer theme={props.theme} />
 			</div>
 			<SelectWalletModal
 				isOpen={isSelectWalletOpen}
