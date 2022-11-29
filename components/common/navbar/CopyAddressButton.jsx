@@ -5,7 +5,7 @@ import {  CopyAddressButtonTheme, THEME_TYPE } from './navbar.theme';
 
 export const CopyAddressButton = ({account, themeType}) => {
 	//const {account} = props.account
-	let theme = themeType === THEME_TYPE.dark ? CopyAddressButtonTheme.dark : CopyAddressButtonTheme.light;
+	const theme = themeType === THEME_TYPE.dark ? CopyAddressButtonTheme.dark : CopyAddressButtonTheme.light;
 
 
 	const [isCopied, setIsCopied] = useState(false);

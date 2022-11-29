@@ -16,7 +16,7 @@ export const NavBar = ({themeType, padding}) => {
 	// ----------------------------------------------------
 	// ----------  Variables and Constants ----------------
 	// ----------------------------------------------------
-	let theme = themeType === THEME_TYPE.dark ? NavBarTheme.dark : NavBarTheme.light;
+	const theme = themeType === THEME_TYPE.dark ? NavBarTheme.dark : NavBarTheme.light;
 
 	const defaultChainId = 5 //goerli
 

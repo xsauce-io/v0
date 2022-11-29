@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { Drawer, Box } from '@mui/material';
 import { useState } from 'react';
 import { useWindowDimensions } from '/utils/hooks/useWindowDimensions.js';
@@ -13,7 +12,7 @@ export const NavBarDrawerContainer = ({themeType}) => {
 	// ----------------------------------------------------
 	// ----------------------  Constants -------------------
 	// ----------------------------------------------------
-	let theme = themeType === THEME_TYPE.dark ? DrawerContainerTheme.dark : DrawerContainerTheme.light;
+	const theme = themeType === THEME_TYPE.dark ? DrawerContainerTheme.dark : DrawerContainerTheme.light;
 
 	const screens = {
 		mobile: '300',
