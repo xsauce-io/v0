@@ -1,14 +1,13 @@
+/**
+ * @Description Theming Components for the navbar folder
+ * @notice prefix tw stands for a tw string
+ */
 
 
 export const THEME = {
     light: 'light',
     dark: 'dark',
 };
-
-/**
- * Theming Components
- * prefix tw stands for a tw string
- */
 
 export const NavBarTheme = {
     dark: {
