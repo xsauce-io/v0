@@ -32,7 +32,6 @@ export const CalendarCardList = () => {
     useEffect(() => {
         if (calendarSneakerListData) {
             setResponse(calendarSneakerListData);
-
         }
     }, [calendarSneakerListData]);
 
@@ -55,18 +54,19 @@ export const CalendarCardList = () => {
     }, [calendarSneakerListDataError]);
 
     useMemo(() => {
-        if (response) {
-            if (response.length > 0) {
-                if (response.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
-                    response.sort((a, b) =>
+        let arrayCopy = [...response];
+        if (arrayCopy instanceof Array) {
+            if (arrayCopy.length > 0) {
+                if (arrayCopy.length > 0 && sortBy.state === SORT_BY_STATES.NAME) {
+                    arrayCopy.sort((a, b) =>
                         a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
                     );
-
+                    setResponse(arrayCopy)
                 } else if (
-                    response.length > 0 &&
+                    arrayCopy.length > 0 &&
                     sortBy.state === SORT_BY_STATES.RELEASE_DATE
                 ) {
-                    response.sort(
+                    arrayCopy.sort(
                         (a, b) =>
                             a.releaseDate > b.releaseDate
                                 ? 1
@@ -74,19 +74,20 @@ export const CalendarCardList = () => {
                                     ? -1
                                     : 0
                     );
-
+                    setResponse(arrayCopy)
                 } else if (
-                    response.length > 0 &&
+                    arrayCopy.length > 0 &&
                     sortBy.state === SORT_BY_STATES.RETAIL_PRICE
                 ) {
-                    response.sort(
+                    arrayCopy.sort(
                         (a, b) =>
                             a.retailPrice - b.retailPrice
                     );
-
+                    setResponse(arrayCopy)
                 }
             }
         }
+
     }, [sortBy]);
 
 
@@ -153,11 +154,8 @@ export const CalendarCardList = () => {
                 </div>
             </div>
             <div className="grid mobile:grid-cols-1 tablet:grid laptop:grid-cols-4 grid-rows-1 gap-y-6 place-items-center gap-x-6 mb-10 ">
-                {response || calendarSneakerListDataError === undefined
-                    ? response?.map((element, index) => (
-                        <CalendarCard index={index} cardObject={element} />
-                    ))
-                    : skeletonArray.map((index) => (
+                {calendarSneakerListDataLoading || calendarSneakerListDataError ?
+                    skeletonArray.map((index) => (
                         <Skeleton
                             index={index}
                             animation="pulse"
@@ -166,7 +164,13 @@ export const CalendarCardList = () => {
                             sx={{ borderRadius: '15px' }}
                             width={'100%'}
                         />
-                    ))}
+                    ))
+                    :
+                        response?.map((element, index) => (
+                            <CalendarCard index={index} cardObject={element} />
+                        ))
+
+                }
             </div>
         </div>
 

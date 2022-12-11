@@ -15,7 +15,7 @@ export const MarketsContent = () => {
 			title: 'Culture Index',
 			subTitle: 'Top 30 in Streetwear',
 			rankProfile: '(Ranked by Volume)',
-			href: '/culture-index-image-jpg.jpg',
+			href: '/culture-index-image.jpg',
 		},
 		{
 			title: 'Nike Index',

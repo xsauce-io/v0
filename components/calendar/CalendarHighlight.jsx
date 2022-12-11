@@ -8,6 +8,7 @@ import { useGetCalendarHighlightSneaker } from '../../services/calendar/highligh
 
 export const CalendarHighlight = () => {
 	// ------------------- Constants ---------------------
+	const goatImagePlaceHolderURL = 'https://image.goat.com/placeholders/product_templates/original/missing.png';
 
 	const randomPlaceholder = [
 		'/hurache-placeholder-img-svg.svg',
@@ -43,24 +44,23 @@ export const CalendarHighlight = () => {
 		<div
 			className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl w-full items-start text-left font-inter min-h-full "
 		>
-			{highlightSneakerData === undefined ? (
+			{highlightSneakerData === undefined || highlightSneakerDataLoading ? (
 				<React.Fragment>
-					<Skeleton
-						variant="rectangular"
-						sx={{ backgroundColor: 'white', height: '450px' }}
-					/>
+				<Skeleton
+                        variant="rounded"
+                        sx={{ backgroundColor: 'grey', height: '100%', width: "100%" }}
+                    />
 				</React.Fragment>
 			) : (
 				<React.Fragment>
 					<div className="flex items-left flex-col space-y-3 justify-center w-full h-full ">
-						{highlightSneakerData.image?.original === '' ||
-							highlightSneakerData.image?.original ===
-							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
+						{highlightSneakerData.image.original === '' ||
+							highlightSneakerData.image.original === goatImagePlaceHolderURL ? (
 							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
-									className="object-contain h-auto w-[40%] m-auto scale-80"
+									className="object-contain h-auto w-[45%] m-auto scale-80"
 									src={
-										highlightSneakerData?.name[0] === 'J'
+										highlightSneakerData.name[0] === 'J'
 											? randomPlaceholder[3]
 											: highlightSneakerData?.name[0] === 'Y'
 												? randomPlaceholder[2]
@@ -72,8 +72,8 @@ export const CalendarHighlight = () => {
 							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 								<img
-									className="object-contain h-auto w-[30%] m-auto"
-									src={highlightSneakerData.image?.original}
+									className="object-contain h-auto w-[40%] m-auto"
+									src={highlightSneakerData.image.original}
 								></img>
 							</div>
 						)}

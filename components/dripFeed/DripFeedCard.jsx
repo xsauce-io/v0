@@ -1,8 +1,10 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
+import Image from 'next/image';
 
 
 export const DripFeedCard = ({ cardObject, index }) => {
+    const goatImagePlaceHolderURL = 'https://image.goat.com/placeholders/product_templates/original/missing.png';
     const randomPlaceholder = [
         '/hurache-placeholder-img-svg.svg',
         '/octobers.svg',
@@ -14,40 +16,41 @@ export const DripFeedCard = ({ cardObject, index }) => {
     return (
         <div
             index={index}
-            className="flex flex-col transition duration-500 bg-black rounded-md shadow-md shadow-black text-black hover:shadow-2xl laptop: w-full items-start text-left font-inter min-h-full 	"
+            className="flex flex-col transition duration-500 laptop:w-full items-start  min-h-full 	"
         >
             {cardObject === undefined ? (
                 <React.Fragment>
                     <Skeleton
-                        variant="rectangular"
-                        sx={{ backgroundColor: 'white', height: '450px' }}
+                        variant="rounded"
+                        sx={{ backgroundColor: 'grey', height: '100%', width: "100%" }}
                     />
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    <div className="flex items-left flex-col justify-center w-full h-full ">
-                        {cardObject.image?.original === '' ||
-                            cardObject.image?.original ===
-                            'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
+                    <div className="flex items-left flex-col  transition duration-500  rounded-md justify-center w-full h-full bg-black shadow-md shadow-black text-black hover:shadow-2xl text-left font-inter ">
+                        {cardObject.image.original === '' ||
+                            cardObject.image.original === goatImagePlaceHolderURL ? (
                             <div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
                                 <img
-                                    className="object-cover w-[40%]  m-auto h-auto scale-80"
+
+                                    className="object-contain w-[45%] h-auto m-auto "
                                     src={
-                                        cardObject?.name[0] === 'J'
+                                        cardObject.name[0] === 'J'
                                             ? randomPlaceholder[3]
-                                            : cardObject?.name[0] === 'Y'
+                                            : cardObject.name[0] === 'Y'
                                                 ? randomPlaceholder[2]
                                                 : randomPlaceholder[4]
                                     }
                                 />
                             </div>
                         ) : (
-                            <div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
+                            <div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
                                 {/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
                                 <img
-                                    className="object-contain w-[40%]  m-auto h-auto "
-                                    src={cardObject.image?.original}
+
+                                    className="object-contain w-[45%] h-auto  m-auto transition duration-500"
+                                    src={cardObject.image.original}
                                 ></img>
                             </div>
                         )}

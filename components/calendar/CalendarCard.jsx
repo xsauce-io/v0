@@ -3,6 +3,8 @@ import { Skeleton } from '@mui/material';
 
 
 export const CalendarCard = ({ cardObject, index }) => {
+	const goatImagePlaceHolderURL = 'https://image.goat.com/placeholders/product_templates/original/missing.png';
+
 	const randomPlaceholder = [
 		'/hurache-placeholder-img-svg.svg',
 		'/octobers.svg',
@@ -18,20 +20,19 @@ export const CalendarCard = ({ cardObject, index }) => {
 		>
 			{cardObject === undefined ? (
 				<React.Fragment>
-					<Skeleton
-						variant="rectangular"
-						sx={{ backgroundColor: 'white', height: '450px' }}
-					/>
-				</React.Fragment>
+                    <Skeleton
+                        variant="rounded"
+                        sx={{ backgroundColor: 'grey', height: '100%', width: "100%" }}
+                    />
+                </React.Fragment>
 			) : (
 				<React.Fragment>
 					<div className="flex items-left flex-col justify-center w-full h-full ">
 						{cardObject.image?.original === '' ||
-							cardObject.image?.original ===
-							'https://image.goat.com/placeholders/product_templates/original/missing.png' ? (
+							cardObject.image?.original === goatImagePlaceHolderURL ? (
 							<div className="w-full bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md">
 								<img
-									className="object-cover w-[40%]  m-auto h-auto scale-80"
+									className="object-cover w-[40%]  m-auto h-auto "
 									src={
 										cardObject?.name[0] === 'J'
 											? randomPlaceholder[3]
