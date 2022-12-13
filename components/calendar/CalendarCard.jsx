@@ -1,5 +1,6 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 export const CalendarCard = ({ cardObject, index }) => {
@@ -46,10 +47,10 @@ export const CalendarCard = ({ cardObject, index }) => {
 							<div className="w-full  bg-white justify-center items-center border-black border-[1px] rounded-tl-md rounded-tr-md ">
 								{/* Information in this div will be fed by the contract. Can grab it on load in the main index and pass it as another object */}
 
-								<img
+								<LazyLoadImage
 									className="object-contain w-[40%]  m-auto h-auto "
 									src={cardObject.image?.original}
-								></img>
+								></LazyLoadImage>
 							</div>
 						)}
 

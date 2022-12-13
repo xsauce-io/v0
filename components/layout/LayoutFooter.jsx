@@ -179,7 +179,7 @@ export const LayoutFooter = () => {
 							rel={'noreferrer'}
 						>
 							<button onClick={() => mixpanelTrack('View Twitter Page')}>
-								<img className="" src="/twitterxsauce-icon-svg.svg" />
+								<img className="" src="/twitter-icon.svg" />
 							</button>
 						</a>
 						<a
@@ -188,7 +188,7 @@ export const LayoutFooter = () => {
 							rel={'noreferrer'}
 						>
 							<button onClick={() => mixpanelTrack('View Github Page')}>
-								<img className="" src="/github-icon-svg.svg" />
+								<img className="" src="/github-icon.svg" />
 							</button>
 						</a>
 						<a
@@ -197,7 +197,7 @@ export const LayoutFooter = () => {
 							rel={'noreferrer'}
 						>
 							<button onClick={() => mixpanelTrack('View Telegram Page')}>
-								<img className="" src="/telegramxsauce-icon-svg.svg" />
+								<img className="" src="/telegram-icon.svg" />
 							</button>
 						</a>
 						<a
@@ -206,7 +206,7 @@ export const LayoutFooter = () => {
 							rel={'noreferrer'}
 						>
 							<button onClick={() => mixpanelTrack('View AngelList Page')}>
-								<img className="" src="/angel-list-icon-svg.svg" />
+								<img className="" src="/angel-list-icon.svg" />
 							</button>
 						</a>
 					</div>
