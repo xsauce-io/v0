@@ -26,7 +26,7 @@ export const MarketsFutureIndexSection = ({ market, handleCallback }) => {
 	}, [market]);
 	return (
 		<>
-			<div className={`m-auto py-4 tablet:w-[250px] h-[250px] `}>
+			<div className={`m-auto py-4 tablet:w-[250px] h-[250px]`}>
 				<img src={market.href} className="object-contain w-full h-full " />
 			</div>
 			{width >= screens.tablet ? (
@@ -43,10 +43,10 @@ export const MarketsFutureIndexSection = ({ market, handleCallback }) => {
 					</div>
 				</>) : (
 				<>
-					<div className="dropdown dropdown-center  rounded-xl p-4 flex flex-row justify-center shadow shadow-xl ">
+					<div className="dropdown dropdown-center dropdown-hover rounded-xl p-4 flex flex-row justify-center shadow shadow-xl  hover:bg-[lightgrey] focus:bg-[lightgrey] rounded-3xl ">
 						<label
 							tabindex="0"
-							className="text-[14px] flex flex-row text-black justify-center"
+							className="text-[14px] flex flex-row text-black justify-center "
 						>
 
 							<div className="flex-1 font-bold text-2xl text-center">
@@ -61,23 +61,29 @@ export const MarketsFutureIndexSection = ({ market, handleCallback }) => {
 						</label>
 						<ul
 							tabindex="0"
-							className="menu dropdown-content bg-[gray] text-white p-2 shadow rounded-box w-52 mt-4"
+							className="menu dropdown-content bg-[lightgrey] text-black p-2 shadow rounded-box w-full mt-30"
 						>
 							<li>
-								<a className='active:bg-white active:text-black' onClick={() => setState(0)}>
-									<img className="h-[15%] w-[15%]" src="/culture-index-image.jpg" />
+								<a className='hover:bg-white active:bg-[#ACFF00] active:text-black' onClick={() => setState(0)}>
+									<div className='h-full w-[10%]'>
+										<img className="object-contain" src="/culture-index-image.jpg" />
+									</div>
 									Culture Index
 								</a>
 							</li>
 							<li>
-								<a className='active:bg-white active:text-black' onClick={() => setState(1)}>
-									<img className="h-[15%] w-[15%]" src="/nike.png" />
+								<a className='hover:bg-white active:bg-[#ACFF00] active:text-black' onClick={() => setState(1)}>
+									<div className='h-full w-[10%]'>
+										<img className="object-contain py-2 " src="/nike.png" />
+									</div>
 									Nike Index
 								</a>
 							</li>
 							<li>
-								<a className='active:bg-white active:text-black' onClick={() => setState(2)}>
-									<img className="h-[15%] w-[15%]" src="/yeezyLogo.png" />
+								<a className='hover:bg-white active:bg-[#ACFF00] active:text-black' onClick={() => setState(2)}>
+									<div className='h-full w-[10%]'>
+										<img className="object-contain scale-80" src="/yeezyLogo.png" />
+									</div>
 									Yeezy Index
 								</a>
 							</li>
