@@ -42,7 +42,7 @@ export const MarketsContent = () => {
 		<React.Fragment>
 			<div className="flex flex-col space-y-4 laptop:flex-row  laptop:space-x-4 laptop:space-y-0 pb-4">
 				<div className="bg-white shadow-lg h-fit mobile:w-full laptop:w-[70%] rounded-lg font-SG p-4 tablet:p-8 laptop:p-12 ">
-					<span className="flex flex-row justify-end">
+					<span className="flex flex-row justify-end px-3">
 						<a
 							onClick={() =>
 								mixpanelTrackProps('View Market', Markets[Market].title)
@@ -97,7 +97,7 @@ export const MarketsContent = () => {
 								</button>
 							</div>
 							<div className="mt-5 flex flex-row  bg-white items-center py-4 px-6 text-left w-[100%] border-[1px] border-black rounded-[80px]  focus:outline-2 focus:outline-offset-2 hover:outline-1">
-								<p className="flex-1 text-left mobile:text-sm laptop:text-md pr-1">
+								<p className=" text-left mobile:text-sm laptop:text-md pr-1">
 									Amount:
 								</p>
 								<input
